@@ -171,19 +171,20 @@ input, textarea, button {
 	font-family: 'verlag', Arial;
 }
 select {
-	background: rgba(0,0,0,0.1);
+	background: rgba(0,0,0,0.1) url('/helpdesk/images/icons-06.png') no-repeat 99% 50%;
 	color: #aaa;
-	border: 0;
-	padding: 0.5rem 1rem;
+	border: 1px solid transparent;
+	padding: 0.5rem 1.0rem;
 	text-transform: uppercase;
 	font-family: 'verlag', Arial;
-	width: 69.7%;
+	width: 60%;
 	-webkit-appearance:none;
 	-webkit-border-radius: 0px;
 	outline: none;
-	box-sizing:border-box;
 	display: inline-block;
-	left: 0;
+	left: -3px;
+	position: relative;
+	background-size: 20px;
 }
 select option {
 	text-transform: uppercase;
@@ -202,25 +203,25 @@ fieldset legend {
 }
 label {
 	text-transform: uppercase;
-	width: 30%;
+	width: 25%;
 	display: inline-block;
 	padding: 0.5rem 1rem;
 	vertical-align: top;
-	box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
+	box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  -webkit-box-sizing:content-box;
   border: 1px solid transparent;
 }
-fieldset input, fieldset textarea  {
-	width: 70%;
-	box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
+fieldset input, fieldset textarea, fieldset select  {
+	width: 65%;
+	box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  -webkit-box-sizing:content-box;
 }
-input[type=text]:focus, textarea:focus {
+input[type=text]:focus, textarea:focus, select:focus {
   outline: none;
   border: 1px solid rgba(0,0,0,0.4);
-  box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
+  box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  -webkit-box-sizing:content-box;
 }
