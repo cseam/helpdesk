@@ -38,7 +38,7 @@ CREATE TABLE `assign_engineers` (
 
 LOCK TABLES `assign_engineers` WRITE;
 /*!40000 ALTER TABLE `assign_engineers` DISABLE KEYS */;
-INSERT INTO `assign_engineers` VALUES (1,10);
+INSERT INTO `assign_engineers` VALUES (1,8);
 /*!40000 ALTER TABLE `assign_engineers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,9 +61,12 @@ CREATE TABLE `calls` (
   `closed` datetime DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `urgency` int(11) DEFAULT '2',
+  `location` varchar(45) DEFAULT NULL,
+  `room` varchar(45) DEFAULT NULL,
+  `category` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`callid`),
   UNIQUE KEY `callid_UNIQUE` (`callid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +75,6 @@ CREATE TABLE `calls` (
 
 LOCK TABLES `calls` WRITE;
 /*!40000 ALTER TABLE `calls` DISABLE KEYS */;
-INSERT INTO `calls` VALUES (1,'test','test','test','test',8,'2014-07-09 10:17:40',NULL,NULL,1,2),(2,'test2','test2','test2','tets2',10,'2014-07-09 10:17:55',NULL,NULL,1,2),(3,'new','new','new','new',8,'2014-07-09 10:20:31',NULL,NULL,2,2),(5,'opened time test','email','title','details',8,'2014-07-10 12:07:12',NULL,NULL,1,2);
 /*!40000 ALTER TABLE `calls` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,4 +145,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-22 11:07:12
+-- Dump completed on 2014-07-22 14:24:17
