@@ -34,16 +34,18 @@
 		<?php echo check_input($_POST['category'])  ?><br/>
 		<?php echo check_input($_POST['title'])  ?><br/>
 		<?php echo check_input($_POST['details']) ?><br/>
+		<?php echo next_engineer() ?><br/>
 	</div>	
 	<?php
 		// Create Query	
 		$sqlstr = "INSERT INTO calls ";
-		$sqlstr .= "(name, email, title, details, opened, urgency, location, room, category) ";
+		$sqlstr .= "(name, email, title, details, assigned, opened, urgency, location, room, category) ";
 		$sqlstr .= "VALUES (";
 		$sqlstr .= " ' " . check_input($_POST['name']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['email']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['title']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['details']) . " ',";
+		$sqlstr .= " ' " . next_engineer() . " ',";
 		$sqlstr .= " ' " . date("c") . " ',";
 		$sqlstr .= " ' " . check_input($_POST['urgency']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['location']) . " ',";
@@ -52,6 +54,8 @@
 		$sqlstr .= ")";
 		// Run Query
 		mysqli_query($db, $sqlstr); 
+		// Update engineers assignment
+		mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer() ."' WHERE id='1'");
 		// Close Connection
 		mysqli_close($db);
 	

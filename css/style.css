@@ -178,6 +178,8 @@ select {
 	text-transform: uppercase !important;
 	font-family: 'verlag', Arial;
 	width: 60%;
+	appearance: none;
+	border-radius: 0px;
 	-webkit-appearance:none;
 	-webkit-border-radius: 0px;
 	outline: none;
