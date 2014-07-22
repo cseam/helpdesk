@@ -42,6 +42,9 @@
 			$outputstr .= $calls['lastupdate'] . " - ";
 			$outputstr .= $calls['closed'] . " - ";
 			$outputstr .= $calls['status'] . " - ";
+			$outputstr .= $calls['urgency'] . " - ";
+			$outputstr .= $calls['location'] . " - ";
+			$outputstr .= $calls['room'] . " - ";
 			$outputstr .= $calls['category'] ."<br/>";
 			echo $outputstr;
 		}

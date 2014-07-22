@@ -175,19 +175,14 @@ select {
 	color: #aaa;
 	border: 1px solid transparent;
 	padding: 0.5rem 1.0rem;
-	text-transform: uppercase;
+	text-transform: uppercase !important;
 	font-family: 'verlag', Arial;
 	width: 60%;
 	-webkit-appearance:none;
 	-webkit-border-radius: 0px;
 	outline: none;
 	display: inline-block;
-	left: -3px;
-	position: relative;
 	background-size: 20px;
-}
-select option {
-	text-transform: uppercase;
 }
 fieldset {
 	border: 1px solid rgba(0,0,0,0.4);

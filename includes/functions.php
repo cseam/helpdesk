@@ -31,10 +31,10 @@ function check_input($data, $problem='')
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     // might not use this section
-    if ($problem && strlen($data) == 0)
-    {
-        return($problem);
-    }
+    //if ($problem && strlen($data) == 0)
+    //{
+    //    return($problem);
+    //}
     return $data;
 }
 function last_engineer($data)
