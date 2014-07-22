@@ -41,7 +41,8 @@
 			$outputstr .= $calls['opened'] . " - ";
 			$outputstr .= $calls['lastupdate'] . " - ";
 			$outputstr .= $calls['closed'] . " - ";
-			$outputstr .= $calls['status'] . "<br/>";
+			$outputstr .= $calls['status'] . " - ";
+			$outputstr .= $calls['category'] ."<br/>";
 			echo $outputstr;
 		}
 	?>

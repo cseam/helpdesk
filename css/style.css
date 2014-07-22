@@ -170,6 +170,24 @@ input, textarea, button {
 	text-transform: uppercase;
 	font-family: 'verlag', Arial;
 }
+select {
+	background: rgba(0,0,0,0.1);
+	color: #aaa;
+	border: 0;
+	padding: 0.5rem 1rem;
+	text-transform: uppercase;
+	font-family: 'verlag', Arial;
+	width: 69.7%;
+	-webkit-appearance:none;
+	-webkit-border-radius: 0px;
+	outline: none;
+	box-sizing:border-box;
+	display: inline-block;
+	left: 0;
+}
+select option {
+	text-transform: uppercase;
+}
 fieldset {
 	border: 1px solid rgba(0,0,0,0.4);
 	padding: 1rem;
@@ -193,7 +211,7 @@ label {
   -webkit-box-sizing:border-box;
   border: 1px solid transparent;
 }
-fieldset input, fieldset textarea {
+fieldset input, fieldset textarea  {
 	width: 70%;
 	box-sizing:border-box;
   -moz-box-sizing:border-box;

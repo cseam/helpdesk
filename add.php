@@ -33,7 +33,7 @@
 	</div>	
 	<?php
 		// Run Query	
-		mysqli_query($db, "INSERT INTO calls (name, email, title, details, opened) VALUES ('" . check_input($_POST['name']) . "','" . check_input($_POST['email']) . "','" . check_input($_POST['title']) . "','" . check_input($_POST['details']) . "','" . date("c") . "')");				// Close Connection
+		mysqli_query($db, "INSERT INTO calls (name, email, title, details, opened, category) VALUES ('" . check_input($_POST['name']) . "','" . check_input($_POST['email']) . "','" . check_input($_POST['title']) . "','" . check_input($_POST['details']) . "','" . date("c") . "' ,' "  . check_input($_POST['category']) . "')");				// Close Connection
 		mysqli_close($db);
 	
 	 } else {?>
@@ -43,6 +43,12 @@
 		<legend>form post to php_self</legend>
 		<label for="name">Your Name</label><input type="text" id="name" name="name" value="<?php echo check_input($_POST['name']) ?>" />
 		<label for="email">Your Email</label><input type="text" id="email" name="email" value="<?php echo check_input($_POST['email']) ?>" />
+		<label for="category">Category</label>
+			<select id="category" name="category">
+				<option value="option1">Option 1</option>
+				<option value="option2">Option 2</option>
+				<option value="option3">Option 3</option>
+			</select>
 		<label for="title">Title</label><input type="text" id="title" name="title" value="<?php echo check_input($_POST['title']) ?>"/>
 		<label for="details">Details</label><textarea name="details" id="details" rows="10" cols="40"><?php echo check_input($_POST['details']) ?></textarea>
 	</fieldset>
