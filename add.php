@@ -32,8 +32,21 @@
 		<?php echo check_input($_POST['details'],"Details Required") ?><br/>
 	</div>	
 	<?php
-		// Run Query	
-		mysqli_query($db, "INSERT INTO calls (name, email, title, details, opened, category) VALUES ('" . check_input($_POST['name']) . "','" . check_input($_POST['email']) . "','" . check_input($_POST['title']) . "','" . check_input($_POST['details']) . "','" . date("c") . "' ,' "  . check_input($_POST['category']) . "')");				// Close Connection
+		// Create Query	
+		$sqlstr = "INSERT INTO calls ";
+		$sqlstr .= "(name, email, title, details, opened, urgency, category) ";
+		$sqlstr .= "VALUES (";
+		$sqlstr .= " ' " . check_input($_POST['name']) . " ',";
+		$sqlstr .= " ' " . check_input($_POST['email']) . " ',";
+		$sqlstr .= " ' " . check_input($_POST['title']) . " ',";
+		$sqlstr .= " ' " . check_input($_POST['details']) . " ',";
+		$sqlstr .= " ' " . date("c") . " ',";
+		$sqlstr .= " ' " . check_input($_POST['urgency']) . " ',";
+		$sqlstr .= " ' " . check_input($_POST['category']) . " ' ";
+		$sqlstr .= ")";
+		// Run Query
+		mysqli_query($db, $sqlstr); 
+		// Close Connection
 		mysqli_close($db);
 	
 	 } else {?>
@@ -45,9 +58,15 @@
 		<label for="email">Your Email</label><input type="text" id="email" name="email" value="<?php echo check_input($_POST['email']) ?>" />
 		<label for="category">Category</label>
 			<select id="category" name="category">
-				<option value="option1">Option 1</option>
-				<option value="option2">Option 2</option>
-				<option value="option3">Option 3</option>
+				<option value="option1" >Option 1</option>
+				<option value="option2" >Option 2</option>
+				<option value="option3" >Option 3</option>
+			</select>
+		<label for="urgency">Urgency</label>
+			<select id="urgency" name="urgency">
+				<option value="1">Low</option>
+				<option value="2">Normal</option>
+				<option value="3">High</option>
 			</select>
 		<label for="title">Title</label><input type="text" id="title" name="title" value="<?php echo check_input($_POST['title']) ?>"/>
 		<label for="details">Details</label><textarea name="details" id="details" rows="10" cols="40"><?php echo check_input($_POST['details']) ?></textarea>
