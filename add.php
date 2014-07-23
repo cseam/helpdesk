@@ -28,7 +28,6 @@
 		<h3>Form Posted</h3>
 		<?php echo check_input($_POST['name'])  ?><br/>
 		<?php echo check_input($_POST['email'])  ?><br/>
-		<?php echo check_input($_POST['urgency'])  ?><br/>
 		<?php echo check_input($_POST['location'])  ?><br/>
 		<?php echo check_input($_POST['room'])  ?><br/>
 		<?php echo check_input($_POST['category'])  ?><br/>
@@ -37,6 +36,9 @@
 		<?php echo next_engineer() ?><br/>
 	</div>	
 	<?php
+		// Calculate Urgency
+		$urgencystr = round( (check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 ); 
+			
 		// Create Query	
 		$sqlstr = "INSERT INTO calls ";
 		$sqlstr .= "(name, email, title, details, assigned, opened, urgency, location, room, category) ";
@@ -47,14 +49,14 @@
 		$sqlstr .= " ' " . check_input($_POST['details']) . " ',";
 		$sqlstr .= " ' " . next_engineer() . " ',";
 		$sqlstr .= " ' " . date("c") . " ',";
-		$sqlstr .= " ' " . check_input($_POST['urgency']) . " ',";
+		$sqlstr .= " ' " . $urgencystr . " ',";
 		$sqlstr .= " ' " . check_input($_POST['location']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['room']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['category']) . " ' ";
 		$sqlstr .= ")";
 		// Run Query
 		mysqli_query($db, $sqlstr); 
-		// Update engineers assignment
+		// Update engineers assignment (id hard coded for dev needs to be specific to department if they want round robin)
 		mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer() ."' WHERE id='1'");
 		// Close Connection
 		mysqli_close($db);
@@ -74,12 +76,20 @@
 				<option value="option2" >Option 2</option>
 				<option value="option3" >Option 3</option>
 			</select>
-		<label for="urgency">Urgency</label>
-			<select id="urgency" name="urgency">
-				<option value="1">Low</option>
-				<option value="2">Normal</option>
-				<option value="3">High</option>
-			</select>
+		<hr/>
+		<label for="callurgency">Call Urgency</label>
+			<select id="callurgency" name="callurgency">
+				<option value="1">An alternative is available</option>
+				<option value="2">This is affecting my work</option>
+				<option value="3">I cannot work</option>
+			</select>	
+		<label for="callseverity">Call Severity</label>	
+			<select id="callseverity" name="callseverity">
+				<option value="1">This problem affects only me</option>
+				<option value="2">This problem affects multiple people</option>
+				<option value="3">This problem affects all of <?=$companyname;?></option>
+			</select>		
+		<hr/>
 		<label for="location">Location</label>
 			<select id="location" name="location">
 				<option value="Main Site">Main Site</option>

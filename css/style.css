@@ -198,6 +198,11 @@ fieldset legend {
 	margin-left: 0rem;
 	text-transform: uppercase;
 }
+fieldset hr {
+	border: 0;
+	border-bottom: 1px solid rgba(0,0,0,0.4);
+	margin: 1rem;
+}
 label {
 	text-transform: uppercase;
 	width: 25%;
