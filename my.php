@@ -5,7 +5,7 @@
 	include 'includes/functions.php';
 	?>
 	<head>
-		<title><?=$codename?> - Add</title>
+		<title><?=$codename;?> - Add</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +17,11 @@
 	<div class="section">
 	
 	<div class="enviro">
-	<?php
-	// check environment
-	echo environ();
-	?>
+	<?=environ();?>
 	</div>
 	<h2>My Calls</h2>
 	
-	<p>calls for specific engineer, in this case engineerid:<?php echo $_COOKIE['engineerid']?></p>
+	<p>calls for specific engineer, in this case engineerid:<?=$_COOKIE['engineerid'];?></p>
 	<p>
 	<?php 
 	// select calls for current engineer set using cookie engineerid
@@ -36,7 +33,7 @@
 			$outputstr = $calls['callid'] . " - ";
 			$outputstr .= $calls['name'] . " - ";
 			$outputstr .= $calls['email'] . " - ";
-			$outputstr .= $calls['title'] . " - ";
+			$outputstr .= $calls['tel'] . " - ";
 			$outputstr .= $calls['details'] . " - ";
 			$outputstr .= $calls['assigned'] . " - ";
 			$outputstr .= $calls['opened'] . " - ";
@@ -48,7 +45,7 @@
 	?>
 	</p>
 	<ul>
-		<li><a href="index.php"><?=$codename?> Home</a></li>
+		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>
 	
 	</div>

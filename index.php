@@ -6,7 +6,7 @@
 	include 'includes/functions.php';
 	?>
 	<head>
-		<title><?=$codename?></title>
+		<title><?=$codename;?></title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,13 +18,10 @@
 	<div class="section">
 	
 	<div class="enviro">
-	<?php
-	// check environment
-	echo environ();
-	?>
+	<?=environ();?>
 	</div>
-	<h2>Codename: <?=$codename?></h2>
-	<p><?=$codename?> webapp forms & wireframes, variables displayed for debugging.</p>
+	<h2>Codename: <?=$codename;?></h2>
+	<p><?=$codename;?> webapp forms & wireframes, variables displayed for debugging.</p>
 	<ul>
 		<li><a href="add.php">Add Call Form</a></li>
 		<li><a href="my.php">My Calls</a></li>

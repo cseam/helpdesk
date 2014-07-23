@@ -5,7 +5,7 @@
 	include 'includes/functions.php';
 	?>
 	<head>
-		<title><?=$codename?> - Next Engineer</title>
+		<title><?=$codename;?> - Next Engineer</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,21 +17,18 @@
 	<div class="section">
 	
 	<div class="enviro">
-	<?php
-	// check environment
-	echo environ();
-	?>
+	<?=environ();?>
 	</div>
 	<h2>Next Function Tests</h2>
 	
 	<p>function calculates and returns the next engineer looking at the assign engineers table.</p>
 	
 	<h3>Last Engineer Assigned</h3>
-	<p><?php echo last_engineer(); ?></p>
+	<p><?=last_engineer();?></p>
 	<h3>Next Engineer ID</h3>
-	<p><?php echo next_engineer(); ?></p>
+	<p><?=next_engineer();?></p>
 	<ul>
-		<li><a href="index.php"><?=$codename?> Home</a></li>
+		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>
 	
 	</div>

@@ -5,7 +5,7 @@
 	include 'includes/functions.php';
 	?>
 	<head>
-		<title><?php echo $codename?> - All Calls</title>
+		<title><?=$codename;?> - All Calls</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,10 +17,7 @@
 	<div class="section">
 	
 	<div class="enviro">
-	<?php
-	// check environment
-	echo environ();
-	?>
+	<?=environ();?>
 	</div>
 	
 	<h2>* From Calls Table</h2>
@@ -35,7 +32,7 @@
 			$outputstr = $calls['callid'] . " - ";
 			$outputstr .= $calls['name'] . " - ";
 			$outputstr .= $calls['email'] . " - ";
-			$outputstr .= $calls['title'] . " - ";
+			$outputstr .= $calls['tel'] . " - ";
 			$outputstr .= $calls['details'] . " - ";
 			$outputstr .= $calls['assigned'] . " - ";
 			$outputstr .= $calls['opened'] . " - ";
@@ -53,7 +50,7 @@
 	
 	
 	<ul>
-		<li><a href="index.php"><?php echo $codename?> Home</a></li>
+		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	

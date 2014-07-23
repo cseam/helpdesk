@@ -5,7 +5,7 @@
 	include 'includes/functions.php';
 	?>
 	<head>
-		<title><?php echo $codename?> - Engineers</title>
+		<title><?=$codename;?> - Engineers</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,12 +17,9 @@
 	<div class="section">
 	
 	<div class="enviro">
-	<?php
-	// check environment
-	echo environ();
-	?>
+	<?=environ();?>
 	</div>
-	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
 	
 	<?php
 		// form actions
@@ -69,8 +66,8 @@
 	<h2>Add Engineer</h2>
 		<fieldset>
 			<legend>add engineers</legend>
-			<label for="name">Engineer Name</label><input type="text" id="name" name="name" value="<?php echo check_input($_POST['name']) ?>" />
-			<label for="email">Engineer Email</label><input type="text" id="email" name="email" value="<?php echo check_input($_POST['email']) ?>" />
+			<label for="name">Engineer Name</label><input type="text" id="name" name="name" value="<?=check_input($_POST['name']);?>" />
+			<label for="email">Engineer Email</label><input type="text" id="email" name="email" value="<?=check_input($_POST['email']);?>" />
 		</fieldset>
 	<input type="submit" value="submit" name="btnSubmit" /><input type="reset" value="clear" />
 	
@@ -79,7 +76,7 @@
 	
 	</form>
 	<ul>
-		<li><a href="index.php"><?php echo $codename?> Home</a></li>
+		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
