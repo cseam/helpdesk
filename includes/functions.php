@@ -42,21 +42,19 @@ function check_input($data, $problem='')
 }
 function last_engineer($data)
 {
-	// returns details for last engineer assigned a call.
+	//returns details for last engineer assigned a call.
 	$data = "";
-	// find last engineer assigned
-	global $db; 
-	$result = mysqli_query($db, "SELECT * FROM assign_engineers");
-	while($calls = mysqli_fetch_array($result)) {
-		$lastengineerid = $calls['engineerId'];
-	}
-	// get last engineer full details from engineers table 
-	$result = mysqli_query($db, "SELECT * FROM engineers WHERE idengineers = ". $lastengineerid . "");
+	// find and join last engineer assigned
+	global $db;
+	
+	$sqlstr = "SELECT * FROM assign_engineers ";
+	$sqlstr .= "INNER JOIN engineers ON assign_engineers.engineerid=engineers.idengineers";
+	
+	$result = mysqli_query($db, $sqlstr);
 	while($engdetails = mysqli_fetch_array($result)) {
-		$engineername = $engdetails['engineerName'];
-		$engineeremail = $engdetails['engineerEmail'];
+	$data = $engdetails['engineerId'] . " - " . $engdetails['engineerName'] . " - " . $engdetails['engineerEmail'];		
 	}
-	$data = $lastengineerid . " - " . $engineername . " - " . $engineeremail;
+	
 	return $data;
 }
 function next_engineer($data)
