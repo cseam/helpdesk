@@ -31,6 +31,8 @@ function check_input($data, $problem='')
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
+    $data = mysql_real_escape_string($data);
+    
     // might not use this section
     //if ($problem && strlen($data) == 0)
     //{

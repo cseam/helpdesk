@@ -22,30 +22,31 @@
 	
 	<h2>* From Calls Table</h2>
 	<p>
+	<table>
+	<thead>
+		<tr>
+			<th>Call ID</th>
+			<th>Opened</th>
+			<th>Details</th>
+		</tr>
+	</thead>
+	<tbody>
 	<?php 
 		//list current engineers
 		//run select query
 		$result = mysqli_query($db, "SELECT * FROM calls");
-		
+	
 		while($calls = mysqli_fetch_array($result))  {
-		
-			$outputstr = $calls['callid'] . " - ";
-			$outputstr .= $calls['name'] . " - ";
-			$outputstr .= $calls['email'] . " - ";
-			$outputstr .= $calls['tel'] . " - ";
-			$outputstr .= $calls['details'] . " - ";
-			$outputstr .= $calls['assigned'] . " - ";
-			$outputstr .= $calls['opened'] . " - ";
-			$outputstr .= $calls['lastupdate'] . " - ";
-			$outputstr .= $calls['closed'] . " - ";
-			$outputstr .= $calls['status'] . " - ";
-			$outputstr .= $calls['urgency'] . " - ";
-			$outputstr .= $calls['location'] . " - ";
-			$outputstr .= $calls['room'] . " - ";
-			$outputstr .= $calls['category'] ."<br/>";
+			$outputstr = "<tr>";
+			$outputstr .= "<td>#" . $calls['callid'] . "</td>";
+			$outputstr .= "<td>" . date("d/m/y h:s", strtotime($calls['opened'])) . "</td>";
+			$outputstr .= "<td><a href='viewcall.php?id=" . $calls['callid'] . "'>" . substr($calls['details'], 0, 100) . "</a></td>";
+			$outputstr .= "</tr>";
 			echo $outputstr;
 		}
 	?>
+	</tbody>
+	</table>
 	</p>
 	
 	

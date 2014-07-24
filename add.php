@@ -68,13 +68,6 @@
 			<input type="text" id="email" name="email" value="<?=check_input($_POST['email']);?>" />
 		<label for="tel">Primary Contact Telephone #</label>
 			<input type="text" id="tel" name="tel" value="<?=check_input($_POST['tel']);?>" />
-		
-		<label for="category">Category</label>
-			<select id="category" name="category">
-				<option value="option1" >Option 1</option>
-				<option value="option2" >Option 2</option>
-				<option value="option3" >Option 3</option>
-			</select>
 		<hr/>
 		<label for="callurgency">Call Urgency</label>
 			<select id="callurgency" name="callurgency">
@@ -89,12 +82,19 @@
 				<option value="3">This problem affects all of <?=$companyname;?></option>
 			</select>		
 		<hr/>
+		<label for="category">Category</label>
+			<select id="category" name="category">
+				<option value="option1" >Option 1</option>
+				<option value="option2" >Option 2</option>
+				<option value="option3" >Option 3</option>
+			</select>
 		<label for="location">Location</label>
 			<select id="location" name="location">
 				<option value="Main Site">Main Site</option>
 			</select>
 		<label for="room">Room</label>
 			<input type="text" id="room" name="room" value="<?=check_input($_POST['room']);?>" />
+		<hr/>
 		<label for="details">Problem Details</label>
 			<textarea name="details" id="details" rows="10" cols="40"><?=check_input($_POST['details']);?></textarea>
 	</fieldset>
