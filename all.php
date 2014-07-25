@@ -15,15 +15,14 @@
 	<body>
 	<div class="section">
 	<h2>* From Calls Table</h2>
-	<p>
-	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+	<div id="#ajaxforms">
 	<table>
 	<thead>
 		<tr>
 			<th>Call ID</th>
 			<th>Opened</th>
 			<th>Details</th>
-			<th>Button</th>
+			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -36,38 +35,38 @@
 		<td>#<?=$calls['callid'];?></td>
 		<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
 		<td><a href="viewcall.php?id=<?=$calls['callid'];?>"><?=substr($calls['details'], 0, 100);?></a></td>
-		<td>Submit</td>
+		<td>
+			<form method="post">
+				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
+				<button name="submit" value="submit" type="submit">View</button>
+			</form>
+		</td>
 		</tr>
 	<? } ?>
 	</tbody>
 	</table>
-	</form>
-	</p>
+	</div>
 	
-	
-	<div id="div2">ajax div</div>
-
-	<script>
-    // When the form is submitted run this JS code
-    $('form').submit(function(e) {
-        // Post the form data to page.php
-        $.post('viewcallpost.php', $(this).serialize(), function(resp) {
-            // Set the response data into the #div2
-            $('#div2').html(resp);
-        });
-
-        // Cancel the actual form post so the page doesn't refresh
-        e.preventDefault();
-        return false;
-    });
-    </script>
-	
-	
+	<div id="ajax"></div>
+		
 	<ul>
 		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+    // Ajax form submit
+    $('form').submit(function(e) {
+        // Post the form data to viewcall
+        $.post('viewcallpost.php', $(this).serialize(), function(resp) {
+            // return response data into div
+            $('#ajax').html(resp);
+        });
+        // Cancel the actual form post so the page doesn't refresh
+        e.preventDefault();
+        return false;
+    });     
+    </script>
 	</body>
 </html>

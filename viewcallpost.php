@@ -1,5 +1,5 @@
-	
-	<?php 
+	<?php
+	include 'includes/functions.php';
 	// select calls for ID
 	// run select query
 	$sqlstr = "SELECT * FROM calls ";
