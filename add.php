@@ -32,13 +32,14 @@
 			
 		// Create Query	
 		$sqlstr = "INSERT INTO calls ";
-		$sqlstr .= "(name, email, tel, details, assigned, opened, urgency, location, room, category) ";
+		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category) ";
 		$sqlstr .= "VALUES (";
 		$sqlstr .= " ' " . check_input($_POST['name']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['email']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['tel']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['details']) . " ',";
 		$sqlstr .= " ' " . next_engineer() . " ',";
+		$sqlstr .= " ' " . date("c") . " ',";
 		$sqlstr .= " ' " . date("c") . " ',";
 		$sqlstr .= " ' " . $urgencystr . " ',";
 		$sqlstr .= " ' " . check_input($_POST['location']) . " ',";

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-	// load functions
 	include 'includes/functions.php';
 	?>
 	<head>
@@ -15,11 +14,6 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
-	</div>
-	
 	<h2>View Call with ID: <?=check_input($_GET['id']);?> </h2>
 	<p>
 	<?php 

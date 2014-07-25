@@ -14,7 +14,6 @@
 	</head>
 	<body>
 	<div class="section">
-	<h2>* From Calls Table</h2>
 	<div id="#ajaxforms">
 	<table>
 	<thead>
@@ -32,9 +31,9 @@
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>
-		<td>#<?=$calls['callid'];?></td>
+		<td><a href="viewcall.php?id=<?=$calls['callid'];?>">#<?=$calls['callid'];?></a></td>
 		<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
-		<td><a href="viewcall.php?id=<?=$calls['callid'];?>"><?=substr($calls['details'], 0, 100);?></a></td>
+		<td><?=substr($calls['details'], 0, 100);?></td>
 		<td>
 			<form method="post">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />

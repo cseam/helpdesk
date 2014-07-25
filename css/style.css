@@ -36,7 +36,7 @@ body {
 a {
 	font-family: 'verlag', Arial;
 	font-size: 0.85rem;
-	color:#758e88;
+	color:#577d6a;
 	text-transform: uppercase;
 	padding: 0;
 	text-decoration: none;
@@ -148,7 +148,7 @@ body {
 	line-height: 1.3rem;
 }
 a, a:hover, h1, h2, h3, h4, h5, h6, p  {
-	color:#aaa;
+	color:#577d6a;
 }
 .enviro, .msgbox {
 	background: rgba(0,0,0,0.1);
@@ -169,6 +169,7 @@ input, textarea, button {
 	padding: 0.5rem 1rem;
 	text-transform: uppercase;
 	font-family: 'verlag', Arial;
+	resize: none;
 }
 select {
 	background: rgba(0,0,0,0.1) url('/helpdesk/images/icons-06.png') no-repeat 99% 50%;
@@ -227,6 +228,10 @@ input[type=text]:focus, textarea:focus, select:focus {
   -moz-box-sizing:content-box;
   -webkit-box-sizing:content-box;
 }
+table {
+	width: 100%;
+}
+
 table tr {
 	border: 0;
 }
@@ -236,5 +241,40 @@ table td, table th {
 }
 table th {
 	text-align: left;
+	text-transform: uppercase;
 }
-
+#ajax {
+	margin-top: 2rem;
+}
+#calldetails {
+	padding: 2rem;
+	background: rgba(0,0,0,0.1);
+}
+.callheader {
+	color: #577d6a;
+	text-transform: uppercase;
+	margin: 0;
+}
+.callbody {
+	color: #919191;
+}
+#calldetails textarea {
+	width: 96.5%;
+	background: transparent;
+	resize: none;
+	border: 1px solid rgba(0,0,0,0.3);
+}
+.callfooter {
+	display: inline-block;
+	margin: 0;
+	color: #aaa;
+}
+.buttons {
+	margin: 0;
+	text-align: right;
+	width: 50%;
+	float: right;
+}
+.buttons button {
+	background-color: #fff;
+}

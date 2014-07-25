@@ -10,20 +10,16 @@
 	// display results to page
 	while($calls = mysqli_fetch_array($result))  {
 	?>
-		<ul>
-			<li>Call ID: #<?=$calls['callid'];?></li>
-			<li>Primary Contact Name: <?=$calls['name'];?></li>
-			<li>Primary Email: <?=$calls['email'];?></li>
-			<li>Primary Telephone: <?=$calls['tel'];?></li>
-			<li>Engineer Assigned: <?=$calls['assigned'];?> (<?=$calls['engineerName'];?> - <?=$calls['engineerEmail'];?>)</li>
-			<li>Call Opened: <?=date("d/m/y h:s", strtotime($calls['opened']));?></li>
-			<li>Call Last Update: <?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></li>
-			<li>Call Closed: <?=date("d/m/y h:s", strtotime($calls['closed']));?></li>
-			<li>Status: <?=$calls['status'];?> (<?=$calls['statusCode'];?>)</li>
-			<li>Urgency: <?=$calls['urgency'];?></li>
-			<li>Location: <?=$calls['location'];?></li>
-			<li>Room: <?=$calls['room'];?></li>
-			<li>Category: <?=$calls['category'];?></li>
-			<li>Call Details: <?=$calls['details'];?></li>
-		</ul>
+	<div id="calldetails">
+	<h2>Call Details #<?=$_POST['id'];?></h2>
+	<p class="callheader"><a href="mailto:<?=$calls['email'];?>"><?=$calls['name'];?></a> (<?=$calls['tel'];?>)</p>	
+	<p class="callheader"><?=$calls['room'];?> - <?=$calls['location'];?></p>
+	<p class="callbody"><?=$calls['details'];?></p>
+	<p><textarea name="details" id="details" rows="10" cols="40"></textarea></p>
+	<p class="buttons">
+		<button name="close" value="close" type="submit">Close Call</button>
+		<button name="update" value="update" type="submit">Update Call</button>
+	</p>
+	<p class="callfooter">Opened <?=date("d/m/y h:s", strtotime($calls['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></p>
+	</div>
 	<? } ?>
