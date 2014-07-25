@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-	// load functions
 	include 'includes/functions.php';
 	?>
 	<head>
@@ -15,12 +14,7 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
-	</div>
-	<h2>My Calls</h2>
-	
+	<h2>My Calls</h2>	
 	<p>calls for specific engineer, in this case engineerid:<?=$_COOKIE['engineerid'];?></p>
 	<p>
 	<?php 
@@ -29,27 +23,23 @@
 	$result = mysqli_query($db, "SELECT * FROM calls WHERE assigned =" . $_COOKIE['engineerid']);
 	// display results to page
 	while($calls = mysqli_fetch_array($result))  {
-		
-			$outputstr = $calls['callid'] . " - ";
-			$outputstr .= $calls['name'] . " - ";
-			$outputstr .= $calls['email'] . " - ";
-			$outputstr .= $calls['tel'] . " - ";
-			$outputstr .= $calls['details'] . " - ";
-			$outputstr .= $calls['assigned'] . " - ";
-			$outputstr .= $calls['opened'] . " - ";
-			$outputstr .= $calls['lastupdate'] . " - ";
-			$outputstr .= $calls['closed'] . " - ";
-			$outputstr .= $calls['status'] . "<br/>";
-			echo $outputstr;
-		}
 	?>
+		<?=$calls['callid'] ?> -
+		<?=$calls['name'] ?> -
+		<?=$calls['email'] ?> -
+		<?=$calls['tel'] ?> -
+		<?=substr($calls['details'], 0, 100) ?> -
+		<?=$calls['assigned'] ?> -
+		<?=$calls['opened'] ?> -
+		<?=$calls['lastupdate'] ?> -
+		<?=$calls['closed'] ?> -
+		<?=$calls['status'] ?><br />
+	<? } ?>
 	</p>
 	<ul>
 		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>
-	
 	</div>
-
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
 	</body>

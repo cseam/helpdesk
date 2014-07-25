@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-	// load functions
 	include 'includes/functions.php';
 	?>
 	<head>
@@ -15,39 +14,53 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
-	</div>
-	
 	<h2>* From Calls Table</h2>
 	<p>
+	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
 	<table>
 	<thead>
 		<tr>
 			<th>Call ID</th>
 			<th>Opened</th>
 			<th>Details</th>
+			<th>Button</th>
 		</tr>
 	</thead>
 	<tbody>
 	<?php 
-		//list current engineers
 		//run select query
 		$result = mysqli_query($db, "SELECT * FROM calls");
-	
 		while($calls = mysqli_fetch_array($result))  {
-			$outputstr = "<tr>";
-			$outputstr .= "<td>#" . $calls['callid'] . "</td>";
-			$outputstr .= "<td>" . date("d/m/y h:s", strtotime($calls['opened'])) . "</td>";
-			$outputstr .= "<td><a href='viewcall.php?id=" . $calls['callid'] . "'>" . substr($calls['details'], 0, 100) . "</a></td>";
-			$outputstr .= "</tr>";
-			echo $outputstr;
-		}
-	?>
+		?>
+		<tr>
+		<td>#<?=$calls['callid'];?></td>
+		<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
+		<td><a href="viewcall.php?id=<?=$calls['callid'];?>"><?=substr($calls['details'], 0, 100);?></a></td>
+		<td>Submit</td>
+		</tr>
+	<? } ?>
 	</tbody>
 	</table>
+	</form>
 	</p>
+	
+	
+	<div id="div2">ajax div</div>
+
+	<script>
+    // When the form is submitted run this JS code
+    $('form').submit(function(e) {
+        // Post the form data to page.php
+        $.post('viewcallpost.php', $(this).serialize(), function(resp) {
+            // Set the response data into the #div2
+            $('#div2').html(resp);
+        });
+
+        // Cancel the actual form post so the page doesn't refresh
+        e.preventDefault();
+        return false;
+    });
+    </script>
 	
 	
 	<ul>

@@ -46,15 +46,12 @@ function last_engineer($data)
 	$data = "";
 	// find and join last engineer assigned
 	global $db;
-	
 	$sqlstr = "SELECT * FROM assign_engineers ";
 	$sqlstr .= "INNER JOIN engineers ON assign_engineers.engineerid=engineers.idengineers";
-	
 	$result = mysqli_query($db, $sqlstr);
 	while($engdetails = mysqli_fetch_array($result)) {
 	$data = $engdetails['engineerId'] . " - " . $engdetails['engineerName'] . " - " . $engdetails['engineerEmail'];		
 	}
-	
 	return $data;
 }
 function next_engineer($data)

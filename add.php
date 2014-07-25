@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-	// load functions
 	include 'includes/functions.php';
 	?>
 	<head>
@@ -15,10 +14,6 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
-	</div>
 	<h2>Add Form</h2>
 	<?php if ($_SERVER['REQUEST_METHOD']== "POST") { ?>
 	<div class="enviro">
@@ -101,10 +96,7 @@
 	
 	<input type="submit" value="submit" /><input type="reset" value="clear" />
 	</form>
-	<?php 
-		// End of if else statment
-	} ?>
-
+	<? } ?>
 	<ul>
 		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>

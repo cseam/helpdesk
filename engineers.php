@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-	// load functions
 	include 'includes/functions.php';
 	?>
 	<head>
@@ -15,12 +14,7 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
-	</div>
-	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
-	
+	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">	
 	<?php
 		// form actions
 		// on submit form
@@ -44,8 +38,6 @@
 		 // end of submit form actions
 		}
 	?>
-	
-	
 	<h2>* From Engineers Table</h2>
 	<p>
 	<?php 
@@ -70,10 +62,6 @@
 			<label for="email">Engineer Email</label><input type="text" id="email" name="email" value="<?=check_input($_POST['email']);?>" />
 		</fieldset>
 	<input type="submit" value="submit" name="btnSubmit" /><input type="reset" value="clear" />
-	
-	
-	
-	
 	</form>
 	<ul>
 		<li><a href="index.php"><?=$codename;?> Home</a></li>
