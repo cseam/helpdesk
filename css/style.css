@@ -148,7 +148,7 @@ body {
 	line-height: 1.3rem;
 }
 a, a:hover, h1, h2, h3, h4, h5, h6, p  {
-	color:#577d6a;
+	color:#587e6b;
 }
 .enviro, .msgbox {
 	background: rgba(0,0,0,0.1);
@@ -279,8 +279,19 @@ table th {
 	background-color: #fff;
 }
 .update {
-	border-top: 1px dashed rgba(0,0,0,0.3);
-	border-bottom: 1px dashed rgba(0,0,0,0.3);
-	padding: 1rem 0rem;
-	margin: 0.5rem 0rem;
+	border-left: 2px solid #fff;
+	padding: 0.5rem 1rem;
+	margin: 0.8rem 0rem;
+}
+.update h3 {
+	text-align: left;
+	font-size: 0.6rem;
+	color: #577d6a;
+	margin: 0.3rem 0;
+	padding: 0;
+}
+.original {
+	border-left: 2px solid #fff;
+	padding: 0.5rem 1rem;
+	margin: 0.8rem 0rem;
 }

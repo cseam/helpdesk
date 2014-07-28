@@ -37,7 +37,7 @@
 		$sqlstr .= " ' " . check_input($_POST['name']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['email']) . " ',";
 		$sqlstr .= " ' " . check_input($_POST['tel']) . " ',";
-		$sqlstr .= " ' " . check_input($_POST['details']) . " ',";
+		$sqlstr .= " '<div class=original>" . check_input($_POST['details']) . "</div>',";
 		$sqlstr .= " ' " . next_engineer() . " ',";
 		$sqlstr .= " ' " . date("c") . " ',";
 		$sqlstr .= " ' " . date("c") . " ',";

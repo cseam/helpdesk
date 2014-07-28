@@ -1,4 +1,3 @@
-<?php include 'includes/whoami.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 	<?php
