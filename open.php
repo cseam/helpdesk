@@ -14,8 +14,8 @@
 	</head>
 	<body>
 	<div class="section">
+	<h2>Open Calls</h2>
 	<div id="#ajaxforms">
-	<h2>All Calls</h2>
 	<table>
 	<thead>
 		<tr>
@@ -28,7 +28,7 @@
 	<tbody>
 	<?php 
 		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls");
+		$result = mysqli_query($db, "SELECT * FROM calls WHERE status='1'");
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>

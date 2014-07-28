@@ -24,7 +24,9 @@
 	<ul>
 		<li><a href="add.php">Add Call Form</a></li>
 		<li><a href="all.php">All Calls</a></li>
-		<li><a href="my.php">My Calls</a></li>
+		<li><a href="open.php">Open Calls</a></li>
+		<li><a href="my.php">All My Calls</a></li>
+		<li><a href="myopen.php">My Open Calls</a></li>
 		<li><a href="engineers.php">Engineers</a></li>
 		<li><a href="assigntests.php">Assign Function Tests</a></li>
 	</ul>

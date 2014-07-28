@@ -40,6 +40,7 @@ if (isset($_POST['update'])) {
 		$sqlstr = "UPDATE calls ";
 		$sqlstr .= "SET status=1, ";
 		$sqlstr .= "lastupdate='" . date("c") . "', ";
+		$sqlstr .= "closed=NULL, ";
 		$sqlstr .= "details='<div class=update>" . mysql_real_escape_string($_POST['updatedetails']) . " <h3>Update By {EngineerName}, " . date("d/m/y h:s") . " </h3></div>" . mysql_real_escape_string($_POST['details']) . "' ";
 		$sqlstr .= "WHERE callid=" . check_input($_POST['id']);
 		// Run query
@@ -55,7 +56,6 @@ if (isset($_POST['update'])) {
 } ?>
 
 	<ul>
-		<li><a href="all.php">All Calls</a></li>
 		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>
 </div>
