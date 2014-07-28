@@ -33,7 +33,7 @@
 		<tr>
 		<td><a href="viewcall.php?id=<?=$calls['callid'];?>">#<?=$calls['callid'];?></a></td>
 		<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
-		<td><?=substr($calls['details'], 0, 100);?></td>
+		<td><?=substr(strip_tags($calls['details']), 0, 100);?></td>
 		<td>
 			<form method="post">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
