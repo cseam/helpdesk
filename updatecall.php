@@ -24,7 +24,7 @@ if (isset($_POST['close'])) {
        $sqlstr .= "SET closed='" . date("c") . "', ";
        $sqlstr .= "status=2, ";
        $sqlstr .= "lastupdate='" . date("c") . "', ";
-       $sqlstr .= "details='<div class=update><h3>Calls Closed By {EngineerName}</h3>"  . check_input($_POST['updatedetails']) . "</div>" . check_input($_POST['details']) . "'";
+       $sqlstr .= "details='<div class=update><h3>Calls Closed By {EngineerName}</h3>"  . $_POST['updatedetails'] . "</div>" .$_POST['details'] . "' ";
        $sqlstr .= "WHERE callid=" . check_input($_POST['id']);
        // Run query
        mysqli_query($db, $sqlstr); 
@@ -37,8 +37,17 @@ if (isset($_POST['close'])) {
 if (isset($_POST['update'])) {
 		// update call
 		// setup sqlstr
-		echo "<h2>Update Call</h2>";
-        echo "<p>ID:" . $_POST['id'] . "</p>";
+		$sqlstr = "UPDATE calls ";
+		$sqlstr .= "SET status=1, ";
+		$sqlstr .= "lastupdate='" . date("c") . "', ";
+		$sqlstr .= "details='<div class=update><h3>Call Updated By {EngineerName}</h3>" . $_POST['updatedetails'] . "</div>" .$_POST['details'] . "' ";
+		$sqlstr .= "WHERE callid=" . check_input($_POST['id']);
+		// Run query
+		mysqli_query($db, $sqlstr);
+		//Close connection
+		mysqli_close($db);
+		
+		echo "<h2>Call updated #". $_POST['id'] ."</h2>";
         echo "<p>Details: " . $_POST['details'] . "</p>";
         echo "<p>Update Details: " . $_POST['updatedetails'] . "</p>";
 }
