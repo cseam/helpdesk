@@ -21,7 +21,7 @@ function environ($data)
     $data .= "<br/>Port " . $_SERVER['SERVER_PORT']; 
     $data .= "<br/>HTTP " . $_SERVER['REQUEST_METHOD']; 
     $data .= "<br/>" . date_default_timezone_get();
-    $data .= "<br/>Cookie Engineer id:" . $_COOKIE['engineerid'];
+    $data .= "<br/>Session AUTH Data: " . $_SESSION['sAMAccountName'];
     return $data;
 }
 

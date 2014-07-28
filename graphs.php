@@ -1,4 +1,3 @@
-<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 	<?php
@@ -16,23 +15,11 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
-	</div>
-	<h2>Codename: <?=$codename;?></h2>
-	<p><?=$codename;?> webapp forms & wireframes, variables displayed for debugging.</p>
+	<h2>Graphs</h2>
+	<p>page to test drawing graphs for stats</p>
 	<ul>
-		<li><a href="add.php">Add call form (auto assign)</a></li>
-		<li><a href="all.php">All calls</a></li>
-		<li><a href="open.php">Open calls</a></li>
-		<li><a href="my.php">All my calls</a></li>
-		<li><a href="myopen.php">My open calls</a></li>
-		<li><a href="engineers.php">Engineers</a></li>
-		<li><a href="assigntests.php">Assign function tests</a></li>
-		<li><a href="graphs.php">Graph/stats tests</a></li>
-	</ul>
-	
+		<li><a href="index.php"><?=$codename;?> Home</a></li>
+	</ul>	
 	</div>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
