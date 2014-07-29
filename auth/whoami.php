@@ -17,7 +17,7 @@ if ($sAMAcountName == null) {
 	$_SESSION['sAMAccountName'] = $_SERVER['PHP_AUTH_USER'];
 	$result = mysqli_query($db, "SELECT * FROM engineers WHERE sAMAccountName='". $_SERVER['PHP_AUTH_USER'] ."'");
 	while($engineers = mysqli_fetch_array($result))  {
-		$_SESSION['engineerLevel'] = $engineers['engineerLevel']);
+		$_SESSION['engineerLevel'] = $engineers['engineerLevel'];
 	}
 	echo "<h1>Authentication Success</h1>";
 	echo "Session variables set";
