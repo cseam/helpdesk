@@ -6,7 +6,7 @@ date_default_timezone_set('Europe/London');
 
 
 //Database Setup 
-$db = mysqli_connect("localhost", "root", "root", "helpdesk");
+$db = mysqli_connect("localhost", "helpdesk", "helpdesk", "helpdesk");
 // check db connection not sure if this should be done before each db call or once at function load is enough? 
 if (mysqli_connect_errno()) {
 	printf("Connect failed: %s\n", mysqli_connect_error());
