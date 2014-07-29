@@ -31,6 +31,7 @@
 		<li><a href="engineers.php">Engineers</a></li>
 		<li><a href="assigntests.php">Assign function tests</a></li>
 		<li><a href="graphs.php">Graph/stats tests</a></li>
+		<li><a href="auth/whoami.php">Engineer authentication</a></li>
 	</ul>
 	
 	</div>

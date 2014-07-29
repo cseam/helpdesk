@@ -21,7 +21,8 @@ function environ($data)
     $data .= "<br/>Port " . $_SERVER['SERVER_PORT']; 
     $data .= "<br/>HTTP " . $_SERVER['REQUEST_METHOD']; 
     $data .= "<br/>" . date_default_timezone_get();
-    $data .= "<br/>Session AUTH Data: " . $_SESSION['sAMAccountName'];
+    $data .= "<br/>Session sAMAccountName: " . $_SESSION['sAMAccountName'];
+    $data .= "<br/>Engineer Level:" . $_SESSION['engineerLevel'];
     return $data;
 }
 
