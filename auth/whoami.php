@@ -10,7 +10,7 @@ $sAMAcountName = $_SERVER['PHP_AUTH_USER'];
 if ($sAMAcountName == null) {
 	echo "<h1>Authentication Error.</h1>";
 	echo "<p>Setting session data manually during testing as ntml is off on MAMP</p>";
-	echo "<p><a href='http://localhost:8888/helpdesk/'>Home</a></p>";
+	echo "<p><a href='/'>Home</a></p>";
 	$_SESSION['sAMAccountName'] = 'dripsh';
 	$_SESSION['engineerLevel'] = '1';
 } else {
@@ -21,7 +21,7 @@ if ($sAMAcountName == null) {
 	}
 	echo "<h1>Authentication Success</h1>";
 	echo "Session variables set";
-	echo "<p><a href='http://localhost:8888/helpdesk/'>Home</a></p>";
+	echo "<p><a href='/'>Home</a></p>";
 }
 
 ?>
