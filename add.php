@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 	<?php
@@ -57,13 +58,13 @@
 	 	
 	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
 	<fieldset>
-		<legend>form post to php_self</legend>
+		<legend>Call Details</legend>
 		<label for="name">Primary Contact Name</label>
-			<input type="text" id="name" name="name" value="<?=check_input($_POST['name']);?>" />
+			<input type="text" id="name" name="name" value="<?=$_SESSION['sAMAccountName'];?>" />
 		<label for="email">Primary Contact Email</label>
-			<input type="text" id="email" name="email" value="<?=check_input($_POST['email']);?>" />
-		<label for="tel">Primary Contact Telephone #</label>
-			<input type="text" id="tel" name="tel" value="<?=check_input($_POST['tel']);?>" />
+			<input type="text" id="email" name="email" value="<?=$_SESSION['sAMAccountName']."@".$companysuffix;?>" />
+		<label for="tel">Primary Contact Phone #</label>
+			<input type="text" id="tel" name="tel" value="" />
 		<hr/>
 		<label for="callurgency">Call Urgency</label>
 			<select id="callurgency" name="callurgency">
@@ -89,10 +90,10 @@
 				<option value="Main Site">Main Site</option>
 			</select>
 		<label for="room">Room</label>
-			<input type="text" id="room" name="room" value="<?=check_input($_POST['room']);?>" />
+			<input type="text" id="room" name="room" value="" />
 		<hr/>
 		<label for="details">Problem Details</label>
-			<textarea name="details" id="details" rows="10" cols="40"><?=check_input($_POST['details']);?></textarea>
+			<textarea name="details" id="details" rows="10" cols="40"></textarea>
 	</fieldset>
 	
 	<input type="submit" value="submit" /><input type="reset" value="clear" />

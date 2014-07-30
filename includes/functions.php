@@ -1,7 +1,8 @@
 <?php
 // Global Vars & Settings
 $codename = "Pantone Snail";
-$companyname = "College";
+$companyname = "CLC";
+$companysuffix = "cheltladiescollege.org";
 date_default_timezone_set('Europe/London');
 
 
