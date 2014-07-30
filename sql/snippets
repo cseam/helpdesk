@@ -5,4 +5,9 @@ FROM engineers AS a
 WHERE b.status = 1
 GROUP BY a.idengineers
 
-/* SELECT ALL USERS AND COUNT TOTAL NUMBER OF CLOSED CALLS TODAY */
+/* SELECT ALL USERS AND COUNT TOTAL NUMBER OF CLOSED CALLS IN GIVEN NUMBER OF DAYS */
+SELECT a.idengineers, a.engineerName, count(*) AS OPEN_CALLS
+FROM engineers AS a
+	LEFT JOIN calls AS b ON a.idengineers = b.assigned
+WHERE b.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+GROUP BY a.idengineers
