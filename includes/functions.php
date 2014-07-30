@@ -24,6 +24,7 @@ function environ($data)
     $data .= "<br/>" . date_default_timezone_get();
     $data .= "<br/>Session sAMAccountName: " . $_SESSION['sAMAccountName'];
     $data .= "<br/>Engineer Level:" . $_SESSION['engineerLevel'];
+    $data .= "<br/>Engineer ID:" . $_SESSION['engineerId'];
     return $data;
 }
 
