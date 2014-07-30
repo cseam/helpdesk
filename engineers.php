@@ -30,7 +30,14 @@
 			// if form posted & submit button clicked, add form to engineers table.
 			if (isset($_POST['btnSubmit'])) {
 				echo "Engineer added (" . $_POST['name'] .")" ;
-				mysqli_query($db, "INSERT INTO engineers (engineerName, engineerEmail) VALUES ('" . $_POST['name'] . "','" . $_POST['email'] . "')");
+				$strsql = "INSERT INTO engineers ";
+				$strsql .= "(engineerName, engineerEmail, sAMAccountName, engineerLevel) VALUES (";
+				$strsql .= "'". check_input($_POST['name']) ."',";
+				$strsql .= "'". check_input($_POST['email']) ."',";
+				$strsql .= "'". check_input($_POST['sAMAccountName']) ."',";
+				$strsql .= "'". check_input($_POST['level']) ."'";
+				$strsql .= ")";
+				mysqli_query($db, $strsql);
 			}
 		 ?>
 		 </div>
@@ -38,11 +45,10 @@
 		 // end of submit form actions
 		}
 	?>
-	<h2>* From Engineers Table</h2>
+	<h2>All Engineers</h2>
 	<p>
 	<?php 
 		//list current engineers
-		//run select query
 		$result = mysqli_query($db, "SELECT * FROM engineers");
 		
 		while($engineers = mysqli_fetch_array($result)) {
@@ -58,8 +64,18 @@
 	<h2>Add Engineer</h2>
 		<fieldset>
 			<legend>add engineers</legend>
-			<label for="name">Engineer Name</label><input type="text" id="name" name="name" value="<?=check_input($_POST['name']);?>" />
-			<label for="email">Engineer Email</label><input type="text" id="email" name="email" value="<?=check_input($_POST['email']);?>" />
+			<label for="name">Engineer Name</label><input type="text" id="name" name="name" value="" />
+			<label for="email">Engineer Email</label><input type="text" id="email" name="email" value="" />
+			
+			<label for="sAMAccountName">sAMAccountName</label><input type="text" id="sAMAccountName" name="sAMAccountName" value="" />
+			<label for="level">Engineer Level</label>
+			<select id="level" name="level">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+			
+			
 		</fieldset>
 	<input type="submit" value="submit" name="btnSubmit" /><input type="reset" value="clear" />
 	</form>
