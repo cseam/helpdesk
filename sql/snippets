@@ -1,0 +1,8 @@
+/* SELECT ALL USERS AND COUNT TOTAL NUMBER OF OPEN CALLS */
+SELECT a.idengineers, a.engineerName, count(*) AS OPEN_CALLS
+FROM engineers AS a
+	LEFT JOIN calls AS b ON a.idengineers = b.assigned
+WHERE b.status = 1
+GROUP BY a.idengineers
+
+/* SELECT ALL USERS AND COUNT TOTAL NUMBER OF CLOSED CALLS TODAY */
