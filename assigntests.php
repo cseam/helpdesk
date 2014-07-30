@@ -15,10 +15,6 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
-	</div>
 	<h2>Assign/Next Function Tests</h2>
 	
 	<p>function calculates and returns the next engineer looking at the assign engineers table.</p>
@@ -32,7 +28,6 @@
 	</ul>
 	
 	</div>
-
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
 	</body>
