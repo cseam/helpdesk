@@ -26,4 +26,4 @@
 	<p class="callfooter">Opened <?=date("d/m/y h:s", strtotime($calls['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></p>
 	</form>
 	</div>
-	<? } ?>
+	<?php } ?>

@@ -26,19 +26,13 @@ function environ($data)
     return $data;
 }
 
-function check_input($data, $problem='')
+function check_input($data)
 {
-	// need to decide what this function does.. does it do field validation or just data cleanse.
+    global $db;
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
-    $data = mysql_real_escape_string($data);
-    
-    // might not use this section
-    //if ($problem && strlen($data) == 0)
-    //{
-    //    return($problem);
-    //}
+    $data = mysqli_real_escape_string($db, $data);
     return $data;
 }
 function last_engineer($data)
