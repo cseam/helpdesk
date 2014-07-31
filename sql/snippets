@@ -25,6 +25,13 @@ SELECT count(*)  FROM calls
 WHERE opened > (now() - INTERVAL 10 SECOND)
 
 /*number of calls closed by user during last 7 week days*/
-SELECT closeengineerid, WEEKDAY(closed) AS DAY_OF_WEEK, COUNT(*) AS Count FROM calls
+SELECT closeengineerid, DATE_FORMAT(closed,'%a') AS DAY_OF_WEEK FROM calls
 WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
-GROUP BY closeengineerid
+
+
+
+
+SELECT closeengineerid, DATE_FORMAT(closed, '%a')AS DAY_OF_WEEK, COUNT(0) as COUNT
+	FROM calls
+	WHERE closeengineerid = '11' AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) 
+	GROUP BY DATE_FORMAT(closed, '%a')
