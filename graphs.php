@@ -21,8 +21,8 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Calls', 'Number'],
-          ['Closed this week',     11],
-          ['Still Open',      2]
+          ['Closed (this week)',     11],
+          ['Your calls still open',      2]
         ]);
 
         var options = {
@@ -39,7 +39,7 @@
       google.setOnLoadCallback(drawChart2);
       function drawChart2() {
         var data = google.visualization.arrayToDataTable([
-          ['Day', 'All Calls Closed', 'Your Calls Closed'],
+          ['Day', 'All', 'Your'],
           ['Sun',  14,      0],
           ['Mon',  88,      14],
           ['Tue',  70,      22],
@@ -51,8 +51,11 @@
 
         var options = {
           title: '',
-          legend: 'none',
+          legend: { position: 'right' },
           colors: ['#577d6a','#CCCCCC'],
+          pointSize: 4,
+          vAxis: {gridlines: { count: 3 },textPosition: 'none'},
+          chartArea: {'width': 'auto', 'height': '70%', 'left' : 0,},
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('linechart'));
@@ -67,8 +70,8 @@
 	<div class="section">
 	<h2>Graphs</h2>
 	<h3>Performance</h3>
-	<div id="piechart" style="width: 20%; float: left;"></div>
-	<div id="linechart" style="width: 40%; float: left;"></div>
+	<div id="piechart" style="width: 20%; float: left; -webkit-box-sizing: border-box;"></div>
+	<div id="linechart" style="width: 40%; float: left; -webkit-box-sizing: border-box;"></div>
 	<ul style="clear: left;">
 		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>	
