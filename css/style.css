@@ -262,7 +262,7 @@ table th {
 	width: 96.5%;
 	background: transparent;
 	resize: none;
-	border: 2px solid rgba(255,255,255,0.5);
+	border: 1px solid rgba(0,0,0,0.5);
 }
 .callfooter {
 	display: inline-block;
@@ -279,7 +279,7 @@ table th {
 	background-color: #fff;
 }
 .update {
-	border-left: 2px solid rgba(255,255,255,0.5);
+	border-left: 1px dashed rgba(0,0,0,0.5);
 	padding: 0.5rem 1rem;
 	margin: 0.8rem 0rem;
 }
@@ -291,7 +291,7 @@ table th {
 	padding: 0;
 }
 .original {
-	border-left: 2px solid rgba(255,255,255,0.5);
+	border-left: 1px solid rgba(0,0,0,0.5);
 	padding: 0.5rem 1rem;
 	margin: 0.8rem 0rem;
 }

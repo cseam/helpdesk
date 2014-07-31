@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 	<?php
@@ -28,7 +29,7 @@
 	<tbody>
 	<?php 
 		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls WHERE assigned='". $_COOKIE['engineerid'] ."' AND status='1'");
+		$result = mysqli_query($db, "SELECT * FROM calls WHERE assigned='". $_SESSION['engineerId']  ."' AND status='1'");
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>

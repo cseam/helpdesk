@@ -24,7 +24,7 @@ if (isset($_POST['close'])) {
        $sqlstr .= "SET closed='" . date("c") . "', ";
        $sqlstr .= "status=2, ";
        $sqlstr .= "lastupdate='" . date("c") . "', ";
-       $sqlstr .= "details='<div class=update>"  . mysql_real_escape_string($_POST['updatedetails']) . " <h3>Closed By {EngineerName}, " . date("d/m/y h:s") . " </h3></div>" .mysql_real_escape_string($_POST['details']) . "' ";
+       $sqlstr .= "details='<div class=update>"  . mysqli_real_escape_string($_POST['updatedetails']) . " <h3>Closed By {EngineerName}, " . date("d/m/y h:s") . " </h3></div>" .mysqli_real_escape_string($_POST['details']) . "' ";
        $sqlstr .= "WHERE callid=" . check_input($_POST['id']);
        // Run query
        mysqli_query($db, $sqlstr); 
@@ -41,7 +41,7 @@ if (isset($_POST['update'])) {
 		$sqlstr .= "SET status=1, ";
 		$sqlstr .= "lastupdate='" . date("c") . "', ";
 		$sqlstr .= "closed=NULL, ";
-		$sqlstr .= "details='<div class=update>" . mysql_real_escape_string($_POST['updatedetails']) . " <h3>Update By {EngineerName}, " . date("d/m/y h:s") . " </h3></div>" . mysql_real_escape_string($_POST['details']) . "' ";
+		$sqlstr .= "details='<div class=update>" . mysqli_real_escape_string($_POST['updatedetails']) . " <h3>Update By {EngineerName}, " . date("d/m/y h:s") . " </h3></div>" . mysqli_real_escape_string($_POST['details']) . "' ";
 		$sqlstr .= "WHERE callid=" . check_input($_POST['id']);
 		// Run query
 		mysqli_query($db, $sqlstr);
