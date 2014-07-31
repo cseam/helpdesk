@@ -13,8 +13,18 @@ WHERE b.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
 GROUP BY a.idengineers
 
 /* All Engineers - closing calls by weekday */
-SELECT a.idengineers, a.engineerName, b.closed, WEEKDAY(b.closed) AS Weekday_Number, count(*) AS CLOSED_CALLS
+
+SELECT a.idengineers, a.engineerName, b.closed, WEEKDAY(b.closed) AS Weekday_Number, b.closeengineerid
 FROM engineers AS a
 	LEFT JOIN calls AS b ON a.idengineers = b.assigned
 WHERE b.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
-GROUP BY WEEKDAY(b.closed)
+/* All Calls opened in the last 10 seconds
+Include 'assigned = 'X' AND ...' to look for a specific user being assigned
+a call in the last 10 seconds */
+SELECT count(*)  FROM calls
+WHERE opened > (now() - INTERVAL 10 SECOND)
+
+/*number of calls closed by user during last 7 week days*/
+SELECT closeengineerid, WEEKDAY(closed) AS DAY_OF_WEEK, COUNT(*) AS Count FROM calls
+WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+GROUP BY closeengineerid
