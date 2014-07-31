@@ -26,16 +26,38 @@
         ]);
 
         var options = {
-          title: 'Performance',
+          title: '',
           pieHole: 0.5,
           colors: ['#577d6a','#CCCCCC'],
           pieSliceText: 'none',
           legend: 'none',
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('chart'));
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }
+      google.setOnLoadCallback(drawChart2);
+      function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+          ['Day', 'All Calls Closed', 'Your Calls Closed'],
+          ['Sun',  14,      0],
+          ['Mon',  88,      14],
+          ['Tue',  70,      22],
+          ['Wed',  66,       11],
+          ['Thu',  108,      26],
+          ['Fri',  92,      14],
+          ['Sat',  24,      0]
+        ]);
+
+        var options = {
+          title: '',
+          legend: 'none',
+          colors: ['#577d6a','#CCCCCC'],
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+        chart.draw(data, options);
+        }
     </script>
 		
 		
@@ -44,9 +66,10 @@
 	<body>
 	<div class="section">
 	<h2>Graphs</h2>
-	<p>page to test drawing graphs for stats</p>
-	<div id="chart" style="width: 300px;"></div>
-	<ul>
+	<h3>Performance</h3>
+	<div id="piechart" style="width: 20%; float: left;"></div>
+	<div id="linechart" style="width: 40%; float: left;"></div>
+	<ul style="clear: left;">
 		<li><a href="index.php"><?=$codename;?> Home</a></li>
 	</ul>	
 	</div>
