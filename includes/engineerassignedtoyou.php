@@ -12,7 +12,7 @@
 		<td class="view_td">
 			<form method="post">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="submit" type="submit" class="calllistbutton"><?=substr(strip_tags($calls['details']), 0, 100);?></button>
+				<button name="submit" value="submit" type="submit" class="calllistbutton"><?=substr(strip_tags($calls['details']), 0, 145);?>...</button>
 			</form>
 		</td>
 		</tr>

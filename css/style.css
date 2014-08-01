@@ -234,7 +234,7 @@ table tr {
 table td, table th {
 	border-bottom: 1px solid silver;
 	padding: 0.2rem 0.5rem;
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 	line-height: 1rem;
 }
 table th {
@@ -244,10 +244,10 @@ table th {
 .calllistbutton {
 	background: transparent;
 	text-align: left;
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 	padding: 0;
 	margin: 0;
-
+	text-transform: none;
 }
 .view_td {
 	width: auto;
@@ -274,10 +274,13 @@ table th {
 	color: #919191;
 }
 #calldetails textarea {
-	width: 96.5%;
-	background: transparent;
+	width: 93%;
+	background: rgba(255,255,255,0.25);
 	resize: none;
-	border: 1px solid rgba(0,0,0,0.5);
+	padding: 1rem;
+	border-top: 1px solid silver;
+	border-bottom: 1px solid silver;
+
 }
 .callfooter {
 	display: inline-block;
@@ -291,23 +294,25 @@ table th {
 	float: right;
 }
 .buttons button {
-	background-color: #fff;
+	background-color: rgba(255,255,255,0.25);
+	border: 1px solid silver;
 }
 .update {
-	border-left: 1px dashed rgba(0,0,0,0.5);
-	padding: 0.5rem 1rem;
+	border-left: 1px dashed transparent;
+	padding: 0.5rem 0rem;
 	margin: 0.8rem 0rem;
+	border-bottom: 1px solid silver;
 }
 .update h3 {
-	text-align: left;
+	text-align: right;
 	font-size: 0.6rem;
 	color: #577d6a;
 	margin: 0.3rem 0;
 	padding: 0;
 }
 .original {
-	border-left: 1px solid rgba(0,0,0,0.5);
-	padding: 0.5rem 1rem;
+	border-left: 1px solid transparent;
+	padding: 0.5rem 0rem;
 	margin: 0.8rem 0rem;
 }
 
