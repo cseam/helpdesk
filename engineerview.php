@@ -6,7 +6,7 @@
 	include 'includes/functions.php';
 	?>
 	<head>
-		<title><?=$codename;?></title>
+		<title><?=$codename;?> - Engineer View</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,27 +16,29 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
+	<div id="branding">
+		<a href="add.php">Add Call</a><br/>
+		<a href="index.php"><?=$codename;?> Home</a>
 	</div>
-	<h2>Codename: <?=$codename;?></h2>
-	<p><?=$codename;?> webapp forms & wireframes, variables displayed for debugging.</p>
-	<ul>
-		<li><a href="add.php">Add call form (auto assign)</a></li>
-		<li><a href="all.php">All calls</a></li>
-		<li><a href="open.php">Open calls</a></li>
-		<li><a href="my.php">All my calls</a></li>
-		<li><a href="myopen.php">My open calls</a></li>
-		<li><a href="engineers.php">Engineers</a></li>
-		<li><a href="assigntests.php">Assign function tests</a></li>
-		<li><a href="graphs.php">Graph/stats tests</a></li>
-		<li><a href="auth/whoami.php">Engineer authentication</a></li>
-		<li><a href="engineerview.php">Engineer View</a></li>
-	</ul>
 	
+	<div id="leftpage">
+	<div id="stats">
+		<h3>Performance</h3>
+		<?php include 'includes/engineergraph.php'; ?>
 	</div>
-
+	<div id="calllist">
+		<h3>Assigned to you</h3>
+		<?php include 'includes/engineerassignedtoyou.php'; ?>
+		<h3>All Urgent Calls</h3>
+		<p>urgent calls for everyone</p>
+	</div>
+	</div>
+	<div id="rightpage">
+	<div id="call">
+		<div id="ajax"></div>
+	</div>
+	</div>
+	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
 	</body>
