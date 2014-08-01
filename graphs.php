@@ -4,57 +4,82 @@
 	<?php
 	// load functions
 	include 'includes/functions.php';	
-	// sql
 	
+	// Get engineer calls closed for line chart
 	$sqlstr = "SELECT closeengineerid, DATE_FORMAT(closed, '%a')AS DAY_OF_WEEK FROM calls WHERE closeengineerid = '".$_SESSION['engineerId']."' AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)"; 
-		$engineermon = 0;
-		$engineertue = 0;
-		$engineerwed = 0;
-		$engineerthu = 0;
-		$engineerfri = 0;
-		$engineersat = 0;
-		$engineersun = 0;
-		
-	// Run Query
-		$resultengineer = mysqli_query($db, $sqlstr); 
+	$engineermon = $engineertue = $engineerwed = $engineerthu = $engineerfri = $engineersat = $engineersun = 0;	
+	$resultengineer = mysqli_query($db, $sqlstr); 
 		while($stats = mysqli_fetch_array($resultengineer))  { 	
-			if ($stats['DAY_OF_WEEK'] == "Mon") { ++$engineermon; };
-			if ($stats['DAY_OF_WEEK'] == "Tue") { ++$engineertue; };
-			if ($stats['DAY_OF_WEEK'] == "Wed") { ++$engineerwed; };
-			if ($stats['DAY_OF_WEEK'] == "Thu") { ++$engineerthu; };
-			if ($stats['DAY_OF_WEEK'] == "Fri") { ++$engineerfri; };
-			if ($stats['DAY_OF_WEEK'] == "Sat") { ++$engineersat; };
-			if ($stats['DAY_OF_WEEK'] == "Sun") { ++$engineersun; };
+			SWITCH ($stats['DAY_OF_WEEK']) {
+            	CASE "Mon":
+                	++$engineermon;
+                	break;
+                CASE "Tue":
+                	++$engineertue;
+                    break;
+                CASE "Wed":
+                	++$engineerwed;
+                    break;
+                CASE "Thu":
+                	++$engineerthu;
+                	break;
+                CASE "Fri":
+                	++$engineerfri;
+                	break;
+                CASE "Sat":
+                	++$engineersat;
+                	break;
+                CASE "Sun":
+                	++$engineersun;
+                	break;
+            }
 		}
 
+	// Get all calls closed for line chart
 	$sqlstrall = "SELECT closeengineerid, DATE_FORMAT(closed, '%a') AS DAY_OF_WEEK FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)"; 
-
-		$allmon = 0;
-		$alltue = 0;
-		$allwed = 0;
-		$allthu = 0;
-		$allfri = 0;
-		$allsat = 0;
-		$allsun = 0;
-
-		$resultall = mysqli_query($db, $sqlstrall); 
+	$allmon = $alltue = $allwed = $allthu = $allfri = $allsat = $allsun = 0;
+	$resultall = mysqli_query($db, $sqlstrall); 
 		while($stats = mysqli_fetch_array($resultall))  { 
-		
-			
-			if ($stats['DAY_OF_WEEK'] == "Mon") { ++$allmon; };
-			if ($stats['DAY_OF_WEEK'] == "Tue") { ++$alltue; };
-			if ($stats['DAY_OF_WEEK'] == "Wed") { ++$allwed; };
-			if ($stats['DAY_OF_WEEK'] == "Thu") { ++$allthu; };
-			if ($stats['DAY_OF_WEEK'] == "Fri") { ++$allfri; };
-			if ($stats['DAY_OF_WEEK'] == "Sat") { ++$allsat; };
-			if ($stats['DAY_OF_WEEK'] == "Sun") { ++$allsun; };
+			SWITCH ($stats['DAY_OF_WEEK']) {
+            	CASE "Mon":
+                	++$allmon;
+                	break;
+                CASE "Tue":
+                	++$alltue;
+                    break;
+                CASE "Wed":
+                	++$allwed;
+                    break;
+                CASE "Thu":
+                	++$allthu;
+                	break;
+                CASE "Fri":
+                	++$allfri;
+                	break;
+                CASE "Sat":
+                	++$allsat;
+                	break;
+                CASE "Sun":
+                	++$allsun;
+                	break;
+            }
 		}
-
-	
+		
+	// Get all calls closed by engineer this week for pie
+	$sqlstrpieall = "SELECT closeengineerid FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND closeengineerid = '".$_SESSION['engineerId']."'";
+	$allpie = 0;
+	$resultpieall = mysqli_query($db, $sqlstrpieall); 
+		while($stats = mysqli_fetch_array($resultpieall))  {
+			++$allpie;	
+		}
+	// Get all open calls by engineer 
+	$sqlstrpieopen = "SELECT assigned FROM calls WHERE status = '1' AND assigned = '".$_SESSION['engineerId']."'";
+	$allopen = 0;
+	$resultpieopen = mysqli_query($db, $sqlstrpieopen); 
+		while($stats = mysqli_fetch_array($resultpieopen))  {
+			++$allopen;
+		}
 	?>
-	
-	
-	
 	<head>
 		<title><?=$codename;?></title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
@@ -72,8 +97,8 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Calls', 'Number'],
-          ['Closed (this week)',     11],
-          ['Your calls still open',      2]
+          ['Closed (this week)',     <?=$allpie?>],
+          ['Your calls still open',      <?=$allopen?>]
         ]);
 
         var options = {
@@ -117,7 +142,7 @@
 	<body>
 	<div class="section">
 	<h2>Graphs</h2>
-	<h3>Performance</h3>
+	<h3>Your Performance</h3>
 	<div id="piechart" style="width: 20%; float: left; -webkit-box-sizing: border-box;"></div>
 	<div id="linechart" style="width: 40%; float: left; -webkit-box-sizing: border-box;"></div>	
 	<ul style="clear: left;">
