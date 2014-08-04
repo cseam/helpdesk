@@ -14,16 +14,17 @@
 	<form action="updatecall.php" method="post">
 	<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$calls['details'];?>" />
-	<h2>Call Details #<?=$_POST['id'];?></h2>
-	<p class="callheader"><a href="mailto:<?=$calls['email'];?>"><?=$calls['name'];?></a> (<?=$calls['tel'];?>)</p>	
-	<p class="callheader"><?=$calls['room'];?> - <?=$calls['location'];?></p>
+	<h2>
+	<?php if ($calls['urgency'] === '3') { echo "Urgent ";} ?>Call Details #<?=$_POST['id'];?></h2>
+	<p class="callheader">created by <a href="mailto:<?=$calls['email'];?>"><?=$calls['name'];?></a> (<?=$calls['tel'];?>)</p>	
+	<p class="callheader">for <?=$calls['room'];?> - <?=$calls['location'];?></p>
 	<p class="callbody"><?=$calls['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">
 		<button name="close" value="close" type="submit">Close Call</button>
 		<button name="update" value="update" type="submit">Update Call</button>
 	</p>
-	<p class="callfooter">Opened <?=date("d/m/y h:s", strtotime($calls['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></p>
+	<p class="callfooter">Call Opened <?=date("d/m/y h:s", strtotime($calls['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></p>
 	</form>
 	</div>
 	<?php } ?>

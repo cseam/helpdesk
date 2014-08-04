@@ -270,23 +270,32 @@ table th {
 	color: #577d6a;
 	text-transform: uppercase;
 	margin: 0;
+	font-size: 0.8rem;
+}
+.callheader a {
+	font-size: 0.8rem;
 }
 .callbody {
 	color: #919191;
 }
 #calldetails textarea {
 	width: 93%;
-	background: rgba(255,255,255,0.25);
+	background: rgba(255,255,255,0.45);
 	resize: none;
 	padding: 1rem;
-	border-top: 1px solid silver;
-	border-bottom: 1px solid silver;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
 
 }
 .callfooter {
 	display: inline-block;
 	margin: 0;
-	color: #aaa;
+	padding-top: 5px;
+	color: #577d6a;
+	line-height: 0.9rem;
+	font-size: 0.8rem;
+	text-transform: lowercase;
+	font-style: italic;
 }
 .buttons {
 	margin: 0;
@@ -295,26 +304,30 @@ table th {
 	float: right;
 }
 .buttons button {
-	background-color: rgba(255,255,255,0.25);
+	background-color: rgba(255,255,255,0.45);
 	border: 1px solid transparent;
 }
 .update {
 	border-left: 1px dashed transparent;
 	padding: 0.5rem 0rem;
-	margin: 0.8rem 0rem;
-	border-bottom: 1px solid silver;
+	margin: 0.5rem 0rem;
+	border-bottom: 1px dotted silver;
+	line-height: 1.5rem;
 }
 .update h3 {
-	text-align: right;
-	font-size: 0.6rem;
+	text-align: left;
+	font-size: 0.8rem;
 	color: #577d6a;
 	margin: 0.3rem 0;
 	padding: 0;
+	font-style: italic;
+	text-transform: lowercase;
 }
 .original {
 	border-left: 1px solid transparent;
 	padding: 0.5rem 0rem;
 	margin: 0.8rem 0rem;
+	line-height: 1.5rem;
 }
 
 #branding {
@@ -347,11 +360,13 @@ table th {
 	background: transparent;
 	height: 50%;
 	overflow: auto;
-	padding: 0 5px;
+	padding: 0;
 	overflow: hidden;
+	margin-right: 15px;
 }
 #calllist:hover {
 	overflow: auto;
+	margin-right: 15px;
 }
 
 #call {

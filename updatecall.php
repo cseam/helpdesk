@@ -20,39 +20,30 @@
 
 if (isset($_POST['close'])) {
         // close call
-        // setup sqlstr
        $sqlstr = "UPDATE calls ";
        $sqlstr .= "SET closed='" . date("c") . "', ";
        $sqlstr .= "status=2, ";
        $sqlstr .= "lastupdate='" . date("c") . "', ";
        $sqlstr .= "closeengineerid='".$_SESSION['engineerId']."',";
-       $sqlstr .= "details='<div class=update>"  . $_POST['updatedetails'] . " <h3>Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . " </h3></div>" . $_POST['details'] . "' ";
-       $sqlstr .= "WHERE callid=" . check_input($_POST['id']);
+       $sqlstr .= "details='<div class=update>"  . mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3>Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . " </h3></div>" . mysqli_real_escape_string($db,$_POST['details']) . "' ";
+       $sqlstr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
        // Run query
        mysqli_query($db, $sqlstr); 
-       // Close Connection
-       mysqli_close($db);
        echo "<h2>Call Updated & Closed #" . $_POST['id'] . "</h2>";
-       echo "<p>Details: " . $_POST['details'] . "</p>";
-       echo "<p>Update: " . $_POST['updatedetails'] . "</p>";
+       echo "<p>SQL: " . $sqlstr . "</p>";
     }
 if (isset($_POST['update'])) {
 		// update call
-		// setup sqlstr
-		$sqlstr = "UPDATE calls ";
-		$sqlstr .= "SET status=1, ";
-		$sqlstr .= "lastupdate='" . date("c") . "', ";
-		$sqlstr .= "closed=NULL, ";
-		$sqlstr .= "details='<div class=update>" . $_POST['updatedetails'] . " <h3>Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . " </h3></div>" . $_POST['details'] . "' ";
-		$sqlstr .= "WHERE callid=" . check_input($_POST['id']);
+		$sqlupdatestr = "UPDATE calls ";
+		$sqlupdatestr .= "SET status=1, ";
+		$sqlupdatestr .= "lastupdate='" . date("c") . "', ";
+		$sqlupdatestr .= "closed=NULL, ";
+		$sqlupdatestr .= "details='<div class=update>" .  mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3>Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . "</h3></div>" .  mysqli_real_escape_string($db,$_POST['details']) . "' ";
+		$sqlupdatestr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
 		// Run query
-		mysqli_query($db, $sqlstr);
-		//Close connection
-		mysqli_close($db);
-		
+		mysqli_query($db, $sqlupdatestr);
 		echo "<h2>Call updated #". $_POST['id'] ."</h2>";
-        echo "<p>Details: " . $_POST['details'] . "</p>";
-        echo "<p>Update Details: " . $_POST['updatedetails'] . "</p>";
+        echo "<p>SQL: " . $sqlupdatestr . "</p>";
 }
 
 } ?>
