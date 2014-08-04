@@ -296,7 +296,7 @@ table th {
 }
 .buttons button {
 	background-color: rgba(255,255,255,0.25);
-	border: 1px solid silver;
+	border: 1px solid transparent;
 }
 .update {
 	border-left: 1px dashed transparent;
@@ -340,15 +340,20 @@ table th {
 
 #stats {
 	background: transparent;
-	height: 30%;
+	height: 32%;
 	overflow: hidden;
 }
 #calllist {
 	background: transparent;
-	height: 53%;
+	height: 50%;
 	overflow: auto;
 	padding: 0 5px;
+	overflow: hidden;
 }
+#calllist:hover {
+	overflow: auto;
+}
+
 #call {
 	background: transparent;
 	height: 83%;
