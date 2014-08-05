@@ -27,7 +27,10 @@
 	<ul>
 		<li><a href="add.php">Add Call</a></li>
 		<li><a href="engineerview.php">Engineer View</a></li>
-		<li><a href="auth/whoami.php">Engineer authentication</a></li>
+	</ul>
+	<h3>Authentication</h3>
+	<ul>
+		<li><a href="auth/whoami.php">Engineer authentication</a></li>	
 	</ul>
 	<h3>Dev Pages</h3>
 	<ul>

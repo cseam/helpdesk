@@ -17,23 +17,24 @@
 	<body>
 	<div class="section">
 	<div id="branding">
+		<a href="add.php">Add Call</a><br/>
 		<a href="engineerview.php">Engineer view</a><br/>
-		<a href="index.php"><?=$codename;?> Home</a>
 	</div>
 	
 	<div id="leftpage">
 	<div id="stats">
-		<h3>Welcome</h3>
-		<p>stats</p>
+		<h3>Information</h3>
+		<p>Welcome to Helpdesk, please use the form to log issues.</p>
+		<p>Please remember the more information you can provide the quicker the engineer can fix your problem, for example when your printer is out of ink please include as much information as possible, printer model, colour of ink cartridge, room the printer is in. etc.. this saves the engineer asking these questions at a later point and slowing down the process.</p>
 	</div>
 	<div id="calllist">
-		<h3>Your Calls</h3>
-		<p>call list</p>
+		<h3>Your Helpdesks</h3>
+		<?php include 'includes/yourcalls.php'; ?>
 	</div>
 	</div>
 	<div id="rightpage">
 		<div id="addcall">
-
+			<div id="ajax">
 	<?php if ($_SERVER['REQUEST_METHOD']== "POST") { ?>
 	<h2>Thank you</h2>
 	<p>Your Helpdesk has been added. Your call has been assigned to <?=engineer_friendlyname(next_engineer());?>, the enginner will be in touch shortly. should  they require additional information, correspondence will be emailed to the contact address you entered in the form.</p>
@@ -47,19 +48,20 @@
 			
 		// Create Query	
 		$sqlstr = "INSERT INTO calls ";
-		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category) ";
+		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner) ";
 		$sqlstr .= "VALUES (";
-		$sqlstr .= " ' " . check_input($_POST['name']) . " ',";
-		$sqlstr .= " ' " . check_input($_POST['email']) . " ',";
-		$sqlstr .= " ' " . check_input($_POST['tel']) . " ',";
+		$sqlstr .= " '" . check_input($_POST['name']) . "',";
+		$sqlstr .= " '" . check_input($_POST['email']) . "',";
+		$sqlstr .= " '" . check_input($_POST['tel']) . "',";
 		$sqlstr .= " '<div class=original>" . check_input($_POST['details']) . "</div>',";
-		$sqlstr .= " ' " . next_engineer() . " ',";
-		$sqlstr .= " ' " . date("c") . " ',";
-		$sqlstr .= " ' " . date("c") . " ',";
-		$sqlstr .= " ' " . $urgencystr . " ',";
-		$sqlstr .= " ' " . check_input($_POST['location']) . " ',";
-		$sqlstr .= " ' " . check_input($_POST['room']) . " ',";
-		$sqlstr .= " ' " . check_input($_POST['category']) . " ' ";
+		$sqlstr .= " '" . next_engineer() . "',";
+		$sqlstr .= " '" . date("c") . "',";
+		$sqlstr .= " '" . date("c") . "',";
+		$sqlstr .= " '" . $urgencystr . "',";
+		$sqlstr .= " '" . check_input($_POST['location']) . "',";
+		$sqlstr .= " '" . check_input($_POST['room']) . "',";
+		$sqlstr .= " '" . check_input($_POST['category']) . "',";
+		$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "' ";
 		$sqlstr .= ")";
 		// Run Query
 		mysqli_query($db, $sqlstr); 
@@ -121,8 +123,7 @@
 	</p>
 	</form>
 	<? } ?>
-
-
+			</div>
 		</div>
 	</div>
 	</div>
