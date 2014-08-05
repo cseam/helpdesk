@@ -86,7 +86,12 @@
 		<legend>Location</legend>
 		<label for="location">Site</label>
 			<select id="location" name="location">
-				<option value="Main Site">Main College Site</option>
+				<?php 
+					$locations = mysqli_query($db, "SELECT * FROM location ORDER BY locationName");
+					while($option = mysqli_fetch_array($locations))  { ?>
+					<option value="<?=$option['id'];?>" <? if ($option['id'] == 1) { echo "SELECTED"; };?>><?=$option['locationName'];?></option>
+				<? } ?>
+			
 			</select>
 		<label for="room">Room</label>
 			<input type="text" id="room" name="room" value="" />
