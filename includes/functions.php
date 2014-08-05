@@ -81,4 +81,19 @@ function next_engineer($data)
 	$data = $nextid;	
 	return $data;
 }
+function engineer_friendlyname($data) 
+{
+	global $db;
+	$result = mysqli_query($db, "SELECT * FROM engineers WHERE idengineers='".$data."'");
+	while($calls = mysqli_fetch_array($result)) {
+		$friendly = $calls['engineerName'];
+	}	
+	$data = $friendly;
+	return $data;
+}
+
+
+
+
+
 ?>

@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
+	// load functions
 	include 'includes/functions.php';
 	?>
 	<head>
-		<title><?=$codename;?> - Add</title>
+		<title><?=$codename;?> - Add Call</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,18 +16,31 @@
 	</head>
 	<body>
 	<div class="section">
-	<h2>Add Form</h2>
+	<div id="branding">
+		<a href="engineerview.php">Engineer view</a><br/>
+		<a href="index.php"><?=$codename;?> Home</a>
+	</div>
+	
+	<div id="leftpage">
+	<div id="stats">
+		<h3>Welcome</h3>
+		<p>stats</p>
+	</div>
+	<div id="calllist">
+		<h3>Your Calls</h3>
+		<p>call list</p>
+	</div>
+	</div>
+	<div id="rightpage">
+		<div id="addcall">
+
 	<?php if ($_SERVER['REQUEST_METHOD']== "POST") { ?>
-	<div class="enviro">
-		<h3>Form Posted</h3>
-		<?=check_input($_POST['name']);?><br/>
-		<?=check_input($_POST['email']);?><br/>
-		<?=check_input($_POST['location']);?><br/>
-		<?=check_input($_POST['room']);?><br/>
-		<?=check_input($_POST['category']);?><br/>
-		<?=check_input($_POST['details']);?><br/>
-		<?=next_engineer();?><br/>
-	</div>	
+	<h2>Thank you</h2>
+	<p>Your Helpdesk has been added. Your call has been assigned to <?=engineer_friendlyname(next_engineer());?>, the enginner will be in touch shortly. should  they require additional information, correspondence will be emailed to the contact address you entered in the form.</p>
+	<p>Please check your email for further details.</p>
+	<ul>
+		<li><a href="add.php">Add another Call</a></li>
+	</ul>
 	<?php
 		// Calculate Urgency
 		$urgencystr = round( (check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 ); 
@@ -55,55 +69,74 @@
 		mysqli_close($db);
 	
 	 } else {?>
-	 	
+	<h1>Add Call</h1>	 	
 	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
 	<fieldset>
-		<legend>Call Details</legend>
-		<label for="name">Primary Contact Name</label>
+		<legend>Primary Contact</legend>
+		<label for="name">Name</label>
 			<input type="text" id="name" name="name" value="<?=$_SESSION['sAMAccountName'];?>" />
-		<label for="email">Primary Contact Email</label>
+		<label for="email">Email</label>
 			<input type="text" id="email" name="email" value="<?=$_SESSION['sAMAccountName']."@".$companysuffix;?>" />
-		<label for="tel">Primary Contact Phone #</label>
+		<label for="tel">Telephone</label>
 			<input type="text" id="tel" name="tel" value="" />
-		<hr/>
-		<label for="callurgency">Call Urgency</label>
+	</fieldset>	
+	<fieldset>
+		<legend>Location</legend>
+		<label for="location">Site</label>
+			<select id="location" name="location">
+				<option value="Main Site">Main College Site</option>
+			</select>
+		<label for="room">Room</label>
+			<input type="text" id="room" name="room" value="" />
+	</fieldset>
+	<fieldset>
+		<legend>Scope</legend>	
+		<label for="callurgency">Urgency</label>
 			<select id="callurgency" name="callurgency">
 				<option value="1">An alternative is available</option>
 				<option value="2">This is affecting my work</option>
 				<option value="3">I cannot work</option>
 			</select>	
-		<label for="callseverity">Call Severity</label>	
+		<label for="callseverity">Severity</label>	
 			<select id="callseverity" name="callseverity">
 				<option value="1">This problem affects only me</option>
 				<option value="2">This problem affects multiple people</option>
 				<option value="3">This problem affects all of <?=$companyname;?></option>
 			</select>		
-		<hr/>
-		<label for="category">Category</label>
+	</fieldset>
+	<fieldset>
+		<legend>Details</legend>
+		<label for="category">Type</label>
 			<select id="category" name="category">
 				<option value="option1" >Option 1</option>
 				<option value="option2" >Option 2</option>
 				<option value="option3" >Option 3</option>
 			</select>
-		<label for="location">Location</label>
-			<select id="location" name="location">
-				<option value="Main Site">Main Site</option>
-			</select>
-		<label for="room">Room</label>
-			<input type="text" id="room" name="room" value="" />
-		<hr/>
-		<label for="details">Problem Details</label>
+		<label for="details">Details</label>
 			<textarea name="details" id="details" rows="10" cols="40"></textarea>
 	</fieldset>
-	
-	<input type="submit" value="submit" /><input type="reset" value="clear" />
+	<p class="buttons">
+		<button name="submit" value="submit" type="submit">Submit</button>
+		<button name="clear" value="clear" type="reset">Clear</button>
+	</p>
 	</form>
 	<? } ?>
-	<ul>
-		<li><a href="index.php"><?=$codename;?> Home</a></li>
-	</ul>
+
+
+		</div>
+	</div>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+

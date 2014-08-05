@@ -17,7 +17,7 @@ html {
 body {
 	background-color: #fff;
 	font-family: 'verlag', Arial;
-	color: #818287;
+	color: #6b6b6b;
 	font-weight: 200;
 	margin: 0;
 	padding: 0;
@@ -59,7 +59,7 @@ a:hover {
 h1 {
 	font-family: 'verlag', Arial;
 	font-size: 1.5rem;
-	color: #818286;
+	color: #6b6b6b;
 	text-transform: uppercase;
 	padding: 0;
 	text-decoration: none;
@@ -71,7 +71,7 @@ h1 {
 h2 {
 	font-family: 'verlag', Arial;
 	font-size: 1.5rem;
-	color: #818286;
+	color: #6b6b6b;
 	text-transform: uppercase;
 	padding: 0;
 	text-decoration: none;
@@ -86,7 +86,7 @@ h2 {
 h3 {
 	font-family: 'verlag', Arial;
 	font-size: 1.1rem;
-	color: #818286;
+	color: #6b6b6b;
 	text-transform: uppercase;
 	padding: 5px 0;
 	text-decoration: none;
@@ -95,7 +95,7 @@ h3 {
 p {
 	font-family: 'verlag', Arial;
 	font-size: 0.85rem;
-	color: #818286;
+	color: #6b6b6b;
 	padding: 0;
 	text-decoration: none;
 	font-weight: 200;
@@ -121,14 +121,12 @@ blockquote {
 	font-style: italic;
 	font-size: 1.2rem;
 	padding: 0.5rem 1rem;
-	/*border-top: solid 1px silver;
-	border-bottom: solid 1px silver;*/
 }
 hr {
 	border-top: 0;
 	border-left: 0;
 	border-right: 0;
-	border-bottom: solid 1px #aaa;
+	border-bottom: solid 1px #6b6b6b;
 }
 ul li:before {
   content: '\2014\a0\a0'; /* long dash */
@@ -156,10 +154,10 @@ ul {
 }
 hr, h2 {
 	border: 0;	
-	border-bottom: 1px solid #aaa;
+	border-bottom: 1px solid #c9c7c7;
 }
 input, textarea, button {
-	background: rgba(0,0,0,0.1);
+	background: rgba(255,255,255,0.45);
 	color: #aaa;
 	border: 1px solid transparent;
 	padding: 0.5rem 1rem;
@@ -168,7 +166,7 @@ input, textarea, button {
 	resize: none;
 }
 select {
-	background: rgba(0,0,0,0.1) url('/images/ICONS-06.png') no-repeat 99% 50%;
+	background: rgba(255,255,255,0.45) url('/images/ICONS-06.png') no-repeat 99% 50%;
 	color: #aaa;
 	border: 1px solid transparent;
 	padding: 0.5rem 1.0rem;
@@ -184,9 +182,10 @@ select {
 	background-size: 20px;
 }
 fieldset {
-	border: 1px solid rgba(0,0,0,0.4);
-	padding: 1rem;
-	margin: 1rem 0;
+	border: 1px solid transparent;;
+	border-top: 1px solid rgba(0,0,0,0.2);
+	padding: 0.5rem;
+	margin: 0.5rem 0;
 	overflow: hidden;
 }
 fieldset legend {
@@ -194,28 +193,25 @@ fieldset legend {
 	font-size: 0.8rem;
 	margin-left: 0rem;
 	text-transform: uppercase;
-}
-fieldset hr {
-	border: 0;
-	border-bottom: 1px solid rgba(0,0,0,0.4);
-	margin: 1rem;
+	text-align: right;
 }
 label {
 	text-transform: uppercase;
-	width: 25%;
+	width: 30%;
 	display: inline-block;
-	padding: 0.5rem 1rem;
+	padding: 0.5rem 0 0 0;
+	font-size: 0.8rem;
 	vertical-align: top;
 	box-sizing:content-box;
-  -moz-box-sizing:content-box;
-  -webkit-box-sizing:content-box;
-  border: 1px solid transparent;
+	-moz-box-sizing:content-box;
+	-webkit-box-sizing:content-box;
+	border: 1px solid transparent;
 }
 fieldset input, fieldset textarea, fieldset select  {
-	width: 65%;
+	width: 60%;
 	box-sizing:content-box;
-  -moz-box-sizing:content-box;
-  -webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	-webkit-box-sizing:content-box;
 }
 input[type=text]:focus, textarea:focus, select:focus {
   outline: none;
@@ -232,7 +228,7 @@ table tr {
 	border: 0;
 }
 table td, table th {
-	border-bottom: 1px solid silver;
+	border-bottom: 1px solid #e4e4e4;
 	padding: 0.2rem 0.5rem;
 	font-size: 0.9rem;
 	line-height: 1rem;
@@ -283,9 +279,6 @@ table th {
 	background: rgba(255,255,255,0.45);
 	resize: none;
 	padding: 1rem;
-	border-top: 1px solid transparent;
-	border-bottom: 1px solid transparent;
-
 }
 .callfooter {
 	display: inline-block;
@@ -298,7 +291,7 @@ table th {
 	font-style: italic;
 }
 .buttons {
-	margin: 0;
+	margin: 0 1rem 0 0;
 	text-align: right;
 	width: 50%;
 	float: right;
@@ -309,9 +302,9 @@ table th {
 }
 .update {
 	border-left: 1px dashed transparent;
-	padding: 0.5rem 0rem;
+	padding: 1rem 0 0.5rem 0rem;
 	margin: 0.5rem 0rem;
-	border-bottom: 1px dotted silver;
+	border-top: 1px solid #c9c7c7;
 	line-height: 1.5rem;
 }
 .update h3 {
@@ -378,4 +371,10 @@ table th {
 .calllink {
 	font-size: 1.5rem;
 }
-
+#addcall {
+	background: transparent;
+	height: 74%;
+	overflow: auto;
+	padding: 2rem;
+	background: rgba(0,0,0,0.1);
+}
