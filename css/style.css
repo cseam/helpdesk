@@ -348,6 +348,7 @@ table th {
 	background: transparent;
 	height: 32%;
 	overflow: hidden;
+	padding-right: 1rem;
 }
 #calllist {
 	background: transparent;
