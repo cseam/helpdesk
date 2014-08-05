@@ -12,7 +12,7 @@
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>
-		<td><a href="viewcall.php?id=<?=$calls['callid'];?>">#<?=$calls['callid'];?></a></td>
+		<td>#<?=$calls['callid'];?></td>
 		<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
 		<td class="view_td">
 			<form method="post">

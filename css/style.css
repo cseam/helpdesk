@@ -375,4 +375,7 @@ table th {
 	overflow: auto;
 	background: rgba(0,0,0,0.1);
 }
+.calllink {
+	font-size: 1.5rem;
+}
 
