@@ -28,7 +28,7 @@
 	</div>
 	<div id="calllist">
 		<?php include 'includes/engineerurgentcalls.php'; ?>
-		<h3>Assigned to you</h3>
+		<h3>Assigned to you (<?=$_SESSION['sAMAccountName']?>)</h3>
 		<?php include 'includes/engineerassignedtoyou.php'; ?>
 	</div>
 	</div>
