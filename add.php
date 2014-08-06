@@ -115,9 +115,11 @@
 		<legend>Details</legend>
 		<label for="category">Type</label>
 			<select id="category" name="category">
-				<option value="option1" >Option 1</option>
-				<option value="option2" >Option 2</option>
-				<option value="option3" >Option 3</option>
+				<?php
+					$categories = mysqli_query($db, "SELECT * FROM categories ORDER BY categoryName");
+					while($option = mysqli_fetch_array($categories))  { ?>
+					<option value="<?=$option['id'];?>" <? if ($option['id'] == 1) { echo "SELECTED"; };?>><?=$option['categoryName'];?></option>
+				<? } ?>
 			</select>
 		<label for="details">Details</label>
 			<textarea name="details" id="details" rows="10" cols="40"></textarea>

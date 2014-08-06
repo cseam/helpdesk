@@ -5,6 +5,7 @@
 	$sqlstr = "SELECT * FROM calls ";
 	$sqlstr .= "INNER JOIN engineers ON calls.assigned=engineers.idengineers ";
 	$sqlstr .= "INNER JOIN status ON calls.status=status.id ";
+	$sqlstr .= "INNER JOIN location ON calls.location=location.id ";
 	$sqlstr .= "WHERE callid =" . check_input($_POST['id']);
 	$result = mysqli_query($db, $sqlstr);
 	// display results to page
@@ -17,7 +18,7 @@
 	<h2>
 	<?php if ($calls['urgency'] === '3') { echo "Urgent ";} ?>Call Details #<a href="viewcall.php?id=<?=$calls['callid'];?>" class="calllink"><?=$_POST['id'];?></a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$calls['email'];?>"><?=$calls['name'];?></a> (<?=$calls['tel'];?>)</p>	
-	<p class="callheader">for <?=$calls['room'];?> - <?=$calls['location'];?></p>
+	<p class="callheader">for <?=$calls['room'];?> - <?=$calls['locationName'];?></p>
 	<p class="callbody"><?=$calls['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">

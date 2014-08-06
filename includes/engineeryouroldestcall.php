@@ -4,6 +4,7 @@
 	$sqloldeststr = "SELECT * FROM calls ";
 	$sqloldeststr .= "INNER JOIN engineers ON calls.assigned=engineers.idengineers ";
 	$sqloldeststr .= "INNER JOIN status ON calls.status=status.id ";
+	$sqloldeststr .= "INNER JOIN location ON calls.location=location.id ";
 	$sqloldeststr .= "WHERE status='1' AND assigned='". $_SESSION['engineerId'] . "' ";
 	$sqloldeststr .= "ORDER BY opened ";
 	$sqloldeststr .= "LIMIT 1";
@@ -17,7 +18,7 @@
 	<input type="hidden" id="details" name="details" value="<?=$call['details'];?>" />
 	<h2>Call Details #<a href="viewcall.php?id=<?=$call['callid'];?>" class="calllink"><?=$call['callid'];?></a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>	
-	<p class="callheader">for <?=$call['room'];?> - <?=$call['location'];?></p>
+	<p class="callheader">for <?=$call['room'];?> - <?=$call['locationName'];?></p>
 	<p class="callbody"><?=$call['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">
