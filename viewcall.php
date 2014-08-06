@@ -1,10 +1,12 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 	<?php
+	// load functions
 	include 'includes/functions.php';
 	?>
 	<head>
-		<title><?=$codename;?> - All Calls</title>
+		<title><?=$codename;?> - Full Call Details</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,43 +15,120 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 	<body>
-	<div class="section">
-	<h2>View Call with ID: <?=check_input($_GET['id']);?> </h2>
-	<p>
 	<?php 
-	// select calls for ID
-	// run select query
 	$sqlstr = "SELECT * FROM calls ";
 	$sqlstr .= "INNER JOIN engineers ON calls.assigned=engineers.idengineers ";
 	$sqlstr .= "INNER JOIN status ON calls.status=status.id ";
+	$sqlstr .= "INNER JOIN categories ON calls.category=categories.id ";
+	$sqlstr .= "INNER JOIN location ON calls.location=location.id ";
 	$sqlstr .= "WHERE callid =" . check_input($_GET['id']);
 	$result = mysqli_query($db, $sqlstr);
-	// display results to page
 	while($calls = mysqli_fetch_array($result))  {
 	?>
-		<ul>
-			<li>Call ID: #<?=$calls['callid'];?></li>
-			<li>Primary Contact Name: <?=$calls['name'];?></li>
-			<li>Primary Email: <?=$calls['email'];?></li>
-			<li>Primary Telephone: <?=$calls['tel'];?></li>
-			<li>Engineer Assigned: <?=$calls['assigned'];?> (<?=$calls['engineerName'];?> - <?=$calls['engineerEmail'];?>)</li>
-			<li>Call Opened: <?=date("d/m/y h:s", strtotime($calls['opened']));?></li>
-			<li>Call Last Update: <?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></li>
-			<li>Call Closed: <?=date("d/m/y h:s", strtotime($calls['closed']));?></li>
-			<li>Status: <?=$calls['status'];?> (<?=$calls['statusCode'];?>)</li>
-			<li>Urgency: <?=$calls['urgency'];?></li>
-			<li>Location: <?=$calls['location'];?></li>
-			<li>Room: <?=$calls['room'];?></li>
-			<li>Category: <?=$calls['category'];?></li>
-			<li>Call Details: <?=$calls['details'];?></li>
-		</ul>
-	<? } ?>
-	</p>
-	<ul>
-		<li><a href="index.php"><?=$codename;?> Home</a></li>
-	</ul>
+	
+	
+		<div class="section">
+	<div id="branding">
+		<a href="add.php">Add Call</a><br/>
+		<a href="engineerview.php">Engineer view</a><br/>
+	</div>
+	
+	<div id="leftpage">
+	<div id="stats">
+		<h3>#<?=$calls['callid'];?> Full Details</h3>
+		<p>
+		some stats and graphs here for this call, time call has been open compared to average, number of engineer update etc
+		</p>
+	</div>
+	<div id="calllist">
+		<table>
+			<tbody>
+				<tr>
+					<td>Call ID</td>
+					<td>#<?=$calls['callid'];?></td>
+				</tr>
+				<tr>
+					<td>Primary Contact Name</td>
+					<td><?=$calls['name'];?></td>
+				</tr>
+				<tr>
+					<td>Primary Contact Email</td>
+					<td><?=$calls['email'];?></td>
+				</tr>
+				<tr>
+					<td>Primary Contact Telephone</td>
+					<td><?=$calls['tel'];?></td>
+				</tr>
+				<tr>
+					<td>Location</td>
+					<td><?=$calls['locationName'];?></td>
+				</tr>
+				<tr>
+					<td>Room</td>
+					<td><?=$calls['room'];?></td>
+				</tr>
+				<tr>
+					<td>Category</td>
+					<td><?=$calls['categoryName'];?> (id:<?=$calls['category'];?>)</td>
+				</tr>
+				<tr>
+					<td>Urgency</td>
+					<td>
+					<?php SWITCH ($calls['urgency']) {
+							CASE "1":
+							echo "Low";
+							break;
+							CASE "2":
+							echo "Normal";
+							break;
+							CASE "3":
+							echo "High";
+							break;
+							} ?> (<?=$calls['urgency'];?>)</td>
+				</tr>
+				<tr>
+					<td>Engineer Assigned</td>
+					<td><?=$calls['engineerName'];?> - <?=$calls['engineerEmail'];?> (id:<?=$calls['assigned'];?>)</td>
+				</tr>
+				<tr>
+					<td>Call Opened at</td>
+					<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
+				</tr>
+				<tr>
+					<td>Call Last Updated at</td>
+					<td><?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></td>
+				</tr>
+				<tr>
+					<td>Call Closed at</td>
+					<td>
+					<?php
+						if ($calls['status'] === '1') {
+							echo "Call still open.";							
+						} else {
+							echo date("d/m/y h:s", strtotime($calls['closed']));
+						}
+					?>
+					</td>
+				</tr>
+				<tr>
+					<td>Status</td>
+					<td><?=$calls['status'];?> (<?=$calls['statusCode'];?>)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+	<div id="rightpage">
+		<div id="addcall">
+			<div id="ajax">
+				<h2>Call Correspondence</h2>
+				<?=$calls['details'];?>
+			</div>
+		</div>
+	</div>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
+	<? } ?>
 	</body>
 </html>
