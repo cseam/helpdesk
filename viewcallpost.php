@@ -1,4 +1,5 @@
 	<?php
+	session_start();
 	include 'includes/functions.php';
 	// select calls for ID
 	// run select query
@@ -28,4 +29,9 @@
 	<p class="callfooter">Call Opened <?=date("d/m/y h:s", strtotime($calls['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></p>
 	</form>
 	</div>
-	<?php } ?>
+	<?php 
+	// log user/engineer views
+	$logsql = "INSERT INTO call_views (sAMAccountName, callid) VALUES ('" . $_SESSION['sAMAccountName'] . "','" . $calls['callid'] . "')";
+	mysqli_query($db, $logsql);
+	
+	} ?>

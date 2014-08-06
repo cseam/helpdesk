@@ -35,10 +35,42 @@
 	
 	<div id="leftpage">
 	<div id="stats">
-		<h3>#<?=$calls['callid'];?> Full Details</h3>
-		<p>
-		some stats and graphs here for this call, time call has been open compared to average, number of engineer update etc
-		</p>
+		<h3>Full Details</h3>
+		<?php
+			$engineerviews = $ownerviews = 0;
+			$viewsql = "SELECT * FROM call_views WHERE callid='".$calls['callid']."'";
+			$views = mysqli_query($db, $viewsql);
+			while ($rows = mysqli_fetch_array($views))  { 
+				if ($rows['sAMAccountName'] === $calls['sAMAccountName']) { ++$engineerviews; };
+				if ($rows['sAMAccountName'] === $calls['owner']) { ++$ownerviews; };
+			};
+			
+		?>		
+		<!--Google Graphs-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Views', 'Number'],
+          ['Engineer Views',     <?=$engineerviews?>],
+          ['Owner Views',      <?=$ownerviews?>]
+        ]);
+
+        var options = {
+          title: '',
+          pieHole: 0.5,
+          colors: ['#577d6a','#CCCCCC'],
+          pieSliceText: 'none',
+          legend: 'none',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+	<div id="piechart" style="width: 40%; float: left;"></div>
 	</div>
 	<div id="calllist">
 		<table>
