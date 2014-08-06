@@ -16,7 +16,7 @@
 	<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$calls['details'];?>" />
 	<h2>
-	<?php if ($calls['urgency'] === '3') { echo "Urgent ";} ?>Call Details #<a href="viewcall.php?id=<?=$calls['callid'];?>" class="calllink"><?=$_POST['id'];?></a></h2>
+	<?php if ($calls['urgency'] === '3') { echo "Urgent ";} ?>Call Details #<?=$_POST['id'];?><a href="viewcall.php?id=<?=$calls['callid'];?>" class="calllink">full details</a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$calls['email'];?>"><?=$calls['name'];?></a> (<?=$calls['tel'];?>)</p>	
 	<p class="callheader">for <?=$calls['room'];?> - <?=$calls['locationName'];?></p>
 	<p class="callbody"><?=$calls['details'];?></p>

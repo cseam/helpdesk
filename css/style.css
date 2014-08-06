@@ -24,7 +24,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 	font-variant-numeric: lining-nums;
 	font-feature-settings: 'lnum';
-	/* vendor-prefixes */
 	-moz-font-feature-settings: 'lnum=1';
 	-ms-font-feature-settings: 'lnum';
 	-webkit-font-feature-settings: 'lnum';
@@ -43,7 +42,6 @@ body {
 	-webkit-box-sizing: border-box; 
 	overflow: hidden;
 }
-/** CLC STUFF **/
 a {
 	font-family: 'verlag', Arial;
 	font-size: 0.85rem;
@@ -252,6 +250,7 @@ table th {
 
 #ajax {
 	margin-top: 0rem;
+	padding: 2rem;
 }
 
 #ajaxforms {
@@ -259,7 +258,6 @@ table th {
 }
 
 #calldetails {
-	padding: 2rem;
 	background: transparent;
 }
 .callheader {
@@ -291,10 +289,11 @@ table th {
 	font-style: italic;
 }
 .buttons {
-	margin: 0 1rem 0 0;
+	margin: 0 1rem 2rem 0;
 	text-align: right;
 	width: 50%;
 	float: right;
+	
 }
 .buttons button {
 	background-color: rgba(255,255,255,0.45);
@@ -370,13 +369,13 @@ table th {
 	background: rgba(0,0,0,0.1);
 }
 .calllink {
-	font-size: 1.5rem;
+	font-size: .6rem;
+	float: right;
 }
 #addcall {
 	background: transparent;
-	height: 74%;
+	height: 83%;
 	overflow: auto;
-	padding: 2rem;
 	background: rgba(0,0,0,0.1);
 }
 .closed {

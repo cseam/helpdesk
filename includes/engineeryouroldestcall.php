@@ -16,7 +16,7 @@
 	<form action="updatecall.php" method="post">
 	<input type="hidden" id="id" name="id" value="<?=$call['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$call['details'];?>" />
-	<h2>Call Details #<a href="viewcall.php?id=<?=$call['callid'];?>" class="calllink"><?=$call['callid'];?></a></h2>
+	<h2>Call Details #<?=$call['callid'];?><a href="viewcall.php?id=<?=$call['callid'];?>" class="calllink">full details</a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>	
 	<p class="callheader">for <?=$call['room'];?> - <?=$call['locationName'];?></p>
 	<p class="callbody"><?=$call['details'];?></p>
