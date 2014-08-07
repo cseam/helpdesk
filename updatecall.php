@@ -53,7 +53,25 @@ if (isset($_POST['close'])) {
        $sqlstr .= "details='" . mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>"  . mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . " </h3></div>'";
        $sqlstr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
        // Run query
-       mysqli_query($db, $sqlstr); 
+       mysqli_query($db, $sqlstr);
+       // Email stakeholder
+       $contact = mysqli_query($db, "SELECT email FROM calls WHERE callid='".$_POST['id']."'");
+       $row = $contact->fetch_object();
+       $to = $row->email;		
+       $message = "<p>Your helpdesk (#" . $_POST['id'] .") has been closed</p>";
+       $message .= "<p>To view the details of this call please visit helpdesk</p>"; 
+       $message .= "<p><a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>View Call</a></p>";
+       $message .= "<p>this is an automated message please do not reply, to update your call please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
+       $msgtitle = "Helpdesk Call #" . $_POST['id'] . " Closed";
+       $headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
+       $headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n"; 
+       $headers .= 'MIME-Version: 1.0' . "\r\n";
+       $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+       $headers .= 'X-Mailer: PHP/' . phpversion();	
+       // In case any of our lines are larger than 70 characters, we should use wordwrap()
+       $message = wordwrap($message, 70, "\r\n");
+       // Send
+       mail($to, $msgtitle, $message, $headers);
        echo "<h2>Updated & Closed</h2>";
        echo "<p>Call #" . $_POST['id'] . " has been updated and closed, all stake holders have been emailed.</p>";
        echo "<p><a href='/'>Home</a></p>";
@@ -69,9 +87,28 @@ if (isset($_POST['update'])) {
 		$sqlupdatestr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
 		// Run query
 		mysqli_query($db, $sqlupdatestr);
+		// Email stakeholder
+		$contact = mysqli_query($db, "SELECT email FROM calls WHERE callid='".$_POST['id']."'");
+		$row = $contact->fetch_object();
+		$to = $row->email;		
+		$message = "<p>Your helpdesk (#" . $_POST['id'] .") has been updated</p>";
+		$message .= "<p>To view the details of this update please visit helpdesk</p>"; 
+		$message .= "<p><a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>View Call</a></p>";
+		$message .= "<p>this is an automated message please do not reply, to update your call please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
+		$msgtitle = "Helpdesk Call #" . $_POST['id'] . " Update";
+		$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
+		$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n"; 
+		$headers .= 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers .= 'X-Mailer: PHP/' . phpversion();	
+		// In case any of our lines are larger than 70 characters, we should use wordwrap()
+		$message = wordwrap($message, 70, "\r\n");
+		// Send
+		mail($to, $msgtitle, $message, $headers);
+		//display message
 		echo "<h2>Call updated</h2>";
-        echo "<p>Call #" . $_POST['id'] . " has been updated, all stake holders have been emailed.</p>";
-        echo "<p><a href='/'>Home</a></p>";
+        echo "<p>Call #" . $_POST['id'] . " has been updated, stake holder has been emailed to update them.</p>";
+        echo "<p><a href='/'>Home</a></p>";        
 }
 
 } ?>

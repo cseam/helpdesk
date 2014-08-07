@@ -1,6 +1,7 @@
 <?php
 // Global Vars & Settings
 $codename = "Helpdesk";
+$helpdeskloc = "http://helpdesk.cheltenhamladiescollege.co.uk";
 $companyname = "CLC";
 $companysuffix = "cheltladiescollege.org";
 date_default_timezone_set('Europe/London');
