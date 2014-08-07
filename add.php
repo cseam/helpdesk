@@ -43,12 +43,23 @@
 		<li><a href="add.php">Add another Call</a></li>
 	</ul>
 	<?php
+		// Upload attachments & move
+		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {  	
+			//get the uploaded file information
+			$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
+			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']); 
+			//move the temp. uploaded file to uploads folder and salt for duplicates
+			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
+			$tmp_path = $_FILES["attachment"]["tmp_name"];
+			move_uploaded_file($tmp_path, $folder);
+		}
+	
 		// Calculate Urgency
 		$urgencystr = round( (check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 ); 
 			
 		// Create Query	
 		$sqlstr = "INSERT INTO calls ";
-		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner) ";
+		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner, attachmentname) ";
 		$sqlstr .= "VALUES (";
 		$sqlstr .= " '" . check_input($_POST['name']) . "',";
 		$sqlstr .= " '" . check_input($_POST['email']) . "',";
@@ -61,7 +72,8 @@
 		$sqlstr .= " '" . check_input($_POST['location']) . "',";
 		$sqlstr .= " '" . check_input($_POST['room']) . "',";
 		$sqlstr .= " '" . check_input($_POST['category']) . "',";
-		$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "' ";
+		$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "',";
+		$sqlstr .= " '" . $name_of_uploaded_file . "'";
 		$sqlstr .= ")";
 		// Run Query
 		mysqli_query($db, $sqlstr); 
@@ -72,7 +84,7 @@
 	
 	 } else {?>
 	<h1>Add Call</h1>	 	
-	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data">
 	<fieldset>
 		<legend>Primary Contact</legend>
 		<label for="name">Name</label>
@@ -124,6 +136,13 @@
 		<label for="details">Details</label>
 			<textarea name="details" id="details" rows="10" cols="40"></textarea>
 	</fieldset>
+	<fieldset>
+		<legend>Attachments</legend>
+		<label for="attachment">Picture or Screenshot</label>
+		<input type="file" name="attachment">
+	</fieldset>
+	
+	
 	<p class="buttons">
 		<button name="submit" value="submit" type="submit">Submit</button>
 		<button name="clear" value="clear" type="reset">Clear</button>

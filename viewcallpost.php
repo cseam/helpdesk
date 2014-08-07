@@ -20,6 +20,7 @@
 	<?php if ($calls['urgency'] === '3') { echo "Urgent ";} ?>Call Details #<?=$_POST['id'];?><a href="viewcall.php?id=<?=$calls['callid'];?>" class="calllink">full details</a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$calls['email'];?>"><?=$calls['name'];?></a> (<?=$calls['tel'];?>)</p>	
 	<p class="callheader">for <?=$calls['room'];?> - <?=$calls['locationName'];?></p>
+	<?php if (!empty($calls['attachmentname'])) { ?><p><img src="/uploads/<?=$calls['attachmentname'];?>" width="100%" /></p><? }; ?>
 	<p class="callbody"><?=$calls['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">
