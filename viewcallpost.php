@@ -20,6 +20,16 @@
 	<?php if ($calls['urgency'] === '3') { echo "Urgent ";} ?>Call Details #<?=$_POST['id'];?><a href="viewcall.php?id=<?=$calls['callid'];?>" class="calllink">full details</a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$calls['email'];?>"><?=$calls['name'];?></a> (<?=$calls['tel'];?>)</p>	
 	<p class="callheader">for <?=$calls['room'];?> - <?=$calls['locationName'];?></p>
+	<p class="callheader">duration 
+					<?php
+						$date1 = strtotime($calls['opened']);
+						if ($calls['status'] ==='2') { $date2 = strtotime($calls['closed']); } else { $date2 = time(); };
+						$diff = $date1 - $date2;
+						$d = ($diff/(60*60*24))%365;
+						$h = ($diff/(60*60))%24;
+						$m = ($diff/60)%60;
+						echo $d." days, ".$h." hours, ".$m." minutes.";
+					?></p>
 	<?php if (!empty($calls['attachmentname'])) { ?><p><img src="/uploads/<?=$calls['attachmentname'];?>" width="100%" /></p><? }; ?>
 	<p class="callbody"><?=$calls['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>

@@ -19,6 +19,16 @@
 	<h2>Oldest Call Details #<?=$call['callid'];?><a href="viewcall.php?id=<?=$call['callid'];?>" class="calllink">full details</a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>	
 	<p class="callheader">for <?=$call['room'];?> - <?=$call['locationName'];?></p>
+	<p class="callheader">duration 
+					<?php
+						$date1 = strtotime($calls['opened']);
+						if ($calls['status'] ==='2') { $date2 = strtotime($calls['closed']); } else { $date2 = time(); };
+						$diff = $date1 - $date2;
+						$d = ($diff/(60*60*24))%365;
+						$h = ($diff/(60*60))%24;
+						$m = ($diff/60)%60;
+						echo $d." days, ".$h." hours, ".$m." minutes.";
+					?></p>
 	<?php if (!empty($call['attachmentname'])) { ?><p><img src="/uploads/<?=$call['attachmentname'];?>" width="100%" /></p><? }; ?>
 	<p class="callbody"><?=$call['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>

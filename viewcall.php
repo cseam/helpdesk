@@ -143,6 +143,20 @@
 					</td>
 				</tr>
 				<tr>
+					<td>Call Duration</td>
+					<td>
+					<?php
+						$date1 = strtotime($calls['opened']);
+						if ($calls['status'] ==='2') { $date2 = strtotime($calls['closed']); } else { $date2 = time(); };
+						$diff = $date1 - $date2;
+						$d = ($diff/(60*60*24))%365;
+						$h = ($diff/(60*60))%24;
+						$m = ($diff/60)%60;
+						echo $d." days, ".$h." hours, ".$m." minutes.";
+					?>
+					</td>
+				</tr>
+				<tr>
 					<td>Status</td>
 					<td><?=$calls['status'];?> (<?=$calls['statusCode'];?>)</td>
 				</tr>

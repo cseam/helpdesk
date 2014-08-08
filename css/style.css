@@ -230,18 +230,19 @@ table td, table th {
 	padding: 0.2rem 0.5rem;
 	font-size: 0.9rem;
 	line-height: 1rem;
+	vertical-align: middle;
 }
 table th {
 	text-align: left;
 	text-transform: uppercase;
 }
 .calllistbutton {
-	background: transparent;
+	background: #e4e4e4;
 	text-align: left;
 	font-size: 0.9rem;
-	padding: 0;
+	padding: 0.2rem 1rem;
 	margin: 0;
-	text-transform: none;
+	text-transform: uppercase;
 	cursor: pointer !important;
 }
 .view_td {
