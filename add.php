@@ -139,7 +139,7 @@
 	<fieldset>
 		<legend>Attachments</legend>
 		<label for="attachment">Picture or Screenshot</label>
-		<input type="file" name="attachment">
+		<input type="file" name="attachment" accept="image/*">
 	</fieldset>
 	
 	
