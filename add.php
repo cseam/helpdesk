@@ -84,15 +84,15 @@
 	
 	 } else {?>
 	<h1>Add Call</h1>	 	
-	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data">
+	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
 	<fieldset>
 		<legend>Primary Contact</legend>
 		<label for="name">Name</label>
-			<input type="text" id="name" name="name" value="<?=$_SESSION['sAMAccountName'];?>" />
+			<input type="text" id="name" name="name" value="<?=$_SESSION['sAMAccountName'];?>"  required />
 		<label for="email">Email</label>
-			<input type="text" id="email" name="email" value="<?=$_SESSION['sAMAccountName']."@".$companysuffix;?>" />
+			<input type="text" id="email" name="email" value="<?=$_SESSION['sAMAccountName']."@".$companysuffix;?>"  required />
 		<label for="tel">Telephone</label>
-			<input type="text" id="tel" name="tel" value="" />
+			<input type="text" id="tel" name="tel" value=""  required />
 	</fieldset>	
 	<fieldset>
 		<legend>Location</legend>
@@ -134,7 +134,7 @@
 				<? } ?>
 			</select>
 		<label for="details">Details</label>
-			<textarea name="details" id="details" rows="10" cols="40"></textarea>
+			<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
 	</fieldset>
 	<fieldset>
 		<legend>Attachments</legend>
@@ -155,6 +155,17 @@
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
+	<script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$("#addForm").validate({
+			rules: {
+				email: {
+					required: true,
+					email: true
+					}
+				}
+		});
+	</script>
 	</body>
 </html>
 

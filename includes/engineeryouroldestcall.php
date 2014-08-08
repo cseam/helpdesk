@@ -19,6 +19,7 @@
 	<h2>Oldest Call Details #<?=$call['callid'];?><a href="viewcall.php?id=<?=$call['callid'];?>" class="calllink">full details</a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>	
 	<p class="callheader">for <?=$call['room'];?> - <?=$call['locationName'];?></p>
+	<?php if (!empty($call['attachmentname'])) { ?><p><img src="/uploads/<?=$call['attachmentname'];?>" width="100%" /></p><? }; ?>
 	<p class="callbody"><?=$call['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">

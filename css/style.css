@@ -384,3 +384,16 @@ table th {
 	padding: 0rem;
 	font-size: 0.6rem;
 }
+.error {
+	color: red;
+}
+input.error, textarea.error {
+	background: #ffe0e0;
+	border: 1px solid silver;
+}
+label.error {
+	width: 95%;
+	font-size: 0.7rem;
+	text-align: right;
+}
+
