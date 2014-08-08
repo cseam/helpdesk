@@ -348,7 +348,11 @@ table th {
 	background: transparent;
 	height: 32%;
 	overflow: hidden;
-	padding-right: 1rem;
+	padding-right: 2rem;
+}
+#stats p {
+	font-size: 0.95rem;
+	line-height: 1.4rem;
 }
 #calllist {
 	background: transparent;

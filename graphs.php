@@ -3,7 +3,7 @@
 <html lang="en">
 	<?php
 	// load functions
-	include 'includes/functions.php';	
+	include_once 'includes/functions.php';	
 	
 	// Get engineer calls closed for line chart
 	$sqlstr = "SELECT closeengineerid, DATE_FORMAT(closed, '%a')AS DAY_OF_WEEK FROM calls WHERE closeengineerid = '".$_SESSION['engineerId']."' AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)"; 

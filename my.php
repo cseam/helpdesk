@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-	include 'includes/functions.php';
+	include_once 'includes/functions.php';
 	?>
 	<head>
 		<title><?=$codename;?> - All Calls</title>

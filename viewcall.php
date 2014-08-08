@@ -3,7 +3,7 @@
 <html lang="en">
 	<?php
 	// load functions
-	include 'includes/functions.php';
+	include_once 'includes/functions.php';
 	?>
 	<head>
 		<title><?=$codename;?> - Full Call Details</title>
@@ -148,7 +148,7 @@
 					<?php
 						$date1 = strtotime($calls['opened']);
 						if ($calls['status'] ==='2') { $date2 = strtotime($calls['closed']); } else { $date2 = time(); };
-						$diff = $date1 - $date2;
+						$diff = $date2 - $date1;
 						$d = ($diff/(60*60*24))%365;
 						$h = ($diff/(60*60))%24;
 						$m = ($diff/60)%60;

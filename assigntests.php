@@ -2,7 +2,7 @@
 <html lang="en">
 	<?php
 	// load functions
-	include 'includes/functions.php';
+	include_once 'includes/functions.php';
 	?>
 	<head>
 		<title><?=$codename;?> - Assign Function test Engineer</title>
