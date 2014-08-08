@@ -18,7 +18,6 @@
 	<div class="section">
 	<div id="branding">
 		<a href="add.php">Add Call</a><br/>
-		<a href="index.php"><?=$codename;?> Home</a>
 	</div>
 	
 	<div id="leftpage">

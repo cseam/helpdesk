@@ -4,6 +4,7 @@
 	<?php
 	// load functions
 	include_once 'includes/functions.php';
+	
 	?>
 	<head>
 		<title><?=$codename;?> - Add Call</title>
