@@ -9,7 +9,7 @@
 		?>
 		<tr>
 		<td>#<?=$calls['callid'];?></td>
-		<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
+		<td><?=date("d/m/y", strtotime($calls['opened']));?></td>
 		<td class="view_td"><?=substr(strip_tags($calls['details']), 0, 120);?>...</td>
 		<td>
 			<form method="post">

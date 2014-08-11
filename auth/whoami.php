@@ -3,7 +3,7 @@ session_start();
 include_once '../includes/functions.php';	
 $sAMAcountName = $_SERVER['PHP_AUTH_USER'];
  
-if ($sAMAcountName == null) {
+if (empty($sAMAcountName)) {
 	echo "<p class='error'>Authentication Error.</p>";
 } else {
 	$result = mysqli_query($db, "SELECT * FROM engineers WHERE sAMAccountName='". $_SERVER['PHP_AUTH_USER'] ."'");

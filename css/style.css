@@ -240,10 +240,11 @@ table th {
 	background: #e4e4e4;
 	text-align: left;
 	font-size: 0.9rem;
-	padding: 0.2rem 1rem;
+	padding: 0.3rem 1rem;
 	margin: 0;
 	text-transform: uppercase;
 	cursor: pointer !important;
+	font-size: 0.7rem;
 }
 .view_td {
 	width: auto;

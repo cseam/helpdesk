@@ -8,8 +8,8 @@
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>
-		<td>#<?=$calls['callid'];?><?php if ($calls['status'] == '2') { echo "<span class='closed'>CLOSED</span>";} ?></td>
-		<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
+		<td>#<?=$calls['callid'];?></td>
+		<td><?php if ($calls['status'] == '2') { echo "<span class='closed'>CLOSED</span>";} else { echo date("d/m/y", strtotime($calls['opened']));} ?></td>
 		<td class="view_td"><?=substr(strip_tags($calls['details']), 0, 120);?>...</td>
 		<td>
 		<form method="post">
