@@ -25,7 +25,15 @@
 	<div id="stats">
 		<p>calls added in last day</p>
 		<p>calls closed in last day</p>
-		<p>average call duration</p>
+		<?php 
+			// minutes in array
+			$call_time =  array(2 , 10, 150, 10, 66, 89);
+			$average_call_time = array_sum($call_time) / count($call_time) * 60; 
+			$d = ($average_call_time/(60*60*24))%365;
+			$h = ($average_call_time/(60*60))%24;
+			$m = ($average_call_time/60)%60;
+			echo "<p>adverage call duration " . $d ." days, ".$h." hours, ".$m." minutes.</p>";
+		?>
 		<p>most calls closed by engineer</p>
 		<p>least calls closed by engineer</p>
 	</div>
