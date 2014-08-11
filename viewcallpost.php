@@ -20,10 +20,12 @@
 	<?php if ($calls['urgency'] === '3') { echo "Urgent ";} ?>Call Details #<?=$_POST['id'];?><a href="viewcall.php?id=<?=$calls['callid'];?>" class="calllink">full details</a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$calls['email'];?>"><?=$calls['name'];?></a> (<?=$calls['tel'];?>)</p>	
 	<p class="callheader">for <?=$calls['room'];?> - <?=$calls['locationName'];?></p>
-	<p class="callheader">duration 
+	<p class="callheader">
 					<?php
+						if ($calls['status'] === '2') { echo "CLOSED ";} else { echo "Duration ";};
+					
 						$date1 = strtotime($calls['opened']);
-						if ($calls['status'] ==='2') { $date2 = strtotime($calls['closed']); } else { $date2 = time(); };
+						if ($calls['status'] ==='2') {$date2 = strtotime($calls['closed']);} else {$date2 = time();};
 						$diff = $date2 - $date1;
 						$d = ($diff/(60*60*24))%365;
 						$h = ($diff/(60*60))%24;
