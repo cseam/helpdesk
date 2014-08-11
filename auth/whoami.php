@@ -4,7 +4,7 @@ include_once '../includes/functions.php';
 $sAMAcountName = $_SERVER['PHP_AUTH_USER'];
  
 if (empty($sAMAcountName)) {
-	echo "<p class='error'>Authentication Error.</p>";
+	echo "<p class='error'>Not Authenticated (Error) please <a href='/auth/whoami.php'>authenticate</a>.</p>";
 } else {
 	$result = mysqli_query($db, "SELECT * FROM engineers WHERE sAMAccountName='". $_SERVER['PHP_AUTH_USER'] ."'");
 	while($engineers = mysqli_fetch_array($result))  {

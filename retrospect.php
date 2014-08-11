@@ -18,8 +18,7 @@
 	<body>
 	<div class="section">
 	<div id="branding">
-		<a href="add.php">Add Call</a><br/>
-		<a href="engineerview.php">Engineer view</a><br/>
+		<?php include 'includes/nav.php'; ?>
 	</div>
 	
 	<div id="leftpage">

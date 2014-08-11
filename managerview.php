@@ -4,9 +4,10 @@
 	<?php
 	// load functions
 	include_once 'includes/functions.php';
+	
 	?>
 	<head>
-		<title><?=$codename;?> - Engineer View</title>
+		<title><?=$codename;?> - Managers View</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,24 +23,42 @@
 	
 	<div id="leftpage">
 	<div id="stats">
-		<h3>Performance</h3>
-		<?php include 'includes/engineergraph.php'; ?>
+		<p>stats</p>
 	</div>
 	<div id="calllist">
-		<?php include 'includes/engineerurgentcalls.php'; ?>
-		<h3>Assigned to you (<?=$_SESSION['sAMAccountName']?>)</h3>
-		<?php include 'includes/engineerassignedtoyou.php'; ?>
+		<p>call list</p>
 	</div>
 	</div>
 	<div id="rightpage">
-	<div id="call">
-		<div id="ajax">
-			<?php include 'includes/engineeryouroldestcall.php'; ?>
+		<div id="addcall">
+			<div id="ajax">
+				<p>ajax</p>
+			</div>
 		</div>
-	</div>
 	</div>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
+	<script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$("#addForm").validate({
+			rules: {
+				email: {
+					required: true,
+					email: true
+					}
+				}
+		});
+	</script>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
