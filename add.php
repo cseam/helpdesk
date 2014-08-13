@@ -98,10 +98,11 @@
 		<legend>Location</legend>
 		<label for="location">Site</label>
 			<select id="location" name="location">
+				<option value="" SELECTED>Please Select</option>
 				<?php 
 					$locations = mysqli_query($db, "SELECT * FROM location ORDER BY locationName");
 					while($option = mysqli_fetch_array($locations))  { ?>
-					<option value="<?=$option['id'];?>" <? if ($option['id'] == 1) { echo "SELECTED"; };?>><?=$option['locationName'];?></option>
+					<option value="<?=$option['id'];?>"><?=$option['locationName'];?></option>
 				<? } ?>
 			
 			</select>
@@ -162,6 +163,9 @@
 				email: {
 					required: true,
 					email: true
+					},
+				location: {
+					required: true,
 					}
 				}
 		});
