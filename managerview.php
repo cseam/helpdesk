@@ -3,7 +3,8 @@
 <html lang="en">
 	<?php
 	// load functions
-	include_once 'includes/functions.php';
+	include_once('includes/functions.php');
+	include_once('includes/reportfunctions.php');
 	
 	?>
 	<head>
@@ -23,8 +24,8 @@
 	
 	<div id="leftpage">
 	<div id="stats">
-		<p>calls added in last day</p>
-		<p>calls closed in last day</p>
+		<p><?=callsinlastday()?> calls added in last 24 hours</p>
+		<p><?=callsclosedinlastday()?> calls closed in last 24 hours</p>
 		<?php 
 			// minutes in array
 			$call_time =  array(2 , 10, 150, 10, 66, 89);
@@ -34,8 +35,8 @@
 			$m = ($average_call_time/60)%60;
 			echo "<p>adverage call duration " . $d ." days, ".$h." hours, ".$m." minutes.</p>";
 		?>
-		<p>most calls closed by engineer</p>
-		<p>least calls closed by engineer</p>
+		<p>most calls closed by <?=topengineer()?> this week</p>
+		<p>least calls closed by <?=bottomengineer()?> this week</p>
 	</div>
 	<div id="calllist">
 		<div id="ajaxforms">
