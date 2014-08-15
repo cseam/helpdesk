@@ -10,6 +10,8 @@
 	$sqloldeststr .= "LIMIT 1";
 	$oldestresult = mysqli_query($db, $sqloldeststr);
 	// display results to page
+	
+	if (mysqli_num_rows($oldestresult) == 0) { include('includes/managerdefault.php');;};
 	while($call = mysqli_fetch_array($oldestresult))  {
 	?>
 	<div id="calldetails">
