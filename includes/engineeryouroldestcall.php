@@ -19,7 +19,7 @@
 	<h2>Oldest Call Details #<?=$call['callid'];?><a href="viewcall.php?id=<?=$call['callid'];?>" class="calllink">full details</a></h2>
 	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>	
 	<p class="callheader">for <?=$call['room'];?> - <?=$call['locationName'];?></p>
-	<p class="callheader">duration 
+	<p class="callheader">Open for 
 					<?php
 						$date1 = strtotime($calls['opened']);
 						if ($calls['status'] ==='2') { $date2 = strtotime($calls['closed']); } else { $date2 = time(); };

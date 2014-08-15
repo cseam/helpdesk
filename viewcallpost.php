@@ -23,7 +23,7 @@
 	<p class="callheader">for <?=$calls['room'];?> - <?=$calls['locationName'];?></p>
 	<p class="callheader">
 					<?php
-						if ($calls['status'] === '2') { echo "CLOSED ";} else { echo "Duration ";};
+						if ($calls['status'] === '2') { echo "Call closed in ";} else { echo "Open for ";};
 					
 						$date1 = strtotime($calls['opened']);
 						if ($calls['status'] ==='2') {$date2 = strtotime($calls['closed']);} else {$date2 = time();};

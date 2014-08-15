@@ -24,8 +24,52 @@
 	
 	<div id="leftpage">
 	<div id="stats">
-		<p><?=callsinlastday()?> calls added in last 24 hours</p>
-		<p><?=callsclosedinlastday()?> calls closed in last 24 hours</p>
+		 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		 <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Calls', 'Number'],
+          ['most calls closed by <?=topengineer()?>',     <?=topengineer("count")?>],
+          ['least calls closed by <?=bottomengineer()?>',      <?=bottomengineer("count")?>]
+        ]);
+
+        var options = {
+          title: '',
+          pieHole: 0.5,
+          colors: ['#577d6a','#CCCCCC'],
+          pieSliceText: 'none',
+          legend: 'none',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+      
+      google.setOnLoadCallback(drawChart2);
+      function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+          ['Calls', 'Calls', { role: 'style' }],
+          ['Added (24h)', <?=callsinlastday()?>, "#577d6a"],
+          ['Closed (24h)', <?=callsclosedinlastday()?>, "#CCCCCC"]
+        ]);
+
+        var options = {
+          title: '',
+          legend: { position: 'right' },
+          colors: ['#577d6a','#CCCCCC'],
+          pointSize: 4,
+          vAxis: {gridlines: { count: 4 },},
+          chartArea: {'width': 'auto', 'height': '70%',},
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('linechart'));
+        chart.draw(data, options);
+        }
+      	</script>
+      	<div id="piechart" style="width: 40%; float: left;"></div>
+      	<div id="linechart" style="width: 60%; float: left;"></div>
 		<?php 
 			// minutes in array
 			$call_time =  array(2 , 10, 150, 10, 66, 89);
@@ -33,10 +77,11 @@
 			$d = ($average_call_time/(60*60*24))%365;
 			$h = ($average_call_time/(60*60))%24;
 			$m = ($average_call_time/60)%60;
-			echo "<p>adverage call duration " . $d ." days, ".$h." hours, ".$m." minutes.</p>";
+			echo "<p>Average call duration " . $d ." days, ".$h." hours, ".$m." minutes.</p>";
 		?>
-		<p>most calls closed by <?=topengineer()?> this week</p>
-		<p>least calls closed by <?=bottomengineer()?> this week</p>
+		
+		
+		
 	</div>
 	<div id="calllist">
 		<div id="ajaxforms">
