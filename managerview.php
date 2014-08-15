@@ -57,7 +57,7 @@
 
         var options = {
           title: '',
-          legend: { position: 'right' },
+          legend: { position: 'none' },
           colors: ['#577d6a','#CCCCCC'],
           pointSize: 4,
           vAxis: {gridlines: { count: 4 },},

@@ -1,1 +1,16 @@
-<p>Pitchfork chillwave tousled quinoa, selfies Portland plaid raw denim. Paleo quinoa Williamsburg forage, synth Thundercats retro you probably haven't heard of them leggings before they sold out deep v vegan banjo. Seitan locavore Intelligentsia art party High Life, 3 wolf moon +1 lomo. Austin 90's selfies 3 wolf moon. Wayfarers cliche food truck distillery seitan raw denim. Normcore Blue Bottle Odd Future flexitarian roof party tattooed, Thundercats actually hashtag squid jean shorts readymade brunch. PBR&B McSweeney's polaroid ennui, biodiesel before they sold out selvage pug Odd Future authentic direct trade semiotics.</p>
+<?php session_start();?>
+<?php
+	// load functions
+	include_once '../includes/functions.php';
+?>
+<h3>Assigned Calls Not Yet Closed</h3>
+<ul>
+          <?php 
+		//run select query
+		$result = mysqli_query($db, "SELECT engineerName, Count(assigned) AS HowManyAssigned, sum(case when status=1 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers GROUP BY assigned order by OpenOnes DESC;");
+		while($calls = mysqli_fetch_array($result))  {
+		?>
+		<li><?=$calls['engineerName'];?> - <?=$calls['OpenOnes'];?></li>	
+		<? } ?>
+</ul>
+
