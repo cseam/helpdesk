@@ -23,8 +23,8 @@
 	
 	<div id="leftpage">
 	<div id="stats">
-		<h3>Retrospect Calls</h3>
-		<p>This form is used to log calls for work that has already been done. this form opens a call and instantly closes it with you as the closing engineer. this call is not assigned to anyone. please use this form to log work done that doesn't have a ticket on Helpdesk, but needs to reported on.</p>
+		<h3>What are Retrospect Calls?</h3>
+		<p>This form is used to log calls for work that has already been done. the form opens a call and instantly closes it with you as the closing engineer. this call is not assigned to anyone. no work will be done, this is to allow stats to accurately represent work done.</p><p>Please use this form to log work done that doesn't have a ticket on Helpdesk, but has been completed.</p>
 	</div>
 	<div id="calllist">
 		<h3>Your Helpdesks</h3>
