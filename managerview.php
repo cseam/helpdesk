@@ -88,6 +88,15 @@
 			<table>
 				<tbody>
 					<tr>
+						<td>Open Calls</td>
+						<td style="text-align: right;">
+							<form method="post">
+							<input type="hidden" id="id" name="id" value="0" />
+							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
+							</form>
+						</td>
+					</tr>
+					<tr>
 						<td>All Calls</td>
 						<td style="text-align: right;">
 							<form method="post">
@@ -97,7 +106,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Oldest Calls</td>
+						<td>Oldest Call</td>
 						<td style="text-align: right;">
 							<form method="post">
 							<input type="hidden" id="id" name="id" value="2" />

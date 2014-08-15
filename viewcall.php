@@ -65,11 +65,11 @@
           legend: 'none',
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart = new google.visualization.BarChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }
     </script>
-	<div id="piechart" style="width: 40%; float: left;"></div>
+	<div id="piechart" style="width: 100%; float: left;"></div>
 	</div>
 	<div id="calllist">
 		<table>

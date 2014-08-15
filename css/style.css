@@ -226,7 +226,7 @@ table tr {
 	border: 0;
 }
 table td, table th {
-	border-bottom: 1px solid #e4e4e4;
+	border-bottom: 1px solid silver;
 	padding: 0.2rem 0.5rem;
 	font-size: 0.9rem;
 	line-height: 1rem;
