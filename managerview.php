@@ -24,21 +24,29 @@
 	
 	<div id="leftpage">
 	<div id="stats">
-		 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		 <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Calls', 'Number'],
-          ['most calls closed by <?=topengineer()?>',     <?=topengineer("count")?>],
-          ['least calls closed by <?=bottomengineer()?>',      <?=bottomengineer("count")?>]
+         
+	<?php 
+		$sql ="SELECT engineerName, sum(case when status=2 THEN 1 ELSE 0 END) AS CloseOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) GROUP BY assigned order by CloseOnes DESC;";
+		$result = mysqli_query($db, $sql);
+	while($loop = mysqli_fetch_array($result)) {
+	echo "['Closed by " . $loop ['engineerName'] . "', " . $loop['CloseOnes'] . "],";		
+	}		
+	?>
+	
+	
         ]);
 
         var options = {
           title: '',
           pieHole: 0.5,
-          colors: ['#577d6a','#CCCCCC'],
+          colors: ['#577d6a','#CCCCCC','#8ECCAD','#CCCCCC','#327F59','#CCCCCC','#B1FFD8','#CCCCCC','#65FFB2'],
           pieSliceText: 'none',
           legend: 'none',
         };
