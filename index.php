@@ -26,21 +26,14 @@
 	<h3>Prototype</h3>
 	<ul>
 		<li><a href="add.php">Add Call</a></li>
+		<li><a href="retrospect.php">Retrospect Call</a></li>
 		<li><a href="engineerview.php">Engineer View</a></li>
+		<li><a href="managerview.php">Manager View</a></li>
 	</ul>
-	<h3>Authentication</h3>
+	<h3>Development Pages</h3>
 	<ul>
-		<li><a href="auth/whoami.php">Engineer authentication</a></li>	
-	</ul>
-	<h3>Dev Pages</h3>
-	<ul>
-		<li><a href="all.php">All calls</a></li>
-		<li><a href="open.php">Open calls</a></li>
-		<li><a href="my.php">All my calls</a></li>
-		<li><a href="myopen.php">My open calls</a></li>
-		<li><a href="engineers.php">Engineers</a></li>
-		<li><a href="assigntests.php">Assign function tests</a></li>
-		<li><a href="graphs.php">Graph/stats tests</a></li>
+		<li><a href="auth/whoami.php">Manual authentication</a></li>	
+		<li><a href="engineers.php">Create Engineers</a></li>
 	</ul>
 	
 	
