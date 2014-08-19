@@ -29,56 +29,61 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Calls', 'Number'],
-         
-	<?php 
-		$sql ="SELECT engineerName, sum(case when status=2 THEN 1 ELSE 0 END) AS CloseOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) GROUP BY assigned order by CloseOnes DESC;";
+      
+      
+      
+      var dataTable = new google.visualization.DataTable();
+      dataTable.addColumn('string', 'Calls');
+      dataTable.addColumn('number', 'Number');
+      dataTable.addColumn({type: 'string', role: 'tooltip'});
+      // A column for custom tooltip content
+      dataTable.addRows([
+    <?php 
+		$sql ="SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers GROUP BY engineerName ORDER BY Last7 DESC";
 		$result = mysqli_query($db, $sql);
 	while($loop = mysqli_fetch_array($result)) {
-	echo "['Closed by " . $loop ['engineerName'] . "', " . $loop['CloseOnes'] . "],";		
+	echo "['" . $loop ['engineerName'] . "', " . $loop['Last7'] . ", 'Closed ". $loop['Last7'] ." calls in last 7 days',],";		
 	}		
 	?>
-	
-	
-        ]);
-
+    
+     ]);
+      
         var options = {
           title: '',
-          pieHole: 0.5,
-          colors: ['#577d6a','#CCCCCC','#8ECCAD','#CCCCCC','#327F59','#CCCCCC','#B1FFD8','#CCCCCC','#65FFB2'],
-          pieSliceText: 'none',
+          colors: ['#CCCCCC','#577d6a',],
           legend: 'none',
+          chartArea: {left : 75,},
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
+        var chart = new google.visualization.BarChart(document.getElementById('piechart'));
+        chart.draw(dataTable, options);
       }
       
       google.setOnLoadCallback(drawChart2);
       function drawChart2() {
         var data = google.visualization.arrayToDataTable([
-          ['Calls', 'Calls', { role: 'style' }],
-          ['Added (24h)', <?=callsinlastday()?>, "#577d6a"],
-          ['Closed (24h)', <?=callsclosedinlastday()?>, "#CCCCCC"]
+          ['Calls', 'Calls'],
+          ['Opened (24h)', <?=callsinlastday()?>],
+          ['Closed (24h)', <?=callsclosedinlastday()?>]
         ]);
 
         var options = {
           title: '',
           legend: { position: 'none' },
-          colors: ['#577d6a','#CCCCCC'],
+          colors: ['#CCCCCC','#577d6a',],
           pointSize: 4,
           vAxis: {gridlines: { count: 4 },},
           chartArea: {'width': 'auto', 'height': '70%',},
         };
 
-        var chart = new google.visualization.BarChart(document.getElementById('linechart'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('linechart'));
         chart.draw(data, options);
         }
       	</script>
       	<div id="piechart" style="width: 40%; float: left;"></div>
       	<div id="linechart" style="width: 60%; float: left;"></div>
-		<?php 
+		<?php
+		 
 			// minutes in array
 			$call_time =  array(2 , 10, 150, 10, 66, 89);
 			$average_call_time = array_sum($call_time) / count($call_time) * 60; 
