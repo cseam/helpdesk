@@ -1,0 +1,16 @@
+/* TEAM */
+Title:      Elliot Goode.
+Position:   Full Stack Developer
+Email:      me@elliotgoode.co.uk
+Twitter:    @atomicjam
+Location:   Cheltenham, Uk.
+
+/* THANKS */
+Name: Graham Langley
+
+/* SITE */
+Created:     2014
+Language:    English (UK)
+Standards:   PHP, HTML5, CSS3
+Components:  jQuery
+Software:    Adobe Photoshop CS6, Coda 2
