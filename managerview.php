@@ -127,6 +127,7 @@
 							</form>
 						</td>
 					</tr>
+					<!--
 					<tr>
 						<td>Engineer Workload</td>
 						<td style="text-align: right;">
@@ -136,6 +137,7 @@
 							</form>
 						</td>
 					</tr>
+					-->
 					<tr>
 						<td>Work Rate</td>
 						<td style="text-align: right;">
