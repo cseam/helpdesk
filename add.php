@@ -107,7 +107,7 @@
 			
 			</select>
 		<label for="room">Room</label>
-			<input type="text" id="room" name="room" value="" />
+			<input type="text" id="room" name="room" value="" required />
 	</fieldset>
 	<fieldset>
 		<legend>Scope</legend>	
@@ -128,10 +128,11 @@
 		<legend>Details</legend>
 		<label for="category">Type</label>
 			<select id="category" name="category">
+			<option value="" SELECTED>Please Select</option>
 				<?php
 					$categories = mysqli_query($db, "SELECT * FROM categories ORDER BY categoryName");
 					while($option = mysqli_fetch_array($categories))  { ?>
-					<option value="<?=$option['id'];?>" <? if ($option['id'] == 1) { echo "SELECTED"; };?>><?=$option['categoryName'];?></option>
+					<option value="<?=$option['id'];?>"><?=$option['categoryName'];?></option>
 				<? } ?>
 			</select>
 		<label for="details">Details</label>
@@ -165,6 +166,9 @@
 					email: true
 					},
 				location: {
+					required: true,
+					},
+				category: {
 					required: true,
 					}
 				}

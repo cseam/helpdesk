@@ -94,7 +94,7 @@
 		<label for="email">Email</label>
 			<input type="text" id="email" name="email" value="<?=$_SESSION['sAMAccountName']."@".$companysuffix;?>"  required />
 		<label for="tel">Telephone</label>
-			<input type="text" id="tel" name="tel" value=""  required />
+			<input type="text" id="tel" name="tel" value="" />
 	</fieldset>	
 	<fieldset>
 		<legend>Location</legend>
