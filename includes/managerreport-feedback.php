@@ -1,1 +1,28 @@
-<p>Pitchfork chillwave tousled quinoa, selfies Portland plaid raw denim. Paleo quinoa Williamsburg forage, synth Thundercats retro you probably haven't heard of them leggings before they sold out deep v vegan banjo. Seitan locavore Intelligentsia art party High Life, 3 wolf moon +1 lomo. Austin 90's selfies 3 wolf moon. Wayfarers cliche food truck distillery seitan raw denim. Normcore Blue Bottle Odd Future flexitarian roof party tattooed, Thundercats actually hashtag squid jean shorts readymade brunch. PBR&B McSweeney's polaroid ennui, biodiesel before they sold out selvage pug Odd Future authentic direct trade semiotics.</p>
+<?php 
+	include_once('../includes/functions.php');
+?>
+<table>
+<tr>
+	<th>New</th>
+	<th>Call Id</th>
+	<th>Satisfaction</th>
+	<th>Customer Feedback</th>
+</tr>
+<?	
+	$sql ="SELECT *, sum(case when opened >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS New FROM feedback  GROUP BY callid ORDER BY id DESC";
+	$result = mysqli_query($db, $sql);
+		while($loop = mysqli_fetch_array($result)) { ?>
+<tr>
+	<td><?=$loop['New'];?></td>
+	<td><a href="/viewcall.php?id=<?=$loop['callid']?>"><?=$loop['callid']?></a></td>
+	<td>
+		<? if ($loop['satisfaction'] == 1) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 2) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 3) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 4) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 5) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+	</td>
+	<td><?=substr(strtolower(strip_tags($loop['details'])), 0, 40);?>...</td>
+</tr>
+<? } ?>
+</table>

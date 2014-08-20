@@ -45,11 +45,12 @@
 			
 		// Create Query	
 		$sqlstr = "INSERT INTO feedback ";
-		$sqlstr .= "(callid, satisfaction, details) ";
+		$sqlstr .= "(callid, satisfaction, details, opened) ";
 		$sqlstr .= "VALUES (";
 		$sqlstr .= " '" . check_input($_POST['callid']) . "',";
 		$sqlstr .= " '" . check_input($_POST['satisfaction']) . "',";
-		$sqlstr .= " '" . check_input($_POST['details']) . "'";
+		$sqlstr .= " '" . check_input($_POST['details']) . "',";
+		$sqlstr .= " '" . date("c") . "'";
 		$sqlstr .= ")";
 		// Run Query
 		mysqli_query($db, $sqlstr); 
