@@ -48,7 +48,6 @@ if (isset($_POST['close'])) {
        $sqlstr .= "status=2, ";
        $sqlstr .= "lastupdate='" . date("c") . "', ";
        $sqlstr .= "closeengineerid='".$_SESSION['engineerId']."',";
-       // $sqlstr .= "details='<div class=update>"  . mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3>Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . " </h3></div>" . mysqli_real_escape_string($db,$_POST['details']) . "' ";
        $sqlstr .= "details='" . mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>"  . mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . " </h3></div>'";
        $sqlstr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
        // Run query
@@ -57,10 +56,10 @@ if (isset($_POST['close'])) {
        $contact = mysqli_query($db, "SELECT email FROM calls WHERE callid='".$_POST['id']."'");
        $row = $contact->fetch_object();
        $to = $row->email;		
-       $message = "<p>Your helpdesk (#" . $_POST['id'] .") has been closed</p>";
-       $message .= "<p>To view the details of this call please visit helpdesk</p>"; 
-       $message .= "<p><a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>View Call</a></p>";
+       $message = "<p>Helpdesk (#" . $_POST['id'] .") has been closed</p>";
+       $message .= "<p>To view the details of this call please <a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>visit helpdesk</a></p>";
        $message .= "<p>this is an automated message please do not reply, to update your call please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
+       $message .= "<p>you can provide confidential feedback to the engineers line manager, let us know how well your call was dealt with <a href='". $helpdeskloc ."/feedback.php?id=" . $_POST['id'] ."'>Provide Feedback</a></p>";
        $msgtitle = "Helpdesk Call #" . $_POST['id'] . " Closed";
        $headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
        $headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n"; 

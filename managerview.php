@@ -50,7 +50,7 @@
       
         var options = {
           title: '',
-          colors: ['#CCCCCC','#577d6a',],
+          colors: ['#577d6a','#CCCCCC',],
           legend: 'none',
           chartArea: {left : 75,},
         };
@@ -70,7 +70,7 @@
         var options = {
           title: '',
           legend: { position: 'none' },
-          colors: ['#CCCCCC','#577d6a',],
+          colors: ['#577d6a','#CCCCCC',],
           pointSize: 4,
           vAxis: {gridlines: { count: 4 },},
           chartArea: {'width': 'auto', 'height': '70%',},
@@ -127,9 +127,8 @@
 							</form>
 						</td>
 					</tr>
-					<!--
 					<tr>
-						<td>Engineer Workload</td>
+						<td>Blank Report</td>
 						<td style="text-align: right;">
 							<form method="post">
 							<input type="hidden" id="id" name="id" value="3" />
@@ -137,7 +136,6 @@
 							</form>
 						</td>
 					</tr>
-					-->
 					<tr>
 						<td>Work Rate</td>
 						<td style="text-align: right;">
