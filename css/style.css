@@ -181,7 +181,7 @@ select {
 	background-size: 20px;
 }
 fieldset {
-	border: 1px solid transparent;;
+	border: 1px solid transparent;
 	border-top: 1px solid rgba(0,0,0,0.2);
 	padding: 0.5rem;
 	margin: 0.5rem 0;

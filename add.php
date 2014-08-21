@@ -77,6 +77,20 @@
 		$sqlstr .= ")";
 		// Run Query
 		mysqli_query($db, $sqlstr); 
+		
+		// Create Addition Fields Query
+		//Get call id
+		$helpdeskcallid = mysqli_insert_id($db);
+		// find out how many fields to insert
+		$additionalfieldstoinsert = mysqli_query($db, "SELECT * FROM call_additional_fields WHERE typeid =".$_POST['category']." ;");
+		//for each field insert its value
+		while($loop = mysqli_fetch_array($additionalfieldstoinsert))  { 		
+			$insertname = "label" . $loop['id'];
+			$sqladditional = "INSERT INTO call_additional_results (callid, label, value) VALUES ";
+			$sqladditional .= "('".$helpdeskcallid."','".$loop['label']."','".$_POST[$insertname]."')";
+			mysqli_query($db, $sqladditional);
+		};
+		
 		// Update engineers assignment (id hard coded for dev needs to be specific to department if they want round robin)
 		mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer() ."' WHERE id='1'");
 		// Close Connection
@@ -135,6 +149,20 @@
 					<option value="<?=$option['id'];?>"><?=$option['categoryName'];?></option>
 				<? } ?>
 			</select>
+			
+			<script type="text/javascript">
+			$("#category").change(function(e) {
+				$.post('includes/additionalfields.php?id=' + $("#category").val(), $(this).serialize(), function(resp) {
+					$('#additional_fields').html(resp);
+				});
+				e.preventDefault();
+				return false;
+				
+  			});
+			</script>
+			<div id="additional_fields">
+			</div>
+			
 		<label for="details">Details</label>
 			<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
 	</fieldset>

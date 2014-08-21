@@ -34,6 +34,17 @@
 						echo $d." days, ".$h." hours, ".$m." minutes.";
 					?></p>
 	<?php if (!empty($calls['attachmentname'])) { ?><p><img src="/uploads/<?=$calls['attachmentname'];?>" width="100%" /></p><? }; ?>
+	
+	<hr />
+	<?php
+	 $additional_field_sql = "SELECT * FROM call_additional_results WHERE callid = ".$calls['callid'].";";
+	 $additional_field_result = mysqli_query($db, $additional_field_sql); 
+	 while ($items = mysqli_fetch_array($additional_field_result)) { ?>
+	 <p class="callheader"><?=$items['label']?> - <?=$items['value']?></p>	 
+	<? } ?>
+	
+	
+	
 	<p class="callbody"><?=$calls['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">

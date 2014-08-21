@@ -180,7 +180,7 @@
 	<div id="rightpage">
 		<div id="addcall">
 			<div id="ajax">
-				<?php include('includes/managerdefault.php'); ?>
+				<?php include('includes/managerreport-default.php'); ?>
 			</div>
 		</div>
 	</div>
