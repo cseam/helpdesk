@@ -9,7 +9,7 @@
 	<tbody>
 	<?php 
 		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ORDER BY callID DESC");
+		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ORDER BY callID DESC LIMIT 1000");
 		if (mysqli_num_rows($result) == 0) { echo "<p>All calls Closed</p>";};
 		while($calls = mysqli_fetch_array($result))  {
 		?>

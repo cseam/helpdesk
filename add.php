@@ -100,6 +100,18 @@
 	<h1>Add Call</h1>	 	
 	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
 	<fieldset>
+		<legend>Helpdesk</legend>
+		<label for="helpdesk">Department</label>
+			<select id="helpdesk" name="helpdesk" required>
+				<option value="" SELECTED>Please Select</option>
+				<?php
+				$helpdesks = mysqli_query($db, "SELECT * FROM helpdesks ORDER BY helpdesk_name");
+				while($option = mysqli_fetch_array($helpdesks)) { ?>
+					<option value="<?=$option['id'];?>"><?=$option['helpdesk_name'];?></option>
+				<? } ?>
+			</select>
+	</fieldset>
+	<fieldset>
 		<legend>Primary Contact</legend>
 		<label for="name">Name</label>
 			<input type="text" id="name" name="name" value="<?=$_SESSION['sAMAccountName'];?>"  required />
@@ -153,7 +165,9 @@
 			<script type="text/javascript">
 			$("#category").change(function(e) {
 				$.post('includes/additionalfields.php?id=' + $("#category").val(), $(this).serialize(), function(resp) {
+					$('#additional_fields').hide();
 					$('#additional_fields').html(resp);
+					$('#additional_fields').slideDown();
 				});
 				e.preventDefault();
 				return false;
