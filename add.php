@@ -59,7 +59,7 @@
 			
 		// Create Query	
 		$sqlstr = "INSERT INTO calls ";
-		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner, attachmentname) ";
+		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner, attachmentname, helpdesk) ";
 		$sqlstr .= "VALUES (";
 		$sqlstr .= " '" . check_input($_POST['name']) . "',";
 		$sqlstr .= " '" . check_input($_POST['email']) . "',";
@@ -73,7 +73,8 @@
 		$sqlstr .= " '" . check_input($_POST['room']) . "',";
 		$sqlstr .= " '" . check_input($_POST['category']) . "',";
 		$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "',";
-		$sqlstr .= " '" . $name_of_uploaded_file . "'";
+		$sqlstr .= " '" . $name_of_uploaded_file . "',";
+		$sqlstr .= " '" . check_input($_POST['helpdesk']) . "'";
 		$sqlstr .= ")";
 		// Run Query
 		mysqli_query($db, $sqlstr); 

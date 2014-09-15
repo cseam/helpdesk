@@ -16,28 +16,11 @@
 	</head>
 	<body>
 	<div class="section">
-	
-	<div class="enviro">
-	<?=environ();?>
-	</div>
-	<h2>Codename: <?=$codename;?></h2>
-	<p><?=$codename;?> webapp forms & wireframes, variables displayed for debugging.</p>
-	
-	<h3>Prototype</h3>
-	<ul>
-		<li><a href="add.php">Add Call</a></li>
-		<li><a href="retrospect.php">Retrospect Call</a></li>
-		<li><a href="engineerview.php">Engineer View</a></li>
-		<li><a href="managerview.php">Manager View</a></li>
-	</ul>
-	<h3>Development Pages</h3>
-	<ul>
-		<li><a href="auth/whoami.php">Manual authentication</a></li>	
-		<li><a href="engineers.php">Create Engineers</a></li>
-		<li><a href="functiontest.php">Function Test (auto assign)</a></li>
-	</ul>
-	
-	
+		<h2>Function Test</h2>
+		<p>should only display engineers from IT no other helpdesks</p>
+		<p>last enginner id: <?=last_engineer()?></p>
+		<p>next engineer id and name: <?=next_engineer()?> <?=engineer_friendlyname(next_engineer()) ?></p>
+		
 	</div>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	

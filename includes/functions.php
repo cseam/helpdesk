@@ -71,10 +71,10 @@ function next_engineer($data)
 		$engineeremail = $engdetails['engineerEmail'];
 	}
 	// get next engineer id from table 
-	$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE idengineers > " . $lastengineerid . " ORDER BY idengineers LIMIT 1");
+	$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE idengineers > " . $lastengineerid . " AND helpdesk=1  AND engineerLevel=1 ORDER BY idengineers LIMIT 1");
 	// if end of list start from beginning again to create a a loop.
 	if (mysqli_num_rows($result) == 0) {
-		$result = mysqli_query($db, "SELECT idengineers FROM engineers LIMIT 1");
+		$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE helpdesk=1 AND engineerLevel=1 LIMIT 1");
 	} 
 	// output next engineers id to var 
 	while($next = mysqli_fetch_array($result)) {
