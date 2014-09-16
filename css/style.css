@@ -394,10 +394,16 @@ table th {
 .error {
 	color: red;
 }
-input.error, textarea.error {
+select.error, input.error, textarea.error {
 	background: #ffe0e0;
 	border: 1px solid silver;
 }
+select.error {
+	background: #ffe0e0 url('/images/ICONS-06.png') no-repeat 99% 50%;
+	background-size: 20px;
+}
+
+
 label.error {
 	width: 95%;
 	font-size: 0.7rem;

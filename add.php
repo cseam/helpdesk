@@ -110,7 +110,19 @@
 				while($option = mysqli_fetch_array($helpdesks)) { ?>
 					<option value="<?=$option['id'];?>"><?=$option['helpdesk_name'];?></option>
 				<? } ?>
-			</select>
+			</select>	
+		<script type="text/javascript">
+			$("#helpdesk").change(function(e) {
+				$.post('includes/helpdeskdescription.php?id=' + $("#helpdesk").val(), $(this).serialize(), function(resp) {
+					$('#helpdesk_description').hide();
+					$('#helpdesk_description').html(resp);
+					$('#helpdesk_description').slideDown();
+				});
+				e.preventDefault();
+				return false;
+  			});
+		</script>	
+		<div id="helpdesk_description"><p>Please select the department you wish to log a helpdesk, if you are unsure selecting from the dropdown above will show a brief description of the department responsibilities.</p></div>
 	</fieldset>
 	<fieldset>
 		<legend>Primary Contact</legend>
