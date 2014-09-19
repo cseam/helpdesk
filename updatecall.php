@@ -40,7 +40,6 @@
 
 
 <?php if ($_SERVER['REQUEST_METHOD']== "POST") { 
-
 if (isset($_POST['close'])) {
         // close call
        $sqlstr = "UPDATE calls ";
@@ -75,13 +74,23 @@ if (isset($_POST['close'])) {
        echo "<p><a href='/'>Home</a></p>";
     }
 if (isset($_POST['update'])) {
+		// Check for image
+		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {  	
+			//get the uploaded file information
+			$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
+			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']); 
+			//move the temp. uploaded file to uploads folder and salt for duplicates
+			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
+			$tmp_path = $_FILES["attachment"]["tmp_name"];
+			move_uploaded_file($tmp_path, $folder);
+			$upload_img_code = "<img src=/uploads/" . $name_of_uploaded_file . " width=100% />";
+		}
 		// update call
 		$sqlupdatestr = "UPDATE calls ";
 		$sqlupdatestr .= "SET status=1, ";
 		$sqlupdatestr .= "lastupdate='" . date("c") . "', ";
 		$sqlupdatestr .= "closed=NULL, ";
-		// $sqlupdatestr .= "details='<div class=update>" .  mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3>Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . "</h3></div>" .  mysqli_real_escape_string($db,$_POST['details']) . "' ";
-		$sqlupdatestr .= "details='".  mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>" .  mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . "</h3></div>'";
+		$sqlupdatestr .= "details='".  mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>" . $upload_img_code .  mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . "</h3></div>'";
 		$sqlupdatestr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
 		// Run query
 		mysqli_query($db, $sqlupdatestr);
@@ -106,7 +115,7 @@ if (isset($_POST['update'])) {
 		//display message
 		echo "<h2>Call updated</h2>";
         echo "<p>Call #" . $_POST['id'] . " has been updated, stake holder has been emailed to update them.</p>";
-        echo "<p><a href='/'>Home</a></p>";        
+        echo "<p><a href='/'>Home</a></p>";       
 }
 
 } ?>
