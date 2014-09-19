@@ -52,6 +52,7 @@
 			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
 			$tmp_path = $_FILES["attachment"]["tmp_name"];
 			move_uploaded_file($tmp_path, $folder);
+			$upload_img_code = "<img src=/uploads/" . $name_of_uploaded_file . " width=100% />";
 		}
 	
 		// Calculate Urgency
@@ -59,12 +60,12 @@
 			
 		// Create Query	
 		$sqlstr = "INSERT INTO calls ";
-		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner, attachmentname, helpdesk) ";
+		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner, helpdesk) ";
 		$sqlstr .= "VALUES (";
 		$sqlstr .= " '" . check_input($_POST['name']) . "',";
 		$sqlstr .= " '" . check_input($_POST['email']) . "',";
 		$sqlstr .= " '" . check_input($_POST['tel']) . "',";
-		$sqlstr .= " '<div class=original>" . check_input($_POST['details']) . "</div>',";
+		$sqlstr .= " '<div class=original>" . $upload_img_code . check_input($_POST['details']) . "</div>',";
 		$sqlstr .= " '" . next_engineer() . "',";
 		$sqlstr .= " '" . date("c") . "',";
 		$sqlstr .= " '" . date("c") . "',";
@@ -73,7 +74,6 @@
 		$sqlstr .= " '" . check_input($_POST['room']) . "',";
 		$sqlstr .= " '" . check_input($_POST['category']) . "',";
 		$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "',";
-		$sqlstr .= " '" . $name_of_uploaded_file . "',";
 		$sqlstr .= " '" . check_input($_POST['helpdesk']) . "'";
 		$sqlstr .= ")";
 		// Run Query

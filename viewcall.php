@@ -167,7 +167,6 @@
 		<div id="addcall">
 			<div id="ajax">
 				<h2>Call Correspondence</h2>
-				<?php if (!empty($calls['attachmentname'])) { ?><p><img src="/uploads/<?=$calls['attachmentname'];?>" width="100%" /></p><? }; ?>
 				<?=$calls['details'];?>
 			</div>
 		</div>

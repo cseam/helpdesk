@@ -33,8 +33,6 @@
 						$m = ($diff/60)%60;
 						echo $d." days, ".$h." hours, ".$m." minutes.";
 					?></p>
-	<?php if (!empty($calls['attachmentname'])) { ?><p><img src="/uploads/<?=$calls['attachmentname'];?>" width="100%" /></p><? }; ?>
-	
 	<hr />
 	<?php
 	 $additional_field_sql = "SELECT * FROM call_additional_results WHERE callid = ".$calls['callid'].";";
