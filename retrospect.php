@@ -87,6 +87,8 @@
 	 } else {?>
 	<h1>Retrospect Call</h1>	 	
 	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
+	<p>THIS FORM IS OUT OF DATE DONT USE</p>
+	
 	<fieldset>
 		<legend>Primary Contact</legend>
 		<label for="name">Name</label>

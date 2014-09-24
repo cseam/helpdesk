@@ -43,12 +43,15 @@ function check_input($data)
 }
 function last_engineer($data)
 {
+	// check helpdesk call is for
+	$helpdeskid = $data;
 	//returns details for last engineer assigned a call.
 	$data = "";
 	// find and join last engineer assigned
 	global $db;
 	$sqlstr = "SELECT * FROM assign_engineers ";
-	$sqlstr .= "INNER JOIN engineers ON assign_engineers.engineerid=engineers.idengineers";
+	$sqlstr .= "INNER JOIN engineers ON assign_engineers.engineerid=engineers.idengineers ";
+	$sqlstr .= "WHERE id=".$helpdeskid." ";
 	$result = mysqli_query($db, $sqlstr);
 	while($engdetails = mysqli_fetch_array($result)) {
 	$data = $engdetails['engineerId'] . " - " . $engdetails['engineerName'] . " - " . $engdetails['engineerEmail'];		
@@ -57,10 +60,13 @@ function last_engineer($data)
 }
 function next_engineer($data)
 {
+	// Check helpdesk call is for
+	$helpdeskid = $data;	
+	// Reset data and calculate next engineer
 	$data = "";
 	// find last engineer assigned 
 	global $db; 
-	$result = mysqli_query($db, "SELECT * FROM assign_engineers");
+	$result = mysqli_query($db, "SELECT * FROM assign_engineers WHERE id=".$helpdeskid."");
 	while($calls = mysqli_fetch_array($result))  {
 			$lastengineerid = $calls['engineerId'];
 		}
@@ -71,10 +77,10 @@ function next_engineer($data)
 		$engineeremail = $engdetails['engineerEmail'];
 	}
 	// get next engineer id from table 
-	$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE idengineers > " . $lastengineerid . " AND helpdesk=1  AND engineerLevel=1 ORDER BY idengineers LIMIT 1");
+	$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE idengineers > " . $lastengineerid . " AND helpdesk=".$helpdeskid."  AND engineerLevel=1 ORDER BY idengineers LIMIT 1");
 	// if end of list start from beginning again to create a a loop.
 	if (mysqli_num_rows($result) == 0) {
-		$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE helpdesk=1 AND engineerLevel=1 LIMIT 1");
+		$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE helpdesk=".$helpdeskid." AND engineerLevel=1 LIMIT 1");
 	} 
 	// output next engineers id to var 
 	while($next = mysqli_fetch_array($result)) {
@@ -82,7 +88,7 @@ function next_engineer($data)
 	}
 	
 	// return data as required
-	$data = $nextid;	
+	$data = $nextid;
 	return $data;
 }
 function engineer_friendlyname($data) 

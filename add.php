@@ -37,7 +37,7 @@
 			<div id="ajax">
 	<?php if ($_SERVER['REQUEST_METHOD']== "POST") { ?>
 	<h2>Thank you</h2>
-	<p>Your Helpdesk has been added. Your call has been assigned to <?=engineer_friendlyname(next_engineer());?>, the enginner will be in touch shortly. should  they require additional information, correspondence will be emailed to the contact address you entered in the form.</p>
+	<p>Your Helpdesk has been added. Your call has been assigned to <?=engineer_friendlyname(next_engineer(check_input($_POST['helpdesk'])));?>, the enginner will be in touch shortly. should  they require additional information, correspondence will be emailed to the contact address you entered in the form.</p>
 	<p>Please check your email for further details.</p>
 	<ul>
 		<li><a href="add.php">Add another Call</a></li>
@@ -66,7 +66,7 @@
 		$sqlstr .= " '" . check_input($_POST['email']) . "',";
 		$sqlstr .= " '" . check_input($_POST['tel']) . "',";
 		$sqlstr .= " '<div class=original>" . $upload_img_code . check_input($_POST['details']) . "</div>',";
-		$sqlstr .= " '" . next_engineer() . "',";
+		$sqlstr .= " '" . next_engineer(check_input($_POST['helpdesk'])) . "',";
 		$sqlstr .= " '" . date("c") . "',";
 		$sqlstr .= " '" . date("c") . "',";
 		$sqlstr .= " '" . $urgencystr . "',";
@@ -93,7 +93,7 @@
 		};
 		
 		// Update engineers assignment (id hard coded for dev needs to be specific to department if they want round robin)
-		mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer() ."' WHERE id='1'");
+		mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer(check_input($_POST['helpdesk'])) ."' WHERE id='".$_POST['helpdesk']."'");
 		// Close Connection
 		mysqli_close($db);
 	

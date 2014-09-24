@@ -18,8 +18,8 @@
 	<div class="section">
 		<h2>Function Test</h2>
 		<p>should only display engineers from IT no other helpdesks</p>
-		<p>last enginner id: <?=last_engineer()?></p>
-		<p>next engineer id and name: <?=next_engineer()?> <?=engineer_friendlyname(next_engineer()) ?></p>
+		<p>last enginner id: <?=last_engineer("1")?></p>
+		<p>next engineer id and name: <?=next_engineer("1")?> <?=engineer_friendlyname(next_engineer("1")) ?></p>
 		
 	</div>
 
