@@ -4,7 +4,7 @@
 	<a href="retrospect.php">Retrospect Call</a><br/>
 	<a href="engineerview.php">Engineer View</a><br/>
 <?php	};
-	if ($_SESSION['engineerLevel'] >= "2") { ?> 
+	if ($_SESSION['engineerLevel'] >= "2" or $_SESSION['engineerId'] == "11") { ?> 
 	<a href="managerview.php">Manager View</a><br/>
 <?php	};
 ?>
