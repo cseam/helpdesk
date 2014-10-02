@@ -6,9 +6,13 @@ $companyname = "CLC";
 $companysuffix = "cheltladiescollege.org";
 date_default_timezone_set('Europe/London');
 
-// check authentication 
-if (empty($_SESSION['sAMAccountName'])) { include_once 'auth/whoami.php';};
-
+// prompt authentication
+function prompt_auth($data) {
+	if (empty($_SESSION['sAMAccountName'])) { 
+		// User not logged in forward to login page
+			die("<script>location.href = '/auth/whoami.php?return=".$data."'</script>");
+		};
+} 
 
 //Database Setup 
 $db = mysqli_connect("localhost", "helpdesk", "helpdesk", "helpdesk");

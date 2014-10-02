@@ -1,6 +1,9 @@
 	<?php
 	session_start();
+	// load functions
 	include_once 'includes/functions.php';
+	// check authentication 
+	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	// select calls for ID
 	// run select query
 	$sqlstr = "SELECT * FROM calls ";

@@ -4,6 +4,9 @@
 	<?php
 	// load functions
 	include_once 'includes/functions.php';
+	// check authentication 
+	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); } else { die("<script>location.href = '/add.php'</script>");};
+
 	?>
 	<head>
 		<title><?=$codename;?></title>

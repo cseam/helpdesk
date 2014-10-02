@@ -4,6 +4,8 @@
 	<?php
 	// load functions
 	include_once 'includes/functions.php';
+	// check authentication 
+	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>
 	<head>
 		<title><?=$codename;?> - Full Call Details</title>
