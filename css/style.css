@@ -410,3 +410,77 @@ label.error {
 	text-align: right;
 }
 
+/*** Responsive Stuff ***/
+/*** Tablet ***/
+@media screen and (max-width: 768px) {
+
+}
+/*** Specific for Kindle  600x887 960x439***/
+@media screen and (max-width: 600px) {
+	#leftpage, #rightpage {
+		width: 100%;
+		height: auto;
+	}
+	#leftpage {
+		max-height: 250px;
+		margin-bottom: 1rem;
+		overflow: auto; 
+	}
+	.section {
+		overflow: auto;
+		padding: 1rem;
+	}
+	#stats {
+		display: none;
+	}
+	#branding {
+		line-height: 26px;
+		padding-bottom: 0.5rem;
+	}
+	#ajax {
+		padding: 2rem;
+	}
+	fieldset input, fieldset textarea, fieldset select  {
+	width: 90%;
+	box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	-webkit-box-sizing:content-box;
+	}
+}
+
+/* phone */
+@media screen and (max-width: 480px) {
+	#leftpage, #rightpage {
+		width: 100%;
+		height: auto;
+	}
+	#leftpage {
+		max-height: 200px;
+		margin-bottom: 1rem;
+		overflow: hidden; 
+	}
+	.section {
+		overflow: auto;
+		padding: 1rem;
+	}
+	#stats {
+		display: none;
+	}
+	#branding {
+		line-height: 16px;
+		padding-bottom: 0.5rem;
+	}
+	#ajax {
+		padding: 1rem;
+	}
+	fieldset input, fieldset textarea, fieldset select  {
+	width: 85%;
+	box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	-webkit-box-sizing:content-box;
+	}
+	#yourcalls td:nth-child(2) {
+		display: none;
+	}
+}
+

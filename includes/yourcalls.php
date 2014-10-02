@@ -1,5 +1,5 @@
 <div id="ajaxforms">
-	<table>
+	<table id="yourcalls">
 	<tbody>
 	<?php 
 		//run select query
