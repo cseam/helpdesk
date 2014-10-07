@@ -10,6 +10,7 @@ if (empty($sAMAcountName)) {
 		$_SESSION['sAMAccountName'] = $_SERVER['PHP_AUTH_USER'];
 		$_SESSION['engineerLevel'] = $engineers['engineerLevel'];
 		$_SESSION['engineerId'] = $engineers['idengineers'];
+		$_SESSION['engineerHelpdesk'] = $engineers['helpdesk'];
 	}
 	die("<script>location.href = '".$_GET['return']."'</script>");
 }

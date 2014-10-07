@@ -40,7 +40,8 @@
       // A column for custom tooltip content
       dataTable.addRows([
     <?php 
-		$sql ="SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers GROUP BY engineerName ORDER BY Last7 DESC";
+    	$helpdeskid = $_SESSION['engineerHelpdesk'];
+		$sql ="SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk = ".$helpdeskid." GROUP BY engineerName ORDER BY Last7 DESC";
 		$result = mysqli_query($db, $sql);
 	while($loop = mysqli_fetch_array($result)) {
 	echo "['" . $loop ['engineerName'] . "', " . $loop['Last7'] . ", 'Closed ". $loop['Last7'] ." calls in last 7 days',],";		
