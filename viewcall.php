@@ -15,6 +15,8 @@
 		<meta name="robots" content="nofollow" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
+		<script src="javascript/jquery.js" type="text/javascript"></script>
 	</head>
 	<body>
 	<?php 
@@ -174,8 +176,7 @@
 		</div>
 	</div>
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
-	<script src="javascript/jquery.js" type="text/javascript"></script>
+	
 	<? } ?>
 	</body>
 </html>

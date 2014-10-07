@@ -16,6 +16,8 @@
 		<meta name="robots" content="nofollow" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
+		<script src="javascript/jquery.js" type="text/javascript"></script>
 	</head>
 	<body>
 	<div class="section">
@@ -92,7 +94,7 @@
 			$d = ($average_call_time/(60*60*24))%365;
 			$h = ($average_call_time/(60*60))%24;
 			$m = ($average_call_time/60)%60;
-			echo "<p>Average call duration " . $d ." days, ".$h." hours, ".$m." minutes.</p>";
+			//echo "<p>Average call duration " . $d ." days, ".$h." hours, ".$m." minutes.</p>";
 		?>
 		
 		
@@ -164,8 +166,6 @@
 		</div>
 	</div>
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
-	<script src="javascript/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
     // Ajax form submit
     $('.reportlist').submit(function(e) {
