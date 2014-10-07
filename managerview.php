@@ -99,82 +99,59 @@
 	</div>
 	<div id="calllist">
 		<div id="ajaxforms">
-			<table>
-				<tbody>
-					<tr>
-						<td>Open Calls</td>
-						<td style="text-align: right;">
-							<form method="post">
-							<input type="hidden" id="id" name="id" value="0" />
-							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>All Calls</td>
-						<td style="text-align: right;">
-							<form method="post">
-							<input type="hidden" id="id" name="id" value="1" />
-							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>Oldest Call</td>
-						<td style="text-align: right;">
-							<form method="post">
-							<input type="hidden" id="id" name="id" value="2" />
-							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>Blank Report</td>
-						<td style="text-align: right;">
-							<form method="post">
-							<input type="hidden" id="id" name="id" value="3" />
-							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>Work Rate</td>
-						<td style="text-align: right;">
-							<form method="post">
-							<input type="hidden" id="id" name="id" value="4" />
-							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>User Feedback</td>
-						<td style="text-align: right;">
-							<form method="post">
-							<input type="hidden" id="id" name="id" value="5" />
-							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>Punchcard In/Out</td>
-						<td style="text-align: right;">
-							<form method="post">
-							<input type="hidden" id="id" name="id" value="6" />
-							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
-							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>Emerging Issues</td>
-						<td style="text-align: right;">
-							<form method="post">
-							<input type="hidden" id="id" name="id" value="7" />
-							<button name="submit" value="submit" type="submit" class="calllistbutton">View</button>
-							</form>
-						</td>
-					</tr>
-			</tbody>
-			</table>
+		<table>
+		<tbody>		
+		<tr><td>Open Calls</td><td style="text-align: right;">
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<input type="hidden" id="report" name="report" value="0" />
+		<input type="submit" id="btn" name="btn" value="View" />
+		</form>
+		</td></tr>		
+		<tr><td>All Calls</td><td style="text-align: right;">
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<input type="hidden" id="report" name="report" value="1" />
+		<input type="submit" id="btn" name="btn" value="View" />
+		</form>
+		</td></tr>
+		<tr><td>Oldest Call</td><td style="text-align: right;">
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<input type="hidden" id="report" name="report" value="2" />
+		<input type="submit" id="btn" name="btn" value="View" />
+		</form>
+		</td></tr>
+		<tr><td>Blank Report</td><td style="text-align: right;">
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<input type="hidden" id="report" name="report" value="3" />
+		<input type="submit" id="btn" name="btn" value="View" />
+		</form>
+		</td></tr>
+		<tr><td>Work Rate</td><td style="text-align: right;">
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<input type="hidden" id="report" name="report" value="4" />
+		<input type="submit" id="btn" name="btn" value="View" />
+		</form>
+		</td></tr>
+		<tr><td>User Feedback</td><td style="text-align: right;">
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<input type="hidden" id="report" name="report" value="5" />
+		<input type="submit" id="btn" name="btn" value="View" />
+		</form>
+		</td></tr>
+		<tr><td>Punchcard In/Out</td><td style="text-align: right;">
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<input type="hidden" id="report" name="report" value="6" />
+		<input type="submit" id="btn" name="btn" value="View" />
+		</form>
+		</td></tr>
+		<tr><td>Emerging Issues</td><td style="text-align: right;">
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<input type="hidden" id="report" name="report" value="7" />
+		<input type="submit" id="btn" name="btn" value="View" />
+		</form>
+		</td></tr>
+		</tbody>
+		</table>
+		
 		</div>
 	</div>
 	</div>
@@ -190,7 +167,7 @@
 	<script src="javascript/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
     // Ajax form submit
-    $('form').submit(function(e) {
+    $('.reportlist').submit(function(e) {
         // Post the form data to viewcall
         $.post('includes/managerviewreport.php', $(this).serialize(), function(resp) {
             // return response data into div

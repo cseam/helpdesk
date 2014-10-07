@@ -24,7 +24,7 @@
 			};
 		?></td>
 		<td>
-			<form method="post">
+			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="allcallslist">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
 				<button name="submit" value="submit" type="submit" class="calllistbutton"><?=substr(strip_tags($calls['details']), 0, 40);?>...</button>
 			</form>
@@ -39,7 +39,7 @@
 </div>
 	<script type="text/javascript">
     // Ajax form submit
-    $('form').submit(function(e) {
+    $('.allcallslist').submit(function(e) {
         // Post the form data to viewcall
         $.post('viewcallpost.php', $(this).serialize(), function(resp) {
             // return response data into div
