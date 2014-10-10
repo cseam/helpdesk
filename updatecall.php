@@ -15,8 +15,10 @@
 		<meta name="robots" content="nofollow" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="javascript/sweet/sweet-alert.css">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 		<script src="javascript/jquery.js" type="text/javascript"></script>
+		<script src="javascript/sweet/sweet-alert.min.js"></script>
 	</head>
 	<body>
 	<div class="section">
@@ -38,12 +40,16 @@
 	<div id="rightpage">
 		<div id="addcall">
 			<div id="ajax">
-	
-
-
-
 
 <?php if ($_SERVER['REQUEST_METHOD']== "POST") { 
+
+if (isset($_POST['reassign'])) {
+	echo "<h2>Call Reassigned</h2>";
+	echo "<p>Call #" . $_POST['id'] . " has been reassigned, all stake holders have been emailed with details.</p>";
+	echo "<p><a href='/'>Home</a></p>";
+	
+}
+
 if (isset($_POST['close'])) {
 		// Check for image
 		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {  	
@@ -138,5 +144,8 @@ if (isset($_POST['update'])) {
 		</div>
 	</div>
 	</div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){swal("Updated", "Helpdesk Call has been updated successfully.", "success")});
+</script>	
 	</body>
 </html>

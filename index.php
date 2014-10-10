@@ -10,11 +10,11 @@
 	
 	{ 
 	// forward to correct page depending on user
-		if ($_SESSION['engineerLevel'] == "1") {
-			// forward to engineer page
-			die("<script>location.href = '/engineerview.php'</script>");
-		} else if ($_SESSION['engineerLevel'] == "2") {
+		if ($_SESSION['engineerLevel'] == "2") {
 			// forward to manager page
+			die("<script>location.href = '/managerview.php'</script>");
+		} else if ($_SESSION['engineerLevel'] == "1") {
+			// forward to engineer page
 			die("<script>location.href = '/engineerview.php'</script>");
 		} else {
 			// forward to new call page
