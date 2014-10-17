@@ -14,7 +14,16 @@
 <label for="helpdesk">Assign to</label>
 	<select id="engineer" name="engineer" required>
 				<option value="" SELECTED>Please Select</option>
-				<option value="1">Test item</option>
+				<?php
+				if ($_SESSION['engineerHelpdesk'] <= '3') {
+					$whereenginners = 'WHERE helpdesk <= 3';	
+				} else {
+					$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];				
+				};	
+				$helpdesks = mysqli_query($db, "SELECT * FROM engineers " .$whereenginners. " ORDER BY engineerName");
+				while($option = mysqli_fetch_array($helpdesks)) { ?>
+					<option value="<?=$option['idengineers'];?>"><?=$option['engineerName'];?></option>
+				<? } ?>
 	</select>
 <label for="details">Reason</label>
 			<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
