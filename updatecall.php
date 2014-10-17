@@ -48,12 +48,12 @@ if (isset($_POST['reassign'])) {
 	echo "<p>Call #" . $_POST['id'] . " has been reassigned, and call details have been updated.</p>";
 	echo "<p><a href='/'>Home</a></p>";
 	// Update Message
-	$reasonstr = "<div class=update><h3>Call reassigned (".date("c").") by manager for the following reason,</h3>".$_POST['details']."</div>";
+	$reasonstr = "<div class=update><h3>Call reassigned (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".$_POST['details']."</div>";
 	// Create SQL for reassign
 	$sqlstr = "UPDATE calls ";
 	$sqlstr .= "SET assigned=".$_POST['engineer'].", ";
 	$sqlstr .= "status=1, ";
-	$sqlstr .= "lastupdate='" . date("l jS \of F Y h:i:s A") . "', ";
+	$sqlstr .= "lastupdate='" . date("c") . "', ";
 	$sqlstr .= "details=CONCAT(details,'".mysqli_real_escape_string($db, $reasonstr)."') ";
 	$sqlstr .= "WHERE callid='" . mysqli_real_escape_string($db, $_POST['id']) . "'";
 	// Run Query

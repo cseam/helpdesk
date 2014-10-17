@@ -172,6 +172,26 @@
 			<div id="ajax">
 				<h2>Call Correspondence</h2>
 				<?=$calls['details'];?>
+				<? 
+				// if manager show call feedback if any feedback given.
+					if ($_SESSION['engineerLevel'] == '2' & $calls['status'] == '2') { 
+					?>
+					<h2>Call Feedback</h2>
+					<?
+						// select feedback for this call
+						$feedbackstr = "SELECT * FROM feedback WHERE callid='".$calls['callid']."'";
+						$feedbackresults = mysqli_query($db, $feedbackstr);
+						if (mysqli_num_rows($feedbackresults) == 0) { echo "<p>No feedback given.</p>";};		
+						while ($rows = mysqli_fetch_array($feedbackresults))  { ?>
+						<? if ($rows['satisfaction'] == 1) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($rows['satisfaction'] == 2) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($rows['satisfaction'] == 3) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($rows['satisfaction'] == 4) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($rows['satisfaction'] == 5) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+	<p><?=$rows['details'];?></p><p>(<?=$rows['opened'];?> - <?=$calls['name']?>)</p>
+						<?	};	?>	
+				<?	}; ?>
+				
 			</div>
 		</div>
 	</div>
