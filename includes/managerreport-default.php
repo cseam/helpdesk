@@ -32,6 +32,12 @@
 		</td>
 		<td>
 			<?=strstr($calls['engineerName']," ", true);?>
+			<?php
+				$string = $calls['engineerName'];
+				$pieces = explode(' ', $string);
+				$last_word = array_pop($pieces);
+				echo substr($last_word, 0, 1);
+			?>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reassign">

@@ -77,10 +77,11 @@
           colors: ['#577d6a','#CCCCCC',],
           pointSize: 4,
           vAxis: {gridlines: { count: 4 },},
+          pieHole: 0.5,
           chartArea: {'width': 'auto', 'height': '70%',},
         };
 
-        var chart = new google.visualization.ColumnChart(document.getElementById('linechart'));
+        var chart = new google.visualization.PieChart(document.getElementById('linechart'));
         chart.draw(data, options);
         }
       	</script>
@@ -107,49 +108,49 @@
 		<tr><td>Open Calls</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<input type="hidden" id="report" name="report" value="0" />
-		<input type="submit" id="btn" name="btn" value="View" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Open Calls" />
 		</form>
 		</td></tr>		
 		<tr><td>All Calls</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<input type="hidden" id="report" name="report" value="1" />
-		<input type="submit" id="btn" name="btn" value="View" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View All Calls" />
 		</form>
 		</td></tr>
 		<tr><td>Oldest Call</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<input type="hidden" id="report" name="report" value="2" />
-		<input type="submit" id="btn" name="btn" value="View" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
 		</td></tr>
 		<tr><td>Blank Report</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<input type="hidden" id="report" name="report" value="3" />
-		<input type="submit" id="btn" name="btn" value="View" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="Blank Report" />
 		</form>
 		</td></tr>
 		<tr><td>Work Rate</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<input type="hidden" id="report" name="report" value="4" />
-		<input type="submit" id="btn" name="btn" value="View" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Work Rate" />
 		</form>
 		</td></tr>
 		<tr><td>User Feedback</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<input type="hidden" id="report" name="report" value="5" />
-		<input type="submit" id="btn" name="btn" value="View" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Feedback" />
 		</form>
 		</td></tr>
 		<tr><td>Punchcard In/Out</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<input type="hidden" id="report" name="report" value="6" />
-		<input type="submit" id="btn" name="btn" value="View" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Punchcard" />
 		</form>
 		</td></tr>
 		<tr><td>Emerging Issues</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<input type="hidden" id="report" name="report" value="7" />
-		<input type="submit" id="btn" name="btn" value="View" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Issues" />
 		</form>
 		</td></tr>
 		</tbody>
