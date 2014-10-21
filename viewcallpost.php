@@ -50,7 +50,12 @@
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p><label for="attachment" style="width: 190px">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
 	<p class="buttons">
+		<?php 
+			if ($calls['status'] === '1') {?>
 		<button name="close" value="close" type="submit">Close Call</button>
+		<?php
+			};
+		?>
 		<button name="update" value="update" type="submit">Update Call</button>
 	</p>
 	<p class="callfooter">Call Opened <?=date("d/m/y h:s", strtotime($calls['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($calls['lastupdate']));?></p>

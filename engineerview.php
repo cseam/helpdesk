@@ -26,12 +26,12 @@
 	
 	<div id="leftpage">
 	<div id="stats">
-		<h3>Performance</h3>
+		<h3>Your Performance</h3>
 		<?php include 'includes/engineergraph.php'; ?>
 	</div>
 	<div id="calllist">
 		<?php include 'includes/engineerurgentcalls.php'; ?>
-		<h3>Assigned to you</h3>
+		<h3>Calls Assigned to you</h3>
 		<?php include 'includes/engineerassignedtoyou.php'; ?>
 	</div>
 	</div>
