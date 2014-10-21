@@ -13,4 +13,4 @@ Created:     2014
 Language:    English (UK)
 Standards:   PHP, HTML5, CSS3
 Components:  jQuery
-Software:    Adobe Photoshop CS6, Coda 2
+Software:    Adobe Photoshop CC, Coda 2.5
