@@ -36,7 +36,10 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reassign">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="" type="submit">reassign</button>
+				<input name="submit" value="" type="image" src="/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer" />
+				
+				 
+				
 			</form>
 		</td>
 		
