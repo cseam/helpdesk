@@ -304,8 +304,22 @@ table th {
 }
 .icon {
 	background: transparent;
-	padding: 0 0 3px 0;
+	padding: 5px 0 3px 0;
+	cursor: pointer;
+	float: right;
 }
+.reportname {
+	cursor: pointer;
+	text-align: left;
+	width: auto;
+}
+.reportlist {
+	border-bottom: 1px solid #c9c7c7;
+	width: 47%;
+	float: left;
+	margin: 0 5px;
+}
+
 .update {
 	border-left: 1px dashed transparent;
 	padding: 1rem 0 0.5rem 0rem;

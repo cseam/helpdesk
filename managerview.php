@@ -75,6 +75,7 @@
           title: '',
           legend: { position: 'none' },
           colors: ['#577d6a','#CCCCCC',],
+          pieSliceText: 'none',
           pointSize: 4,
           vAxis: {gridlines: { count: 4 },},
           pieHole: 0.5,
@@ -103,59 +104,69 @@
 	</div>
 	<div id="calllist">
 		<div id="ajaxforms">
-		<table>
-		<tbody>		
-		<tr><td>Open Calls</td><td style="text-align: right;">
+			
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">View Open Calls</button>
 		<input type="hidden" id="report" name="report" value="0" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Open Calls" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
-		</td></tr>		
-		<tr><td>All Calls</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">View All Calls</button>
 		<input type="hidden" id="report" name="report" value="1" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View All Calls" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
-		</td></tr>
-		<tr><td>Oldest Call</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">View Oldest Call</button>
 		<input type="hidden" id="report" name="report" value="2" />
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
-		</td></tr>
-		<tr><td>Blank Report</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">Calls Assigned But Not Closed</button>
 		<input type="hidden" id="report" name="report" value="3" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="Blank Report" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
-		</td></tr>
-		<tr><td>Work Rate</td><td style="text-align: right;">
-		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">Engineer Work Rate</button>
 		<input type="hidden" id="report" name="report" value="4" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Work Rate" />
-		</form>
-		</td></tr>
-		<tr><td>User Feedback</td><td style="text-align: right;">
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
+		</form>	
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">User Feedback</button>
 		<input type="hidden" id="report" name="report" value="5" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Feedback" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
-		</td></tr>
-		<tr><td>Punchcard In/Out</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">Punchcard in/out</button>
 		<input type="hidden" id="report" name="report" value="6" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Punchcard" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
-		</td></tr>
-		<tr><td>Emerging Issues</td><td style="text-align: right;">
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">Emerging Issues</button>
 		<input type="hidden" id="report" name="report" value="7" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Issues" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
-		</td></tr>
-		</tbody>
-		</table>
-		
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
+		<input type="hidden" id="report" name="report" value="8" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
+		</form>
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
+		<input type="hidden" id="report" name="report" value="9" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
+		</form>
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
+		<input type="hidden" id="report" name="report" value="10" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
+		</form>
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
+		<input type="hidden" id="report" name="report" value="11" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
+		</form>
+
+				
 		</div>
 	</div>
 	</div>
