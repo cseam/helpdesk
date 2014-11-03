@@ -43,6 +43,26 @@
 
 <?php if ($_SERVER['REQUEST_METHOD']== "POST") { 
 
+if (isset($_POST['forward'])) {
+	echo "<h2>Call forwarded</h2>"; 
+	echo "<p>Call #" . $_POST['id'] . " has been forwarded, and call details have been updated.</p>";
+	echo "<p><a href='/'>Home</a></p>";
+	// Update Message
+	$reasonstr = "<div class=update><h3>Call forwarded (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".$_POST['details']."</div>";
+	// Create SQL for reassign
+	$sqlstr = "UPDATE calls ";
+	$sqlstr .= "SET ";
+	$sqlstr .= "helpdesk='".$_POST['fwdhelpdesk']."', ";
+	$sqlstr .= "assigned='".next_engineer(check_input($_POST['fwdhelpdesk']))."', ";
+	$sqlstr .= "lastupdate='" . date("c") . "', ";
+	$sqlstr .= "details=CONCAT(details,'".mysqli_real_escape_string($db, $reasonstr)."') ";
+	$sqlstr .= "WHERE callid='" . mysqli_real_escape_string($db, $_POST['id']) . "'";
+	// Run Query
+	mysqli_query($db, $sqlstr);
+	// Update engineers assignment 
+	mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer(check_input($_POST['fwdhelpdesk'])) ."' WHERE id='".$_POST['fwdhelpdesk']."'");
+}
+
 if (isset($_POST['reassign'])) {
 	echo "<h2>Call Reassigned</h2>";
 	echo "<p>Call #" . $_POST['id'] . " has been reassigned, and call details have been updated.</p>";

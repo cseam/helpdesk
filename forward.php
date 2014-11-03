@@ -24,7 +24,7 @@
 
 </fieldset>
 <p class="buttons">
-		<button name="reassign" value="reassign" type="submit">Forward Call</button>
+		<button name="forward" value="forward" type="submit">Forward Call</button>
 </p>
 </form>
 <script type="text/javascript">
