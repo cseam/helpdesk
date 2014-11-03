@@ -29,7 +29,7 @@
 				<button name="submit" value="submit" type="submit" class="calllistbutton"><?=substr(strip_tags($calls['details']), 0, 40);?>...</button>
 			</form>
 		</td>
-		<td><?=substr($calls['engineerName'], 0, 12);?></td>
+		<td><?=strstr($calls['engineerName']," ", true);?></td>
 		
 		
 		</tr>
