@@ -102,7 +102,7 @@
 		mysqli_close($db);
 	
 	 } else {?>
-	<h1>Add Call</h1>	 	
+	<h1>Add Call <a href="retrospect.php" class="calllink"><img src="/images/ICONS-add@2x.png" width="24" height="25" alt="add retrospect call" /></a></h1>	 	
 	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
 	<fieldset>
 		<legend>Helpdesk</legend>
