@@ -25,6 +25,7 @@
 	$sqlstr .= "INNER JOIN status ON calls.status=status.id ";
 	$sqlstr .= "INNER JOIN categories ON calls.category=categories.id ";
 	$sqlstr .= "INNER JOIN location ON calls.location=location.id ";
+	$sqlstr .= "INNER JOIN helpdesks ON calls.helpdesk=helpdesks.id ";
 	$sqlstr .= "WHERE callid =" . check_input($_GET['id']);
 	$result = mysqli_query($db, $sqlstr);
 	while($calls = mysqli_fetch_array($result))  {
@@ -81,6 +82,10 @@
 				<tr>
 					<td>Call ID</td>
 					<td>#<?=$calls['callid'];?></td>
+				</tr>
+				<tr>
+					<td>Owner</td>
+					<td><?=$calls['owner'];?></td>
 				</tr>
 				<tr>
 					<td>Primary Contact Name</td>
@@ -162,6 +167,10 @@
 				<tr>
 					<td>Status</td>
 					<td><?=$calls['status'];?> (<?=$calls['statusCode'];?>)</td>
+				</tr>
+				<tr>
+					<td>Helpdesk</td>
+					<td><?=$calls['helpdesk_name'];?> (#<?=$calls['helpdesk'];?>)</td>
 				</tr>
 			</tbody>
 		</table>
