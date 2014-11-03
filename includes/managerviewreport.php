@@ -8,7 +8,7 @@ if ($_POST['report'] == "5") { echo "<h2>User Feedback</h2>"; include('managerre
 if ($_POST['report'] == "6") { echo "<h2>Punchcard In/Out</h2>"; include('managerreport-punchcard.php');};
 if ($_POST['report'] == "7") { echo "<h2>Emerging issues</h2>"; include('managerreport-issues.php');};
 if ($_POST['report'] == "8") { echo "<h2>Search Calls</h2>"; include('managerreport-search.php');};
-if ($_POST['report'] == "9") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
+if ($_POST['report'] == "9") { echo "<h2>Scheduled Tasks</h2>"; include('managerreport-tasks.php');};
 if ($_POST['report'] == "10") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
 if ($_POST['report'] == "11") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
 if ($_POST['report'] == "12") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
