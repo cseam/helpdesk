@@ -16,14 +16,14 @@
 		?>
 		<tr>
 		<td>#<?=$calls['callid'];?></td>
-		<td>
-		
-		<? if ($calls['status'] ==='2') { 
-			echo "<span class='closed'>Closed</span>";
-			} else { 
-			echo date("d/m/y", strtotime($calls['opened']));
-			};
-		?></td>
+		<td width="75">
+		<?php
+		$datetime1 = new DateTime(date("Y-m-d", strtotime($calls['opened'])));
+		$datetime2 = new DateTime(date("Y-m-d"));
+		$interval = date_diff($datetime1, $datetime2);
+		echo $interval->format('%a days open');
+		?>
+		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
