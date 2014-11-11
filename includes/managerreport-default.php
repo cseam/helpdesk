@@ -16,18 +16,18 @@
 		?>
 		<tr>
 		<td>#<?=$calls['callid'];?></td>
-		<td width="75">
+		<td width="45">
 		<?php
 		$datetime1 = new DateTime(date("Y-m-d", strtotime($calls['opened'])));
 		$datetime2 = new DateTime(date("Y-m-d"));
 		$interval = date_diff($datetime1, $datetime2);
-		echo $interval->format('%a days open');
+		echo $interval->format('%a days');
 		?>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="submit" type="submit" class="calllistbutton"><?=substr(strip_tags($calls['details']), 0, 35);?>...</button>
+				<button name="submit" value="submit" type="submit" class="calllistbutton"><?=substr(strip_tags($calls['details']), 0, 65);?>...</button>
 			</form>
 		</td>
 		<td>
@@ -51,8 +51,6 @@
 				<input name="submit" value="" type="image" src="/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer" />
 			</form>
 		</td>
-		
-		
 		</tr>
 	<? } ?>
 	</tbody>
