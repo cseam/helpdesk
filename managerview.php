@@ -124,7 +124,7 @@
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<button type="submit" value="View" name="btn" id="btn" class="reportname">Calls Assigned But Not Closed</button>
 		<input type="hidden" id="report" name="report" value="3" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-assignnotclosed@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<button type="submit" value="View" name="btn" id="btn" class="reportname">Engineer Work Rate</button>
@@ -157,9 +157,9 @@
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-scheduledtask@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
-		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">Change Control</button>
 		<input type="hidden" id="report" name="report" value="10" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-null@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-changecontrol@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" />
 		</form>
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
