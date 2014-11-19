@@ -68,8 +68,8 @@
       function drawChart2() {
         var data = google.visualization.arrayToDataTable([
           ['Calls', 'Calls'],
-          ['Opened (24h)', <?=callsinlastday()?>],
-          ['Closed (24h)', <?=callsclosedinlastday()?>]
+          ['Opened (24h)', <?=callsinlastday()+0.00000000001?>],
+          ['Closed (24h)', <?=callsclosedinlastday()+0.00000000001?>]
         ]);
 
         var options = {
