@@ -19,17 +19,28 @@
 </div>
 
 <script type="text/javascript">
-    // Ajax form submit
     $('.searchform').submit(function(e) {
-        // Post the form data to viewcall
-        $.post('includes/searchpost.php', $(this).serialize(), function(resp) {
-            // return response data into div
-            $('#resultspost').html(resp);
-        });
-        // Cancel the actual form post so the page doesn't refresh
-        e.preventDefault();
-        return false;
-    });     
+    	$.ajax(
+			{
+				type: 'post',
+				url: 'includes/searchpost.php',
+				data: $(this).serialize(),
+				beforeSend: function()
+				{
+				$('#resultspost').html('loading...');
+    			},
+				success: function(data)
+				{
+				$('#resultspost').html(data);
+    			},
+				error: function()
+				{
+				$('#resultspost').html('error loading data');
+    			}
+			});
+       e.preventDefault();
+       return false;
+    }); 
 </script>
 
 <script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
