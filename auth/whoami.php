@@ -1,5 +1,10 @@
 <?php session_start();	
+$_SESSION['engineerLevel'] = 0;
+$_SESSION['engineerId'] = null;
+$_SESSION['engineerHelpdesk'] = null;
+$_SESSION['sAMAccountName'] = $_SERVER['PHP_AUTH_USER'];
 $sAMAcountName = $_SERVER['PHP_AUTH_USER'];
+
 include_once '../includes/functions.php';
  
 if (empty($sAMAcountName)) {
