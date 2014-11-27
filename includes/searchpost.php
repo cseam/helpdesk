@@ -6,14 +6,6 @@
 	$sqlstr .= "WHERE details LIKE '%" . check_input($_POST['term']) . "%';";
 	$result = mysqli_query($db, $sqlstr);	
 ?>
-<h2>Search Results</h2>
-<?php
-	if (mysqli_num_rows($result) == 0) {
-		echo "<h3>0 Returned</h3>";
-	} else {
-		echo "<h3>" . mysqli_num_rows($result) . " Returned</h3>";
-	} ;
-?>
 <table>
 	<tbody>	
 <?php
@@ -28,19 +20,25 @@
 			echo date("d/m/y", strtotime($calls['opened']));
 			};
 		?></td>
+		<td><?=strstr($calls['engineerName']," ", true);?></td>
 		<td>
-			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="searchresultsview">
+			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="searchresultsview" >
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="submit" type="submit" class="calllistbutton"><?=substr(strip_tags($calls['details']), 0, 40);?>...</button>
+				<div style="margin-top:10px;float: left;"><?=substr(strip_tags($calls['details']), 0, 40);?>...</div>
 				<input type="image" name="submit" value="submit" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Call" />
 			</form>
 		</td>
-		<td><?=strstr($calls['engineerName']," ", true);?></td>
 		</tr>
 <?  }; ?>
 	</tbody>
 </table>
-
+<?php
+		if (mysqli_num_rows($result) == 0) {
+		echo "<p>&mdash; 0 results returned.</p>";
+	} else {
+		echo "<p>&mdash; " . mysqli_num_rows($result) . " result returned.</p>";
+	} ;
+?>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
 	<script src="javascript/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
@@ -56,6 +54,3 @@
         return false;
     });     
     </script>
-
-
-

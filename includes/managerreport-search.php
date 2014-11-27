@@ -4,12 +4,10 @@
 	include_once '../includes/functions.php';
 ?>
 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="search" class="searchform">
-<p>Search all calls in database for following details</p>
-	<fieldset>
-		<legend>Search Term</legend>
+<fieldset>
 		<label for="term">Look For</label>
 		<input type="text" id="term" name="term" value=""  required />
-	</fieldset>
+</fieldset>
 <p class="buttons">
 	<button name="submit" value="submit" type="submit">Search</button>
 </p>
@@ -27,7 +25,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#resultspost').html('loading...');
+				$('#resultspost').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -35,18 +33,16 @@
     			},
 				error: function()
 				{
-				$('#resultspost').html('error loading data');
+				$('#resultspost').html('error loading data, please refresh.');
     			}
 			});
        e.preventDefault();
        return false;
     }); 
 </script>
-
 <script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$("#search").validate({
-			rules: {
-				}
+			rules: {}
 		});
 </script>
