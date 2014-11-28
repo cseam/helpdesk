@@ -38,15 +38,26 @@
 	</table>
 </div>
 	<script type="text/javascript">
-    // Ajax form submit
     $('.allcallslist').submit(function(e) {
-        // Post the form data to viewcall
-        $.post('viewcallpost.php', $(this).serialize(), function(resp) {
-            // return response data into div
-            $('#ajax').html(resp);
-        });
-        // Cancel the actual form post so the page doesn't refresh
-        e.preventDefault();
-        return false;
-    });     
+    	$.ajax(
+			{
+				type: 'post',
+				url: '/viewcallpost.php',
+				data: $(this).serialize(),
+				beforeSend: function()
+				{
+				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+    			},
+				success: function(data)
+				{
+				$('#ajax').html(data);
+    			},
+				error: function()
+				{
+				$('#ajax').html('error loading data, please refresh.');
+    			}
+			});
+       e.preventDefault();
+       return false;
+    }); 
     </script>

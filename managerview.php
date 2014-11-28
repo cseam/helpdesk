@@ -180,17 +180,28 @@
 	</div>
 	</div>
 	<script type="text/javascript">
-    // Ajax form submit
-    $('.reportlist').submit(function(e) {
-        // Post the form data to viewcall
-        $.post('includes/managerviewreport.php', $(this).serialize(), function(resp) {
-            // return response data into div
-            $('#ajax').html(resp);
-        });
-        // Cancel the actual form post so the page doesn't refresh
-        e.preventDefault();
-        return false;
-    });     
+     $('.reportlist').submit(function(e) {
+    	$.ajax(
+			{
+				type: 'post',
+				url: '/includes/managerviewreport.php',
+				data: $(this).serialize(),
+				beforeSend: function()
+				{
+				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+    			},
+				success: function(data)
+				{
+				$('#ajax').html(data);
+    			},
+				error: function()
+				{
+				$('#ajax').html('error loading data, please refresh.');
+    			}
+			});
+       e.preventDefault();
+       return false;
+    }); 
     </script>
 	</body>
 </html>

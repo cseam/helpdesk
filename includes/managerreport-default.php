@@ -57,39 +57,72 @@
 	</table>
 </div>
 	<script type="text/javascript">
-    // Ajax form submit to view post
-    $('.viewpost').submit(function(e) {
-        // Post the form data to viewcall
-        $.post('viewcallpost.php', $(this).serialize(), function(resp) {
-            // return response data into div
-            $('#ajax').html(resp);
-        });
-        // Cancel the actual form post so the page doesn't refresh
-        e.preventDefault();
-        return false;
-    });
+     $('.viewpost').submit(function(e) {
+    	$.ajax(
+			{
+				type: 'post',
+				url: '/viewcallpost.php',
+				data: $(this).serialize(),
+				beforeSend: function()
+				{
+				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+    			},
+				success: function(data)
+				{
+				$('#ajax').html(data);
+    			},
+				error: function()
+				{
+				$('#ajax').html('error loading data, please refresh.');
+    			}
+			});
+       e.preventDefault();
+       return false;
+    }); 
+
+	$('.reassign').submit(function(e) {
+    	$.ajax(
+			{
+				type: 'post',
+				url: '/reassign.php',
+				data: $(this).serialize(),
+				beforeSend: function()
+				{
+				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+    			},
+				success: function(data)
+				{
+				$('#ajax').html(data);
+    			},
+				error: function()
+				{
+				$('#ajax').html('error loading data, please refresh.');
+    			}
+			});
+       e.preventDefault();
+       return false;
+    }); 
     
-    // Ajax form submit to reassign
-    $('.reassign').submit(function(e) {
-        // Post the form data to viewcall
-        $.post('reassign.php', $(this).serialize(), function(resp) {
-            // return response data into div
-            $('#ajax').html(resp);
-        });
-        // Cancel the actual form post so the page doesn't refresh
-        e.preventDefault();
-        return false;
-    });
-    
-    // Ajax form submit to reassign
-    $('.forward').submit(function(e) {
-        // Post the form data to viewcall
-        $.post('forward.php', $(this).serialize(), function(resp) {
-            // return response data into div
-            $('#ajax').html(resp);
-        });
-        // Cancel the actual form post so the page doesn't refresh
-        e.preventDefault();
-        return false;
-    });
+  	$('.forward').submit(function(e) {
+    	$.ajax(
+			{
+				type: 'post',
+				url: '/forward.php',
+				data: $(this).serialize(),
+				beforeSend: function()
+				{
+				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+    			},
+				success: function(data)
+				{
+				$('#ajax').html(data);
+    			},
+				error: function()
+				{
+				$('#ajax').html('error loading data, please refresh.');
+    			}
+			});
+       e.preventDefault();
+       return false;
+    }); 
     </script>
