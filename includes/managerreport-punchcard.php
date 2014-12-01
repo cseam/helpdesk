@@ -1,1 +1,37 @@
-<p>Pitchfork chillwave tousled quinoa, selfies Portland plaid raw denim. Paleo quinoa Williamsburg forage, synth Thundercats retro you probably haven't heard of them leggings before they sold out deep v vegan banjo. Seitan locavore Intelligentsia art party High Life, 3 wolf moon +1 lomo. Austin 90's selfies 3 wolf moon. Wayfarers cliche food truck distillery seitan raw denim. Normcore Blue Bottle Odd Future flexitarian roof party tattooed, Thundercats actually hashtag squid jean shorts readymade brunch. PBR&B McSweeney's polaroid ennui, biodiesel before they sold out selvage pug Odd Future authentic direct trade semiotics.</p>
+<?php session_start();?>
+<?php
+	// load functions
+	include_once '../includes/functions.php';
+	
+	$sqlstr = "SELECT * FROM engineers LEFT JOIN engineers_status ON engineers_status.id=engineers.idengineers;";
+	$result = mysqli_query($db, $sqlstr);	
+	
+?>
+<table>
+<tr>
+	<th>Engineer Name</th>
+	<th>Status</th>
+	<th></th>
+</tr>
+<?php
+	while($calls = mysqli_fetch_array($result))  {
+?>
+<tr>
+	<td><?=$calls['engineerName'];?></td>
+	<td>
+		<div class="switch">
+            <input id="cmn-toggle-<?=$calls['idengineers']?>" class="cmn-toggle cmn-toggle-round" type="checkbox" <? if ($calls['status'] == 1) { ?>checked="true" <?}?>>
+            <label for="cmn-toggle-<?=$calls['idengineers']?>"></label>
+          </div>
+	</td>
+	<?
+		if ($calls['status'] == NULL or $calls['status'] == 0) { 
+			echo "<td>OUT</td>";
+		} else {
+			echo "<td>IN</td>";
+		}?>
+</tr>
+<?php
+	}
+?>
+</table>
