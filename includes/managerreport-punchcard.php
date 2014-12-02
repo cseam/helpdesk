@@ -7,29 +7,39 @@
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['toggle'] == TRUE) { ?>
 <h2>Punchcard in/out</h2>
 <?
+	// remove all status for enginner just submitted
 	$sqlstr = "DELETE FROM engineers_status WHERE id = " . $_POST['id'] . ";";
 	$result = mysqli_query($db, $sqlstr);	
 
+	// get toggle status 
 	$whichtoggle = "cmn-toggle-" . $_POST['id'];
 	if ($_POST[$whichtoggle] == 'on') {
 		$togglevalue = 1;
 	} else {
 		$togglevalue = 0;
 	}
-
+	// update status with changes from form 
 	$sqlstr = "INSERT INTO engineers_status (id, status) VALUES ('". $_POST['id'] ."','". $togglevalue ."');";
 	$result = mysqli_query($db, $sqlstr);
+	// update timestamp with changes
+	$sqlstr = "INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES ('".$_POST['id']."','".$togglevalue."','".date("c")."');";
+	$result = mysqli_query($db, $sqlstr);
+	
+	
 	 } ?>
 
 
 <?php
+	// get engineers and current status
 	$sqlstr = "SELECT * FROM engineers LEFT JOIN engineers_status ON engineers_status.id=engineers.idengineers;";
 	$result = mysqli_query($db, $sqlstr);	
 ?>
 <table>
 <tr>
 	<th>Engineer Name</th>
-	<th>Status IN/OUT</th>
+	<th>Status</th>
+	<th>IN / OUT</th>
+	<th>Date - Time</th>
 </tr>
 <?php
 	while($calls = mysqli_fetch_array($result))  {
@@ -45,15 +55,19 @@
 				<label for="cmn-toggle-<?=$calls['idengineers']?>"></label>
 			</form>
 		</div>
-		
-	<?
-		if ($calls['status'] == NULL or $calls['status'] == 0) { 
-			echo " &mdash; OUT";
-		} else {
-			echo " &mdash; IN";
-		}?>
-		
 		</td>
+		<td>
+			<?php
+				$sqlstr = "SELECT * FROM engineers_punchcard WHERE engineerid = '" . $calls['idengineers'] . "' ORDER BY id DESC LIMIT 1;";
+				$punchcard = mysqli_query($db, $sqlstr);
+				while($test = mysqli_fetch_array($punchcard))  {
+					if ($test['direction'] == 0) { echo "OUT ";} else { echo "IN ";};
+				?>
+		</td>
+		<td>
+			<?=date("d/m - h:sa", strtotime($test['stamp']));?>
+		</td>
+		<? } ?>
 </tr>
 <?php
 	}
@@ -68,10 +82,6 @@
 				type: 'post',
 				url: '/includes/managerreport-punchcard.php',
 				data: $(this).serialize(),
-				beforeSend: function()
-				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
-    			},
 				success: function(data)
 				{
 				$('#ajax').html(data);

@@ -498,6 +498,10 @@ input.cmn-toggle-round + label:after {
 }
 input.cmn-toggle-round:checked + label:before {
   background-color: #6f9281;
+  content: "in";
+  padding-left: 15px;
+  padding-top: 2px;
+  color: #fff;
 }
 input.cmn-toggle-round:checked + label:after {
   margin-left: 33px;
