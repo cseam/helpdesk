@@ -9,7 +9,7 @@ if ($_POST['report'] == "6") { echo "<h2>Punchcard In/Out</h2>"; include('manage
 if ($_POST['report'] == "7") { echo "<h2>Emerging issues</h2>"; include('managerreport-issues.php');};
 if ($_POST['report'] == "8") { echo "<h1>Search Calls</h1>"; include('managerreport-search.php');};
 if ($_POST['report'] == "9") { echo "<h2>Scheduled Tasks</h2>"; include('managerreport-tasks.php');};
-if ($_POST['report'] == "10") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
+if ($_POST['report'] == "10") { echo "<h2>Change Control</h2>"; include('managerreport-changecontrol.php');};
 if ($_POST['report'] == "11") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
 if ($_POST['report'] == "12") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
 if ($_POST['report'] == "13") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};

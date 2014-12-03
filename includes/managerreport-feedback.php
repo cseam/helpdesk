@@ -24,7 +24,7 @@
 		</tr>
 <?};?>
 </table>
-<br/>
+<br/><br/>
 <h2>Feedback Details</h2>
 <table>
 <tr>
