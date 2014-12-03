@@ -2,8 +2,32 @@
 	include_once('../includes/functions.php');
 ?>
 <table>
+	<tr>
+		<th>Engineer Name</th>
+		<th>Adverage Feedback Score</th>
+		<th>Total Feedback Number</th>
+	</tr>
+<?
+	$sqlstr = "SELECT engineerName, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT FROM calls INNER JOIN feedback ON feedback.callid=calls.callid INNER JOIN engineers ON engineers.idengineers=calls.closeengineerid GROUP BY calls.closeengineerid;";
+	$result = mysqli_query($db, $sqlstr);
+		while($loop = mysqli_fetch_array($result)) { ?>
+		<tr>
+			<td><?=$loop['engineerName'];?></td>
+			<td>
+			<? if ($loop['FeedbackAVG'] == 1) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['FeedbackAVG'] == 2) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['FeedbackAVG'] == 3) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['FeedbackAVG'] == 4) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['FeedbackAVG'] == 5) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' /><img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
+			</td>
+			<td><?=$loop['FeedbackCOUNT'];?>	</td>
+		</tr>
+<?};?>
+</table>
+<br/>
+<h2>Feedback Details</h2>
+<table>
 <tr>
-	<th>New</th>
 	<th>Call Id</th>
 	<th>Satisfaction</th>
 	<th>Customer Feedback</th>
@@ -13,7 +37,6 @@
 	$result = mysqli_query($db, $sql);
 		while($loop = mysqli_fetch_array($result)) { ?>
 <tr>
-	<td><?=$loop['New'];?></td>
 	<td><a href="/viewcall.php?id=<?=$loop['callid']?>"><?=$loop['callid']?></a></td>
 	<td>
 		<? if ($loop['satisfaction'] == 1) { echo "<img src='/images/star.png' alt='star' height='17' width='auto' />"; };?>
