@@ -7,12 +7,12 @@ if ($_POST['report'] == "4") { echo "<h2>Workrate</h2>"; include('managerreport-
 if ($_POST['report'] == "5") { echo "<h2>User Feedback</h2>"; include('managerreport-feedback.php');};
 if ($_POST['report'] == "6") { echo "<h2>Punchcard In/Out</h2>"; include('managerreport-punchcard.php');};
 if ($_POST['report'] == "7") { echo "<h2>Emerging issues</h2>"; include('managerreport-issues.php');};
-if ($_POST['report'] == "8") { echo "<h1>Search Calls</h1>"; include('managerreport-search.php');};
+if ($_POST['report'] == "8") { echo ""; include('managerreport-search.php');};
 if ($_POST['report'] == "9") { echo "<h2>Scheduled Tasks</h2>"; include('managerreport-tasks.php');};
-if ($_POST['report'] == "10") { echo "<h2>Change Control</h2>"; include('managerreport-changecontrol.php');};
-if ($_POST['report'] == "11") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
-if ($_POST['report'] == "12") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
-if ($_POST['report'] == "13") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
+if ($_POST['report'] == "10") { echo "<h2>Add Change Control</h2>"; include('managerreport-changecontrol.php');};
+if ($_POST['report'] == "11") { echo "<h2>View Change History</h2>"; include('managerreport-changehistory.php');};
+if ($_POST['report'] == "12") { echo "<h2>Tag Control</h2>"; include('managerreport-tags.php');};
+if ($_POST['report'] == "13") { echo "<h2>Awaiting Invoice</h2>"; include('managerreport-awaitinginvoice.php');};
 if ($_POST['report'] == "14") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
 if ($_POST['report'] == "15") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
 if ($_POST['report'] == "16") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};

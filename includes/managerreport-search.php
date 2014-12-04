@@ -5,11 +5,12 @@
 ?>
 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="search" class="searchform">
 <fieldset>
-		<label for="term">Look For</label>
+		<legend>Search all calls</legend>
+		<label for="term">Search Query</label>
 		<input type="text" id="term" name="term" value=""  required />
 </fieldset>
 <p class="buttons">
-	<button name="submit" value="submit" type="submit">Search</button>
+	<button name="submit" value="submit" type="submit">Go</button>
 </p>
 </form>
 

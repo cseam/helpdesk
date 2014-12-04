@@ -4,12 +4,12 @@
 	include_once '../includes/functions.php';
 ?>
 <p>Please log all changes to servers, and tag appropriately.</p>
-<script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
-<form action="" method="post" enctype="multipart/form-data" id="changecontrol">
+<script src="/javascript/jquery.validate.min.js" type="text/javascript"></script>
+<form action="<?=$_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" id="changecontrol">
 <fieldset>
 	<legend>add change control</legend>
 	<label for="">Date / Time</label>
-		<input type="text" id="name" name="name" value=""  required />
+		<input type="datetime" id="name" name="name" value=""  required />
 	<label for="">Engineer</label>
 		<select id="engineer" name="engineer" required>
 				<option value="" SELECTED>Please Select</option>
@@ -29,19 +29,17 @@
 	<label for="">Tags</label>
 		<input type="text" id="name" name="name" value="" readonly="true" required />
 	<p class="tags">
-		<button name="add" value="add" type="submit">internet</button>
-		<button name="add" value="add" type="submit">wireless</button>
-		<button name="add" value="add" type="submit">dhcp</button>
-		<button name="add" value="add" type="submit">group policy</button>
-		<button name="add" value="add" type="submit">updates</button>
+		<?
+			$tags = mysqli_query($db, "SELECT * FROM changecontrol_tags;");
+				while($buttons = mysqli_fetch_array($tags)) { ?>
+					<button name="tag" value="<?=$buttons['tagname'];?>" type="submit"><?=$buttons['tagname'];?></button>
+		<? } ?>
 	</p>
 	<p class="buttons">
 		<button name="add" value="add" type="submit">Submit</button>
 	</p>	
 </fieldset>
 </form>
-<h3>History</h3>
-
 <script type="text/javascript">
 		$("#reassign").validate();
 </script>

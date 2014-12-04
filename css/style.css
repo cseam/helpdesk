@@ -309,7 +309,7 @@ table th {
 .tags button {
 	border: 1px solid transparent;
 	padding: 5px 5px 5px 30px;
-	background: rgba(255,255,255,0.25) url('/images/ICONS-tag.png') no-repeat 0% 50%;
+	background: rgba(255,255,255,0.25) url('/images/ICONS-tag@2x.png') no-repeat 0% 50%;
 	background-size: contain;
 }
 .icon {

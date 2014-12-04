@@ -156,16 +156,30 @@
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-scheduledtask@2x.png" width="24" height="24" class="icon" alt="Scheduled Tasks" />
 		</form>
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
-		<button type="submit" value="View" name="btn" id="btn" class="reportname">Change Control</button>
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">Add Change Control</button>
 		<input type="hidden" id="report" name="report" value="10" />
-		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-changecontrol@2x.png" width="24" height="25" class="icon" alt="Change Control" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-addchangecontrol@2x.png" width="24" height="25" class="icon" alt="Change Control" />
+		</form>
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">View Change History</button>
+		<input type="hidden" id="report" name="report" value="11" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-changecontrol@2x.png" width="24" height="25" class="icon" alt="Null" />
+		</form>
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">Tag Control</button>
+		<input type="hidden" id="report" name="report" value="12" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-tag@2x.png" width="24" height="25" class="icon" alt="Null" />
+		</form>
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">Awaiting Invoice</button>
+		<input type="hidden" id="report" name="report" value="13" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-invoice@2x.png" width="24" height="25" class="icon" alt="Null" />
 		</form>
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
-		<input type="hidden" id="report" name="report" value="11" />
+		<input type="hidden" id="report" name="report" value="14" />
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-null@2x.png" width="24" height="25" class="icon" alt="Null" />
 		</form>
-
 				
 		</div>
 	</div>
