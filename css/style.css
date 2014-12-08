@@ -150,6 +150,11 @@ ul {
 	padding: 1rem;
 	margin: 0 0 2rem 0;
 }
+#poststatus {
+	background: rgba(255, 112, 0, 0.79);
+	padding: 1rem;
+	margin: 0 0 2rem 0;
+}
 hr, h2 {
 	border: 0;	
 	border-bottom: 1px solid #c9c7c7;
@@ -311,7 +316,16 @@ table th {
 	padding: 5px 5px 5px 30px;
 	background: rgba(255,255,255,0.25) url('/images/ICONS-tag@2x.png') no-repeat 0% 50%;
 	background-size: contain;
+	cursor: pointer;
 }
+.deltag button {
+	padding: 3px 30px 3px 15px;
+	background: rgba(255,255,255,0.25) url('/images/ICONS-null@2x.png') no-repeat 100% 50%;
+	background-size: contain;
+	cursor: pointer;
+	float: left;
+}
+
 .icon {
 	background: transparent;
 	padding: 5px 0 3px 0;

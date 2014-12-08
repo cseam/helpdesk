@@ -11,7 +11,7 @@ if ($_POST['report'] == "8") { echo ""; include('managerreport-search.php');};
 if ($_POST['report'] == "9") { echo "<h2>Scheduled Tasks</h2>"; include('managerreport-tasks.php');};
 if ($_POST['report'] == "10") { echo "<h2>Add Change Control</h2>"; include('managerreport-changecontrol.php');};
 if ($_POST['report'] == "11") { echo "<h2>View Change History</h2>"; include('managerreport-changehistory.php');};
-if ($_POST['report'] == "12") { echo "<h2>Tag Control</h2>"; include('managerreport-tags.php');};
+if ($_POST['report'] == "12") { echo "<h1>Tag Control</h1>"; include('managerreport-tags.php');};
 if ($_POST['report'] == "13") { echo "<h2>Awaiting Invoice</h2>"; include('managerreport-awaitinginvoice.php');};
 if ($_POST['report'] == "14") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
 if ($_POST['report'] == "15") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};

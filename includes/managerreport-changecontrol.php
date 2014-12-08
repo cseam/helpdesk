@@ -43,3 +43,6 @@
 <script type="text/javascript">
 		$("#reassign").validate();
 </script>
+<div id="poststatus">
+	<? print_r($_POST); ?>
+</div>
