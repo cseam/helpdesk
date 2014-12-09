@@ -1,10 +1,10 @@
 <?php 
 	include_once('../includes/functions.php');
 ?>
-<p>Issues logged by area in last 7 days, high numbers may indicate a problem in that house</p>
+<p>Issues logged by area in last 7 days, high numbers may indicate a problem in that house, room or location</p>
 <table>
 <tr>
-	<th>Location</th>
+	<th>Location / Room</th>
 	<th>Calls Logged</th>
 </tr>
 <?	
@@ -16,13 +16,6 @@
 	<td><?=$loop['Number_of_Calls']?></td>
 </tr>
 <? } ?>
-</table>
-<p>Reoccurring string logged for room location, high numbers may indicate a problem in that location</p>
-<table>
-<tr>
-	<th>Room</th>
-	<th>Calls Logged</th>
-</tr>
 <?	
 	$sql ="SELECT COUNT(*) AS Number_of_Calls, room AS Room FROM calls WHERE opened >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) GROUP BY room HAVING COUNT(*) >=3 ORDER BY Number_of_Calls DESC";
 	$result = mysqli_query($db, $sql);
