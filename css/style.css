@@ -313,19 +313,26 @@ table th {
 }
 .tags button {
 	border: 1px solid transparent;
-	padding: 5px 5px 5px 30px;
+	padding: 3px 15px 3px 30px;
 	background: rgba(255,255,255,0.25) url('/images/ICONS-tag@2x.png') no-repeat 0% 50%;
 	background-size: contain;
 	cursor: pointer;
+	float: left;
 }
-.deltag button {
+.deltag button{
 	padding: 3px 30px 3px 15px;
 	background: rgba(255,255,255,0.25) url('/images/ICONS-null@2x.png') no-repeat 100% 50%;
 	background-size: contain;
 	cursor: pointer;
 	float: left;
 }
-
+.addtagform button{
+	padding: 3px 15px 3px 30px;
+	background: rgba(255,255,255,0.25) url('/images/ICONS-tag@2x.png') no-repeat 0% 50%;
+	background-size: contain;
+	cursor: pointer;
+	float: left;
+}
 .icon {
 	background: transparent;
 	padding: 5px 0 3px 0;
