@@ -1,0 +1,13 @@
+$primary-color: #343;
+$font-face: 'verlag', Arial;
+
+body {
+	color: $primary-color;
+	font-family: 100% $font-face;
+}
+H1 {
+	color: $primary-color;
+}
+H2 {
+	color: $primary-color;
+}
