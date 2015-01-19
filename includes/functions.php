@@ -8,18 +8,18 @@ date_default_timezone_set('Europe/London');
 
 // prompt authentication
 function prompt_auth($data) {
-	if (empty($_SESSION['sAMAccountName'])) { 
+	if (empty($_SESSION['sAMAccountName'])) {
 		// User not logged in forward to login page
 			die("<script>location.href = '/auth/whoami.php?return=".$data."'</script>");
 		};
-} 
+}
 
-//Database Setup 
+//Database Setup
 $db = mysqli_connect("localhost", "helpdesk", "helpdesk", "helpdesk");
-// check db connection not sure if this should be done before each db call or once at function load is enough? 
+// check db connection not sure if this should be done before each db call or once at function load is enough?
 if (mysqli_connect_errno()) {
 	printf("Connect failed: %s\n", mysqli_connect_error());
-}	
+}
 
 // Functions
 function check_input($data)
@@ -44,18 +44,18 @@ function last_engineer($data)
 	$sqlstr .= "WHERE id=".$helpdeskid." ";
 	$result = mysqli_query($db, $sqlstr);
 	while($engdetails = mysqli_fetch_array($result)) {
-	$data = $engdetails['engineerId'] . " - " . $engdetails['engineerName'] . " - " . $engdetails['engineerEmail'];		
+	$data = $engdetails['engineerId'] . " - " . $engdetails['engineerName'] . " - " . $engdetails['engineerEmail'];
 	}
 	return $data;
 }
 function next_engineer($data)
 {
 	// Check helpdesk call is for
-	$helpdeskid = $data;	
+	$helpdeskid = $data;
 	// Reset data and calculate next engineer
 	$data = "";
-	// find last engineer assigned 
-	global $db; 
+	// find last engineer assigned
+	global $db;
 	$result = mysqli_query($db, "SELECT * FROM assign_engineers WHERE id=".$helpdeskid."");
 	while($calls = mysqli_fetch_array($result))  {
 			$lastengineerid = $calls['engineerId'];
@@ -66,34 +66,34 @@ function next_engineer($data)
 		$engineername = $engdetails['engineerName'];
 		$engineeremail = $engdetails['engineerEmail'];
 	}
-	// get next engineer id from table 
+	// get next engineer id from table
 	$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE idengineers > " . $lastengineerid . " AND helpdesk=".$helpdeskid."  AND engineerLevel=1 ORDER BY idengineers LIMIT 1");
 	// if end of list start from beginning again to create a a loop.
 	if (mysqli_num_rows($result) == 0) {
 		$result = mysqli_query($db, "SELECT idengineers FROM engineers WHERE helpdesk=".$helpdeskid." AND engineerLevel=1 LIMIT 1");
-	} 
-	// output next engineers id to var 
+	}
+	// output next engineers id to var
 	while($next = mysqli_fetch_array($result)) {
 		$nextid = $next['idengineers'];
 	}
-	
-	// return data as required
-	$data = $nextid;
-	return $data;
+	return $nextid;
 }
-function engineer_friendlyname($data) 
+function engineer_friendlyname($data)
 {
 	global $db;
 	$result = mysqli_query($db, "SELECT * FROM engineers WHERE idengineers='".$data."'");
 	while($calls = mysqli_fetch_array($result)) {
 		$friendly = $calls['engineerName'];
-	}	
-	$data = $friendly;
-	return $data;
+	}
+	return $friendly;
 }
-
-
-
-
-
+function helpdesk_friendlyname($data)
+{
+	global $db;
+	$query = mysqli_query($db, "SELECT * FROM helpdesks WHERE id=".$data.";");
+	while($results = mysqli_fetch_array($query)) {
+		$friendly = $results['helpdesk_name'];
+	}
+	return $friendly;
+}
 ?>
