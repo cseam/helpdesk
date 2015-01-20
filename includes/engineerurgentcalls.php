@@ -1,6 +1,12 @@
-<?php 
+<?php
+	//only my helpdesks
+		if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE helpdesk <= 3';
+		} else {
+			$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];
+		};
 	// are there any urgent calls?
-	$result = mysqli_query($db, "SELECT * FROM calls WHERE urgency='3' AND status='1'");
+	$result = mysqli_query($db, "SELECT * FROM calls ".$whereenginners." AND urgency='3' AND status='1'");
 	// display results if found
 	if(mysqli_num_rows($result) > 0) {
 ?>
@@ -8,7 +14,7 @@
 <div id="ajaxforms">
 	<table>
 	<tbody>
-	<?php 
+	<?php
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>
@@ -25,4 +31,4 @@
 	</tbody>
 	</table>
 </div>
-<?php } ?>		
+<?php } ?>

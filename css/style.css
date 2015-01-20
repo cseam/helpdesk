@@ -373,6 +373,14 @@ table th {
 	margin: 0.8rem 0rem;
 	line-height: 1.5rem;
 }
+.smalltxt {
+	font-size: 0.8rem;
+}
+#filter {
+	width: 80px !important;
+	padding: 4px 10px 4px 5px;
+	background-size: 15%;
+}
 
 #branding {
 	height: 14.5%;

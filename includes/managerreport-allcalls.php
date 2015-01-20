@@ -6,6 +6,33 @@
 
 <div id="ajaxforms">
 	<table>
+	<thead>
+		<tr class="head">
+			<th>#</th>
+			<th>
+				<select id="filter" onchange="filterTable()" >
+					<option value="0" SELECTED>Location</option>
+				<? //populate filter
+					$filter = mysqli_query($db, "SELECT * FROM location;");
+					while($locations = mysqli_fetch_array($filter))  { ?>
+					<option value="<?=$locations['id'];?>"><?=$locations['locationName'];?></option>
+				<?}?>
+			</select>
+			<script type="text/javascript">
+				function filterTable(err) {
+					$("tr").show();
+						if ($( "select#filter" ).val() !== '0') {
+							$("tr").not("."+$( "select#filter" ).val()).hide();
+						};
+					$("tr.head").show();
+				};
+			</script>
+			</th>
+			<th>Date</th>
+			<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Details</th>
+			<th>Engineer</th>
+		</tr>
+	</thead>
 	<tbody>
 	<?php
 		//only my helpdesks
@@ -15,12 +42,13 @@
 			$whereenginners = 'WHERE engineers.helpdesk='.$_SESSION['engineerHelpdesk'];
 		};
 		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ".$whereenginners." ORDER BY callID DESC LIMIT 1000;");
+		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id ".$whereenginners." ORDER BY callID DESC LIMIT 1000;");
 		if (mysqli_num_rows($result) == 0) { echo "<p>All calls Closed</p>";};
 		while($calls = mysqli_fetch_array($result))  {
 		?>
-		<tr>
+		<tr class="<?=$calls['location'];?>">
 		<td>#<?=$calls['callid'];?></td>
+		<td><span class="smalltxt"><?=$calls['locationName'];?></span></td>
 		<td>
 
 		<? if ($calls['status'] ==='2') {
