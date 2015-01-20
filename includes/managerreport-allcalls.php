@@ -7,19 +7,25 @@
 <div id="ajaxforms">
 	<table>
 	<tbody>
-	<?php 
+	<?php
+		//only my helpdesks
+		if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+		} else {
+			$whereenginners = 'WHERE engineers.helpdesk='.$_SESSION['engineerHelpdesk'];
+		};
 		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ORDER BY callID DESC LIMIT 1000");
+		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ".$whereenginners." ORDER BY callID DESC LIMIT 1000;");
 		if (mysqli_num_rows($result) == 0) { echo "<p>All calls Closed</p>";};
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>
 		<td>#<?=$calls['callid'];?></td>
 		<td>
-		
-		<? if ($calls['status'] ==='2') { 
+
+		<? if ($calls['status'] ==='2') {
 			echo "<span class='closed'>Closed</span>";
-			} else { 
+			} else {
 			echo date("d/m/y", strtotime($calls['opened']));
 			};
 		?></td>
@@ -30,8 +36,8 @@
 			</form>
 		</td>
 		<td><?=strstr($calls['engineerName']," ", true);?></td>
-		
-		
+
+
 		</tr>
 	<? } ?>
 	</tbody>
@@ -59,5 +65,5 @@
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
     </script>

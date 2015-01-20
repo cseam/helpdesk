@@ -2,6 +2,11 @@
 <?php
 	// load functions
 	include_once '../includes/functions.php';
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+		} else {
+			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
+	};
 
 ?>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['toggle'] == TRUE) { ?>
@@ -9,30 +14,30 @@
 <?
 	// remove all status for enginner just submitted
 	$sqlstr = "DELETE FROM engineers_status WHERE id = " . $_POST['id'] . ";";
-	$result = mysqli_query($db, $sqlstr);	
+	$result = mysqli_query($db, $sqlstr);
 
-	// get toggle status 
+	// get toggle status
 	$whichtoggle = "cmn-toggle-" . $_POST['id'];
 	if ($_POST[$whichtoggle] == 'on') {
 		$togglevalue = 1;
 	} else {
 		$togglevalue = 0;
 	}
-	// update status with changes from form 
+	// update status with changes from form
 	$sqlstr = "INSERT INTO engineers_status (id, status) VALUES ('". $_POST['id'] ."','". $togglevalue ."');";
 	$result = mysqli_query($db, $sqlstr);
 	// update timestamp with changes
 	$sqlstr = "INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES ('".$_POST['id']."','".$togglevalue."','".date("c")."');";
 	$result = mysqli_query($db, $sqlstr);
-	
-	
+
+
 	 } ?>
 
 
 <?php
 	// get engineers and current status
-	$sqlstr = "SELECT * FROM engineers LEFT JOIN engineers_status ON engineers_status.id=engineers.idengineers;";
-	$result = mysqli_query($db, $sqlstr);	
+	$sqlstr = "SELECT * FROM engineers LEFT JOIN engineers_status ON engineers_status.id=engineers.idengineers ".$whereenginners.";";
+	$result = mysqli_query($db, $sqlstr);
 ?>
 <table>
 <tr>
@@ -73,9 +78,9 @@
 	}
 ?>
 </table>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 	<script src="javascript/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript">  
+	<script type="text/javascript">
     $('.toggleform').change(function(e) {
     	$.ajax(
 			{
@@ -93,6 +98,6 @@
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
     </script>
 

@@ -5,18 +5,18 @@
 	// load functions
 	include_once('includes/functions.php');
 	include_once('includes/reportfunctions.php');
-	// check authentication 
+	// check authentication
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>
 	<head>
 		<title><?=$codename;?> - Managers View</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="robots" content="nofollow" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 		<script src="javascript/jquery.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -24,7 +24,7 @@
 	<div id="branding">
 		<?php include 'includes/nav.php'; ?>
 	</div>
-	
+
 	<div id="leftpage">
 	<div id="stats">
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -32,26 +32,30 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-      
-      
-      
+
+
+
       var dataTable = new google.visualization.DataTable();
       dataTable.addColumn('string', 'Calls');
       dataTable.addColumn('number', 'Number');
       dataTable.addColumn({type: 'string', role: 'tooltip'});
       // A column for custom tooltip content
       dataTable.addRows([
-    <?php 
-    	$helpdeskid = $_SESSION['engineerHelpdesk'];
-		$sql ="SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk = ".$helpdeskid." GROUP BY engineerName ORDER BY Last7 DESC";
+    <?php
+		 if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+		} else {
+			$whereenginners = 'WHERE engineers.helpdesk='.$_SESSION['engineerHelpdesk'];
+		};
+		$sql ="SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers " . $whereenginners . " GROUP BY engineerName ORDER BY Last7 DESC;";
 		$result = mysqli_query($db, $sql);
 	while($loop = mysqli_fetch_array($result)) {
-	echo "['" . $loop ['engineerName'] . "', " . $loop['Last7'] . ", 'Closed ". $loop['Last7'] ." calls in last 7 days',],";		
-	}		
+	echo "['" . $loop ['engineerName'] . "', " . $loop['Last7'] . ", 'Closed ". $loop['Last7'] ." calls in last 7 days',],";
+	}
 	?>
-    
+
      ]);
-      
+
         var options = {
           title: '',
           colors: ['#CCCCCC','#577d6a',],
@@ -62,7 +66,7 @@
         var chart = new google.visualization.BarChart(document.getElementById('piechart'));
         chart.draw(dataTable, options);
       }
-      
+
       google.setOnLoadCallback(drawChart2);
       function drawChart2() {
         var data = google.visualization.arrayToDataTable([
@@ -89,22 +93,22 @@
       	<div id="piechart" style="width: 40%; float: left;"></div>
       	<div id="linechart" style="width: 60%; float: left;"></div>
 		<?php
-		 
+
 			// minutes in array
 			$call_time =  array(2 , 10, 150, 10, 66, 89);
-			$average_call_time = array_sum($call_time) / count($call_time) * 60; 
+			$average_call_time = array_sum($call_time) / count($call_time) * 60;
 			$d = ($average_call_time/(60*60*24))%365;
 			$h = ($average_call_time/(60*60))%24;
 			$m = ($average_call_time/60)%60;
 			//echo "<p>Average call duration " . $d ." days, ".$h." hours, ".$m." minutes.</p>";
 		?>
-		
-		
-		
+
+
+
 	</div>
 	<div id="calllist">
 		<div id="ajaxforms">
-			
+
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<button type="submit" value="View" name="btn" id="btn" class="reportname">View Open Calls</button>
 		<input type="hidden" id="report" name="report" value="0" />
@@ -129,7 +133,7 @@
 		<button type="submit" value="View" name="btn" id="btn" class="reportname">Engineer Work Rate</button>
 		<input type="hidden" id="report" name="report" value="4" />
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-workrate@2x.png" width="24" height="25" class="icon" alt="Engineer Work Rate" />
-		</form>	
+		</form>
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
 		<button type="submit" value="View" name="btn" id="btn" class="reportname">User Feedback</button>
 		<input type="hidden" id="report" name="report" value="5" />
@@ -180,7 +184,7 @@
 		<input type="hidden" id="report" name="report" value="14" />
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-null@2x.png" width="24" height="25" class="icon" alt="Null" />
 		</form>
-				
+
 		</div>
 	</div>
 	</div>
@@ -214,7 +218,7 @@
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
     </script>
 	</body>
 </html>

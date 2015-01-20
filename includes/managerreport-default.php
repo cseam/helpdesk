@@ -8,9 +8,14 @@
 <div id="ajaxforms">
 	<table>
 	<tbody>
-	<?php 
+	<?php
+		if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+		} else {
+			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
+		};
 		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE status='1' ORDER BY callID");
+		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ".$whereenginners." AND status='1' ORDER BY callID;");
 		if (mysqli_num_rows($result) == 0) { echo "<p>All calls Closed</p>";};
 		while($calls = mysqli_fetch_array($result))  {
 		?>
@@ -32,20 +37,14 @@
 		</td>
 		<td>
 			<?=strstr($calls['engineerName']," ", true);?>
-			<?php
-				// $string = $calls['engineerName'];
-				// $pieces = explode(' ', $string);
-				// $last_word = array_pop($pieces);
-				// echo substr($last_word, 0, 1);
-			?>
 		</td>
 		<td>
-			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">			
+			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">
 			<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
 			<input name="submit" value="" type="image" src="/images/ICONS-forward@2x.png" width="24" height="25" class="icon" alt="assign engineer" />
 			</form>
 		</td>
-		<td>	
+		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reassign">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
 				<input name="submit" value="" type="image" src="/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer" />
@@ -78,7 +77,7 @@
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
 
 	$('.reassign').submit(function(e) {
     	$.ajax(
@@ -101,8 +100,8 @@
 			});
        e.preventDefault();
        return false;
-    }); 
-    
+    });
+
   	$('.forward').submit(function(e) {
     	$.ajax(
 			{
@@ -124,5 +123,5 @@
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
     </script>

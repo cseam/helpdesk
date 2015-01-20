@@ -4,13 +4,19 @@
 	include_once '../includes/functions.php';
 ?>
 	<?php
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+		} else {
+			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
+	};
+
 	// select calls for ID
 	// run select query
 	$sqloldeststr = "SELECT * FROM calls ";
 	$sqloldeststr .= "INNER JOIN engineers ON calls.assigned=engineers.idengineers ";
 	$sqloldeststr .= "INNER JOIN status ON calls.status=status.id ";
 	$sqloldeststr .= "INNER JOIN location ON calls.location=location.id ";
-	$sqloldeststr .= "WHERE status='1' ";
+	$sqloldeststr .= $whereenginners . " AND status='1' ";
 	$sqloldeststr .= "ORDER BY opened ";
 	$sqloldeststr .= "LIMIT 1";
 	$oldestresult = mysqli_query($db, $sqloldeststr);
@@ -22,9 +28,9 @@
 	<input type="hidden" id="id" name="id" value="<?=$call['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$call['details'];?>" />
 	<h3>Call #<?=$call['callid'];?><a href="viewcall.php?id=<?=$call['callid'];?>" class="calllink">full details</a></h3>
-	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>	
+	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>
 	<p class="callheader">for <?=$call['room'];?> - <?=$call['locationName'];?></p>
-	<p class="callheader">Open for 
+	<p class="callheader">Open for
 					<?php
 						$date1 = strtotime($calls['opened']);
 						if ($calls['status'] ==='2') { $date2 = strtotime($calls['closed']); } else { $date2 = time(); };

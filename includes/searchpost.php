@@ -1,22 +1,29 @@
 <?php
 	session_start();
 	include_once 'functions.php';
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+		} else {
+			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
+	};
 
-	$sqlstr = "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ";
-	$sqlstr .= "WHERE details LIKE '%" . check_input($_POST['term']) . "%';";
-	$result = mysqli_query($db, $sqlstr);	
+
+
+	$sqlstr = "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id " . $whereenginners;
+	$sqlstr .= " AND details LIKE '%" . check_input($_POST['term']) . "%';";
+	$result = mysqli_query($db, $sqlstr);
 ?>
 <table>
-	<tbody>	
+	<tbody>
 <?php
 	while($calls = mysqli_fetch_array($result))  {
 ?>
 	<tr>
 		<td>#<?=$calls['callid'];?></td>
-		<td>		
-		<? if ($calls['status'] ==='2') { 
+		<td>
+		<? if ($calls['status'] ==='2') {
 			echo "<span class='closed'>Closed</span>";
-			} else { 
+			} else {
 			echo date("d/m/y", strtotime($calls['opened']));
 			};
 		?></td>
@@ -39,9 +46,9 @@
 		echo "<p>&mdash; " . mysqli_num_rows($result) . " result returned.</p>";
 	} ;
 ?>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 	<script src="javascript/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript">    
+	<script type="text/javascript">
      $('.searchresultsview').submit(function(e) {
     	$.ajax(
 			{
@@ -63,5 +70,5 @@
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
     </script>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 	include_once('../includes/functions.php');
 ?>
 <table>
@@ -8,7 +8,15 @@
 		<th>Total Feedback Number</th>
 	</tr>
 <?
-	$sqlstr = "SELECT engineerName, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT FROM calls INNER JOIN feedback ON feedback.callid=calls.callid INNER JOIN engineers ON engineers.idengineers=calls.closeengineerid GROUP BY calls.closeengineerid;";
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+		} else {
+			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
+	};
+
+
+
+	$sqlstr = "SELECT engineerName, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT FROM calls INNER JOIN feedback ON feedback.callid=calls.callid INNER JOIN engineers ON engineers.idengineers=calls.closeengineerid ".$whereenginners." GROUP BY calls.closeengineerid;";
 	$result = mysqli_query($db, $sqlstr);
 		while($loop = mysqli_fetch_array($result)) { ?>
 		<tr>
@@ -32,7 +40,7 @@
 	<th>Satisfaction</th>
 	<th>Customer Feedback</th>
 </tr>
-<?	
+<?
 	$sql ="SELECT *, sum(case when opened >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS New FROM feedback  GROUP BY callid ORDER BY id DESC";
 	$result = mysqli_query($db, $sql);
 		while($loop = mysqli_fetch_array($result)) { ?>
