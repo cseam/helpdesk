@@ -17,13 +17,15 @@
 	<?php
 		while($calls = mysqli_fetch_array($result))  {
 		?>
-		<tr>
+		<tr class="urgent">
 		<td>#<?=$calls['callid'];?></td>
-		<td><?=date("d/m/y h:s", strtotime($calls['opened']));?></td>
-		<td class="view_td">
-			<form method="post">
+		<td><?=date("d/m/y", strtotime($calls['opened']));?><br />
+			<?=date("H:i", strtotime($calls['opened']));?></td>
+		<td class="view_td"><?=substr(strip_tags($calls['details']), 0, 120);?>...</td>
+		<td>
+			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="submit" type="submit"><?=substr(strip_tags($calls['details']), 0, 145);?>...</button>
+				<input type="image" name="submit" value="submit" src="/images/ICONS-urgent@2x.png" width="24" height="25" class="icon" alt="View Call" />
 			</form>
 		</td>
 		</tr>
