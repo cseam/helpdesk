@@ -4,19 +4,19 @@
 	<?php
 	// load functions
 	include_once 'includes/functions.php';
-	// check authentication 
+	// check authentication
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>
 	<head>
 		<title><?=$codename;?> - Update Calls</title>
 		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="robots" content="nofollow" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" type="text/css" href="javascript/sweet/sweet-alert.css">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 		<script src="javascript/jquery.js" type="text/javascript"></script>
 		<script src="javascript/sweet/sweet-alert.min.js"></script>
 	</head>
@@ -25,7 +25,7 @@
 	<div id="branding">
 		<?php include 'includes/nav.php'; ?>
 	</div>
-	
+
 	<div id="leftpage">
 	<div id="stats">
 		<h3>Information</h3>
@@ -41,10 +41,10 @@
 		<div id="addcall">
 			<div id="ajax">
 
-<?php if ($_SERVER['REQUEST_METHOD']== "POST") { 
+<?php if ($_SERVER['REQUEST_METHOD']== "POST") {
 
 if (isset($_POST['forward'])) {
-	echo "<h2>Call forwarded</h2>"; 
+	echo "<h2>Call forwarded</h2>";
 	echo "<p>Call #" . $_POST['id'] . " has been forwarded, and call details have been updated.</p>";
 	echo "<p><a href='/'>Home</a></p>";
 	// Update Message
@@ -59,7 +59,7 @@ if (isset($_POST['forward'])) {
 	$sqlstr .= "WHERE callid='" . mysqli_real_escape_string($db, $_POST['id']) . "'";
 	// Run Query
 	mysqli_query($db, $sqlstr);
-	// Update engineers assignment 
+	// Update engineers assignment
 	mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer(check_input($_POST['fwdhelpdesk'])) ."' WHERE id='".$_POST['fwdhelpdesk']."'");
 }
 
@@ -78,15 +78,15 @@ if (isset($_POST['reassign'])) {
 	$sqlstr .= "WHERE callid='" . mysqli_real_escape_string($db, $_POST['id']) . "'";
 	// Run Query
 	mysqli_query($db, $sqlstr);
-	
+
 }
 
 if (isset($_POST['close'])) {
 		// Check for image
-		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {  	
+		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
 			//get the uploaded file information
 			$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
-			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']); 
+			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']);
 			//move the temp. uploaded file to uploads folder and salt for duplicates
 			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
 			$tmp_path = $_FILES["attachment"]["tmp_name"];
@@ -99,24 +99,24 @@ if (isset($_POST['close'])) {
        $sqlstr .= "status=2, ";
        $sqlstr .= "lastupdate='" . date("c") . "', ";
        $sqlstr .= "closeengineerid='".$_SESSION['engineerId']."',";
-       $sqlstr .= "details='" . mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>"  . $upload_img_code . mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . " </h3></div>'";
+       $sqlstr .= "details='" . mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>"  . $upload_img_code . mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:i") . " </h3></div>'";
        $sqlstr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
        // Run query
        mysqli_query($db, $sqlstr);
        // Email stakeholder
        $contact = mysqli_query($db, "SELECT email FROM calls WHERE callid='".$_POST['id']."'");
        $row = $contact->fetch_object();
-       $to = $row->email;		
+       $to = $row->email;
        $message = "<p>Helpdesk (#" . $_POST['id'] .") has been closed</p>";
        $message .= "<p>To view the details of this call please <a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>visit helpdesk</a></p>";
        $message .= "<p>this is an automated message please do not reply, to update your call please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
        $message .= "<p>you can provide confidential feedback to the engineers line manager, let us know how well your call was dealt with <a href='". $helpdeskloc ."/feedback.php?id=" . $_POST['id'] ."'>Provide Feedback</a></p>";
        $msgtitle = "Helpdesk Call #" . $_POST['id'] . " Closed";
        $headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
-       $headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n"; 
+       $headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
        $headers .= 'MIME-Version: 1.0' . "\r\n";
        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-       $headers .= 'X-Mailer: PHP/' . phpversion();	
+       $headers .= 'X-Mailer: PHP/' . phpversion();
        // In case any of our lines are larger than 70 characters, we should use wordwrap()
        $message = wordwrap($message, 70, "\r\n");
        // Send
@@ -127,10 +127,10 @@ if (isset($_POST['close'])) {
     }
 if (isset($_POST['update'])) {
 		// Check for image
-		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {  	
+		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
 			//get the uploaded file information
 			$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
-			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']); 
+			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']);
 			//move the temp. uploaded file to uploads folder and salt for duplicates
 			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
 			$tmp_path = $_FILES["attachment"]["tmp_name"];
@@ -142,24 +142,24 @@ if (isset($_POST['update'])) {
 		$sqlupdatestr .= "SET status=1, ";
 		$sqlupdatestr .= "lastupdate='" . date("c") . "', ";
 		$sqlupdatestr .= "closed=NULL, ";
-		$sqlupdatestr .= "details='".  mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>" . $upload_img_code .  mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:s") . "</h3></div>'";
+		$sqlupdatestr .= "details='".  mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>" . $upload_img_code .  mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:i") . "</h3></div>'";
 		$sqlupdatestr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
 		// Run query
 		mysqli_query($db, $sqlupdatestr);
 		// Email stakeholder
 		$contact = mysqli_query($db, "SELECT email FROM calls WHERE callid='".$_POST['id']."'");
 		$row = $contact->fetch_object();
-		$to = $row->email;		
+		$to = $row->email;
 		$message = "<p>Your helpdesk (#" . $_POST['id'] .") has been updated</p>";
-		$message .= "<p>To view the details of this update please visit helpdesk</p>"; 
+		$message .= "<p>To view the details of this update please visit helpdesk</p>";
 		$message .= "<p><a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>View Call</a></p>";
 		$message .= "<p>this is an automated message please do not reply, to update your call please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
 		$msgtitle = "Helpdesk Call #" . $_POST['id'] . " Update";
 		$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
-		$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n"; 
+		$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
 		$headers .= 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-		$headers .= 'X-Mailer: PHP/' . phpversion();	
+		$headers .= 'X-Mailer: PHP/' . phpversion();
 		// In case any of our lines are larger than 70 characters, we should use wordwrap()
 		$message = wordwrap($message, 70, "\r\n");
 		// Send
@@ -167,7 +167,7 @@ if (isset($_POST['update'])) {
 		//display message
 		echo "<h2>Call updated</h2>";
         echo "<p>Call #" . $_POST['id'] . " has been updated, stake holder has been emailed to update them.</p>";
-        echo "<p><a href='/'>Home</a></p>";       
+        echo "<p><a href='/'>Home</a></p>";
 }
 
 } ?>
@@ -177,6 +177,6 @@ if (isset($_POST['update'])) {
 	</div>
 <script>
 document.addEventListener('DOMContentLoaded',function(){swal("Updated", "Helpdesk Call has been updated successfully.", "success")});
-</script>	
+</script>
 	</body>
 </html>
