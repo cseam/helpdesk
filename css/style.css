@@ -168,17 +168,18 @@ input, textarea, button {
 	color: #777777;
 	border: 1px solid transparent;
 	padding: 0.5rem 1rem;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 	font-family: 'verlag', Arial;
 	resize: none;
 	vertical-align: bottom;
+	font-size: 0.8rem;
 }
 select {
 	background: rgba(255,255,255,0.45) url('/images/ICONS-06.png') no-repeat 99% 50%;
 	color: #aaa;
 	border: 1px solid transparent;
 	padding: 0.5rem 1.0rem;
-	text-transform: uppercase !important;
+	/*text-transform: uppercase !important;*/
 	font-family: 'verlag', Arial;
 	width: 60%;
 	appearance: none;
@@ -217,9 +218,11 @@ label {
 }
 fieldset input, fieldset textarea, fieldset select  {
 	width: 60%;
+	margin: 3px 0;
 	box-sizing:content-box;
 	-moz-box-sizing:content-box;
 	-webkit-box-sizing:content-box;
+	font-size: 0.8rem;
 }
 input[type=text]:focus, textarea:focus, select:focus {
   outline: none;
@@ -227,6 +230,7 @@ input[type=text]:focus, textarea:focus, select:focus {
   box-sizing:content-box;
   -moz-box-sizing:content-box;
   -webkit-box-sizing:content-box;
+  font-size: 0.8rem;
 }
 table {
 	width: 100%;
