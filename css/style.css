@@ -467,13 +467,32 @@ select.error {
 	background: #ffe0e0 url('/images/ICONS-06.png') no-repeat 99% 50%;
 	background-size: 20px;
 }
-
-
 label.error {
 	width: 95%;
 	font-size: 0.7rem;
 	text-align: right;
 }
+#login {
+	margin: 1rem;
+}
+#login input {
+	background: rgba(0, 0, 0, 0.08);
+}
+#login #btnLogin {
+	width: 65px;
+	border: 1px solid #aaa;
+	text-transform: capitalize;
+	margin-left: 30.35%;
+	margin-top: 10px;
+	background: rgba(233, 233, 233, 0.21);
+}
+
+#formError {
+	background: rgba(255, 0, 0, 0.29);
+	padding: 1.5rem 1rem;
+	margin: 1rem 0rem;
+}
+
 /* toggle switch css */
 .cmn-toggle {
   position: absolute;
@@ -549,6 +568,8 @@ input.cmn-toggle-round:checked + label:before {
 input.cmn-toggle-round:checked + label:after {
   margin-left: 33px;
 }
+
+
 
 /*** Responsive Stuff ***/
 /*** Tablet ***/

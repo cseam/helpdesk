@@ -10,7 +10,8 @@ date_default_timezone_set('Europe/London');
 function prompt_auth($data) {
 	if (empty($_SESSION['sAMAccountName'])) {
 		// User not logged in forward to login page
-			die("<script>location.href = '/auth/whoami.php?return=".$data."'</script>");
+			//die("<script>location.href = '/auth/whoami.php?return=".$data."'</script>");
+			die("<script>location.href = '/login/login.php?return=".$data."'</script>");
 		};
 }
 
