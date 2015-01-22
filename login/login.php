@@ -30,6 +30,9 @@
 						if ($ldapbind) {
 							//bind successful authenticate session details for user
 							$result = mysqli_query($db, "SELECT * FROM engineers WHERE sAMAccountName='". $_POST['username'] ."'");
+								if(mysqli_num_rows($result) === 0) {
+									$_SESSION['sAMAccountName'] = $_POST['username'];
+								}
 								while($engineers = mysqli_fetch_array($result))  {
 									$_SESSION['sAMAccountName'] = $_POST['username'];
 									$_SESSION['engineerLevel'] = $engineers['engineerLevel'];
