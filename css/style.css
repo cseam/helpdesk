@@ -176,7 +176,7 @@ input, textarea, button {
 }
 select {
 	background: rgba(255,255,255,0.45) url('/images/ICONS-06.png') no-repeat 99% 50%;
-	color: #aaa;
+	color: #777777;
 	border: 1px solid transparent;
 	padding: 0.5rem 1.0rem;
 	/*text-transform: uppercase !important;*/
