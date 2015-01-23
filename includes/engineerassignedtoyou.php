@@ -7,7 +7,9 @@
 	<?php
 		//run select query
 		$result = mysqli_query($db, "SELECT * FROM calls WHERE assigned='". $_SESSION['engineerId']  ."' AND status='1'");
-		if (mysqli_num_rows($result) == 0) { echo "<p>Woop! you have closed all your calls!</p><p>Why not boost your stats and help someone else out in the department with the calls on the right.</p>";};
+		if (mysqli_num_rows($result) == 0) {
+			echo "<p>0 assigned calls</p>";
+			};
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>

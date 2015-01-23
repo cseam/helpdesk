@@ -2,13 +2,13 @@
 	include_once 'functions.php';
 ?>
 <div id="ajaxforms">
-<p>Showing not only your calls, all open helpdesk calls for
+<p class="note">Showing all open calls for
 	<?
 	if ($_SESSION['engineerHelpdesk'] <= '3') { ?>
 	<?=helpdesk_friendlyname(1)?>, <?=helpdesk_friendlyname(2)?>, <?=helpdesk_friendlyname(3)?>.
 	<? } else { ?>
 	<?=helpdesk_friendlyname($_SESSION['engineerHelpdesk'])?>
-	<? } ?> included.</p>
+	<? } ?></p>
 	<table>
 	<tbody>
 	<?php
@@ -20,7 +20,9 @@
 				$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];
 			};
 		$result = mysqli_query($db, "SELECT * FROM calls " .$whereenginners. " AND status='1';");
-		if (mysqli_num_rows($result) == 0) { echo "<p>Helpdesk clear!</p>";};
+		if (mysqli_num_rows($result) == 0) {
+			echo "<p>0 open calls.</p>";
+			};
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>
