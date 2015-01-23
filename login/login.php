@@ -34,10 +34,15 @@
 									$_SESSION['sAMAccountName'] = $_POST['username'];
 								}
 								while($engineers = mysqli_fetch_array($result))  {
+									// Update Session Details
 									$_SESSION['sAMAccountName'] = $_POST['username'];
 									$_SESSION['engineerLevel'] = $engineers['engineerLevel'];
 									$_SESSION['engineerId'] = $engineers['idengineers'];
 									$_SESSION['engineerHelpdesk'] = $engineers['helpdesk'];
+										// Update db enginner status
+										mysqli_query($db, "UPDATE engineers_status SET status=1 WHERE id=" . $engineers['idengineers'] . ";");
+										// Update db enginner punchcard
+										mysqli_query($db, "INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES ('" .$engineers['idengineers']."','1','".date("c")."');");
 									}
 									die("<script>location.href = '".$_GET['return']."'</script>");
 						} else {

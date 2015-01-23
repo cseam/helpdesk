@@ -70,7 +70,7 @@
 				?>
 		</td>
 		<td>
-			<?=date("d/m - h:sa", strtotime($test['stamp']));?>
+			<?=date("d/m - h:ia", strtotime($test['stamp']));?>
 		</td>
 		<? } ?>
 </tr>
