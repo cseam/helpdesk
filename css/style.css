@@ -1,11 +1,11 @@
 /* Fonts */
 @font-face {
 font-family: 'verlag';
-src: url('/fonts/verlag-light-webfont.eot'); /* IE9 Compatibility Modes */
-src: url('/fonts/verlag-light-webfont.eot?#iefix') format('embedded-ptype'), /* IE6-IE8 */
-url('/fonts/verlag-light-webfont.woff') format('woff'), /* Modern Browsers */
-url('/fonts/verlag-light-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-url('/fonts/verlag-light-webfont.svg') format('svg'); /* Legacy iOS */
+src: url('/fonts/verlag-book-webfont.eot'); /* IE9 Compatibility Modes */
+src: url('/fonts/verlag-book-webfont.eot?#iefix') format('embedded-ptype'), /* IE6-IE8 */
+url('/fonts/verlag-book-webfont.woff') format('woff'), /* Modern Browsers */
+url('/fonts/verlag-book-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+url('/fonts/verlag-book-webfont.svg') format('svg'); /* Legacy iOS */
 }
 /* root */
 html {
