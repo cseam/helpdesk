@@ -276,6 +276,13 @@ table th {
 	margin: 150px 35%;
 	width: 150px !important;
 }
+.note {
+	font-size: 0.8rem !important;
+	font-style: italic;
+	padding-left: 1rem;
+	border-left: 2px solid #aaa;
+	line-height: 1.1rem !important;
+};
 
 #calldetails {
 	background: transparent;
