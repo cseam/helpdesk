@@ -165,8 +165,5 @@ if (isset($_POST['update'])) {
 		</div>
 	</div>
 	</div>
-<script>
-document.addEventListener('DOMContentLoaded',function(){swal("Updated", "Helpdesk Call has been updated successfully.", "success")});
-</script>
 	</body>
 </html>
