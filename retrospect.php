@@ -8,15 +8,7 @@
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>
 	<head>
-		<title><?=$codename;?> - Add Retrospect Call</title>
-		<link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="robots" content="nofollow" />
-		<link rel="stylesheet" type="text/css" href="css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
-		<script src="javascript/jquery.js" type="text/javascript"></script>
+		<?php include_once 'includes/header.php'; ?>
 		<script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
 	</head>
 	<body>
