@@ -1,4 +1,4 @@
-helpdesk v 0.1
+helpdesk v 0.2
 ========
 
 Internal helpdesk, a ticket based system for employees to report various issues on site, to specified departments for action.
