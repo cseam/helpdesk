@@ -499,6 +499,30 @@ label.error {
 	padding: 1.5rem 1rem;
 	margin: 1rem 0rem;
 }
+/* digital sign */
+#digitalsign {
+	font-size: 20px;
+}
+#digitalsign #leftpage {
+	width: 48%;
+}
+
+
+#digitalsign-stats {
+	text-align: center;
+}
+
+.xbig  {
+	font-size: 100px;
+	line-height: auto;
+	height: 100px;
+	min-height: auto;
+}
+#digitalsign-stats tfoot td {
+	font-size: 0.7rem;
+}
+
+/* end digital sign */
 
 /* toggle switch css */
 .cmn-toggle {
@@ -651,4 +675,3 @@ input.cmn-toggle-round:checked + label:after {
 		display: none;
 	}
 }
-
