@@ -7,5 +7,6 @@
 <meta name="robots" content="nofollow" />
 <link rel="stylesheet" type="text/css" href="/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/print.css" media="print"/>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 <script src="/javascript/global_jquery.js" type="text/javascript"></script>
