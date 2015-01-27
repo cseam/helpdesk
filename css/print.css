@@ -1,0 +1,9 @@
+#leftpage, #branding, .calllink {
+	display: none;
+}
+#rightpage {
+	width: 100%;
+}
+#calldetails, #rightpage, #call, #ajax {
+	background: transparent !important;
+}
