@@ -1,6 +1,5 @@
 <?php
-	include_once('../includes/functions.php');
-
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
 			$whereenginners = 'WHERE engineers.helpdesk <= 3';
 		} else {

@@ -1,5 +1,5 @@
 <?php session_start();
-	include_once 'functions.php';
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <div id="ajaxforms">
 <p class="note">Showing all open calls for

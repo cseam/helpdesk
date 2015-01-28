@@ -1,7 +1,7 @@
 <?php session_start();?>
 <?php
 	// load functions
-	include_once '../includes/functions.php';
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="search" class="searchform">
 <fieldset>

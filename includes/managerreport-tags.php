@@ -1,7 +1,7 @@
 <?php session_start();?>
 <?php
 	// load functions
-	include_once '../includes/functions.php';
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['tagname'] == TRUE) { ?>
 <h2>Tag Control</h2>

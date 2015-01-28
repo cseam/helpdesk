@@ -3,8 +3,7 @@
 ?>
 <table>
 <tr>
-	<th>Emerging Issues</th>
-	<th>Calls Logged</th>
+	<th colspan='2'>Emerging Issues</th>
 </tr>
 <?
 	$issuescount = 0;

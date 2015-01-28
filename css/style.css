@@ -506,24 +506,20 @@ label.error {
 #digitalsign #leftpage {
 	width: 48%;
 }
-
-
 #digitalsign-stats {
 	text-align: center;
 }
-
 .xbig  {
 	font-size: 150px;
 	line-height: auto;
 	height: 150px;
 	min-height: auto;
-	color:#577d6a;
+	color:#577d6a !important;
 	font-weight: 400;
 }
 #digitalsign-stats tfoot td {
-	font-size: 0.6rem;
+	font-size: 0.8rem;
 }
-
 #issues, #topengineers {
 	margin: 1rem 0;
 }

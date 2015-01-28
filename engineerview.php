@@ -9,6 +9,7 @@
 	?>
 	<head>
 		<?php include_once 'includes/header.php'; ?>
+		<meta http-equiv="refresh" content="600" />
 	</head>
 	<body>
 	<div class="section">

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include_once 'functions.php';
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 
 			 		$morefields = mysqli_query($db, "SELECT * FROM call_additional_fields WHERE typeid = ". $_GET['id'] .";");
 			 		while($loop = mysqli_fetch_array($morefields)) { ?>
