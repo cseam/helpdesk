@@ -1,9 +1,9 @@
-<h2>Open</h2>
 <?php session_start();?>
 <?php
 	// load functions
 	include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 ?>
+<h3>Open Calls</h3>
 <div id="ajaxforms">
 	<table>
 	<thead>
@@ -17,7 +17,7 @@
 	<?php
 		//run select query
 		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE engineers.helpdesk <= 3 AND status='1' ORDER BY callID;");
-		if (mysqli_num_rows($result) == 0) { echo "<p>0 Open Calls</p>";};
+		if (mysqli_num_rows($result) == 0) { echo "<tr><td colspan='3'>0 Open Calls</td></tr>";};
 		while($calls = mysqli_fetch_array($result))  {
 		?>
 		<tr>

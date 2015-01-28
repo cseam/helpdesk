@@ -501,7 +501,7 @@ label.error {
 }
 /* digital sign */
 #digitalsign {
-	font-size: 20px;
+	font-size: 26px;
 }
 #digitalsign #leftpage {
 	width: 48%;
@@ -513,15 +513,20 @@ label.error {
 }
 
 .xbig  {
-	font-size: 100px;
+	font-size: 150px;
 	line-height: auto;
-	height: 100px;
+	height: 150px;
 	min-height: auto;
+	color:#577d6a;
+	font-weight: 400;
 }
 #digitalsign-stats tfoot td {
-	font-size: 0.7rem;
+	font-size: 0.6rem;
 }
 
+#issues, #topengineers {
+	margin: 1rem 0;
+}
 /* end digital sign */
 
 /* toggle switch css */

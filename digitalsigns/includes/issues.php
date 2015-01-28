@@ -1,10 +1,9 @@
-<h3>Emerging Issues</h3>
 <?php
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <table>
 <tr>
-	<th>Location / Room</th>
+	<th>Emerging Issues</th>
 	<th>Calls Logged</th>
 </tr>
 <?
