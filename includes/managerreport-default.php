@@ -32,7 +32,7 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="submit" type="submit" class="calllistbutton"><?=substr(strip_tags($calls['details']), 0, 65);?>...</button>
+				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($calls['details']), 0, 65);?>...</button>
 			</form>
 		</td>
 		<td>
