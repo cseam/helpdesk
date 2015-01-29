@@ -1,4 +1,6 @@
 <?php session_start();?>
+<? //check auth level
+	if ($_SESSION['engineerLevel'] !== '2') { die("<script>location.href = '/index.php'</script>"); };?>
 <!DOCTYPE html>
 <html lang="en">
 	<?php
