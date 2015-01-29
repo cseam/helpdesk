@@ -19,7 +19,7 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<input type="image" name="submit" value="submit" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Call" />
+				<input type="image" name="submit" value="submit" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Call" title="View Call" />
 			</form>
 		</td>
 
