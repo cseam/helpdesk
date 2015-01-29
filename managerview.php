@@ -175,8 +175,13 @@
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-invoice@2x.png" width="24" height="25" class="icon" alt="Null" />
 		</form>
 		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
-		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">IT Reception Screen</button>
 		<input type="hidden" id="report" name="report" value="14" />
+		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-digitalscreen@2x.png" width="24" height="25" class="icon" alt="Null" />
+		</form>
+		<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reportlist">
+		<button type="submit" value="View" name="btn" id="btn" class="reportname">null</button>
+		<input type="hidden" id="report" name="report" value="15" />
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-null@2x.png" width="24" height="25" class="icon" alt="Null" />
 		</form>
 
