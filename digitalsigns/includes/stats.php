@@ -34,7 +34,7 @@
 					<td>Open Calls</td>
 					<td>Closed Today</td>
 					<td>Closed This Week</td>
-					<td>Average Feedback (out of 5)</td>
+					<td>Average Feedback</td>
 				</tr>
 			</tfoot>
 		</table>

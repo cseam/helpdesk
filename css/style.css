@@ -519,9 +519,25 @@ label.error {
 }
 #digitalsign-stats tfoot td {
 	font-size: 0.8rem;
+	text-transform: uppercase;
+}
+#digitalsign-stats td {
+	border-right: 1px solid #aaa;
+	border-top: 0;
+	border-bottom: 0;
+}
+#digitalsign th {
+	color:#577d6a !important;
+	font-size: 0.6rem;
+}
+#digitalsign-stats td:last-child {
+	border-right: 0;
 }
 #issues, #topengineers {
 	margin: 1rem 0;
+}
+.indent {
+	padding-left: 10px;
 }
 /* end digital sign */
 

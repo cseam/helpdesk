@@ -1,9 +1,9 @@
 <table>
 <tr>
-	<th>Top Engineer's</th>
-	<th>30 Days</th>
-	<th>7 Days</th>
-	<th>24 Hours</th>
+	<th>Top Engineers</th>
+	<th>Month</th>
+	<th>Week</th>
+	<th>Day</th>
 </tr>
 <?php
 

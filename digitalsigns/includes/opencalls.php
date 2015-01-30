@@ -3,14 +3,14 @@
 	// load functions
 	include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 ?>
-<h3>Open Calls</h3>
+<h3 class="indent">Oldest Open Calls</h3>
 <div id="ajaxforms">
 	<table>
 	<thead>
 		<tr>
-			<td>Age</td>
-			<td>Engineer</td>
-			<td>Details</td>
+			<th>Age</th>
+			<th>Assigned</th>
+			<th>Snapshot</th>
 		</tr>
 	</thead>		
 	<tbody>
