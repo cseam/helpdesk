@@ -17,3 +17,6 @@
   ga('create', 'UA-59019267-1', 'auto');
   ga('send', 'pageview');
 </script>
+<!-- Responsive chart js -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>

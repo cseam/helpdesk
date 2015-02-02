@@ -30,7 +30,7 @@
 		?>
 		</td>
 		<td>
-			<?=strstr($calls['engineerName']," ", true);?>
+			<?=$calls['engineerName'];?>
 		</td>
 		<td>
 			<?=substr(strip_tags($calls['details']), 0, 300);?>...

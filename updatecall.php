@@ -3,12 +3,12 @@
 <html lang="en">
 	<?php
 	// load functions
-	include_once 'includes/functions.php';
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');	
 	// check authentication
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>
 	<head>
-		<?php include_once 'includes/header.php'; ?>
+		<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'); ?>
 	</head>
 	<body>
 	<div class="section">
@@ -87,6 +87,7 @@ if (isset($_POST['close'])) {
        $sqlstr = "UPDATE calls ";
        $sqlstr .= "SET closed='" . date("c") . "', ";
        $sqlstr .= "status=2, ";
+       if ($_POST['callreason'] > 0) { $sqlstr .= "callreason=" . $_POST['callreason'] . ", "; };
        $sqlstr .= "lastupdate='" . date("c") . "', ";
        $sqlstr .= "closeengineerid='".$_SESSION['engineerId']."',";
        $sqlstr .= "details='" . mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>"  . $upload_img_code . mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:i") . " </h3></div>'";
@@ -112,7 +113,7 @@ if (isset($_POST['close'])) {
        // Send
        mail($to, $msgtitle, $message, $headers);
        echo "<h2>Updated & Closed</h2>";
-       echo "<p>Call #" . $_POST['id'] . " has been updated and closed, all stake holders have been emailed.</p>";
+       echo "<p>Call #" . $_POST['id'] . " has been updated and closed, email sent.</p>";
        echo "<p><a href='/'>Home</a></p>";
     }
 if (isset($_POST['update'])) {
@@ -132,6 +133,7 @@ if (isset($_POST['update'])) {
 		$sqlupdatestr .= "SET status=1, ";
 		$sqlupdatestr .= "lastupdate='" . date("c") . "', ";
 		$sqlupdatestr .= "closed=NULL, ";
+		$sqlupdatestr .= "callreason=NULL, ";
 		$sqlupdatestr .= "details='".  mysqli_real_escape_string($db,$_POST['details']) . "<div class=update>" . $upload_img_code .  mysqli_real_escape_string($db,$_POST['updatedetails']) . " <h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:i") . "</h3></div>'";
 		$sqlupdatestr .= "WHERE callid='" . mysqli_real_escape_string($db,$_POST['id']) . "'";
 		// Run query
@@ -156,7 +158,7 @@ if (isset($_POST['update'])) {
 		mail($to, $msgtitle, $message, $headers);
 		//display message
 		echo "<h2>Call updated</h2>";
-        echo "<p>Call #" . $_POST['id'] . " has been updated, stake holder has been emailed to update them.</p>";
+        echo "<p>Call #" . $_POST['id'] . " has been updated, email sent to update users.</p>";
         echo "<p><a href='/'>Home</a></p>";
 }
 
