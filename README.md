@@ -1,5 +1,4 @@
-Helpdesk
-========
+# Helpdesk
 
 Internal Helpdesk system to allow users to log (tickets) or issues that they have around campus.
 
@@ -8,3 +7,7 @@ Writen to replace old asp helpdesk from 2004, the original helpdesk had basic fu
 PHP/MySQL stack at pressent, but intention to move to NodeJS/Mongod in future builds.
 
 System must be fully maintained by individual departments, without intervention from IT for day to day operations.
+
+## Concept
+
+![alt tag](https://raw.github.com/atomicjam/helpdesk/master/images/concept%20artwork/helpdesk.jpg)
