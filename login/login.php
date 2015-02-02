@@ -7,6 +7,7 @@
 	// reset session details
 	$_SESSION['engineerLevel'] = 0;
 	$_SESSION['engineerId'] = null;
+	$_SESSION['superuser'] = null;
 	$_SESSION['engineerHelpdesk'] = null;
 	$_SESSION['sAMAccountName'] = null;
 
@@ -38,6 +39,7 @@
 									$_SESSION['sAMAccountName'] = $_POST['username'];
 									$_SESSION['engineerLevel'] = $engineers['engineerLevel'];
 									$_SESSION['engineerId'] = $engineers['idengineers'];
+									$_SESSION['superuser'] = $engineers['superuser'];
 									$_SESSION['engineerHelpdesk'] = $engineers['helpdesk'];
 										// Update db enginner status
 										mysqli_query($db, "UPDATE engineers_status SET status=1 WHERE id=" . $engineers['idengineers'] . ";");
