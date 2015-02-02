@@ -1,8 +1,10 @@
-helpdesk v 0.8.0
+Helpdesk
 ========
 
-Internal helpdesk to replace old asp helpdesk from 2004, system needs to take existing features and add a ticket based system for employees to report various issues on site, to specified departments for action.
+Internal Helpdesk system to allow users to log (tickets) or issues that they have around campus.
 
-PHP driven, but intention to move to NodeJS in future, responsive designed to be portable for enginneers and quick for users to log issues.
+Writen to replace old asp helpdesk from 2004, the original helpdesk had basic functionality with a simple form to log tickets and a group view of tickets for engineers, the new system needs to expand on this providing managers some reporting functions, and to include a modern responsive design with the ability to work on mobile devices and include recent branding changes.
 
-system to be managed and maintained by individual departments and IT to maintain codebase.
+PHP/MySQL stack at pressent, but intention to move to NodeJS/Mongod in future builds.
+
+System must be fully maintained by individual departments, without intervention from IT for day to day operations.
