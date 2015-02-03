@@ -1,13 +1,14 @@
-<title><?=$codename;?></title>
+<title><?php echo $codename;?></title>
 <link rel="shortcut icon" href="clcfavicon.ico" type="image/x-icon" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="nofollow" />
+<!-- stylesheets -->
 <link rel="stylesheet" type="text/css" href="/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"/>
+<!-- jQuery CDN -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
-<script src="/javascript/global_jquery.js" type="text/javascript"></script>
 <!-- Google Analytics -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

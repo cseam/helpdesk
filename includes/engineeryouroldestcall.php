@@ -15,7 +15,7 @@
 	while($call = mysqli_fetch_array($oldestresult))  {
 	?>
 	<div id="calldetails">
-	<form action="updatecall.php" method="post">
+	<form action="updatecall.php" method="post" enctype="multipart/form-data">
 	<input type="hidden" id="id" name="id" value="<?=$call['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$call['details'];?>" />
 	<h2>Oldest Call Details #<?=$call['callid'];?><a href="viewcall.php?id=<?=$call['callid'];?>" class="calllink"><img src="/images/ICONS-viewfulldetails@2x.png" alt="view full details" title="view full details" width="23" height="24" /></a></h2>
@@ -41,6 +41,53 @@
 	<? } ?>
 	<p class="callbody"><?=$call['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
+	<p><label for="attachment" style="width: 190px">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
+	
+	
+	<?php if ($_SESSION['engineerId'] !== null) {?>
+	<?	
+		// filter for engineers helpdesks
+		if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$whereenginners = 'WHERE helpdesk_id <= 3';
+		} else {
+			$whereenginners = 'WHERE helpdesk_id='.$_SESSION['engineerHelpdesk']."'";
+		};
+	?>
+	<fieldset>
+		<legend>Engineer Controls</legend>
+	<span class="engineercontrols">
+			<label for="callreason">Reason behind issue</label>
+			<select id="callreason" name="callreason" required>
+				<option value="" SELECTED>Please Select</option>
+				<?php
+				$callreasons = mysqli_query($db, "SELECT * FROM callreasons ".$whereenginners." ORDER BY reason_name;");
+				while($option = mysqli_fetch_array($callreasons)) { ?>
+					<option value="<?=$option['id'];?>"><?=$option['reason_name'];?></option>
+				<? } ?>
+			</select>
+			<label for="quickresponse">Quick Response</label>
+			<select id="quickresponse" name="quickresponse" required>
+				<option value="" SELECTED>Please Select</option>
+					<?php
+				$quickresponses = mysqli_query($db, "SELECT * FROM quick_responses ".$whereenginners." ORDER BY quick_response;");
+				while($option = mysqli_fetch_array($quickresponses)) { ?>
+					<option value="<?=$option['quick_response'];?>"><?=$option['quick_response'];?></option>
+				<? } ?>
+			</select>
+			<script type="text/javascript">
+			$("#quickresponse").change(function(e) {
+				 $('#updatedetails').val($('#quickresponse').val() + ', ' + $('#updatedetails').val());
+				});
+			</script>
+	</span>
+	</fieldset>
+	<?php } ?>
+
+	
+	
+	
+	
+	
 	<p class="buttons">
 		<button name="close" value="close" type="submit">Close Call</button>
 		<button name="update" value="update" type="submit">Update Call</button>

@@ -1,113 +1,104 @@
 <?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
-	<?php
-	// load functions
-	include_once 'includes/functions.php';
-	// check authentication
-	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
-	?>
+		<?php
+		include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
+		// check authentication
+		if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); }; ?>
 	<head>
-		<?php include_once 'includes/header.php'; ?>
+		<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'); ?>
 	</head>
 	<body>
 	<div class="section">
 	<div id="branding">
-		<?php include 'includes/nav.php'; ?>
+		<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'); ?>
 	</div>
-
 	<div id="leftpage">
 	<div id="stats">
 		<h3>Information</h3>
-		<p>Welcome to helpdesk <?=$_SESSION['sAMAccountName'];?>, please use the form to log calls for engineers, once your call has been logged you will receive email feedback on your issue, you can also return here at any time to see the status of your calls.</p>
+		<p>Welcome to helpdesk <?php echo $_SESSION['sAMAccountName'];?>, please use the form to log calls for engineers, once your call has been logged you will receive email feedback on your issue, you can also return here at any time to see the status of your calls.</p>
 		<p class="note">Remember the more information you provide the quicker the engineer can fix your problem. For example, your printer is out of ink please include, printer model, colour of ink cartridge, room the printer is in. etc.</p>
 	</div>
 	<div id="calllist">
 		<h3>Your Helpdesks</h3>
-		<?php include 'includes/yourcalls.php'; ?>
+		<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/yourcalls.php'); ?>
 	</div>
 	</div>
 	<div id="rightpage">
 		<div id="addcall">
 			<div id="ajax">
-	<?php if ($_SERVER['REQUEST_METHOD']== "POST") { ?>
-	<h2>Thank you</h2>
-	<p>Your Helpdesk has been added. Your call has been assigned to <?=engineer_friendlyname(next_engineer(check_input($_POST['helpdesk'])));?>, the enginner will be in touch shortly. should  they require additional information, correspondence will be emailed to the contact address you entered in the form.</p>
-	<p>Please check your email for further details.</p>
-	<ul>
-		<li><a href="add.php">Add another Call</a></li>
-	</ul>
-	<?php
-		// Upload attachments & move
-		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
-			//get the uploaded file information
-			$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
-			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']);
-			//move the temp. uploaded file to uploads folder and salt for duplicates
-			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
-			$tmp_path = $_FILES["attachment"]["tmp_name"];
-			move_uploaded_file($tmp_path, $folder);
-			$upload_img_code = "<img src=/uploads/" . $name_of_uploaded_file . " width=100% />";
-		}
-
-		// Calculate Urgency
-		$urgencystr = round( (check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 );
-
-		// Create Query
-		$sqlstr = "INSERT INTO calls ";
-		$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner, helpdesk) ";
-		$sqlstr .= "VALUES (";
-		$sqlstr .= " '" . check_input($_POST['name']) . "',";
-		$sqlstr .= " '" . check_input($_POST['email']) . "',";
-		$sqlstr .= " '" . check_input($_POST['tel']) . "',";
-		$sqlstr .= " '<div class=original>" . $upload_img_code . check_input($_POST['details']) . "</div>',";
-		$sqlstr .= " '" . next_engineer(check_input($_POST['helpdesk'])) . "',";
-		$sqlstr .= " '" . date("c") . "',";
-		$sqlstr .= " '" . date("c") . "',";
-		$sqlstr .= " '" . $urgencystr . "',";
-		$sqlstr .= " '" . check_input($_POST['location']) . "',";
-		$sqlstr .= " '" . check_input($_POST['room']) . "',";
-		$sqlstr .= " '" . check_input($_POST['category']) . "',";
-		$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "',";
-		$sqlstr .= " '" . check_input($_POST['helpdesk']) . "'";
-		$sqlstr .= ")";
-		// Run Query
-		mysqli_query($db, $sqlstr);
-
-		// Create Addition Fields Query
-		//Get call id
-		$helpdeskcallid = mysqli_insert_id($db);
-		// find out how many fields to insert
-		$additionalfieldstoinsert = mysqli_query($db, "SELECT * FROM call_additional_fields WHERE typeid =".$_POST['category']." ;");
-		//for each field insert its value
-		while($loop = mysqli_fetch_array($additionalfieldstoinsert))  {
-			$insertname = "label" . $loop['id'];
-			$sqladditional = "INSERT INTO call_additional_results (callid, label, value) VALUES ";
-			$sqladditional .= "('".$helpdeskcallid."','".$loop['label']."','".$_POST[$insertname]."')";
-			mysqli_query($db, $sqladditional);
-		};
-
-		// Update engineers assignment (id hard coded for dev needs to be specific to department if they want round robin)
-		mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer(check_input($_POST['helpdesk'])) ."' WHERE id='".$_POST['helpdesk']."'");
-		// Close Connection
-		mysqli_close($db);
-
-	 } else {?>
-	<h1>Add Call</h1>
-	<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
-	<fieldset>
-		<legend>Helpdesk</legend>
-		<label for="helpdesk">Department</label>
-			<select id="helpdesk" name="helpdesk" required>
-				<option value="" SELECTED>Please Select</option>
+				<?php if ($_SERVER['REQUEST_METHOD']== "POST") { ?>
+				<h2>Thank you</h2>
+				<p>Your Helpdesk has been added. Your call has been assigned to <?php  echo engineer_friendlyname(next_engineer(check_input($_POST['helpdesk'])));?>, the engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
+				<p>Please check your email for further details.</p>
+				<ul>
+					<li><a href="/">Home</a></li>
+				</ul>
 				<?php
-				$helpdesks = mysqli_query($db, "SELECT * FROM helpdesks ORDER BY helpdesk_name");
-				while($option = mysqli_fetch_array($helpdesks)) { ?>
-					<option value="<?=$option['id'];?>"><?=$option['helpdesk_name'];?></option>
-				<? } ?>
-			</select>
-		<script type="text/javascript">
-			$("#helpdesk").change(function(e) {
+					// Upload attachments 
+					if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
+					$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
+					$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']);
+					//move the temp. uploaded file to uploads folder and salt for duplicates
+					$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
+					$tmp_path = $_FILES["attachment"]["tmp_name"];
+					move_uploaded_file($tmp_path, $folder);
+					$upload_img_code = "<img src=/uploads/" . $name_of_uploaded_file . " width=100% />";
+					}
+					// Calculate Urgency
+					$urgencystr = round( (check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 );
+					// Create Query
+					$sqlstr = "INSERT INTO calls ";
+					$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, urgency, location, room, category, owner, helpdesk) ";
+					$sqlstr .= "VALUES (";
+					$sqlstr .= " '" . check_input($_POST['name']) . "',";
+					$sqlstr .= " '" . check_input($_POST['email']) . "',";
+					$sqlstr .= " '" . check_input($_POST['tel']) . "',";
+					$sqlstr .= " '<div class=original>" . $upload_img_code . check_input($_POST['details']) . "</div>',";
+					$sqlstr .= " '" . next_engineer(check_input($_POST['helpdesk'])) . "',";
+					$sqlstr .= " '" . date("c") . "',";
+					$sqlstr .= " '" . date("c") . "',";
+					$sqlstr .= " '" . $urgencystr . "',";
+					$sqlstr .= " '" . check_input($_POST['location']) . "',";
+					$sqlstr .= " '" . check_input($_POST['room']) . "',";
+					$sqlstr .= " '" . check_input($_POST['category']) . "',";
+					$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "',";
+					$sqlstr .= " '" . check_input($_POST['helpdesk']) . "'";
+					$sqlstr .= ")";
+					// Run Query
+					mysqli_query($db, $sqlstr);
+					// Create Addition Fields Query
+					//Get call id
+					$helpdeskcallid = mysqli_insert_id($db);
+					// find out how many fields to insert
+					$additionalfieldstoinsert = mysqli_query($db, "SELECT * FROM call_additional_fields WHERE typeid =".$_POST['category']." ;");
+					//for each field insert its value
+					while($loop = mysqli_fetch_array($additionalfieldstoinsert))  {
+						$insertname = "label" . $loop['id'];
+						$sqladditional = "INSERT INTO call_additional_results (callid, label, value) VALUES ";
+						$sqladditional .= "('".$helpdeskcallid."','".$loop['label']."','".$_POST[$insertname]."')";
+						mysqli_query($db, $sqladditional);
+					};
+					// Update engineers assignment (id hard coded for dev needs to be specific to department if they want round robin)
+					mysqli_query($db, "UPDATE assign_engineers SET engineerId = '". next_engineer(check_input($_POST['helpdesk'])) ."' WHERE id='".$_POST['helpdesk']."'");
+					// Close Connection
+					mysqli_close($db);
+	 } else {?>
+		<h1>Add Call</h1>
+		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
+		<fieldset>
+			<legend>Helpdesk</legend>
+				<label for="helpdesk">Department</label>
+				<select id="helpdesk" name="helpdesk" required>
+					<option value="" SELECTED>Please Select</option>
+						<?php
+						$helpdesks = mysqli_query($db, "SELECT * FROM helpdesks ORDER BY helpdesk_name");
+							while($option = mysqli_fetch_array($helpdesks)) { ?>
+								<option value="<?php echo $option['id'];?>"><?php echo $option['helpdesk_name'];?></option>
+						<? } ?>
+				</select>
+				<script type="text/javascript">
+				$("#helpdesk").change(function(e) {
 				$.post('includes/helpdeskdescription.php?id=' + $("#helpdesk").val(), $(this).serialize(), function(resp) {
 					$('#helpdesk_description').hide();
 					$('#helpdesk_description').html(resp);
@@ -115,97 +106,90 @@
 				});
 				e.preventDefault();
 				return false;
-  			});
-		</script>
-		<div id="helpdesk_description"><p>Please select the department you wish to log a helpdesk, if you are unsure selecting from the dropdown above will show a brief description of the department responsibilities.</p></div>
-	</fieldset>
-	<fieldset>
-		<legend>Primary Contact</legend>
-		<label for="name">Name</label>
-			<input type="text" id="name" name="name" value="<?=$_SESSION['sAMAccountName'];?>"  required />
-		<label for="email">Email</label>
-			<input type="text" id="email" name="email" value="<?=$_SESSION['sAMAccountName']."@".$companysuffix;?>"  required />
-		<label for="tel">Telephone</label>
-			<input type="text" id="tel" name="tel" value=""  required />
-	</fieldset>
-	<fieldset>
-		<legend>Location</legend>
-		<label for="location">Site</label>
-			<select id="location" name="location">
-				<option value="" SELECTED>Please Select</option>
-				<?php
-					$locations = mysqli_query($db, "SELECT * FROM location ORDER BY locationName");
-					while($option = mysqli_fetch_array($locations))  { ?>
-					<option value="<?=$option['id'];?>"><?=$option['locationName'];?></option>
-				<? } ?>
-
-			</select>
-		<label for="room">Room</label>
-			<input type="text" id="room" name="room" value="" required />
-	</fieldset>
-	<fieldset>
-		<legend>Scope</legend>
-		<label for="callurgency">Urgency</label>
-			<select id="callurgency" name="callurgency">
-				<option value="1">An alternative is available</option>
-				<option value="2">This is affecting my work</option>
-				<option value="3">I cannot work</option>
-			</select>
-		<label for="callseverity">Severity</label>
-			<select id="callseverity" name="callseverity">
-				<option value="1">This problem affects only me</option>
-				<option value="2">This problem affects multiple people</option>
-				<option value="3">This problem affects all of <?=$companyname;?></option>
-			</select>
-	</fieldset>
-	<fieldset>
-		<legend>Details</legend>
-		<label for="category">Type</label>
-			<select id="category" name="category">
-			<option value="" SELECTED>Please Select</option>
-				<?php
-					$categories = mysqli_query($db, "SELECT * FROM categories ORDER BY categoryName");
-					while($option = mysqli_fetch_array($categories))  { ?>
-					<option value="<?=$option['id'];?>"><?=$option['categoryName'];?></option>
-				<? } ?>
-			</select>
-
-			<script type="text/javascript">
-			$("#category").change(function(e) {
-				$.post('includes/additionalfields.php?id=' + $("#category").val(), $(this).serialize(), function(resp) {
-					$('#additional_fields').hide();
-					$('#additional_fields').html(resp);
-					$('#additional_fields').slideDown();
 				});
-				e.preventDefault();
-				return false;
-
-  			});
-			</script>
-			<div id="additional_fields">
-			</div>
-
-		<label for="details">Details</label>
-			<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
-	</fieldset>
-	<fieldset>
-		<legend>Attachments</legend>
-		<label for="attachment">Picture or Screenshot</label>
-		<input type="file" name="attachment" accept="image/*">
-	</fieldset>
-
-
-	<p class="buttons">
-		<button name="submit" value="submit" type="submit">Submit</button>
-		<button name="clear" value="clear" type="reset">Clear</button>
-	</p>
-	</form>
-	<? } ?>
-			</div>
+				</script>
+				<div id="helpdesk_description"><p>Please select the department you wish to log a Helpdesk, if you are unsure selecting from the dropdown above will show a brief description of the department responsibilities.</p></div>
+		</fieldset>
+		<fieldset>
+			<legend>Primary Contact</legend>
+				<label for="name">Name</label>
+				<input type="text" id="name" name="name" value="<?php echo $_SESSION['sAMAccountName'];?>"  required />
+				<label for="email">Email</label>
+				<input type="text" id="email" name="email" value="<?php echo $_SESSION['sAMAccountName']."@".$companysuffix;?>"  required />
+				<label for="tel">Telephone</label>
+				<input type="text" id="tel" name="tel" value=""  required />
+		</fieldset>
+		<fieldset>
+			<legend>Location</legend>
+				<label for="location">Site</label>
+				<select id="location" name="location">
+					<option value="" SELECTED>Please Select</option>
+					<?php
+						$locations = mysqli_query($db, "SELECT * FROM location ORDER BY locationName;");
+							while($option = mysqli_fetch_array($locations))  { ?>
+								<option value="<?php echo $option['id'];?>"><?php echo $option['locationName'];?></option>
+					<? }; ?>
+				</select>
+				<label for="room">Room</label>
+				<input type="text" id="room" name="room" value="" required />
+		</fieldset>
+		<fieldset>
+			<legend>Scope</legend>
+				<label for="callurgency">Urgency</label>
+				<select id="callurgency" name="callurgency">
+					<option value="1">An alternative is available</option>
+					<option value="2">This is affecting my work</option>
+					<option value="3">I cannot work</option>
+				</select>
+				<label for="callseverity">Severity</label>
+				<select id="callseverity" name="callseverity">
+					<option value="1">This problem affects only me</option>
+					<option value="2">This problem affects multiple people</option>
+					<option value="3">This problem affects all of <?php echo $companyname;?></option>
+				</select>
+		</fieldset>
+		<fieldset>
+			<legend>Details</legend>
+				<label for="category">Type</label>
+				<select id="category" name="category">
+					<option value="" SELECTED>Please Select</option>
+						<?php
+							$categories = mysqli_query($db, "SELECT * FROM categories ORDER BY categoryName;");
+								while($option = mysqli_fetch_array($categories))  { ?>
+									<option value="<?php echo $option['id'];?>"><?php echo $option['categoryName'];?></option>
+						<? }; ?>
+				</select>
+				<script type="text/javascript">
+				$("#category").change(function(e) {
+					$.post('includes/additionalfields.php?id=' + $("#category").val(), $(this).serialize(), function(resp) {
+						$('#additional_fields').hide();
+						$('#additional_fields').html(resp);
+						$('#additional_fields').slideDown();
+					});
+					e.preventDefault();
+					return false;
+				});
+				</script>
+				<div id="additional_fields"></div>
+				<label for="details">Details</label>
+				<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
+		</fieldset>
+		<fieldset>
+			<legend>Attachments</legend>
+				<label for="attachment">Picture or Screenshot</label>
+				<input type="file" name="attachment" accept="image/*">
+		</fieldset>
+		<p class="buttons">
+			<button name="submit" value="submit" type="submit">Submit</button>
+			<button name="clear" value="clear" type="reset">Clear</button>
+		</p>
+		</form>
+	<?php }; ?>
+		</div>
 		</div>
 	</div>
 	</div>
-	<script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="/javascript/jquery.validate.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$("#addForm").validate({
 			rules: {
@@ -224,13 +208,3 @@
 	</script>
 	</body>
 </html>
-
-
-
-
-
-
-
-
-
-
