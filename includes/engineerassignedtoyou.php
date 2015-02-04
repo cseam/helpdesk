@@ -2,6 +2,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <div id="ajaxforms">
+<p class="note">Showing all open calls for <?php echo(engineer_friendlyname($_SESSION['engineerId']));?></p>
 	<table>
 	<tbody>
 	<?php

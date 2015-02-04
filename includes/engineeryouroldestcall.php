@@ -11,7 +11,7 @@
 	$oldestresult = mysqli_query($db, $sqloldeststr);
 	// display results to page
 	
-	if (mysqli_num_rows($oldestresult) == 0) { include('includes/managerdefault.php');;};
+	if (mysqli_num_rows($oldestresult) == 0) { echo("<h3>0 assigned calls</h3>"); };
 	while($call = mysqli_fetch_array($oldestresult))  {
 	?>
 	<div id="calldetails">

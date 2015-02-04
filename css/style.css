@@ -358,6 +358,7 @@ table th {
 	cursor: pointer;
 	text-align: left;
 	width: auto;
+	text-transform: uppercase;
 }
 .reportlist {
 	border-bottom: 1px solid rgba(202, 200, 200, 0.8);
@@ -440,7 +441,19 @@ table th {
 	overflow: auto;
 	margin-right: 15px;
 }
-
+.engineersubnav {
+	text-align: right;
+	border-bottom: solid 1px #aaa;
+}
+.engineersubnav a {
+	margin: 6px;
+	padding 0 0 2px 0;
+	height: 20px;
+	font-size: 0.9rem;
+}
+.engineersubnav a:hover {
+	border-bottom: 2px solid rgba(100,125,106, 0.7);
+}
 #call {
 	background: transparent;
 	height: 83%;

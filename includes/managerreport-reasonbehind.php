@@ -28,14 +28,4 @@
 	    			 };
 	new Chartist.Pie('.ct-chart', data);
   	</script>
-  	<style>
-	  	.ct-series-a path { fill: #aaa !important; }
-	  	.ct-series-b path { fill: #577d6a !important; }
-	  	.ct-series-c path { fill: #ccc !important; }
-	  	.ct-series-d path { fill: #577d6a !important; }
-	  	.ct-series-e path { fill: #aaa !important; }
-	  	.ct-series-f path  { fill: #577d6a !important; }
-	  	.ct-series-g path { fill: #ccc !important; }
-	  	.ct-series-h path { fill: #577d6a !important; }
-	</style>
 	<div class="ct-chart ct-perfect-fourth"></div>
