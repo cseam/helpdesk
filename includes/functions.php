@@ -3,7 +3,8 @@
 $codename = "Helpdesk";
 $helpdeskloc = "http://helpdesk.cheltenhamladiescollege.co.uk";
 $companyname = "CLC";
-$companysuffix = "cheltladiescollege.org";
+$companysuffix = "cheltenhamladiescollege.co.uk";
+$ldapserver = "ldap://clcdc1.cheltenhamladiescollege.co.uk";
 date_default_timezone_set('Europe/London');
 
 // prompt authentication
