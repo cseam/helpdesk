@@ -548,7 +548,7 @@ label.error {
   visibility: hidden;
 }
 .cmn-toggle + label {
-  display: block;
+  display: inline-block;
   position: relative;
   cursor: pointer;
   outline: none;
@@ -560,14 +560,14 @@ label.error {
 
 input.cmn-toggle-round + label {
   padding: 2px;
-  width: 48px;
-  height: 14px;
+  width: 58px;
+  height: 18px;
   background-color: #dddddd;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  -ms-border-radius: 16px;
-  -o-border-radius: 16px;
-  border-radius: 16px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+  border-radius: 18px;
 }
 input.cmn-toggle-round + label:before, input.cmn-toggle-round + label:after {
   display: block;
@@ -580,18 +580,18 @@ input.cmn-toggle-round + label:before, input.cmn-toggle-round + label:after {
 input.cmn-toggle-round + label:before {
   right: 1px;
   background-color: #f1f1f1;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  -ms-border-radius: 16px;
-  -o-border-radius: 16px;
-  border-radius: 16px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
+  border-radius: 18px;
   -webkit-transition: background 0.4s;
   -moz-transition: background 0.4s;
   -o-transition: background 0.4s;
   transition: background 0.4s;
 }
 input.cmn-toggle-round + label:after {
-  width: 16px;
+  width: 18px;
   background-color: #fff;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
@@ -608,13 +608,14 @@ input.cmn-toggle-round + label:after {
 }
 input.cmn-toggle-round:checked + label:before {
   background-color: #6f9281;
-  content: "in";
+  content: "yes";
   padding-left: 15px;
   padding-top: 2px;
   color: #fff;
+  font-size: 0.7rem;
 }
 input.cmn-toggle-round:checked + label:after {
-  margin-left: 33px;
+  margin-left: 43px;
 }
 
 

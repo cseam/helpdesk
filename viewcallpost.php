@@ -64,7 +64,7 @@
 		<legend>Engineer Controls</legend>
 	<span class="engineercontrols">
 			<label for="callreason">Reason behind issue</label>
-			<select id="callreason" name="callreason" required>
+			<select id="callreason" name="callreason">
 				<option value="" SELECTED>Please Select</option>
 				<?php
 				$callreasons = mysqli_query($db, "SELECT * FROM callreasons ".$whereenginners." ORDER BY reason_name;");
@@ -73,7 +73,7 @@
 				<? } ?>
 			</select>
 			<label for="quickresponse">Quick Response</label>
-			<select id="quickresponse" name="quickresponse" required>
+			<select id="quickresponse" name="quickresponse">
 				<option value="" SELECTED>Please Select</option>
 					<?php
 				$quickresponses = mysqli_query($db, "SELECT * FROM quick_responses ".$whereenginners." ORDER BY quick_response;");
