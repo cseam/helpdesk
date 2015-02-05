@@ -519,6 +519,10 @@ label.error {
 	text-transform: uppercase;
 	padding: 1rem;
 }
+.lockerready {
+	padding: 0.6rem 1rem;
+	background: rgba(0, 109, 5, 0.29);
+}
 /* End Lockers */
 /* Digital sign */
 #digitalsign {
