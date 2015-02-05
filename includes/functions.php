@@ -98,4 +98,12 @@ function helpdesk_friendlyname($data)
 	}
 	return $friendly;
 }
+function random_locker()
+{
+	global $db;
+		$min=1;
+		$max=36;
+		$lockerid = rand($min,$max);
+	return $lockerid;
+}
 ?>

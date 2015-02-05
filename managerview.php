@@ -170,6 +170,11 @@
 						<input type="hidden" id="report" name="report" value="15" />
 						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-reason@2x.png" width="24" height="25" class="icon" alt="Null" title="Null" />
 					</form>
+					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
+						<button type="submit" value="View" name="btn" id="btn" class="reportname">Lockers</button>
+						<input type="hidden" id="report" name="report" value="16" />
+						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-lockers@2x.png" width="24" height="25" class="icon" alt="Null" title="Null" />
+					</form>
 				</div>
 			</div>
 		</div>

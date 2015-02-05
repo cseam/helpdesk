@@ -49,7 +49,7 @@
 					$urgencystr = round( (check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 );
 					// Create Query
 					$sqlstr = "INSERT INTO calls ";
-					$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, title) ";
+					$sqlstr .= "(name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, title, lockerid) ";
 					$sqlstr .= "VALUES (";
 					$sqlstr .= " '" . check_input($_POST['name']) . "',";
 					$sqlstr .= " '" . check_input($_POST['email']) . "',";
@@ -77,7 +77,15 @@
 					$sqlstr .= " '" . check_input($_POST['category']) . "',";
 					$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "',";
 					$sqlstr .= " '" . check_input($_POST['helpdesk']) . "',";
-					$sqlstr .= " '" . check_input($_POST['title']) . "'";
+					$sqlstr .= " '" . check_input($_POST['title']) . "',";
+						if ($_POST['category'] != '11' ) { 
+						$sqlstr .= " " . "null" . " ";
+						} else {
+						$lockerid = random_locker();
+						$sqlstr .= " '". $lockerid ."' ";
+						// Print locker number to screen
+						echo("<fieldset><legend>Engineer Note</legend><p class='lockernotice'>store laptop in locker #". $lockerid ."</p></fieldset>");	
+						};
 					$sqlstr .= ")";
 					// Run Query
 					mysqli_query($db, $sqlstr);
@@ -146,7 +154,7 @@
 					<? }; ?>
 				</select>
 				<label for="room" title="Room where issue is">Room</label>
-				<input type="text" id="room" name="room" value="" required />
+				<input type="text" id="room" name="room" value="" />
 		</fieldset>
 		<fieldset>
 			<legend>Scope</legend>

@@ -15,6 +15,6 @@ if ($_POST['report'] == "12") { echo "<h1>Tag Control</h1>"; include('managerrep
 if ($_POST['report'] == "13") { echo "<h2>Awaiting Invoice</h2>"; include('managerreport-awaitinginvoice.php');};
 if ($_POST['report'] == "14") { die("<script>location.href = '/digitalsigns/index.php'</script>");};
 if ($_POST['report'] == "15") { echo "<h2>Reason behind issues</h2>"; include('managerreport-reasonbehind.php');};
-if ($_POST['report'] == "16") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
+if ($_POST['report'] == "16") { echo "<h2>Lockers</h2>"; include('managerreport-lockers.php');};
 if ($_POST['report'] == "17") { echo "<h2>Empty</h2>"; include('managerreport-blank.php');};
 ?>

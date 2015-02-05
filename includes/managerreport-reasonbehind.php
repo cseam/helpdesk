@@ -16,16 +16,24 @@
 		$result = mysqli_query($db, $sql);
 			while($loop = mysqli_fetch_array($result)) {
 			// setup labels 
-				$lables .=  "'".$loop ['reason_name']. ":" . $loop['last7'] . "' ,";
+				$lables .=  "'".$loop ['reason_name']. "' ,";
 			// series
 				$series .= $loop ['last7'] . ",";
-			}
+			};
+			$lables = rtrim($lables, " ,");
+			$series = rtrim($series, ",");
 	?>
 	<script type="text/javascript">
-    var data = { 
-	    				labels: [<?=$lables?>] ,
-	    				series: [<?=$series ?>]
-	    			 };
-	new Chartist.Pie('.ct-chart', data);
-  	</script>
+	var data = { 
+		labels: [<?php echo($lables);?>],
+		series: [[<?php echo($series);?>]]
+	};
+	var options = {
+		seriesBarDistance: 10,
+		reverseData: true,
+		horizontalBars: true,
+		axisY: { offset: 120 }
+	};
+	new Chartist.Bar('.ct-chart', data, options);
+	</script>
 	<div class="ct-chart ct-perfect-fourth"></div>

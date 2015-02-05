@@ -175,7 +175,7 @@ input, textarea, button {
 	font-size: 0.8rem;
 }
 select {
-	background: rgba(255,255,255,0.45) url('/images/ICONS-06.png') no-repeat 99% 50%;
+	background: rgba(255,255,255,0.45) url('/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
 	color: #777777;
 	border: 1px solid transparent;
 	padding: 0.5rem 1.0rem;
@@ -188,7 +188,7 @@ select {
 	-webkit-border-radius: 0px;
 	outline: none;
 	display: inline-block;
-	background-size: 20px;
+	background-size: 16px;
 }
 fieldset {
 	border: 1px solid transparent;
@@ -484,8 +484,8 @@ select.error, input.error, textarea.error {
 	border: 1px solid silver;
 }
 select.error {
-	background: #ffe0e0 url('/images/ICONS-06.png') no-repeat 99% 50%;
-	background-size: 20px;
+	background: #ffe0e0 url('/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
+	background-size: 16px;
 }
 label.error {
 	width: 95%;
@@ -512,7 +512,15 @@ label.error {
 	padding: 1.5rem 1rem;
 	margin: 1rem 0rem;
 }
-/* digital sign */
+/* Lockers */
+.lockernotice {
+	font-size: 1.3rem;
+	background: rgba(255, 158, 0, 0.29);
+	text-transform: uppercase;
+	padding: 1rem;
+}
+/* End Lockers */
+/* Digital sign */
 #digitalsign {
 	font-size: 26px;
 }

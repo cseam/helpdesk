@@ -43,7 +43,11 @@
 		<input type="hidden" id="report" name="report" value="14" />
 		<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-digitalscreen@2x.png" width="24" height="25" class="icon" alt="IT Screen" title="IT Screen"/>
 		</form>
-		
+		<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
+						<button type="submit" value="View" name="btn" id="btn" class="reportname">Lockers</button>
+						<input type="hidden" id="report" name="report" value="16" />
+						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-lockers@2x.png" width="24" height="25" class="icon" alt="Null" title="Null" />
+		</form>
 <script type="text/javascript">
      $('.reportlist').submit(function(e) {
     	$.ajax(

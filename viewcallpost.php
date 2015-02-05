@@ -38,6 +38,7 @@
 			?>
 		</p>
 	<hr />
+		<?php if ($calls['lockerid'] != null) { ?><p class="callheader">Locker #<?php echo($calls['lockerid']);?></p><?php }; ?>
 		<?php
 		$additional_field_sql = "SELECT * FROM call_additional_results WHERE callid = ".$calls['callid'].";";
 		$additional_field_result = mysqli_query($db, $additional_field_sql); 
