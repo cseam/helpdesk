@@ -194,11 +194,9 @@ select {
 	border-radius: 5px;
 	padding: 0.5rem 1.0rem;
 	font-family: 'verlag', Arial;
-	width: 60%;
 	appearance: none;
 	-webkit-appearance:none;
 	outline: none;
-	display: inline-block;
 }
 fieldset {
 	border: 1px solid transparent;
@@ -216,36 +214,38 @@ fieldset legend {
 }
 label {
 	text-transform: uppercase;
-	width: 30%;
-	display: inline-block;
-	padding: 0.5rem 0 0 0;
+	padding: 0.5rem 0;
 	font-size: 0.8rem;
 	vertical-align: top;
-	box-sizing:content-box;
-	-moz-box-sizing:content-box;
-	-webkit-box-sizing:content-box;
 	border: 1px solid transparent;
+	display: block; 
+	width: 100%;
 }
+
 fieldset input, fieldset textarea, fieldset select  {
-	width: 60%;
 	margin: 3px 0;
-	box-sizing:content-box;
-	-moz-box-sizing:content-box;
-	-webkit-box-sizing:content-box;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
 	font-size: 0.8rem;
+	display: block;
+	width: 100%;
 }
 input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focus {
   outline: none;
   border: 1px solid rgba(0,0,0,0.4);
-  box-sizing:content-box;
-  -moz-box-sizing:content-box;
-  -webkit-box-sizing:content-box;
+  box-sizing: border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
   font-size: 0.8rem;
   background: rgba(30, 117, 0, 0.10) url('/images/ICONS-here@2x.png') no-repeat 99% 50%;
   background-size: 16px;  
 }
 #calldetails textarea {
-	width: 93%;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
 	background: rgba(255,255,255,0.25);
 	resize: none;
 	padding: 1rem;
@@ -444,10 +444,14 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
 	width: auto;
 }
 .closed {
-	color: #ecaa11;
+	color: rgba(30, 117, 0, 0.8);
 	float: left;
-	padding: 0rem;
+	padding: 0.2rem 0.6rem;
 	font-size: 0.6rem;
+	border: 1px solid #ccc;
+	border-radius: 0 0 5px 5px;
+	color: rgb(100, 125, 106);
+	display: block;
 }
 /* END Calls list */
 /* Engineers sub nav */
@@ -650,10 +654,9 @@ input.cmn-toggle-round:checked + label:after {
 }
 /* END Toggle switches */
 
-
 /*** Responsive Stuff ***/
-/*** Phones and xsmall screens ***/
-@media screen and (max-width: 480px) {
+/*** Phones and Small Screens < 600px, and portrait devices***/
+@media screen and (max-width: 600px), screen and (orientation: portrait) {
 	body {
 		-webkit-overflow-scrolling: touch;
 	}
@@ -667,9 +670,6 @@ input.cmn-toggle-round:checked + label:after {
 	}
 	#login p {
 		display: none;
-	}
-	#login form {
-		width: 90%;
 	}
 	.section {
 		overflow: auto;
@@ -696,14 +696,11 @@ input.cmn-toggle-round:checked + label:after {
 	.cmn-toggle + label  {
 		width: 60px !important;
 	}
-	#ajax form input,#ajax form select,#ajax form textarea {
-		width: 86%;
-	}
 	fieldset input, fieldset textarea, fieldset select  {
 	width: 100%;
-	box-sizing:content-box;
-	-moz-box-sizing:content-box;
-	-webkit-box-sizing:content-box;
+	box-sizing: border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
 	}
 	#yourcalls td:nth-child(2) {
 		display: none;
@@ -727,17 +724,22 @@ input.cmn-toggle-round:checked + label:after {
 	}
 }
 
-/* Small devices (tablets, 768px and up) */
-@media screen and (min-width: 480px) {  }
+/* Small devices (phone to tablets, 768px) */
+@media screen and (min-width: 480px) and (max-width: 768px) { 
+
+}
 
 /* Small devices (tablets, 768px and up) */
-@media screen and (min-width: 768px) {  }
+@media screen and (min-width: 768px) {
+	
+}
 
 /* Medium devices (desktops, 992px and up) */
-@media screen and (min-width: 992px) {  }
+@media screen and (min-width: 992px) {
+	
+}
 
 /* Large devices (large desktops, 1200px and up) */
-@media screen and (min-width: 1200px) {  }
-
-
-
+@media screen and (min-width: 1200px) {
+	
+}

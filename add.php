@@ -206,12 +206,21 @@
 		</fieldset>
 		<?php if ($_SESSION['engineerId'] !== null) {?>
 		<fieldset>
-			<legend>Engineer Controls</legend>			
-				<label for="cmn-toggle-selfassign" title="assign call to myself" style="width: 200px; padding: 4px 0;">Assign call to myself</label>
-				<input type="checkbox" name="cmn-toggle-selfassign" id="cmn-toggle-selfassign" value="<?php echo $_SESSION['engineerId'];?>" class="cmn-toggle cmn-toggle-round"><label for="cmn-toggle-selfassign"></label><br />
-				<label for="cmn-toggle-retro" title="open call closed work already complete" style="width: 200px; padding: 4px 0;">Instantly close call</label>
-				<input type="checkbox" name="cmn-toggle-retro" id="cmn-toggle-retro" value="1" class="cmn-toggle cmn-toggle-round">
-				<label for="cmn-toggle-retro"></label>
+			<legend>Engineer Controls</legend>	
+			
+			<table>
+				<tr>
+					<td style="border-bottom: 0;">
+						<label for="cmn-toggle-selfassign" title="assign call to myself" style="width: 200px; padding: 4px 0;">Assign call to myself</label>
+						<input type="checkbox" name="cmn-toggle-selfassign" id="cmn-toggle-selfassign" value="<?php echo $_SESSION['engineerId'];?>" class="cmn-toggle cmn-toggle-round"><label for="cmn-toggle-selfassign"></label>
+					</td>
+					<td style="border-bottom: 0;">
+						<label for="cmn-toggle-retro" title="open call closed work already complete" style="width: 200px; padding: 4px 0;">Instantly close call</label>
+						<input type="checkbox" name="cmn-toggle-retro" id="cmn-toggle-retro" value="1" class="cmn-toggle cmn-toggle-round">
+						<label for="cmn-toggle-retro"></label>
+					</td>
+				</tr>
+			</table>
 		</fieldset>
 		<?php }; ?>
 		<p class="buttons">
