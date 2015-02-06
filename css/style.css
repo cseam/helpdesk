@@ -74,6 +74,7 @@ h2 {
 	column-span:all;
 	border: 0;
 	border-bottom: 1px solid #c9c7c7;
+	line-height: 1.8rem;
 }
 h3 {
 	font-family: 'verlag', Arial;
@@ -457,7 +458,6 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
 /* Engineers sub nav */
 .engineersubnav {
 	text-align: right;
-	border-bottom: solid 1px #aaa;
 }
 .engineersubnav a {
 	margin: 6px;
@@ -502,9 +502,14 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
 	padding: 1rem;
 }
 .lockerready {
-	padding: 0.6rem 1rem;
-	color: #fff;
-	background: rgba(100, 125, 106, 0.8);
+	color: rgba(30, 117, 0, 0.8);
+	float: left;
+	padding: 0.2rem 0.6rem;
+	font-size: 0.6rem;
+	border: 1px solid #ccc;
+	border-radius: 0 0 5px 5px;
+	color: rgb(100, 125, 106);
+	display: block;
 }
 /* END Lockers */
 /* Digital sign */

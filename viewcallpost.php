@@ -19,10 +19,8 @@
 	<form action="updatecall.php" method="post" enctype="multipart/form-data">
 		<input type="hidden" id="id" name="id" value="<?php echo($calls['callid']);?>" />
 		<input type="hidden" id="details" name="details" value="<?php echo($calls['details']);?>" />
-		<h2>
-			<?php if ($calls['urgency'] === '3') { echo("Urgent ");} ?><?php echo($calls['categoryName']);?> #<?php echo($_POST['id']);?><a href="viewcall.php?id=<?php echo($calls['callid']);?>" class="calllink"><img src="/images/ICONS-viewfulldetails@2x.png" alt="view full details"  title="view full details" width="23" height="24" /></a>
-		</h2>
-		<h3><?php echo($calls['title']);?> </h3>
+		<h2><?php echo($calls['title']);?></h2>
+		<p class="callheader">Call #<?php echo($_POST['id']);?> <?php if ($calls['urgency'] === '3') { echo("Urgent ");} ?><?php echo($calls['categoryName']);?></p>
 		<p class="callheader">created by <a href="mailto:<?php echo($calls['email']);?>"><?php echo($calls['name']);?></a> (<?php echo($calls['tel']);?>)</p>	
 		<p class="callheader">for <?php echo($calls['room']);?> - <?php echo($calls['locationName']);?></p>
 		<p class="callheader">assigned to <?php echo(engineer_friendlyname($calls['assigned']));?></p>
@@ -47,8 +45,10 @@
 			<p class="callheader"><?php echo($items['label']);?> - <?php echo($items['value']);?></p>
 		<?php }; ?>
 		<p class="callbody"><?php echo($calls['details']);?></p>
-		<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
-		<p><label for="attachment" style="width: 190px">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
+		<fieldset>
+			<legend>Update Call</legend>
+				<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
+				<p><label for="attachment" style="width: 190px">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
 	<?php if ($_SESSION['engineerId'] !== null) {?>
 	<?php	
 		// filter for engineers helpdesks
@@ -58,6 +58,7 @@
 			$whereenginners = 'WHERE helpdesk_id='.$_SESSION['engineerHelpdesk']."'";
 		};
 	?>
+		</fieldset>
 	<fieldset>
 		<legend>Engineer Controls</legend>
 			<span class="engineercontrols">

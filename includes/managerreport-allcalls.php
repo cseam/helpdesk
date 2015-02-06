@@ -3,7 +3,6 @@
 	// load functions
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-
 <div id="ajaxforms">
 	<table>
 	<thead>
@@ -60,7 +59,7 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="allcallslist">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($calls['details']), 0, 40);?>...</button>
+				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($calls['title']), 0, 40);?>...</button>
 			</form>
 		</td>
 		<td><?=strstr($calls['engineerName']," ", true);?></td>

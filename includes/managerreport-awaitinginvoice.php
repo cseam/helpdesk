@@ -43,7 +43,7 @@
 			</form>
 		</div>
 		<td><? if ($calls['invoicedate'] !== null) { echo date("d/m/y", strtotime($calls['invoicedate'])); };?></td>
-		<td><?=substr(strip_tags($calls['details']), 0, 65);?>...</td>
+		<td><?=substr(strip_tags($calls['title']), 0, 65);?>...</td>
 		</tr>
 	<? } ?>
 	</tbody>
