@@ -28,7 +28,7 @@
 		<tr>
 		<td>#<?=$calls['callid'];?></td>
 		<td><?=date("d/m/y", strtotime($calls['opened']));?></td>
-		<td class="view_td"><?=substr(strip_tags($calls['details']), 0, 120);?>...</td>
+		<td class="view_td"><?=substr(strip_tags($calls['title']), 0, 90);?>...</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />

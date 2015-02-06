@@ -22,6 +22,7 @@
 		<h2>
 			<?php if ($calls['urgency'] === '3') { echo("Urgent ");} ?><?php echo($calls['categoryName']);?> #<?php echo($_POST['id']);?><a href="viewcall.php?id=<?php echo($calls['callid']);?>" class="calllink"><img src="/images/ICONS-viewfulldetails@2x.png" alt="view full details"  title="view full details" width="23" height="24" /></a>
 		</h2>
+		<h3><?php echo($calls['title']);?> </h3>
 		<p class="callheader">created by <a href="mailto:<?php echo($calls['email']);?>"><?php echo($calls['name']);?></a> (<?php echo($calls['tel']);?>)</p>	
 		<p class="callheader">for <?php echo($calls['room']);?> - <?php echo($calls['locationName']);?></p>
 		<p class="callheader">assigned to <?php echo(engineer_friendlyname($calls['assigned']));?></p>

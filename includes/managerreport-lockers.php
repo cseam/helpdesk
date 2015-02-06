@@ -12,7 +12,7 @@
 			<th>Owner</th>
 			<th>Details</th>
 			<th style="text-align:right;">View</th>
-			<th style="text-align:right;">Issue</th>
+			<th style="text-align:right;">Return</th>
 		</tr>
 	</thead>
 	<tbody>

@@ -72,7 +72,7 @@
 				</div>
 				<?php  }; ?>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>?return=<?php echo($_GET['return']);?>" method="post" enctype="multipart/form-data" id="checkPassword">
-						<label for="username">Username</label><input id="username" type="text" name="username" value="">
+						<label for="username">Username</label><input id="username" type="text" name="username" value="" autofocus>
 						<label for="password">Password</label><input id="password" type="password" name="password" value="">
 						<input id="btnLogin" type="submit" name="btnLogin" value="LOGIN" />
 					</form>

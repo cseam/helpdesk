@@ -7,7 +7,8 @@ url('/fonts/verlag-book-webfont.woff') format('woff'), /* Modern Browsers */
 url('/fonts/verlag-book-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
 url('/fonts/verlag-book-webfont.svg') format('svg'); /* Legacy iOS */
 }
-/* root */
+/* END Fonts */
+/* Root style & default elements */
 html {
 	font-size: 16px;
 	height: 100%;
@@ -33,14 +34,6 @@ body {
 	box-sizing: border-box;
 	height: 100%;
 	line-height: 1.3rem;
-}
-.section {
-	background: transparent;
-	height: 100%;
-	padding: 1.2rem 2.2rem;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	overflow: hidden;
 }
 a {
 	font-family: 'verlag', Arial;
@@ -76,10 +69,11 @@ h2 {
 	font-weight: 150;
 	padding-bottom: 15px;
 	margin-bottom: 15px;
-	border-bottom: solid 1px silver;
 	-webkit-column-span:all;
 	-moz-column-span:all;
 	column-span:all;
+	border: 0;
+	border-bottom: 1px solid #c9c7c7;
 }
 h3 {
 	font-family: 'verlag', Arial;
@@ -121,74 +115,90 @@ blockquote {
 	padding: 0.5rem 1rem;
 }
 hr {
-	border-top: 0;
-	border-left: 0;
-	border-right: 0;
-	border-bottom: solid 1px #6b6b6b;
+	border: 0;
+	border-bottom: solid 1px #c9c7c7;
 }
 ul li:before {
-  content: '\2014\a0\a0'; /* long dash */
+  content: '\2014\a0\a0';
 }
 ul {
 	list-style-position: inside;
 	margin: 0.5rem 0rem;
 }
-::-webkit-scrollbar {
-    width: 7px;
+/* END Root & default elements */
+/* Basic view layout */
+.section {
+	background: transparent;
+	height: 100%;
+	padding: 1.2rem 2.2rem;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	overflow: hidden;
 }
-::-webkit-scrollbar-track {
-    background-color: transparent;
+#branding {
+	height: 14.5%;
+	background: transparent url('/images/BRANDING-crest.png') no-repeat top left;
+	background-size: contain;
+	text-align: right;
+	margin-bottom: 1rem;
 }
-::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+#leftpage {
+	float: left;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
 }
-::-webkit-scrollbar-thumb:hover {
-    background-color: #aaa;
+#rightpage {
+	float: right;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
 }
-.enviro, .msgbox {
-	background: rgba(0,0,0,0.1);
-	padding: 1rem;
-	margin: 0 0 2rem 0;
+/* END basic view layout */
+/* Table */
+table {
+	width: 100%;
 }
-.urgent {
-	background: rgba(255,0,0,0.1)  ;
-}
-
-#poststatus {
-	background: rgba(255, 112, 0, 0.79);
-	padding: 1rem;
-	margin: 0 0 2rem 0;
-}
-hr, h2 {
+table tr {
 	border: 0;
-	border-bottom: 1px solid #c9c7c7;
 }
+table td, table th {
+	border-bottom: 1px solid silver;
+	padding: 0.2rem 0.5rem;
+	font-size: 0.9rem;
+	line-height: 1rem;
+	vertical-align: middle;
+}
+table th {
+	text-align: left;
+	text-transform: uppercase;
+}
+/* End tables */
+/* Standard forms */
 input, textarea, button {
-	background: rgba(255,255,255,0.45);
+	background: rgba(255,255,255,0.25);
 	color: #777777;
-	border: 1px solid transparent;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 	padding: 0.5rem 1rem;
-	/*text-transform: uppercase;*/
 	font-family: 'verlag', Arial;
 	resize: none;
 	vertical-align: bottom;
 	font-size: 0.8rem;
 }
 select {
-	background: rgba(255,255,255,0.45) url('/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
+	background: rgba(255,255,255,0.25) url('/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
+	background-size: 16px;
 	color: #777777;
-	border: 1px solid transparent;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 	padding: 0.5rem 1.0rem;
-	/*text-transform: uppercase !important;*/
 	font-family: 'verlag', Arial;
 	width: 60%;
 	appearance: none;
-	border-radius: 0px;
 	-webkit-appearance:none;
-	-webkit-border-radius: 0px;
 	outline: none;
 	display: inline-block;
-	background-size: 16px;
 }
 fieldset {
 	border: 1px solid transparent;
@@ -224,66 +234,84 @@ fieldset input, fieldset textarea, fieldset select  {
 	-webkit-box-sizing:content-box;
 	font-size: 0.8rem;
 }
-input[type=text]:focus, textarea:focus, select:focus {
+input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focus {
   outline: none;
   border: 1px solid rgba(0,0,0,0.4);
   box-sizing:content-box;
   -moz-box-sizing:content-box;
   -webkit-box-sizing:content-box;
   font-size: 0.8rem;
+  background: rgba(30, 117, 0, 0.10) url('/images/ICONS-here@2x.png') no-repeat 99% 50%;
+  background-size: 16px;  
 }
-table {
-	width: 100%;
+#calldetails textarea {
+	width: 93%;
+	background: rgba(255,255,255,0.25);
+	resize: none;
+	padding: 1rem;
 }
-
-table tr {
-	border: 0;
+/* END Standard forms */
+/* Scroll bar look & feel */
+::-webkit-scrollbar {
+    width: 7px;
 }
-table td, table th {
-	border-bottom: 1px solid silver;
-	padding: 0.2rem 0.5rem;
-	font-size: 0.9rem;
-	line-height: 1rem;
-	vertical-align: middle;
+::-webkit-scrollbar-track {
+    background-color: transparent;
 }
-table th {
-	text-align: left;
-	text-transform: uppercase;
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
 }
-.calllistbutton {
-	background: #e4e4e4;
-	text-align: left;
-	font-size: 0.9rem;
-	padding: 0.3rem 1rem;
-	margin: 0;
-	text-transform: uppercase;
-	cursor: pointer !important;
-	font-size: 0.7rem;
+::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
 }
-.view_td {
-	width: auto;
-}
-
+/* End Scroll bar look & feel */
+/* Additional layout */
 #ajax {
 	margin-top: 0rem;
 	padding: 2rem;
 }
-
 #ajaxforms {
 	margin-bottom: 1rem;
 }
-.loading {
-	margin: 150px 35%;
-	width: 150px !important;
+/* END Additional layout */
+/* Stats area */
+#stats {
+	background: transparent;
+	height: 32%;
+	overflow: hidden;
+	padding-right: 2rem;
 }
+#stats p {
+	font-size: 0.95rem;
+	line-height: 1.4rem;
+}
+/* END Stats area */
+/* Urgent calls */
+.urgent {
+	background: rgba(255,0,0,0.1);
+}
+/* END urgent calls */
+/* Add helpdesk form */
+#addcall {
+	background: transparent;
+	height: 83%;
+	overflow: auto;
+	background: rgba(0,0,0,0.1);
+}
+/* END Add helpdesk form */
+/* Additional message styles */
 .note {
 	font-size: 0.8rem !important;
 	font-style: italic;
 	padding-left: 1rem;
 	border-left: 2px solid #aaa;
 	line-height: 1.1rem !important;
-};
-
+}
+.smalltxt {
+	font-size: 0.8rem;
+}
+/* END Additional message styles */
+/* Call details */
 #calldetails {
 	background: transparent;
 }
@@ -299,12 +327,6 @@ table th {
 .callbody {
 	color: #919191;
 }
-#calldetails textarea {
-	width: 93%;
-	background: rgba(255,255,255,0.45);
-	resize: none;
-	padding: 1rem;
-}
 .callfooter {
 	display: inline-block;
 	margin: 0;
@@ -315,16 +337,49 @@ table th {
 	text-transform: lowercase;
 	font-style: italic;
 }
+.update {
+	padding: 1rem 0 0.5rem 0rem;
+	margin: 0.5rem 0rem;
+	border-top: 1px solid #c9c7c7;
+	line-height: 1.5rem;
+}
+.update h3 {
+	text-align: left;
+	font-size: 0.8rem;
+	color: #577d6a;
+	margin: 0.3rem 0;
+	padding: 0;
+	font-style: italic;
+	text-transform: lowercase;
+}
+.original {
+	border-left: 1px solid transparent;
+	padding: 0.5rem 0rem;
+	margin: 0.8rem 0rem;
+	line-height: 1.5rem;
+}
+#call {
+	background: transparent;
+	height: 83%;
+	overflow: auto;
+	background: rgba(0,0,0,0.1);
+}
+.calllink {
+	font-size: .6rem;
+	float: right;
+}
+/* END Call details */
+/* Buttons */
 .buttons {
 	margin: 0 1rem 2rem 0;
 	text-align: right;
 	width: 50%;
 	float: right;
-
 }
 .buttons button {
-	background-color: rgba(255,255,255,0.45);
-	border: 1px solid transparent;
+	background-color: rgba(255,255,255,0.15);
+	border: 1px solid #ccc;
+	cursor: pointer;
 }
 .tags button {
 	border: 1px solid transparent;
@@ -353,84 +408,28 @@ table th {
 	padding: 5px 0 3px 0;
 	cursor: pointer;
 	float: right;
+	border: 1px solid transparent;
 }
 .reportname {
 	cursor: pointer;
 	text-align: left;
 	width: auto;
 	text-transform: uppercase;
+	border: 1px solid transparent;
 }
-.reportlist {
-	border-bottom: 1px solid rgba(202, 200, 200, 0.8);
-	width: 47%;
-	float: left;
-	margin: 0 5px;
-}
-
-.update {
-	border-left: 1px dashed transparent;
-	padding: 1rem 0 0.5rem 0rem;
-	margin: 0.5rem 0rem;
-	border-top: 1px solid #c9c7c7;
-	line-height: 1.5rem;
-}
-.update h3 {
+.calllistbutton {
+	background: #e4e4e4;
 	text-align: left;
+	padding: 0.3rem 1rem;
+	margin: 0;
 	font-size: 0.8rem;
-	color: #577d6a;
-	margin: 0.3rem 0;
-	padding: 0;
-	font-style: italic;
-	text-transform: lowercase;
+	border: 1px solid transparent;
+	cursor: pointer !important;
 }
-.original {
-	border-left: 1px solid transparent;
-	padding: 0.5rem 0rem;
-	margin: 0.8rem 0rem;
-	line-height: 1.5rem;
-}
-.smalltxt {
-	font-size: 0.8rem;
-}
-#filter {
-	width: 80px !important;
-	padding: 4px 10px 4px 5px;
-	background-size: 15%;
-}
-
-#branding {
-	height: 14.5%;
-	background: transparent url('/images/logov3.png') no-repeat top left;
-	background-size: contain;
-	text-align: right;
-	margin-bottom: 1rem;
-}
-
-#leftpage {
-	float: left;
-	width: 50%;
-	height: 100%;
-	overflow: hidden;
-}
-#rightpage {
-	float: right;
-	width: 50%;
-	height: 100%;
-	overflow: hidden;
-}
-
-#stats {
-	background: transparent;
-	height: 32%;
-	overflow: hidden;
-	padding-right: 2rem;
-}
-#stats p {
-	font-size: 0.95rem;
-	line-height: 1.4rem;
-}
+/* END Buttons */
+/* Calls list */
 #calllist {
-	background: transparent;
+	background: trasparent;
 	height: 50%;
 	overflow: auto;
 	padding: 0;
@@ -441,62 +440,47 @@ table th {
 	overflow: auto;
 	margin-right: 15px;
 }
+.view_td {
+	width: auto;
+}
+.closed {
+	color: #ecaa11;
+	float: left;
+	padding: 0rem;
+	font-size: 0.6rem;
+}
+/* END Calls list */
+/* Engineers sub nav */
 .engineersubnav {
 	text-align: right;
 	border-bottom: solid 1px #aaa;
 }
 .engineersubnav a {
 	margin: 6px;
-	padding 0 0 2px 0;
+	padding: 0 0 2px 0;
 	height: 20px;
 	font-size: 0.9rem;
 }
 .engineersubnav a:hover {
 	border-bottom: 2px solid rgba(100,125,106, 0.7);
 }
-#call {
-	background: transparent;
-	height: 83%;
-	overflow: auto;
-	background: rgba(0,0,0,0.1);
-}
-.calllink {
-	font-size: .6rem;
-	float: right;
-}
-#addcall {
-	background: transparent;
-	height: 83%;
-	overflow: auto;
-	background: rgba(0,0,0,0.1);
-}
-.closed {
-	color: #ff0000;
+/* END Engineers sub nav */
+/* Reports */
+.reportlist {
+	border-bottom: 1px solid rgba(202, 200, 200, 0.8);
+	width: 47%;
 	float: left;
-	padding: 0rem;
-	font-size: 0.6rem;
+	margin: 0 5px;
 }
-.error {
-	color: red;
+#filter {
+	width: 80px !important;
+	padding: 4px 10px 4px 5px;
+	background-size: 15%;
 }
-select.error, input.error, textarea.error {
-	background: #ffe0e0;
-	border: 1px solid silver;
-}
-select.error {
-	background: #ffe0e0 url('/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
-	background-size: 16px;
-}
-label.error {
-	width: 95%;
-	font-size: 0.7rem;
-	text-align: right;
-}
+/* END Reports */
+/* Login area */
 #login {
 	margin: 1rem;
-}
-#login input {
-	background: rgba(0, 0, 0, 0.08);
 }
 #login #btnLogin {
 	width: 65px;
@@ -504,14 +488,8 @@ label.error {
 	text-transform: capitalize;
 	margin-left: 30.35%;
 	margin-top: 10px;
-	background: rgba(233, 233, 233, 0.21);
 }
-
-#formError {
-	background: rgba(255, 0, 0, 0.29);
-	padding: 1.5rem 1rem;
-	margin: 1rem 0rem;
-}
+/* END Login area */
 /* Lockers */
 .lockernotice {
 	font-size: 1.3rem;
@@ -521,9 +499,10 @@ label.error {
 }
 .lockerready {
 	padding: 0.6rem 1rem;
-	background: rgba(0, 109, 5, 0.29);
+	color: #fff;
+	background: rgba(100, 125, 106, 0.8);
 }
-/* End Lockers */
+/* END Lockers */
 /* Digital sign */
 #digitalsign {
 	font-size: 26px;
@@ -564,9 +543,37 @@ label.error {
 .indent {
 	padding-left: 10px;
 }
-/* end digital sign */
-
-/* toggle switch css */
+/* END digital sign */
+/* ajax request style */
+.loading {
+	margin: 150px 35%;
+	width: 150px !important;
+}
+/* END ajax request style */
+/* Error Messages */
+.error {
+	color: red;
+}
+select.error, input.error, textarea.error {
+	background: #ffe0e0;
+	border: 1px solid silver;
+}
+select.error {
+	background: #ffe0e0 url('/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
+	background-size: 16px;
+}
+label.error {
+	width: 95%;
+	font-size: 0.7rem;
+	text-align: right;
+}
+#formError {
+	background: rgba(255, 0, 0, 0.29);
+	padding: 1.5rem 1rem;
+	margin: 1rem 0rem;
+}
+/* END Error messages */
+/* Toggle switchs */
 .cmn-toggle {
   position: absolute;
   margin-left: -9999px;
@@ -582,7 +589,6 @@ label.error {
   -ms-user-select: none;
   user-select: none;
 }
-
 input.cmn-toggle-round + label {
   padding: 2px;
   width: 58px;
@@ -642,61 +648,32 @@ input.cmn-toggle-round:checked + label:before {
 input.cmn-toggle-round:checked + label:after {
   margin-left: 43px;
 }
-
+/* END Toggle switches */
 
 
 /*** Responsive Stuff ***/
-/*** Tablet ***/
-@media screen and (max-width: 768px) {
-
-}
-/*** Specific for Kindle  600x887 960x439***/
-@media screen and (max-width: 600px) {
+/*** Phones and xsmall screens ***/
+@media screen and (max-width: 480px) {
+	body {
+		-webkit-overflow-scrolling: touch;
+	}
 	#leftpage, #rightpage {
 		width: 100%;
+		margin: 0;
 		height: auto;
 	}
 	#leftpage {
-		max-height: 250px;
-		margin-bottom: 1rem;
 		overflow: auto;
 	}
-	.section {
-		overflow: auto;
-		padding: 1rem;
-	}
-	#stats {
+	#login p {
 		display: none;
 	}
-	#branding {
-		line-height: 26px;
-		padding-bottom: 0.5rem;
-	}
-	#ajax {
-		padding: 2rem;
-	}
-	fieldset input, fieldset textarea, fieldset select  {
-	width: 90%;
-	box-sizing:content-box;
-	-moz-box-sizing:content-box;
-	-webkit-box-sizing:content-box;
-	}
-}
-
-/* phone */
-@media screen and (max-width: 480px) {
-	#leftpage, #rightpage {
-		width: 100%;
-		height: auto;
-	}
-	#leftpage {
-		max-height: 200px;
-		margin-bottom: 1rem;
-		overflow: hidden;
+	#login form {
+		width: 90%;
 	}
 	.section {
 		overflow: auto;
-		padding: 1rem;
+		padding: 0.6rem;
 	}
 	#stats {
 		display: none;
@@ -704,12 +681,26 @@ input.cmn-toggle-round:checked + label:after {
 	#branding {
 		line-height: 16px;
 		padding-bottom: 0.5rem;
+		max-height: 70px;
 	}
 	#ajax {
 		padding: 1rem;
 	}
+	#ajax form {
+		width: 100%;
+	}
+	#ajax form label {
+		display: block;
+		width: 100%;
+	}
+	.cmn-toggle + label  {
+		width: 60px !important;
+	}
+	#ajax form input,#ajax form select,#ajax form textarea {
+		width: 86%;
+	}
 	fieldset input, fieldset textarea, fieldset select  {
-	width: 85%;
+	width: 100%;
 	box-sizing:content-box;
 	-moz-box-sizing:content-box;
 	-webkit-box-sizing:content-box;
@@ -717,4 +708,36 @@ input.cmn-toggle-round:checked + label:after {
 	#yourcalls td:nth-child(2) {
 		display: none;
 	}
+	.view_td {
+		width: 60%;
+		max-width: 60%;
+	}
+	.buttons {
+		width: 100%;
+	}
+	.buttons button {
+		width: 100%;
+		margin: 0.5rem 1rem;
+	}
+	.engineersubnav a {
+		display: block;
+	}
+	.reportlist {
+		width: 95%;
+	}
 }
+
+/* Small devices (tablets, 768px and up) */
+@media screen and (min-width: 480px) {  }
+
+/* Small devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) {  }
+
+/* Medium devices (desktops, 992px and up) */
+@media screen and (min-width: 992px) {  }
+
+/* Large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {  }
+
+
+

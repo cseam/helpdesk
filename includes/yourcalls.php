@@ -8,7 +8,7 @@
 		<tr>
 		<td>#<?php echo $calls['callid'];?></td>
 		<td><?php if ($calls['status'] == '2') { echo "<span class='closed'>CLOSED</span>"; } else { echo date("d/m/y", strtotime($calls['opened']));} ?></td>
-		<td class="view_td"><?php echo substr(strip_tags($calls['details']), 0, 120);?>...</td>
+		<td class="view_td"><?php echo substr(strip_tags($calls['title']), 0, 90);?>...</td>
 		<td>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
 				<input type="hidden" id="id" name="id" value="<?php echo $calls['callid'];?>" />
