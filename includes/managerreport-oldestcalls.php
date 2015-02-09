@@ -1,6 +1,6 @@
-<?php session_start();?>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 	<?php
@@ -28,9 +28,9 @@
 	<input type="hidden" id="id" name="id" value="<?=$call['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$call['details'];?>" />
 	<h3><?=$call['title'];?></h3>
-	<p class="callheader">Call #<?=$call['callid'];?></p>
-	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>
-	<p class="callheader">for <?=$call['room'];?> - <?=$call['locationName'];?></p>
+	<p class="callheader">Ticket #<?=$call['callid'];?></p>
+	<p class="callheader">Created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>
+	<p class="callheader">For <?=$call['room'];?> - <?=$call['locationName'];?></p>
 	<p class="callheader">Open for
 					<?php
 						$date1 = strtotime($calls['opened']);
@@ -45,10 +45,10 @@
 	<p class="callbody"><?=$call['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">
-		<button name="close" value="close" type="submit">Close Call</button>
-		<button name="update" value="update" type="submit">Update Call</button>
+		<button name="close" value="close" type="submit">Close Ticket</button>
+		<button name="update" value="update" type="submit">Update Ticket</button>
 	</p>
-	<p class="callfooter">Call Opened <?=date("d/m/y h:s", strtotime($call['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($call['lastupdate']));?></p>
+	<p class="callfooter">Ticket Opened <?=date("d/m/y h:s", strtotime($call['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($call['lastupdate']));?></p>
 	</form>
 	</div>
 	<?php } ?>

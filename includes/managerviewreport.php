@@ -1,8 +1,8 @@
 <?php
 if ($_POST['report'] == "0") { include('managerreport-default.php');};
-if ($_POST['report'] == "1") { echo "<h2>All Calls</h2>"; include('managerreport-allcalls.php');};
-if ($_POST['report'] == "2") { echo "<h2>Oldest Call</h2>"; include('managerreport-oldestcalls.php');};
-if ($_POST['report'] == "3") { echo "<h2>Assigned Call Numbers</h2>"; include('managerreport-assigned.php');};
+if ($_POST['report'] == "1") { echo "<h2>All Tickets</h2>"; include('managerreport-allcalls.php');};
+if ($_POST['report'] == "2") { echo "<h2>Oldest Ticket</h2>"; include('managerreport-oldestcalls.php');};
+if ($_POST['report'] == "3") { echo "<h2>Assigned Ticket Numbers</h2>"; include('managerreport-assigned.php');};
 if ($_POST['report'] == "4") { echo "<h2>Workrate</h2>"; include('managerreport-workrate.php');};
 if ($_POST['report'] == "5") { echo "<h2>User Feedback</h2>"; include('managerreport-feedback.php');};
 if ($_POST['report'] == "6") { echo "<h2>Punchcard In/Out</h2>"; include('managerreport-punchcard.php');};

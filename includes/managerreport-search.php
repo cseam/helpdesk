@@ -1,11 +1,11 @@
-<?php session_start();?>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="search" class="searchform">
 <fieldset>
-		<legend>Search all calls</legend>
+		<legend>Search all tickets</legend>
 		<label for="term">Search Query</label>
 		<input type="text" id="term" name="term" value=""  required />
 </fieldset>
@@ -26,7 +26,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#resultspost').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#resultspost').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -39,7 +39,7 @@
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
 </script>
 <script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
 	<script type="text/javascript">

@@ -1,4 +1,5 @@
 <?php
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
 			$whereenginners = 'WHERE engineers.helpdesk <= 3';
@@ -11,7 +12,7 @@
 <table>
 <tr>
 	<th>Location / Room</th>
-	<th>Calls Logged</th>
+	<th>Tickets Logged</th>
 </tr>
 <?
 	$sql ="SELECT COUNT(*) AS Number_of_Calls,c.location AS Location, l.locationName AS Location_Name FROM calls AS c LEFT JOIN location as l ON c.location = l.id ".$whereenginners." AND opened >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND location != 1 GROUP BY location HAVING COUNT(*)>=3 ORDER BY Number_of_Calls DESC";

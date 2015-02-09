@@ -1,9 +1,9 @@
-<?php session_start();?>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<p>Opened and assigned calls not yet closed</p>
+<p>Opened and assigned tickets not yet closed</p>
 <table>
 <tr>
 	<th>Engineer Name</th>

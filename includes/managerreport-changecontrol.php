@@ -1,16 +1,16 @@
-<?php session_start();?>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") { ?>
 <h2>Add Change Control</h2>
 <?
-	$uniquetagcsv = implode(',',array_unique(explode(',', $_POST['tagname'])));	
+	$uniquetagcsv = implode(',',array_unique(explode(',', $_POST['tagname'])));
 	//$uniquetagcsv = $_POST['tagname'];
-	
+
 	$sqlquery = $db->query("INSERT INTO changecontrol (engineersid, stamp, changemade, tags, server) VALUES (".$_POST['engineer'].",'".date("c")."','".$_POST['details']."','". $uniquetagcsv ."','". $_POST['servername'] ."')");
-	if($sqlquery) 
+	if($sqlquery)
 		{
 			echo "<p>Your change control has been added</p>";
 		}
@@ -24,15 +24,15 @@
 		<select id="engineer" name="engineer" required>
 				<?php
 				if ($_SESSION['engineerHelpdesk'] <= '3') {
-					$whereenginners = 'WHERE helpdesk <= 3';	
+					$whereenginners = 'WHERE helpdesk <= 3';
 				} else {
-					$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];				
-				};	
+					$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];
+				};
 				$helpdesks = mysqli_query($db, "SELECT * FROM engineers " .$whereenginners. " ORDER BY engineerName");
 				while($option = mysqli_fetch_array($helpdesks)) { ?>
 					<option value="<?=$option['idengineers'];?>"><?=$option['engineerName'];?></option>
 				<? } ?>
-		</select>	
+		</select>
 	<label for="">Server</label>
 		<input type="text" id="servername" name="servername" />
 	<label for="">Change</label>
@@ -42,7 +42,7 @@
 	<p class="buttons">
 		<input type="hidden" id="addchange" name="addchange" value="add" />
 		<button name="add" value="add" type="submit">Submit</button>
-	</p>	
+	</p>
 </fieldset>
 </form>
 <fieldset>
@@ -59,8 +59,8 @@
 		<? } ?>
 </p>
 </fieldset>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
-<script type="text/javascript">  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
     $('#changecontrol').submit(function(e) {
     	$.ajax(
 			{
@@ -69,7 +69,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -82,7 +82,7 @@
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
     $('.addtagform').submit(function(e) {
 	    var formresults = $( this ).serializeArray();
 	    var currenttagvalues = $("#tagname").val();
@@ -91,5 +91,5 @@
     		});
        e.preventDefault();
        return false;
-    });        
+    });
 </script>

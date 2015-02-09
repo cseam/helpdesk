@@ -1,12 +1,12 @@
-<?php session_start();?>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['toggle'] == TRUE) { ?>
 <h2>Awaiting Invoice</h2>
 <?
-	// update timestamp with changes	
+	// update timestamp with changes
 	$sqlstr = "UPDATE calls SET invoicedate='".date("c")."' WHERE callid='" . $_POST['id'] . "';";
 	$result = mysqli_query($db, $sqlstr);
  } ?>
@@ -17,9 +17,9 @@
 				<td>#</td>
 				<td>Received</td>
 				<td>Date</td>
-				<td>Call Details</td>
+				<td>Ticket Details</td>
 			</tr>
-		</thead>		
+		</thead>
 	<tbody>
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {

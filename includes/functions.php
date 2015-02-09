@@ -1,23 +1,14 @@
 <?php
-// Global Vars & Settings
-$codename = "Helpdesk";
-$helpdeskloc = "http://helpdesk.cheltenhamladiescollege.co.uk";
-$companyname = "CLC";
-$companysuffix = "cheltenhamladiescollege.co.uk";
-$ldapserver = "ldap://clcdc1.cheltenhamladiescollege.co.uk";
-date_default_timezone_set('Europe/London');
-
 // prompt authentication
 function prompt_auth($data) {
 	if (empty($_SESSION['sAMAccountName'])) {
 		// User not logged in forward to login page
-			//die("<script>location.href = '/auth/whoami.php?return=".$data."'</script>");
 			die("<script>location.href = '/login/login.php?return=".$data."'</script>");
 		};
 }
 
 //Database Setup
-$db = mysqli_connect("localhost", "helpdesk", "helpdesk", "helpdesk");
+$db = mysqli_connect(DB_LOC, DB_SCHEMA, DB_USER, DB_PASSWORD);
 // check db connection not sure if this should be done before each db call or once at function load is enough?
 if (mysqli_connect_errno()) {
 	printf("Connect failed: %s\n", mysqli_connect_error());
@@ -106,4 +97,3 @@ function random_locker()
 		$lockerid = rand($min,$max);
 	return $lockerid;
 }
-?>

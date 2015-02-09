@@ -1,7 +1,7 @@
-<h2>Open Calls</h2>
-<?php session_start();?>
+<h2>Open Tickets</h2>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 
@@ -41,7 +41,7 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">
 			<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-			<input name="submit" value="" type="image" src="/images/ICONS-forward@2x.png" width="24" height="25" class="icon" alt="forward call"  title="forward call"/>
+			<input name="submit" value="" type="image" src="/images/ICONS-forward@2x.png" width="24" height="25" class="icon" alt="forward ticket"  title="forward ticket"/>
 			</form>
 		</td>
 		<td>
@@ -64,7 +64,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -87,7 +87,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -110,7 +110,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{

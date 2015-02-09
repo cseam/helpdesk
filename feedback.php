@@ -3,8 +3,9 @@
 <html lang="en">
 	<?php
 	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
-	// check authentication 
+	// check authentication
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>
 	<head>
@@ -23,7 +24,7 @@
 				<p>Comments aren't provided to the engineer directly and are confidential.</p>
 			</div>
 			<div id="calllist">
-				<h3>Your Helpdesks</h3>
+				<h3>Your Tickets</h3>
 				<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/yourcalls.php'); ?>
 			</div>
 		</div>
@@ -37,7 +38,7 @@
 						<li><a href="/">Home</a></li>
 					</ul>
 					<?php
-					// Create Query	
+					// Create Query
 					$sqlstr = "INSERT INTO feedback ";
 					$sqlstr .= "(callid, satisfaction, details, opened) ";
 					$sqlstr .= "VALUES (";
@@ -51,22 +52,22 @@
 					// Close Connection
 					mysqli_close($db);
 					} else {?>
-					<h1>Call Feedback</h1>
+					<h1>Ticket Feedback</h1>
 					<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
 						<fieldset>
 						<legend>Satisfaction</legend>
-							<label for="satisfaction1" style="width: 80%;"><img src="/images/star.png" alt="star" /></label><input type="radio" id="satisfaction1" name="satisfaction" value="1" style="width: 10%;"> 
-							<label for="satisfaction2" style="width: 80%;"><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /></label><input type="radio" id="satisfaction2" name="satisfaction" value="2" style="width: 10%;"> 
-							<label for="satisfaction3" style="width: 80%;"><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /></label><input type="radio" id="satisfaction3" name="satisfaction" value="3" style="width: 10%;"> 
-							<label for="satisfaction4" style="width: 80%;"><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /></label><input type="radio" id="satisfaction4" name="satisfaction" value="4" style="width: 10%;"> 
-							<label for="satisfaction5" style="width: 80%;"><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /><img src="/images/star.png" alt="star" /></label><input type="radio" id="satisfaction5" name="satisfaction" value="5" style="width: 10%;"> 
+							<label for="satisfaction1" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction1" name="satisfaction" value="1" style="width: 10%;">
+							<label for="satisfaction2" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction2" name="satisfaction" value="2" style="width: 10%;">
+							<label for="satisfaction3" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction3" name="satisfaction" value="3" style="width: 10%;">
+							<label for="satisfaction4" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction4" name="satisfaction" value="4" style="width: 10%;">
+							<label for="satisfaction5" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction5" name="satisfaction" value="5" style="width: 10%;">
 							<input type="hidden" id="callid" name="callid" value="<?=$_GET['id'];?>" />
 						</fieldset>
 						<fieldset>
 						<legend>Details</legend>
 							<label for="details">Comments</label>
 							<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
-						</fieldset>	
+						</fieldset>
 						<p class="buttons">
 							<button name="submit" value="submit" type="submit">Submit</button>
 							<button name="clear" value="clear" type="reset">Clear</button>

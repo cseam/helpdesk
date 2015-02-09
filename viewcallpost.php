@@ -1,8 +1,8 @@
 <?php
 	session_start();
-	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
-	// check authentication 
+	// check authentication
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	// select calls for ID
 	$sqlstr = "SELECT * FROM calls ";
@@ -20,10 +20,10 @@
 		<input type="hidden" id="id" name="id" value="<?php echo($calls['callid']);?>" />
 		<input type="hidden" id="details" name="details" value="<?php echo($calls['details']);?>" />
 		<h2><?php echo($calls['title']);?></h2>
-		<p class="callheader">Call #<?php echo($_POST['id']);?> <?php if ($calls['urgency'] === '3') { echo("Urgent ");} ?><?php echo($calls['categoryName']);?></p>
-		<p class="callheader">created by <a href="mailto:<?php echo($calls['email']);?>"><?php echo($calls['name']);?></a> (<?php echo($calls['tel']);?>)</p>	
-		<p class="callheader">for <?php echo($calls['room']);?> - <?php echo($calls['locationName']);?></p>
-		<p class="callheader">assigned to <?php echo(engineer_friendlyname($calls['assigned']));?></p>
+		<p class="callheader">Ticket #<?php echo($_POST['id']);?> <?php if ($calls['urgency'] === '3') { echo("Urgent ");} ?><?php echo($calls['categoryName']);?></p>
+		<p class="callheader">Created by <a href="mailto:<?php echo($calls['email']);?>"><?php echo($calls['name']);?></a> (<?php echo($calls['tel']);?>)</p>
+		<p class="callheader">For <?php echo($calls['room']);?> - <?php echo($calls['locationName']);?></p>
+		<p class="callheader">Assigned to <?php echo(engineer_friendlyname($calls['assigned']));?></p>
 		<p class="callheader">
 			<?php
 			if ($calls['status'] === '2') { echo("Call closed in ");} else { echo("Open for ");};
@@ -40,17 +40,17 @@
 		<?php if ($calls['lockerid'] != null) { ?><p class="callheader">Locker #<?php echo($calls['lockerid']);?></p><?php }; ?>
 		<?php
 		$additional_field_sql = "SELECT * FROM call_additional_results WHERE callid = ".$calls['callid'].";";
-		$additional_field_result = mysqli_query($db, $additional_field_sql); 
+		$additional_field_result = mysqli_query($db, $additional_field_sql);
 			while ($items = mysqli_fetch_array($additional_field_result)) { ?>
 			<p class="callheader"><?php echo($items['label']);?> - <?php echo($items['value']);?></p>
 		<?php }; ?>
 		<p class="callbody"><?php echo($calls['details']);?></p>
 		<fieldset>
-			<legend>Update Call</legend>
+			<legend>Update Ticket</legend>
 				<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 				<p><label for="attachment" style="width: 190px">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
 	<?php if ($_SESSION['engineerId'] !== null) {?>
-	<?php	
+	<?php
 		// filter for engineers helpdesks
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
 			$whereenginners = 'WHERE helpdesk_id <= 3';
@@ -62,7 +62,7 @@
 	<fieldset>
 		<legend>Engineer Controls</legend>
 			<span class="engineercontrols">
-				<label for="callreason">Reason behind issue</label>
+				<label for="callreason">Reason for issue</label>
 				<select id="callreason" name="callreason">
 					<option value="" SELECTED>Please Select</option>
 					<?php
@@ -88,20 +88,20 @@
 			</span>
 	</fieldset>
 	<?php }; ?>
-	<fieldset>	
+	<fieldset>
 		<legend>Update Controls</legend>
 			<p class="buttons">
 			<?php if ($calls['status'] === '1') {?>
-			<button name="close" value="close" type="submit">Close Call</button>
+			<button name="close" value="close" type="submit">Close Ticket</button>
 			<?php };?>
-			<button name="update" value="update" type="submit">Update Call</button>
+			<button name="update" value="update" type="submit">Update Ticket</button>
 			</p>
 			<p class="callfooter">Call Opened <?php echo(date("d/m/y h:s", strtotime($calls['opened'])));?><br />
 			Last Update <?php echo(date("d/m/y h:s", strtotime($calls['lastupdate'])));?></p>
 	</fieldset>
 	</form>
 </div>
-<?php 
+<?php
 // log user/engineer views
 $logsql = "INSERT INTO call_views (sAMAccountName, callid) VALUES ('" . $_SESSION['sAMAccountName'] . "','" . $calls['callid'] . "')";
 mysqli_query($db, $logsql);

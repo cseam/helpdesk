@@ -1,4 +1,5 @@
 <?php
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <table>
@@ -25,7 +26,7 @@
 </tr>
 <? } ?>
 
-<? 
+<?
 	if ($issuescount === 0) { echo "<tr><td colspan=2>None Detected</td></tr>"; };
 ?>
 </table>

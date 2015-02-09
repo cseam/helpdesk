@@ -3,7 +3,8 @@
 <html lang="en">
 	<?php
 	// load functions
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');	
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	// check authentication
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>
@@ -18,26 +19,26 @@
 			<div id="leftpage">
 				<div id="stats">
 					<h3>Information</h3>
-					<p>Welcome to helpdesk <?php echo($_SESSION['sAMAccountName']);?>, please use the form to log calls for engineers, once your call has been logged you will receive email feedback on your issue, you can also return here at any time to see the status of your calls.</p>
-					<p>Please remember the more information you can provide the quicker the engineer can fix your problem, for example when your printer is out of ink please include as much information as possible, printer model, colour of ink cartridge, room the printer is in. etc.. this saves the engineer asking these questions at a later point and slowing down the process.</p>
+					<p>Welcome to <?php echo(CODENAME);?>, please use the form to log tickets for engineers, once your ticket is logged you will receive email feedback on your issue, you can also return here at any time to see the status of your ticket.</p>
+					<p class="note">Remember the more information you provide the quicker the engineer can fix your problem. For example, your printer is out of ink please include, printer model, colour of ink cartridge, room the printer is in. etc.</p>
 				</div>
 				<div id="calllist">
-					<h3>Your Helpdesks</h3>
+					<h3>Your Tickets</h3>
 					<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/yourcalls.php'); ?>
 				</div>
 			</div>
 			<div id="rightpage">
 				<div id="addcall">
 					<div id="ajax">
-					<?php 
+					<?php
 						if ($_SERVER['REQUEST_METHOD']== "POST") {
 						// FORWARD CALLS
 						if (isset($_POST['forward'])) {
-							echo("<h2>Call forwarded</h2>");
-							echo("<p>Call #" . $_POST['id'] . " has been forwarded, and call details have been updated.</p>");
+							echo("<h2>Ticket forwarded</h2>");
+							echo("<p>Ticket #" . $_POST['id'] . " has been forwarded, and details have been updated.</p>");
 							echo("<p><a href='/'>Home</a></p>");
 							// Update Message
-							$reasonstr = "<div class=update><h3>Call forwarded (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".$_POST['details']."</div>";
+							$reasonstr = "<div class=update><h3>Ticket forwarded (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".$_POST['details']."</div>";
 							// Create SQL for reassign
 							$sqlstr = "UPDATE calls ";
 							$sqlstr .= "SET ";
@@ -53,11 +54,11 @@
 						}
 						//REASSIGN CALLS
 						if (isset($_POST['reassign'])) {
-							echo("<h2>Call Reassigned</h2>");
-							echo("<p>Call #" . $_POST['id'] . " has been reassigned, and call details have been updated.</p>");
+							echo("<h2>Ticket Reassigned</h2>");
+							echo("<p>Ticket #" . $_POST['id'] . " has been reassigned, and details have been updated.</p>");
 							echo("<p><a href='/'>Home</a></p>");
 							// Update Message
-							$reasonstr = "<div class=update><h3>Call reassigned (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".$_POST['details']."</div>";
+							$reasonstr = "<div class=update><h3>Ticket reassigned (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".$_POST['details']."</div>";
 							// Create SQL for reassign
 							$sqlstr = "UPDATE calls ";
 							$sqlstr .= "SET assigned=".$_POST['engineer'].", ";
@@ -97,10 +98,10 @@
 							$row = $contact->fetch_object();
 							$to = $row->email;
 							$message = "<p>Helpdesk (#" . $_POST['id'] .") has been closed</p>";
-							$message .= "<p>To view the details of this call please <a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>visit helpdesk</a></p>";
-							$message .= "<p>this is an automated message please do not reply, to update your call please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
-							$message .= "<p>you can provide confidential feedback to the engineers line manager, let us know how well your call was dealt with <a href='". $helpdeskloc ."/feedback.php?id=" . $_POST['id'] ."'>Provide Feedback</a></p>";
-							$msgtitle = "Helpdesk Call #" . $_POST['id'] . " Closed";
+							$message .= "<p>To view the details of this ticket please <a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>visit helpdesk</a></p>";
+							$message .= "<p>this is an automated message please do not reply, to update your ticket please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
+							$message .= "<p>you can provide confidential feedback to the engineers line manager, let us know how well your ticket was dealt with <a href='". $helpdeskloc ."/feedback.php?id=" . $_POST['id'] ."'>Provide Feedback</a></p>";
+							$msgtitle = "Helpdesk Ticket #" . $_POST['id'] . " Closed";
 							$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
 							$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
 							$headers .= 'MIME-Version: 1.0' . "\r\n";
@@ -111,7 +112,7 @@
 							// Send
 							mail($to, $msgtitle, $message, $headers);
 							echo("<h2>Updated & Closed</h2>");
-							echo("<p>Call #" . $_POST['id'] . " has been updated and closed, email sent.</p>");
+							echo("<p>Ticket #" . $_POST['id'] . " has been updated and closed.</p>");
 							echo("<p><a href='/'>Home</a></p>");
 						}
 						// UPDATE CALL
@@ -143,9 +144,9 @@
 							$to = $row->email;
 							$message = "<p>Your helpdesk (#" . $_POST['id'] .") has been updated</p>";
 							$message .= "<p>To view the details of this update please visit helpdesk</p>";
-							$message .= "<p><a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>View Call</a></p>";
-							$message .= "<p>this is an automated message please do not reply, to update your call please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
-							$msgtitle = "Helpdesk Call #" . $_POST['id'] . " Update";
+							$message .= "<p><a href='". $helpdeskloc ."/viewcall.php?id=" . $_POST['id'] ."'>View Tciket</a></p>";
+							$message .= "<p>this is an automated message please do not reply, to update your ticket please <a href='". $helpdeskloc ."'>Visit helpdesk</a></p>";
+							$msgtitle = "Helpdesk Ticket #" . $_POST['id'] . " Update";
 							$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
 							$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
 							$headers .= 'MIME-Version: 1.0' . "\r\n";
@@ -156,8 +157,8 @@
 							// Send
 							mail($to, $msgtitle, $message, $headers);
 							//display message
-							echo("<h2>Call updated</h2>");
-							echo("<p>Call #" . $_POST['id'] . " has been updated, email sent to update users.</p>");
+							echo("<h2>Ticket updated</h2>");
+							echo("<p>Ticket #" . $_POST['id'] . " has been updated, email sent to update users.</p>");
 							echo("<p><a href='/'>Home</a></p>");
 						}
 					} ?>

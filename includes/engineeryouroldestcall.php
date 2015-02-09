@@ -10,7 +10,7 @@
 	$sqloldeststr .= "LIMIT 1";
 	$oldestresult = mysqli_query($db, $sqloldeststr);
 	// display results to page
-	
+
 	if (mysqli_num_rows($oldestresult) == 0) { echo("<h3>0 assigned calls</h3>"); };
 	while($call = mysqli_fetch_array($oldestresult))  {
 	?>
@@ -18,11 +18,11 @@
 	<form action="updatecall.php" method="post" enctype="multipart/form-data">
 	<input type="hidden" id="id" name="id" value="<?=$call['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$call['details'];?>" />
-	<h2>Oldest Call Details #<?=$call['callid'];?></h2>
+	<h2>Oldest Ticket Details #<?=$call['callid'];?></h2>
 	<h3><?=$call['title'];?></h3>
-	<p class="callheader">created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>	
-	<p class="callheader">for <?=$call['room'];?> - <?=$call['locationName'];?></p>
-	<p class="callheader">Open for 
+	<p class="callheader">Created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>
+	<p class="callheader">For <?=$call['room'];?> - <?=$call['locationName'];?></p>
+	<p class="callheader">Open for
 					<?php
 						$date1 = strtotime($calls['opened']);
 						if ($calls['status'] ==='2') { $date2 = strtotime($calls['closed']); } else { $date2 = time(); };
@@ -36,17 +36,17 @@
 	<hr />
 	<?php
 	 $additional_field_sql = "SELECT * FROM call_additional_results WHERE callid = ".$call['callid'].";";
-	 $additional_field_result = mysqli_query($db, $additional_field_sql); 
+	 $additional_field_result = mysqli_query($db, $additional_field_sql);
 	 while ($items = mysqli_fetch_array($additional_field_result)) { ?>
-	 <p class="callheader"><?=$items['label']?> - <?=$items['value']?></p>	 
+	 <p class="callheader"><?=$items['label']?> - <?=$items['value']?></p>
 	<? } ?>
 	<p class="callbody"><?=$call['details'];?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p><label for="attachment" style="width: 190px">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
-	
-	
+
+
 	<?php if ($_SESSION['engineerId'] !== null) {?>
-	<?	
+	<?
 		// filter for engineers helpdesks
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
 			$whereenginners = 'WHERE helpdesk_id <= 3';
@@ -57,7 +57,7 @@
 	<fieldset>
 		<legend>Engineer Controls</legend>
 	<span class="engineercontrols">
-			<label for="callreason">Reason behind issue</label>
+			<label for="callreason">Reason for issue</label>
 			<select id="callreason" name="callreason" required>
 				<option value="" SELECTED>Please Select</option>
 				<?php
@@ -84,10 +84,10 @@
 	</fieldset>
 	<?php } ?>
 	<p class="buttons">
-		<button name="close" value="close" type="submit">Close Call</button>
-		<button name="update" value="update" type="submit">Update Call</button>
+		<button name="close" value="close" type="submit">Close Ticket</button>
+		<button name="update" value="update" type="submit">Update Ticket</button>
 	</p>
-	<p class="callfooter">Call Opened <?=date("d/m/y h:s", strtotime($call['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($call['lastupdate']));?></p>
+	<p class="callfooter">Ticket Opened <?=date("d/m/y h:s", strtotime($call['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($call['lastupdate']));?></p>
 	</form>
 	</div>
 	<?php } ?>

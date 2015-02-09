@@ -10,7 +10,7 @@
 	// display results if found
 	if(mysqli_num_rows($result) > 0) {
 ?>
-<h3>Urgent Calls</h3>
+<h3>Urgent Tickets</h3>
 <div id="ajaxforms">
 	<table>
 	<tbody>
@@ -25,7 +25,7 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<input type="image" name="submit" value="submit" src="/images/ICONS-urgent@2x.png" width="24" height="25" class="icon" alt="View Call" title="View Call" />
+				<input type="image" name="submit" value="submit" src="/images/ICONS-urgent@2x.png" width="24" height="25" class="icon" alt="View ticket" title="View ticket" />
 			</form>
 		</td>
 		</tr>

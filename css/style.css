@@ -34,6 +34,7 @@ body {
 	box-sizing: border-box;
 	height: 100%;
 	line-height: 1.3rem;
+	overflow: hidden;
 }
 a {
 	font-family: 'verlag', Arial;

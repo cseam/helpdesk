@@ -1,7 +1,10 @@
-<?php 
+<?php
 	session_start();
+
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
-	if (empty($_SESSION['sAMAccountName'])) { 
+
+	if (empty($_SESSION['sAMAccountName'])) {
 			prompt_auth($_SERVER['REQUEST_URI']);
 	} else {
 		if ($_SESSION['engineerLevel'] === "2") {
@@ -12,4 +15,3 @@
 			die("<script>location.href = '/add.php'</script>");
 	    };
 	};
-?>

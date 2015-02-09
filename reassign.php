@@ -1,23 +1,23 @@
-<?php 
+<?php
 	session_start();
-	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/functions.php');
 ?>
 <script src="/javascript/jquery.validate.min.js" type="text/javascript"></script>
 <form action="updatecall.php" method="post" enctype="multipart/form-data" id="reassign">
-	<h3>Reassign Call</h3>
+	<h3>Reassign Ticket</h3>
 	<fieldset>
-		<legend>Helpdesk Call #<?php echo($_POST['id']);?></legend>
+		<legend>Helpdesk Ticket #<?php echo($_POST['id']);?></legend>
 		<input type="hidden" id="id" name="id" value="<?php echo($_POST['id']);?>" />
 		<label for="helpdesk">Assign to</label>
 			<select id="engineer" name="engineer" required>
 				<option value="" SELECTED>Please Select</option>
 				<?php
 				if ($_SESSION['engineerHelpdesk'] <= '3') {
-					$whereenginners = 'WHERE helpdesk <= 3';	
+					$whereenginners = 'WHERE helpdesk <= 3';
 				} else {
-					$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];				
-				};	
+					$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];
+				};
 				$helpdesks = mysqli_query($db, "SELECT * FROM engineers " .$whereenginners. " ORDER BY engineerName");
 				while($option = mysqli_fetch_array($helpdesks)) { ?>
 					<option value="<?php echo($option['idengineers']);?>"><?php echo($option['engineerName']);?></option>

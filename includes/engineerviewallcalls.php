@@ -1,8 +1,10 @@
-<?php session_start();
+<?php
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <div id="ajaxforms">
-<p class="note">Showing all open calls for
+<p class="note">Showing all open tickets for
 	<?
 	if ($_SESSION['engineerHelpdesk'] <= '3') { ?>
 	<?=helpdesk_friendlyname(1)?>, <?=helpdesk_friendlyname(2)?>, <?=helpdesk_friendlyname(3)?>.
@@ -32,18 +34,14 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<input type="image" name="submit" value="submit" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Call"  title="View Call"/>
+				<input type="image" name="submit" value="submit" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View ticket"  title="View ticket"/>
 			</form>
 		</td>
-
-
 		</tr>
 	<? } ?>
 	</tbody>
 	</table>
 </div>
-
-
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
     $('.assignedtoyou').submit(function(e) {
@@ -54,7 +52,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{

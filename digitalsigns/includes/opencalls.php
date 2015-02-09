@@ -1,9 +1,9 @@
-<?php session_start();?>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 ?>
-<h3 class="indent">Oldest Open Calls</h3>
+<h3 class="indent">Oldest Open Tickets</h3>
 <div id="ajaxforms">
 	<table>
 	<thead>
@@ -12,7 +12,7 @@
 			<th>Assigned</th>
 			<th>Snapshot</th>
 		</tr>
-	</thead>		
+	</thead>
 	<tbody>
 	<?php
 		//run select query

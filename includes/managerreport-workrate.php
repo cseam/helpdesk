@@ -1,4 +1,4 @@
-<p>All Calls Closed in last (X) number of days</p>
+<p>All tickets closed in last (X) number of days</p>
 <table>
 <tr>
 	<th>Engineer Name</th>
@@ -7,6 +7,7 @@
 	<th>24 Hours</th>
 </tr>
 <?php
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
 			$whereenginners = 'WHERE engineers.helpdesk <= 3';
@@ -28,7 +29,7 @@
 </tr>
 <?	} ?>
 </table>
-<p>Number of calls assigned to engineer / of those closed / ratio complete last 30 days</p>
+<p>Number of tickets assigned to engineer / of those closed / ratio complete last 30 days</p>
 <table>
 <tr>
 	<th>Engineer Name</th>

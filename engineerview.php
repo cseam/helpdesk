@@ -3,13 +3,13 @@
 <html lang="en">
 	<?php
 	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	// check authentication
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>
 	<head>
 		<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/header.php'); ?>
-		<meta http-equiv="refresh" content="600" />
 	</head>
 	<body>
 		<div class="section">
@@ -24,9 +24,9 @@
 				<div id="calllist">
 					<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/engineerurgentcalls.php'); ?>
 					<p class="engineersubnav">
-						<a href="#" onclick="showassignedcalls()"><img src="/images/ICONS-yourcalls@2x.png" alt="your calls" title="your calls"  width="16" height="17" /> My Calls</a>
-						<a href="#" onclick="showallcalls()"><img src="/images/ICONS-allcalls@2x.png" alt="your calls" title="your calls"  width="16" height="17" /> All Calls</a>
-						<a href="#" onclick="showreports()"><img src="/images/ICONS-workrate@2x.png" alt="your calls" title="your calls"  width="16" height="17" /> Reports</a>
+						<a href="#" onclick="showassignedcalls()"><img src="/images/ICONS-yourcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> My Tickets</a>
+						<a href="#" onclick="showallcalls()"><img src="/images/ICONS-allcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> All Tickets</a>
+						<a href="#" onclick="showreports()"><img src="/images/ICONS-workrate@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> Reports</a>
 					</p>
 					<script type="text/javascript">
 						function showallcalls() {
@@ -35,7 +35,7 @@
 							type: 'GET',
 							url: '/includes/engineerviewallcalls.php',
 							data: $(this).serialize(),
-							beforeSend: function() { $('#engineerscallview').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>'); },
+							beforeSend: function() { $('#engineerscallview').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
 							success: function(data) { $('#engineerscallview').html(data); },
 							error: function() { $('#engineerscallview').html('error loading data, please refresh.'); }
 						});
@@ -47,7 +47,7 @@
 							type: 'GET',
 							url: '/includes/engineerassignedtoyou.php',
 							data: $(this).serialize(),
-							beforeSend: function() { $('#engineerscallview').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>'); },
+							beforeSend: function() { $('#engineerscallview').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
 							success: function(data) { $('#engineerscallview').html(data); },
 							error: function() { $('#engineerscallview').html('error loading data, please refresh.'); }
 						});
@@ -59,7 +59,7 @@
 							type: 'GET',
 							url: '/includes/engineerreports.php',
 							data: $(this).serialize(),
-							beforeSend: function() { $('#engineerscallview').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>'); },
+							beforeSend: function() { $('#engineerscallview').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
 							success: function(data) { $('#engineerscallview').html(data); },
 							error: function() { $('#engineerscallview').html('error loading data, please refresh.'); }
 						});

@@ -1,11 +1,9 @@
-
 	<?php
-	
 	// Get engineer calls closed for line chart
-	$sqlstr = "SELECT closeengineerid, DATE_FORMAT(closed, '%a')AS DAY_OF_WEEK FROM calls WHERE closeengineerid = '".$_SESSION['engineerId']."' AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)"; 
-	$engineermon = $engineertue = $engineerwed = $engineerthu = $engineerfri = $engineersat = $engineersun = 0;	
-	$resultengineer = mysqli_query($db, $sqlstr); 
-		while($stats = mysqli_fetch_array($resultengineer))  { 	
+	$sqlstr = "SELECT closeengineerid, DATE_FORMAT(closed, '%a')AS DAY_OF_WEEK FROM calls WHERE closeengineerid = '".$_SESSION['engineerId']."' AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)";
+	$engineermon = $engineertue = $engineerwed = $engineerthu = $engineerfri = $engineersat = $engineersun = 0;
+	$resultengineer = mysqli_query($db, $sqlstr);
+		while($stats = mysqli_fetch_array($resultengineer))  {
 			SWITCH ($stats['DAY_OF_WEEK']) {
             	CASE "Mon":
                 	++$engineermon;
@@ -32,10 +30,10 @@
 		}
 
 	// Get all calls closed for line chart
-	$sqlstrall = "SELECT closeengineerid, DATE_FORMAT(closed, '%a') AS DAY_OF_WEEK FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)"; 
+	$sqlstrall = "SELECT closeengineerid, DATE_FORMAT(closed, '%a') AS DAY_OF_WEEK FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)";
 	$allmon = $alltue = $allwed = $allthu = $allfri = $allsat = $allsun = 0;
-	$resultall = mysqli_query($db, $sqlstrall); 
-		while($stats = mysqli_fetch_array($resultall))  { 
+	$resultall = mysqli_query($db, $sqlstrall);
+		while($stats = mysqli_fetch_array($resultall))  {
 			SWITCH ($stats['DAY_OF_WEEK']) {
             	CASE "Mon":
                 	++$allmon;
@@ -60,23 +58,23 @@
                 	break;
             }
 		}
-		
+
 	// Get all calls closed by engineer this week for pie
 	$sqlstrpieall = "SELECT closeengineerid FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND closeengineerid = '".$_SESSION['engineerId']."'";
 	$allpie = 0;
-	$resultpieall = mysqli_query($db, $sqlstrpieall); 
+	$resultpieall = mysqli_query($db, $sqlstrpieall);
 		while($stats = mysqli_fetch_array($resultpieall))  {
-			++$allpie;	
+			++$allpie;
 		}
-	// Get all open calls by engineer 
+	// Get all open calls by engineer
 	$sqlstrpieopen = "SELECT assigned FROM calls WHERE status = '1' AND assigned = '".$_SESSION['engineerId']."'";
 	$allopen = 0;
-	$resultpieopen = mysqli_query($db, $sqlstrpieopen); 
+	$resultpieopen = mysqli_query($db, $sqlstrpieopen);
 		while($stats = mysqli_fetch_array($resultpieopen))  {
 			++$allopen;
 		}
 	?>
-		
+
 		<!--Google Graphs-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 		<?php
+		include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 		include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 		// check authentication
 		if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); }; ?>
@@ -10,32 +11,32 @@
 	</head>
 	<body>
 	<div class="section">
-	<div id="branding">
-		<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'); ?>
-	</div>
-	<div id="leftpage">
-	<div id="stats">
-		<h3>Information</h3>
-		<p>Welcome to helpdesk <?php echo $_SESSION['sAMAccountName'];?>, please use the form to log calls for engineers, once your call has been logged you will receive email feedback on your issue, you can also return here at any time to see the status of your calls.</p>
-		<p class="note">Remember the more information you provide the quicker the engineer can fix your problem. For example, your printer is out of ink please include, printer model, colour of ink cartridge, room the printer is in. etc.</p>
-	</div>
-	<div id="calllist">
-		<h3>Your Helpdesks</h3>
-		<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/yourcalls.php'); ?>
-	</div>
-	</div>
-	<div id="rightpage">
-		<div id="addcall">
-			<div id="ajax">
+		<div id="branding">
+			<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'); ?>
+		</div>
+		<div id="leftpage">
+			<div id="stats">
+				<h3>Information</h3>
+					<p>Welcome to <?php echo(CODENAME);?>, please use the form to log tickets for engineers, once your ticket is logged you will receive email feedback on your issue, you can also return here at any time to see the status of your ticket.</p>
+					<p class="note">Remember the more information you provide the quicker the engineer can fix your problem. For example, your printer is out of ink please include, printer model, colour of ink cartridge, room the printer is in. etc.</p>
+			</div>
+			<div id="calllist">
+				<h3>Your Tickets</h3>
+					<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/yourcalls.php'); ?>
+			</div>
+		</div>
+		<div id="rightpage">
+			<div id="addcall">
+				<div id="ajax">
 				<?php if ($_SERVER['REQUEST_METHOD']== "POST") { ?>
 				<h2>Thank you</h2>
-				<p>Your Helpdesk has been added. Your call has been assigned to <?php if ($_POST['cmn-toggle-selfassign'] !== null) { echo engineer_friendlyname(check_input($_POST['cmn-toggle-selfassign'])); } else { echo engineer_friendlyname(next_engineer(check_input($_POST['helpdesk']))); }; ?>, the engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
+				<p>Your ticket has been added and has been assigned to <?php if ($_POST['cmn-toggle-selfassign'] !== null) { echo engineer_friendlyname(check_input($_POST['cmn-toggle-selfassign'])); } else { echo engineer_friendlyname(next_engineer(check_input($_POST['helpdesk']))); }; ?>, the engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
 				<p>Please check your email for further details.</p>
 				<ul>
 					<li><a href="/">Home</a></li>
 				</ul>
 				<?php
-					// Upload attachments 
+					// Upload attachments
 					if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
 					$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
 					$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']);
@@ -55,10 +56,10 @@
 					$sqlstr .= " '" . check_input($_POST['email']) . "',";
 					$sqlstr .= " '" . check_input($_POST['tel']) . "',";
 					$sqlstr .= " '<div class=original>" . $upload_img_code . check_input($_POST['details']) . "</div>',";
-						if ($_POST['cmn-toggle-selfassign'] !== null) { 
+						if ($_POST['cmn-toggle-selfassign'] !== null) {
 						$sqlstr .= " '" . check_input($_POST['cmn-toggle-selfassign']) . "',";
 						} else {
-						$sqlstr .= " '" . next_engineer(check_input($_POST['helpdesk'])) . "',";	
+						$sqlstr .= " '" . next_engineer(check_input($_POST['helpdesk'])) . "',";
 						};
 					$sqlstr .= " '" . date("c") . "',";
 					$sqlstr .= " '" . date("c") . "',";
@@ -78,13 +79,13 @@
 					$sqlstr .= " '" . $_SESSION['sAMAccountName'] . "',";
 					$sqlstr .= " '" . check_input($_POST['helpdesk']) . "',";
 					$sqlstr .= " '" . check_input($_POST['title']) . "',";
-						if ($_POST['category'] != '11' ) { 
+						if ($_POST['category'] != '11' ) {
 						$sqlstr .= " " . "null" . " ";
 						} else {
 						$lockerid = random_locker();
 						$sqlstr .= " '". $lockerid ."' ";
 						// Print locker number to screen
-						echo("<fieldset><legend>Engineer Note</legend><p class='lockernotice'>store laptop in locker #". $lockerid ."</p></fieldset>");	
+						echo("<fieldset><legend>Engineer Note</legend><p class='lockernotice'>store laptop in locker #". $lockerid ."</p></fieldset>");
 						};
 					$sqlstr .= ")";
 					// Run Query
@@ -106,11 +107,49 @@
 					// Close Connection
 					mysqli_close($db);
 	 } else {?>
-		<h1>Add Call</h1>
+		<h1>Add Ticket</h1>
 		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
 		<fieldset>
-			<legend>Helpdesk</legend>
-				<label for="helpdesk" title="select the college department">Report to</label>
+			<legend>Your contact details</legend>
+				<label for="name" title="Contact name for this call">Your Name</label>
+				<input type="text" id="name" name="name" value="<?php echo $_SESSION['sAMAccountName'];?>"  required />
+				<label for="email" title="Contact email so engineer can comunicate">Your Email</label>
+				<input type="text" id="email" name="email" value="<?php echo $_SESSION['sAMAccountName']."@". COMPANY_SUFFIX;?>"  required />
+				<label for="tel" title="Contact telephone so engineer can comunicate">Telephone/Mobile Number</label>
+				<input type="text" id="tel" name="tel" value=""  required />
+		</fieldset>
+		<fieldset>
+			<legend>Location of issue</legend>
+				<label for="location" title="location on campus of issue">Location on campus</label>
+				<select id="location" name="location">
+					<option value="" SELECTED>Please Select</option>
+					<?php
+						$locations = mysqli_query($db, "SELECT * FROM location ORDER BY locationName;");
+							while($option = mysqli_fetch_array($locations))  { ?>
+								<option value="<?php echo $option['id'];?>"><?php echo $option['locationName'];?></option>
+					<? }; ?>
+				</select>
+				<label for="room" title="Room where issue is">Room or Place</label>
+				<input type="text" id="room" name="room" value="" />
+		</fieldset>
+		<fieldset>
+			<legend>Scope of issue</legend>
+				<label for="callurgency" title="how the issue effects me">Urgency</label>
+				<select id="callurgency" name="callurgency">
+					<option value="1">An alternative is available</option>
+					<option value="2">This is affecting my work</option>
+					<option value="3">I cannot work</option>
+				</select>
+				<label for="callseverity" title="how the issue effects me">Severity</label>
+				<select id="callseverity" name="callseverity">
+					<option value="1">This problem affects only me</option>
+					<option value="2">This problem affects multiple people</option>
+					<option value="3">This problem affects all of <?php echo(COMPANY_NAME);?> and boarding houses</option>
+				</select>
+		</fieldset>
+		<fieldset>
+			<legend>Department</legend>
+				<label for="helpdesk" title="select the college department">Report to this department</label>
 				<select id="helpdesk" name="helpdesk" required>
 					<option value="" SELECTED>Please Select</option>
 						<?php
@@ -134,46 +173,8 @@
 				<div id="helpdesk_description"></div>
 		</fieldset>
 		<fieldset>
-			<legend>Primary Contact</legend>
-				<label for="name" title="Contact name for this call">Name</label>
-				<input type="text" id="name" name="name" value="<?php echo $_SESSION['sAMAccountName'];?>"  required />
-				<label for="email" title="Contact email so engineer can comunicate">Email</label>
-				<input type="text" id="email" name="email" value="<?php echo $_SESSION['sAMAccountName']."@".$companysuffix;?>"  required />
-				<label for="tel" title="Contact telephone so engineer can comunicate">Telephone</label>
-				<input type="text" id="tel" name="tel" value=""  required />
-		</fieldset>
-		<fieldset>
-			<legend>Location</legend>
-				<label for="location" title="location on campus of issue">Site</label>
-				<select id="location" name="location">
-					<option value="" SELECTED>Please Select</option>
-					<?php
-						$locations = mysqli_query($db, "SELECT * FROM location ORDER BY locationName;");
-							while($option = mysqli_fetch_array($locations))  { ?>
-								<option value="<?php echo $option['id'];?>"><?php echo $option['locationName'];?></option>
-					<? }; ?>
-				</select>
-				<label for="room" title="Room where issue is">Room</label>
-				<input type="text" id="room" name="room" value="" />
-		</fieldset>
-		<fieldset>
-			<legend>Scope</legend>
-				<label for="callurgency" title="how the issue effects me">Urgency</label>
-				<select id="callurgency" name="callurgency">
-					<option value="1">An alternative is available</option>
-					<option value="2">This is affecting my work</option>
-					<option value="3">I cannot work</option>
-				</select>
-				<label for="callseverity" title="how the issue effects me">Severity</label>
-				<select id="callseverity" name="callseverity">
-					<option value="1">This problem affects only me</option>
-					<option value="2">This problem affects multiple people</option>
-					<option value="3">This problem affects all of <?php echo $companyname;?></option>
-				</select>
-		</fieldset>
-		<fieldset>
-			<legend>Details</legend>
-				<label for="category" title="what type of issue do you have?">Type</label>
+			<legend>Details of problem</legend>
+				<label for="category" title="what type of issue do you have?">Type of issue</label>
 				<select id="category" name="category">
 					<option value="" SELECTED>Please Select</option>
 						<?php
@@ -194,28 +195,27 @@
 				});
 				</script>
 				<div id="additional_fields"></div>
-				<label for="title" title="short one line title of your problem">Problem Title</label>
+				<label for="title" title="short one line title of your problem">Short description of issue (Title)</label>
 				<input type="text" id="title" name="title" value="" required />
-				<label for="details" title="enter the full details of your problem">Details</label>
+				<label for="details" title="enter the full details of your problem">Describe issue in details</label>
 				<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
 		</fieldset>
 		<fieldset>
-			<legend>Attachments</legend>
+			<legend>Attachments (optional)</legend>
 				<label for="attachment" title="add attachments if required">Picture or Screenshot</label>
 				<input type="file" name="attachment" accept="image/*">
 		</fieldset>
 		<?php if ($_SESSION['engineerId'] !== null) {?>
 		<fieldset>
-			<legend>Engineer Controls</legend>	
-			
+			<legend>Engineer Controls</legend>
 			<table>
 				<tr>
 					<td style="border-bottom: 0;">
-						<label for="cmn-toggle-selfassign" title="assign call to myself" style="width: 200px; padding: 4px 0;">Assign call to myself</label>
+						<label for="cmn-toggle-selfassign" title="assign call to myself" style="width: 200px; padding: 4px 0;">Assign ticket to myself</label>
 						<input type="checkbox" name="cmn-toggle-selfassign" id="cmn-toggle-selfassign" value="<?php echo $_SESSION['engineerId'];?>" class="cmn-toggle cmn-toggle-round"><label for="cmn-toggle-selfassign"></label>
 					</td>
 					<td style="border-bottom: 0;">
-						<label for="cmn-toggle-retro" title="open call closed work already complete" style="width: 200px; padding: 4px 0;">Instantly close call</label>
+						<label for="cmn-toggle-retro" title="open call closed work already complete" style="width: 200px; padding: 4px 0;">Instantly close ticket</label>
 						<input type="checkbox" name="cmn-toggle-retro" id="cmn-toggle-retro" value="1" class="cmn-toggle cmn-toggle-round">
 						<label for="cmn-toggle-retro"></label>
 					</td>
@@ -229,10 +229,10 @@
 		</p>
 		</form>
 	<?php }; ?>
-		</div>
+			</div>
 		</div>
 	</div>
-	</div>
+</div>
 	<script src="/javascript/jquery.validate.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$("#addForm").validate({

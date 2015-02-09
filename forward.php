@@ -1,15 +1,16 @@
-<?php 
+<?php
 	session_start();
 	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <script src="/javascript/jquery.validate.min.js" type="text/javascript"></script>
 <form action="updatecall.php" method="post" enctype="multipart/form-data" id="forward">
 <input type="hidden" id="id" name="id" value="<?php echo($_POST['id']);?>" />
-	<h3>Forward Call</h3>
+	<h3>Forward Ticket</h3>
 		<fieldset>
-		<legend>Helpdesk Call #<?php echo($_POST['id']);?></legend>
-			<label for="fwdhelpdesk">forward #<?php echo($_POST['id']);?> call to</label>
+		<legend><?php echo(CODENAME);?> ticket #<?php echo($_POST['id']);?></legend>
+			<label for="fwdhelpdesk">forward #<?php echo($_POST['id']);?> ticket to</label>
 			<select id="fwdhelpdesk" name="fwdhelpdesk" required>
 				<option value="" SELECTED>Please Select</option>
 				<?php
@@ -22,7 +23,7 @@
 			<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
 		</fieldset>
 		<p class="buttons">
-			<button name="forward" value="forward" type="submit">Forward Call</button>
+			<button name="forward" value="forward" type="submit">Forward Ticket</button>
 		</p>
 </form>
 <script type="text/javascript">

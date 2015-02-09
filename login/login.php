@@ -3,6 +3,7 @@
 <html lang="en">
 <?php
 	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	// reset session details
 	$_SESSION['engineerLevel'] = 0;
@@ -13,7 +14,7 @@
 	// on post
 	if ($_SERVER['REQUEST_METHOD']== "POST") {
 		// using ldap bind
-		$ldaprdn  = $_POST['username'] . '@' . $companysuffix;     // lusername from form + domain suffix
+		$ldaprdn  = $_POST['username'] . '@' . COMPANY_SUFFIX;     // lusername from form + domain suffix
 		$ldappass = $_POST['password'];  // associated password
 		// check password isnt blank as ldap allows anon login that results in true
 			if($ldappass == "") {
@@ -21,7 +22,7 @@
 				$error = "enter a password";
 			} else {
 				// connect to ldap server
-				$ldap_loc = $ldapserver;
+				$ldap_loc = LDAP_SERVER;
 				$ldap_port = 389;
 				$ldapconn = ldap_connect($ldap_loc, $ldap_port) or die("Could not connect to LDAP server.");
 					if ($ldapconn) {
@@ -55,7 +56,7 @@
 			}
 	};
 	?>
-	<head>	
+	<head>
 		<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'); ?>
 	</head>
 	<body>
@@ -64,7 +65,7 @@
 		</div>
 		<div id="leftpage">
 			<fieldset id="login">
-				<legend>login to helpdesk</legend>
+				<legend>login to <?php echo(CODENAME);?></legend>
 				<?php if ($error) { ?>
 				<div id="formError">
 					<h3>Error</h3>
@@ -76,38 +77,31 @@
 						<label for="password">Password</label><input id="password" type="password" name="password" value="">
 						<input id="btnLogin" type="submit" name="btnLogin" value="LOGIN" />
 					</form>
-				<p>Welcome to <?php echo($codename);?>, please login with your standard college username and password.</p>
+				<p>Welcome to <?php echo(CODENAME);?>, please login with your standard college username and password.</p>
 				<p>You do not need to prefix your username with CLC\, login like you would to one of the College computers. E.G. username: smitha</p>
-				<p>If you have any issues with <?php echo($codename);?> contact the IT Support department. </p>
+				<p>If you have any issues with <?php echo(CODENAME);?> contact the IT Support department. </p>
 			</fieldset>
 		</div>
 		<div id="rightpage">
 			<div id="addcall">
 				<div id="ajax">
 					<h2>FAQ's</h2>
-					<h3>What is <?php echo($codename);?>?</h3>
-					<p><?php echo($codename);?> is a way for users at CLC to report issues they have noticed around College and the boarding houses, quickly and easily to the correct department for action.</p>
-					<h3>Who Can use <?php echo($codename);?>?</h3>
-					<p><?php echo($codename);?> is open to both Staff & Students, it is a way to open communication with the correct department. if you notice a bulb has blown, tap is dripping, computer isn't working, sign has fallen down, don't wait for someone else to report it, you can.</p>
+					<h3>What is  <?php echo(CODENAME);?>?</h3>
+					<p> <?php echo(CODENAME);?> is a way for users at CLC to report issues they have noticed around campus, quickly and easily to the correct department for action.</p>
+					<h3>Who Can use  <?php echo(CODENAME);?>?</h3>
+					<p> <?php echo(CODENAME);?> is open to both staff and students, it is a way to open communication with the correct department. if you notice a bulb has blown, tap is dripping, computer isn't working, sign has fallen down, don't wait for someone else to report it, you can.</p>
 					<h3>What should I report?</h3>
 					<p>Anything you feel isn't working correctly, engineers from the correct department will then be able to ask you questions about your ticket to help resolve the problem. Please include as much information as possible, saying a radiator doesn't work but not saying the location, or asking for ink for your printer but not telling the engineer the printer model or ink colour will slow down the process.</p>
-					<h3>Why should i log a <?php echo($codename);?>?</h3>
+					<h3>Why should i log a  <?php echo(CODENAME);?>?</h3>
 					<p>It's a quick process, that will ensure the problem is looked at. College is a large environment and something you notice may take weeks to be noticed by engineers in their day to day routine. Reporting your issues will help resolve frustration when someone else comes to use the equipment to find it broken.</p>
 					<h3>Why not just send an email?</h3>
-					<p>If an engineer is on holiday or you are unsure who to contact <?php echo($codename);?> takes care of that for you, while providing department managers with statistical data on issues helping them troubleshoot larger issues or spot patterns, emailing individuals may solve your issue but wont help solve future issues.</p>
+					<p>If an engineer is on holiday or you are unsure who to contact  <?php echo(CODENAME);?> takes care of that for you, while providing department managers with statistical data on issues helping them troubleshoot larger issues or spot patterns, emailing individuals may solve your issue but wont help solve future issues.</p>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">$(document).ready(alert('IMPORTANT: This is a beta for testing, any tickets logged will not be fixed please use the existing helpdesk to report real issues'))</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

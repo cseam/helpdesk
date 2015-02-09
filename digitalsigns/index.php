@@ -1,10 +1,10 @@
-<?php session_start();?>
+<?php
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
+?>
 <!DOCTYPE HTML>
 <html lang="en"  id="digitalsign">
-	<?php
-	// load functions
-	include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
-	?>
 	<head>
 		<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 		<!-- included local jquery as box doesnt have inet access -->
@@ -15,9 +15,9 @@
 	<div id="branding">
 	</div>
 	<div id="leftpage">
-		
+
 		<div id="digitalsign-stats">
-			<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/digitalsigns/includes/stats.php'; ?>			
+			<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/digitalsigns/includes/stats.php'; ?>
 		</div>
 		<script type="text/javascript">
 			function update_stats() {
@@ -25,7 +25,7 @@
 						type: 'GET',
 						url: '/digitalsigns/includes/stats.php',
 						data: $(this).serialize(),
-						beforeSend: function() { $('#digitalsign-stats').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>'); },
+						beforeSend: function() { $('#digitalsign-stats').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
 						success: function(data) { $('#digitalsign-stats').html(data); },
 						error: function() { $('#digitalsign-stats').html('error loading data, please wait.'); }
 					});
@@ -33,9 +33,9 @@
 			};
 			setInterval(update_stats, 120000);
 		</script>
-					
+
 		<div id="topengineers">
-			<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/digitalsigns/includes/topengineers.php'; ?>			
+			<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/digitalsigns/includes/topengineers.php'; ?>
 		</div>
 		<script type="text/javascript">
 			function update_topengineers() {
@@ -43,7 +43,7 @@
 						type: 'GET',
 						url: '/digitalsigns/includes/topengineers.php',
 						data: $(this).serialize(),
-						beforeSend: function() { $('#topengineers').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>'); },
+						beforeSend: function() { $('#topengineers').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
 						success: function(data) { $('#topengineers').html(data); },
 						error: function() { $('#topengineers').html('error loading data, please wait.'); }
 					});
@@ -60,7 +60,7 @@
 						type: 'GET',
 						url: '/digitalsigns/includes/issues.php',
 						data: $(this).serialize(),
-						beforeSend: function() { $('#issues').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>'); },
+						beforeSend: function() { $('#issues').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
 						success: function(data) { $('#issues').html(data); },
 						error: function() { $('#issues').html('error loading data, please wait.'); }
 					});
@@ -81,7 +81,7 @@
 						type: 'GET',
 						url: '/digitalsigns/includes/opencalls.php',
 						data: $(this).serialize(),
-						beforeSend: function() { $('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>'); },
+						beforeSend: function() { $('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
 						success: function(data) { $('#ajax').html(data); },
 						error: function() { $('#ajax').html('error loading data, please wait.'); }
 					});

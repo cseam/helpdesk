@@ -1,6 +1,6 @@
-<?php session_start();?>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <div id="ajaxforms">
@@ -53,7 +53,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -75,7 +75,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{

@@ -1,12 +1,12 @@
-<?php session_start();?>
-<?php 
-	//check auth level
+<?php
+	session_start();
 	if ($_SESSION['superuser'] !== "1" and $_SESSION['engineerLevel'] !== '2') { die("<script>location.href = '/index.php'</script>"); };
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<?php
 	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] .'/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/functions.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/reportfunctions.php');
 	// check authentication
@@ -14,7 +14,6 @@
 	?>
 	<head>
 		<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/header.php'); ?>
-		<meta http-equiv="refresh" content="600" />
 	</head>
 	<body>
 		<div class="section">
@@ -59,7 +58,7 @@
 				google.setOnLoadCallback(drawChart2);
 					function drawChart2() {
 						var data = google.visualization.arrayToDataTable([
-						['Calls', 'Calls'],
+						['Tickets', 'Tickets'],
 						['Opened (24h)', <?php echo(callsinlastday());?>],
 						['Closed (24h)', <?php echo(callsclosedinlastday());?>]
 					]);
@@ -91,22 +90,22 @@
 			<div id="calllist">
 				<div id="ajaxforms">
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
-						<button type="submit" value="View" name="btn" id="btn" class="reportname">View Open Calls</button>
+						<button type="submit" value="View" name="btn" id="btn" class="reportname">View Open Tickets</button>
 						<input type="hidden" id="report" name="report" value="0" />
-						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Open Calls" title="View Open Calls" />
+						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View Open ticket" title="View Open ticket" />
 					</form>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
-						<button type="submit" value="View" name="btn" id="btn" class="reportname">View All Calls</button>
+						<button type="submit" value="View" name="btn" id="btn" class="reportname">View All Tickets</button>
 						<input type="hidden" id="report" name="report" value="1" />
-						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-allcalls@2x.png" width="24" height="25" class="icon" alt="View All Calls" title="View All Calls" />
+						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-allcalls@2x.png" width="24" height="25" class="icon" alt="View All ticket" title="View All ticket" />
 					</form>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
-						<button type="submit" value="View" name="btn" id="btn" class="reportname">View Oldest Call</button>
+						<button type="submit" value="View" name="btn" id="btn" class="reportname">View Oldest Ticket</button>
 						<input type="hidden" id="report" name="report" value="2" />
-						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-oldestcall@2x.png" width="24" height="25" class="icon" alt="View Oldest Call" title="View Oldest Call" />
+						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-oldestcall@2x.png" width="24" height="25" class="icon" alt="View Oldest ticket" title="View Oldest ticket" />
 					</form>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
-						<button type="submit" value="View" name="btn" id="btn" class="reportname">Calls Assigned #</button>
+						<button type="submit" value="View" name="btn" id="btn" class="reportname">Tickets Assigned #</button>
 						<input type="hidden" id="report" name="report" value="3" />
 						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-assignnotclosed@2x.png" width="24" height="25" class="icon" alt="Calls Assigned" title="Calls Assigned"/>
 					</form>
@@ -131,9 +130,9 @@
 						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-issues@2x.png" width="24" height="25" class="icon" alt="Emerging Issues" title="Emerging Issues"/>
 					</form>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
-						<button type="submit" value="View" name="btn" id="btn" class="reportname">Search Calls</button>
+						<button type="submit" value="View" name="btn" id="btn" class="reportname">Search Tickets</button>
 						<input type="hidden" id="report" name="report" value="8" />
-						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-search@2x.png" width="24" height="25" class="icon" alt="Search Calls" title="Search Calls"/>
+						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-search@2x.png" width="24" height="25" class="icon" alt="Search tickets" title="Search tickets"/>
 					</form>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
 						<button type="submit" value="View" name="btn" id="btn" class="reportname">Scheduled Tasks</button>
@@ -168,7 +167,7 @@
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
 						<button type="submit" value="View" name="btn" id="btn" class="reportname">Reason Behind Issues</button>
 						<input type="hidden" id="report" name="report" value="15" />
-						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-reason@2x.png" width="24" height="25" class="icon" alt="Null" title="Null" />
+						<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-reason@2x.png" width="24" height="25" class="icon" alt="reason for" title="reason for" />
 					</form>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="reportlist">
 						<button type="submit" value="View" name="btn" id="btn" class="reportname">Lockers</button>
@@ -195,7 +194,7 @@
 			data: $(this).serialize(),
 			beforeSend: function()
 			{
-			$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+			$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
 			},
 			success: function(data)
 			{

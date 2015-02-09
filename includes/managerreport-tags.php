@@ -1,13 +1,13 @@
-<?php session_start();?>
 <?php
-	// load functions
+	session_start();
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['tagname'] == TRUE) { ?>
 <h2>Tag Control</h2>
  <?php
 $sqlquery = $db->query("INSERT INTO changecontrol_tags (tagname) VALUES ('".$_POST['tagname']."');");
-	if($sqlquery) 
+	if($sqlquery)
 		{
 			echo "<p>Your new tag has been added</p>";
 		}
@@ -17,7 +17,7 @@ $sqlquery = $db->query("INSERT INTO changecontrol_tags (tagname) VALUES ('".$_PO
 <h2>Tag Control</h2>
 <?php
 $sqlquery = $db->query("DELETE FROM changecontrol_tags WHERE id=".$_POST['delthis'].";");
-	if($sqlquery) 
+	if($sqlquery)
 		{
 			echo "<p>Selected tag deleted</p>";
 		}
@@ -43,13 +43,13 @@ $sqlquery = $db->query("DELETE FROM changecontrol_tags WHERE id=".$_POST['delthi
 		<input type="text" id="tagname" name="tagname" value=""  required />
 	<p class="buttons">
 		<button name="add" value="add" type="submit">Submit</button>
-	</p>	
+	</p>
 </fieldset>
 </form>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 	<script src="javascript/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript">  
+	<script type="text/javascript">
     $('#addtag, .deltag').submit(function(e) {
     	$.ajax(
 			{
@@ -58,7 +58,7 @@ $sqlquery = $db->query("DELETE FROM changecontrol_tags WHERE id=".$_POST['delthi
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -71,6 +71,6 @@ $sqlquery = $db->query("DELETE FROM changecontrol_tags WHERE id=".$_POST['delthi
 			});
        e.preventDefault();
        return false;
-    }); 
+    });
   	</script>
 

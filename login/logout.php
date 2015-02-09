@@ -1,7 +1,6 @@
 <?php
-	// start sessions
 	session_start();
-	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	//Check if enginner logging out
 	if ($_SESSION['engineerId'] !== null) {
