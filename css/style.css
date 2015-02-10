@@ -220,7 +220,7 @@ label {
 	font-size: 0.8rem;
 	vertical-align: top;
 	border: 1px solid transparent;
-	display: block; 
+	display: block;
 	width: 100%;
 }
 
@@ -240,8 +240,8 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
   -moz-box-sizing:border-box;
   -webkit-box-sizing:border-box;
   font-size: 0.8rem;
-  background: rgba(30, 117, 0, 0.10) url('/images/ICONS-here@2x.png') no-repeat 99% 50%;
-  background-size: 16px;  
+  background: rgba(30, 118, 0, 0.05) url('/images/ICONS-here@2x.png') no-repeat 99% 50%;
+  background-size: 16px;
 }
 #calldetails textarea {
 	width: 100%;
@@ -251,6 +251,9 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
 	background: rgba(255,255,255,0.25);
 	resize: none;
 	padding: 1rem;
+}
+select::-ms-expand {
+    display: none !important;
 }
 /* END Standard forms */
 /* Scroll bar look & feel */
@@ -731,21 +734,21 @@ input.cmn-toggle-round:checked + label:after {
 }
 
 /* Small devices (phone to tablets, 768px) */
-@media screen and (min-width: 480px) and (max-width: 768px) { 
+@media screen and (min-width: 480px) and (max-width: 768px) {
 
 }
 
 /* Small devices (tablets, 768px and up) */
 @media screen and (min-width: 768px) {
-	
+
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media screen and (min-width: 992px) {
-	
+
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media screen and (min-width: 1200px) {
-	
+
 }

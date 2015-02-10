@@ -100,8 +100,8 @@
 			</div>
 		</div>
 	</div>
-
+	<!--
 	<script type="text/javascript">$(document).ready(alert('IMPORTANT: This is a beta for testing, any tickets logged will not be fixed please use the existing helpdesk to report real issues'))</script>
-
+	-->
 </body>
 </html>
