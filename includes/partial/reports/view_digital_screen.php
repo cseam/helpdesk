@@ -1,0 +1,1 @@
+<script>location.href = '/digitalsigns/index.php'</script>

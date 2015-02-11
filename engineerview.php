@@ -18,61 +18,22 @@
 			</div>
 			<div id="leftpage">
 				<div id="stats">
-					<h3>Your Performance</h3>
-						<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/engineergraph.php'); ?>
+					<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/graph_my_performance.php'); ?>
 				</div>
 				<div id="calllist">
-					<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/engineerurgentcalls.php'); ?>
+					<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/list_urgent_tickets.php'); ?>
 					<p class="engineersubnav">
-						<a href="#" onclick="showassignedcalls()"><img src="/images/ICONS-yourcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> My Tickets</a>
-						<a href="#" onclick="showallcalls()"><img src="/images/ICONS-allcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> All Tickets</a>
-						<a href="#" onclick="showreports()"><img src="/images/ICONS-workrate@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> Reports</a>
+						<a href="#" onclick="update_div('#engineerscallview','reports/list_assigned_tickets.php');"><img src="/images/ICONS-yourcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> My Tickets</a>
+						<a href="#" onclick="update_div('#engineerscallview','reports/list_open_tickets_for_a_helpdesk.php');"><img src="/images/ICONS-allcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> All Tickets</a>
+						<a href="#" onclick="update_div('#engineerscallview','reports/list_engineer_reports.php');"><img src="/images/ICONS-workrate@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> Reports</a>
 					</p>
-					<script type="text/javascript">
-						function showallcalls() {
-						$.ajax(
-						{
-							type: 'GET',
-							url: '/includes/engineerviewallcalls.php',
-							data: $(this).serialize(),
-							beforeSend: function() { $('#engineerscallview').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
-							success: function(data) { $('#engineerscallview').html(data); },
-							error: function() { $('#engineerscallview').html('error loading data, please refresh.'); }
-						});
-						return false;
-						};
-						function showassignedcalls() {
-						$.ajax(
-						{
-							type: 'GET',
-							url: '/includes/engineerassignedtoyou.php',
-							data: $(this).serialize(),
-							beforeSend: function() { $('#engineerscallview').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
-							success: function(data) { $('#engineerscallview').html(data); },
-							error: function() { $('#engineerscallview').html('error loading data, please refresh.'); }
-						});
-						return false;
-						};
-						function showreports() {
-						$.ajax(
-						{
-							type: 'GET',
-							url: '/includes/engineerreports.php',
-							data: $(this).serialize(),
-							beforeSend: function() { $('#engineerscallview').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>'); },
-							success: function(data) { $('#engineerscallview').html(data); },
-							error: function() { $('#engineerscallview').html('error loading data, please refresh.'); }
-						});
-						return false;
-						};
-					</script>
-					<span id="engineerscallview"><?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/engineerassignedtoyou.php'); ?></span>
+					<span id="engineerscallview"><?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/partial/reports/list_assigned_tickets.php'); ?></span>
 				</div>
 				</div>
 			<div id="rightpage">
 				<div id="call">
 					<div id="ajax">
-						<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/engineeryouroldestcall.php'); ?>
+						<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/partial/reports/view_your_oldest_ticket.php'); ?>
 					</div>
 				</div>
 			</div>

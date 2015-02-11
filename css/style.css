@@ -474,16 +474,21 @@ select::-ms-expand {
 }
 /* END Engineers sub nav */
 /* Reports */
-.reportlist {
-	border-bottom: 1px solid rgba(202, 200, 200, 0.8);
-	width: 47%;
-	float: left;
-	margin: 0 5px;
-}
 #filter {
 	width: 80px !important;
 	padding: 4px 10px 4px 5px;
 	background-size: 15%;
+}
+#reportlinks a {
+	border-bottom: 1px solid rgba(202, 200, 200, 0.8);
+	width: 47%;
+	float: left;
+	margin: 5px;
+	text-align: left;
+}
+#reportlinks a img {
+	float: right;
+	margin: 0 5px 5px 5px;
 }
 /* END Reports */
 /* Login area */

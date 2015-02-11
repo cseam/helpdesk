@@ -16,13 +16,10 @@
 		</div>
 		<div id="leftpage">
 			<div id="stats">
-				<h3>Information</h3>
-					<p>Welcome to <?php echo(CODENAME);?>, please use the form to log tickets for engineers, once your ticket is logged you will receive email feedback on your issue, you can also return here at any time to see the status of your ticket.</p>
-					<p class="note">Remember the more information you provide the quicker the engineer can fix your problem. For example, your printer is out of ink please include, printer model, colour of ink cartridge, room the printer is in. etc.</p>
+				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/user_welcome.php'); ?>
 			</div>
 			<div id="calllist">
-				<h3>Your Tickets</h3>
-					<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/yourcalls.php'); ?>
+				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/list_your_tickets.php'); ?>
 			</div>
 		</div>
 		<div id="rightpage">
@@ -160,7 +157,7 @@
 				</select>
 				<script type="text/javascript">
 				$("#helpdesk").change(function(e) {
-				$.post('includes/helpdeskdescription.php?id=' + $("#helpdesk").val(), $(this).serialize(), function(resp) {
+				$.post('includes/partial/form/helpdesk_description.php?id=' + $("#helpdesk").val(), $(this).serialize(), function(resp) {
 					$('#helpdesk_description').hide();
 					$('#helpdesk_description').html(resp);
 					$('#helpdesk_description').slideDown();
@@ -185,7 +182,7 @@
 				</select>
 				<script type="text/javascript">
 				$("#category").change(function(e) {
-					$.post('includes/additionalfields.php?id=' + $("#category").val(), $(this).serialize(), function(resp) {
+					$.post('includes/partial/form/additional_fields.php?id=' + $("#category").val(), $(this).serialize(), function(resp) {
 						$('#additional_fields').hide();
 						$('#additional_fields').html(resp);
 						$('#additional_fields').slideDown();

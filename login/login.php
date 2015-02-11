@@ -77,9 +77,7 @@
 						<label for="password">Password</label><input id="password" type="password" name="password" value="">
 						<input id="btnLogin" type="submit" name="btnLogin" value="LOGIN" />
 					</form>
-				<p>Welcome to <?php echo(CODENAME);?>, please login with your standard college username and password.</p>
-				<p>You do not need to prefix your username with CLC\, login like you would to one of the College computers. E.G. username: smitha</p>
-				<p>If you have any issues with <?php echo(CODENAME);?> contact the IT Support department. </p>
+					<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/partial/user_login_help.php'); ?>
 			</fieldset>
 		</div>
 		<div id="rightpage">
@@ -100,8 +98,5 @@
 			</div>
 		</div>
 	</div>
-	<!--
-	<script type="text/javascript">$(document).ready(alert('IMPORTANT: This is a beta for testing, any tickets logged will not be fixed please use the existing helpdesk to report real issues'))</script>
-	-->
 </body>
 </html>

@@ -24,8 +24,7 @@
 				<p>Comments aren't provided to the engineer directly and are confidential.</p>
 			</div>
 			<div id="calllist">
-				<h3>Your Tickets</h3>
-				<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/yourcalls.php'); ?>
+				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/list_your_tickets.php'); ?>
 			</div>
 		</div>
 		<div id="rightpage">

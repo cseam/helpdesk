@@ -54,7 +54,7 @@
     	$.ajax(
 			{
 				type: 'post',
-				url: '/viewcallpost.php',
+				url: '/includes/partial/post/view_ticket.php',
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
