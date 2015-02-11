@@ -20,9 +20,10 @@
 		<input type="hidden" id="id" name="id" value="<?php echo($calls['callid']);?>" />
 		<input type="hidden" id="details" name="details" value="<?php echo($calls['details']);?>" />
 		<h2><?php echo($calls['title']);?></h2>
-		<p class="callheader">Ticket #<?php echo($_POST['id']);?> <?php if ($calls['urgency'] === '3') { echo("Urgent ");} ?><?php echo($calls['categoryName']);?></p>
-		<p class="callheader">Created by <a href="mailto:<?php echo($calls['email']);?>"><?php echo($calls['name']);?></a> (<?php echo($calls['tel']);?>)</p>
-		<p class="callheader">For <?php echo($calls['room']);?> - <?php echo($calls['locationName']);?></p>
+		<p class="callheader">#<?php echo($_POST['id']);?> <?php if ($calls['urgency'] === '3') { echo("Urgent ");} ?><?php echo($calls['categoryName']);?></p>
+		<p class="callheader">Created by <a href="mailto:<?php echo($calls['email']);?>"><?php echo($calls['name']);?></a></p>
+		<p class="callheader">Contact Number:<?php echo($calls['tel']);?></p>
+		<p class="callheader"><?php echo($calls['room']);?> - <?php echo($calls['locationName']);?></p>
 		<p class="callheader">Assigned to <?php echo(engineer_friendlyname($calls['assigned']));?></p>
 		<p class="callheader">
 			<?php
@@ -36,7 +37,6 @@
 				echo( $d." days, ".$h." hours, ".$m." minutes.");
 			?>
 		</p>
-	<hr />
 		<?php if ($calls['lockerid'] != null) { ?><p class="callheader">Locker #<?php echo($calls['lockerid']);?></p><?php }; ?>
 		<?php
 		$additional_field_sql = "SELECT * FROM call_additional_results WHERE callid = ".$calls['callid'].";";
@@ -48,7 +48,7 @@
 		<fieldset>
 			<legend>Update Ticket</legend>
 				<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
-				<p><label for="attachment" style="width: 190px">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
+				<p><label for="attachment">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
 	<?php if ($_SESSION['engineerId'] !== null) {?>
 	<?php
 		// filter for engineers helpdesks

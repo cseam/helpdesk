@@ -18,7 +18,7 @@
 	<form action="updatecall.php" method="post" enctype="multipart/form-data">
 	<input type="hidden" id="id" name="id" value="<?=$call['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$call['details'];?>" />
-	<h2>Oldest Ticket Details #<?=$call['callid'];?></h2>
+	<h2>Oldest Ticket</h2>
 	<h3><?=$call['title'];?></h3>
 	<p class="callheader">Created by <a href="mailto:<?=$call['email'];?>"><?=$call['name'];?></a> (<?=$call['tel'];?>)</p>
 	<p class="callheader">For <?=$call['room'];?> - <?=$call['locationName'];?></p>
@@ -33,7 +33,6 @@
 						echo $d." days, ".$h." hours, ".$m." minutes.";
 					?></p>
 	<?php if (!empty($call['attachmentname'])) { ?><p><img src="/uploads/<?=$call['attachmentname'];?>" width="100%" /></p><? }; ?>
-	<hr />
 	<?php
 	 $additional_field_sql = "SELECT * FROM call_additional_results WHERE callid = ".$call['callid'].";";
 	 $additional_field_result = mysqli_query($db, $additional_field_sql);
