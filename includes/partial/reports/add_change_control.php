@@ -7,7 +7,6 @@
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") { ?>
 <?
 	$uniquetagcsv = implode(',',array_unique(explode(',', $_POST['tagname'])));
-	//$uniquetagcsv = $_POST['tagname'];
 
 	$sqlquery = $db->query("INSERT INTO changecontrol (engineersid, stamp, changemade, tags, server) VALUES (".$_POST['engineer'].",'".date("c")."','".$_POST['details']."','". $uniquetagcsv ."','". $_POST['servername'] ."')");
 	if($sqlquery)
@@ -59,13 +58,12 @@
 		<? } ?>
 </p>
 </fieldset>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $('#changecontrol').submit(function(e) {
     	$.ajax(
 			{
 				type: 'post',
-				url: '/includes/managerreport-changecontrol.php',
+				url: '/includes/partial/reports/add_change_control.php',
 				data: $(this).serialize(),
 				beforeSend: function()
 				{

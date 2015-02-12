@@ -7,8 +7,7 @@
 			if (mysqli_num_rows($result) == 0) { echo "<p>No tickets logged, please start by filling in the form on the right.</p>"; };
 			while($calls = mysqli_fetch_array($result))  { ?>
 		<tr>
-		<td>#<?php echo $calls['callid'];?></td>
-		<td><?php if ($calls['status'] == '2') { echo "<span class='closed'>CLOSED</span>"; } else { echo date("d/m/y", strtotime($calls['opened']));} ?></td>
+		<td><?php if ($calls['status'] == '2') { echo "<span class='closed'>CLOSED</span>"; } else { echo "<span class='open'>" . date("d/m/y", strtotime($calls['opened'])) . "</span>";} ?></td>
 		<td class="view_td"><?php echo substr(strip_tags($calls['title']), 0, 90);?>...</td>
 		<td>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">

@@ -72,32 +72,29 @@
 		<td>
 			<?=date("d/m - h:ia", strtotime($test['stamp']));?>
 		</td>
-		<? } ?>
+		<?php } ?>
 </tr>
 <?php
 	}
 ?>
 </table>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
-	<script src="javascript/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript">
-    $('.toggleform').change(function(e) {
-    	$.ajax(
+<script type="text/javascript">
+	$('.toggleform').change(function(e) {
+		$.ajax(
 			{
 				type: 'post',
-				url: '/includes/managerreport-punchcard.php',
+				url: '/includes/partial/reports/view_punchcard.php',
 				data: $(this).serialize(),
 				success: function(data)
 				{
 				$('#ajax').html(data);
-    			},
+			},
 				error: function()
 				{
 				$('#ajax').html('error loading data, please refresh.');
-    			}
+			}
 			});
-       e.preventDefault();
-       return false;
-    });
-    </script>
-
+		e.preventDefault();
+		return false;
+	});
+</script>

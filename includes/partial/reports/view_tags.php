@@ -46,14 +46,12 @@ $sqlquery = $db->query("DELETE FROM changecontrol_tags WHERE id=".$_POST['delthi
 </fieldset>
 </form>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
-	<script src="javascript/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
     $('#addtag, .deltag').submit(function(e) {
     	$.ajax(
 			{
 				type: 'post',
-				url: '/includes/managerreport-tags.php',
+				url: '/includes/partial/reports/view_tags.php',
 				data: $(this).serialize(),
 				beforeSend: function()
 				{

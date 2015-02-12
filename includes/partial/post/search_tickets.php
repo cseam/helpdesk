@@ -7,9 +7,6 @@
 		} else {
 			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
 	};
-
-
-
 	$sqlstr = "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id " . $whereenginners;
 	$sqlstr .= " AND details LIKE '%" . check_input($_POST['term']) . "%';";
 	$result = mysqli_query($db, $sqlstr);
@@ -47,29 +44,27 @@
 		echo "<p>&mdash; " . mysqli_num_rows($result) . " result returned.</p>";
 	} ;
 ?>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
-	<script src="javascript/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript">
-     $('.searchresultsview').submit(function(e) {
-    	$.ajax(
+<script type="text/javascript">
+	$('.searchresultsview').submit(function(e) {
+	$.ajax(
+		{
+			type: 'post',
+			url: '/includes/partial/post/view_ticket.php',
+			data: $(this).serialize(),
+			beforeSend: function()
 			{
-				type: 'post',
-				url: '/includes/partial/post/view_ticket.php',
-				data: $(this).serialize(),
-				beforeSend: function()
-				{
-				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
-    			},
-				success: function(data)
-				{
-				$('#ajax').html(data);
-    			},
-				error: function()
-				{
-				$('#ajax').html('error loading data, please refresh.');
-    			}
-			});
-       e.preventDefault();
-       return false;
-    });
-    </script>
+			$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+		},
+			success: function(data)
+			{
+			$('#ajax').html(data);
+		},
+			error: function()
+			{
+			$('#ajax').html('error loading data, please refresh.');
+		}
+		});
+		e.preventDefault();
+		return false;
+	});
+</script>
