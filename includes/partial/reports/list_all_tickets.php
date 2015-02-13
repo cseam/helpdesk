@@ -76,7 +76,7 @@
     	$.ajax(
 			{
 				type: 'post',
-				url: '/includes/partial/post/view_ticket.php',
+				url: '/includes/partial/form/view_ticket.php',
 				data: $(this).serialize(),
 				beforeSend: function()
 				{

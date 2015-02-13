@@ -35,6 +35,12 @@
 		horizontalBars: true,
 		axisY: { offset: 120 }
 	};
-	new Chartist.Bar('.ct-chart', data, options);
+	new Chartist.Bar('#reasonBehind', data, options);
 	</script>
-	<div class="ct-chart ct-perfect-fourth"></div>
+<style>
+	#reasonBehind .ct-bar {
+		stroke: #577d6a !important;
+		stroke-width: 30px !important;
+	}
+</style>
+<div id="reasonBehind" class="ct-chart ct-perfect-fourth"></div>

@@ -1,5 +1,9 @@
 <h3>Your Performance</h3>
 <?php
+	session_start();
+	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	// Get engineer calls closed for line chart
 	$sqlstr = "SELECT closeengineerid, DATE_FORMAT(closed, '%a')AS DAY_OF_WEEK FROM calls WHERE closeengineerid = '".$_SESSION['engineerId']."' AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)";
 	$engineermon = $engineertue = $engineerwed = $engineerthu = $engineerfri = $engineersat = $engineersun = 0;

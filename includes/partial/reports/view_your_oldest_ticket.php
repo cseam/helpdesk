@@ -1,4 +1,8 @@
-	<?php
+<?php
+	session_start();
+	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	// select calls for ID
 	// run select query
 	$sqloldeststr = "SELECT * FROM calls ";

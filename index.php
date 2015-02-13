@@ -8,10 +8,10 @@
 			prompt_auth($_SERVER['REQUEST_URI']);
 	} else {
 		if ($_SESSION['engineerLevel'] === "2") {
-			die("<script>location.href = '/managerview.php'</script>");
+			include_once($_SERVER['DOCUMENT_ROOT'] . '/views/manager.php');
 		} else if ($_SESSION['engineerLevel'] === "1") {
-			die("<script>location.href = '/engineerview.php'</script>");
+			include_once($_SERVER['DOCUMENT_ROOT'] . '/views/engineer.php');
 		} else {
-			die("<script>location.href = '/add.php'</script>");
-	    };
+			include_once($_SERVER['DOCUMENT_ROOT'] . '/views/user.php');
+		};
 	};

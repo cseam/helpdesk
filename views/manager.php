@@ -1,13 +1,13 @@
 <?php
 	session_start();
-	if ($_SESSION['superuser'] !== "1" and $_SESSION['engineerLevel'] !== '2') { die("<script>location.href = '/index.php'</script>"); };
+	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
+	if ($_SESSION['superuser'] !== "1" and $_SESSION['engineerLevel'] !== '2') { die("<script>location.href = '/'</script>"); };
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<?php
-	// load functions
-	include_once($_SERVER['DOCUMENT_ROOT'] .'/config/config.php');
-	include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/functions.php');
 	// check authentication
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
 	?>

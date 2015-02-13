@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	// load functions
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
+?>
 <h3>Your Tickets</h3>
 <div id="ajaxforms">
 	<table id="yourcalls">
@@ -25,7 +31,7 @@
 		$.ajax(
 			{
 				type: 'post',
-				url: '/includes/partial/post/view_ticket.php',
+				url: '/includes/partial/form/view_ticket.php',
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
@@ -40,6 +46,7 @@
 				$('#ajax').html('error loading data, please refresh.');
 				}
 			});
+			console.log('updated #ajax with view_ticket.php');
 			e.preventDefault();
 			return false;
 	});

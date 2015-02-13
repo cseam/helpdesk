@@ -10,7 +10,7 @@ url('/fonts/verlag-book-webfont.svg') format('svg'); /* Legacy iOS */
 /* END Fonts */
 /* Root style & default elements */
 html {
-	font-size: 16px;
+	font-size: 17px;
 	height: 100%;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;

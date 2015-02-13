@@ -8,5 +8,6 @@ function update_div(update_div, with_report) {
 		success: function(data) { $(update_div).html(data); },
 		error: function() { $(update_div).html('error loading data, please refresh.'); }
 	});
+	console.log('updated ' + update_div + ' with ' + with_report);
 	return false;
 };
