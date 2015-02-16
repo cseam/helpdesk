@@ -25,7 +25,7 @@
 	<td class="xbig"><?=$totalcalls;?></td>
 	<td class="xbig"><?=$loop['Last1'];?></td>
 	<td class="xbig"><?=$loop['Last7'];?></td>
-	<td class="xbig"><? for ($i = 0; $i < round($totalstars); $i++) { echo "<img src='/images/ICONS-star.png' alt='star' height='60' width='auto' />"; }; ?></td>
+	<td class="xbig"><? for ($i = 0; $i < round($totalstars); $i++) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='60' width='auto' />"; }; ?></td>
 </tr>
 <?	} ?>
 			</tbody>

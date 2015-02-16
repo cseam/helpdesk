@@ -1,11 +1,11 @@
 /* Fonts */
 @font-face {
 font-family: 'verlag';
-src: url('/fonts/verlag-book-webfont.eot'); /* IE9 Compatibility Modes */
-src: url('/fonts/verlag-book-webfont.eot?#iefix') format('embedded-ptype'), /* IE6-IE8 */
-url('/fonts/verlag-book-webfont.woff') format('woff'), /* Modern Browsers */
-url('/fonts/verlag-book-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-url('/fonts/verlag-book-webfont.svg') format('svg'); /* Legacy iOS */
+src: url('/public/fonts/verlag-book-webfont.eot'); /* IE9 Compatibility Modes */
+src: url('/public/fonts/verlag-book-webfont.eot?#iefix') format('embedded-ptype'), /* IE6-IE8 */
+url('/public/fonts/verlag-book-webfont.woff') format('woff'), /* Modern Browsers */
+url('/public/fonts/verlag-book-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+url('/public/fonts/verlag-book-webfont.svg') format('svg'); /* Legacy iOS */
 }
 /* END Fonts */
 /* Root style & default elements */
@@ -139,7 +139,7 @@ ul {
 }
 #branding {
 	height: 14.5%;
-	background: transparent url('/images/BRANDING-crest.png') no-repeat top left;
+	background: transparent url('/public/images/BRANDING-crest.png') no-repeat top left;
 	background-size: contain;
 	text-align: right;
 	margin-bottom: 1rem;
@@ -189,7 +189,7 @@ input, textarea, button {
 	font-size: 0.8rem;
 }
 select {
-	background: rgba(255,255,255,0.25) url('/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
 	background-size: 16px;
 	color: #777777;
 	border: 1px solid #ccc;
@@ -240,7 +240,7 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
   -moz-box-sizing:border-box;
   -webkit-box-sizing:border-box;
   font-size: 0.8rem;
-  background: rgba(30, 118, 0, 0.05) url('/images/ICONS-here@2x.png') no-repeat 99% 50%;
+  background: rgba(30, 118, 0, 0.05) url('/public/images/ICONS-here@2x.png') no-repeat 99% 50%;
   background-size: 16px;
 }
 #calldetails textarea {
@@ -390,21 +390,21 @@ select::-ms-expand {
 .tags button {
 	border: 1px solid transparent;
 	padding: 3px 15px 3px 30px;
-	background: rgba(255,255,255,0.25) url('/images/ICONS-tag@2x.png') no-repeat 0% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-tag@2x.png') no-repeat 0% 50%;
 	background-size: contain;
 	cursor: pointer;
 	float: left;
 }
 .deltag button{
 	padding: 3px 30px 3px 15px;
-	background: rgba(255,255,255,0.25) url('/images/ICONS-null@2x.png') no-repeat 100% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-null@2x.png') no-repeat 100% 50%;
 	background-size: contain;
 	cursor: pointer;
 	float: left;
 }
 .addtagform button{
 	padding: 3px 15px 3px 30px;
-	background: rgba(255,255,255,0.25) url('/images/ICONS-tag@2x.png') no-repeat 0% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-tag@2x.png') no-repeat 0% 50%;
 	background-size: contain;
 	cursor: pointer;
 	float: left;
@@ -580,7 +580,7 @@ select.error, input.error, textarea.error {
 	border: 1px solid silver;
 }
 select.error {
-	background: #ffe0e0 url('/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
+	background: #ffe0e0 url('/public/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
 	background-size: 16px;
 }
 label.error {

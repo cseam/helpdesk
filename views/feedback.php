@@ -10,7 +10,7 @@
 	?>
 	<head>
 		<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'); ?>
-		<script src="/javascript/jquery.validate.min.js" type="text/javascript"></script>
+		<script src="/public/javascript/jquery.validate.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="section">
@@ -55,11 +55,11 @@
 					<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
 						<fieldset>
 						<legend>Satisfaction</legend>
-							<label for="satisfaction1" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction1" name="satisfaction" value="1" style="width: 10%;">
-							<label for="satisfaction2" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction2" name="satisfaction" value="2" style="width: 10%;">
-							<label for="satisfaction3" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction3" name="satisfaction" value="3" style="width: 10%;">
-							<label for="satisfaction4" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction4" name="satisfaction" value="4" style="width: 10%;">
-							<label for="satisfaction5" style="width: 80%;"><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /><img src="/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction5" name="satisfaction" value="5" style="width: 10%;">
+							<label for="satisfaction1" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction1" name="satisfaction" value="1" style="width: 10%;">
+							<label for="satisfaction2" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction2" name="satisfaction" value="2" style="width: 10%;">
+							<label for="satisfaction3" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction3" name="satisfaction" value="3" style="width: 10%;">
+							<label for="satisfaction4" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction4" name="satisfaction" value="4" style="width: 10%;">
+							<label for="satisfaction5" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction5" name="satisfaction" value="5" style="width: 10%;">
 							<input type="hidden" id="callid" name="callid" value="<?=$_GET['id'];?>" />
 						</fieldset>
 						<fieldset>

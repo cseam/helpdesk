@@ -30,7 +30,7 @@
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="searchresultsview" >
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
 				<div style="margin-top:10px;float: left;"><?=substr(strip_tags($calls['details']), 0, 40);?>...</div>
-				<input type="image" name="submit" value="submit" src="/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View ticket" />
+				<input type="image" name="submit" value="submit" src="/public/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View ticket" />
 			</form>
 		</td>
 		</tr>
@@ -53,7 +53,7 @@
 			data: $(this).serialize(),
 			beforeSend: function()
 			{
-			$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+			$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
 		},
 			success: function(data)
 			{

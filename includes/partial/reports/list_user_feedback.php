@@ -24,11 +24,11 @@
 		<tr>
 			<td><?=$loop['engineerName'];?></td>
 			<td>
-			<? if ($loop['FeedbackAVG'] == 1) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['FeedbackAVG'] == 2) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['FeedbackAVG'] == 3) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['FeedbackAVG'] == 4) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['FeedbackAVG'] == 5) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+			<? if ($loop['FeedbackAVG'] == 1) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['FeedbackAVG'] == 2) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['FeedbackAVG'] == 3) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['FeedbackAVG'] == 4) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['FeedbackAVG'] == 5) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
 			</td>
 			<td><?=$loop['FeedbackCOUNT'];?>	</td>
 		</tr>
@@ -49,11 +49,11 @@
 <tr>
 	<td><a href="/viewcall.php?id=<?=$loop['callid']?>"><?=$loop['callid']?></a></td>
 	<td>
-		<? if ($loop['satisfaction'] == 1) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['satisfaction'] == 2) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['satisfaction'] == 3) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['satisfaction'] == 4) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['satisfaction'] == 5) { echo "<img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 1) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 2) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 3) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 4) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
+		<? if ($loop['satisfaction'] == 5) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
 	</td>
 	<td><?=substr(strtolower(strip_tags($loop['details'])), 0, 40);?>...</td>
 </tr>

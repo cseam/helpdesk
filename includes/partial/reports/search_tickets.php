@@ -27,7 +27,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#resultspost').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				$('#resultspost').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -42,7 +42,7 @@
        return false;
     });
 </script>
-<script src="javascript/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/public/javascript/jquery.validate.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$("#search").validate({
 			rules: {}

@@ -31,13 +31,13 @@
 		<td>
 			<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="allcallslist">
 				<input type="hidden" id="id" name="id" value="<?php echo($calls['callid']);?>" />
-				<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-view@2x.png" class="icon" width="24" height="25" alt="View details" title="View details" />
+				<input type="image" id="btn" name="btn" value="View" src="/public/images/ICONS-view@2x.png" class="icon" width="24" height="25" alt="View details" title="View details" />
 			</form>
 		</td>
 		<td>
 			<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="returntouser">
 				<input type="hidden" id="id" name="id" value="<?php echo($calls['callid']);?>" />
-				<input type="image" id="btn" name="btn" value="View" src="/images/ICONS-forward@2x.png" class="icon" width="24" height="25" alt="return to user" title="return to user" />
+				<input type="image" id="btn" name="btn" value="View" src="/public/images/ICONS-forward@2x.png" class="icon" width="24" height="25" alt="return to user" title="return to user" />
 			</form>
 		</td>
 		</tr>
@@ -54,7 +54,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -77,7 +77,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{

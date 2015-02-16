@@ -10,4 +10,4 @@ System must be fully maintained by individual departments, without intervention 
 
 ## Concept
 
-![alt tag](https://raw.github.com/atomicjam/helpdesk/master/images/concept%20artwork/helpdesk.jpg)
+![alt tag](https://raw.github.com/atomicjam/helpdesk/master/public/images/concept%20artwork/helpdesk.jpg)

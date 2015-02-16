@@ -41,13 +41,13 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">
 			<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-			<input name="submit" value="" type="image" src="/images/ICONS-forward@2x.png" width="24" height="25" class="icon" alt="forward ticket"  title="forward ticket"/>
+			<input name="submit" value="" type="image" src="/public/images/ICONS-forward@2x.png" width="24" height="25" class="icon" alt="forward ticket"  title="forward ticket"/>
 			</form>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reassign">
 				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<input name="submit" value="" type="image" src="/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer"  title="assign engineer" />
+				<input name="submit" value="" type="image" src="/public/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer"  title="assign engineer" />
 			</form>
 		</td>
 		</tr>
@@ -64,7 +64,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -87,7 +87,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
@@ -110,7 +110,7 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{

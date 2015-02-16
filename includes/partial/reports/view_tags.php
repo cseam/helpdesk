@@ -55,7 +55,7 @@ $sqlquery = $db->query("DELETE FROM changecontrol_tags WHERE id=".$_POST['delthi
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
