@@ -24,7 +24,7 @@
 	while($call = mysqli_fetch_array($oldestresult))  {
 	?>
 	<div id="calldetails">
-	<form action="updatecall.php" method="post">
+	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="updateForm">
 	<input type="hidden" id="id" name="id" value="<?=$call['callid'];?>" />
 	<input type="hidden" id="details" name="details" value="<?=$call['details'];?>" />
 	<h2><?=$call['title'];?></h2>
@@ -50,5 +50,39 @@
 	</p>
 	<p class="callfooter">Ticket Opened <?=date("d/m/y h:s", strtotime($call['opened']));?><br />Last Update <?=date("d/m/y h:s", strtotime($call['lastupdate']));?></p>
 	</form>
+	<script type="text/javascript">
+	$(function() {
+		// Wait for DOM ready state
+
+		// Client side form validation
+		$("#updateForm").validate({
+			rules: {
+				updatedetails: {
+					required: true,
+					}
+			},
+			// Submit via ajax if valid
+			submitHandler: function(form) {
+				$.ajax(
+					{
+					type: 'post',
+					url: '/includes/partial/post/update_ticket.php',
+					data: $("#updateForm").serialize(),
+					success: function(data)
+					{
+						$('#ajax').html(data);
+						console.log ("updated ticket");
+					},
+					error: function()
+					{
+						$('#ajax').html('error :' + error() );
+						console.log ("error updating ticket");
+					}
+				});
+			}
+		});
+		// End DOM Ready
+	});
+	</script>
 	</div>
 	<?php } ?>

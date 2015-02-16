@@ -4,8 +4,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<script src="/javascript/jquery.validate.min.js" type="text/javascript"></script>
-<form action="updatecall.php" method="post" enctype="multipart/form-data" id="forward">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="forward">
 <input type="hidden" id="id" name="id" value="<?php echo($_POST['id']);?>" />
 	<h3>Forward Ticket</h3>
 		<fieldset>
@@ -27,5 +26,32 @@
 		</p>
 </form>
 <script type="text/javascript">
-		$("#forward").validate();
+	$(function() {
+		// Wait for DOM ready state
+
+		// Client side form validation
+		$("#forward").validate({
+			// Submit via ajax if valid
+			submitHandler: function(form) {
+				$.ajax(
+					{
+					type: 'post',
+					url: '/includes/partial/post/update_ticket.php',
+					data: $('#forward').serialize(),
+					success: function(data)
+					{
+						$('#ajax').html(data);
+						console.log ("update ticket");
+					},
+					error: function()
+					{
+						$('#ajax').html('error :' + error() );
+						console.log ("update failed");
+					}
+				});
+			}
+		});
+
+	// End DOM Ready
+	});
 </script>

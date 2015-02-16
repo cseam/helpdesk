@@ -6,6 +6,7 @@ define('DEVELOPMENT_ENVIRONMENT',true);
 
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);
+define('UPLOAD_LOC', '/uploads/');
 
 define('CODENAME', 'helpdesk');
 define('COMPANY_NAME', 'CLC');

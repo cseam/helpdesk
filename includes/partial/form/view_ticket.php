@@ -117,36 +117,35 @@
 			},
 			// Submit via ajax if valid
 			submitHandler: function(form) {
-				$('#updateForm').submit(function(e) {
-					$.ajax(
+
+				// Setup formdata object
+				var formData = new FormData(document.getElementById("updateForm"));
+				// Main magic with files here
+				formData.append('attachment', $('input[type=file]')[0].files[0]);
+				console.log(formData);
+
+				$.ajax(
 					{
 					type: 'post',
 					url: '/includes/partial/post/update_ticket.php',
-					data: $(this).serialize(),
-					beforeSend: function()
-					{
-					$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
-					},
+					data: formData,
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
 					success: function(data)
 					{
-					$('#ajax').html(data);
+						$('#ajax').html(data);
+						console.log ("updated ticket");
 					},
 					error: function()
 					{
-					$('#ajax').html('error :' + error() );
+						$('#ajax').html('error :' + error() );
+						console.log ("error updating ticket");
 					}
-					});
-					e.preventDefault();
-					return false;
 				});
 			}
 		});
-
-
-
-
-
-
 		// End DOM Ready
 	});
 	</script>

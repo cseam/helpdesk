@@ -47,19 +47,15 @@
 			// Run Query
 			mysqli_query($db, $sqlstr);
 		}
-
 		// if Close ticket
-		if ($_POST['button_value'] === 'close') {
+		if (isset($_POST['close'])) {
 			// Check for image attachments (need to check mime type also)
 			if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
-			// Get the uploaded file information
-			$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
-			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']);
-			// Move the temp. uploaded file to uploads folder and salt for duplicates
-			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
+			$name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10);
+			$folder = ROOT . UPLOAD_LOC . $name_of_uploaded_file;
 			$tmp_path = $_FILES["attachment"]["tmp_name"];
 			move_uploaded_file($tmp_path, $folder);
-			$upload_img_code = "<img src=/uploads/" . $name_of_uploaded_file . " width=100% />";
+			$upload_img_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " width=100% />";
 			}
 			// Close ticket sql
 			$sqlstr = "UPDATE calls ";
@@ -93,20 +89,28 @@
 			// update view
 			echo("<h2>Updated & Closed</h2>");
 			echo("<p>Ticket #" . $_POST['id'] . " has been updated and closed.</p>");
+				SWITCH ($_SESSION['engineerLevel']) {
+					CASE 2:
+					echo("<script type='text/javascript'>update_div('#calllist','/reports/list_manager_reports.php');</script>");
+					break;
+					CASE 1:
+					echo("<script type='text/javascript'>update_div('#calllist','/reports/list_engineers_tickets.php');</script>");
+					break;
+					DEFAULT:
+					echo("<script type='text/javascript'>update_div('#calllist','/reports/list_your_tickets.php');</script>");
+					break;
+				}
 		}
 
 		//if Update ticket
-		if ($_POST['button_value'] === 'update') {
-			// Check for image (need to check for mime type and this is the
+		if (isset($_POST['update'])) {
+			// Check for image attachments (need to check mime type also)
 			if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
-			//get the uploaded file information
-			$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
-			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']);
-			//move the temp. uploaded file to uploads folder and salt for duplicates
-			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
+			$name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10);
+			$folder = ROOT . UPLOAD_LOC . $name_of_uploaded_file;
 			$tmp_path = $_FILES["attachment"]["tmp_name"];
 			move_uploaded_file($tmp_path, $folder);
-			$upload_img_code = "<img src=/uploads/" . $name_of_uploaded_file . " width=100% />";
+			$upload_img_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " width=100% />";
 			}
 
 			// update ticket

@@ -146,27 +146,32 @@
 				},
 			// Submit via ajax if valid
 			submitHandler: function(form) {
-				$('#addForm').submit(function(e) {
-					$.ajax(
+
+				// Setup formdata object
+				var formData = new FormData(document.getElementById("addForm"));
+				// Main magic with files here
+				formData.append('attachment', $('input[type=file]')[0].files[0]);
+				console.log(formData);
+
+				$.ajax(
 					{
 					type: 'post',
 					url: '/includes/partial/post/add_ticket.php',
-					data: $(this).serialize(),
-					beforeSend: function()
-					{
-					$('#ajax').html('<img src="/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
-					},
+					data: formData,
+					async: false,
+					cache: false,
+					contentType: false,
+					processData: false,
 					success: function(data)
 					{
-					$('#ajax').html(data);
+						$('#ajax').html(data);
+						console.log ("added new ticket");
 					},
 					error: function()
 					{
-					$('#ajax').html('error :' + error() );
+						$('#ajax').html('error :' + error() );
+						console.log ("add ticket failed");
 					}
-					});
-					e.preventDefault();
-					return false;
 				});
 			}
 		});

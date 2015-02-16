@@ -1,1 +1,1 @@
-<script>location.href = '/digitalsigns/index.php'</script>
+<script>location.href = '/views/digitalsign.php'</script>

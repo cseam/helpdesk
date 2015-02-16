@@ -3,7 +3,6 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/functions.php');
 ?>
-<script src="/javascript/jquery.validate.min.js" type="text/javascript"></script>
 <form action="updatecall.php" method="post" enctype="multipart/form-data" id="reassign">
 	<h3>Reassign Ticket</h3>
 	<fieldset>
@@ -31,5 +30,32 @@
 	</p>
 </form>
 <script type="text/javascript">
-		$("#reassign").validate();
+	$(function() {
+		// Wait for DOM ready state
+
+		// Client side form validation
+		$("#reassign").validate({
+			// Submit via ajax if valid
+			submitHandler: function(form) {
+				$.ajax(
+					{
+					type: 'post',
+					url: '/includes/partial/post/update_ticket.php',
+					data: $('#reassign').serialize(),
+					success: function(data)
+					{
+						$('#ajax').html(data);
+						console.log ("update ticket");
+					},
+					error: function()
+					{
+						$('#ajax').html('error :' + error() );
+						console.log ("update failed");
+					}
+				});
+			}
+		});
+
+	// End DOM Ready
+	});
 </script>

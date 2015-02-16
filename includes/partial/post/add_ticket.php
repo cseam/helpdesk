@@ -6,20 +6,19 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 
 	// process form
-	if ($_SERVER['REQUEST_METHOD']== "POST") { ?>
+	if ($_SERVER['REQUEST_METHOD']== "POST") {	?>
 	<h2>Thank you</h2>
 	<p>Your ticket has been added and has been assigned to <?php if ($_POST['cmn-toggle-selfassign'] !== null) { echo engineer_friendlyname(check_input($_POST['cmn-toggle-selfassign'])); } else { echo engineer_friendlyname(next_engineer(check_input($_POST['helpdesk']))); }; ?>, the engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
 	<p>Please check your email for further details.</p>
+
 <?php
 	// Upload attachments (need to check mime type also at some point)
 		if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
-			$salt = "HD" . substr(md5(microtime()),rand(0,26),5);
-			$name_of_uploaded_file = $salt . basename($_FILES['attachment']['name']);
-			//move the temp. uploaded file to uploads folder and salt for duplicates
-			$folder = "/var/www/html/helpdesk/uploads/" . $name_of_uploaded_file;
+			$name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10);
+			$folder = ROOT . UPLOAD_LOC . $name_of_uploaded_file;
 			$tmp_path = $_FILES["attachment"]["tmp_name"];
 			move_uploaded_file($tmp_path, $folder);
-			$upload_img_code = "<img src=/uploads/" . $name_of_uploaded_file . " width=100% />";
+			$upload_img_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " width=100% />";
 		}
 
 	// Calculate Urgency
@@ -89,3 +88,6 @@
 	mysqli_close($db);
 }
 ?>
+<script type="text/javascript">
+	update_div('#calllist','/reports/list_your_tickets.php');
+</script>
