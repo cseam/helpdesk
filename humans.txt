@@ -6,11 +6,15 @@ Twitter:    @atomicjam
 Location:   Cheltenham, Uk.
 
 /* THANKS */
-Name: Graham Langley
+Concept
+  Name: Mark Burrows
+  Name: Mat McMahon
+Testing & Thermal printer
+  Name: Graham Langley
 
 /* SITE */
 Created:     2015
 Language:    English (UK)
-Standards:   PHP, HTML5, CSS3
-Components:  jQuery
-Software:    Adobe Photoshop CC, Coda 2.5
+Standards:   HTML5, CSS3
+Components:  PHP,jQuery
+Software:    Adobe Photoshop CC, Adobe Illustrator CC, Coda 2.5
