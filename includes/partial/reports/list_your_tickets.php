@@ -10,7 +10,7 @@
 	<tbody>
 	<?php
 		$result = mysqli_query($db, "SELECT * FROM calls WHERE owner='". $_SESSION['sAMAccountName']  ."' ORDER BY callid DESC LIMIT 10");
-			if (mysqli_num_rows($result) == 0) { echo "<p>No tickets logged, please start by filling in the form on the right.</p>"; };
+			if (mysqli_num_rows($result) == 0) { echo "<p>No tickets logged. Please start by filling in the form.</p>"; };
 			while($calls = mysqli_fetch_array($result))  { ?>
 		<tr>
 		<td><?php if ($calls['status'] == '2') { echo "<span class='closed'>CLOSED</span>"; } else { echo "<span class='open'>" . date("d/m/y", strtotime($calls['opened'])) . "</span>";} ?></td>

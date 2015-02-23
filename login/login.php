@@ -83,17 +83,17 @@
 		<div id="rightpage">
 			<div id="addcall">
 				<div id="ajax">
-					<h2>FAQ's</h2>
+					<h2>FAQs</h2>
 					<h3>What is  <?php echo(CODENAME);?>?</h3>
-					<p> <?php echo(CODENAME);?> is a way for users at CLC to report issues they have noticed around campus, quickly and easily to the correct department for action.</p>
+					<p><?php echo(CODENAME);?> is a way for users at College to quickly and easily report issues they have noticed around campus to the correct department for action.</p>
 					<h3>Who Can use  <?php echo(CODENAME);?>?</h3>
-					<p> <?php echo(CODENAME);?> is open to both staff and students, it is a way to open communication with the correct department. if you notice a bulb has blown, tap is dripping, computer isn't working, sign has fallen down, don't wait for someone else to report it, you can.</p>
+					<p><?php echo(CODENAME);?> is open to both staff and students. If you notice a bulb has blown, a tap is dripping, a computer isn't working, a sign has fallen down, etc. then don't wait for someone else to report it - you can. </p>
 					<h3>What should I report?</h3>
-					<p>Anything you feel isn't working correctly, engineers from the correct department will then be able to ask you questions about your ticket to help resolve the problem. Please include as much information as possible, saying a radiator doesn't work but not saying the location, or asking for ink for your printer but not telling the engineer the printer model or ink colour will slow down the process.</p>
+					<p>Anything you feel isn't working correctly. Engineers from the correct department will then be able to ask you questions about your ticket - your report on Helpdesk - to help resolve the problem. Please include as much information as possible. For example, reporting that a radiator isn't working but not supplying the location, or requesting ink for a printer without including the printer model or ink colour, will slow down the process.  </p>
 					<h3>Why should i log a  <?php echo(CODENAME);?>?</h3>
-					<p>It's a quick process, that will ensure the problem is looked at. College is a large environment and something you notice may take weeks to be noticed by engineers in their day to day routine. Reporting your issues will help resolve frustration when someone else comes to use the equipment to find it broken.</p>
+					<p>It is a swift process and will ensure that the problem is looked at as soon as possible. With College being such a large environment, engineers may not notice a problem straight away, but with Helpdesk you can bring it to their attention immediately. </p>
 					<h3>Why not just send an email?</h3>
-					<p>If an engineer is on holiday or you are unsure who to contact  <?php echo(CODENAME);?> takes care of that for you, while providing department managers with statistical data on issues helping them troubleshoot larger issues or spot patterns, emailing individuals may solve your issue but wont help solve future issues.</p>
+					<p>If you do not know who to specifically contact, or an engineer is on holiday, <?php echo(CODENAME);?> takes care of that for you and directs your problem to the appropriate department and / or person. Not only that, it provides department managers with statistical data, helping them troubleshoot larger issues and even spot patterns. Emailing individuals may solve your issue, but Helpdesk can warn of future problems as well. </p>
 				</div>
 			</div>
 		</div>

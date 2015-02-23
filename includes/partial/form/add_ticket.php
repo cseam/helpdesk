@@ -11,7 +11,7 @@
 			<input type="text" id="name" name="name" value="<?php echo $_SESSION['sAMAccountName'];?>"  required />
 			<label for="email" title="Contact email so engineer can comunicate">Your Email</label>
 			<input type="text" id="email" name="email" value="<?php echo $_SESSION['sAMAccountName']."@". COMPANY_SUFFIX;?>"  required />
-			<label for="tel" title="Contact telephone so engineer can comunicate">Telephone/Mobile Number</label>
+			<label for="tel" title="Contact telephone so engineer can comunicate">Telephone / Mobile Number</label>
 			<input type="text" id="tel" name="tel" value=""  required />
 	</fieldset>
 	<fieldset>
@@ -40,7 +40,7 @@
 			<select id="callseverity" name="callseverity">
 				<option value="1">This problem affects only me</option>
 				<option value="2">This problem affects multiple people</option>
-				<option value="3">This problem affects all of <?php echo(COMPANY_NAME);?> and boarding houses</option>
+				<option value="3">This problem affects all of College and boarding houses</option>
 			</select>
 	</fieldset>
 	<fieldset>
@@ -93,7 +93,7 @@
 			<div id="additional_fields"></div>
 			<label for="title" title="short one line title of your problem">Short description of issue (Title)</label>
 			<input type="text" id="title" name="title" value="" required />
-			<label for="details" title="enter the full details of your problem">Describe issue in details</label>
+			<label for="details" title="enter the full details of your problem">Describe issue in detail</label>
 			<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
 	</fieldset>
 	<fieldset>
