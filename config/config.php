@@ -21,3 +21,4 @@ define('DB_PASSWORD','helpdesk');
 
 date_default_timezone_set('Europe/London');
 
+
