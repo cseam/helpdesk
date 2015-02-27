@@ -50,7 +50,7 @@
 									die("<script>location.href = '".$_GET['return']."'</script>");
 						} else {
 						// bind failed
-						$error = "password incorrect, account locked, or user does not exist";
+						$error = "Password incorrect, account locked, or user does not exist";
 						}
 					}
 			}
@@ -67,9 +67,9 @@
 			<fieldset id="login">
 				<legend>login to <?php echo(CODENAME);?></legend>
 				<?php if ($error) { ?>
-				<div id="formError">
+				<div class="note urgent">
 					<h3>Error</h3>
-					Please <?php echo($error)?>, check your details and try again.
+					<?php echo($error)?>, check your details and try again.
 				</div>
 				<?php  }; ?>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>?return=<?php echo($_GET['return']);?>" method="post" enctype="multipart/form-data" id="checkPassword">

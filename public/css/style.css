@@ -308,7 +308,7 @@ select::-ms-expand {
 .note {
 	font-size: 0.8rem !important;
 	font-style: italic;
-	padding-left: 1rem;
+	padding: 1rem;
 	border-left: 2px solid #aaa;
 	line-height: 1.1rem !important;
 }

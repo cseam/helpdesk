@@ -62,7 +62,7 @@
 					$('#helpdesk_description').slideDown();
 				});
 				e.preventDefault();
-				$('#category :not(.helpdesk-' + $("#helpdesk").val() +' )').remove();
+				//$('#category :not(.helpdesk-' + $("#helpdesk").val() +' )').remove();
 				return false;
 				});
 			</script>
