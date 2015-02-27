@@ -66,16 +66,16 @@
 		<div id="leftpage">
 			<fieldset id="login">
 				<legend>login to <?php echo(CODENAME);?></legend>
-				<?php if ($error) { ?>
-				<div class="note urgent">
-					<h3>Error</h3>
-					<?php echo($error)?>, check your details and try again.
-				</div>
-				<?php  }; ?>
 					<form action="<?php echo($_SERVER['PHP_SELF']);?>?return=<?php echo($_GET['return']);?>" method="post" enctype="multipart/form-data" id="checkPassword">
 						<label for="username">Username</label><input id="username" type="text" name="username" value="" autofocus>
 						<label for="password">Password</label><input id="password" type="password" name="password" value="">
 						<input id="btnLogin" type="submit" name="btnLogin" value="LOGIN" />
+						<?php if ($error) { ?>
+							<div class="note urgent">
+							<h3>Error</h3>
+							<?php echo($error)?>, check your details and try again.
+							</div>
+						<?php  }; ?>
 					</form>
 					<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/partial/user_login_help.php'); ?>
 			</fieldset>
