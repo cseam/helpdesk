@@ -156,7 +156,7 @@
 				$.ajax(
 					{
 					type: 'post',
-					url: '/includes/partial/post/add_ticket.php',
+					url: '/includes/partial/post/pdo_add_ticket.php',
 					data: formData,
 					async: false,
 					cache: false,
@@ -165,7 +165,7 @@
 					success: function(data)
 					{
 						$('#ajax').html(data);
-						console.log ("added new ticket");
+						console.log ("pdo added new ticket");
 					},
 					error: function()
 					{

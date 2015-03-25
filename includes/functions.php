@@ -8,12 +8,72 @@ function prompt_auth($data) {
 }
 
 //Database Setup
+
+// using SQLi (will be replaced by PDO but until then needed to continue working)
 $db = mysqli_connect(DB_LOC, DB_SCHEMA, DB_USER, DB_PASSWORD);
 // check db connection not sure if this should be done before each db call or once at function load is enough?
 if (mysqli_connect_errno()) {
 	printf("Connect failed: %s\n", mysqli_connect_error());
 }
+// using PDO
+try {
+	# PDO_MYSQL
+	$DBH = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
+	# Display development errors
+	if (DEVELOPMENT_ENVIRONMENT === true) {
+		$DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
+	}
+}
+catch(PDOException $e) {
+	echo($e->getMessage());
+}
 
+// Classes
+class ticket {
+	public $name;
+	public $email;
+	public $tel;
+	public $details;
+	public $assigned;
+	public $opened;
+	public $lastupdate;
+	public $status;
+	public $closed;
+	public $closeengineerid;
+	public $urgency;
+	public $location;
+	public $room;
+	public $category;
+	public $owner;
+	public $helpdesk;
+	public $invoicedate;
+	public $callreason;
+	public $title;
+	public $lockerid;
+
+	function __construct($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o, $p, $q, $r, $s, $t) {
+		$this->name = $a;
+		$this->email = $b;
+		$this->tel = $c;
+		$this->details = $d;
+		$this->assigned = $e;
+		$this->opened = $f;
+		$this->lastupdate = $g;
+		$this->status = $h;
+		$this->closed = $i;
+		$this->closeengineerid = $j;
+		$this->urgency = $k;
+		$this->location = $l;
+		$this->room = $m;
+		$this->category = $n;
+		$this->owner = $o;
+		$this->helpdesk = $p;
+		$this->invoicedate = $q;
+		$this->callreason = $r;
+		$this->title = $s;
+		$this->lockerid = $t;
+	}
+}
 // Functions
 function check_input($data)
 {
