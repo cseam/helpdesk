@@ -7,9 +7,14 @@
 		} else {
 			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
 	};
+
+
+
 	$sqlstr = "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id " . $whereenginners;
 	$sqlstr .= " AND details LIKE '%" . check_input($_POST['term']) . "%';";
 	$result = mysqli_query($db, $sqlstr);
+
+
 ?>
 <table>
 	<tbody>

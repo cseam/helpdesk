@@ -13,9 +13,11 @@
 			<select id="fwdhelpdesk" name="fwdhelpdesk" required>
 				<option value="" SELECTED>Please Select</option>
 				<?php
-				$helpdesks = mysqli_query($db, "SELECT * FROM helpdesks");
-				while($option = mysqli_fetch_array($helpdesks)) { ?>
-					<option value="<?php echo($option['id']);?>"><?php echo($option['helpdesk_name']);?></option>
+				$STH = $DBH->Prepare('SELECT * FROM helpdesks');
+				$STH->setFetchMode(PDO::FETCH_OBJ);
+				$STH->execute();
+				while($row = $STH->fetch()) { ?>
+					<option value="<?php echo($row->id); ?>"><?php echo($row->helpdesk_name); ?></option>
 				<?php }; ?>
 			</select>
 			<label for="details">Reason</label>

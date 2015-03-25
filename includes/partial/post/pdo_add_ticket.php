@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 
 	// Calculate Urgency
 	$urgency = round((check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 );
+
 	// Generate locker number if needed
 	if ($_POST['category'] != '11' ) {
 		$lockerid = null;
@@ -31,14 +32,17 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 		$lockerid = random_locker();
 		$lockerflash = "<fieldset><legend>Engineer Note</legend><p class='lockernotice'>store laptop in locker #". $lockerid ."</p></fieldset>";
 	};
+
 	// Generate ticket details including any images uploaded
 	$ticketdetails = "<div class=original>" . $upload_img_code . $_POST['details'] . "</div>";
+
 	// Calculate engineer to be assigned to ticket
 	if ($_POST['cmn-toggle-selfassign'] !== null) {
 		$assignedengineer = $_POST['cmn-toggle-selfassign'];
 	} else {
 		$assignedengineer =	next_engineer($_POST['helpdesk']);
 	};
+
 	// Check form for auto close and set status acordingly
 	if ($_POST['cmn-toggle-retro'] !== null) {
 		$status = '2';
@@ -49,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 		$closed = null;
 		$closeengineerid = null;
 	};
+
 	// Create new ticket object from form values
 	$createticket = new ticket(
 		$_POST['name'], // name (varchar)
