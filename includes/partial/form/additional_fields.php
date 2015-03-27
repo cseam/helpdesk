@@ -3,8 +3,12 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 
-			 		$morefields = mysqli_query($db, "SELECT * FROM call_additional_fields WHERE typeid = ". $_GET['id'] .";");
-			 		while($loop = mysqli_fetch_array($morefields)) { ?>
-				 		<label for="<?=$loop['label'];?>"><?=$loop['label'];?></label>
-				 		<input type="text" id="label<?=$loop['id'];?>" name="label<?=$loop['id'];?>" value="" required />
-<? } ?>
+	// populate additional fields from db
+	$STH = $DBH->Prepare("SELECT * FROM call_additional_fields WHERE typeid = :typeid");
+	$STH->bindParam(':typeid', $_GET['id'], PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) { ?>
+		<label for="<?php echo($row->label);?>"><?php echo($row->label);?></label>
+		<input type="text" id="label<?php echo($row->id);?>" name="label<?php echo($row->id);?>" value="" required />
+<?php };

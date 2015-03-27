@@ -6,9 +6,7 @@ function prompt_auth($data) {
 			die("<script>location.href = '/login/login.php?return=".$data."'</script>");
 		};
 }
-
 //Database Setup
-
 // using SQLi (will be replaced by PDO but until then needed to continue working)
 $db = mysqli_connect(DB_LOC, DB_SCHEMA, DB_USER, DB_PASSWORD);
 // check db connection not sure if this should be done before each db call or once at function load is enough?

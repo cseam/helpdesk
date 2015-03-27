@@ -11,16 +11,21 @@
 		<label for="helpdesk">Assign to</label>
 			<select id="engineer" name="engineer" required>
 				<option value="" SELECTED>Please Select</option>
+
 				<?php
-				if ($_SESSION['engineerHelpdesk'] <= '3') {
-					$whereenginners = 'WHERE helpdesk <= 3';
-				} else {
-					$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];
-				};
-				$helpdesks = mysqli_query($db, "SELECT * FROM engineers " .$whereenginners. " ORDER BY engineerName");
-				while($option = mysqli_fetch_array($helpdesks)) { ?>
-					<option value="<?php echo($option['idengineers']);?>"><?php echo($option['engineerName']);?></option>
-				<?php }; ?>
+						if ($_SESSION['engineerHelpdesk'] <= '3') {
+							$STHloop = $DBH->Prepare("SELECT * FROM engineers WHERE helpdesk <= :helpdeskid ORDER BY engineerName");
+							$hdid = 3;
+						} else {
+							$STHloop = $DBH->Prepare("SELECT * FROM engineers WHERE helpdesk = :helpdeskid ORDER BY engineerName");
+							$hdid = $_SESSION['engineerHelpdesk'];
+						}
+						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+						$STHloop->setFetchMode(PDO::FETCH_OBJ);
+						$STHloop->execute();
+						while($row = $STHloop->fetch()) { ?>
+						<option value="<?php echo($row->idengineers);?>"><?php echo($row->engineerName);?></option>
+					<?php }; ?>
 			</select>
 		<label for="details">Reason</label>
 		<textarea name="details" id="details" rows="10" cols="40"  required></textarea>

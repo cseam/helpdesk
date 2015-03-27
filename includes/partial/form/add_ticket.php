@@ -20,10 +20,13 @@
 			<select id="location" name="location">
 				<option value="" SELECTED>Please Select</option>
 					<?php
-						$locations = mysqli_query($db, "SELECT * FROM location ORDER BY locationName;");
-							while($option = mysqli_fetch_array($locations))  { ?>
-								<option value="<?php echo $option['id'];?>"><?php echo $option['locationName'];?></option>
-					<? }; ?>
+						// populate locations from db
+						$STH = $DBH->Prepare("SELECT * FROM location ORDER BY locationName");
+						$STH->setFetchMode(PDO::FETCH_OBJ);
+						$STH->execute();
+						while($row = $STH->fetch()) { ?>
+							<option value="<?php echo($row->id);?>"><?php echo($row->locationName);?></option>
+					<?php };?>
 			</select>
 			<label for="room" title="Room where issue is">Room or Place</label>
 			<input type="text" id="room" name="room" value="" />
@@ -48,11 +51,14 @@
 			<label for="helpdesk" title="select the college department">Report to this department</label>
 			<select id="helpdesk" name="helpdesk" required>
 				<option value="" SELECTED>Please Select</option>
-					<?php
-					$helpdesks = mysqli_query($db, "SELECT * FROM helpdesks ORDER BY helpdesk_name");
-						while($option = mysqli_fetch_array($helpdesks)) { ?>
-							<option value="<?php echo $option['id'];?>"><?php echo $option['helpdesk_name'];?></option>
-					<?php }; ?>
+				<?php
+						// populate helpdesks from db
+						$STH = $DBH->Prepare("SELECT * FROM helpdesks ORDER BY helpdesk_name");
+						$STH->setFetchMode(PDO::FETCH_OBJ);
+						$STH->execute();
+						while($row = $STH->fetch()) { ?>
+							<option value="<?php echo($row->id);?>"><?php echo($row->helpdesk_name);?></option>
+				<?php };?>
 			</select>
 			<script type="text/javascript">
 				$("#helpdesk").change(function(e) {
@@ -74,10 +80,13 @@
 			<select id="category" name="category">
 				<option value="" SELECTED>Please Select</option>
 					<?php
-					$categories = mysqli_query($db, "SELECT * FROM categories ORDER BY categoryName;");
-						while($option = mysqli_fetch_array($categories))  { ?>
-							<option value="<?php echo $option['id'];?>" class="helpdesk-<?php echo $option['helpdesk'];?>"><?php echo $option['categoryName'];?></option>
-					<?php }; ?>
+							// populate helpdesks from db
+							$STH = $DBH->Prepare("SELECT * FROM categories ORDER BY categoryName");
+							$STH->setFetchMode(PDO::FETCH_OBJ);
+							$STH->execute();
+							while($row = $STH->fetch()) { ?>
+								<option value="<?php echo($row->id);?>" class="helpdesk-<?php echo($row->helpdesk);?>"><?php echo($row->categoryName);?></option>
+					<?php };?>
 			</select>
 			<script type="text/javascript">
 				$("#category").change(function(e) {

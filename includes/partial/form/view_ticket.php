@@ -1,39 +1,37 @@
 <?php
+	// start sessions
 	session_start();
+	//load functions
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
-	// check authentication
+	// check if authenticated
 	if (empty($_SESSION['sAMAccountName'])) { prompt_auth($_SERVER['REQUEST_URI']); };
-
-
+	// post passes over ticket id once ticket id is passed populate page
 	if ($_SERVER['REQUEST_METHOD']== "POST") {
-		// get ticket for post id
-		$sqlstr = "SELECT * FROM calls ";
-		$sqlstr .= "INNER JOIN engineers ON calls.assigned=engineers.idengineers ";
-		$sqlstr .= "INNER JOIN status ON calls.status=status.id ";
-		$sqlstr .= "INNER JOIN location ON calls.location=location.id ";
-		$sqlstr .= "INNER JOIN categories ON calls.category=categories.id ";
-		$sqlstr .= "WHERE callid =" . check_input($_POST['id']);
-		$result = mysqli_query($db, $sqlstr);
-		// update view
-		while($calls = mysqli_fetch_array($result))  {
-?>
+		//populate ticket details from db
+
+		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id INNER JOIN categories ON calls.category=categories.id WHERE callid = :callid");
+		$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);
+		$STH->setFetchMode(PDO::FETCH_OBJ);
+		$STH->execute();
+		while($row = $STH->fetch()) { ?>
+
 <div id="calldetails">
-	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="updateForm">
-		<input type="hidden" id="id" name="id" value="<?php echo($calls['callid']);?>" />
+	<form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF']));?>" method="post" enctype="multipart/form-data" id="updateForm">
+		<input type="hidden" id="id" name="id" value="<?php echo($row->callid);?>" />
 		<input type="hidden" id="button_value" name="button_value" value="" />
-		<input type="hidden" id="details" name="details" value="<?php echo($calls['details']);?>" />
-		<h2><?php echo($calls['title']);?></h2>
-		<p class="callheader">#<?php echo($_POST['id']);?> <?php if ($calls['urgency'] === '3') { echo("Urgent ");} ?><?php echo($calls['categoryName']);?></p>
-		<p class="callheader">Created by <a href="mailto:<?php echo($calls['email']);?>"><?php echo($calls['name']);?></a></p>
-		<p class="callheader">Contact Number:<?php echo($calls['tel']);?></p>
-		<p class="callheader"><?php echo($calls['room']);?> - <?php echo($calls['locationName']);?></p>
-		<p class="callheader">Assigned to <?php echo(engineer_friendlyname($calls['assigned']));?></p>
+		<input type="hidden" id="details" name="details" value="<?php echo($row->details);?>" />
+		<h2><?php echo($row->title);?></h2>
+		<p class="callheader">#<?php echo($_POST['id']);?> <?php if ($row->urgency === '3') { echo("Urgent ");} ?><?php echo($row->categoryName);?></p>
+		<p class="callheader">Created by <a href="mailto:<?php echo($row->email);?>"><?php echo($row->name);?></a></p>
+		<p class="callheader">Contact Number: <?php echo($row->tel);?></p>
+		<p class="callheader"><?php echo($row->room);?> - <?php echo($row->locationName);?></p>
+		<p class="callheader">Assigned to <?php echo(engineer_friendlyname($row->assigned));?></p>
 		<p class="callheader">
 		<?php
-		if ($calls['status'] === '2') { echo("Call closed in ");} else { echo("Open for ");};
-			$date1 = strtotime($calls['opened']);
-			if ($calls['status'] ==='2') {$date2 = strtotime($calls['closed']);} else {$date2 = time();};
+		if ($row->status === '2') { echo("Call closed in ");} else { echo("Open for ");};
+			$date1 = strtotime($row->opened);
+			if ($row->status ==='2') {$date2 = strtotime($row->closed);} else {$date2 = time();};
 			$diff = $date2 - $date1;
 			$d = ($diff/(60*60*24))%365;
 			$h = ($diff/(60*60))%24;
@@ -41,27 +39,22 @@
 			echo( $d." days, ".$h." hours, ".$m." minutes.");
 		?>
 		</p>
-		<?php if ($calls['lockerid'] != null) { ?><p class="callheader">Locker #<?php echo($calls['lockerid']);?></p><?php }; ?>
+		<?php if ($row->lockerid != null) { ?><p class="callheader">Locker #<?php echo($row->lockerid);?></p><?php }; ?>
 		<?php
-		$additional_field_sql = "SELECT * FROM call_additional_results WHERE callid = ".$calls['callid'].";";
-		$additional_field_result = mysqli_query($db, $additional_field_sql);
-			while ($items = mysqli_fetch_array($additional_field_result)) { ?>
-		<p class="callheader"><?php echo($items['label']);?> - <?php echo($items['value']);?></p>
-		<?php }; ?>
-		<p class="callbody"><?php echo($calls['details']);?></p>
+			// populate additional fields
+				$STHloop = $DBH->Prepare("SELECT * FROM call_additional_results WHERE callid = :callid");
+				$STHloop->bindParam(':callid', $row->callid, PDO::PARAM_STR);
+				$STHloop->setFetchMode(PDO::FETCH_OBJ);
+				$STHloop->execute();
+				while($row2 = $STHloop->fetch()) { ?>
+					<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
+				<?php }; ?>
+		<p class="callbody"><?php echo($row->details);?></p>
 	<fieldset>
 		<legend>Update Ticket</legend>
 		<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 		<p><label for="attachment">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
 		<?php if ($_SESSION['engineerId'] !== null) {?>
-		<?php
-		// filter for engineers helpdesks
-		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE helpdesk_id <= 3';
-		} else {
-			$whereenginners = 'WHERE helpdesk_id='.$_SESSION['engineerHelpdesk']."'";
-		};
-		?>
 	</fieldset>
 	<fieldset>
 		<legend>Engineer Controls</legend>
@@ -70,18 +63,36 @@
 				<select id="callreason" name="callreason">
 					<option value="" SELECTED>Please Select</option>
 					<?php
-						$callreasons = mysqli_query($db, "SELECT * FROM callreasons ".$whereenginners." ORDER BY reason_name;");
-						while($option = mysqli_fetch_array($callreasons)) { ?>
-						<option value="<?php echo($option['id']);?>"><?php echo($option['reason_name']);?></option>
+						if ($_SESSION['engineerHelpdesk'] <= '3') {
+							$STHloop = $DBH->Prepare("SELECT * FROM callreasons WHERE helpdesk_id <= :helpdeskid ORDER BY reason_name");
+							$hdid = 3;
+						} else {
+							$STHloop = $DBH->Prepare("SELECT * FROM callreasons WHERE helpdesk_id = :helpdeskid ORDER BY reason_name");
+							$hdid = $_SESSION['engineerHelpdesk'];
+						}
+						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+						$STHloop->setFetchMode(PDO::FETCH_OBJ);
+						$STHloop->execute();
+						while($row = $STHloop->fetch()) { ?>
+						<option value="<?php echo($row->id);?>"><?php echo($row->reason_name);?></option>
 					<?php }; ?>
 				</select>
 				<label for="quickresponse">Quick Response</label>
 				<select id="quickresponse" name="quickresponse">
 					<option value="" SELECTED>Please Select</option>
 					<?php
-						$quickresponses = mysqli_query($db, "SELECT * FROM quick_responses ".$whereenginners." ORDER BY quick_response;");
-						while($option = mysqli_fetch_array($quickresponses)) { ?>
-						<option value="<?php echo($option['quick_response']);?>"><?php echo($option['quick_response']);?></option>
+						if ($_SESSION['engineerHelpdesk'] <= '3') {
+							$STHloop = $DBH->Prepare("SELECT * FROM quick_responses WHERE helpdesk_id <= :helpdeskid ORDER BY quick_response");
+							$hdid = 3;
+						} else {
+							$STHloop = $DBH->Prepare("SELECT * FROM quick_responses WHERE helpdesk_id = :helpdeskid ORDER BY quick_response");
+							$hdid = $_SESSION['engineerHelpdesk'];
+						}
+						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+						$STHloop->setFetchMode(PDO::FETCH_OBJ);
+						$STHloop->execute();
+						while($row = $STHloop->fetch()) { ?>
+						<option value="<?php echo($row->quick_response);?>"><?php echo($row->quick_response);?></option>
 					<?php }; ?>
 				</select>
 				<script type="text/javascript">
@@ -151,11 +162,14 @@
 	</script>
 </div>
 <?php
-// log user/engineer views
-$logsql = "INSERT INTO call_views (sAMAccountName, callid) VALUES ('" . $_SESSION['sAMAccountName'] . "','" . $calls['callid'] . "')";
-mysqli_query($db, $logsql);
-};
+	// log ticket views
+	$STH = $DBH->Prepare("INSERT INTO call_views (sAMAccountName, callid) VALUES (:samaccountname , :callid)");
+	$STH->bindParam(':samaccountname', $_SESSION['sAMAccountName'], PDO::PARAM_STR);
+	$STH->bindParam(':callid', $row->callid, PDO::PARAM_STR);
+	$STH->execute();
 
 
+// close while loop
 };
-?>
+// close method post
+};

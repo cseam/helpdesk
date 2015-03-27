@@ -3,38 +3,34 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE engineers.helpdesk <= 3';
-		} else {
-			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
-	};
-
-
-
-	$sqlstr = "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id " . $whereenginners;
-	$sqlstr .= " AND details LIKE '%" . check_input($_POST['term']) . "%';";
-	$result = mysqli_query($db, $sqlstr);
-
-
-?>
+		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE engineers.helpdesk <= :helpdeskid AND details LIKE :search");
+		$hdid = 3;
+	} else {
+		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE engineers.helpdesk = :helpdeskid AND details LIKE :search");
+		$hdid = $_SESSION['engineerHelpdesk'];
+	}
+	$term = "%".$_POST['term']."%";
+	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+	$STH->bindParam(":search", $term , PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute(); ?>
 <table>
 	<tbody>
-<?php
-	while($calls = mysqli_fetch_array($result))  {
-?>
+<?php	while($row = $STH->fetch()) { ?>
 	<tr>
-		<td>#<?=$calls['callid'];?></td>
+		<td>#<?php echo($row->callid);?></td>
 		<td>
-		<? if ($calls['status'] ==='2') {
+		<?php if ($row->status ==='2') {
 			echo "<span class='closed'>Closed</span>";
 			} else {
-			echo date("d/m/y", strtotime($calls['opened']));
+			echo date("d/m/y", strtotime($row->opened));
 			};
 		?></td>
-		<td><?=strstr($calls['engineerName']," ", true);?></td>
+		<td><?=strstr($row->engineerName," ", true);?></td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="searchresultsview" >
-				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<div style="margin-top:10px;float: left;"><?=substr(strip_tags($calls['details']), 0, 40);?>...</div>
+				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
+				<div style="margin-top:10px;float: left;"><?=substr(strip_tags($row->details), 0, 40);?>...</div>
 				<input type="image" name="submit" value="submit" src="/public/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View ticket" />
 			</form>
 		</td>
@@ -42,13 +38,7 @@
 <?  }; ?>
 	</tbody>
 </table>
-<?php
-		if (mysqli_num_rows($result) == 0) {
-		echo "<p>&mdash; 0 results returned.</p>";
-	} else {
-		echo "<p>&mdash; " . mysqli_num_rows($result) . " result returned.</p>";
-	} ;
-?>
+<?php echo("<p>" . $STH->rowCount() . " results returned.</p>");?>
 <script type="text/javascript">
 	$('.searchresultsview').submit(function(e) {
 	$.ajax(

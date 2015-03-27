@@ -3,7 +3,11 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 
-			 		$thedetails = mysqli_query($db, "SELECT * FROM helpdesks WHERE id = ". $_GET['id'] .";");
-			 		while($loop = mysqli_fetch_array($thedetails)) { ?>
-				 		<p><?=$loop['description'];?></p>
-<? } ?>
+	// populate helpdesk details from db
+	$STH = $DBH->Prepare("SELECT * FROM helpdesks WHERE id = :id");
+	$STH->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) { ?>
+	<p><?php echo($row->description);?></p>
+<?php };
