@@ -4,17 +4,19 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <h2>Add Change Control</h2>
-<?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") { ?>
-<?
+<?php
+if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") {
 	$uniquetagcsv = implode(',',array_unique(explode(',', $_POST['tagname'])));
-
-	$sqlquery = $db->query("INSERT INTO changecontrol (engineersid, stamp, changemade, tags, server) VALUES (".$_POST['engineer'].",'".date("c")."','".$_POST['details']."','". $uniquetagcsv ."','". $_POST['servername'] ."')");
-	if($sqlquery)
-		{
-			echo "<p>Your change control has been added</p>";
-		}
+	$STH = $DBH->Prepare('INSERT INTO changecontrol (engineersid, stamp, changemade, tags, server) VALUES (:engineersid, :stamp, :changemade, :tags, :server)');
+	$STH->bindParam(':engineersid', $_POST['engineer'], PDO::PARAM_STR);
+	$STH->bindParam(':stamp', date("c"), PDO::PARAM_STR);
+	$STH->bindParam(':changemade', $_POST['details'], PDO::PARAM_STR);
+	$STH->bindParam(':tags', $uniquetagcsv, PDO::PARAM_STR);
+	$STH->bindParam(':server', $_POST['servername'], PDO::PARAM_STR);
+	$STH->execute();
+	echo("<p>Your change control has been added</p>");
+};
 ?>
-<?}?>
 <p>Please log all changes to servers, and tag appropriately.</p>
 <form action="<?=$_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" id="changecontrol">
 <fieldset>
@@ -22,15 +24,19 @@
 	<label for="">Engineer</label>
 		<select id="engineer" name="engineer" required>
 				<?php
-				if ($_SESSION['engineerHelpdesk'] <= '3') {
-					$whereenginners = 'WHERE helpdesk <= 3';
-				} else {
-					$whereenginners = 'WHERE helpdesk='.$_SESSION['engineerHelpdesk'];
-				};
-				$helpdesks = mysqli_query($db, "SELECT * FROM engineers " .$whereenginners. " ORDER BY engineerName");
-				while($option = mysqli_fetch_array($helpdesks)) { ?>
-					<option value="<?=$option['idengineers'];?>"><?=$option['engineerName'];?></option>
-				<? } ?>
+						if ($_SESSION['engineerHelpdesk'] <= '3') {
+							$STH = $DBH->Prepare("SELECT * FROM engineers WHERE helpdesk <= :helpdeskid ORDER BY engineerName");
+							$hdid = 3;
+						} else {
+							$STH = $DBH->Prepare("SELECT * FROM engineers WHERE helpdesk = :helpdeskid ORDER BY engineerName");
+							$hdid = $_SESSION['engineerHelpdesk'];
+						}
+						$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+						$STH->setFetchMode(PDO::FETCH_OBJ);
+						$STH->execute();
+						while($row = $STH->fetch()) { ?>
+						<option value="<?php echo($row->idengineers);?>"><?php echo($row->engineerName);?></option>
+				<?php }; ?>
 		</select>
 	<label for="">Server</label>
 		<input type="text" id="servername" name="servername" />
@@ -47,15 +53,17 @@
 <fieldset>
 	<legend>Please select your tags</legend>
 <p class="tags">
-		<?
-			$tags = mysqli_query($db, "SELECT * FROM changecontrol_tags;");
-				while($buttons = mysqli_fetch_array($tags)) { ?>
-					<form action="<?=$_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" class="addtagform">
-					<input type="hidden" class="addtagid" name="addtagid" value="<?=$buttons['id'];?>" />
-					<input type="hidden" class="addtagname" name="addtagname" value="<?=$buttons['tagname'];?>" />
-					<button name="tag" value="addtag" type="submit"><?=$buttons['tagname'];?></button>
-					</form>
-		<? } ?>
+		<?php
+			$STH = $DBH->Prepare("SELECT * FROM changecontrol_tags");
+			$STH->setFetchMode(PDO::FETCH_OBJ);
+			$STH->execute();
+			while($row = $STH->fetch()) { ?>
+				<form action="<?=$_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" class="addtagform">
+				<input type="hidden" class="addtagid" name="addtagid" value="<?=$row->id;?>" />
+				<input type="hidden" class="addtagname" name="addtagname" value="<?=$row->tagname;?>" />
+				<button name="tag" value="addtag" type="submit"><?=$row->tagname;?></button>
+				</form>
+		<?php }; ?>
 </p>
 </fieldset>
 <script type="text/javascript">
