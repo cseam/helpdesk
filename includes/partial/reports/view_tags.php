@@ -5,32 +5,36 @@
 ?>
 <h2>Tag Control</h2>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['tagname'] == TRUE) { ?>
- <?php
-$sqlquery = $db->query("INSERT INTO changecontrol_tags (tagname) VALUES ('".$_POST['tagname']."');");
-	if($sqlquery)
+<?php
+	$STH = $DBH->Prepare("INSERT INTO changecontrol_tags (tagname) VALUES (:tagname)");
+	$STH->bindParam(":tagname", $_POST['tagname'], PDO::PARAM_STR);
+	$STH->execute();
+	if($STH)
 		{
 			echo "<p>Your new tag has been added</p>";
-		}
-?>
+		} ?>
 <? } ?>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['delthis'] == TRUE) { ?>
 <?php
-$sqlquery = $db->query("DELETE FROM changecontrol_tags WHERE id=".$_POST['delthis'].";");
-	if($sqlquery)
+	$STH = $DBH->Prepare("DELETE FROM changecontrol_tags WHERE id = :delthis");
+	$STH->bindParam(":delthis", $_POST['delthis'], PDO::PARAM_INT);
+	$STH->execute();
+	if($STH)
 		{
 			echo "<p>Selected tag deleted</p>";
-		}
-?>
+		} ?>
 <? } ?>
 <fieldset>
 	<legend>Remove current tag</legend>
 <p class="tags  delete">
 		<?
-			$tags = mysqli_query($db, "SELECT * FROM changecontrol_tags;");
-				while($buttons = mysqli_fetch_array($tags)) { ?>
+			$STH = $DBH->Prepare("SELECT * FROM changecontrol_tags");
+			$STH->setFetchMode(PDO::FETCH_OBJ);
+			$STH->execute();
+			while($row = $STH->fetch()) { ?>
 				<form action="<?=$_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data" class="deltag">
-					<input type="hidden" id="delthis" name="delthis" value="<?=$buttons['id'];?>" />
-					<button name="tag" value="<?=$buttons['tagname'];?>" type="submit"><?=$buttons['tagname'];?></button>
+					<input type="hidden" id="delthis" name="delthis" value="<?=$row->id ?>" />
+					<button name="tag" value="<?=$row->tagname;?>" type="submit"><?=$row->tagname;?></button>
 				</form>
 		<? } ?>
 </p>

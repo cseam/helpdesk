@@ -15,17 +15,18 @@
 		</tr>
 	</thead>
 	<tbody>
-<?
-$sqlstr = mysqli_query($db, "SELECT * FROM changecontrol INNER JOIN engineers ON changecontrol.engineersid=engineers.idengineers ;");
-				while($results = mysqli_fetch_array($sqlstr)) {
-						echo "<tr>";
-						echo "<td>" . $results['engineerName'] . "</td>";
-						echo "<td>" . date("d/m h:s", strtotime($results['stamp'])) . "</td>";
-						echo "<td>" . $results['server'] . "</td>";
-						echo "<td>" . $results['changemade'] . "</td>";
-						echo "<td>" . $results['tags'] . "</td>";
-						echo "</tr>";
-};
-?>
+<?php
+	$STH = $DBH->Prepare("SELECT * FROM changecontrol INNER JOIN engineers ON changecontrol.engineersid=engineers.idengineers");
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) { ?>
+<tr>
+	<td><?= $row->engineerName ?></td>
+	<td><?= date("d/m h:s", strtotime($row->stamp)) ?></td>
+	<td><?= $row->server ?></td>
+	<td><?= $row->changemade ?></td>
+	<td><?= $row->tags ?></td>
+</tr>
+<?php } ?>
 	</tbody>
 </table>

@@ -7,9 +7,11 @@
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['toggle'] == TRUE) { ?>
 <?
 	// update timestamp with changes
-	$sqlstr = "UPDATE calls SET invoicedate='".date("c")."' WHERE callid='" . $_POST['id'] . "';";
-	$result = mysqli_query($db, $sqlstr);
- } ?>
+	$STH = $DBH->Prepare("UPDATE calls SET invoicedate = :invoicedate WHERE callid = :callid");
+	$STH->bindParam(":invoicedate", date("c"), PDO::PARAM_STR);
+	$STH->bindParam(":callid", $_POST['id'], PDO::PARAM_STR);
+	$STH->execute();
+};?>
 <div id="ajaxforms">
 	<table>
 		<thead>
@@ -23,27 +25,30 @@
 	<tbody>
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE engineers.helpdesk <= :helpdeskid ORDER BY callID");
+			$hdid = 3;
 		} else {
-			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE engineers.helpdesk = :helpdeskid ORDER BY callID");
+			$hdid = $_SESSION['engineerHelpdesk'];
 		};
-		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ".$whereenginners." ORDER BY callID;");
-		while($calls = mysqli_fetch_array($result))  {
-		?>
+		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+		$STH->setFetchMode(PDO::FETCH_OBJ);
+		$STH->execute();
+		while($row = $STH->fetch()) {
+	?>
 		<tr>
-		<td>#<?=$calls['callid'];?></td>
+		<td>#<?=$row->callid;?></td>
 		<td>
 			<div class="switch" style="float:left;">
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="toggleform" >
 				<input type="hidden" id="toggle" name="toggle" value="TRUE" />
-				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<input id="cmn-toggle-<?=$calls['callid']?>" name="cmn-toggle-<?=$calls['callid']?>" class="cmn-toggle cmn-toggle-round" type="checkbox" <? if ($calls['invoicedate'] !== null) { ?>checked="true" <?}?>>
-				<label for="cmn-toggle-<?=$calls['callid']?>"></label>
+				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
+				<input id="cmn-toggle-<?=$row->callid?>" name="cmn-toggle-<?=$row->callid?>" class="cmn-toggle cmn-toggle-round" type="checkbox" <? if ($row->invoicedate !== null) { ?>checked="true" <?}?>>
+				<label for="cmn-toggle-<?=$row->callid?>"></label>
 			</form>
 		</div>
-		<td><? if ($calls['invoicedate'] !== null) { echo date("d/m/y", strtotime($calls['invoicedate'])); };?></td>
-		<td><?=substr(strip_tags($calls['title']), 0, 65);?>...</td>
+		<td><? if ($row->invoicedate !== null) { echo date("d/m/y", strtotime($row->invoicedate)); };?></td>
+		<td><?=substr(strip_tags($row->title), 0, 65);?>...</td>
 		</tr>
 	<? } ?>
 	</tbody>

@@ -6,23 +6,24 @@
 <h2>Reason Behind Tickets</h2>
 <p>Chart showing option engineer has set when ticket has been closed in last 30 days</p>
 	<?php
-		// filter helpdesks
-		 if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE calls.helpdesk <= 3';
+		if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$STH = $DBH->Prepare("SELECT callreasons.reason_name, count(*) AS last7 FROM calls INNER JOIN callreasons ON calls.callreason = callreasons.id WHERE calls.helpdesk <= :helpdeskid AND calls.status='2' AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) GROUP BY callreasons.reason_name");
+			$hdid = 3;
 		} else {
-			$whereenginners = 'WHERE calls.helpdesk='.$_SESSION['engineerHelpdesk'];
+			$STH = $DBH->Prepare("SELECT callreasons.reason_name, count(*) AS last7 FROM calls INNER JOIN callreasons ON calls.callreason = callreasons.id WHERE calls.helpdesk = :helpdeskid AND calls.status='2' AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) GROUP BY callreasons.reason_name");
+			$hdid = $_SESSION['engineerHelpdesk'];
 		};
-		// count reason in last 3 days
-		$sql ="SELECT callreasons.reason_name, count(*) AS last7 FROM calls INNER JOIN callreasons ON calls.callreason = callreasons.id ". $whereenginners ." AND calls.status = '2' AND calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) GROUP BY callreasons.reason_name;";
-		$result = mysqli_query($db, $sql);
-			while($loop = mysqli_fetch_array($result)) {
+		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+		$STH->setFetchMode(PDO::FETCH_OBJ);
+		$STH->execute();
+		while($row = $STH->fetch()) {
 			// setup labels
-				$lables .=  "'".$loop ['reason_name']. "' ,";
+				$lables .=  "'".$row->reason_name."' ,";
 			// series
-				$series .= $loop ['last7'] . ",";
-			};
-			$lables = rtrim($lables, " ,");
-			$series = rtrim($series, ",");
+				$series .= $row->last7.",";
+		};
+		$lables = rtrim($lables, " ,");
+		$series = rtrim($series, ",");
 	?>
 	<script type="text/javascript">
 	var data = {

@@ -73,8 +73,8 @@
 						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 						$STHloop->setFetchMode(PDO::FETCH_OBJ);
 						$STHloop->execute();
-						while($row = $STHloop->fetch()) { ?>
-						<option value="<?php echo($row->id);?>"><?php echo($row->reason_name);?></option>
+						while($row2 = $STHloop->fetch()) { ?>
+						<option value="<?php echo($row2->id);?>"><?php echo($row2->reason_name);?></option>
 					<?php }; ?>
 				</select>
 				<label for="quickresponse">Quick Response</label>
@@ -91,8 +91,8 @@
 						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 						$STHloop->setFetchMode(PDO::FETCH_OBJ);
 						$STHloop->execute();
-						while($row = $STHloop->fetch()) { ?>
-						<option value="<?php echo($row->quick_response);?>"><?php echo($row->quick_response);?></option>
+						while($row2 = $STHloop->fetch()) { ?>
+						<option value="<?php echo($row2->quick_response);?>"><?php echo($row2->quick_response);?></option>
 					<?php }; ?>
 				</select>
 				<script type="text/javascript">
@@ -106,13 +106,13 @@
 	<fieldset>
 		<legend>Update Controls</legend>
 			<p class="buttons">
-			<?php if ($calls['status'] === '1') {?>
+			<?php if ($row->status === '1') {?>
 			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close Ticket</button>
 			<?php };?>
 			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update Ticket</button>
 			</p>
-			<p class="callfooter">Call Opened <?php echo(date("d/m/y h:s", strtotime($calls['opened'])));?><br />
-			Last Update <?php echo(date("d/m/y h:s", strtotime($calls['lastupdate'])));?></p>
+			<p class="callfooter">Call Opened <?php echo(date("d/m/y h:s", strtotime($row->opened)));?><br />
+			Last Update <?php echo(date("d/m/y h:s", strtotime($row->lastupdate)));?></p>
 	</fieldset>
 	</form>
 	<script type="text/javascript">

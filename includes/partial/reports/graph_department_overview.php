@@ -5,20 +5,24 @@
 ?>
 <h3>Department Performance</h3>
 <?php
-	// Prep chart Data
-	if ($_SESSION['engineerHelpdesk'] <= '3') { $whereenginners = 'WHERE engineers.helpdesk <= 3'; } else { $whereenginners = 'WHERE engineers.helpdesk='.$_SESSION['engineerHelpdesk']; };
-
-	$sql ="SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers " . $whereenginners . " GROUP BY engineerName ORDER BY Last7 DESC;";
-	$result = mysqli_query($db, $sql);
-		while($loop = mysqli_fetch_array($result)) {
-
-				$lables .= "'" . $loop['engineerName'] . "',";
-				$data .= $loop['Last7'] . ",";
-		};
-		$data = rtrim($data, ",");
-		$lables = rtrim($lables, " ,");
-		$ticketsin = callsinlastday();
-		$ticketsout = callsclosedinlastday();
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid GROUP BY engineerName ORDER BY Last7 DESC");
+		$hdid = 3;
+	} else {
+		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk = :helpdeskid GROUP BY engineerName ORDER BY Last7 DESC");
+		$hdid = $_SESSION['engineerHelpdesk'];
+	};
+	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) {
+		$lables .= "'" . $row->engineerName . "',";
+		$data .= $row->Last7 . ",";
+	};
+	$data = rtrim($data, ",");
+	$lables = rtrim($lables, " ,");
+	$ticketsin = callsinlastday();
+	$ticketsout = callsclosedinlastday();
 ?>
 <style>
 	.ct-bar {

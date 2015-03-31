@@ -10,23 +10,24 @@
 <?php
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
+
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE engineers.helpdesk <= 3';
-		} else {
-			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
-	};
-
-
-
-	$sql ="SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers ".$whereenginners." GROUP BY engineerName ORDER BY Last30 DESC";
-	$result = mysqli_query($db, $sql);
-		while($loop = mysqli_fetch_array($result)) { ?>
+		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid GROUP BY engineerName ORDER BY Last30 DESC");
+		$hdid = 3;
+	} else {
+		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk = :helpdeskid GROUP BY engineerName ORDER BY Last30 DESC");
+		$hdid = $_SESSION['engineerHelpdesk'];
+	}
+	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) { ?>
 
 <tr>
-	<td><?=$loop['engineerName'];?></td>
-	<td><?=$loop['Last30'];?></td>
-	<td><?=$loop['Last7'];?></td>
-	<td><?=$loop['Last1'];?></td>
+	<td><?=$row->engineerName;?></td>
+	<td><?=$row->Last30;?></td>
+	<td><?=$row->Last7;?></td>
+	<td><?=$row->Last1;?></td>
 </tr>
 <?	} ?>
 </table>
@@ -39,17 +40,25 @@
 	<th>Close Ratio</th>
 </tr>
 <?php
-		//run select query
-		$result = mysqli_query($db, "SELECT engineerName, Count(assigned) AS HowManyAssigned, sum(case when status=1 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers
- ".$whereenginners." AND calls.opened >= DATE_SUB(CURDATE(),INTERVAL 30 DAY)
-GROUP BY assigned order by HowManyAssigned DESC;");
-		while($calls = mysqli_fetch_array($result))  {
-		?>
+
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+		$STH = $DBH->Prepare("SELECT engineerName, Count(assigned) AS HowManyAssigned, sum(case when status=1 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid AND calls.opened >= DATE_SUB(CURDATE(),INTERVAL 30 DAY)
+GROUP BY assigned order by HowManyAssigned DESC");
+		$hdid = 3;
+	} else {
+		$STH = $DBH->Prepare("SELECT engineerName, Count(assigned) AS HowManyAssigned, sum(case when status=1 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers WHERE engineers.helpdesk = :helpdeskid AND calls.opened >= DATE_SUB(CURDATE(),INTERVAL 30 DAY)
+GROUP BY assigned order by HowManyAssigned DESC");
+		$hdid = $_SESSION['engineerHelpdesk'];
+	}
+	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) { ?>
 <tr>
-	<td><?=$calls['engineerName'];?></td>
-	<td><?=$calls['HowManyAssigned'];?></td>
-	<td><?=($calls['HowManyAssigned']-$calls['OpenOnes']);?></td>
-	<td><?=round(($calls['HowManyAssigned']-$calls['OpenOnes']) / $calls['HowManyAssigned'] * 100); ?>%</td>
+	<td><?=$row->engineerName;?></td>
+	<td><?=$row->HowManyAssigned;?></td>
+	<td><?=($row->HowManyAssigned-$row->OpenOnes);?></td>
+	<td><?=round(($row->HowManyAssigned-$row->OpenOnes) / $row->HowManyAssigned * 100); ?>%</td>
 </tr>
 <? } ?>
 </table>

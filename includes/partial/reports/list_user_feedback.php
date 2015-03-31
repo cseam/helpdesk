@@ -9,28 +9,22 @@
 		<th>Average Feedback Score</th>
 		<th>Total Feedback Number</th>
 	</tr>
-<?
+<?php
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE engineers.helpdesk <= 3';
-		} else {
-			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
-	};
-
-
-
-	$sqlstr = "SELECT engineerName, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT FROM calls INNER JOIN feedback ON feedback.callid=calls.callid INNER JOIN engineers ON engineers.idengineers=calls.closeengineerid ".$whereenginners." GROUP BY calls.closeengineerid;";
-	$result = mysqli_query($db, $sqlstr);
-		while($loop = mysqli_fetch_array($result)) { ?>
+		$STH = $DBH->Prepare("SELECT engineerName, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT FROM calls INNER JOIN feedback ON feedback.callid=calls.callid INNER JOIN engineers ON engineers.idengineers=calls.closeengineerid WHERE engineers.helpdesk <= :helpdeskid GROUP BY calls.closeengineerid");
+		$hdid = 3;
+	} else {
+		$STH = $DBH->Prepare("SELECT engineerName, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT FROM calls INNER JOIN feedback ON feedback.callid=calls.callid INNER JOIN engineers ON engineers.idengineers=calls.closeengineerid WHERE engineers.helpdesk = :helpdeskid GROUP BY calls.closeengineerid");
+		$hdid = $_SESSION['engineerHelpdesk'];
+	}
+	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) { ?>
 		<tr>
-			<td><?=$loop['engineerName'];?></td>
-			<td>
-			<? if ($loop['FeedbackAVG'] == 1) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['FeedbackAVG'] == 2) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['FeedbackAVG'] == 3) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['FeedbackAVG'] == 4) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['FeedbackAVG'] == 5) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-			</td>
-			<td><?=$loop['FeedbackCOUNT'];?>	</td>
+			<td><?=$row->engineerName;?></td>
+			<td><? for ($i = 0; $i < round($row->FeedbackAVG); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='60' width='auto' />"); }; ?></td>
+			<td><?=$row->FeedbackCOUNT;?></td>
 		</tr>
 <?};?>
 </table>
@@ -43,19 +37,14 @@
 	<th>Customer Feedback</th>
 </tr>
 <?
-	$sql ="SELECT *, sum(case when opened >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS New FROM feedback  GROUP BY callid ORDER BY id DESC";
-	$result = mysqli_query($db, $sql);
-		while($loop = mysqli_fetch_array($result)) { ?>
+	$STH = $DBH->Prepare("SELECT *, sum(case when opened >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS New FROM feedback  GROUP BY callid ORDER BY id DESC");
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) { ?>
 <tr>
-	<td><a href="/viewcall.php?id=<?=$loop['callid']?>"><?=$loop['callid']?></a></td>
-	<td>
-		<? if ($loop['satisfaction'] == 1) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['satisfaction'] == 2) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['satisfaction'] == 3) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['satisfaction'] == 4) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-		<? if ($loop['satisfaction'] == 5) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' /><img src='/public/images/ICONS-star.png' alt='star' height='17' width='auto' />"; };?>
-	</td>
-	<td><?=substr(strtolower(strip_tags($loop['details'])), 0, 40);?>...</td>
+	<td><a href="/viewcall.php?id=<?=$row->callid?>"><?=$row-callid?></a></td>
+	<td><? for ($i = 0; $i < round($row->satisfaction); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='60' width='auto' />"); }; ?></td>
+	<td><?=substr(strtolower(strip_tags($row->details)), 0, 40);?>...</td>
 </tr>
 <? } ?>
 </table>

@@ -12,11 +12,14 @@
 			<th>
 				<select id="filter" onchange="filterTable()" >
 					<option value="0" SELECTED>Location</option>
-				<? //populate filter
-					$filter = mysqli_query($db, "SELECT * FROM location;");
-					while($locations = mysqli_fetch_array($filter))  { ?>
-					<option value="<?=$locations['id'];?>"><?=$locations['locationName'];?></option>
-				<?}?>
+					<?php
+						// populate locations from db
+						$STH = $DBH->Prepare("SELECT * FROM location ORDER BY locationName");
+						$STH->setFetchMode(PDO::FETCH_OBJ);
+						$STH->execute();
+						while($row = $STH->fetch()) { ?>
+							<option value="<?php echo($row->id);?>"><?php echo($row->locationName);?></option>
+					<?php };?>
 			</select>
 			<script type="text/javascript">
 				function filterTable(err) {
@@ -35,35 +38,37 @@
 	</thead>
 	<tbody>
 	<?php
-		//only my helpdesks
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE engineers.helpdesk <= :helpdeskid ORDER BY callID DESC LIMIT 1000");
+			$hdid = 3;
 		} else {
-			$whereenginners = 'WHERE engineers.helpdesk='.$_SESSION['engineerHelpdesk'];
-		};
-		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id ".$whereenginners." ORDER BY callID DESC LIMIT 1000;");
-		if (mysqli_num_rows($result) == 0) { echo "<p>All calls Closed</p>";};
-		while($calls = mysqli_fetch_array($result))  {
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE engineers.helpdesk = :helpdeskid ORDER BY callID DESC LIMIT 1000");
+			$hdid = $_SESSION['engineerHelpdesk'];
+		}
+		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+		$STH->setFetchMode(PDO::FETCH_OBJ);
+		$STH->execute();
+		if ($STH->rowCount() == 0) { echo "<p>All calls Closed</p>";};
+		while($row = $STH->fetch()) {
 		?>
-		<tr class="<?=$calls['location'];?>">
-		<td>#<?=$calls['callid'];?></td>
-		<td><span class="smalltxt"><?=$calls['locationName'];?></span></td>
+		<tr class="<?=$row->location;?>">
+		<td>#<?=$row->callid;?></td>
+		<td><span class="smalltxt"><?=$row->locationName;?></span></td>
 		<td>
 
-		<? if ($calls['status'] ==='2') {
+		<? if ($row->status ==='2') {
 			echo "<span class='closed'>Closed</span>";
 			} else {
-			echo date("d/m/y", strtotime($calls['opened']));
+			echo date("d/m/y", strtotime($row->opened));
 			};
 		?></td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="allcallslist">
-				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($calls['title']), 0, 40);?>...</button>
+				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
+				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($row->title), 0, 40);?>...</button>
 			</form>
 		</td>
-		<td><?=strstr($calls['engineerName']," ", true);?></td>
+		<td><?=strstr($row->engineerName," ", true);?></td>
 
 
 		</tr>

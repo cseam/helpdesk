@@ -5,9 +5,14 @@
 	//Check if enginner logging out
 	if ($_SESSION['engineerId'] !== null) {
 		// Update db enginner status out
-		mysqli_query($db, "UPDATE engineers_status SET status=0 WHERE id=" . $_SESSION['engineerId'] . ";");
+		$STH = $DBH->Prepare("UPDATE engineers_status SET status=0 WHERE id = :id");
+		$STH->bindParam(":id", $_SESSION['engineerId'], PDO::PARAM_INT);
+		$STH->execute();
 		// Update db enginner punchcard
-		mysqli_query($db, "INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES ('" .$_SESSION['engineerId'] ."','0','".date("c")."');");
+		$STH = $DBH->Prepare("INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES (:id, '0', :date)");
+		$STH->bindParam(":id", $_SESSION['engineerId'], PDO::PARAM_INT);
+		$STH->bindParam(":date", date("c"), PDO::PARAM_STR);
+		$STH->execute();
 	};
 	// Destroy session
 	session_destroy();

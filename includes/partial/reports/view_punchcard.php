@@ -2,20 +2,14 @@
 	session_start();
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
-	if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE engineers.helpdesk <= 3';
-		} else {
-			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
-	};
-
 ?>
 <h2>Punchcard</h2>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['toggle'] == TRUE) { ?>
 <?
-	// remove all status for enginner just submitted
-	$sqlstr = "DELETE FROM engineers_status WHERE id = " . $_POST['id'] . ";";
-	$result = mysqli_query($db, $sqlstr);
-
+	// Remove all status for engineers just submitted
+	$STH = $DBH->Prepare("DELETE FROM engineers_status WHERE id = :id");
+	$STH->bindParam(":id", $_POST['id'], PDO::PARAM_INT);
+	$STH->execute();
 	// get toggle status
 	$whichtoggle = "cmn-toggle-" . $_POST['id'];
 	if ($_POST[$whichtoggle] == 'on') {
@@ -23,22 +17,31 @@
 	} else {
 		$togglevalue = 0;
 	}
-	// update status with changes from form
-	$sqlstr = "INSERT INTO engineers_status (id, status) VALUES ('". $_POST['id'] ."','". $togglevalue ."');";
-	$result = mysqli_query($db, $sqlstr);
-	// update timestamp with changes
-	$sqlstr = "INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES ('".$_POST['id']."','".$togglevalue."','".date("c")."');";
-	$result = mysqli_query($db, $sqlstr);
-
-
+	// Update status with changes from form
+	$STH = $DBH->Prepare("INSERT INTO engineers_status (id, status) VALUES (:id , :toggle)");
+	$STH->bindParam(":id", $_POST['id'], PDO::PARAM_INT);
+	$STH->bindParam(":toggle", $togglevalue, PDO::PARAM_INT);
+	$STH->execute();
+	// Update timestamp with changes
+	$STH = $DBH->Prepare("INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES (:id , :toggle, :date)");
+	$STH->bindParam(":id", $_POST['id'], PDO::PARAM_INT);
+	$STH->bindParam(":toggle", $togglevalue, PDO::PARAM_INT);
+	$STH->bindParam(":date", date("c"), PDO::PARAM_INT);
+	$STH->execute();
 	 } ?>
 
 
 <?php
-	// get engineers and current status
-	$sqlstr = "SELECT * FROM engineers LEFT JOIN engineers_status ON engineers_status.id=engineers.idengineers ".$whereenginners.";";
-	$result = mysqli_query($db, $sqlstr);
-?>
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+		$STH = $DBH->Prepare("SELECT * FROM engineers LEFT JOIN engineers_status ON engineers_status.id=engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid");
+		$hdid = 3;
+	} else {
+		$STH = $DBH->Prepare("SELECT * FROM engineers LEFT JOIN engineers_status ON engineers_status.id=engineers.idengineers WHERE engineers.helpdesk = :helpdeskid");
+		$hdid = $_SESSION['engineerHelpdesk'];
+	}
+	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();?>
 <table>
 <tr>
 	<th>Engineer Name</th>
@@ -47,30 +50,32 @@
 	<th>Date - Time</th>
 </tr>
 <?php
-	while($calls = mysqli_fetch_array($result))  {
+	while($row = $STH->fetch()) {
 ?>
 <tr>
-	<td><?=$calls['engineerName'];?></td>
+	<td><?=$row->engineerName;?></td>
 	<td>
 		<div class="switch" style="float:left;">
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="toggleform" >
 				<input type="hidden" id="toggle" name="toggle" value="TRUE" />
-				<input type="hidden" id="id" name="id" value="<?=$calls['idengineers'];?>" />
-				<input id="cmn-toggle-<?=$calls['idengineers']?>" name="cmn-toggle-<?=$calls['idengineers']?>" class="cmn-toggle cmn-toggle-round" type="checkbox" <? if ($calls['status'] == 1) { ?>checked="true" <?}?>>
-				<label for="cmn-toggle-<?=$calls['idengineers']?>"></label>
+				<input type="hidden" id="id" name="id" value="<?=$row->idengineers;?>" />
+				<input id="cmn-toggle-<?=$row->idengineers?>" name="cmn-toggle-<?=$row->idengineers?>" class="cmn-toggle cmn-toggle-round" type="checkbox" <? if ($row->status == 1) { ?>checked="true" <?}?>>
+				<label for="cmn-toggle-<?=$row->idengineers?>"></label>
 			</form>
 		</div>
 		</td>
 		<td>
 			<?php
-				$sqlstr = "SELECT * FROM engineers_punchcard WHERE engineerid = '" . $calls['idengineers'] . "' ORDER BY id DESC LIMIT 1;";
-				$punchcard = mysqli_query($db, $sqlstr);
-				while($test = mysqli_fetch_array($punchcard))  {
-					if ($test['direction'] == 0) { echo "OUT ";} else { echo "IN ";};
+				$STHloop = $DBH->Prepare("SELECT * FROM engineers_punchcard WHERE engineerid = :engineersid ORDER BY id DESC LIMIT 1");
+				$STHloop->bindParam(":engineersid", $row->idengineers, PDO::PARAM_STR);
+				$STHloop->setFetchMode(PDO::FETCH_OBJ);
+				$STHloop->execute();
+				while($rowloop = $STHloop->fetch()) {
+					if ($rowloop->direction == 0) { echo "OUT ";} else { echo "IN ";};
 				?>
 		</td>
 		<td>
-			<?=date("d/m - h:ia", strtotime($test['stamp']));?>
+			<?=date("d/m - h:ia", strtotime($rowloop->stamp));?>
 		</td>
 		<?php } ?>
 </tr>

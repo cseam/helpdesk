@@ -11,7 +11,6 @@
 		<label for="helpdesk">Assign to</label>
 			<select id="engineer" name="engineer" required>
 				<option value="" SELECTED>Please Select</option>
-
 				<?php
 						if ($_SESSION['engineerHelpdesk'] <= '3') {
 							$STHloop = $DBH->Prepare("SELECT * FROM engineers WHERE helpdesk <= :helpdeskid ORDER BY engineerName");

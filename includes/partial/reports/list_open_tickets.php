@@ -10,20 +10,23 @@
 	<tbody>
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$whereenginners = 'WHERE engineers.helpdesk <= 3';
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE engineers.helpdesk <= :helpdeskid AND status='1' ORDER BY callID");
+			$hdid = 3;
 		} else {
-			$whereenginners = 'WHERE engineers.helpdesk=' .$_SESSION['engineerHelpdesk'];
-		};
-		//run select query
-		$result = mysqli_query($db, "SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id ".$whereenginners." AND status='1' ORDER BY callID;");
-		if (mysqli_num_rows($result) == 0) { echo "<p>All calls Closed</p>";};
-		while($calls = mysqli_fetch_array($result))  {
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE engineers.helpdesk = :helpdeskid AND status='1' ORDER BY callID");
+			$hdid = $_SESSION['engineerHelpdesk'];
+		}
+		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+		$STH->setFetchMode(PDO::FETCH_OBJ);
+		$STH->execute();
+		if ($STH->rowCount() == 0) { echo "<p>All calls Closed</p>";};
+		while($row = $STH->fetch()) {
 		?>
 		<tr>
-		<td>#<?=$calls['callid'];?></td>
+		<td>#<?=$row->callid;?></td>
 		<td width="45">
 		<?php
-		$datetime1 = new DateTime(date("Y-m-d", strtotime($calls['opened'])));
+		$datetime1 = new DateTime(date("Y-m-d", strtotime($row->opened)));
 		$datetime2 = new DateTime(date("Y-m-d"));
 		$interval = date_diff($datetime1, $datetime2);
 		echo $interval->format('%a days');
@@ -31,22 +34,22 @@
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">
-				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
-				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($calls['title']), 0, 65);?>...</button>
+				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
+				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($row->title), 0, 65);?>...</button>
 			</form>
 		</td>
 		<td>
-			<?=strstr($calls['engineerName']," ", true);?>
+			<?=strstr($row->engineerName," ", true);?>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">
-			<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
+			<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 			<input name="submit" value="" type="image" src="/public/images/ICONS-forward@2x.png" width="24" height="25" class="icon" alt="forward ticket"  title="forward ticket"/>
 			</form>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reassign">
-				<input type="hidden" id="id" name="id" value="<?=$calls['callid'];?>" />
+				<input type="hidden" id="id" name="id" value="<?=$row-callid;?>" />
 				<input name="submit" value="" type="image" src="/public/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer"  title="assign engineer" />
 			</form>
 		</td>

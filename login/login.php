@@ -31,21 +31,27 @@
 						// verify binding
 						if ($ldapbind) {
 							//bind successful authenticate session details for user
-							$result = mysqli_query($db, "SELECT * FROM engineers WHERE sAMAccountName='". $_POST['username'] ."'");
-								if(mysqli_num_rows($result) === 0) {
-									$_SESSION['sAMAccountName'] = $_POST['username'];
-								}
-								while($engineers = mysqli_fetch_array($result))  {
+							$STH = $DBH->Prepare("SELECT * FROM engineers WHERE sAMAccountName = :username");
+							$STH->bindParam(":username", $_POST['username'], PDO::PARAM_STR);
+							$STH->setFetchMode(PDO::FETCH_OBJ);
+							$STH->execute();
+							if($STH->rowCount() === 0) { $_SESSION['sAMAccountName'] = $_POST['username'];}
+								while($row = $STH->fetch()) {
 									// Update Session Details
 									$_SESSION['sAMAccountName'] = $_POST['username'];
-									$_SESSION['engineerLevel'] = $engineers['engineerLevel'];
-									$_SESSION['engineerId'] = $engineers['idengineers'];
-									$_SESSION['superuser'] = $engineers['superuser'];
-									$_SESSION['engineerHelpdesk'] = $engineers['helpdesk'];
+									$_SESSION['engineerLevel'] = $row->engineerLevel;
+									$_SESSION['engineerId'] = $row->idengineers;
+									$_SESSION['superuser'] = $row->superuser;
+									$_SESSION['engineerHelpdesk'] = $row->helpdesk;
 										// Update db enginner status
-										mysqli_query($db, "UPDATE engineers_status SET status=1 WHERE id=" . $engineers['idengineers'] . ";");
+										$STHloop = $DBH->Prepare("UPDATE engineers_status SET status=1 WHERE id = : id");
+										$STHloop->bindParam(":id", $row->idengineers, PDO::PARAM_STR);
+										$STHloop->execute();
 										// Update db enginner punchcard
-										mysqli_query($db, "INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES ('" .$engineers['idengineers']."','1','".date("c")."');");
+										$STHloop = $DBH->Prepare("INSERT INTO engineers_punchcard (engineerid, direction, stamp) VALUES (:id, '1', :date)");
+										$STHloop->bindParam(":id", $row->idengineers, PDO::PARAM_STR);
+										$STHloop->bindParam(":date", date("c"), PDO::PARAM_STR);
+										$STHloop->execute();
 									}
 									die("<script>location.href = '".$_GET['return']."'</script>");
 						} else {

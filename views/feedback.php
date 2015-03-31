@@ -37,19 +37,12 @@
 						<li><a href="/">Home</a></li>
 					</ul>
 					<?php
-					// Create Query
-					$sqlstr = "INSERT INTO feedback ";
-					$sqlstr .= "(callid, satisfaction, details, opened) ";
-					$sqlstr .= "VALUES (";
-					$sqlstr .= " '" . check_input($_POST['callid']) . "',";
-					$sqlstr .= " '" . check_input($_POST['satisfaction']) . "',";
-					$sqlstr .= " '" . check_input($_POST['details']) . "',";
-					$sqlstr .= " '" . date("c") . "'";
-					$sqlstr .= ")";
-					// Run Query
-					mysqli_query($db, $sqlstr);
-					// Close Connection
-					mysqli_close($db);
+					$STH = $DBH->Prepare("INSERT INTO feedback (callid, satisfaction, details, opened) VALUES (:id, :satisfaction, :details, :date)");
+					$STH->bindParam(":id", $_POST['callid'], PDO::PARAM_INT);
+					$STH->bindParam(":satisfaction", $_POST['satisfaction'], PDO::PARAM_STR);
+					$STH->bindParam(":details", $_POST['details'], PDO::PARAM_STR);
+					$STH->bindParam(":date", date("c"), PDO::PARAM_STR);
+					$STH->execute();
 					} else {?>
 					<h1>Ticket Feedback</h1>
 					<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
