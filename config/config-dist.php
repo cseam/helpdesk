@@ -9,18 +9,18 @@ define('UPLOAD_LOC', '/uploads/');
 // name for the helpdesk to be used
 define('CODENAME', 'helpdesk');
 // company name used in various forms
-define('COMPANY_NAME', 'CLC');
+define('COMPANY_NAME', 'Great Company PLC');
 // company suffix used to postfix username for auto complete email etc
-define('COMPANY_SUFFIX', 'cheltenhamladiescollege.co.uk');
+define('COMPANY_SUFFIX', 'domainnamehere.co.uk');
 // companys ldap server location for authentications
-define('LDAP_SERVER', 'ldap://clcdc1.cheltenhamladiescollege.co.uk');
+define('LDAP_SERVER', 'ldap://ldapserver.domainnamehere.co.uk');
 // websever location and protocol you wish to connect using set to https for production
 define('HELPDESK_LOC', 'http://' . $_SERVER['HTTP_HOST']);
 // database location, schema, username and password
 define('DB_LOC', 'localhost');
 define('DB_SCHEMA', 'helpdesk');
-define('DB_USER','helpdesk');
-define('DB_PASSWORD','helpdesk');
+define('DB_USER','mysqluser');
+define('DB_PASSWORD','mysqlpassword');
 // default timezone for server
 date_default_timezone_set('Europe/London');
 // helper items can be ignored
