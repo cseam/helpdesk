@@ -178,10 +178,10 @@ table th {
 /* End tables */
 /* Standard forms */
 input, textarea, button {
-	background: rgba(255,255,255,0.25);
+	background: rgba(255,255,255,0.9);
 	color: #777777;
 	border: 1px solid #ccc;
-	border-radius: 5px;
+	border-radius: 1px;
 	padding: 0.5rem 1rem;
 	font-family: 'verlag', Arial;
 	resize: none;
@@ -189,11 +189,11 @@ input, textarea, button {
 	font-size: 0.8rem;
 }
 select {
-	background: rgba(255,255,255,0.25) url('/public/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
+	background: rgba(255,255,255,0.9) url('/public/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
 	background-size: 16px;
 	color: #777777;
 	border: 1px solid #ccc;
-	border-radius: 5px;
+	border-radius: 1px;
 	padding: 0.5rem 1.0rem;
 	font-family: 'verlag', Arial;
 	appearance: none;
@@ -240,7 +240,7 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
   -moz-box-sizing:border-box;
   -webkit-box-sizing:border-box;
   font-size: 0.8rem;
-  background: rgba(30, 118, 0, 0.05) url('/public/images/ICONS-here@2x.png') no-repeat 99% 50%;
+  background: rgba(55, 215, 2, 0.05) url('/public/images/ICONS-here@2x.png') no-repeat 99% 50%;
   background-size: 16px;
 }
 #calldetails textarea {
@@ -248,7 +248,7 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
 	box-sizing: border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
-	background: rgba(255,255,255,0.25);
+	background: rgba(255,255,255,0.9);
 	resize: none;
 	padding: 1rem;
 }
@@ -323,12 +323,19 @@ select::-ms-expand {
 .callheader {
 	color: #577d6a;
 	text-transform: uppercase;
-	margin: 5px 0;
-	font-size: 0.75rem;
-	border-bottom: 1px solid rgba(88, 126, 107, 0.2);
+	margin: 2px 0;
+	font-size: 0.70rem;
+	border-bottom: 0px solid rgba(88, 126, 107, 0.2);
+	width: 50%;
+	float: left;
 }
 .callheader a {
-	font-size: 0.75rem;
+	font-size: 0.70rem;
+}
+h3.callbody {
+	clear: left;
+	padding-top: 30px;
+	color: #919191 !important;
 }
 .callbody {
 	color: #919191;
@@ -383,7 +390,7 @@ select::-ms-expand {
 	float: right;
 }
 .buttons button {
-	background-color: rgba(255,255,255,0.15);
+	background-color: rgba(255,255,255,0.9);
 	border: 1px solid #ccc;
 	cursor: pointer;
 }
@@ -451,9 +458,9 @@ select::-ms-expand {
 }
 .closed {
 	float: left;
-	padding: 0.2rem 0.6rem;
-	font-size: 0.6rem;
-	border: 1px solid #ccc;
+	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
+	font-size: 0.7rem;
+	/* border: 1px solid #ccc; */
 	border-radius: 0 0 5px 5px;
 	color: rgb(100, 125, 106);
 	display: block;

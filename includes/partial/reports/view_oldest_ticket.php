@@ -20,7 +20,7 @@
 	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="updateForm">
 	<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 	<input type="hidden" id="details" name="details" value="<?=$row->details;?>" />
-	<h2><?=$row->title;?></h2>
+	<h2>Ticket Details #<?=$row->callid;?></h2>
 	<p class="callheader">Ticket #<?=$row->callid;?></p>
 	<p class="callheader">Created by <a href="mailto:<?=$row->email;?>"><?=$row->name;?></a> (<?=$row->tel;?>)</p>
 	<p class="callheader">For <?=$row->room;?> - <?=$row->locationName;?></p>
@@ -34,7 +34,7 @@
 						$m = ($diff/60)%60;
 						echo $d." days, ".$h." hours, ".$m." minutes.";
 					?></p>
-	<?php if (!empty($row->attachmentname)) { ?><p><img src="/uploads/<?=$row->attachmentname;?>" width="100%" /></p><? }; ?>
+	<h3 class="callbody"><?php echo($row->title);?></h3>
 	<p class="callbody"><?=$row->details;?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">

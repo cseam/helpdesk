@@ -15,8 +15,7 @@
 	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="updateForm">
 	<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 	<input type="hidden" id="details" name="details" value="<?=$row->details;?>" />
-	<h2>Oldest Ticket</h2>
-	<h3><?=$row->title;?></h3>
+	<h2>Oldest Ticket Details #<?=$row->callid?></h2>
 	<p class="callheader">Created by <a href="mailto:<?=$row->email;?>"><?=$row->name;?></a> (<?=$row->tel;?>)</p>
 	<p class="callheader">For <?=$row->room;?> - <?=$row->locationName;?></p>
 	<p class="callheader">Open for
@@ -29,7 +28,6 @@
 						$m = ($diff/60)%60;
 						echo $d." days, ".$h." hours, ".$m." minutes.";
 					?></p>
-	<?php if (!empty($row->attachmentname)) { ?><p><img src="/uploads/<?=$row->attachmentname;?>" width="100%" /></p><? }; ?>
 	<?php
 		// populate additional fields
 		$STHloop = $DBH->Prepare("SELECT * FROM call_additional_results WHERE callid = :callid");
@@ -39,6 +37,7 @@
 		while($row2 = $STHloop->fetch()) { ?>
 			<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
 	<?php }; ?>
+	<h3 class="callbody"><?php echo($row->title);?></h3>
 	<p class="callbody"><?=$row->details;?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p><label for="attachment" style="width: 190px">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>

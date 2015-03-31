@@ -12,11 +12,11 @@
 			<label for="email" title="Contact email so engineer can comunicate">Your Email</label>
 			<input type="text" id="email" name="email" value="<?php echo $_SESSION['sAMAccountName']."@". COMPANY_SUFFIX;?>"  required />
 			<label for="tel" title="Contact telephone so engineer can comunicate">Telephone / Mobile Number</label>
-			<input type="text" id="tel" name="tel" value=""  required />
+			<input type="text" id="tel" name="tel" value="" />
 	</fieldset>
 	<fieldset>
 		<legend>Location of issue</legend>
-			<label for="location" title="location on campus of issue">Location on campus</label>
+			<label for="location" title="location of issue">Issue Location</label>
 			<select id="location" name="location">
 				<option value="" SELECTED>Please Select</option>
 					<?php

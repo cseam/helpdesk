@@ -149,11 +149,11 @@
 
 	// Draw Pie chartist.js
 	var pieData = {
-		series: [<?=$allopen?>,<?=$allpie?>]
+		series: [<?=$allpie?>,<?=$allopen?>]
 		};
 
 	var pieOptions = {
-		chartPadding: {top: 20, right:5, bottom:5, left:5},
+		chartPadding: {top: 20, right:5, bottom:20, left:5},
 		donut: true,
 		showLabel: false,
 		donutWidth: 20
@@ -163,5 +163,9 @@
 	//END DOM READY
 	});
 </script>
-<div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; float: left;"></div>
-<div id="weekstats" class="ct-chart ct-golden-section" style="width: 60%;float:left;"></div>
+<div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; height:85%; float: left; display:table;">
+	<span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 2.5rem;font-weight: 100;">
+		<?php echo(round(100 - (($allopen/$allpie)*100)));?>%
+	</span>
+</div>
+<div id="weekstats" class="ct-chart ct-golden-section" style="width: 60%; height: 85%;float:left;"></div>

@@ -108,6 +108,7 @@
 					break;
 					CASE 1:
 					echo("<script type='text/javascript'>update_div('#calllist','/reports/list_engineers_tickets.php');</script>");
+					echo("<script type='text/javascript'>update_div('#stats','reports/graph_my_performance.php');</script>");
 					break;
 					DEFAULT:
 					echo("<script type='text/javascript'>update_div('#calllist','/reports/list_your_tickets.php');</script>");

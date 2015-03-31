@@ -21,7 +21,7 @@
 		<input type="hidden" id="id" name="id" value="<?php echo($row->callid);?>" />
 		<input type="hidden" id="button_value" name="button_value" value="" />
 		<input type="hidden" id="details" name="details" value="<?php echo($row->details);?>" />
-		<h2><?php echo($row->title);?></h2>
+		<h2>Ticket Details #<?php echo($_POST['id']);?></h2>
 		<p class="callheader">#<?php echo($_POST['id']);?> <?php if ($row->urgency === '3') { echo("Urgent ");} ?><?php echo($row->categoryName);?></p>
 		<p class="callheader">Created by <a href="mailto:<?php echo($row->email);?>"><?php echo($row->name);?></a></p>
 		<p class="callheader">Contact Number: <?php echo($row->tel);?></p>
@@ -29,7 +29,7 @@
 		<p class="callheader">Assigned to <?php echo(engineer_friendlyname($row->assigned));?></p>
 		<p class="callheader">
 		<?php
-		if ($row->status === '2') { echo("Call closed in ");} else { echo("Open for ");};
+		if ($row->status === '2') { echo("Closed in ");} else { echo("Open for ");};
 			$date1 = strtotime($row->opened);
 			if ($row->status ==='2') {$date2 = strtotime($row->closed);} else {$date2 = time();};
 			$diff = $date2 - $date1;
@@ -49,6 +49,7 @@
 				while($row2 = $STHloop->fetch()) { ?>
 					<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
 				<?php }; ?>
+		<h3 class="callbody"><?php echo($row->title);?></h3>
 		<p class="callbody"><?php echo($row->details);?></p>
 	<fieldset>
 		<legend>Update Ticket</legend>
