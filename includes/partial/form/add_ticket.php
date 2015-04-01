@@ -62,14 +62,17 @@
 			</select>
 			<script type="text/javascript">
 				$("#helpdesk").change(function(e) {
-				$.post('/includes/partial/form/helpdesk_description.php?id=' + $("#helpdesk").val(), $(this).serialize(), function(resp) {
-					$('#helpdesk_description').hide();
-					$('#helpdesk_description').html(resp);
-					$('#helpdesk_description').slideDown();
-				});
-				e.preventDefault();
-				//$('#category :not(.helpdesk-' + $("#helpdesk").val() +' )').remove();
-				return false;
+					$.post('/includes/partial/form/get_categorys.php?id=' + $("#helpdesk").val(), $(this).serialize(), function(resp){
+						$('#category option').remove();
+						$('#category').html(resp);
+					});
+					$.post('/includes/partial/form/helpdesk_description.php?id=' + $("#helpdesk").val(), $(this).serialize(), function(resp) {
+						$('#helpdesk_description').hide();
+						$('#helpdesk_description').html(resp);
+						$('#helpdesk_description').slideDown();
+					});
+					e.preventDefault();
+					return false;
 				});
 			</script>
 			<div id="helpdesk_description"></div>
@@ -78,15 +81,7 @@
 		<legend>Details of problem</legend>
 			<label for="category" title="what type of issue do you have?">Type of issue</label>
 			<select id="category" name="category">
-				<option value="" SELECTED>Please Select</option>
-					<?php
-							// populate helpdesks from db
-							$STH = $DBH->Prepare("SELECT * FROM categories ORDER BY categoryName");
-							$STH->setFetchMode(PDO::FETCH_OBJ);
-							$STH->execute();
-							while($row = $STH->fetch()) { ?>
-								<option value="<?php echo($row->id);?>" class="helpdesk-<?php echo($row->helpdesk);?>"><?php echo($row->categoryName);?></option>
-					<?php };?>
+				<option value="" SELECTED>Please select department first</option>
 			</select>
 			<script type="text/javascript">
 				$("#category").change(function(e) {
