@@ -203,8 +203,8 @@ select {
 fieldset {
 	border: 1px solid transparent;
 	border-top: 1px solid rgba(0,0,0,0.2);
-	padding: 0.5rem;
-	margin: 0.5rem 0;
+	padding: 0.2rem;
+	margin: 0.4rem 0;
 	overflow: hidden;
 }
 fieldset legend {
@@ -216,7 +216,7 @@ fieldset legend {
 }
 label {
 	text-transform: uppercase;
-	padding: 0.5rem 0;
+	padding: 0.6rem 0 0.1rem 0;
 	font-size: 0.8rem;
 	vertical-align: top;
 	border: 1px solid transparent;
@@ -225,7 +225,7 @@ label {
 }
 
 fieldset input, fieldset textarea, fieldset select  {
-	margin: 3px 0;
+	margin: 1px 0;
 	box-sizing: border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
@@ -273,7 +273,7 @@ select::-ms-expand {
 /* Additional layout */
 #ajax {
 	margin-top: 0rem;
-	padding: 2rem;
+	padding: 1.5rem;
 }
 #ajaxforms {
 	margin-bottom: 1rem;
