@@ -23,7 +23,7 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
-		<td>#<?=$row->callid;?></td>
+		<!--<td>#<?=$row->callid;?></td>-->
 		<td width="45">
 		<?php
 		$datetime1 = new DateTime(date("Y-m-d", strtotime($row->opened)));

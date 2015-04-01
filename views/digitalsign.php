@@ -19,6 +19,7 @@
 		<div id="digitalsign-stats">
 			<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/partial/reports/view_sign_stats.php'; ?>
 		</div>
+
 	</div>
 	<div id="rightpage">
 		<div id="call">

@@ -3,17 +3,16 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h2>Lockers</h2>
 <div id="ajaxforms">
 	<table>
 	<thead>
 		<tr class="head">
-			<th>#</th>
-			<th>Status</th>
-			<th>Owner</th>
-			<th>Details</th>
-			<th style="text-align:right;">View</th>
-			<th style="text-align:right;">Return</th>
+			<!--<th>#</th>-->
+			<th>Laptop Status</th>
+			<th>Laptop Owner</th>
+			<th>Ticket <br/>Details</th>
+			<th style="text-align:right;">View Ticket</th>
+			<th style="text-align:right;">Return Laptop</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,7 +24,7 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
-		<td><?php echo($row->lockerid);?></td>
+		<!--<td><?php echo($row->lockerid);?></td>-->
 		<td><?php if ($row->status === '2') {echo("<span class=lockerready>Ready</span>");};?></td>
 		<td><?php echo($row->name);?></td>
 		<td><?php echo($row->title); ?></td>

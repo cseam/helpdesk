@@ -22,6 +22,7 @@
 	<input type="hidden" id="details" name="details" value="<?=$row->details;?>" />
 	<h2>Ticket Details #<?=$row->callid;?></h2>
 	<p class="callheader">Ticket #<?=$row->callid;?></p>
+	<p class="callheader">Assigned to <?=engineer_friendlyname($row->assigned);?></p>
 	<p class="callheader">Created by <a href="mailto:<?=$row->email;?>"><?=$row->name;?></a> (<?=$row->tel;?>)</p>
 	<p class="callheader">For <?=$row->room;?> - <?=$row->locationName;?></p>
 	<p class="callheader">Open for
