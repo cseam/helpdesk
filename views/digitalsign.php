@@ -29,5 +29,21 @@
 		</div>
 	</div>
 	</div>
+
+	<script type="text/javascript">
+	$(function() {
+		// Wait for DOM ready state
+			// Reload stats and lockers
+			setInterval(function() {
+				// Do something after 5 min 300000ms
+				update_div('#digitalsign-stats','reports/view_sign_stats.php');
+				update_div('#ajax','reports/view_lockers.php')
+			}, 300000);
+		// End DOM ready check
+	});
+	</script>
+
+
+
 	</body>
 </html>
