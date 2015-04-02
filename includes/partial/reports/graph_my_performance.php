@@ -165,7 +165,15 @@
 </script>
 <div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; height:85%; float: left; display:table;">
 	<span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 2.5rem;font-weight: 100;">
-		<?php echo(round(100 - (($allopen/$allpie)*100)));?>%
+		<?php
+			if ($allpie > 0) {
+				$alltotal = $allpie + $allopen;
+				$display = round(($allpie / $alltotal) * 100);
+			} else {
+				$display = '0';
+			}
+			echo $display;
+		?>%
 	</span>
 </div>
 <div id="weekstats" class="ct-chart ct-golden-section" style="width: 60%; height: 85%;float:left;"></div>

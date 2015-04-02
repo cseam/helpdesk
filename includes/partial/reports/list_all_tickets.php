@@ -8,7 +8,7 @@
 	<table>
 	<thead>
 		<tr class="head">
-			<th>#</th>
+			<!--<th>#</th>-->
 			<th>
 				<select id="filter" onchange="filterTable()" >
 					<option value="0" SELECTED>Location</option>
@@ -31,8 +31,8 @@
 				};
 			</script>
 			</th>
-			<th>Date</th>
-			<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Details</th>
+			<th>Status</th>
+			<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title</th>
 			<th>Engineer</th>
 		</tr>
 	</thead>
@@ -52,7 +52,7 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr class="<?=$row->location;?>">
-		<td>#<?=$row->callid;?></td>
+		<!--<td>#<?=$row->callid;?></td>-->
 		<td><span class="smalltxt"><?=$row->locationName;?></span></td>
 		<td>
 

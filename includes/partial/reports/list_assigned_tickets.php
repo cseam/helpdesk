@@ -16,7 +16,7 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
-		<td>#<?=$row->callid;?></td>
+		<!--<td>#<?=$row->callid;?></td>-->
 		<td><?=date("d/m/y", strtotime($row->opened));?></td>
 		<td class="view_td"><?=substr(strip_tags($row->title), 0, 90);?>...</td>
 		<td>
