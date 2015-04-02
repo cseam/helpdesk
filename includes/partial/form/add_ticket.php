@@ -53,7 +53,7 @@
 				<option value="" SELECTED>Please Select</option>
 				<?php
 						// populate helpdesks from db
-						$STH = $DBH->Prepare("SELECT * FROM helpdesks ORDER BY helpdesk_name");
+						$STH = $DBH->Prepare("SELECT * FROM helpdesks WHERE deactivate !=1 ORDER BY helpdesk_name");
 						$STH->setFetchMode(PDO::FETCH_OBJ);
 						$STH->execute();
 						while($row = $STH->fetch()) { ?>
