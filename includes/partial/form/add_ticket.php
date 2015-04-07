@@ -37,7 +37,7 @@
 			<select id="callurgency" name="callurgency">
 				<option value="1">An alternative is available</option>
 				<option value="2">This is affecting my work</option>
-				<option value="3">I cannot work</option>
+				<option value="3">I cannot work or issue is time critical</option>
 			</select>
 			<label for="callseverity" title="how the issue effects me">Severity</label>
 			<select id="callseverity" name="callseverity">
