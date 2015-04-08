@@ -27,4 +27,4 @@ System must be fully maintained by individual departments, without intervention 
 ![alt tag](https://raw.github.com/atomicjam/helpdesk/master/public/images/concept%20artwork/managersview-beta1.jpg)
 
 ## Setup Instructions
-Comming soon in beta 3 with install pages and scripts. 
+Coming soon in beta 3 with install pages and scripts. 
