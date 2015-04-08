@@ -10,7 +10,12 @@
 	if ($_SERVER['REQUEST_METHOD']== "POST") {
 		//populate ticket details from db
 
-		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id INNER JOIN categories ON calls.category=categories.id WHERE callid = :callid");
+		$STH = $DBH->Prepare("SELECT * FROM calls
+		INNER JOIN engineers ON calls.assigned=engineers.idengineers
+		INNER JOIN status ON calls.status=status.id
+		INNER JOIN location ON calls.location=location.id
+		INNER JOIN categories ON calls.category=categories.id
+		WHERE callid = :callid");
 		$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
@@ -108,9 +113,10 @@
 		<legend>Update Controls</legend>
 			<p class="buttons">
 			<?php if ($row->status === '1') {?>
-			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close Ticket</button>
+			<button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
+			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
 			<?php };?>
-			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update Ticket</button>
+			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
 			</p>
 			<p class="callfooter">Call Opened <?php echo(date("d/m/y h:s", strtotime($row->opened)));?><br />
 			Last Update <?php echo(date("d/m/y h:s", strtotime($row->lastupdate)));?></p>

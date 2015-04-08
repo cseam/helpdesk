@@ -8,7 +8,8 @@
 <link rel="stylesheet" type="text/css" href="/public/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/public/css/print.css" media="print"/>
 <!-- jQuery CDN -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>-->
+<script src="/public/javascript/jquery-2.1.3.min.js" type="text/javascript"></script>
 <!-- custom javascript functions -->
 <script src="/public/javascript/custom.js" type="text/javascript"></script>
 <!-- Google Analytics -->
@@ -21,7 +22,9 @@
   ga('send', 'pageview');
 </script>
 <!-- Responsive chart js -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<!--<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">-->
+<link rel="stylesheet" href="/public/css/chartist.min.css">
+<!--<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>-->
+<script src="/public/javascript/chartist.min.js"></script>
 <!-- Forms simple client validation -->
 <script src="/public/javascript/jquery.validate.min.js" type="text/javascript"></script>

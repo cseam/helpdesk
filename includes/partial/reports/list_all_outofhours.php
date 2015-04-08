@@ -1,5 +1,5 @@
 <h2>Out of hours calls</h2>
-<p><button onclick="update_div('#ajax','form/add_outofhours.php')">Log a new call</button></p>
+<p class="buttons"><button onclick="update_div('#ajax','form/add_outofhours.php')">Log a new call</button></p>
 <h3>List of calls</h3>
 
 <table>

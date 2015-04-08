@@ -107,10 +107,30 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 	$STH->bindParam(':id', $_POST['helpdesk'], PDO::PARAM_STR);
 	$STH->execute();
 
+	// Get Service level agreement to generate ETA for user
+	$STH = $DBH->Prepare("SELECT * FROM service_level_agreement WHERE helpdesk = :helpdesk AND urgency = :urgency");
+	$STH->bindParam(':helpdesk', $_POST['helpdesk'], PDO::PARAM_INT);
+	$STH->bindParam(':urgency', $urgency, PDO::PARAM_INT);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) {
+		$SLA = $row->agreement;
+			$date = date("d-m-Y");
+			$date = strtotime(date("d-m-Y", strtotime($date)) . $row->close_eta_days . " days");
+			$date = date("d-m-Y",$date);
+			$SLAETA = $date;
+	}
+
 	// Update view and update call list
 ?>
 <h2>Thank you</h2>
 <p>Your ticket has been added and has been assigned to <?php if ($_POST['cmn-toggle-selfassign'] !== null) { echo engineer_friendlyname(check_input($_POST['cmn-toggle-selfassign'])); } else { echo engineer_friendlyname(next_engineer(check_input($_POST['helpdesk']))); }; ?>, the engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
+<?php if ($SLA) { ?>
+<h3>Service Level Agreement</h3>
+<p>Your ticket has been assigned the following service level agreement,
+<p><?php echo($SLA);?></p>
+<p>Expected date your ticket will be closed is on or before <?php echo($SLAETA);?></p>
+<?php } ?>
 <p>Please check your email for further details.</p>
 <?php echo($lockerflash); ?>
 <script type="text/javascript">update_div('#calllist','/reports/list_your_tickets.php');</script>

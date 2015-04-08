@@ -7,8 +7,6 @@
 <html lang="en"  id="digitalsign">
 	<head>
 		<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
-		<!-- included local jquery as box doesnt have inet access -->
-		<script src="/public/javascript/jquery-2.1.3.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 	<div class="section">

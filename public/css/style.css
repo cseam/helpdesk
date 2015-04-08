@@ -384,9 +384,9 @@ h3.callbody {
 /* END Call details */
 /* Buttons */
 .buttons {
-	margin: 0 1rem 2rem 0;
+	margin: 0 0 2rem 1rem;
 	text-align: right;
-	width: 50%;
+	width: auto;
 	float: right;
 }
 .buttons button {

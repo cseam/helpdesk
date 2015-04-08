@@ -46,6 +46,12 @@
 			echo("<h2>Ticket Reassigned</h2>".$reason);
 		}
 
+		// if Hold ticket
+		if (isset($_POST['hold'])) {
+			echo("<h2>not working yet</h2>");
+		}
+
+
 		// if Close ticket
 		if (isset($_POST['close'])) {
 
