@@ -21,7 +21,7 @@ System must be fully maintained by individual departments, without intervention 
 ![alt tag](https://raw.github.com/atomicjam/helpdesk/master/public/images/concept%20artwork/addticket-beta1.jpg)
 
 ### Engineer View
-![alt tag](https://raw.github.com/atomicjam/helpdesk/master/public/images/concept%20artwork/engineerview-beta1.jpg)
+![alt tag](https://raw.github.com/atomicjam/helpdesk/master/public/images/concept%20artwork/engineersview-beta1.jpg)
 
 ### Manager View
-![alt tag](https://raw.github.com/atomicjam/helpdesk/master/public/images/concept%20artwork/managerview-beta1.jpg)
+![alt tag](https://raw.github.com/atomicjam/helpdesk/master/public/images/concept%20artwork/managersview-beta1.jpg)
