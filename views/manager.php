@@ -33,7 +33,7 @@
 	<div id="rightpage">
 		<div id="addcall">
 			<div id="ajax">
-				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/list_open_tickets.php'); ?>
+				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/manager_default_view.php'); ?>
 			</div>
 		</div>
 	</div>

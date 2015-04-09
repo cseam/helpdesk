@@ -1,4 +1,5 @@
 <div id="reportlinks">
+	<a href="#" onclick="update_div('#ajax','reports/list_escalated_tickets.php');"><img src="/public/images/ICONS-escalated@2x.png" alt="View escalated tickets" title="View escalated tickets"  width="24" height="25" />View Escalated tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_open_tickets.php');"><img src="/public/images/ICONS-view@2x.png" alt="View open tickets" title="View open tickets"  width="24" height="25" />View open tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_all_tickets.php');"><img src="/public/images/ICONS-allcalls@2x.png" alt="View all tickets" title="View all tickets"  width="24" height="25" />View all tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_oldest_ticket.php');"><img src="/public/images/ICONS-oldestcall@2x.png" alt="View oldest ticket" title="View oldest ticket"  width="24" height="25" />View oldest ticket</a>

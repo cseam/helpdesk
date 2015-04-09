@@ -477,6 +477,15 @@ h3.callbody {
 	color: rgba(194, 151, 9, 1);
 	display: block;
 }
+.escalated {
+	float: left;
+	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
+	font-size: 0.7rem;
+	/* border: 1px solid #ccc; */
+	border-radius: 0 0 5px 5px;
+	color: rgba(194, 10, 13, 1);
+	display: block;
+}
 .open {
 	color: rgb(100, 125, 106);
 	padding: 0.2rem 0.6rem;

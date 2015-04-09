@@ -87,7 +87,7 @@
 			$message = "<p>Helpdesk (#" . $_POST['id'] .") has been closed</p>";
 			$message .= "<p>To view the details of this ticket please <a href='". HELPDESK_LOC ."'>Visit ". CODENAME ."</a></p>";
 			$message .= "<p>this is an automated message please do not reply</p>";
-			$message .= "<p>you can provide confidential feedback to the engineers line manager, let us know how well your ticket was dealt with <a href='". HELPDESK_LOC ."/feedback.php?id=" . $_POST['id'] ."'>Provide Feedback</a></p>";
+			$message .= "<p>you can provide confidential feedback to the engineers line manager, let us know how well your ticket was dealt with <a href='". HELPDESK_LOC ."/views/feedback.php?id=" . $_POST['id'] ."'>Provide Feedback</a></p>";
 			$msgtitle = "Helpdesk Ticket #" . $_POST['id'] . " Closed";
 			$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
 			$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
@@ -118,7 +118,6 @@
 
 		// if Hold ticket
 		if (isset($_POST['hold'])) {
-			echo("<h2>not working yet</h2>");
 			// Create hold message for database
 			$holdreason = "<div class=update>" . $_POST['updatedetails'] . "<h3> Call put on HOLD by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
 			// PDO update ticket and set status to hold (3)
@@ -127,6 +126,22 @@
 			$STH->bindParam(':details', $holdreason, PDO::PARAM_STR);
 			$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);
 			$STH->execute();
+			// Update view
+			echo("<h2>Ticket put on Hold</h2>".$holdreason);
+		}
+
+		// if escalate ticket
+		if (isset($_POST['escalate'])) {
+			// Create hold message for database
+			$reason = "<div class=update>" . $_POST['updatedetails'] . "<h3> Escalated to Managment by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
+			// PDO update ticket and set status to hold (3)
+			$STH = $DBH->Prepare("UPDATE calls SET status = 4, lastupdate = :lastupdate, closed = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
+			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
+			$STH->bindParam(':details', $reason, PDO::PARAM_STR);
+			$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);
+			$STH->execute();
+			// Update view
+			echo("<h2>Ticket escalated to your manager</h2><p>for the following reason<p>".$reason);
 		}
 
 		//if Update ticket
