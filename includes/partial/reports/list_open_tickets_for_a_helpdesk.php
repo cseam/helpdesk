@@ -14,10 +14,10 @@
 	<tbody>
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk <= :helpdeskid AND status='1'");
+			$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk <= :helpdeskid AND status !='2'");
 			$hdid = 3;
 		} else {
-			$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk = :helpdeskid AND status='1'");
+			$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk = :helpdeskid AND status !='2'");
 			$hdid = $_SESSION['engineerHelpdesk'];
 		};
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
@@ -28,7 +28,7 @@
 		?>
 		<tr>
 		<td>#<?=$row->callid;?></td>
-		<td><?=date("d/m/y", strtotime($row->opened));?></td>
+		<td><?php if ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); } else { echo(date("d/m/y", strtotime($row->opened))); }?></td>
 		<td class="view_td"><?=substr(strip_tags($row->title), 0, 90);?>...</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">

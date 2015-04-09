@@ -54,14 +54,10 @@
 		<tr class="<?=$row->location;?>">
 		<!--<td>#<?=$row->callid;?></td>-->
 		<td><span class="smalltxt"><?=$row->locationName;?></span></td>
-		<td>
-
-		<? if ($row->status ==='2') {
-			echo "<span class='closed'>Closed</span>";
-			} else {
-			echo date("d/m/y", strtotime($row->opened));
-			};
-		?></td>
+		<td><?php
+			if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
+		elseif ($row->status == '3') { echo("<span class='hold'>HOLD</span>"); }
+		else { echo "<span class='open'>" . date("d/m/y", strtotime($row->opened)) . "</span>";} ?></td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="allcallslist">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />

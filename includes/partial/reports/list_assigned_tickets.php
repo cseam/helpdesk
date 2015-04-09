@@ -8,7 +8,7 @@
 	<table>
 	<tbody>
 	<?php
-		$STH = $DBH->Prepare("SELECT * FROM calls WHERE assigned = :assigned AND status='1'");
+		$STH = $DBH->Prepare("SELECT * FROM calls WHERE assigned = :assigned AND status !='2'");
 		$STH->bindParam(":assigned", $_SESSION['engineerId'], PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
@@ -17,7 +17,7 @@
 		?>
 		<tr>
 		<!--<td>#<?=$row->callid;?></td>-->
-		<td><?=date("d/m/y", strtotime($row->opened));?></td>
+		<td><?php if ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); } else { echo(date("d/m/y", strtotime($row->opened))); }?></td>
 		<td class="view_td"><?=substr(strip_tags($row->title), 0, 90);?>...</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">

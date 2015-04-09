@@ -46,12 +46,6 @@
 			echo("<h2>Ticket Reassigned</h2>".$reason);
 		}
 
-		// if Hold ticket
-		if (isset($_POST['hold'])) {
-			echo("<h2>not working yet</h2>");
-		}
-
-
 		// if Close ticket
 		if (isset($_POST['close'])) {
 
@@ -120,6 +114,19 @@
 					echo("<script type='text/javascript'>update_div('#calllist','/reports/list_your_tickets.php');</script>");
 					break;
 				}
+		}
+
+		// if Hold ticket
+		if (isset($_POST['hold'])) {
+			echo("<h2>not working yet</h2>");
+			// Create hold message for database
+			$holdreason = "<div class=update>" . $_POST['updatedetails'] . "<h3> Call put on HOLD by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
+			// PDO update ticket and set status to hold (3)
+			$STH = $DBH->Prepare("UPDATE calls SET status = 3, lastupdate = :lastupdate, closed = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
+			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
+			$STH->bindParam(':details', $holdreason, PDO::PARAM_STR);
+			$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);
+			$STH->execute();
 		}
 
 		//if Update ticket

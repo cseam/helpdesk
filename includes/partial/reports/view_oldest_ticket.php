@@ -4,10 +4,10 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE engineers.helpdesk <= :helpdeskid AND status='1' ORDER BY opened LIMIT 1");
+		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE engineers.helpdesk <= :helpdeskid AND status !='2' ORDER BY opened LIMIT 1");
 		$hdid = 3;
 	} else {
-		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE engineers.helpdesk = :helpdeskid AND status='1' ORDER BY opened LIMIT 1");
+		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE engineers.helpdesk = :helpdeskid AND status !='2' ORDER BY opened LIMIT 1");
 		$hdid = $_SESSION['engineerHelpdesk'];
 	}
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);

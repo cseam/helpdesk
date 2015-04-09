@@ -16,7 +16,10 @@
 		if ($STH->rowCount() == 0) { echo("<p>No tickets logged. Please start by filling in the form.</p>"); };
 		while($row = $STH->fetch()) { ?>
 		<tr>
-		<td><?php if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; } else { echo "<span class='open'>" . date("d/m/y", strtotime($row->opened)) . "</span>";} ?></td>
+		<td><?php
+			if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
+		elseif ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
+		else { echo "<span class='open'>" . date("d/m/y", strtotime($row->opened)) . "</span>";} ?></td>
 		<td class="view_td"><?php echo(substr(strip_tags($row->title), 0, 90));?>...</td>
 		<td>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
