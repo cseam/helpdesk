@@ -21,6 +21,7 @@
 	$STH = $DBH->Prepare("SELECT * FROM out_of_hours ORDER BY id DESC");
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
+	if ($STH->rowCount() == 0) { echo "<tr><td colspan=5>0 out of hours logged</td></tr>";};
 		while($row = $STH->fetch()) { ?>
 			<tr>
 				<td><?php echo($row->id);?></td>

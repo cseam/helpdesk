@@ -3,7 +3,9 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h2>View Change Control</h2>
+<h2>Change Control</h2>
+<p class="buttons"><button onclick="update_div('#ajax','reports/add_change_control.php')">Add Change Control</button><button onclick="update_div('#ajax','reports/view_tags.php')">Add Tags</button></p>
+<h3>List of changes</h3>
 <table>
 	<thead>
 		<tr>
@@ -19,6 +21,7 @@
 	$STH = $DBH->Prepare("SELECT * FROM changecontrol INNER JOIN engineers ON changecontrol.engineersid=engineers.idengineers");
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
+	if ($STH->rowCount() == 0) { echo "<tr><td colspan=5>0 changes logged</td></tr>";};
 	while($row = $STH->fetch()) { ?>
 <tr>
 	<td><?= $row->engineerName ?></td>

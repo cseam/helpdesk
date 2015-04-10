@@ -20,7 +20,7 @@
 		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE lockerid > 0 ORDER BY lockerid");
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		if ($STH->rowCount() == 0) { echo "<p>Nothing in lockers</p>";};
+		if ($STH->rowCount() == 0) { echo "<tr><td colspan=5>0 items in lockers</td></tr>";};
 		while($row = $STH->fetch()) {
 		?>
 		<tr>

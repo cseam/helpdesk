@@ -20,6 +20,7 @@
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
+	if ($STH->rowCount() == 0) { echo "<tr><td colspan=3>0 feedback logged</td></tr>";};
 	while($row = $STH->fetch()) { ?>
 		<tr>
 			<td><?=$row->engineerName;?></td>
@@ -40,6 +41,7 @@
 	$STH = $DBH->Prepare("SELECT *, sum(case when opened >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS New FROM feedback  GROUP BY callid ORDER BY id DESC");
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
+	if ($STH->rowCount() == 0) { echo "<tr><td colspan=3>0 feedback details</td></tr>";};
 	while($row = $STH->fetch()) { ?>
 <tr>
 	<td><a href="/viewcall.php?id=<?=$row->callid?>"><?=$row-callid?></a></td>

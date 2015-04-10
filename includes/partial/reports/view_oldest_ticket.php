@@ -13,6 +13,7 @@
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
+	if ($STH->rowCount() == 0) { echo "<p>0 Tickets logged</p>";};
 	// display results to page
 	while($row = $STH->fetch()) {
 	?>

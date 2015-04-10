@@ -10,13 +10,11 @@
 	<a href="#" onclick="update_div('#ajax','reports/list_user_feedback.php');"><img src="/public/images/ICONS-userfeedback@2x.png" alt="User Feedback" title="User Feedback"  width="24" height="25" />User feedback</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_emerging_issues.php');"><img src="/public/images/ICONS-issues@2x.png" alt="Emerging issues" title="Emerging issues"  width="24" height="25" />Emerging issues</a>
 	<a href="#" onclick="update_div('#ajax','reports/search_tickets.php');"><img src="/public/images/ICONS-search@2x.png" alt="Search tickets" title="Search tickets"  width="24" height="25" />Search tickets</a>
-	<a href="#" onclick="update_div('#ajax','reports/add_change_control.php');"><img src="/public/images/ICONS-addchangecontrol@2x.png" alt="Add change control" title="Add change control"  width="24" height="25" />Add change control</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_change_control.php');"><img src="/public/images/ICONS-changecontrol@2x.png" alt="View change control" title="View change control"  width="24" height="25" />View change control</a>
-	<a href="#" onclick="update_div('#ajax','reports/view_tags.php');"><img src="/public/images/ICONS-tag@2x.png" alt="View tags" title="View tags"  width="24" height="25" />View tags</a>
-	<a href="#" onclick="update_div('#ajax','reports/view_digital_screen.php');"><img src="/public/images/ICONS-digitalscreen@2x.png" alt="IT reception screen" title="IT reception screen"  width="24" height="25" />IT reception screen</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_lockers.php');"><img src="/public/images/ICONS-lockers@2x.png" alt="Lockers" title="Lockers"  width="24" height="25" />Lockers</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_scheduled_tasks.php');"><img src="/public/images/ICONS-scheduledtask@2x.png" alt="scheduled tasks" title="sheduled tasks"  width="24" height="25" />Scheduled tasks</a>
-	<a href="#" onclick="update_div('#ajax','reports/list_tickets_awaiting_invoice.php');"><img src="/public/images/ICONS-invoice@2x.png" alt="awaiting invoice" title="awaiting invoice"  width="24" height="25" />Awaiting invoice</a>
 	<a href="#" onclick="update_div('#ajax','reports/graph_reason_behind.php');"><img src="/public/images/ICONS-reason@2x.png" alt="reason behind issue" title="reason behind issue"  width="24" height="25" />Reason behind issue</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_all_outofhours.php');"><img src="/public/images/ICONS-outofhours@2x.png" alt="Out Of Hours" title="Out Of Hours"  width="24" height="25" />Out Of Hours</a>
+	<a href="#" onclick="update_div('#ajax','reports/list_tickets_awaiting_invoice.php');"><img src="/public/images/ICONS-invoice@2x.png" alt="awaiting invoice" title="awaiting invoice"  width="24" height="25" />Awaiting invoice</a>
+	<a href="#" onclick="update_div('#ajax','reports/view_digital_screen.php');"><img src="/public/images/ICONS-digitalscreen@2x.png" alt="IT reception screen" title="IT reception screen"  width="24" height="25" />IT reception screen</a>
 </div>

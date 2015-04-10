@@ -20,6 +20,7 @@
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
+	if ($STH->rowCount() == 0) { echo "<tr><td colspan=2>0 issues detected by locations</td></tr>";};
 	while($row = $STH->fetch()) { ?>
 <tr>
 	<td><?=$row->Location_Name?></td>
@@ -37,6 +38,7 @@
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
+	if ($STH->rowCount() == 0) { echo "<tr><td colspan=2>0 issues detected by room</td></tr>";};
 	while($row = $STH->fetch()) { ?>
 <tr>
 	<td><?=$row->Room?></td>

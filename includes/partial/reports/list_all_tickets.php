@@ -48,7 +48,7 @@
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		if ($STH->rowCount() == 0) { echo "<p>All calls Closed</p>";};
+		if ($STH->rowCount() == 0) { echo "<tr><td colspan=4>0 tickets logged</td></tr>";};
 		while($row = $STH->fetch()) {
 		?>
 		<tr class="<?=$row->location;?>">
