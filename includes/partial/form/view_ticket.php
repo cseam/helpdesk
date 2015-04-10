@@ -10,8 +10,9 @@
 	if ($_SERVER['REQUEST_METHOD']== "POST") {
 		//populate ticket details from db
 
+		//INNER JOIN engineers ON calls.assigned=engineers.idengineers
+
 		$STH = $DBH->Prepare("SELECT * FROM calls
-		INNER JOIN engineers ON calls.assigned=engineers.idengineers
 		INNER JOIN status ON calls.status=status.id
 		INNER JOIN location ON calls.location=location.id
 		INNER JOIN categories ON calls.category=categories.id
@@ -31,7 +32,7 @@
 		<p class="callheader">Created by <a href="mailto:<?php echo($row->email);?>"><?php echo($row->name);?></a></p>
 		<p class="callheader">Contact Number: <?php echo($row->tel);?></p>
 		<p class="callheader"><?php echo($row->room);?> - <?php echo($row->locationName);?></p>
-		<p class="callheader">Assigned to <?php echo(engineer_friendlyname($row->assigned));?></p>
+		<p class="callheader"><?php if ($row->assigned == NULL) { echo("Not assigned yet"); } else {?>Assigned to <?php echo(engineer_friendlyname($row->assigned)); }?></p>
 		<p class="callheader">
 		<?php
 		if ($row->status === '2') { echo("Closed in ");} else { echo("Open for ");};

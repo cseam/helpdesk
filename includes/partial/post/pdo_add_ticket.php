@@ -36,11 +36,24 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 	// Generate ticket details including any images uploaded
 	$ticketdetails = "<div class=original>" . $upload_img_code . $_POST['details'] . "</div>";
 
-	// Calculate engineer to be assigned to ticket
-	if ($_POST['cmn-toggle-selfassign'] !== null) {
-		$assignedengineer = $_POST['cmn-toggle-selfassign'];
-	} else {
-		$assignedengineer =	next_engineer($_POST['helpdesk']);
+	// Check if helpdesk is has auto assigned tickets or not
+	$STH = $DBH->Prepare("SELECT auto_assign FROM helpdesks WHERE id = :id");
+	$STH->bindParam(':id', $_POST['helpdesk'], PDO::PARAM_INT);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) {
+		if ($row->auto_assign == '0') {
+			// if auto assign not set leave engineer null
+			$assignedengineer = NULL;
+		}
+		if ($row->auto_assign == '1') {
+			// if auto assign set populate next engineer
+			$assignedengineer =	next_engineer($_POST['helpdesk']);
+		}
+		if ($_POST['cmn-toggle-selfassign'] !== null) {
+			// if engineer has set checkbox to day assign to themselfs
+			$assignedengineer = $_POST['cmn-toggle-selfassign'];
+		}
 	};
 
 	// Check form for auto close and set status acordingly
@@ -124,7 +137,14 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 	// Update view and update call list
 ?>
 <h2>Thank you</h2>
-<p>Your ticket has been added and has been assigned to <?php if ($_POST['cmn-toggle-selfassign'] !== null) { echo engineer_friendlyname(check_input($_POST['cmn-toggle-selfassign'])); } else { echo engineer_friendlyname(next_engineer(check_input($_POST['helpdesk']))); }; ?>, the engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
+
+<p><?php if ($assignedengineer !== NULL) { ?>
+Your ticket has been added and has been assigned to <?php echo(engineer_friendlyname($assignedengineer)); ?>
+<?php } else { ?>
+Your ticket has been added to <?php echo(CODENAME) ?>
+<?php } ?>
+</p>
+<p>An engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
 <?php if ($SLA) { ?>
 <h3>Service Level Agreement</h3>
 <p>Your ticket has been assigned the following service level agreement,

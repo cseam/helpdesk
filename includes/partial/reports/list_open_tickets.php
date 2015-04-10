@@ -10,16 +10,16 @@
 	<tbody>
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE engineers.helpdesk <= :helpdeskid AND status !='2' ORDER BY callID");
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE helpdesk <= :helpdeskid AND status !='2' ORDER BY callID");
 			$hdid = 3;
 		} else {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE engineers.helpdesk = :helpdeskid AND status !='2' ORDER BY callID");
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE helpdesk = :helpdeskid AND status !='2' ORDER BY callID");
 			$hdid = $_SESSION['engineerHelpdesk'];
 		}
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		if ($STH->rowCount() == 0) { echo "<p>All calls Closed</p>";};
+		if ($STH->rowCount() == 0) { echo "<p>No Open Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
@@ -39,7 +39,7 @@
 			</form>
 		</td>
 		<td>
-			<?=strstr($row->engineerName," ", true);?>
+			<?php if ($row->assigned !== NULL) { echo(engineer_friendlyname($row->assigned)); } else { echo("NULL"); };?>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">
@@ -49,7 +49,7 @@
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reassign">
-				<input type="hidden" id="id" name="id" value="<?=$row-callid;?>" />
+				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 				<input name="submit" value="" type="image" src="/public/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer"  title="assign engineer" />
 			</form>
 		</td>
