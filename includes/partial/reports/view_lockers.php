@@ -4,6 +4,8 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <div id="ajaxforms">
+
+<h2>Lockers</h2>
 	<table>
 	<thead>
 		<tr class="head">

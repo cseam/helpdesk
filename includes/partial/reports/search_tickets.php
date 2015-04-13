@@ -3,7 +3,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h3>Search Tickets</h3>
+<h1>Search Tickets</h1>
 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="search" class="searchform">
 <fieldset>
 		<legend>Search all tickets</legend>

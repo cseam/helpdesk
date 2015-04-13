@@ -5,7 +5,6 @@
 ?>
 <h2>Change Control</h2>
 <p class="buttons"><button onclick="update_div('#ajax','reports/add_change_control.php')">Add Change Control</button><button onclick="update_div('#ajax','reports/view_tags.php')">Add Tags</button></p>
-<h3>List of changes</h3>
 <table>
 	<thead>
 		<tr>

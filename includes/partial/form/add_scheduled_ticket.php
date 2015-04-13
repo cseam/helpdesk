@@ -9,8 +9,9 @@
 		<legend>Frequency</legend>
 			<label for="reoccurance" title="reoccurance">Reoccurance</label>
 			<select id="reoccurance" name="reoccurance">
-				<option value="daily" SELECTED>Daily</option>
-				<option value="weekly" >Weekly</option>
+				<option value="once" >Once</option>
+				<option value="daily" >Daily</option>
+				<option value="weekly" SELECTED >Weekly</option>
 				<option value="monthly" >Montly</option>
 				<option value="yearly" >Yearly</option>
 			</select>

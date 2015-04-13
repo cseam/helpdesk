@@ -3,7 +3,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h2>Tag Control</h2>
+<h1>Tag Control</h1>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['tagname'] == TRUE) { ?>
 <?php
 	$STH = $DBH->Prepare("INSERT INTO changecontrol_tags (tagname) VALUES (:tagname)");
