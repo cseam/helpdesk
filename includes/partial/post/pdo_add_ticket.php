@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 		null, // invoicedate (datetime)
 		null, // callreason (int)
 		$_POST['title'], // title (long)
-		$lockerid  // lockerid (int)
+		$lockerid// lockerid (int)
 	);
 
 	// Prepare ticket insert PDO Statment
