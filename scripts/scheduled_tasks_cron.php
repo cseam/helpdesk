@@ -6,8 +6,8 @@
 
 	echo("\n* Loading Config & Functions\n");
 	// load config and functions
-	include('../config/config.php');
-	include('../includes/functions.php');
+	include('/var/www/html/helpdesk/config/config.php');
+	include('/var/www/html/helpdesk/includes/functions.php');
 
 	// Process Scheduled Tickets
 	echo ("\n-- Starting Process Scheduled Tickets : "). date("h:i:s") . "\n";
