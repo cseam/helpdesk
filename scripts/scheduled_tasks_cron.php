@@ -18,14 +18,9 @@
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
 			while($row = $STH->fetch()) {
-				// Process each ticket checking frequency
-				SWITCH ($row->frequencytype) {
-						CASE "once":
-							// create ticket once on start date
-							echo ("ONCE") . $row->title;
-							break;
-						CASE "daily":
-							// create ticket daily from start date
+						// cleanup ticket objects
+						unset($createticket);
+						// create ticket from scheduled_calls table
 							$createticket = new ticket(
 									$row->name, // name (varchar)
 									$row->email, // email (varchar)
@@ -48,18 +43,56 @@
 									$row->title, // title (long)
 									$row->lockerid// lockerid (int)
 								);
-							$STHloop = $DBH->Prepare("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid) VALUES (:name, :email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoicedate, :callreason, :title, :lockerid)");
-							// Execute PDO
+						// prep PDO statment
+						$STHloop = $DBH->Prepare("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid) VALUES (:name, :email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoicedate, :callreason, :title, :lockerid)");
+						// set start date
+						$startdate = date("Y-m-d", strtotime($row->startschedule));
+				// Process each ticket checking frequency
+				SWITCH ($row->frequencytype) {
+						CASE "once":
+							// create ticket once on start date
+								if ($startdate == date("Y-m-d")) {
+									// frequency matches create ticket
+									$STHloop->execute((array)$createticket);
+									echo ("Ticket created for scheduled task #" . $row->callid . " using once frequency rule\n" );
+								} else {
+									echo("Ticket #". $row->callid . " deferred start dates dont match");
+								};
+							break;
+						CASE "daily":
+							// frequency matches create ticket
 							$STHloop->execute((array)$createticket);
 							echo ("Ticket created for scheduled task #" . $row->callid . " using daily frequency rule\n" );
 							break;
 						CASE "weekly":
-							// create ticket weekly from start date on same day
-							echo ("WEEKLY") . $row->title;
+							// create ticket if day of week as number matches start date
+								if (date('N', strtotime($startdate)) == date('N')) {
+									// frequency matches create ticket
+									$STHloop->execute((array)$createticket);
+									echo ("Ticket created for scheduled task #" . $row->callid . " using weekly frequency rule\n" );
+								} else {
+									echo("Ticket #". $row->callid . " deferred start date was a different day of the week\n");
+								};
+							break;
+						CASE "monthly":
+							// create ticket if day of month matches start date
+								if (date('d', strtotime($startdate)) == date("d")) {
+									// frequency matches create ticket
+									$STHloop->execute((array)$createticket);
+									echo ("Ticket created for scheduled task #" . $row->callid . " using monthly frequency rule\n" );
+								} else {
+									echo("Ticket #". $row->callid . " deferred start date was a different day of the month\n");
+								};
 							break;
 						CASE "yearly":
-							// create ticket yearly from start date on same day
-							echo ("YEARLY") . $row->title;
+							// create ticket if day of month matches start date
+								if (date('m-d', strtotime($startdate)) == date("m-d")) {
+									// frequency matches create ticket
+									$STHloop->execute((array)$createticket);
+									echo ("Ticket created for scheduled task #" . $row->callid . " using yearly frequency rule\n" );
+								} else {
+									echo("Ticket #". $row->callid . " deferred start date was a different day and month\n");
+								};
 							break;
 						DEFAULT:
 							// should never hit this as frequency should be populated in db
