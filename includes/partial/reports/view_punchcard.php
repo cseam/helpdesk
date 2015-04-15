@@ -76,6 +76,7 @@
 		</td>
 		<td>
 			<?=date("d/m - h:ia", strtotime($rowloop->stamp));?>
+			<br/><em><?=$rowloop->note?></em>
 		</td>
 		<?php } ?>
 </tr>
