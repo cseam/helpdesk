@@ -1,5 +1,8 @@
 <?php
 	session_start();
+
+	if (empty($_SESSION['sAMAccountName'])) { $_SESSION['sAMAccountName'] = 'DigitalSign'; };
+
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>

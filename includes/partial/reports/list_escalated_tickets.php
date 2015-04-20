@@ -1,13 +1,9 @@
-<h2>Escalated Tickets</h2>
 <?php
 	session_start();
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-
 <div id="ajaxforms">
-	<table>
-	<tbody>
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
 			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id WHERE engineers.helpdesk <= :helpdeskid AND status ='4' ORDER BY callID");
@@ -19,6 +15,7 @@
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
+		echo ("<h2>" . $STH->rowCount() . " Escalated Tickets</h2><table><tbody>");
 		if ($STH->rowCount() == 0) { echo "<p>No Escalated Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>

@@ -155,6 +155,7 @@ ul {
 	width: 50%;
 	height: 100%;
 	overflow: hidden;
+	-webkit-overflow-scrolling: touch;
 }
 /* END basic view layout */
 /* Table */
@@ -251,6 +252,7 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
 	background: rgba(255,255,255,0.4);
 	resize: none;
 	padding: 1rem;
+	font-size: 1rem !important;
 }
 select::-ms-expand {
     display: none !important;
@@ -274,6 +276,7 @@ select::-ms-expand {
 #ajax {
 	margin-top: 0rem;
 	padding: 1.5rem;
+	-webkit-overflow-scrolling: touch;
 }
 #ajaxforms {
 	margin-bottom: 1rem;
@@ -358,7 +361,7 @@ h3.callbody {
 }
 .update h3 {
 	text-align: right;
-	font-size: 0.7rem;
+	font-size: 1rem;
 	color: #577d6a;
 	margin: 0.3rem 0;
 	padding: 0;
@@ -711,6 +714,9 @@ input.cmn-toggle-round:checked + label:after {
 /*** Phones and Small Screens < 600px, and portrait devices***/
 @media screen and (max-width: 600px), screen and (orientation: portrait) {
 	body {
+		-webkit-overflow-scrolling: touch;
+	}
+	#ajax {
 		-webkit-overflow-scrolling: touch;
 	}
 	#leftpage, #rightpage {

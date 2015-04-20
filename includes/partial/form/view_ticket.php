@@ -56,7 +56,7 @@
 					<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
 				<?php }; ?>
 		<h3 class="callbody"><?php echo($row->title);?></h3>
-		<p class="callbody"><?php echo($row->details);?></p>
+		<p class="callbody"><?php echo(nl2br($row->details));?></p>
 	<fieldset>
 		<legend>Update Ticket</legend>
 		<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
