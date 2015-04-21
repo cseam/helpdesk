@@ -325,9 +325,8 @@ select::-ms-expand {
 }
 .callheader {
 	color: #577d6a;
-	text-transform: uppercase;
 	margin: 2px 0;
-	font-size: 0.70rem;
+	font-size: 0.90rem;
 	border-bottom: 0px solid rgba(88, 126, 107, 0.2);
 	width: 50%;
 	float: left;

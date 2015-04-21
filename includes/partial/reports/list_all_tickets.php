@@ -8,7 +8,7 @@
 	<table>
 	<thead>
 		<tr class="head">
-			<!--<th>#</th>-->
+			<th>#</th>
 			<th>
 				<select id="filter" onchange="filterTable()" >
 					<option value="0" SELECTED>Location</option>
@@ -52,7 +52,7 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr class="<?=$row->location;?>">
-		<!--<td>#<?=$row->callid;?></td>-->
+		<td>#<?=$row->callid;?></td>
 		<td><span class="smalltxt"><?=$row->locationName;?></span></td>
 		<td><?php
 			if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }

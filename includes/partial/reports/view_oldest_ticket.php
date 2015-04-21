@@ -22,10 +22,10 @@
 	<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 	<input type="hidden" id="details" name="details" value="<?=$row->details;?>" />
 	<h2>Ticket Details #<?=$row->callid;?></h2>
-	<p class="callheader">Ticket #<?=$row->callid;?></p>
-	<p class="callheader">Assigned to <?=engineer_friendlyname($row->assigned);?></p>
+	<p class="callheader">Ticket #<?=$row->callid;?> <?php if ($row->urgency === '3') { echo("urgent ");} ?><?php echo($row->categoryName);?></p>
 	<p class="callheader">Created by <a href="mailto:<?=$row->email;?>"><?=$row->name;?></a> (<?=$row->tel;?>)</p>
 	<p class="callheader">For <?=$row->room;?> - <?=$row->locationName;?></p>
+	<p class="callheader"><?php if ($row->assigned == NULL) { echo("Not assigned yet"); } else {?>Assigned to <?php echo(engineer_friendlyname($row->assigned)); }?></p>
 	<p class="callheader">Open for
 					<?php
 						$date1 = strtotime($row->opened);
@@ -36,12 +36,24 @@
 						$m = ($diff/60)%60;
 						echo $d." days, ".$h." hours, ".$m." minutes.";
 					?></p>
+	<?php if ($row->lockerid != null) { ?><p class="callheader">Locker #<?php echo($row->lockerid);?></p><?php }; ?>
+		<?php
+			// populate additional fields
+				$STHloop = $DBH->Prepare("SELECT * FROM call_additional_results WHERE callid = :callid");
+				$STHloop->bindParam(':callid', $row->callid, PDO::PARAM_STR);
+				$STHloop->setFetchMode(PDO::FETCH_OBJ);
+				$STHloop->execute();
+				while($row2 = $STHloop->fetch()) { ?>
+					<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
+				<?php }; ?>
+
+
 	<h3 class="callbody"><?php echo($row->title);?></h3>
-	<p class="callbody"><?=$row->details;?></p>
+	<p class="callbody"><?=nl2br($row->details);?></p>
 	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
 	<p class="buttons">
-		<button name="close" value="close" type="submit">Close Ticket</button>
-		<button name="update" value="update" type="submit">Update Ticket</button>
+		<button name="close" value="close" type="submit">Close</button>
+		<button name="update" value="update" type="submit">Update</button>
 	</p>
 	<p class="callfooter">Ticket Opened <?=date("d/m/y h:s", strtotime($row->opened));?><br />Last Update <?=date("d/m/y h:s", strtotime($row->lastupdate));?></p>
 	</form>

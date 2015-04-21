@@ -29,6 +29,12 @@
 		<tr>
 		<td>#<?=$row->callid;?></td>
 		<td><?php if ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); } else { echo(date("d/m/y", strtotime($row->opened))); }?></td>
+		<td><?php
+			$engineername = engineer_friendlyname($row->assigned);
+			$fullname = explode(' ', $engineername);
+			$first_name = $fullname[0];
+			echo($first_name);
+			?></td>
 		<td class="view_td"><?=substr(strip_tags($row->title), 0, 90);?>...</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">

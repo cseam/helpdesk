@@ -135,7 +135,7 @@
 					// In case any of our lines are larger than 70 characters, we wordwrap()
 					$message = wordwrap($message, 70, "\r\n");
 					// Send email
-					mail($to, $msgtitle, $message, $headers);
+					// mail($to, $msgtitle, $message, $headers);
 					echo("(EMAIL SENT)\n");
 			}
 	echo ("\n-- Ending Process Lockers : "). date("h:i:s") . "\n";
@@ -169,7 +169,6 @@
 				echo("auto logged out " . engineer_friendlyname($row->engineerid)) . "\n";
 			}
 	echo ("\n-- Ending Process Logouts : "). date("h:i:s") . "\n";
-
 
 	// Log CRON Task to database
 	$message = "CRON JOB ENDED : " . date("d:m:y h:i:s");

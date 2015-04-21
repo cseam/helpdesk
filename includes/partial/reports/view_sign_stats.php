@@ -69,7 +69,7 @@
 		<tbody>
 <?php
 
-	$STH = $DBH->Prepare("SELECT sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 FROM calls WHERE helpdesk <= 3");
+	$STH = $DBH->Prepare("SELECT sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 0 DAY) THEN 1 ELSE 0 END) AS Last1 FROM calls WHERE helpdesk <= 3");
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
 	while($row = $STH->fetch()) { ?>
@@ -77,7 +77,7 @@
 			<td class="xbig"><?php echo($totalcalls);?></td>
 			<td class="xbig"><?=$row->Last1;?></td>
 			<td class="xbig"><?=$row->Last7;?></td>
-			<td class="xbig"><? for ($i = 0; $i < round($totalstars); $i++) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='60' width='auto' />"; }; ?></td>
+			<td class="xbig"><? for ($i = 0; $i < round($totalstars); $i++) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='40' width='auto' />"; }; ?></td>
 		</tr>
 <?	} ?>
 		</tbody>
