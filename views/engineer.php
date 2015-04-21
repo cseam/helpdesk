@@ -12,7 +12,6 @@
 	?>
 	<head>
 		<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/header.php'); ?>
-		<meta http-equiv="refresh" content="900">
 	</head>
 	<body>
 		<div class="section">
@@ -35,5 +34,18 @@
 				</div>
 			</div>
 		</div>
+
+	<script type="text/javascript">
+	$(function() {
+		// Wait for DOM ready state
+			// Reload stats and lockers
+			setInterval(function() {
+				// Do something after 5 min 300000ms
+				update_div('#stats','reports/graph_my_performance.php');
+				update_div('#calllist','reports/list_engineers_tickets.php')
+			}, 300000);
+		// End DOM ready check
+	});
+	</script>
 	</body>
 </html>

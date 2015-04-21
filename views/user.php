@@ -12,7 +12,6 @@
 	?>
 	<head>
 		<?php include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/header.php'); ?>
-		<meta http-equiv="refresh" content="900">
 	</head>
 	<body>
 		<div class="section">
