@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 	if ($_POST['cmn-toggle-retro'] !== null) {
 		$status = '2';
 		$closed = date("c");
-		$closeengineerid = $_POST['cmn-toggle-selfassign'];
+		$closeengineerid = $_POST['engineerid'];
 	} else {
 		$status = '1';
 		$closed = null;

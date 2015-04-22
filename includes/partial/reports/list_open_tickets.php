@@ -15,12 +15,15 @@
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		echo ("<h2>" . $STH->rowCount() . " Open Tickets</h2><table><tbody>");
+		echo ("<h2>" . $STH->rowCount() . " - Open Tickets</h2><table><tbody>");
 		if ($STH->rowCount() == 0) { echo "<p>No Open Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
 		<!--<td>#<?=$row->callid;?></td>-->
+		<td>
+			<?php if ($row->assigned !== NULL) { echo(strstr(engineer_friendlyname($row->assigned)," ", true)); } else { echo("NULL"); };?>
+		</td>
 		<td width="45">
 		<?php
 		$datetime1 = new DateTime(date("Y-m-d", strtotime($row->opened)));
@@ -34,9 +37,6 @@
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($row->title), 0, 65);?>...</button>
 			</form>
-		</td>
-		<td>
-			<?php if ($row->assigned !== NULL) { echo(engineer_friendlyname($row->assigned)); } else { echo("NULL"); };?>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">

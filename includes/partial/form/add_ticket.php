@@ -16,7 +16,7 @@
 	</fieldset>
 	<fieldset>
 		<legend>Location of issue</legend>
-			<label for="location" title="location of issue">Issue Location</label>
+			<label for="location" title="location of issue">Building</label>
 			<select id="location" name="location">
 				<option value="" SELECTED>Please Select</option>
 					<?php
@@ -35,15 +35,31 @@
 		<legend>Scope of issue</legend>
 			<label for="callurgency" title="how the issue effects me">Urgency</label>
 			<select id="callurgency" name="callurgency">
-				<option value="1">An alternative is available</option>
-				<option value="2">This is affecting my work</option>
-				<option value="3">I cannot work or issue is time critical</option>
+				<option value="1" SELECTED>None</option>
+				<option value="2">Very Minor</option>
+				<option value="3">Minor</option>
+				<option value="4">Very Low</option>
+				<option value="5">Low</option>
+				<option value="6">Moderate</option>
+				<option value="7">High</option>
+				<option value="8">Very High</option>
+				<option value="9">Extremely High</option>
+				<option value="10">Dangerous</option>
 			</select>
 			<label for="callseverity" title="how the issue effects me">Severity</label>
 			<select id="callseverity" name="callseverity">
-				<option value="1">This problem affects only me</option>
-				<option value="2">This problem affects multiple people</option>
-				<option value="3">This problem affects all of College and boarding houses</option>
+				<option value="1" SELECTED>Alternative is available</option>
+				<option value="1">Affects me</option>
+				<option value="1">Affects me and my department</option>
+				<option value="2">Affects multiple departments</option>
+				<option value="3">Affects teaching and learning</option>
+				<option value="3">Affects students</option>
+				<option value="3">Affects my work</option>
+				<option value="6">Issue is time critical</option>
+				<option value="10">Affects all of college and boarding houses</option>
+				<option value="5">Affects main college site only</option>
+				<option value="5">Affects boarding houses only</option>
+
 			</select>
 	</fieldset>
 	<fieldset>
@@ -107,6 +123,7 @@
 	</fieldset>
 
 	<?php if ($_SESSION['engineerId'] !== null) {?>
+	<input type="hidden" name="engineerid" id="engineerid" value="<?php echo $_SESSION['engineerId'];?>" />
 	<fieldset>
 		<legend>Engineer Controls</legend>
 			<table>

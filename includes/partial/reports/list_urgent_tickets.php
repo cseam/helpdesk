@@ -4,14 +4,14 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/functions.php');
 
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-		$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk <= :helpdeskid AND urgency='3' AND status='1'");
+		$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk <= :helpdeskid AND urgency='10' AND status='1'");
 		$hdid = 3;
 	} else {
-		$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk = :helpdeskid AND urgency='3' AND status='1'");
+		$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk = :helpdeskid AND urgency='10' AND status='1'");
 		$hdid = $_SESSION['engineerHelpdesk'];
 	}
 
-	$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk <= :helpdeskid AND urgency='3' AND status='1'");
+	$STH = $DBH->Prepare("SELECT * FROM calls WHERE helpdesk <= :helpdeskid AND urgency='10' AND status='1'");
 	$hdid = 3;
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_INT);
 	$STH->setFetchMode(PDO::FETCH_OBJ);

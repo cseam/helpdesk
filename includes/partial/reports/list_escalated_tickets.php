@@ -15,22 +15,20 @@
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		echo ("<h2>" . $STH->rowCount() . " Escalated Tickets</h2><table><tbody>");
+		echo ("<h2>" . $STH->rowCount() . " - Escalated Tickets</h2><table><tbody>");
 		if ($STH->rowCount() == 0) { echo "<p>No Escalated Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
 		<!--<td>#<?=$row->callid;?></td>-->
-		<td width="45"><span class="escalated">!</span>
+		<td>
+			<?=strstr($row->engineerName," ", true);?>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($row->title), 0, 65);?>...</button>
 			</form>
-		</td>
-		<td>
-			<?=strstr($row->engineerName," ", true);?>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">
