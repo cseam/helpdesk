@@ -20,7 +20,12 @@
 			if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
 		elseif ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
 		else { echo "<span class='open'>" . date("d/m/y", strtotime($row->opened)) . "</span>";} ?></td>
-		<td class="view_td"><?php echo(substr(strip_tags($row->title), 0, 90));?>...</td>
+		<td class="view_td">
+			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
+				<input type="hidden" id="id" name="id" value="<?php echo $row->callid;?>" />
+				<input type="submit" name="submit" value="<?php echo(substr(strip_tags($row->title), 0, 50));?>..." alt="View ticket" title="View ticket" class="calllistbutton"/>
+			</form>
+		</td>
 		<td>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
 				<input type="hidden" id="id" name="id" value="<?php echo $row->callid;?>" />

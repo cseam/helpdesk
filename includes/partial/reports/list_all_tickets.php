@@ -11,7 +11,7 @@
 			<th>#</th>
 			<th>
 				<select id="filter" onchange="filterTable()" >
-					<option value="0" SELECTED>Location</option>
+					<option value="0" SELECTED>Code</option>
 					<?php
 						// populate locations from db
 						$STH = $DBH->Prepare("SELECT * FROM location ORDER BY locationName");
@@ -53,7 +53,7 @@
 		?>
 		<tr class="<?=$row->location;?>">
 		<td>#<?=$row->callid;?></td>
-		<td><span class="smalltxt"><?=$row->locationName;?></span></td>
+		<td><span class="smalltxt" title="<?=$row->locationName;?>"><?=$row->shorthand;?></span></td>
 		<td><?php
 			if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
 		elseif ($row->status == '3') { echo("<span class='hold'>HOLD</span>"); }
@@ -64,7 +64,13 @@
 				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($row->title), 0, 40);?>...</button>
 			</form>
 		</td>
-		<td><?=strstr($row->engineerName," ", true);?></td>
+		<td>
+			<?php if ($row->status == "2") { ?>
+				<?=strstr(engineer_friendlyname($row->closeengineerid)," ", true);?>
+			<?php } else { ?>
+				<?=strstr($row->engineerName," ", true);?>
+			<?php }; ?>
+		</td>
 
 
 		</tr>

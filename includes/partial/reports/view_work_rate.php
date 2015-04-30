@@ -12,10 +12,10 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid GROUP BY engineerName ORDER BY Last30 DESC");
+		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid GROUP BY engineerName ORDER BY Last30 DESC");
 		$hdid = 3;
 	} else {
-		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk = :helpdeskid GROUP BY engineerName ORDER BY Last30 DESC");
+		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk = :helpdeskid GROUP BY engineerName ORDER BY Last30 DESC");
 		$hdid = $_SESSION['engineerHelpdesk'];
 	}
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
@@ -31,6 +31,7 @@
 </tr>
 <?	} ?>
 </table>
+<!--
 <p>Number of tickets assigned to engineer / of those closed / ratio complete last 30 days</p>
 <table>
 <tr>
@@ -62,3 +63,4 @@ GROUP BY assigned order by HowManyAssigned DESC");
 </tr>
 <? } ?>
 </table>
+-->

@@ -123,10 +123,10 @@
 				echo("#" . $row->callid . " emailing user " . $row->email);
 					// Construct message
 					$to = $row->email;
-					$message = "<p>Helpdesk (#" . $row->callid .", " . $row->title . ") item awaiting collection in IT Support</p>";
+					$message = "<span style='font-family: arial;'><p>Helpdesk (#" . $row->callid .", " . $row->title . ") item awaiting collection in IT Support</p>";
 					$message .= "<p>Please come and collect your device from IT support as soon as possible, To view the details of this ticket please <a href='". HELPDESK_LOC ."'>Visit ". CODENAME ."</a></p>";
-					$message .= "<p>this is an automated message please do not reply</p>";
-					$msgtitle = "CLC Helpdesk Ticket #" . $row->callid . " Item Awaiting Collection";
+					$message .= "<p>This is an automated message please do not reply</p></span>";
+					$msgtitle = "Your Helpdesk ticket (#" . $row->callid . ") is awaiting collection.";
 					$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
 					$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
 					$headers .= 'MIME-Version: 1.0' . "\r\n";

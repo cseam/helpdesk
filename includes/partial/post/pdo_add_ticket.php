@@ -24,17 +24,17 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 	$urgency = round((check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 );
 
 	// Generate locker number if needed
-	if ($_POST['category'] != '11' ) {
-		$lockerid = null;
-		$lockerflash = '';
-	} else {
+	if ($_POST['category'] == 11 || $_POST['category'] == 41 ) {
 		// Generate Lockerid
 		$lockerid = random_locker();
 		$lockerflash = "<fieldset><legend>Engineer Note</legend><p class='lockernotice'>store laptop in locker #". $lockerid ."</p></fieldset>";
+	} else {
+		$lockerid = null;
+		$lockerflash = '';
 	};
 
 	// Generate ticket details including any images uploaded
-	$ticketdetails = "<div class=original>" . $upload_img_code . $_POST['details'] . "</div>";
+	$ticketdetails = "<div class=original>" . $upload_img_code . htmlspecialchars($_POST['details']) . "</div>";
 
 	// Check if helpdesk is has auto assigned tickets or not
 	$STH = $DBH->Prepare("SELECT auto_assign FROM helpdesks WHERE id = :id");

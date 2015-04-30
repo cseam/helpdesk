@@ -18,7 +18,7 @@
 		<legend>Location of issue</legend>
 			<label for="location" title="location of issue">Building</label>
 			<select id="location" name="location">
-				<option value="" SELECTED>Please Select</option>
+				<option value="" SELECTED>Please select</option>
 					<?php
 						// populate locations from db
 						$STH = $DBH->Prepare("SELECT * FROM location ORDER BY locationName");
@@ -56,15 +56,15 @@
 				<option value="3">Affects students</option>
 				<option value="3">Affects my work</option>
 				<option value="6">Issue is time critical</option>
-				<option value="10">Affects all of college and boarding houses</option>
+				<option value="10">Affects all of college and the boarding houses</option>
 				<option value="5">Affects main college site only</option>
-				<option value="5">Affects boarding houses only</option>
+				<option value="5">Affects the boarding houses only</option>
 
 			</select>
 	</fieldset>
 	<fieldset>
 		<legend>Department</legend>
-			<label for="helpdesk" title="select the college department">Report to this department</label>
+			<label for="helpdesk" title="select the college department">Report to this Department</label>
 			<select id="helpdesk" name="helpdesk" required>
 				<option value="" SELECTED>Please Select</option>
 				<?php

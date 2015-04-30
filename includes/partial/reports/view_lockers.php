@@ -9,12 +9,11 @@
 	<table>
 	<thead>
 		<tr class="head">
-			<th>Locker<br/>#</th>
-			<th>Laptop Status</th>
-			<th>Laptop Owner</th>
-			<th>Ticket <br/>Details</th>
-			<th style="text-align:right;">View Ticket</th>
-			<th style="text-align:right;">Return Laptop</th>
+			<th>Locker</th>
+			<th>Status</th>
+			<th>Owner</th>
+			<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Details</th>
+			<th style="text-align:right;">Return</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,15 +28,16 @@
 		<td><?php echo($row->lockerid);?></td>
 		<td><?php if ($row->status === '2') {echo("<span class=lockerready>Ready</span>");} else {echo("In Progress");};?></td>
 		<td><?php echo($row->name);?></td>
-		<td><?php echo($row->title); ?></td>
 		<td>
-			<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="allcallslist">
-				<input type="hidden" id="id" name="id" value="<?php echo($row->callid);?>" />
-				<input type="image" id="btn" name="btn" value="View" src="/public/images/ICONS-view@2x.png" class="icon" width="24" height="25" alt="View details" title="View details" />
+			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="allcallslist">
+				<input type="hidden" id="id" name="id" value="<?php echo $row->callid;?>" />
+				<input type="submit" name="submit" value="<?php echo(substr(strip_tags($row->title), 0, 40));?>" alt="View ticket" title="View ticket" class="calllistbutton"/>
 			</form>
 		</td>
 		<td>
 			<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="returntouser">
+				<input type="hidden" id="locker" name="locker" value="<?php echo($row->lockerid);?>" />
+				<input type="hidden" id="owner" name="owner" value="<?php echo($row->name);?>" />
 				<input type="hidden" id="id" name="id" value="<?php echo($row->callid);?>" />
 				<input type="image" id="btn" name="btn" value="View" src="/public/images/ICONS-forward@2x.png" class="icon" width="24" height="25" alt="return to user" title="return to user" />
 			</form>
@@ -72,6 +72,7 @@
     });
 
      $('.returntouser').submit(function(e) {
+	 	if (confirm("\nPlease Confirm \nLocker :#"+ this.locker.value +" \nOwner : "+ this.owner.value + "\n\nReturn this item?")) {
     	$.ajax(
 			{
 				type: 'post',
@@ -92,6 +93,9 @@
 			});
        e.preventDefault();
        return false;
+       } else {
+	   return false;
+	   };
     });
 
     </script>

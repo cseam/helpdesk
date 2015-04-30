@@ -21,7 +21,12 @@
 			if ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
 			elseif ($row->status == '4') { echo("<span class='escalated'>ESCALATED</span>"); }
 			else { echo(date("d/m/y", strtotime($row->opened))); }?></td>
-		<td class="view_td"><?=substr(strip_tags($row->title), 0, 90);?>...</td>
+		<td class="view_td">
+			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
+			<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
+			<input type="submit" name="submit" value="<?=substr(strip_tags($row->title), 0, 50);?>..." alt="View ticket" title="View ticket" class="calllistbutton"/>
+			</form>
+		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />

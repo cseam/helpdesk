@@ -10,7 +10,7 @@
 		// if Forward ticket
 		if (isset($_POST['forward'])) {
 			//Create update message for db
-			$reason = "<div class=update><h3>Ticket forwarded (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".$_POST['details']."</div>";
+			$reason = "<div class=update><h3>Ticket forwarded (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>". htmlspecialchars($_POST['details'])."</div>";
 			//PDO Update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET helpdesk = :helpdesk, assigned = :assigned, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':helpdesk', $_POST['fwdhelpdesk'], PDO::PARAM_STR);
@@ -33,7 +33,7 @@
 		// if Reassign ticket
 		if (isset($_POST['reassign'])) {
 			//Create update message for db
-			$reason = "<div class=update><h3>Ticket reassigned (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".$_POST['details']."</div>";
+			$reason = "<div class=update><h3>Ticket reassigned (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".htmlspecialchars($_POST['details'])."</div>";
 			//PDO update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET assigned = :assigned, status = 1, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':assigned', $_POST['engineer'], PDO::PARAM_STR);
@@ -64,7 +64,7 @@
 			}
 
 			//Create update message for db
-			$reason = "<div class=update>"  . $upload_img_code . $_POST['updatedetails'] . "<h3>Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:i") . "</h3></div>'";
+			$reason = "<div class=update>"  . $upload_img_code . htmlspecialchars($_POST['updatedetails']) . "<h3>Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:i") . "</h3></div>'";
 			// PDO update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET closed = :closed, status = 2, callreason = :callreason, lastupdate = :lastupdate, closeengineerid = :closeengineerid, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':closed', date("c"), PDO::PARAM_STR);
@@ -84,11 +84,11 @@
 			$row = $STH->fetch();
 			// Construct message
 			$to = $row->email;
-			$message = "<p>Helpdesk (#" . $_POST['id'] .") has been closed</p>";
+			$message = "<span style='font-family: arial;'><p>Your Helpdesk ticket (#" . $_POST['id'] .") has been closed.</p>";
 			$message .= "<p>To view the details of this ticket please <a href='". HELPDESK_LOC ."'>Visit ". CODENAME ."</a></p>";
-			$message .= "<p>this is an automated message please do not reply</p>";
-			$message .= "<p>you can provide confidential feedback to the engineers line manager, let us know how well your ticket was dealt with <a href='". HELPDESK_LOC ."/views/feedback.php?id=" . $_POST['id'] ."'>Provide Feedback</a></p>";
-			$msgtitle = "Helpdesk Ticket #" . $_POST['id'] . " Closed";
+			$message .= "<p>This is an automated message please do not reply</p>";
+			$message .= "<p>You can provide confidential feedback to the engineers line manager, let us know how well your ticket was dealt with <a href='". HELPDESK_LOC ."/views/feedback.php?id=" . $_POST['id'] ."'>Provide Feedback</a></p></span>";
+			$msgtitle = "Your Helpdesk ticket (#" . $_POST['id'] . ") has been closed.";
 			$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
 			$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
 			$headers .= 'MIME-Version: 1.0' . "\r\n";
@@ -119,7 +119,7 @@
 		// if Hold ticket
 		if (isset($_POST['hold'])) {
 			// Create hold message for database
-			$holdreason = "<div class=update>" . $_POST['updatedetails'] . "<h3> Call put on HOLD by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
+			$holdreason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Call put on HOLD by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
 			// PDO update ticket and set status to hold (3)
 			$STH = $DBH->Prepare("UPDATE calls SET status = 3, lastupdate = :lastupdate, closed = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
@@ -133,7 +133,7 @@
 		// if escalate ticket
 		if (isset($_POST['escalate'])) {
 			// Create hold message for database
-			$reason = "<div class=update>" . $_POST['updatedetails'] . "<h3> Escalated to Managment by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
+			$reason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Escalated to Managment by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
 			// PDO update ticket and set status to hold (3)
 			$STH = $DBH->Prepare("UPDATE calls SET status = 4, lastupdate = :lastupdate, closed = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
@@ -161,7 +161,7 @@
 			}
 
 			// Create update message for db
-			$reason = "<div class=update>" . $upload_img_code . $_POST['updatedetails'] . "<h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:i") . "</h3></div>";
+			$reason = "<div class=update>" . $upload_img_code . htmlspecialchars($_POST['updatedetails']) . "<h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y H:i") . "</h3></div>";
 			// PDO update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET status = 1, lastupdate = :lastupdate, closed = NULL, callreason = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
@@ -177,10 +177,10 @@
 			$row = $STH->fetch();
 			// Construct message
 			$to = $row->email;
-			$message = "<p>Your helpdesk (#" . $_POST['id'] .") has been updated</p>";
+			$message = "<span style='font-family: arial;'><p>Your Helpdesk ticket (#" . $_POST['id'] .") has been updated.</p>";
 			$message .= "<p>To view the details of this update or update your ticket please <a href='". HELPDESK_LOC ."'>Visit ". CODENAME ."</a></p>";
-			$message .= "<p>This is an automated message please do not reply</p>";
-			$msgtitle = "Helpdesk Ticket #" . $_POST['id'] . " Update";
+			$message .= "<p>This is an automated message please do not reply</p></span>";
+			$msgtitle = "Your Helpdesk ticket (#" . $_POST['id'] . ") has been updated.";
 			$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
 			$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
 			$headers .= 'MIME-Version: 1.0' . "\r\n";

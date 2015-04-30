@@ -50,12 +50,72 @@
 
 	<h3 class="callbody"><?php echo($row->title);?></h3>
 	<p class="callbody"><?=nl2br($row->details);?></p>
-	<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
-	<p class="buttons">
-		<button name="close" value="close" type="submit">Close</button>
-		<button name="update" value="update" type="submit">Update</button>
-	</p>
-	<p class="callfooter">Ticket Opened <?=date("d/m/y h:s", strtotime($row->opened));?><br />Last Update <?=date("d/m/y h:s", strtotime($row->lastupdate));?></p>
+	<fieldset>
+		<legend>Update Ticket</legend>
+		<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
+		<p><label for="attachment">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
+		<?php if ($_SESSION['engineerId'] !== null) {?>
+	</fieldset>
+	<fieldset>
+		<legend>Engineer Controls</legend>
+			<span class="engineercontrols">
+				<label for="callreason">Reason for issue</label>
+				<select id="callreason" name="callreason">
+					<option value="" SELECTED>Please Select</option>
+					<?php
+						if ($_SESSION['engineerHelpdesk'] <= '3') {
+							$STHloop = $DBH->Prepare("SELECT * FROM callreasons WHERE helpdesk_id <= :helpdeskid ORDER BY reason_name");
+							$hdid = 3;
+						} else {
+							$STHloop = $DBH->Prepare("SELECT * FROM callreasons WHERE helpdesk_id = :helpdeskid ORDER BY reason_name");
+							$hdid = $_SESSION['engineerHelpdesk'];
+						}
+						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+						$STHloop->setFetchMode(PDO::FETCH_OBJ);
+						$STHloop->execute();
+						while($row2 = $STHloop->fetch()) { ?>
+						<option value="<?php echo($row2->id);?>"><?php echo($row2->reason_name);?></option>
+					<?php }; ?>
+				</select>
+				<label for="quickresponse">Quick Response</label>
+				<select id="quickresponse" name="quickresponse">
+					<option value="" SELECTED>Please Select</option>
+					<?php
+						if ($_SESSION['engineerHelpdesk'] <= '3') {
+							$STHloop = $DBH->Prepare("SELECT * FROM quick_responses WHERE helpdesk_id <= :helpdeskid ORDER BY quick_response");
+							$hdid = 3;
+						} else {
+							$STHloop = $DBH->Prepare("SELECT * FROM quick_responses WHERE helpdesk_id = :helpdeskid ORDER BY quick_response");
+							$hdid = $_SESSION['engineerHelpdesk'];
+						}
+						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+						$STHloop->setFetchMode(PDO::FETCH_OBJ);
+						$STHloop->execute();
+						while($row2 = $STHloop->fetch()) { ?>
+						<option value="<?php echo($row2->quick_response);?>"><?php echo($row2->quick_response);?></option>
+					<?php }; ?>
+				</select>
+				<script type="text/javascript">
+					$("#quickresponse").change(function(e) {
+						$('#updatedetails').val($('#quickresponse').val() + ', ' + $('#updatedetails').val());
+					});
+				</script>
+			</span>
+	</fieldset>
+	<?php }; ?>
+	<fieldset>
+		<legend>Update Controls</legend>
+			<p class="buttons">
+			<?php if ($row->status === '1') {?>
+			<button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
+			<button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
+			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
+			<?php };?>
+			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
+			</p>
+			<p class="callfooter">Call Opened <?php echo(date("d/m/y h:s", strtotime($row->opened)));?><br />
+			Last Update <?php echo(date("d/m/y h:s", strtotime($row->lastupdate)));?></p>
+	</fieldset>
 	</form>
 	<script type="text/javascript">
 	$(function() {
