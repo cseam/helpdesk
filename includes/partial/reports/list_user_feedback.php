@@ -24,16 +24,16 @@
 	while($row = $STH->fetch()) { ?>
 		<tr>
 			<td><?=$row->engineerName;?></td>
-			<td><? for ($i = 0; $i < round($row->FeedbackAVG); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='60' width='auto' />"); }; ?></td>
+			<td><? for ($i = 0; $i < round($row->FeedbackAVG); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='24' width='auto' />"); }; ?></td>
 			<td><?=$row->FeedbackCOUNT;?></td>
 		</tr>
 <?};?>
 </table>
 <br/><br/>
-<h3>Feedback Details</h3>
+<h3>Details</h3>
 <table>
 <tr>
-	<th>Ticket Id</th>
+	<th>Ticket</th>
 	<th>Satisfaction</th>
 	<th>Customer Feedback</th>
 </tr>
@@ -44,9 +44,9 @@
 	if ($STH->rowCount() == 0) { echo "<tr><td colspan=3>0 feedback details</td></tr>";};
 	while($row = $STH->fetch()) { ?>
 <tr>
-	<td><a href="/viewcall.php?id=<?=$row->callid?>"><?=$row-callid?></a></td>
-	<td><? for ($i = 0; $i < round($row->satisfaction); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='60' width='auto' />"); }; ?></td>
-	<td><?=substr(strtolower(strip_tags($row->details)), 0, 40);?>...</td>
+	<td>#<?=$row->callid?></td>
+	<td><? for ($i = 0; $i < round($row->satisfaction); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='24' width='auto' />"); }; ?></td>
+	<td><?=substr(strtolower(strip_tags($row->details)), 0, 400);?></td>
 </tr>
 <? } ?>
 </table>
