@@ -1,7 +1,7 @@
 <title><?php echo(CODENAME);?></title>
 <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="robots" content="nofollow" />
 <!-- stylesheets -->
 <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />

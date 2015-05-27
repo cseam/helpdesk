@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
@@ -29,6 +30,7 @@
 		</tr>
 <?};?>
 </table>
+<!--
 <br/><br/>
 <h3>Details</h3>
 <table>
@@ -45,8 +47,9 @@
 	while($row = $STH->fetch()) { ?>
 <tr>
 	<td>#<?=$row->callid?></td>
-	<td><? for ($i = 0; $i < round($row->satisfaction); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='24' width='auto' />"); }; ?></td>
+	<td><? for ($i = 0; $i < round($row->satisfaction); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='16' width='auto' />"); }; ?></td>
 	<td><?=substr(strtolower(strip_tags($row->details)), 0, 400);?></td>
 </tr>
 <? } ?>
 </table>
+-->

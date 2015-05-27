@@ -1,3 +1,4 @@
+<?php session_start();?>
 <h2>View Work Rate</h2>
 <p>All tickets closed in last (X) number of days</p>
 <table>

@@ -31,16 +31,18 @@
 		<td>
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="allcallslist">
 				<input type="hidden" id="id" name="id" value="<?php echo $row->callid;?>" />
-				<input type="submit" name="submit" value="<?php echo(substr(strip_tags($row->title), 0, 40));?>" alt="View ticket" title="View ticket" class="calllistbutton"/>
+				<input type="submit" name="submit" value="<?php echo(substr(strip_tags($row->title), 0, 20));?>" alt="View ticket" title="View ticket" class="calllistbutton"/>
 			</form>
 		</td>
 		<td>
+			<?php if ($row->status === '2') { ?>
 			<form action="<?php echo($_SERVER['PHP_SELF']);?>" method="post" class="returntouser">
 				<input type="hidden" id="locker" name="locker" value="<?php echo($row->lockerid);?>" />
 				<input type="hidden" id="owner" name="owner" value="<?php echo($row->name);?>" />
 				<input type="hidden" id="id" name="id" value="<?php echo($row->callid);?>" />
 				<input type="image" id="btn" name="btn" value="View" src="/public/images/ICONS-forward@2x.png" class="icon" width="24" height="25" alt="return to user" title="return to user" />
 			</form>
+			<?php } ?>
 		</td>
 		</tr>
 	<?php }; ?>

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <h2>Emerging Issues</h2>
 <?php
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');

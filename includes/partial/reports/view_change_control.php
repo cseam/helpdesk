@@ -17,7 +17,7 @@
 	</thead>
 	<tbody>
 <?php
-	$STH = $DBH->Prepare("SELECT * FROM changecontrol INNER JOIN engineers ON changecontrol.engineersid=engineers.idengineers");
+	$STH = $DBH->Prepare("SELECT * FROM changecontrol INNER JOIN engineers ON changecontrol.engineersid=engineers.idengineers ORDER BY id DESC");
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
 	if ($STH->rowCount() == 0) { echo "<tr><td colspan=5>0 changes logged</td></tr>";};

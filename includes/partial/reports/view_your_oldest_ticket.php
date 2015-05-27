@@ -16,29 +16,35 @@
 	<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 	<input type="hidden" id="details" name="details" value="<?=$row->details;?>" />
 	<h2>Oldest Ticket Details #<?=$row->callid?></h2>
-	<p class="callheader">Created by <a href="mailto:<?=$row->email;?>"><?=$row->name;?></a> (<?=$row->tel;?>)</p>
-	<p class="callheader">For <?=$row->room;?> - <?=$row->locationName;?></p>
-	<p class="callheader">Open for
-					<?php
-						$date1 = strtotime($row->opened);
-						if ($row->status ==='2') { $date2 = strtotime($row->closed); } else { $date2 = time(); };
-						$diff = $date2 - $date1;
-						$d = ($diff/(60*60*24))%365;
-						$h = ($diff/(60*60))%24;
-						$m = ($diff/60)%60;
-						echo $d." days, ".$h." hours, ".$m." minutes.";
-					?></p>
-	<?php
-		// populate additional fields
-		$STHloop = $DBH->Prepare("SELECT * FROM call_additional_results WHERE callid = :callid");
-		$STHloop->bindParam(':callid', $row->callid, PDO::PARAM_STR);
-		$STHloop->setFetchMode(PDO::FETCH_OBJ);
-		$STHloop->execute();
-		while($row2 = $STHloop->fetch()) { ?>
-			<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
-	<?php }; ?>
+		<p class="callheader">#<?=$row->callid?> <?php if ($row->urgency === '3') { echo("urgent ");} ?><?php echo($row->categoryName);?></p>
+		<p class="callheader">Created by <a href="mailto:<?php echo($row->email);?>"><?php echo($row->name);?></a></p>
+		<p class="callheader">Contact number: <?php echo($row->tel);?></p>
+		<p class="callheader"><?php echo($row->room);?> - <?php echo($row->locationName);?></p>
+		<p class="callheader"><?php if ($row->assigned == NULL) { echo("Not assigned yet"); } else {?>Assigned to <?php echo(engineer_friendlyname($row->assigned)); }?></p>
+		<p class="callheader">
+		<?php
+		if ($row->status === '2') { echo("Closed in ");} else { echo("Open for ");};
+			$date1 = strtotime($row->opened);
+			if ($row->status ==='2') {$date2 = strtotime($row->closed);} else {$date2 = time();};
+			$diff = $date2 - $date1;
+			$d = ($diff/(60*60*24))%365;
+			$h = ($diff/(60*60))%24;
+			$m = ($diff/60)%60;
+			echo( $d." days, ".$h." hours, ".$m." minutes.");
+		?>
+		</p>
+		<?php if ($row->lockerid != null) { ?><p class="callheader">Locker #<?php echo($row->lockerid);?></p><?php }; ?>
+		<?php
+			// populate additional fields
+				$STHloop = $DBH->Prepare("SELECT * FROM call_additional_results WHERE callid = :callid");
+				$STHloop->bindParam(':callid', $row->callid, PDO::PARAM_STR);
+				$STHloop->setFetchMode(PDO::FETCH_OBJ);
+				$STHloop->execute();
+				while($row2 = $STHloop->fetch()) { ?>
+					<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
+				<?php }; ?>
 	<h3 class="callbody"><?php echo($row->title);?></h3>
-	<p class="callbody"><?=$row->details;?></p>
+	<p class="callbody"><?php echo(nl2br($row->details));?></p>
 	<fieldset>
 		<legend>Update Ticket</legend>
 		<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
