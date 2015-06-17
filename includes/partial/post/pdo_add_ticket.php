@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 	$urgency = round((check_input($_POST['callurgency']) + check_input($_POST['callseverity'])) / 2 );
 
 	// Generate locker number if needed
-	if ($_POST['category'] == 11 || $_POST['category'] == 41 ) {
+	if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) {
 		// Generate Lockerid
 		$lockerid = random_locker();
 		$lockerflash = "<fieldset><legend>Engineer Note</legend><p class='lockernotice'>store laptop in locker #". $lockerid ."</p></fieldset>";
