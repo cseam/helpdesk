@@ -19,6 +19,8 @@
 		$STH->execute();
 		if ($STH->rowCount() == 0) { echo "0 items scheduled\n";};
 			while($row = $STH->fetch()) {
+						// who to assign
+						if ($row->assigned == -1) { $assigned = next_engineer($row->helpdesk); } else {$assigned = $row->assigned;} // assigned engineer (int)
 						// cleanup ticket objects
 						unset($createticket);
 						// create ticket from scheduled_calls table
@@ -27,7 +29,7 @@
 									$row->email, // email (varchar)
 									$row->tel, // telephone number (varchar)
 									$row->details, // ticket details (long)
-									$row->assigned, // assigned engineer (int)
+									$assigned,
 									date("c"), // opened (datetime)
 									date("c"), // last update (datetime)
 									$row->status, // status (int)

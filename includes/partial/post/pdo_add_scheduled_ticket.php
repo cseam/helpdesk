@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 	if ($_POST['assigned'] == 'DONT') {
 		$assignedengineer = NULL;
 	} elseif ($_POST['assigned'] == 'AUTO') {
-		$assignedengineer = next_engineer($_POST['helpdesk']);
+		$assignedengineer = -1;
 	} else {
 		$assignedengineer = $_POST['assigned'];
 	};

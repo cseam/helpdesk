@@ -151,7 +151,7 @@ function random_locker()
 {
 	global $db;
 		$min=1;
-		$max=36;
+		$max=30;
 		$lockerid = rand($min,$max);
 	return $lockerid;
 }
