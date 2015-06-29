@@ -20,7 +20,9 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
-		<!--<td>#<?=$row->callid;?></td>-->
+		<td>
+			#<?php echo $row->callid; ?>
+		</td>
 		<td width="45"><?php echo(date("d/m/y", strtotime($row->opened))); ?>
 		</td>
 		<td>

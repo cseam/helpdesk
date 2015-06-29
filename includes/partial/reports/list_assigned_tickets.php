@@ -16,7 +16,9 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
-		<!--<td>#<?=$row->callid;?></td>-->
+		<td>
+			#<?php echo $row->callid; ?>
+		</td>
 		<td><?php
 			if ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
 			elseif ($row->status == '4') { echo("<span class='escalated'>ESCALATED</span>"); }

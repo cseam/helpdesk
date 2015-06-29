@@ -20,7 +20,9 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
-		<!--<td>#<?=$row->callid;?></td>-->
+		<td>
+			#<?php echo $row->callid; ?>
+		</td>
 		<td>
 			<?=strstr($row->engineerName," ", true);?>
 		</td>

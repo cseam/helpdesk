@@ -6,10 +6,10 @@
 <div id="ajaxforms">
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE helpdesk <= :helpdeskid AND status !='2' ORDER BY callID");
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE helpdesk <= :helpdeskid AND status ='1' AND assigned !='NULL' ORDER BY callID");
 			$hdid = 3;
 		} else {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE helpdesk = :helpdeskid AND status !='2' ORDER BY callID");
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE helpdesk = :helpdeskid AND status ='1' AND assigned !='NULL' ORDER BY callID");
 			$hdid = $_SESSION['engineerHelpdesk'];
 		}
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
@@ -20,7 +20,9 @@
 		while($row = $STH->fetch()) {
 		?>
 		<tr>
-		<!--<td>#<?=$row->callid;?></td>-->
+		<td>
+			#<?php echo $row->callid; ?>
+		</td>
 		<td>
 			<?php if ($row->assigned !== NULL) { echo(strstr(engineer_friendlyname($row->assigned)," ", true)); } else { echo("NULL"); };?>
 		</td>

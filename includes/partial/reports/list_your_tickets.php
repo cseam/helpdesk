@@ -16,6 +16,9 @@
 		if ($STH->rowCount() == 0) { echo("<p>No tickets logged. Please start by filling in the form.</p>"); };
 		while($row = $STH->fetch()) { ?>
 		<tr>
+		<td>
+			#<?php echo $row->callid; ?>
+		</td>
 		<td><?php
 			if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
 		elseif ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
