@@ -3,10 +3,10 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE engineers.helpdesk <= :helpdeskid AND details LIKE :search");
+		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE (details LIKE :search OR callid LIKE :search OR title LIKE :search) AND engineers.helpdesk <= :helpdeskid ");
 		$hdid = 3;
 	} else {
-		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE engineers.helpdesk = :helpdeskid AND details LIKE :search");
+		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE (details LIKE :search OR callid LIKE :search OR title LIKE :search) AND engineers.helpdesk = :helpdeskid ");
 		$hdid = $_SESSION['engineerHelpdesk'];
 	}
 	$term = "%".$_POST['term']."%";
