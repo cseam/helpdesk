@@ -7,12 +7,13 @@
 <?php
 if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") {
 	$uniquetagcsv = implode(',',array_unique(explode(',', $_POST['tagname'])));
-	$STH = $DBH->Prepare('INSERT INTO changecontrol (engineersid, stamp, changemade, tags, server) VALUES (:engineersid, :stamp, :changemade, :tags, :server)');
+	$STH = $DBH->Prepare('INSERT INTO changecontrol (engineersid, stamp, changemade, tags, server, helpdesk) VALUES (:engineersid, :stamp, :changemade, :tags, :server, :helpdesk)');
 	$STH->bindParam(':engineersid', $_POST['engineer'], PDO::PARAM_STR);
 	$STH->bindParam(':stamp', date("c"), PDO::PARAM_STR);
 	$STH->bindParam(':changemade', $_POST['details'], PDO::PARAM_STR);
 	$STH->bindParam(':tags', $uniquetagcsv, PDO::PARAM_STR);
 	$STH->bindParam(':server', $_POST['servername'], PDO::PARAM_STR);
+	$STH->bindParam(':helpdesk', $_SESSION['engineerHelpdesk'], PDO::PARAM_INT);
 	$STH->execute();
 	echo("<p>Your change control has been added</p>");
 };
@@ -54,7 +55,15 @@ if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") {
 	<legend>Please select your tags</legend>
 <p class="tags">
 		<?php
-			$STH = $DBH->Prepare("SELECT * FROM changecontrol_tags");
+			
+			if ($_SESSION['engineerHelpdesk'] <= '3') {
+				$STH = $DBH->Prepare("SELECT * FROM changecontrol_tags WHERE helpdesk <= :helpdeskid");
+				$hdid = 3;
+			} else {
+				$STH = $DBH->Prepare("SELECT * FROM changecontrol_tags WHERE helpdesk = :helpdeskid");
+				$hdid = $_SESSION['engineerHelpdesk'];
+			}
+			$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 			$STH->setFetchMode(PDO::FETCH_OBJ);
 			$STH->execute();
 			while($row = $STH->fetch()) { ?>

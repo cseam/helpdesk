@@ -23,8 +23,19 @@
 		<td>
 			#<?php echo $row->callid; ?>
 		</td>
-		<td width="45"><?php echo(date("d/m/y", strtotime($row->opened))); ?>
+		<td><?php echo(date("d/m/y", strtotime($row->opened))); ?>
 		</td>
+		<td>
+		<?php
+		$datetime1 = new DateTime(date("Y-m-d", strtotime($row->opened)));
+		$datetime2 = new DateTime(date("Y-m-d"));
+		$interval = date_diff($datetime1, $datetime2);
+		echo $interval->format('%a days');
+		?>
+		</td>
+		
+		
+		
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />

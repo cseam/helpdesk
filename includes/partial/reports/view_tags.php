@@ -6,7 +6,8 @@
 <h1>Tag Control</h1>
 <?php if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['tagname'] == TRUE) { ?>
 <?php
-	$STH = $DBH->Prepare("INSERT INTO changecontrol_tags (tagname) VALUES (:tagname)");
+	$STH = $DBH->Prepare("INSERT INTO changecontrol_tags (tagname, helpdesk) VALUES (:tagname, :helpdesk)");
+	$STH->bindParam(":helpdesk", $_SESSION['engineerHelpdesk'], PDO::PARAM_INT);
 	$STH->bindParam(":tagname", $_POST['tagname'], PDO::PARAM_STR);
 	$STH->execute();
 	if($STH)
@@ -28,7 +29,14 @@
 	<legend>Remove current tag</legend>
 <p class="tags  delete">
 		<?
-			$STH = $DBH->Prepare("SELECT * FROM changecontrol_tags");
+			if ($_SESSION['engineerHelpdesk'] <= '3') {
+				$STH = $DBH->Prepare("SELECT * FROM changecontrol_tags WHERE helpdesk <= :helpdeskid");
+				$hdid = 3;
+			} else {
+				$STH = $DBH->Prepare("SELECT * FROM changecontrol_tags WHERE helpdesk = :helpdeskid");
+				$hdid = $_SESSION['engineerHelpdesk'];
+			}
+			$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 			$STH->setFetchMode(PDO::FETCH_OBJ);
 			$STH->execute();
 			while($row = $STH->fetch()) { ?>

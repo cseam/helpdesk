@@ -27,6 +27,14 @@
 			<?=strstr($row->engineerName," ", true);?>
 		</td>
 		<td>
+			<?php
+			$datetime1 = new DateTime(date("Y-m-d", strtotime($row->opened)));
+			$datetime2 = new DateTime(date("Y-m-d"));
+			$interval = date_diff($datetime1, $datetime2);
+			echo $interval->format('%a days');
+			?>
+		</td>
+		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($row->title), 0, 65);?>...</button>
