@@ -15,7 +15,7 @@
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		echo ("<h2>" . $STH->rowCount() . " - Open Tickets</h2><table><tbody>");
+		echo ("<h2>" . $STH->rowCount() . " - Assigned Tickets</h2><table><tbody>");
 		if ($STH->rowCount() == 0) { echo "<p>No Open Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>

@@ -1,7 +1,9 @@
 <div id="reportlinks">
 	<a href="#" onclick="update_div('#ajax','reports/list_escalated_tickets.php');"><img src="/public/images/ICONS-escalated@2x.png" alt="View escalated tickets" title="View escalated tickets"  width="24" height="25" />Escalated tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_unassigned_tickets.php');"><img src="/public/images/ICONS-unassigned@2x.png" alt="View unassigned tickets" title="View unassigned tickets"  width="24" height="25" />Unassigned tickets</a>
-	<a href="#" onclick="update_div('#ajax','reports/list_open_tickets.php');"><img src="/public/images/ICONS-view@2x.png" alt="View open tickets" title="View open tickets"  width="24" height="25" />Open tickets</a>
+	<a href="#" onclick="update_div('#ajax','reports/list_open_tickets.php');"><img src="/public/images/ICONS-assigned@2x.png" alt="View Assigned tickets" title="View Assigned tickets"  width="24" height="25" />Assigned tickets</a>
+	<a href="#" onclick="update_div('#ajax','reports/list_open_and_unassigned_tickets.php');"><img src="/public/images/ICONS-view@2x.png" alt="View Open tickets" title="View Open tickets"  width="24" height="25" />Open tickets</a>
+	<a href="#" onclick="update_div('#ajax','reports/list_closed_tickets.php');"><img src="/public/images/ICONS-closed@2x.png" alt="View closed tickets" title="View closed tickets"  width="24" height="25" />Closed tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_all_tickets.php');"><img src="/public/images/ICONS-allcalls@2x.png" alt="View all tickets" title="View all tickets"  width="24" height="25" />All tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_oldest_ticket.php');"><img src="/public/images/ICONS-oldestcall@2x.png" alt="View oldest ticket" title="View oldest ticket"  width="24" height="25" />Oldest ticket</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_work_rate.php');"><img src="/public/images/ICONS-workrate@2x.png" alt="Engineer work rate" title="Engineer work rate"  width="24" height="25" />Work rate</a>
