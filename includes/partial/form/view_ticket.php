@@ -114,6 +114,7 @@
 		<legend>Update Controls</legend>
 			<p class="buttons">
 			<?php if ($row->status === '1') {?>
+			<button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button>
 			<button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
 			<button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
 			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>

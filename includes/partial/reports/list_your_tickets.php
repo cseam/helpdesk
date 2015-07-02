@@ -22,6 +22,8 @@
 		<td><?php
 			if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
 		elseif ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
+		elseif ($row->status == '4') { echo("<span class='escalated'>ESCALATED</span>"); }
+		elseif ($row->status == '5') { echo("<span class='hold'>SENT AWAY</span>"); }
 		else { echo "<span class='open'>" . date("d/m/y", strtotime($row->opened)) . "</span>";} ?></td>
 		<td class="view_td">
 			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">

@@ -30,7 +30,10 @@
 		<td>
 			#<?php echo $row->callid; ?>
 		</td>
-		<td><?php if ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); } else { echo(date("d/m/y", strtotime($row->opened))); }?></td>
+		<td><?php if ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
+			elseif ($row->status == '4') { echo("<span class='escalated'>ESCALATED</span>"); }
+			elseif ($row->status == '5') { echo("<span class='hold'>SENT AWAY</span>");
+			 } else { echo(date("d/m/y", strtotime($row->opened))); }?></td>
 		<td><?php
 			$engineername = engineer_friendlyname($row->assigned);
 			$fullname = explode(' ', $engineername);

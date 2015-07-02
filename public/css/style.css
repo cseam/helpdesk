@@ -785,7 +785,7 @@ input.cmn-toggle-round:checked + label:after {
 		padding: 5px 0;
 	}
 	.logout {
-		display: none !important;
+		/*display: none !important;*/
 	}
 }
 
