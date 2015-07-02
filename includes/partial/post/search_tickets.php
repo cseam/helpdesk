@@ -30,7 +30,7 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="searchresultsview" >
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
-				<div style="margin-top:10px;float: left;"><?=substr(strip_tags($row->details), 0, 40);?>...</div>
+				<div style="margin-top:10px;float: left;"><?=substr(strip_tags($row->title), 0, 40);?>...</div>
 				<input type="image" name="submit" value="submit" src="/public/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View ticket" />
 			</form>
 		</td>
