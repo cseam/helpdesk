@@ -17,6 +17,7 @@
 		<div class="section">
 			<div id="branding">
 				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/nav.php'); ?>
+				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/mobilenav.php'); ?>
 			</div>
 			<div id="leftpage">
 				<div id="stats">
@@ -35,6 +36,8 @@
 			</div>
 		</div>
 
+
+
 	<script type="text/javascript">
 	$(function() {
 		// Wait for DOM ready state
@@ -44,6 +47,12 @@
 				update_div('#stats','reports/graph_my_performance.php');
 				update_div('#calllist','reports/list_engineers_tickets.php')
 			}, 300000);
+			
+			// Bind sidr to menu
+			$('#mobile-menu').sidr({
+				name: 'sidr',
+				side: 'right'	
+			});
 		// End DOM ready check
 	});
 	</script>

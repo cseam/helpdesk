@@ -6,6 +6,7 @@
 <!-- stylesheets -->
 <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="/public/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/public/css/sidr.css" />
 <link rel="stylesheet" type="text/css" href="/public/css/print.css" media="print" />
 <!-- jQuery CDN -->
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>-->
@@ -28,3 +29,5 @@
 <script src="/public/javascript/chartist.min.js"></script>
 <!-- Forms simple client validation -->
 <script src="/public/javascript/jquery.validate.min.js" type="text/javascript"></script>
+<!-- Side popout slider for hamburger menu on mobile -->
+<script src="/public/javascript/jquery.sidr.min.js" type="text/javascript"></script>

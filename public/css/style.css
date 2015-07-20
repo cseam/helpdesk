@@ -127,6 +127,14 @@ ul {
 	list-style-position: inside;
 	margin: 0.5rem 0rem;
 }
+strong {
+	font-weight: 300;
+	color:#454c48;
+	text-transform: uppercase;
+}
+em {
+	font-style: italic;
+}
 /* END Root & default elements */
 /* Basic view layout */
 .section {
@@ -708,6 +716,11 @@ input.cmn-toggle-round:checked + label:after {
 	margin-left: 43px;
 }
 /* END Toggle switches */
+/* mobile menu */
+#mobile-menu {
+		display: none;
+}
+
 
 /*** Responsive Stuff ***/
 /*** Phones and Small Screens < 600px, and portrait devices***/
@@ -786,6 +799,12 @@ input.cmn-toggle-round:checked + label:after {
 	}
 	.logout {
 		/*display: none !important;*/
+	}
+	#mobile-menu {
+		display: block;
+	}
+	#non-mobile-menu, .engineersubnav {
+		display: none;
 	}
 }
 

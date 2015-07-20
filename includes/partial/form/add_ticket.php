@@ -55,11 +55,13 @@
 				<option value="3">Affects teaching and learning</option>
 				<option value="3">Affects students</option>
 				<option value="3">Affects my work</option>
-				<option value="6">Issue is time critical</option>
-				<option value="10">Affects all of college and the boarding houses</option>
-				<option value="5">Affects main college site only</option>
+				<option value="10">Affects all of College, houses and all facilities</option>
+				<option value="5">Affects main College site only</option>
 				<option value="5">Affects the boarding houses only</option>
-
+				<option value="5">Affects catering or kitchens</option>
+				<option value="5">Affects the sports centre facilities</option>
+				<option value="5">Affects the parabola arts centre facilities</option>
+				<option value="6">Issue is time critical</option>
 			</select>
 	</fieldset>
 	<fieldset>

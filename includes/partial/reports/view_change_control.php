@@ -8,7 +8,7 @@
 <table>
 	<thead>
 		<tr>
-			<th>Who / When / Where / What</th>
+			<th>What / Who / When</th>
 			<th>Change</th>
 		</tr>
 	</thead>
@@ -30,12 +30,9 @@
 	while($row = $STH->fetch()) { ?>
 <tr>
 	<td>
-		<ul>
-			<li><?= $row->engineerName ?></li>
-			<li><?= date("d/m h:s", strtotime($row->stamp)) ?></li>
-			<li><?= $row->server ?></li>
-			<li>Tags: <?= $row->tags ?></li>
-		</ul>
+		<strong><?= $row->server ?></strong><br/>
+		<?= $row->engineerName ?> - <?= date("d/m @ h:s", strtotime($row->stamp)) ?><br/>
+		<em><?= $row->tags ?></em>
 	</td>
 	<td><?= $row->changemade ?></td>
 </tr>

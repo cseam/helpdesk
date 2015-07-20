@@ -18,6 +18,7 @@
 		<div class="section">
 			<div id="branding">
 				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/nav.php'); ?>
+				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/mobilenav.php'); ?>
 			</div>
 			<div id="leftpage">
 				<div id="stats">
@@ -46,6 +47,12 @@
 				// Do something after 5 min 300000ms
 				update_div('#stats','reports/graph_department_overview.php')
 			}, 300000);
+			
+			// Bind sidr to menu
+			$('#mobile-menu').sidr({
+				name: 'sidr',
+				side: 'right'	
+			});
 		// End DOM ready check
 	});
 </script>
