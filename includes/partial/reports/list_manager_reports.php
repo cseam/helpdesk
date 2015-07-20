@@ -6,7 +6,7 @@
 	<a href="#" onclick="update_div('#ajax','reports/list_closed_tickets.php');"><img src="/public/images/ICONS-closed@2x.png" alt="View closed tickets" title="View closed tickets"  width="24" height="25" />Closed tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_all_tickets.php');"><img src="/public/images/ICONS-allcalls@2x.png" alt="View all tickets" title="View all tickets"  width="24" height="25" />All tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_oldest_ticket.php');"><img src="/public/images/ICONS-oldestcall@2x.png" alt="View oldest ticket" title="View oldest ticket"  width="24" height="25" />Oldest ticket</a>
-		<a href="#" onclick="update_div('#ajax','reports/list_sent_away_tickets.php');"><img src="/public/images/ICONS-sentaway@2x.png" alt="Sent away for repair" title="Sent away for repair"  width="24" height="25" />Sent away for repair</a>
+		<a href="#" onclick="update_div('#ajax','reports/list_sent_away_tickets.php');"><img src="/public/images/ICONS-sentaway@2x.png" alt="Sent away for repair" title="Sent away for repair"  width="24" height="25" />Sent away</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_work_rate.php');"><img src="/public/images/ICONS-workrate@2x.png" alt="Engineer work rate" title="Engineer work rate"  width="24" height="25" />Work rate</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_assigned_numbers.php');"><img src="/public/images/ICONS-assignnotclosed@2x.png" alt="View assigned numbers" title="View assigned numbers"  width="24" height="25" />Assigned numbers</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_punchcard.php');"><img src="/public/images/ICONS-punchcard@2x.png" alt="Punchcard" title="Punchcard"  width="24" height="25" />Punchcard</a>
