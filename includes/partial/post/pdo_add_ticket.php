@@ -147,7 +147,7 @@ Your ticket has been added to <?php echo(CODENAME) ?>
 <p>An engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
 <?php if ($SLA) { ?>
 <h3>Service Level Agreement</h3>
-<p>Your ticket has been assigned the following service level agreement,
+<p>Your ticket has been assigned the following service level agreement:
 <p><?php echo($SLA);?></p>
 <p>Expected date your ticket will be closed is on or before <?php echo($SLAETA);?></p>
 <?php } ?>

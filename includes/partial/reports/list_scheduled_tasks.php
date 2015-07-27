@@ -15,7 +15,15 @@
 	</thead>
 	<tbody>
 <?php
-	$STH = $DBH->Prepare("SELECT * FROM scheduled_calls");
+	
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$STH = $DBH->Prepare("SELECT * FROM scheduled_calls WHERE helpdesk <= :helpdesk");
+			$hdid = 3;
+	} else {
+			$STH = $DBH->Prepare("SELECT * FROM scheduled_calls WHERE helpdesk = :helpdesk");
+			$hdid = $_SESSION['engineerHelpdesk'];
+	}
+	$STH->bindParam(":helpdesk", $hdid, PDO::PARAM_STR);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
 	if ($STH->rowCount() == 0) { echo "<tr><td colspan=3>0 scheduled tickets</td></tr>";};
