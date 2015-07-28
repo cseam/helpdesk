@@ -3,7 +3,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h3>Department Performance (by day)</h3>
+<h3>Tickets Closed (Last 7 Days)</h3>
 <?php
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
 		$hdid = 3;
@@ -43,7 +43,7 @@
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
 	while($row = $STH->fetch()) {
-		$lables .= "'" . $row->engineerName . "',";
+		$lables .= "' " . $row->engineerName . " ',";
 		$datamo .= $row->mo . ",";
 		$datatu .= $row->tu . ",";
 		$datawe .= $row->we . ",";
@@ -85,7 +85,6 @@
 	.ct-series-g line {
 		stroke: #ccc !important;
 	}
-
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -104,17 +103,23 @@
 			]
 		};
 	var options = {
-		chartPadding: 5,
+		chartPadding: 20,
 		fullWidth: true,
 		horizontalBars: true,
 		stackBars: true,
 		reverseData: true,
+		seriesBarDistance: 10,
 		axisY: {
+			onlyInteger: true,
 			offset: 100
-			}
+			},
+		axisX: {
+			onlyInteger: true
+			}	
 		};
 
 	new Chartist.Bar('#teamperformance', data, options);
+	
 	//END DOM READY
 	});
 </script>
