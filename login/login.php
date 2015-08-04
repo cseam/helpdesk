@@ -100,6 +100,8 @@
 					<p>It is a swift process and will ensure that the problem is looked at as soon as possible. With College being such a large environment, engineers may not notice a problem straight away, but with Helpdesk you can bring it to their attention immediately. </p>
 					<h3>Why not just send an email?</h3>
 					<p>If you do not know who to specifically contact, or an engineer is on holiday, <?php echo(CODENAME);?> takes care of that for you and directs your problem to the appropriate department and / or person. Not only that, it provides department managers with statistical data, helping them troubleshoot larger issues and even spot patterns. Emailing individuals may solve your issue, but Helpdesk can warn of future problems as well. </p>
+					<h3>How do i use Helpdesk?</h3>
+					<p>Helpdesk is designed to be a simple as possible, to help new users familiarise themselves with the process a illustrated step by step guide for users is available to read <a href="/documentation/Helpdesk%20-%20User%20Helpdesk%20Procedure.pdf">here</a>.</p>
 				</div>
 			</div>
 		</div>

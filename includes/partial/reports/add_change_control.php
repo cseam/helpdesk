@@ -6,6 +6,7 @@
 <h2>Add Change Control</h2>
 <?php
 if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") {
+	//  add change control
 	$uniquetagcsv = implode(',',array_unique(explode(',', $_POST['tagname'])));
 	$STH = $DBH->Prepare('INSERT INTO changecontrol (engineersid, stamp, changemade, tags, server, helpdesk) VALUES (:engineersid, :stamp, :changemade, :tags, :server, :helpdesk)');
 	$STH->bindParam(':engineersid', $_POST['engineer'], PDO::PARAM_STR);
@@ -15,6 +16,41 @@ if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") {
 	$STH->bindParam(':server', $_POST['servername'], PDO::PARAM_STR);
 	$STH->bindParam(':helpdesk', $_SESSION['engineerHelpdesk'], PDO::PARAM_INT);
 	$STH->execute();
+	// list engineers in same helpdesk
+	
+	if ($_SESSION['engineerHelpdesk'] <= '3') {
+		$STH = $DBH->Prepare("SELECT * FROM engineers WHERE helpdesk <= :helpdeskid");
+		$hdid = 3;
+	} else {
+		$STH = $DBH->Prepare("SELECT * FROM engineers WHERE helpdesk = :helpdeskid");
+		$hdid = $_SESSION['engineerHelpdesk'];
+	}
+	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) { 
+		// email all engineers to let them know details of change control	
+			// Construct message
+			$to = $row->engineerEmail;
+			$message = "<span style='font-family: arial;'><p>Change control has been added</p>";
+			$message .= "<p><b>" . $_POST['servername'] . "</b></p>";
+			$message .= "<p>" . engineer_friendlyname($_POST['engineer']) . "</p>";
+			$message .= "<p>" . date("l jS \of F Y h:i:s A") . "</p>";
+			$message .= "<p>" . $_POST['details'] . "</p>";
+			$message .= "<p>To view the details of this change please <a href='". HELPDESK_LOC ."'>Visit ". CODENAME ."</a></p>";
+			$message .= "<p>This is an automated message please <b>do not reply</b></p>";
+			$msgtitle = "Change Control Added (" . $_POST['servername'] . ")";
+			$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
+			$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
+			$headers .= 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers .= 'X-Mailer: PHP/' . phpversion();
+			// In case any of our lines are larger than 70 characters, we wordwrap()
+			$message = wordwrap($message, 70, "\r\n");
+			// Send email
+			mail($to, $msgtitle, $message, $headers);
+	};
+	// update view 
 	echo("<p>Your change control has been added</p>");
 };
 ?>
@@ -45,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST" & $_POST['addchange'] == "add") {
 		<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
 	<label for="">Tags</label>
 		<textarea id="tagname" name="tagname" rows="2" cols="40" value="" readonly="true" required ></textarea>
+		<input type="hidden" id="helpdesk" name="helpdesk" value="<?php echo($hdid); ?>" />
 	<p class="buttons">
 		<input type="hidden" id="addchange" name="addchange" value="add" />
 		<button name="add" value="add" type="submit">Submit</button>

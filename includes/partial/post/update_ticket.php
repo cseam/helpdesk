@@ -192,8 +192,9 @@
 			// Construct message
 			$to = $row->email;
 			$message = "<span style='font-family: arial;'><p>Your Helpdesk ticket (#" . $_POST['id'] .") has been updated.</p>";
+			$message .= "<p>An engineer updated your ticket with the following comment: <b>".$reason."</b></p>";
 			$message .= "<p>To view the details of this update or update your ticket please <a href='". HELPDESK_LOC ."'>Visit ". CODENAME ."</a></p>";
-			$message .= "<p>This is an automated message please do not reply</p></span>";
+			$message .= "<p>This is an automated message please <b>do not reply, login to update your ticket</b></p></span>";
 			$msgtitle = "Your Helpdesk ticket (#" . $_POST['id'] . ") has been updated.";
 			$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
 			$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
