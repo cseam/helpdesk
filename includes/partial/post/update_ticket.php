@@ -10,7 +10,7 @@
 		// if Forward ticket
 		if (isset($_POST['forward'])) {
 			//Create update message for db
-			$reason = "<div class=update><h3>Ticket forwarded (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>". htmlspecialchars($_POST['details'])."</div>";
+			$reason = "<div class=update><h3>Ticket forwarded (".date("l jS \of F Y h:i:s A").")</h3>". htmlspecialchars($_POST['details'])."</div>";
 			//PDO Update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET helpdesk = :helpdesk, assigned = :assigned, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':helpdesk', $_POST['fwdhelpdesk'], PDO::PARAM_STR);
@@ -33,7 +33,7 @@
 		// if Reassign ticket
 		if (isset($_POST['reassign'])) {
 			//Create update message for db
-			$reason = "<div class=update><h3>Ticket reassigned (".date("l jS \of F Y h:i:s A").") for the following reason,</h3>".htmlspecialchars($_POST['details'])."</div>";
+			$reason = "<div class=update><h3>Ticket reassigned (".date("l jS \of F Y h:i:s A").")</h3>".htmlspecialchars($_POST['details'])."</div>";
 			//PDO update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET assigned = :assigned, status = 1, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':assigned', $_POST['engineer'], PDO::PARAM_STR);

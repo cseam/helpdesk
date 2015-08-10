@@ -21,7 +21,7 @@
 				<?php }; ?>
 			</select>
 			<label for="details">Reason</label>
-			<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
+			<textarea name="details" id="details" rows="10" cols="40"></textarea>
 		</fieldset>
 		<p class="buttons">
 			<button name="forward" value="forward" type="submit">Forward Ticket</button>

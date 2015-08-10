@@ -28,10 +28,12 @@
 		<input type="hidden" id="button_value" name="button_value" value="" />
 		<input type="hidden" id="details" name="details" value="<?php echo($row->details);?>" />
 		<h2>Ticket details #<?php echo($_POST['id']);?></h2>
-		<p class="callheader">#<?php echo($_POST['id']);?> <?php if ($row->urgency === '3') { echo("urgent ");} ?><?php echo($row->categoryName);?></p>
-		<p class="callheader">Created by <a href="mailto:<?php echo($row->email);?>"><?php echo($row->name);?></a></p>
+		<p class="callheader">#<?php echo($_POST['id']);?> <?php if ($row->urgency === '3') { echo("urgent ");} ?></p>
+		<p class="callheader"><?php echo($row->categoryName);?></p>
+		<p class="callheader">Created by <?php echo($row->name);?></p>
 		<p class="callheader">Contact number: <?php echo($row->tel);?></p>
-		<p class="callheader"><?php echo($row->room);?> - <?php echo($row->locationName);?></p>
+		<p class="callheader"><?php echo($row->locationName);?></p>
+		<p class="callheader"><?php echo($row->room);?></p>
 		<p class="callheader"><?php if ($row->assigned == NULL) { echo("Not assigned yet"); } else {?>Assigned to <?php echo(engineer_friendlyname($row->assigned)); }?></p>
 		<p class="callheader">
 		<?php
@@ -133,7 +135,7 @@
 		$("#updateForm").validate({
 			rules: {
 				updatedetails: {
-					required: true,
+					required: false,
 					}
 			},
 			// Submit via ajax if valid
