@@ -3,39 +3,9 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h2>View All Tickets</h2>
+<h3>View All Tickets</h3>
 <div id="ajaxforms">
 	<table>
-	<thead>
-		<tr class="head">
-			<th>#</th>
-			<th>
-				<select id="filter" onchange="filterTable()" >
-					<option value="0" SELECTED>Code</option>
-					<?php
-						// populate locations from db
-						$STH = $DBH->Prepare("SELECT * FROM location ORDER BY locationName");
-						$STH->setFetchMode(PDO::FETCH_OBJ);
-						$STH->execute();
-						while($row = $STH->fetch()) { ?>
-							<option value="<?php echo($row->id);?>"><?php echo($row->locationName);?></option>
-					<?php };?>
-			</select>
-			<script type="text/javascript">
-				function filterTable(err) {
-					$("tr").show();
-						if ($( "select#filter" ).val() !== '0') {
-							$("tr").not("."+$( "select#filter" ).val()).hide();
-						};
-					$("tr.head").show();
-				};
-			</script>
-			</th>
-			<th>Status</th>
-			<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title</th>
-			<th>Engineer</th>
-		</tr>
-	</thead>
 	<tbody>
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
@@ -53,10 +23,10 @@
 		?>
 		<tr class="<?=$row->location;?>">
 		<td>#<?=$row->callid;?></td>
-		<td><span class="smalltxt" title="<?=$row->locationName;?>"><?=$row->shorthand;?></span></td>
+		<td><span class="smalltxt" title="<?=$row->locationName;?>"><img src="/public/images/<?=$row->iconlocation;?>" alt="<?=$row->locationName;?>" width="24px" height="auto"/></span></td>
 		<td><?php
 			if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
-		elseif ($row->status == '3') { echo("<span class='hold'>HOLD</span>"); }
+		elseif ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
 		elseif ($row->status == '4') { echo("<span class='escalated'>ESCALATED</span>"); }
 		elseif ($row->status == '5') { echo("<span class='hold'>SENT AWAY</span>"); }
 		else { echo "<span class='open'>" . date("d/m/y", strtotime($row->opened)) . "</span>";} ?></td>

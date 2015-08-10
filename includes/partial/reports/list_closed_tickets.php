@@ -6,16 +6,16 @@
 <div id="ajaxforms">
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE helpdesk <= :helpdeskid AND status ='2' AND assigned !='NULL' ORDER BY callID DESC LIMIT 1000");
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE helpdesk <= :helpdeskid AND status ='2' AND assigned !='NULL' ORDER BY callID DESC LIMIT 1000");
 			$hdid = 3;
 		} else {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE helpdesk = :helpdeskid AND status ='2' AND assigned !='NULL' ORDER BY callID DESC LIMIT 1000");
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE helpdesk = :helpdeskid AND status ='2' AND assigned !='NULL' ORDER BY callID DESC LIMIT 1000");
 			$hdid = $_SESSION['engineerHelpdesk'];
 		}
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		echo ("<h2>Last " . $STH->rowCount() . " Closed Tickets</h2><table><tbody>");
+		echo ("<h3>Last " . $STH->rowCount() . " Closed Tickets</h3><table><tbody>");
 		if ($STH->rowCount() == 0) { echo "<p>No Open Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>
@@ -23,6 +23,7 @@
 		<td>
 			#<?php echo $row->callid; ?>
 		</td>
+		<td><img src="/public/images/<?=$row->iconlocation;?>" alt="<?=$row->locationName;?>" title="<?=$row->locationName;?>" width="24px" height="auto"/></td>
 		<td>
 			<?php if ($row->assigned !== NULL) { echo(strstr(engineer_friendlyname($row->assigned)," ", true)); } else { echo("NULL"); };?>
 		</td>
@@ -33,18 +34,6 @@
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 				<button name="submit" value="submit" type="submit" class="calllistbutton" title="view call"><?=substr(strip_tags($row->title), 0, 65);?>...</button>
-			</form>
-		</td>
-		<td>
-			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">
-			<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
-			<input name="submit" value="" type="image" src="/public/images/ICONS-forward@2x.png" width="24" height="25" class="icon" alt="forward ticket"  title="forward ticket"/>
-			</form>
-		</td>
-		<td>
-			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reassign">
-				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
-				<input name="submit" value="" type="image" src="/public/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer"  title="assign engineer" />
 			</form>
 		</td>
 		</tr>
@@ -58,52 +47,6 @@
 			{
 				type: 'post',
 				url: '/includes/partial/form/view_ticket.php',
-				data: $(this).serialize(),
-				beforeSend: function()
-				{
-				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
-    			},
-				success: function(data)
-				{
-				$('#ajax').html(data);
-    			},
-				error: function()
-				{
-				$('#ajax').html('error loading data, please refresh.');
-    			}
-			});
-       e.preventDefault();
-       return false;
-    });
-
-	$('.reassign').submit(function(e) {
-    	$.ajax(
-			{
-				type: 'post',
-				url: '/includes/partial/post/reassign_ticket.php',
-				data: $(this).serialize(),
-				beforeSend: function()
-				{
-				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
-    			},
-				success: function(data)
-				{
-				$('#ajax').html(data);
-    			},
-				error: function()
-				{
-				$('#ajax').html('error loading data, please refresh.');
-    			}
-			});
-       e.preventDefault();
-       return false;
-    });
-
-  	$('.forward').submit(function(e) {
-    	$.ajax(
-			{
-				type: 'post',
-				url: '/includes/partial/post/forward_ticket.php',
 				data: $(this).serialize(),
 				beforeSend: function()
 				{

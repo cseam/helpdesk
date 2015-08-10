@@ -184,6 +184,9 @@ table th {
 	text-align: left;
 	text-transform: uppercase;
 }
+.hdtitle {
+	border-bottom: 0px;
+}
 /* End tables */
 /* Standard forms */
 input, textarea, button {
@@ -196,6 +199,7 @@ input, textarea, button {
 	resize: none;
 	vertical-align: bottom;
 	font-size: 0.8rem;
+	font-weight: 300;
 }
 select {
 	background: rgba(255,255,255,0.4) url('/public/images/ICONS-dropdown@2x.png') no-repeat 99% 50%;
@@ -269,6 +273,9 @@ select::-ms-expand {
 /* Scroll bar look & feel */
 ::-webkit-scrollbar {
 	width: 7px;
+}
+::-webkit-scrollbar:horizontal {
+	height: 7px;
 }
 ::-webkit-scrollbar-track {
 	background-color: transparent;
@@ -453,6 +460,9 @@ h3.callbody {
 	border: 1px solid transparent;
 	cursor: pointer !important;
 }
+.hdtitle button {
+	padding: 0;
+}
 /* END Buttons */
 /* Calls list */
 #calllist {
@@ -475,7 +485,8 @@ h3.callbody {
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 0 0 5px 5px;
+	border-radius: 15px;
+	background-color: rgba(0, 82, 90, 0.1);
 	color: rgb(100, 125, 106);
 	display: block;
 }
@@ -484,7 +495,8 @@ h3.callbody {
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 0 0 5px 5px;
+	border-radius: 15px;
+	background-color: rgba(88, 70, 0, 0.1);
 	color: rgba(194, 151, 9, 1);
 	display: block;
 }
@@ -493,7 +505,8 @@ h3.callbody {
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 0 0 5px 5px;
+	border-radius: 15px;
+	background-color: rgba(90, 0, 24, 0.1);
 	color: rgba(194, 10, 13, 1);
 	display: block;
 }
@@ -578,7 +591,7 @@ h3.callbody {
 	height: auto;
 	min-height: auto;
 	color:#577d6a !important;
-	font-weight: 400;
+	font-weight: 300;
 }
 .mbig {
 	font-size: 80px;
@@ -586,7 +599,7 @@ h3.callbody {
 	height: auto;
 	min-height: auto;
 	color:#577d6a !important;
-	font-weight: 400;
+	font-weight: 300;
 }
 #digitalsign-stats tfoot td {
 	font-size: 0.8rem;

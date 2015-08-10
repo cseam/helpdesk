@@ -11,6 +11,4 @@
 	<a href="#" onclick="update_div('#calllist','reports/list_engineers_tickets.php');update_div('#engineerscallview','reports/list_open_tickets_for_a_helpdesk.php');$.sidr('close', 'sidr');"><img src="/public/images/ICONS-allcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> Departments Tickets</a><br/>
 	<a href="#" onclick="update_div('#calllist','reports/list_engineers_tickets.php');update_div('#engineerscallview','reports/list_engineer_reports.php');$.sidr('close', 'sidr');"><img src="/public/images/ICONS-workrate@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> Reports</a><br/>
 <?php }; ?>
-
-
 </div>
