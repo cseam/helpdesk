@@ -189,6 +189,13 @@ table th {
 	padding-top: 0.8rem;
 }
 /* End tables */
+/* helper classes */
+.clearbreak {
+	clear: both;
+	display: block;
+	line-height: 0;
+}
+/* helpder classes */
 /* Standard forms */
 input, textarea, button {
 	background: rgba(255,255,255,0.4);
