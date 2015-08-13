@@ -147,6 +147,18 @@ function helpdesk_friendlyname($data)
 	}
 	return $friendly;
 }
+function category_friendlyname($data)
+{
+	global $DBH;
+	$STH = $DBH->Prepare("SELECT categoryName FROM categories WHERE id = :id");
+	$STH->bindParam(":id", $data, PDO::PARAM_STR);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) {
+		$friendly = $row->categoryName;
+	}
+	return $friendly;
+}
 function random_locker()
 {
 	global $db;
