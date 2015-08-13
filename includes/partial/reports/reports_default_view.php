@@ -17,9 +17,6 @@
 	$STH->execute();
 	
 	while($row = $STH->fetch()) {
-		
-		//echo( date("F", mktime(0, 0, 0, $row->MonthNum, 10)) . " " . helpdesk_friendlyname($row->helpdesk) . " : " . $row->Totals . "<br/>" );
-		
 		$lables .= "' " . helpdesk_friendlyname($row->helpdesk) . "(" . $row->Totals . ") ',";
 		$data .= $row->Totals . ",";
 	};

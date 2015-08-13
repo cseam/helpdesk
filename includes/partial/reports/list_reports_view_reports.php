@@ -12,6 +12,8 @@
 	
 	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />Year on Year</a>
 	
+	<a href="#" onclick="update_div('#ajax','reports/reports_sla_performance.php');"><img src="/public/images/ICONS-scheduledtask@2x.png" alt="" title=""  width="24" height="25" />SLA Performance</a>
+	
 	<a href="#" onclick="update_div('#ajax','reports/view_work_rate.php');"><img src="/public/images/ICONS-workrate@2x.png" alt="Engineer work rate" title="Engineer work rate"  width="24" height="25" />Work rate</a>
 
 	<a href="#" onclick="update_div('#ajax','reports/list_user_feedback.php');"><img src="/public/images/ICONS-userfeedback@2x.png" alt="User Feedback" title="User Feedback"  width="24" height="25" />User feedback</a>
@@ -22,13 +24,4 @@
 
 	<a href="#" onclick="update_div('#ajax','reports/view_digital_screen.php');"><img src="/public/images/ICONS-digitalscreen@2x.png" alt="IT reception screen" title="IT reception screen"  width="24" height="25" />TV screen</a>	
 	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />null</a>
-	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />null</a>
-	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />null</a>
-	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />null</a>
-	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />null</a>
 </div>
