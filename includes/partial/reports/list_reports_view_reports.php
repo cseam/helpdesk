@@ -1,16 +1,16 @@
 <div id="reportlinks">
 	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />Engineer Breakdown</a>
+	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-yourcalls@2x.png" alt="" title=""  width="24" height="25" />Engineer Breakdown</a>
 	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />Helpdesk Breakdown</a>
+	<a href="#" onclick="update_div('#ajax','reports/reports_helpdesk_breakdown.php');"><img src="/public/images/ICONS-viewfulldetails@2x.png" alt="" title=""  width="24" height="25" />Helpdesk Breakdown</a>
 	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />Category Breakdown</a>
+	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-unassigned@2x.png" alt="" title=""  width="24" height="25" />Category Breakdown</a>
 	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />Urgency Breakdown</a>
+	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-urgent@2x.png" alt="" title=""  width="24" height="25" />Urgency Breakdown</a>
 	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />Preemptive vs Reactive</a>
+	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-punchcard@2x.png" alt="" title=""  width="24" height="25" />Preemptive vs Reactive</a>
 	
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="" title=""  width="24" height="25" />Year on Year</a>
+	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/other.png" alt="" title=""  width="24" height="25" />Year on Year</a>
 	
 	<a href="#" onclick="update_div('#ajax','reports/reports_sla_performance.php');"><img src="/public/images/ICONS-scheduledtask@2x.png" alt="" title=""  width="24" height="25" />SLA Performance</a>
 	
