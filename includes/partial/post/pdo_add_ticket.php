@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 	// Generate ticket details including any images uploaded
 	$ticketdetails = "<div class=original>" . $upload_img_code . htmlspecialchars($_POST['details']) . "</div>";
 
-	// Check if helpdesk is has auto assigned tickets or not
-	$STH = $DBH->Prepare("SELECT auto_assign FROM helpdesks WHERE id = :id");
+	// Check if helpdesk is has auto assigned tickets or not and if should email on new ticket
+	$STH = $DBH->Prepare("SELECT auto_assign, email_on_newticket FROM helpdesks WHERE id = :id");
 	$STH->bindParam(':id', $_POST['helpdesk'], PDO::PARAM_INT);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
@@ -53,6 +53,31 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 		if ($_POST['cmn-toggle-selfassign'] !== null) {
 			// if engineer has set checkbox to day assign to themselfs
 			$assignedengineer = $_POST['cmn-toggle-selfassign'];
+		}
+		if ($row->email_on_newticket == '1') {
+			// email all engineers of this helpdesk so they know something has been added.
+				// Get engineers emails
+				$STHemail = $DBH->Prepare('SELECT engineerEmail FROM engineers WHERE helpdesk = :helpdesk');
+				$STHemail->bindParam(':helpdesk', $_POST['helpdesk'], PDO::PARAM_INT);
+				$STHemail->setFetchMode(PDO::FETCH_OBJ);
+				$STHemail->execute();
+					while($rowemail = $STHemail->fetch()) {
+						//Construct message
+						$to = $rowemail->engineerEmail;
+						$message = "<p>" . $_POST['name'] . " has added a ticket to the " . helpdesk_friendlyname($_POST['helpdesk']) . " Helpdesk</p>";
+						$message .= "<p>To view the details of this ticket please <a href='". HELPDESK_LOC ."'>Visit ". CODENAME ."</a></p>";
+			$message .= "<p>This is an automated message please <b>do not reply, login to update your ticket</b></p></span>";
+						$msgtitle = "New Helpdesk Added to " . helpdesk_friendlyname($_POST['helpdesk']) . " helpdesk";
+						$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
+						$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
+						$headers .= 'MIME-Version: 1.0' . "\r\n";
+						$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+						$headers .= 'X-Mailer: PHP/' . phpversion();
+						// In case any of our lines are larger than 70 characters, we wordwrap()
+						$message = wordwrap($message, 70, "\r\n");
+						// Send email
+						mail($to, $msgtitle, $message, $headers);		
+					};
 		}
 	};
 
