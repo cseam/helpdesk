@@ -742,7 +742,7 @@ input.cmn-toggle-round:checked + label:after {
 
 /*** Responsive Stuff ***/
 /*** Phones and Small Screens < 600px, and portrait devices***/
-@media screen and (max-width: 600px), screen and (orientation: portrait) {
+@media screen and (max-width: 600px) and (orientation: portrait), screen and (max-width: 736px) and (orientation: landscape) {
 	body {
 		-webkit-overflow-scrolling: touch;
 	}
