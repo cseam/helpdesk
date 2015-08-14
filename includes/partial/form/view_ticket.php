@@ -47,6 +47,8 @@
 			echo( $d." days, ".$h." hours, ".$m." minutes.");
 		?>
 		</p>
+		<p class="callheader">Call Opened <?php echo(date("d/m/y h:s", strtotime($row->opened)));?></p>
+		<p class="callheader">Last Update <?php echo(date("d/m/y h:s", strtotime($row->lastupdate)));?></p>
 		<?php if ($row->lockerid != null) { ?><p class="callheader">Locker #<?php echo($row->lockerid);?></p><?php }; ?>
 		<?php
 			// populate additional fields
@@ -123,8 +125,6 @@
 			<?php };?>
 			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
 			</p>
-			<p class="callfooter">Call Opened <?php echo(date("d/m/y h:s", strtotime($row->opened)));?><br />
-			Last Update <?php echo(date("d/m/y h:s", strtotime($row->lastupdate)));?></p>
 	</fieldset>
 	</form>
 	<script type="text/javascript">
