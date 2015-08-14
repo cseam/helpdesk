@@ -49,4 +49,4 @@
 	//END DOM READY
 	});
 </script>
-<div id="engineer_breakdown" class="ct-chart ct-golden-section" style="width: 100%;height:85%;float:left;"></div>
+<div id="engineer_breakdown" class="ct-chart ct-square"></div>

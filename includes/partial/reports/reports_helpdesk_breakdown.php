@@ -47,6 +47,6 @@
 	//END DOM READY
 	});
 </script>
-<div id="defaultview1" class="ct-chart ct-golden-section" style="width: 100%;height:85%;float:left;"></div>
+<div id="defaultview1" class="ct-chart ct-golden-section"></div>
 
 
