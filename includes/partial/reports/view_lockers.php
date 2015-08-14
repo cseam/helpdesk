@@ -18,7 +18,14 @@
 	</thead>
 	<tbody>
 	<?php
-		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE lockerid > 0 ORDER BY lockerid");
+		if ($_SESSION['engineerHelpdesk'] <= '3') {
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE lockerid > 0 AND calls.helpdesk <= :helpdeskid ORDER BY lockerid");
+			$hdid = 3;
+		} else {
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE lockerid > 0 AND calls.helpdesk = :helpdeskid ORDER BY lockerid");
+			$hdid = $_SESSION['engineerHelpdesk'];
+		}
+		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
 		if ($STH->rowCount() == 0) { echo "<tr><td colspan=5>0 items in lockers</td></tr>";};
