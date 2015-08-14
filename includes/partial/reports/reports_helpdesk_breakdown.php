@@ -42,11 +42,11 @@
 			}
 		};
 
-	new Chartist.Pie('#defaultview1', data, options);
+	new Chartist.Pie('#helpdesk_breakdown', data, options);
 	
 	//END DOM READY
 	});
 </script>
-<div id="defaultview1" class="ct-chart ct-golden-section"></div>
+<div id="helpdesk_breakdown" class="ct-chart ct-golden-section"></div>
 
 

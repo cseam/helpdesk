@@ -5,11 +5,11 @@
 ?>
 <h3>Engineer Breakdown This Month</h3>
 <?php
-	$STH = $DBH->Prepare("SELECT Month(closed) AS MonthNum, helpdesk, assigned, count(callid) AS Totals
+	$STH = $DBH->Prepare("SELECT Month(closed) AS MonthNum, helpdesk, calls.closeengineerid, assigned, count(callid) AS Totals
 		FROM calls
 		WHERE status = 2 AND Month(closed) = :month AND Year(closed) = :year
-		GROUP BY assigned
-		ORDER BY helpdesk DESC");
+		GROUP BY calls.closeengineerid
+		ORDER BY Totals");
 	
 	$STH->bindParam(':month', date("m"), PDO::PARAM_INT);
 	$STH->bindParam(':year', date("o"), PDO::PARAM_INT);
@@ -17,7 +17,7 @@
 	$STH->execute();
 	
 	while($row = $STH->fetch()) {
-		$lables .= "'" . engineer_friendlyname($row->assigned) . "',";
+		$lables .= "'" . engineer_friendlyname($row->closeengineerid) . "',";
 		$data .= $row->Totals . ",";
 	};
 	$data = rtrim($data, ",");

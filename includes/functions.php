@@ -127,10 +127,10 @@ function engineer_friendlyname($data)
 {
 	global $DBH;
 	$STH = $DBH->Prepare("SELECT engineerName FROM engineers WHERE idengineers = :id");
-	$STH->bindParam(":id", $data, PDO::PARAM_STR);
+	$STH->bindParam(":id", $data, PDO::PARAM_INT);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
-	if ($STH->rowCount() == 0) { $friendly = "No Engineer Assigned"; };
+	if ($STH->rowCount() == 0) { $friendly = "Unknown Engineer"; };
 	while($row = $STH->fetch()) {
 		$friendly = $row->engineerName;
 	}

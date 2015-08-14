@@ -1,1 +1,1 @@
-<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/reports_helpdesk_breakdown.php'); ?>
+<p><?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/reports_helpdesk_breakdown.php'); ?></p>

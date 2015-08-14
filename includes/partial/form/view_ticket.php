@@ -44,11 +44,11 @@
 			$d = ($diff/(60*60*24))%365;
 			$h = ($diff/(60*60))%24;
 			$m = ($diff/60)%60;
-			echo( $d." days, ".$h." hours, ".$m." minutes.");
+			echo( $d." days, ".$h." hours, ".$m." minutes");
 		?>
 		</p>
-		<p class="callheader">Call Opened <?php echo(date("d/m/y h:s", strtotime($row->opened)));?></p>
-		<p class="callheader">Last Update <?php echo(date("d/m/y h:s", strtotime($row->lastupdate)));?></p>
+		<p class="callheader">Call Opened <?php echo(date("d/m/y h:i:s", strtotime($row->opened)));?></p>
+		<p class="callheader">Last Update <?php echo(date("d/m/y h:i:s", strtotime($row->lastupdate)));?></p>
 		<?php if ($row->lockerid != null) { ?><p class="callheader">Locker #<?php echo($row->lockerid);?></p><?php }; ?>
 		<?php
 			// populate additional fields
