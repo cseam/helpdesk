@@ -20,5 +20,5 @@
 	<a href="#" onclick="update_div('#ajax','reports/list_scheduled_tasks.php');"><img src="/public/images/ICONS-scheduledtask@2x.png" alt="scheduled tasks" title="sheduled tasks"  width="24" height="25" />Scheduled tasks</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_all_outofhours.php');"><img src="/public/images/ICONS-outofhours@2x.png" alt="Out Of Hours" title="Out Of Hours"  width="24" height="25" />Out Of Hours</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_tickets_awaiting_invoice.php');"><img src="/public/images/ICONS-invoice@2x.png" alt="awaiting invoice" title="awaiting invoice"  width="24" height="25" />Awaiting invoice</a>
-	<a href="#" onclick="update_div('#ajax','reports/null.php');"><img src="/public/images/ICONS-null@2x.png" alt="Performance Objectives" title="Performance Objectvies"  width="24" height="25" />Performance Objectives</a>
+	<a href="#" onclick="update_div('#ajax','reports/list_all_performance_objectives.php');"><img src="/public/images/ICONS-null@2x.png" alt="Performance Objectives" title="Performance Objectvies"  width="24" height="25" />Performance Objectives</a>
 </div>
