@@ -17,7 +17,6 @@
 		<div class="section">
 			<div id="branding">
 				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/nav.php'); ?>
-				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/mobilenav.php'); ?>
 			</div>
 			<div id="leftpage">
 				<div id="stats">
@@ -37,7 +36,7 @@
 		</div>
 
 
-
+	<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/mobilenav.php'); ?>
 	<script type="text/javascript">
 	$(function() {
 		// Wait for DOM ready state

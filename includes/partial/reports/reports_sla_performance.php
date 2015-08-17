@@ -3,8 +3,8 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h3>SLA Performance (this month)</h3>
 <div id="ajaxforms">
+<h3>Failed Tickets (this month)</h3>
 	<table>
 	<tbody>
 	<?php
@@ -44,7 +44,7 @@ ORDER BY callid
 		<td>#<?=$row->callid;?></td>
 		<td><?=$row->title;?></td>
 		<td><?=engineer_friendlyname($row->assigned);?></td>
-		<td>Overdue <?php echo($row->total_days_to_close - $row->close_eta_days);?> days</td>
+		<td><?php echo($row->total_days_to_close - $row->close_eta_days);?> days<br/>Overdue</td>
 		</tr>
 		<?php
 		} else {
@@ -52,12 +52,16 @@ ORDER BY callid
 				$passcounter += 1;
 			};
 		?>
-	<? } 
-		echo($failcounter . " tickets failed SLA");
-		
-	?>
+	<? } ?>
 	</tbody>
 	</table>
+	<br/>
+	<h3>Department Stats</h3>
 	<p><?php echo($passcounter . " tickets passed SLA successfully"); ?></p>
+	<p><?php echo($failcounter . " tickets failed SLA"); ?></p>
+	<p><?php 
+		$totalcounter = $passcounter + $failcounter;
+		
+		echo("fail rate " . round(($failcounter / $totalcounter) * 100) . "% this month"); ?></p>
 	
 </div>

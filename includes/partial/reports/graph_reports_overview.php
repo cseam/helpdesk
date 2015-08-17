@@ -43,7 +43,7 @@
 		series: [[<?php echo($data);?>]],
 		};
 	var options = {
-					
+			chartPadding: 30,		
 		};
 
 	new Chartist.Line('#reportspie', data, options);

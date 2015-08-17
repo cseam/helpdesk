@@ -59,8 +59,8 @@
 				<option value="5">Affects main College site only</option>
 				<option value="5">Affects the boarding houses only</option>
 				<option value="5">Affects catering or kitchens</option>
-				<option value="5">Affects the sports centre facilities</option>
-				<option value="5">Affects the parabola arts centre facilities</option>
+				<option value="5">Affects the Sports Centre facilities</option>
+				<option value="5">Affects the Parabola Arts Centre facilities</option>
 				<option value="6">Issue is time critical</option>
 			</select>
 	</fieldset>
