@@ -7,6 +7,37 @@
 
 	// Process post
 	if ($_SERVER['REQUEST_METHOD']== "POST") {
+		
+		// if assign ticket
+		if (isset($_POST['assign'])) {
+			//fudge for assign ticket should rewrite this its messy
+		?>	
+		<script type="text/javascript">
+		$(function() {
+			$.ajax(
+			{
+				type: 'post',
+				url: '/includes/partial/post/reassign_ticket.php',
+				data: "id=<?php echo($_POST['id']) ;?>",
+				beforeSend: function()
+				{
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				},
+				success: function(data)
+				{
+				$('#ajax').html(data);
+				},
+				error: function()
+				{
+				$('#ajax').html('error loading data, please refresh.');
+				}
+			});
+			return false;
+		});
+		</script>
+		<?php	
+		}
+	
 		// if Forward ticket
 		if (isset($_POST['forward'])) {
 			//Create update message for db

@@ -116,8 +116,15 @@
 	<?php }; ?>
 	<fieldset>
 		<legend>Update Controls</legend>
-			<p class="buttons">
+			<p class="buttons">	
 			<?php if ($row->status === '1') {?>
+			
+			<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?>
+				<button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">assign</button>
+			<?php }; ?>	
+			
+			
+			
 			<button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button>
 			<button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
 			<button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>

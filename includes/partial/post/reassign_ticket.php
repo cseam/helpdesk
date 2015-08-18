@@ -3,7 +3,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] .'/includes/functions.php');
 ?>
-<form action="updatecall.php" method="post" enctype="multipart/form-data" id="reassign">
+<form action="/includes/partial/post/update_ticket.php" method="post" enctype="multipart/form-data" id="reassign">
 	<h3>Reassign Ticket</h3>
 	<fieldset>
 		<legend>Helpdesk Ticket #<?php echo($_POST['id']);?></legend>
@@ -44,7 +44,7 @@
 				$.ajax(
 					{
 					type: 'post',
-					url: '/includes/partial/post/update_ticket.php',
+					url: '../includes/partial/post/update_ticket.php',
 					data: $('#reassign').serialize(),
 					success: function(data)
 					{
