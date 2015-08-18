@@ -803,7 +803,7 @@ input.cmn-toggle-round:checked + label:after {
 	}
 	.buttons button {
 		width: 100%;
-		margin: 0.5rem 1rem;
+		margin: 0.2rem 0;
 	}
 	.engineersubnav a {
 		display: block;
@@ -825,6 +825,16 @@ input.cmn-toggle-round:checked + label:after {
 		display: none;
 	}
 }
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+	#reportlinks a {
+		width: 98%;
+	}
+	.callheader {
+		width: 100%;
+	}
+}
+
 
 /* Small devices (phone to tablets, 768px) */
 @media screen and (min-width: 480px) and (max-width: 768px) {
