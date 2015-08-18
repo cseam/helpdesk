@@ -5,7 +5,8 @@
 ?>
 <div id="ajaxforms">
 <h3>Performance Objectives</h3>
-<p class="note">Showing all open performance objectives grouped by engineer then by due date</p>
+<p class="buttons"><button onclick="update_div('#ajax','form/add_objective.php')">Add Performance Objective</button></p>
+<p class="note">Showing all open performance objectives grouped by engineer</p>
 	<table>
 	<tbody>
 	<?php
@@ -13,7 +14,7 @@
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
 			$STH = $DBH->Prepare("SELECT * FROM performance_review_objectives 
 		INNER JOIN engineers ON performance_review_objectives.engineerid = engineers.idengineers
-		WHERE engineers.helpdesk<=:helpdeskid AND status !='2'");
+		WHERE engineers.helpdesk<=:helpdeskid AND status !='2' ORDER BY engineers.idengineers");
 			$hdid = 3;
 		} else {
 			$STH = $DBH->Prepare("SELECT * FROM performance_review_objectives 

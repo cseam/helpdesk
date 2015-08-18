@@ -3,7 +3,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h2>Scheduled Tickets</h2>
+<h3>Scheduled Tickets</h3>
 <p class="buttons"><button onclick="update_div('#ajax','form/add_scheduled_ticket.php')">Add New Scheduled Ticket</button></p>
 <table>
 	<thead>
