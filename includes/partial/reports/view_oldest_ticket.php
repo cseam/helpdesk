@@ -113,8 +113,6 @@
 			<?php };?>
 			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
 			</p>
-			<p class="callfooter">Call Opened <?php echo(date("d/m/y h:s", strtotime($row->opened)));?><br />
-			Last Update <?php echo(date("d/m/y h:s", strtotime($row->lastupdate)));?></p>
 	</fieldset>
 	</form>
 	<script type="text/javascript">

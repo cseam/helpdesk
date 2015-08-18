@@ -123,7 +123,15 @@
 			<button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
 			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
 			<?php };?>
-			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
+			<?php if ($row->status === '2') {
+				echo("<a href='". HELPDESK_LOC ."/views/feedback.php?id=" . $row->callid ."'>Leave Feedback here</a> or");
+			};?>
+			<?php if ($row->status === '2') {?>
+			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">still have issue? reopen Ticket</button>
+			<?php } else { ?>
+				<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
+			<?php }; ?>
+			
 			</p>
 	</fieldset>
 	</form>
