@@ -92,6 +92,9 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 		$closeengineerid = null;
 	};
 
+	// is ticket PM or not 
+	if ($_POST['cmn-toggle-pm'] !== null) { $pm = '1'; } else { $pm = '0'; };
+
 	// Create new ticket object from form values
 	$createticket = new ticket(
 		$_POST['name'], // name (varchar)
@@ -113,11 +116,12 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 		null, // invoicedate (datetime)
 		null, // callreason (int)
 		$_POST['title'], // title (long)
-		$lockerid// lockerid (int)
+		$lockerid,// lockerid (int)
+		$pm //preemptive mainanance (int)
 	);
 
 	// Prepare ticket insert PDO Statment
-	$STH = $DBH->Prepare("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid) VALUES (:name, :email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoicedate, :callreason, :title, :lockerid)");
+	$STH = $DBH->Prepare("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, pm) VALUES (:name, :email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoicedate, :callreason, :title, :lockerid, :pm)");
 	// Execute PDO
 	$STH->execute((array)$createticket);
 

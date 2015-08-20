@@ -131,10 +131,10 @@
 			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
 			<?php };?>
 			<?php if ($row->status === '2') {
-				echo("<a href='". HELPDESK_LOC ."/views/feedback.php?id=" . $row->callid ."'>Leave Feedback here</a> or");
+				echo("<a href='". HELPDESK_LOC ."/views/feedback.php?id=" . $row->callid ."'>Leave Feedback</a> or");
 			};?>
 			<?php if ($row->status === '2') {?>
-			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">still have issue? reopen Ticket</button>
+			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">still have an issue?</button>
 			<?php } else { ?>
 				<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
 			<?php }; ?>

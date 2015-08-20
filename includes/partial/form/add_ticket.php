@@ -137,6 +137,10 @@
 					<td><label for="cmn-toggle-retro" title="open call closed work already complete" >Instantly close ticket</label></td>
 					<td><input type="checkbox" name="cmn-toggle-retro" id="cmn-toggle-retro" value="1"></td>
 				</tr>
+				<tr>
+					<td><label for="cmn-toggle-pm" title="preemptive maintance" >Preemptive maintenance</label></td>
+					<td><input type="checkbox" name="cmn-toggle-pm" id="cmn-toggle-pm" value="1"></td>
+				</tr>
 			</table>	
 	</fieldset>
 	<?php }; ?>

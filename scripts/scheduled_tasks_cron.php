@@ -44,10 +44,11 @@
 									$row->invoicedate, // invoicedate (datetime)
 									$row->callreason, // callreason (int)
 									$row->title, // title (long)
-									$row->lockerid// lockerid (int)
+									$row->lockerid,// lockerid (int)
+									1 // pm (int)
 								);
 						// prep PDO statment
-						$STHloop = $DBH->Prepare("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid) VALUES (:name, :email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoicedate, :callreason, :title, :lockerid)");
+						$STHloop = $DBH->Prepare("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, pm) VALUES (:name, :email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoicedate, :callreason, :title, :lockerid, :pm)");
 						// set start date
 						$startdate = date("Y-m-d", strtotime($row->startschedule));
 				// Process each ticket checking frequency

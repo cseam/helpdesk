@@ -34,8 +34,9 @@ class ticket {
 	public $callreason;
 	public $title;
 	public $lockerid;
+	public $pm;
 
-	function __construct($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o, $p, $q, $r, $s, $t) {
+	function __construct($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l, $m, $n, $o, $p, $q, $r, $s, $t, $u) {
 		$this->name = $a;
 		$this->email = $b;
 		$this->tel = $c;
@@ -56,6 +57,7 @@ class ticket {
 		$this->callreason = $r;
 		$this->title = $s;
 		$this->lockerid = $t;
+		$this->pm = $u;
 	}
 }
 // Functions
