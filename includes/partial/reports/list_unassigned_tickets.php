@@ -33,7 +33,7 @@
 		<tr>
 			<td><img src="/public/images/<?=$row->iconlocation;?>" alt="<?=$row->locationName;?>" title="<?=$row->locationName;?>" width="24px" height="auto"/></td>
 			<td>
-				<?php if ($row->assigned !== NULL) { echo(engineer_friendlyname($row->assigned)); } else { echo("NULL"); };?>
+				<span class='closed'>NEW</span>
 			</td>
 			<td>
 			<?php

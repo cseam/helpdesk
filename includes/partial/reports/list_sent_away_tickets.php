@@ -33,6 +33,16 @@
 		</tr>
 		<tr>
 			<td><img src="/public/images/<?=$row->iconlocation;?>" alt="<?=$row->locationName;?>" title="<?=$row->locationName;?>" width="24px" height="auto"/></td>
+			
+			<td>
+				<?php
+				if ($row->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
+				elseif ($row->status == '3') { echo("<span class='hold'>ON HOLD</span>"); }
+				elseif ($row->status == '4') { echo("<span class='escalated'>ESCALATED</span>"); }
+				elseif ($row->status == '5') { echo("<span class='hold'>SENT AWAY</span>"); }
+				else { echo "<span class='open'>" . date("d/m/y", strtotime($row->opened)) . "</span>";} 
+				?>
+			</td>
 			<td>
 				<?php if ($row->assigned !== NULL) { echo(engineer_friendlyname($row->assigned)); } else { echo("NULL"); };?>
 			</td>

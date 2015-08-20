@@ -6,10 +6,24 @@
 <div id="ajaxforms">
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE helpdesk <= :helpdeskid AND status !='2' AND assigned !='NULL' ORDER BY callID");
+			$STH = $DBH->Prepare("
+					SELECT * FROM calls 
+					INNER JOIN status ON calls.status=status.id 
+					INNER JOIN location ON calls.location=location.id 
+					WHERE status NOT IN (2,4,5) 
+					AND helpdesk <= :helpdeskid 
+					AND assigned !='NULL' 
+					ORDER BY callID");
 			$hdid = 3;
 		} else {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE helpdesk = :helpdeskid AND status !='2' AND assigned !='NULL' ORDER BY callID");
+			$STH = $DBH->Prepare("
+					SELECT * FROM calls 
+					INNER JOIN status ON calls.status=status.id 
+					INNER JOIN location ON calls.location=location.id 
+					WHERE status NOT IN (2,4,5) 
+					AND helpdesk = :helpdeskid 
+					AND assigned !='NULL' 
+					ORDER BY callID");
 			$hdid = $_SESSION['engineerHelpdesk'];
 		}
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
@@ -19,8 +33,6 @@
 		if ($STH->rowCount() == 0) { echo "<p>No Open Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>
-		
-		
 		<tr>
 			<td class="hdtitle">
 			#<?php echo $row->callid; ?>
