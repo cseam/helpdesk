@@ -138,9 +138,7 @@ ORDER BY assigned
 		?>
 		</tbody>
 		</table>
-		
-		<p class="note">fail rate including open calls <?php echo(round((($failcounter + $STH->rowCount()) / $totalcounter) * 100)); ?> %</p>
-			
+					
 </div>
 <script type="text/javascript">
 	$('.assignedtoyou').submit(function(e) {

@@ -29,7 +29,7 @@
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		echo ("<h3>" . $STH->rowCount() . " - Assigned Tickets</h3><table><tbody>");
+		echo ("<h3>" . $STH->rowCount() . " - Assigned Tickets<div class=toggle id=toggleassigned>hide/show</div></h3><div id=slideassigned><table><tbody>");
 		if ($STH->rowCount() == 0) { echo "<p>No Open Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>
@@ -84,6 +84,7 @@
 	<? } ?>
 	</tbody>
 	</table>
+	</div>
 </div>
 	<script type="text/javascript">
      $('.viewpost').submit(function(e) {
@@ -154,4 +155,10 @@
        e.preventDefault();
        return false;
     });
+    
+    $( "#toggleassigned" ).click(function() {
+		$( "#slideassigned" ).slideToggle( "slow", function() {
+			// Animation complete.
+  		});
+	});
     </script>

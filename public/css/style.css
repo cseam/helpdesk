@@ -368,7 +368,7 @@ h3.callbody {
 	height: 120px;
 	width: auto;
 	float: left;
-	margin: 1rem;
+	margin: 0.4rem 1rem 0.4rem 0.4rem;
 	display: inline-block;
 }
 .callfooter {
@@ -477,6 +477,11 @@ h3.callbody {
 }
 .hdtitle button {
 	padding: 0;
+}
+.toggle {
+	float: right;
+	cursor: pointer;
+	font-size: 0.6rem;
 }
 /* END Buttons */
 /* Calls list */

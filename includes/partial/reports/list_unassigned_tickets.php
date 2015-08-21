@@ -15,7 +15,7 @@
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		echo ("<h3>" . $STH->rowCount() . " - New Tickets Unassigned</h3><table><tbody>");
+		echo ("<h3>" . $STH->rowCount() . " - New Tickets Unassigned<div class=toggle id=toggleunassigned>hide/show</div></h3><div id=slideunassigned><table><tbody>");
 		if ($STH->rowCount() == 0) { echo "<p>No Unassigned Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>
@@ -130,4 +130,11 @@
        e.preventDefault();
        return false;
     });
+    
+    $( "#toggleunassigned" ).click(function() {
+		$( "#slideunassigned" ).slideToggle( "slow", function() {
+			// Animation complete.
+  		});
+	});
+    
     </script>

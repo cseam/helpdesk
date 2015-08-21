@@ -15,7 +15,7 @@
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
-		echo ("<h3>" . $STH->rowCount() . " - Escalated Tickets</h3><table><tbody>");
+		echo ("<h3>" . $STH->rowCount() . " - Escalated Tickets<div class=toggle id=toggleescalated>hide/show</div></h3><div id=slideescalated><table><tbody>");
 		if ($STH->rowCount() == 0) { echo "<p>No Escalated Tickets</p>";};
 		while($row = $STH->fetch()) {
 		?>
@@ -70,6 +70,7 @@
 	<? } ?>
 	</tbody>
 	</table>
+	</div>
 </div>
 	<script type="text/javascript">
      $('.viewpost').submit(function(e) {
@@ -140,4 +141,11 @@
        e.preventDefault();
        return false;
     });
+    
+     $( "#toggleescalated" ).click(function() {
+		$( "#slideescalated" ).slideToggle( "slow", function() {
+			// Animation complete.
+  		});
+	});
+    
     </script>
