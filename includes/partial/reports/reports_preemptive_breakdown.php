@@ -3,7 +3,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h3>PPM Breakdown This Month</h3>
+<h3>PPM Breakdown This Month (all Helpdesks)</h3>
 <?php
 	$STH = $DBH->Prepare("SELECT pm, count(callid) AS Totals
 		FROM calls

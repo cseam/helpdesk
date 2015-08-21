@@ -6,9 +6,9 @@
 <h2>Feedback Averages</h2>
 <table>
 	<tr>
-		<th>Engineer Name</th>
-		<th>Average Feedback Score</th>
-		<th>Total Feedback Number</th>
+		<th>Engineer<br/>Name</th>
+		<th>Average<br/>Feedback</th>
+		<th>Total<br/>Feedback</th>
 	</tr>
 <?php
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
@@ -36,7 +36,7 @@
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>Engineer<br/>Assigned</th>
+			<th>Engineer</th>
 			<th>Customer</th>
 			<th>Feedback</th>
 		</tr>
@@ -65,7 +65,7 @@
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
-	if ($STH->rowCount() == 0) { echo "<tr><td colspan=3>0 1 star feedback logged</td></tr>";};
+	if ($STH->rowCount() == 0) { echo "<tr><td colspan=4>no poor feedback logged</td></tr>";};
 	while($row = $STH->fetch()) { ?>
 	<tr>
 		<td>
@@ -73,7 +73,6 @@
 				<input type="hidden" id="id" name="id" value="<?php echo $row->callid;?>" />
 				<input type="submit" name="submit" value="<?=$row->callid;?>" alt="View ticket" title="View ticket" class="calllistbutton"/>
 			</form>
-		
 		</td>
 		<td><?=$row->engineerName;?></td>
 		<td><?=$row->owner;?></td>

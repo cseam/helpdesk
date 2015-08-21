@@ -148,7 +148,7 @@ em {
 #branding {
 	height: 14.5%;
 	background: transparent url('/public/images/BRANDING-crest.png') no-repeat top left;
-	background-size: contain;
+	background-size: auto 80%;
 	text-align: right;
 	margin-bottom: 1rem;
 }
@@ -227,6 +227,7 @@ fieldset {
 	padding: 0.2rem;
 	margin: 0.4rem 0;
 	overflow: hidden;
+	clear: left;
 }
 fieldset legend {
 	padding: 0 1rem;
@@ -362,6 +363,14 @@ h3.callbody {
 .callbody {
 	color: #919191;
 }
+.profile-picture {
+	border-radius: 50px;
+	height: 120px;
+	width: auto;
+	float: left;
+	margin: 1rem;
+	display: inline-block;
+}
 .callfooter {
 	display: inline-block;
 	margin: 0;
@@ -377,6 +386,7 @@ h3.callbody {
 	margin: 0.5rem 0rem;
 	border-top: 1px solid rgba(204, 204, 204, 1.0);
 	line-height: 1.5rem;
+	clear: both;
 }
 .update h3 {
 	text-align: left;

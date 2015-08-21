@@ -16,10 +16,12 @@
 	<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
 	<input type="hidden" id="details" name="details" value="<?=$row->details;?>" />
 	<h2>Oldest Ticket Details #<?=$row->callid?></h2>
-		<p class="callheader">#<?=$row->callid?> <?php if ($row->urgency === '3') { echo("urgent ");} ?><?php echo($row->categoryName);?></p>
-		<p class="callheader">Created by <a href="mailto:<?php echo($row->email);?>"><?php echo($row->name);?></a></p>
+		<p class="callheader">#<?php echo($row->callid);?> <?php if ($row->urgency === '3') { echo("urgent ");} ?></p>
+		<p class="callheader"><?php echo($row->categoryName);?></p>
+		<p class="callheader">Created by <?php echo($row->name);?></p>
 		<p class="callheader">Contact number: <?php echo($row->tel);?></p>
-		<p class="callheader"><?php echo($row->room);?> - <?php echo($row->locationName);?></p>
+		<p class="callheader"><?php echo($row->locationName);?></p>
+		<p class="callheader"><?php echo($row->room);?></p>
 		<p class="callheader"><?php if ($row->assigned == NULL) { echo("Not assigned yet"); } else {?>Assigned to <?php echo(engineer_friendlyname($row->assigned)); }?></p>
 		<p class="callheader">
 		<?php
@@ -30,9 +32,11 @@
 			$d = ($diff/(60*60*24))%365;
 			$h = ($diff/(60*60))%24;
 			$m = ($diff/60)%60;
-			echo( $d." days, ".$h." hours, ".$m." minutes.");
+			echo( $d." days, ".$h." hours, ".$m." minutes");
 		?>
 		</p>
+		<p class="callheader">Call Opened <?php echo(date("d/m/y H:i:s", strtotime($row->opened)));?></p>
+		<p class="callheader">Last Update <?php echo(date("d/m/y H:i:s", strtotime($row->lastupdate)));?></p>
 		<?php if ($row->lockerid != null) { ?><p class="callheader">Locker #<?php echo($row->lockerid);?></p><?php }; ?>
 		<?php
 			// populate additional fields
@@ -44,7 +48,17 @@
 					<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
 				<?php }; ?>
 	<h3 class="callbody"><?php echo($row->title);?></h3>
-	<p class="callbody"><?php echo(nl2br($row->details));?></p>
+	<p class="callbody">
+		<?php
+			$src = HELPDESK_LOC . "/uploads/profile_images/" . strtolower($row->owner) . ".jpg";
+			if (@getimagesize($src)) {
+				//use profile image ?>
+				<img src="<?php echo($src);?>" alt="<?php echo(strtolower($row->owner));?> profile picture" class="profile-picture" />
+			<?php } else {
+				//use default image ?>
+				<img src="/uploads/profile_images/default.jpg" alt="default profile picture" class="profile-picture" />
+		<?php };?>
+		<?php echo(nl2br($row->details));?></p>
 	<fieldset>
 		<legend>Update Ticket</legend>
 		<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
@@ -56,7 +70,8 @@
 			<span class="engineercontrols">
 				<label for="callreason">Reason for issue</label>
 				<select id="callreason" name="callreason">
-					<option value="" SELECTED>Please Select</option>
+					<option value="" <?php if($row->callreason == NULL) {echo("SELECTED");};?>>Please Select</option>
+					<option value="0" >Unknown</option>
 					<?php
 						if ($_SESSION['engineerHelpdesk'] <= '3') {
 							$STHloop = $DBH->Prepare("SELECT * FROM callreasons WHERE helpdesk_id <= :helpdeskid ORDER BY reason_name");
@@ -69,7 +84,7 @@
 						$STHloop->setFetchMode(PDO::FETCH_OBJ);
 						$STHloop->execute();
 						while($row2 = $STHloop->fetch()) { ?>
-						<option value="<?php echo($row2->id);?>"><?php echo($row2->reason_name);?></option>
+						<option value="<?php echo($row2->id);?>" <?php if ($row2->id == $row->callreason) {echo("SELECTED");}; ?>><?php echo($row2->reason_name);?></option>
 					<?php }; ?>
 				</select>
 				<label for="quickresponse">Quick Response</label>

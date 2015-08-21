@@ -41,7 +41,7 @@
 		// if Forward ticket
 		if (isset($_POST['forward'])) {
 			//Create update message for db
-			$reason = "<div class=update><h3>Ticket forwarded (".date("l jS \of F Y h:i:s A").")</h3>". htmlspecialchars($_POST['details'])."</div>";
+			$reason = "<div class=update><h3>Ticket forwarded (".date("l jS \of F Y H:i:s A").")</h3>". htmlspecialchars($_POST['details'])."</div>";
 			//PDO Update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET helpdesk = :helpdesk, assigned = :assigned, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':helpdesk', $_POST['fwdhelpdesk'], PDO::PARAM_STR);
@@ -64,7 +64,7 @@
 		// if Reassign ticket
 		if (isset($_POST['reassign'])) {
 			//Create update message for db
-			$reason = "<div class=update><h3>Ticket reassigned (".date("l jS \of F Y h:i:s A").")</h3>".htmlspecialchars($_POST['details'])."</div>";
+			$reason = "<div class=update><h3>Ticket reassigned (".date("l jS \of F Y H:i:s A").")</h3>".htmlspecialchars($_POST['details'])."</div>";
 			//PDO update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET assigned = :assigned, status = 1, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':assigned', $_POST['engineer'], PDO::PARAM_STR);
@@ -95,7 +95,7 @@
 			}
 
 			//Create update message for db
-			$reason = "<div class=update>"  . $upload_img_code . htmlspecialchars($_POST['updatedetails']) . "<h3>Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y h:i") . "</h3></div>'";
+			$reason = "<div class=update>"  . $upload_img_code . htmlspecialchars($_POST['updatedetails']) . "<h3>Closed By ".$_SESSION['sAMAccountName'].", " . date("d/m/y H:i:s") . "</h3></div>'";
 			// PDO update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET closed = :closed, status = 2, callreason = :callreason, lastupdate = :lastupdate, closeengineerid = :closeengineerid, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':closed', date("c"), PDO::PARAM_STR);
@@ -150,7 +150,7 @@
 		// if Hold ticket
 		if (isset($_POST['hold'])) {
 			// Create hold message for database
-			$holdreason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Call put on HOLD by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
+			$holdreason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Call put on HOLD by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y H:i:s") . "</h3></div>";
 			// PDO update ticket and set status to hold (3)
 			$STH = $DBH->Prepare("UPDATE calls SET status = 3, lastupdate = :lastupdate, closed = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
@@ -164,7 +164,7 @@
 		// if send away ticket
 		if (isset($_POST['sendaway'])) {
 			// Create hold message for database
-			$holdreason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Call SENT AWAY for repair " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
+			$holdreason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Call SENT AWAY for repair " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y H:i:s") . "</h3></div>";
 			// PDO update ticket and set status to hold (3)
 			$STH = $DBH->Prepare("UPDATE calls SET status = 5, lastupdate = :lastupdate, closed = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
@@ -178,7 +178,7 @@
 		// if escalate ticket
 		if (isset($_POST['escalate'])) {
 			// Create hold message for database
-			$reason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Escalated to Managment by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y h:i") . "</h3></div>";
+			$reason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Escalated to Managment by " . $_SESSION['sAMAccountName'] . ", " . date("d/m/y H:i:s") . "</h3></div>";
 			// PDO update ticket and set status to hold (3)
 			$STH = $DBH->Prepare("UPDATE calls SET status = 4, lastupdate = :lastupdate, closed = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
@@ -206,10 +206,11 @@
 			}
 
 			// Create update message for db
-			$reason = "<div class=update>" . $upload_img_code . htmlspecialchars($_POST['updatedetails']) . "<h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y H:i") . "</h3></div>";
+			$reason = "<div class=update>" . $upload_img_code . htmlspecialchars($_POST['updatedetails']) . "<h3> Update By ".$_SESSION['sAMAccountName'].", " . date("d/m/y H:i:s") . "</h3></div>";
 			// PDO update ticket
-			$STH = $DBH->Prepare("UPDATE calls SET status = 1, lastupdate = :lastupdate, closed = NULL, callreason = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
+			$STH = $DBH->Prepare("UPDATE calls SET status = 1, lastupdate = :lastupdate, closed = NULL, callreason = :callreason, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
+			$STH->bindParam(':callreason', $_POST['callreason'], PDO::PARAM_STR);
 			$STH->bindParam(':details', $reason, PDO::PARAM_STR);
 			$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);
 			$STH->execute();
