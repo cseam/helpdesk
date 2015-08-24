@@ -97,6 +97,8 @@ function next_engineer($data)
 	$helpdeskid = $data;
 	// Reset data and calculate next engineer
 	$data = "";
+	// Day of week for like statment
+	$day = "%".date("N")."%";
 	// find last engineer assigned
 	global $DBH;
 	$STH = $DBH->Prepare("SELECT * FROM assign_engineers INNER JOIN engineers ON assign_engineers.engineerid=engineers.idengineers WHERE id= :id");
@@ -105,17 +107,18 @@ function next_engineer($data)
 	$STH->execute();
 	while($row = $STH->fetch()) {
 		$lastengineerid = $row->engineerId;
-		$engineername = $row->engineerName;
-		$engineeremail = $row->engineerEmail;
 	}
 	// get next engineer id
-	$STH = $DBH->Prepare("SELECT idengineers FROM engineers WHERE idengineers > :lastengineerid AND helpdesk = :id AND engineerLevel=1 AND disabled=0 ORDER BY idengineers LIMIT 1");
+	$STH = $DBH->Prepare("SELECT idengineers FROM engineers WHERE idengineers > :lastengineerid AND helpdesk = :id AND engineerLevel=1 AND disabled=0 AND availableDays LIKE :available ORDER BY idengineers LIMIT 1");
+	$STH->bindParam(":available", $day, PDO::PARAM_STR);
 	$STH->bindParam(":lastengineerid", $lastengineerid, PDO::PARAM_INT);
 	$STH->bindParam(":id", $helpdeskid, PDO::PARAM_INT);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
+	echo $dayofweek;
 	if ($STH->rowCount() == 0) {
-		$STH = $DBH->Prepare("SELECT idengineers FROM engineers WHERE helpdesk= :id AND engineerLevel=1 AND disabled=0 LIMIT 1");
+		$STH = $DBH->Prepare("SELECT idengineers FROM engineers WHERE helpdesk= :id AND engineerLevel=1 AND disabled=0 AND availableDays LIKE :available LIMIT 1");
+		$STH->bindParam(":available", $day, PDO::PARAM_STR);
 		$STH->bindParam(":id", $helpdeskid, PDO::PARAM_INT);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
