@@ -109,13 +109,13 @@ function next_engineer($data)
 		$engineeremail = $row->engineerEmail;
 	}
 	// get next engineer id
-	$STH = $DBH->Prepare("SELECT idengineers FROM engineers WHERE idengineers > :lastengineerid AND helpdesk = :id AND engineerLevel=1 ORDER BY idengineers LIMIT 1");
+	$STH = $DBH->Prepare("SELECT idengineers FROM engineers WHERE idengineers > :lastengineerid AND helpdesk = :id AND engineerLevel=1 AND disabled=0 ORDER BY idengineers LIMIT 1");
 	$STH->bindParam(":lastengineerid", $lastengineerid, PDO::PARAM_INT);
 	$STH->bindParam(":id", $helpdeskid, PDO::PARAM_INT);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
 	if ($STH->rowCount() == 0) {
-		$STH = $DBH->Prepare("SELECT idengineers FROM engineers WHERE helpdesk= :id AND engineerLevel=1 LIMIT 1");
+		$STH = $DBH->Prepare("SELECT idengineers FROM engineers WHERE helpdesk= :id AND engineerLevel=1 AND disabled=0 LIMIT 1");
 		$STH->bindParam(":id", $helpdeskid, PDO::PARAM_INT);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();

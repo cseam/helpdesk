@@ -60,6 +60,7 @@
 	<? } ?>
 	</tbody>
 	</table>
+	</div>
 </div>
 	<script type="text/javascript">
      $('.viewpost').submit(function(e) {

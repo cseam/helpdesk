@@ -19,6 +19,7 @@
 		FROM engineers
 		LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers
 		WHERE engineers.helpdesk <= :helpdeskid
+		AND engineers.disabled=0
 		GROUP BY engineerName
 		ORDER BY last7 DESC");
 	} else {
@@ -35,6 +36,7 @@
 		FROM engineers
 		LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers
 		WHERE engineers.helpdesk = :helpdeskid
+		AND engineers.disabled=0
 		GROUP BY engineerName
 		ORDER BY last7 DESC");
 	};
