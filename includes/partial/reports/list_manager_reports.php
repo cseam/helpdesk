@@ -11,8 +11,6 @@
 	<a href="#" onclick="update_div('#ajax','reports/list_all_tickets.php');"><img src="/public/images/ICONS-allcalls@2x.png" alt="View all tickets" title="View all tickets"  width="24" height="25" />All tickets</a>
 
 <span class="clearbreak">&nbsp;</span>
-
-	<a href="#" onclick="update_div('#ajax','reports/view_assigned_numbers.php');"><img src="/public/images/ICONS-assignnotclosed@2x.png" alt="View assigned numbers" title="View assigned numbers"  width="24" height="25" />Assigned numbers</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_punchcard.php');"><img src="/public/images/ICONS-punchcard@2x.png" alt="Punchcard" title="Punchcard"  width="24" height="25" />Punchcard</a>
 	<a href="#" onclick="update_div('#ajax','reports/search_tickets.php');"><img src="/public/images/ICONS-search@2x.png" alt="Search tickets" title="Search tickets"  width="24" height="25" />Search tickets</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_change_control.php');"><img src="/public/images/ICONS-changecontrol@2x.png" alt="View change control" title="View change control"  width="24" height="25" />Change control</a>
