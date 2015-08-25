@@ -42,14 +42,14 @@
 		$totalstars = $row->stars;
 	}
 	// Top engineer this week
-	$STH = $DBH->Prepare("SELECT closeengineerid, Count(callid) as count FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) AND status=2 GROUP BY closeengineerid ORDER BY count DESC LIMIT 1");
+	$STH = $DBH->Prepare("SELECT closeengineerid, Count(callid) as count FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) AND status=2 AND helpdesk <=3 GROUP BY closeengineerid ORDER BY count DESC LIMIT 1");
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
 	while($row = $STH->fetch()) {
 		$topengineer = engineer_friendlyname($row->closeengineerid);
 	}
 	// Top engineer of all time
-	$STH = $DBH->Prepare("SELECT closeengineerid, Count(callid) as count FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 10 YEAR) AND status=2 GROUP BY closeengineerid ORDER BY count DESC LIMIT 1");
+	$STH = $DBH->Prepare("SELECT closeengineerid, Count(callid) as count FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 10 YEAR) AND status=2 AND helpdesk <=3 GROUP BY closeengineerid ORDER BY count DESC LIMIT 1");
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
 	while($row = $STH->fetch()) {

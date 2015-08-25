@@ -3,7 +3,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
-<h3>Tickets Closed (Rolling Last 7 Days)</h3>
+<h3>Total Closed (Cumulative last 7 days)</h3>
 <?php
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
 		$hdid = 3;
@@ -127,13 +127,13 @@
 </script>
 <div id="teamperformance" class="ct-chart ct-golden-section" style="width: 100%;height:85%;float:left;"></div>
 <div style="float:right;margin-top: -20px;margin-right: 20px;">
-<span style="font-size: 0.6rem;color: white;background: #577d6a;padding: 0.2rem 0.5rem;"><?php echo(date("D d/m/Y",strtotime("-6 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #5AAB65;padding: 0.2rem 0.5rem;"><?php echo(date("D d/m/Y",strtotime("-5 day")));?></span>
-<span style="font-size: 0.6rem;color: black;background: #B1FFD8;padding: 0.2rem 0.5rem;"><?php echo(date("D d/m/Y",strtotime("-4 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #2C4036;padding: 0.2rem 0.5rem;"><?php echo(date("D d/m/Y",strtotime("-3 day")));?></span>
-<span style="font-size: 0.6rem;color: black;background: #C9B182;padding: 0.2rem 0.5rem;"><?php echo(date("D d/m/Y",strtotime("-2 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #4A402C;padding: 0.2rem 0.5rem;"><?php echo(date("D d/m/Y",strtotime("-1 day")));?></span>
-<span style="font-size: 0.6rem;color: black;background: #ccc;padding: 0.2rem 0.5rem;"><?php echo(date("D d/m/Y"));?></span>
+<span style="font-size: 0.6rem;color: white;background: #577d6a;padding: 0.2rem 0.5rem;"><?php echo(date("d/m/y",strtotime("-6 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #5AAB65;padding: 0.2rem 0.5rem;"><?php echo(date("d/m/y",strtotime("-5 day")));?></span>
+<span style="font-size: 0.6rem;color: black;background: #B1FFD8;padding: 0.2rem 0.5rem;"><?php echo(date("d/m/y",strtotime("-4 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #2C4036;padding: 0.2rem 0.5rem;"><?php echo(date("d/m/y",strtotime("-3 day")));?></span>
+<span style="font-size: 0.6rem;color: black;background: #C9B182;padding: 0.2rem 0.5rem;"><?php echo(date("d/m/y",strtotime("-2 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #4A402C;padding: 0.2rem 0.5rem;"><?php echo(date("d/m/y",strtotime("-1 day")));?></span>
+<span style="font-size: 0.6rem;color: black;background: #ccc;padding: 0.2rem 0.5rem;">Today</span>
 </div>
 
 

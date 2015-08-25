@@ -41,9 +41,9 @@
 		// if Forward ticket
 		if (isset($_POST['forward'])) {
 			//Create update message for db
-			$reason = "<div class=update><h3>Ticket forwarded (".date("l jS \of F Y H:i:s A").")</h3>". htmlspecialchars($_POST['details'])."</div>";
+			$reason = "<div class=update><h3>Ticket forwarded by ".$_SESSION['sAMAccountName']." (".date("l jS \of F Y H:i:s A").")</h3>". htmlspecialchars($_POST['details'])."</div>";
 			//PDO Update ticket
-			$STH = $DBH->Prepare("UPDATE calls SET helpdesk = :helpdesk, assigned = :assigned, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
+			$STH = $DBH->Prepare("UPDATE calls SET helpdesk = :helpdesk, status=1, assigned = :assigned, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':helpdesk', $_POST['fwdhelpdesk'], PDO::PARAM_STR);
 			$STH->bindParam(':assigned', next_engineer($_POST['fwdhelpdesk']), PDO::PARAM_STR);
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
@@ -64,7 +64,7 @@
 		// if Reassign ticket
 		if (isset($_POST['reassign'])) {
 			//Create update message for db
-			$reason = "<div class=update><h3>Ticket reassigned (".date("l jS \of F Y H:i:s A").")</h3>".htmlspecialchars($_POST['details'])."</div>";
+			$reason = "<div class=update><h3>Ticket reassigned by ".$_SESSION['sAMAccountName']." (".date("l jS \of F Y H:i:s A").")</h3>".htmlspecialchars($_POST['details'])."</div>";
 			//PDO update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET assigned = :assigned, status = 1, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':assigned', $_POST['engineer'], PDO::PARAM_STR);
