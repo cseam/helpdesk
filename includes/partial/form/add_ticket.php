@@ -138,7 +138,7 @@
 					<td><input type="checkbox" name="cmn-toggle-retro" id="cmn-toggle-retro" value="1"></td>
 				</tr>
 				<tr>
-					<td><label for="cmn-toggle-pm" title="Planned preemptive maintance" >Planned Preemptive Maintenance</label></td>
+					<td><label for="cmn-toggle-pm" title="Planned preemptive maintance" >Planned Maintenance</label></td>
 					<td><input type="checkbox" name="cmn-toggle-pm" id="cmn-toggle-pm" value="1"></td>
 				</tr>
 			</table>	
