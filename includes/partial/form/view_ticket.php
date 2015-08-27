@@ -29,7 +29,7 @@
 		<input type="hidden" id="button_value" name="button_value" value="" />
 		<input type="hidden" id="details" name="details" value="<?php echo($row->details);?>" />
 		<h2>Ticket details #<?php echo($_POST['id']);?></h2>
-		<p class="callheader">#<?php echo($_POST['id']);?> <?php if ($row->urgency === '3') { echo("urgent ");} ?></p>
+		<p class="callheader">#<?php echo($_POST['id']);?></p>
 		<p class="callheader"><?php echo($row->categoryName);?></p>
 		<p class="callheader">Created by <?php echo($row->name);?></p>
 		<p class="callheader">Contact number: <?php echo($row->tel);?></p>

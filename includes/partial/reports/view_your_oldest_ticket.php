@@ -13,10 +13,11 @@
 	?>
 	<div id="calldetails">
 	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="updateForm">
-	<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
-	<input type="hidden" id="details" name="details" value="<?=$row->details;?>" />
-	<h2>Oldest Ticket Details #<?=$row->callid?></h2>
-		<p class="callheader">#<?php echo($row->callid);?> <?php if ($row->urgency === '3') { echo("urgent ");} ?></p>
+		<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
+		<input type="hidden" id="button_value" name="button_value" value="" />
+		<input type="hidden" id="details" name="details" value="<?=$row->details;?>" />
+		<h2>Oldest Ticket Details #<?=$row->callid?></h2>
+		<p class="callheader">#<?php echo($row->callid);?></p>
 		<p class="callheader"><?php echo($row->categoryName);?></p>
 		<p class="callheader">Created by <?php echo($row->name);?></p>
 		<p class="callheader">Contact number: <?php echo($row->tel);?></p>
@@ -115,16 +116,31 @@
 	<?php }; ?>
 	<fieldset>
 		<legend>Update Controls</legend>
-			<p class="buttons">
+			<p class="buttons">	
 			<?php if ($row->status === '1') {?>
+			
+			<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?>
+				<button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">assign</button>
+			<?php }; ?>	
+			
+			
+			
+			<button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button>
 			<button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
 			<button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
 			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
 			<?php };?>
-			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
+			<?php if ($row->status === '2') {
+				echo("<a href='". HELPDESK_LOC ."/views/feedback.php?id=" . $row->callid ."'>Leave Feedback</a> or");
+			};?>
+			<?php if ($row->status === '2') {?>
+			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">still have an issue?</button>
+			<?php } else { ?>
+				<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
+			<?php }; ?>
+			
 			</p>
-			<p class="callfooter">Call Opened <?php echo(date("d/m/y h:s", strtotime($row->opened)));?><br />
-			Last Update <?php echo(date("d/m/y h:s", strtotime($row->lastupdate)));?></p>
+
 	</fieldset>
 	</form>
 	<script type="text/javascript">
