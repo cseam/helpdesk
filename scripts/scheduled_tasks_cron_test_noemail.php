@@ -21,6 +21,8 @@
 			while($row = $STH->fetch()) {
 						// who to assign
 						if ($row->assigned == -1) { $assigned = next_engineer($row->helpdesk); } else {$assigned = $row->assigned;} // assigned engineer (int)
+						// increment engineer so tickets are round robbin 
+						increment_engineer($row->helpdesk);
 						// cleanup ticket objects
 						unset($createticket);
 						// create ticket from scheduled_calls table

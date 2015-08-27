@@ -128,6 +128,18 @@ function next_engineer($data)
 	}
 	return $nextid;
 }
+function increment_engineer($data) {
+	// Check helpdesk call is for
+	$helpdeskid = $data;
+	// find last engineer assigned
+	global $DBH;	
+	// Update engineers asignment (need to do check if should round robin or fixed assignment)
+	$STH = $DBH->Prepare("UPDATE assign_engineers SET engineerId = :engineerid WHERE id = :id");
+	$STH->bindParam(':engineerid', next_engineer($helpdeskid), PDO::PARAM_STR);
+	$STH->bindParam(':id', $helpdeskid, PDO::PARAM_STR);
+	$STH->execute();
+	return;
+}	
 function engineer_friendlyname($data)
 {
 	global $DBH;
