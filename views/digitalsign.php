@@ -14,7 +14,6 @@
 	<body>
 	<div class="section">
 	<div id="branding">
-		<a href="/">Back to <?php echo(CODENAME) ?></a>
 	</div>
 	<div id="leftpage">
 		<div id="digitalsign-stats">

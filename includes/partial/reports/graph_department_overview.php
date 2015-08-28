@@ -66,27 +66,27 @@
 	$ticketsout = callsclosedinlastday();
 ?>
 <style>
-	/*.ct-series-a line {
-		stroke: #577d6a !important;
+	.ct-series-a line {
+		stroke: #BFCC80 !important;
 	}
 	.ct-series-b line {
-		stroke: #5AAB65 !important;
+		stroke: #FFA38B !important;
 	}
 	.ct-series-c line {
-		stroke: #B1FFD8 !important;
+		stroke: #FDD26E !important;
 	}
 	.ct-series-d line {
-		stroke: #2C4036 !important;
+		stroke: #C09C83 !important;
 	}
 	.ct-series-e line {
-		stroke: #C9B182 !important;
+		stroke: #B8CCEA !important;
 	}
 	.ct-series-f line {
-		stroke: #4A402C !important;
+		stroke: #BFCEC2 !important;
 	}
 	.ct-series-g line {
-		stroke: #ccc !important;
-	}*/
+		stroke: #D1CCBD !important;
+	}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -126,14 +126,14 @@
 	});
 </script>
 <div id="teamperformance" class="ct-chart ct-golden-section" style="width: 100%;height:85%;float:left;"></div>
-<div style="float:right;margin-top: -25px;margin-right: 20px;">
-<span style="font-size: 0.6rem;color: white;background: #d70206;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-6 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #f05b4f;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-5 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #f4c63d;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-4 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #d17905;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-3 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #453d3f;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-2 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #59922b;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-1 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #0544d3;padding: 0.2rem 0.5rem;">Today</span>
+<div style="float:right;margin-top: -25px;margin-right: 20px;">	
+<span style="font-size: 0.6rem;color: white;background: #BFCC80;padding: 0.2rem 0.5rem;"><?php echo(date("j/m/y",strtotime("-6 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #FFA38B;padding: 0.2rem 0.5rem;"><?php echo(date("j/m/y",strtotime("-5 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #FDD26E;padding: 0.2rem 0.5rem;"><?php echo(date("j/m/y",strtotime("-4 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #C09C83;padding: 0.2rem 0.5rem;"><?php echo(date("j/m/y",strtotime("-3 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #B8CCEA;padding: 0.2rem 0.5rem;"><?php echo(date("j/m/y",strtotime("-2 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #BFCEC2;padding: 0.2rem 0.5rem;"><?php echo(date("j/m/y",strtotime("-1 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #D1CCBD;padding: 0.2rem 0.5rem;">Today</span>
 </div>
 
 

@@ -16,7 +16,11 @@
 		INNER JOIN status ON calls.status=status.id
 		INNER JOIN location ON calls.location=location.id
 		INNER JOIN categories ON calls.category=categories.id
-		WHERE callid = :callid");
+		LEFT JOIN service_level_agreement 
+			ON service_level_agreement.urgency = calls.urgency
+			AND service_level_agreement.helpdesk = calls.helpdesk
+		WHERE callid = :callid
+		");
 		$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
@@ -48,8 +52,8 @@
 			echo( $d." days, ".$h." hours, ".$m." minutes");
 		?>
 		</p>
-		<p class="callheader">Call Opened <?php echo(date("d/m/y H:i:s", strtotime($row->opened)));?></p>
-		<p class="callheader">Last Update <?php echo(date("d/m/y H:i:s", strtotime($row->lastupdate)));?></p>
+		<p class="callheader">Call Opened <?php echo(date("d/m/Y H:i:s", strtotime($row->opened)));?></p>
+		<p class="callheader">Last Update <?php echo(date("d/m/Y H:i:s", strtotime($row->lastupdate)));?></p>
 		<?php if ($row->lockerid != null) { ?><p class="callheader">Locker #<?php echo($row->lockerid);?></p><?php }; ?>
 		<?php
 			// populate additional fields
@@ -60,6 +64,21 @@
 				while($row2 = $STHloop->fetch()) { ?>
 					<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
 				<?php }; ?>
+		<?php
+			if ($row->close_eta_days) { ?>		
+		<p class="sla">Due on or before: <?php 
+			$datenow = date("d-m-Y");
+			$datedue = strtotime(date("d-m-Y", strtotime($datenow)) . $row->close_eta_days . " days");
+			$datedue = date("d-m-Y",$datedue);
+			echo(str_replace('-', '/', $datedue));
+			
+			$sla = strtotime($datedue) - strtotime($datenow);
+			$days = ($sla/(60*60*24))%365;
+			echo( " ".$days." days time (SLA)");
+			
+			?>
+			</p>				
+		<? }; ?>
 		<h3 class="callbody"><?php echo($row->title);?></h3>
 		<p class="callbody">
 		<?php
