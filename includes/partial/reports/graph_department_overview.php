@@ -66,7 +66,7 @@
 	$ticketsout = callsclosedinlastday();
 ?>
 <style>
-	.ct-series-a line {
+	/*.ct-series-a line {
 		stroke: #577d6a !important;
 	}
 	.ct-series-b line {
@@ -86,7 +86,7 @@
 	}
 	.ct-series-g line {
 		stroke: #ccc !important;
-	}
+	}*/
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -126,14 +126,14 @@
 	});
 </script>
 <div id="teamperformance" class="ct-chart ct-golden-section" style="width: 100%;height:85%;float:left;"></div>
-<div style="float:right;margin-top: -20px;margin-right: 20px;">
-<span style="font-size: 0.6rem;color: white;background: #577d6a;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-6 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #5AAB65;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-5 day")));?></span>
-<span style="font-size: 0.6rem;color: black;background: #B1FFD8;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-4 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #2C4036;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-3 day")));?></span>
-<span style="font-size: 0.6rem;color: black;background: #C9B182;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-2 day")));?></span>
-<span style="font-size: 0.6rem;color: white;background: #4A402C;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-1 day")));?></span>
-<span style="font-size: 0.6rem;color: black;background: #ccc;padding: 0.2rem 0.5rem;">Today</span>
+<div style="float:right;margin-top: -25px;margin-right: 20px;">
+<span style="font-size: 0.6rem;color: white;background: #d70206;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-6 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #f05b4f;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-5 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #f4c63d;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-4 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #d17905;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-3 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #453d3f;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-2 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #59922b;padding: 0.2rem 0.5rem;"><?php echo(date("jS M",strtotime("-1 day")));?></span>
+<span style="font-size: 0.6rem;color: white;background: #0544d3;padding: 0.2rem 0.5rem;">Today</span>
 </div>
 
 

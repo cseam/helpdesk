@@ -8,7 +8,7 @@
 	<a href="#" onclick="update_div('#ajax','reports/reports_sla_performance.php');"><img src="/public/images/ICONS-scheduledtask@2x.png" alt="" title=""  width="24" height="25" />SLA Performance</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_user_feedback.php');"><img src="/public/images/ICONS-userfeedback@2x.png" alt="User Feedback" title="User Feedback"  width="24" height="25" />User feedback</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_work_rate.php');"><img src="/public/images/ICONS-workrate@2x.png" alt="Engineer work rate" title="Engineer work rate"  width="24" height="25" />Work rate</a>
-<a href="#" onclick="update_div('#ajax','reports/view_assigned_numbers.php');"><img src="/public/images/ICONS-assignnotclosed@2x.png" alt="View assigned numbers" title="View assigned numbers"  width="24" height="25" />Assigned numbers</a>	
+<a href="#" onclick="update_div('#ajax','reports/reports_assigned_numbers.php');"><img src="/public/images/ICONS-assignnotclosed@2x.png" alt="View assigned numbers" title="View assigned numbers"  width="24" height="25" />Assigned Breakdown</a>	
 	<a href="#" onclick="update_div('#ajax','reports/view_emerging_issues.php');"><img src="/public/images/ICONS-issues@2x.png" alt="Emerging issues" title="Emerging issues"  width="24" height="25" />Emerging issues</a>
 	<a href="#" onclick="update_div('#ajax','reports/graph_reason_behind.php');"><img src="/public/images/ICONS-reason@2x.png" alt="reason behind issue" title="reason behind issue"  width="24" height="25" />Reason behind issue</a>
 </div>
