@@ -7,10 +7,10 @@
 <?php 
 	
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-		$STH = $DBH->Prepare("SELECT calls.helpdesk, engineers.idengineers, engineerName, Count(assigned) AS HowManyAssigned, sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid GROUP BY assigned ORDER BY calls.helpdesk");
+		$STH = $DBH->Prepare("SELECT engineers.disabled, calls.helpdesk, engineers.idengineers, engineerName, Count(assigned) AS HowManyAssigned, sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid GROUP BY assigned ORDER BY calls.helpdesk");
 		$hdid = 3;
 	} else {
-		$STH = $DBH->Prepare("SELECT calls.helpdesk, engineers.idengineers, engineerName, Count(assigned) AS HowManyAssigned, sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers WHERE engineers.helpdesk = :helpdeskid GROUP BY assigned ORDER BY calls.helpdesk");
+		$STH = $DBH->Prepare("SELECT engineers.disabled, calls.helpdesk, engineers.idengineers, engineerName, Count(assigned) AS HowManyAssigned, sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers WHERE engineers.helpdesk = :helpdeskid GROUP BY assigned ORDER BY calls.helpdesk");
 		$hdid = $_SESSION['engineerHelpdesk'];
 	}
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
@@ -18,7 +18,7 @@
 	$STH->execute();	
 	while($row = $STH->fetch()) { ?>
 	<div class="<?=$row->helpdesk?>">
-		<h3><?=$row->engineerName?><span style="float: right; font-size: 0.8rem;"><?=$row->OpenOnes?> assigned</span></h3>
+		<h3><?=$row->engineerName?><?php if ($row->disabled == '1') { echo("<span class='smalltxt'> ~ Disabled Engineer</span>"); }?><span style="float: right; font-size: 0.8rem;"><?=$row->OpenOnes?> assigned</span></h3>
 		<table width="95%">
 			<?php
 			$STH2 = $DBH->Prepare("SELECT status, opened, callid, title FROM calls WHERE assigned = :assigned AND status IN (1,3,4)");
