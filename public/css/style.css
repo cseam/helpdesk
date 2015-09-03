@@ -363,6 +363,9 @@ select::-ms-expand {
 	width: 100%;
 	float: left;
 }
+.reminder {
+	color: #D97700;
+}
 h3.callbody {
 	clear: left;
 	padding-top: 30px;

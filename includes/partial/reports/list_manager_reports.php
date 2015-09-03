@@ -13,14 +13,13 @@
 	<a href="#" onclick="update_div('#ajax','reports/list_all_tickets.php');"><img src="/public/images/ICONS-allcalls@2x.png" alt="View all tickets" title="View all tickets"  width="24" height="25" />All</a>
 <a href="#" onclick="update_div('#ajax','reports/search_tickets.php');"><img src="/public/images/ICONS-search@2x.png" alt="Search tickets" title="Search tickets"  width="24" height="25" />Search</a>
 <span class="clearbreak">&nbsp;</span>
-	<a href="#" onclick="update_div('#ajax','reports/view_punchcard.php');"><img src="/public/images/ICONS-punchcard@2x.png" alt="Punchcard" title="Punchcard"  width="24" height="25" />Punchcard</a>
-	
+	<a href="#" onclick="update_div('#ajax','reports/list_working_on.php');"><img src="/public/images/ICONS-workingon@2x.png" alt="working on" title="working on"  width="24" height="25" />Working On</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_job_sheet.php');"><img src="/public/images/ICONS-assignnotclosed@2x.png" alt="View job sheet" title="View job sheet"  width="24" height="25" />Job Sheet</a>	
-	
 	<a href="#" onclick="update_div('#ajax','reports/view_change_control.php');"><img src="/public/images/ICONS-changecontrol@2x.png" alt="View change control" title="View change control"  width="24" height="25" />Change control</a>
 	<a href="#" onclick="update_div('#ajax','reports/view_lockers.php');"><img src="/public/images/ICONS-lockers@2x.png" alt="Lockers" title="Lockers"  width="24" height="25" />Lockers</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_scheduled_tasks.php');"><img src="/public/images/ICONS-scheduledtask@2x.png" alt="scheduled tasks" title="sheduled tasks"  width="24" height="25" />Scheduled tasks</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_all_outofhours.php');"><img src="/public/images/ICONS-outofhours@2x.png" alt="Out Of Hours" title="Out Of Hours"  width="24" height="25" />Out Of Hours</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_tickets_awaiting_invoice.php');"><img src="/public/images/ICONS-invoice@2x.png" alt="awaiting invoice" title="awaiting invoice"  width="24" height="25" />Awaiting invoice</a>
 	<a href="#" onclick="update_div('#ajax','reports/list_all_performance_objectives.php');"><img src="/public/images/ICONS-objective@2x.png" alt="Performance Objectives" title="Performance Objectvies"  width="24" height="25" />Performance Objectives</a>
+	<a href="#" onclick="update_div('#ajax','reports/view_punchcard.php');"><img src="/public/images/ICONS-punchcard@2x.png" alt="Punchcard" title="Punchcard"  width="24" height="25" />Punchcard</a>
 </div>

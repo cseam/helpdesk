@@ -68,7 +68,7 @@
 			if ($row->close_eta_days) { ?>		
 		<p class="sla">Due on or before: <?php 
 			$datenow = date("d-m-Y");
-			$datedue = strtotime(date("d-m-Y", strtotime($datenow)) . $row->close_eta_days . " days");
+			$datedue = strtotime(date("d-m-Y", strtotime($row->opened)) . $row->close_eta_days . " days");
 			$datedue = date("d-m-Y",$datedue);
 			echo(str_replace('-', '/', $datedue));
 			
@@ -229,8 +229,15 @@
 	$STH->bindParam(':callid', $row->callid, PDO::PARAM_STR);
 	$STH->execute();
 
-
 // close while loop
 };
 // close method post
 };
+
+
+
+
+
+	
+
+

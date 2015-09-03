@@ -8,7 +8,11 @@
 	<table>
 	<tbody>
 	<?php
-		$STH = $DBH->Prepare("SELECT * FROM calls WHERE assigned = :assigned AND status !='2'");
+		$STH = $DBH->Prepare("SELECT * FROM calls 
+		LEFT JOIN service_level_agreement 
+			ON service_level_agreement.urgency = calls.urgency
+			AND service_level_agreement.helpdesk = calls.helpdesk
+		WHERE assigned = :assigned AND status !='2'");
 		$STH->bindParam(":assigned", $_SESSION['engineerId'], PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
@@ -25,9 +29,17 @@
 			elseif ($row->status == '5') { echo("<span class='hold'>SENT AWAY</span>"); }
 			else { echo(date("d/m/y", strtotime($row->opened))); }?></td>
 		
+			<?php 
+				if ($row->close_eta_days != null) {
+			$datenow = date("d-m-Y");
+			$datedue = strtotime(date("d-m-Y", strtotime($row->opened)) . $row->close_eta_days . " days");
+			$datedue = date("d-m-Y",$datedue);
+			$sla = strtotime($datedue) - strtotime($datenow);
+			$days = ($sla/(60*60*24))%365;
+			echo("<td class=reminder>due ".$days." days</td>");
+			};
+			?>
 		
-			
-			
 		<td class="view_td">
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 			<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
