@@ -49,7 +49,7 @@
 			</td>
 		</tr>
 		<tr>
-		<td colspan="6"><span class="open">&nbsp;&nbsp;&nbsp;<?php echo(engineer_friendlyname($row->idengineers));?> checked into ticket on <?php echo(date("d/m/Y H:i", strtotime($latest->stamp)));?></span>
+		<td colspan="6"><span class="smalltxt"><?php echo(engineer_friendlyname($row->idengineers));?> checked into ticket on <?php echo(date("d/m/Y H:i", strtotime($latest->stamp)));?></span>
 		</td>
 		</tr>
 				<?php };
