@@ -21,31 +21,36 @@
 		<table>
 			
 			<?php
-			$STH2 = $DBH->Prepare("SELECT call_views.callid, call_views.stamp, calls.title FROM call_views
+			$STH2 = $DBH->Prepare("SELECT call_views.callid, call_views.stamp, calls.title, calls.room, location.locationName, location.iconlocation FROM call_views
 			JOIN calls ON call_views.callid = calls.callid
+			JOIN location ON calls.location = location.id
 			WHERE sAMAccountName = :sAMAccountName
-			ORDER BY id DESC
+			ORDER BY call_views.id DESC
 			LIMIT 1");
 			$STH2->bindParam(":sAMAccountName", $row->sAMAccountName, PDO::PARAM_STR);
 			$STH2->setFetchMode(PDO::FETCH_OBJ);
 			$STH2->execute();
 				while($latest = $STH2->fetch()) { ?>
 		<tr>
-		<td>
-			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
+			<td>
+				<img src="/public/images/<?=$latest->iconlocation;?>" alt="<?=$latest->locationName;?>-<?php echo($latest->room);?>" title="<?=$latest->locationName;?>-<?php echo($latest->room);?>" width="24px" height="auto" />
+			</td>
+			<td style="text-align: left;width: 90%;">
+				<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
 				<input type="hidden" id="id" name="id" value="<?php echo $latest->callid;?>" />
-				<input type="submit" name="submit" value="#<?php echo($latest->callid); ?> - <?php echo(substr(strip_tags($latest->title), 0, 100));?>..." alt="View ticket" title="View ticket" class="calllistbutton"/>
-			</form>
-		</td>
-		<td>
-			<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
+				<input type="submit" name="submit" value="#<?php echo($latest->callid); ?> <?php echo(substr(strip_tags($latest->title), 0, 150));?>" alt="View ticket" title="View ticket" class="calllistbutton"/>
+				</form>
+			</td>
+			<td>
+				<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
 				<input type="hidden" id="id" name="id" value="<?php echo $latest->callid;?>" />
 				<input type="image" name="submit" value="submit" src="/public/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View ticket" title="View ticket"/>
-			</form>
-		</td>
+				</form>
+			</td>
 		</tr>
 		<tr>
-		<td class="hdtitle" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checked into ticket on <?php echo(date("d/m/Y H:i", strtotime($latest->stamp)));?></td>
+		<td colspan="6"><span class="open">&nbsp;&nbsp;&nbsp;<?php echo(engineer_friendlyname($row->idengineers));?> checked into ticket on <?php echo(date("d/m/Y H:i", strtotime($latest->stamp)));?></span>
+		</td>
 		</tr>
 				<?php };
 			?>

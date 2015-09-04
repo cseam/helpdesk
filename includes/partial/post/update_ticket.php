@@ -166,7 +166,7 @@
 			// Create hold message for database
 			$holdreason = "<div class=update>" . htmlspecialchars($_POST['updatedetails']) . "<h3> Call SENT AWAY for repair " . $_SESSION['sAMAccountName'] . ", " . date("d/m/Y H:i:s") . "</h3></div>";
 			// PDO update ticket and set status to hold (3)
-			$STH = $DBH->Prepare("UPDATE calls SET status = 5, lastupdate = :lastupdate, closed = NULL, details = CONCAT(details, :details) WHERE callid = :callid");
+			$STH = $DBH->Prepare("UPDATE calls SET status = 5, lastupdate = :lastupdate, closed = NULL, requireinvoice = 1, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
 			$STH->bindParam(':details', $holdreason, PDO::PARAM_STR);
 			$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);

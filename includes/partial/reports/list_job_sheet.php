@@ -21,12 +21,14 @@
 		<h3><?=$row->engineerName?><?php if ($row->disabled == '1') { echo("<span class='smalltxt'> ~ Disabled Engineer</span>"); }?><span style="float: right; font-size: 0.8rem;"><?=$row->OpenOnes?> assigned</span></h3>
 		<table width="95%">
 			<?php
-			$STH2 = $DBH->Prepare("SELECT status, opened, callid, title FROM calls WHERE assigned = :assigned AND status IN (1,3,4)");
+			$STH2 = $DBH->Prepare("SELECT status, opened, callid, title, location.iconlocation, location.locationName FROM calls INNER JOIN location ON calls.location=location.id WHERE assigned = :assigned AND status IN (1,3,4)");
 			$STH2->bindParam(":assigned", $row->idengineers, PDO::PARAM_INT);
 			$STH2->setFetchMode(PDO::FETCH_OBJ);
 			$STH2->execute();
 			while($row2 = $STH2->fetch()) { ?>
 			<tr>
+				<td>#<?=$row2->callid;?></td>
+				<td><img src="/public/images/<?=$row2->iconlocation;?>" alt="<?=$row2->locationName;?>" title="<?=$row2->locationName;?>" width="24px" height="auto"/></td>
 				<td width="90px">
 					<?php
 					if ($row2->status == '2') { echo "<span class='closed'>CLOSED</span>"; }
