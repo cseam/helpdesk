@@ -38,7 +38,7 @@
 			<td style="text-align: left;width: 90%;">
 				<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
 				<input type="hidden" id="id" name="id" value="<?php echo $latest->callid;?>" />
-				<input type="submit" name="submit" value="#<?php echo($latest->callid); ?> <?php echo(substr(strip_tags($latest->title), 0, 150));?>" alt="View ticket" title="View ticket" class="calllistbutton"/>
+				<input type="submit" name="submit" value="#<?php echo($latest->callid); ?> &nbsp; <?php echo(substr(strip_tags($latest->title), 0, 150));?>" alt="View ticket" title="View ticket" class="calllistbutton"/>
 				</form>
 			</td>
 			<td>

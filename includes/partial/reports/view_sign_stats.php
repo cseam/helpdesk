@@ -69,7 +69,7 @@
 		<tbody>
 <?php
 
-	$STH = $DBH->Prepare("SELECT sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) THEN 1 ELSE 0 END) AS Last7, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 0 DAY) THEN 1 ELSE 0 END) AS Last1 FROM calls WHERE helpdesk <= 3");
+	$STH = $DBH->Prepare("SELECT sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 0 DAY) THEN 1 ELSE 0 END) AS Last1 FROM calls WHERE helpdesk <= 3");
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
 	while($row = $STH->fetch()) { ?>

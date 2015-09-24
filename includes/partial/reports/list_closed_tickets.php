@@ -6,10 +6,10 @@
 <div id="ajaxforms">
 	<?php
 		if ($_SESSION['engineerHelpdesk'] <= '3') {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE helpdesk <= :helpdeskid AND status ='2' AND assigned !='NULL' ORDER BY callID DESC LIMIT 1000");
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE helpdesk <= :helpdeskid AND status ='2' AND assigned !='NULL' ORDER BY calls.closed DESC LIMIT 1000");
 			$hdid = 3;
 		} else {
-			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE helpdesk = :helpdeskid AND status ='2' AND assigned !='NULL' ORDER BY callID DESC LIMIT 1000");
+			$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN status ON calls.status=status.id INNER JOIN location ON calls.location=location.id WHERE helpdesk = :helpdeskid AND status ='2' AND assigned !='NULL' ORDER BY calls.closed DESC LIMIT 1000");
 			$hdid = $_SESSION['engineerHelpdesk'];
 		}
 		$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
@@ -25,10 +25,10 @@
 		</td>
 		<td><img src="/public/images/<?=$row->iconlocation;?>" alt="<?=$row->locationName;?>" title="<?=$row->locationName;?>" width="24px" height="auto"/></td>
 		<td>
-			<?php if ($row->assigned !== NULL) { echo(strstr(engineer_friendlyname($row->assigned)," ", true)); } else { echo("NULL"); };?>
+			<?php if ($row->closeengineerid !== NULL) { echo(strstr(engineer_friendlyname($row->closeengineerid)," ", true)); } else { echo("NULL"); };?>
 		</td>
 		<td width="45">
-		<?php echo date("d/m/y", strtotime($row->opened)); ?>
+		<?php echo date("d/m/y", strtotime($row->closed)); ?>
 		</td>
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="viewpost">

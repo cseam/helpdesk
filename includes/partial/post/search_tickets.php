@@ -3,8 +3,10 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE (details LIKE :search OR callid LIKE :search OR title LIKE :search) AND engineers.helpdesk <= :helpdeskid ORDER BY callid DESC");
+		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE (details LIKE :search OR callid LIKE :search OR title LIKE :search) ORDER BY callid DESC");
 		$hdid = 3;
+		//AND engineers.helpdesk <= :helpdeskid
+		
 	} else {
 		$STH = $DBH->Prepare("SELECT * FROM calls INNER JOIN engineers ON calls.assigned = engineers.idengineers INNER JOIN status ON calls.status = status.id WHERE (details LIKE :search OR callid LIKE :search OR title LIKE :search) AND engineers.helpdesk = :helpdeskid ORDER BY callid DESC");
 		$hdid = $_SESSION['engineerHelpdesk'];
