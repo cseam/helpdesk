@@ -57,6 +57,29 @@
 			$STH->bindParam(':id', $_POST['fwdhelpdesk'], PDO::PARAM_STR);
 			$STH->execute();
 
+			//Email Managers to let them know ticket forwarded.
+			// Get engineers emails
+				$STHemail = $DBH->Prepare('SELECT engineerEmail FROM engineers WHERE helpdesk = :helpdesk AND engineerLevel=2');
+				$STHemail->bindParam(':helpdesk', $_POST['fwdhelpdesk'], PDO::PARAM_INT);
+				$STHemail->setFetchMode(PDO::FETCH_OBJ);
+				$STHemail->execute();
+					while($rowemail = $STHemail->fetch()) {
+						//Construct message
+						$to = $rowemail->engineerEmail;
+						$message = "<span style='font-family: arial;'><p>Helpdesk ticket (#" . $_POST['id'] .") has been forwarded to your helpdesk.</p>";
+						$message .= "<p>To view the details of this ticket please <a href='". HELPDESK_LOC ."'>Visit ". CODENAME ."</a></p>";
+						$message .= "<p>This is an automated message please do not reply</p>";
+						$msgtitle = "New Helpdesk ticket (#" . $_POST['id'] . ")";
+						$headers = 'From: Helpdesk@cheltladiescollege.org' . "\r\n";
+						$headers .= 'Reply-To: helpdesk@cheltladiescollege.org' . "\r\n";
+						$headers .= 'MIME-Version: 1.0' . "\r\n";
+						$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+						$headers .= 'X-Mailer: PHP/' . phpversion();
+						// In case any of our lines are larger than 70 characters, we wordwrap()
+						$message = wordwrap($message, 70, "\r\n");
+						// Send email
+						mail($to, $msgtitle, $message, $headers);
+					}
 			// Update view
 			echo("<h2>Ticket Forwarded</h2>".$reason);
 		}
