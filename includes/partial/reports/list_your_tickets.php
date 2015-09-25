@@ -9,7 +9,7 @@
 	<table id="yourcalls">
 	<tbody>
 	<?php
-		$STH = $DBH->Prepare("SELECT * FROM calls WHERE owner = :owner ORDER BY callid DESC LIMIT 10");
+		$STH = $DBH->Prepare("SELECT * FROM calls WHERE owner = :owner ORDER BY status, callid DESC LIMIT 15");
 		$STH->bindParam(":owner", $_SESSION['sAMAccountName'], PDO::PARAM_STR);
 		$STH->setFetchMode(PDO::FETCH_OBJ);
 		$STH->execute();
