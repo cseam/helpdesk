@@ -6,10 +6,10 @@
 <h3>Add Ticket</h3>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
 	<fieldset>
-		<legend>Your contact details</legend>
-			<label for="name" title="Contact name for this call">Your Name</label>
-			<input type="text" id="name" name="name" value="<?php echo $_SESSION['sAMAccountName'];?>"  required />
-			<label for="email" title="Contact email so engineer can comunicate">Your Email</label>
+		<legend>Contact details</legend>
+			<label for="name" title="Contact name for this call">Your/Contact Name</label>
+			<input type="text" id="name" name="name" value=""  required />
+			<label for="email" title="Contact email so engineer can comunicate">Contact Email</label>
 			<input type="text" id="email" name="email" value="<?php echo $_SESSION['sAMAccountName']."@". COMPANY_SUFFIX;?>"  required />
 			<label for="tel" title="Contact telephone so engineer can comunicate">Telephone / Mobile Number</label>
 			<input type="text" id="tel" name="tel" value="" />
@@ -36,14 +36,14 @@
 			<label for="callurgency" title="how the issue effects me">Urgency</label>
 			<select id="callurgency" name="callurgency">
 				<option value="1" SELECTED>None</option>
-				<option value="2">Very Minor</option>
+				<!--<option value="2">Very Minor</option>-->
 				<option value="3">Minor</option>
-				<option value="4">Very Low</option>
+				<!--<option value="4">Very Low</option>-->
 				<option value="5">Low</option>
 				<option value="6">Moderate</option>
 				<option value="7">High</option>
 				<option value="8">Very High</option>
-				<option value="9">Extremely High</option>
+				<!--<option value="9">Extremely High</option>-->
 				<option value="10">Dangerous</option>
 			</select>
 			<label for="callseverity" title="how the issue effects me">Severity</label>
