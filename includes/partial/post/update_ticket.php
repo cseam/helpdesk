@@ -45,7 +45,8 @@
 			//PDO Update ticket
 			$STH = $DBH->Prepare("UPDATE calls SET helpdesk = :helpdesk, status=1, assigned = :assigned, lastupdate = :lastupdate, details = CONCAT(details, :details) WHERE callid = :callid");
 			$STH->bindParam(':helpdesk', $_POST['fwdhelpdesk'], PDO::PARAM_STR);
-			$STH->bindParam(':assigned', next_engineer($_POST['fwdhelpdesk']), PDO::PARAM_STR);
+			$nullvalue = NULL;
+			$STH->bindParam(':assigned', $nullvalue, PDO::PARAM_STR);
 			$STH->bindParam(':lastupdate', date("c"), PDO::PARAM_STR);
 			$STH->bindParam(':details', $reason, PDO::PARAM_STR);
 			$STH->bindParam(':callid', $_POST['id'], PDO::PARAM_STR);
