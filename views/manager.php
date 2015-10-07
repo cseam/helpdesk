@@ -56,5 +56,6 @@
 		// End DOM ready check
 	});
 	</script>
+	<a href="/views/changelog.php" target="_blank" class="changelog">changelog</a>
 </body>
 </html>

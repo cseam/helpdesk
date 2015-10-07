@@ -764,6 +764,16 @@ input.cmn-toggle-round:checked + label:after {
 #mobile-menu {
 		display: none;
 }
+/* changelog */
+.changelog {
+	font-size: 0.6rem;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding-right: 2.2rem;
+	padding-bottom: 0.4rem;
+}
+
 
 
 /*** Responsive Stuff ***/

@@ -11,7 +11,11 @@
 		<label for="term">Search Query</label>
 		<input type="text" id="term" name="term" value=""  required />
 		<br/>
-		<hr/>
+</fieldset>
+<fieldset>	
+		<legend>Advanced Filters</legend>
+		<label for="ticketid">Ticket ID (optional)</label>
+		<input type="text" id="ticketid" name="ticketid" value="" />
 		<label for="location">Location (optional)</label>
 		<select id="location" name="location">
 		<?php
