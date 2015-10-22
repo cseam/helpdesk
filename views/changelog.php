@@ -57,6 +57,8 @@
 						<hr/>
 						<h4>Oct, 2015 - Adv Search</h4>
 							<ul>
+								<li>ability to remove scheduled tickets</li>
+								<li>updated icon set to SVG</li>
 								<li>added changelog page</li>
 								<li>added advanced search report</li>
 								<li>added working on and job sheets</li>

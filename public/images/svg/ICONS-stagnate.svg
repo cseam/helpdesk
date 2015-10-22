@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 378.9 351.3" style="enable-background:new 0 0 378.9 351.3;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#706F6E;stroke-width:20;stroke-miterlimit:10;}
+	.st1{display:none;}
+	.st2{display:inline;fill:none;stroke:#5B7F72;stroke-width:20;stroke-miterlimit:10;}
+	.st3{display:inline;fill:#FFFFFF;stroke:#5B7F72;stroke-width:20;stroke-miterlimit:10;}
+	.st4{display:inline;fill:#FFFFFF;stroke:#5B7F72;stroke-width:40;stroke-miterlimit:10;}
+	.st5{fill:#B24417;}
+	.st6{font-family:'Verlag-Black';}
+	.st7{font-size:200px;}
+	.st8{fill:none;stroke:#5B7F72;stroke-width:20;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<font horiz-adv-x="1000">
+<!-- Copyright (C) 1996, 2007 Hoefler &amp; Frere-Jones. http://www.typography.com -->
+<!-- Copyright: Copyright 2015 Adobe System Incorporated. All rights reserved. -->
+<font-face font-family="Verlag-Black" units-per-em="1000" underline-position="-100" underline-thickness="50"/>
+<missing-glyph horiz-adv-x="500"/>
+<glyph unicode="|" horiz-adv-x="285" d="M195,-216l0,949l-105,0l0,-949z"/>
+</font>
+
+	<ellipse class="st0" cx="189.2" cy="175.5" rx="176.2" ry="163.2"/>
+<g class="st1">
+	<circle class="st2" cx="213.4" cy="185.4" r="82.2"/>
+	<line class="st3" x1="271.5" y1="243.6" x2="290.6" y2="263.5"/>
+	<line class="st4" x1="282.6" y1="254.5" x2="367.7" y2="345.4"/>
+</g>
+<text transform="matrix(1 0 0 1 248.9032 226.9144)" class="st5 st6 st7">|</text>
+<g>
+	<line class="st8" x1="69.4" y1="149.5" x2="173.6" y2="149.5"/>
+	<line class="st8" x1="69.4" y1="198.6" x2="176" y2="198.6"/>
+	<line class="st8" x1="69.4" y1="149.5" x2="69.4" y2="198.6"/>
+	<line class="st8" x1="176" y1="149.5" x2="176" y2="108"/>
+	<line class="st8" x1="176" y1="243.1" x2="176" y2="198.6"/>
+	<line class="st8" x1="235.1" y1="174.1" x2="176" y2="108"/>
+	<line class="st8" x1="235.1" y1="174.1" x2="176" y2="243.1"/>
+</g>
+</svg>

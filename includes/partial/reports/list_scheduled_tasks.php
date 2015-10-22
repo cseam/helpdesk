@@ -11,6 +11,7 @@
 			<th>#</th>
 			<th>Title</th>
 			<th>Schedule</th>
+			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,9 +33,38 @@
 			<td><?= $row->callid ?></td>
 			<td><?= $row->title ?></td>
 			<td><?= $row->frequencytype ?></td>
+			<td>
+				<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="removeschedule">
+					<input type="hidden" id="id" name="id" value="<?= $row->callid;?>" />
+					<input type="submit" name="submit" value="Remove" alt="Remove" title="Remove Change" class="calllistbutton"/>
+				</form>
+			</td>
 		</tr>
 <?php } ?>
 	</tbody>
 </table>
 
-
+<script type="text/javascript">
+	$('.removeschedule').submit(function(e) {
+		$.ajax(
+			{
+				type: 'post',
+				url: '/includes/partial/post/remove_scheduledticket.php',
+				data: $(this).serialize(),
+				beforeSend: function()
+				{
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				},
+				success: function(data)
+				{
+				$('#ajax').html(data);
+				},
+				error: function()
+				{
+				$('#ajax').html('error loading data, please refresh.');
+				}
+			});
+		e.preventDefault();
+		return false;
+	});
+</script>
