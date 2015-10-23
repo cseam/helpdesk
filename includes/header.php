@@ -1,5 +1,6 @@
 <title><?php echo(CODENAME);?></title>
-<link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/public/images/svg/BRANDING-favicon.svg" sizes="any" type="image/svg+xml" />
+<link rel="mask-icon" href="/public/images/svg/BRANDING-favicon.svg" color="#779182">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <meta name="robots" content="nofollow" />

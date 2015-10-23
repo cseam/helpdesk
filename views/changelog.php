@@ -57,6 +57,7 @@
 						<hr/>
 						<h4>Oct, 2015 - Adv Search</h4>
 							<ul>
+								<li>updated favicon and pinicons to svg</li>
 								<li>ability to remove scheduled tickets</li>
 								<li>updated icon set to SVG</li>
 								<li>added changelog page</li>
