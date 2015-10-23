@@ -29,7 +29,7 @@
 		<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
-				<input type="image" name="submit" value="submit" src="/public/images/ICONS-urgent@2x.png" width="24" height="25" class="icon" alt="View ticket" title="View ticket" />
+				<input type="image" name="submit" value="submit" src="/public/images/svg/ICONS-urgent.svg" width="24" height="25" class="icon" alt="View ticket" title="View ticket" />
 			</form>
 		</td>
 		</tr>

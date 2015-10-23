@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 108.6 235.1" style="enable-background:new 0 0 108.6 235.1;" xml:space="preserve">
+	 viewBox="0 0 82.5 88.2" style="enable-background:new 0 0 82.5 88.2;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#5B7F72;}
-	.st1{font-family:'MyriadPro-Regular';}
-	.st2{font-size:330px;}
+	.st1{fill:#FFFFFF;}
+	.st2{font-family:'Helvetica-Bold';}
+	.st3{font-size:60px;}
 </style>
-<font horiz-adv-x="1000">
-<!-- Copyright 1992, 1994, 1997, 2000, 2004 Adobe Systems Incorporated. All rights reserved. Myriad is either a registered trademark or a trademark of Adobe Systems Incorporated in the United States and/or other countries. -->
-<font-face font-family="MyriadPro-Regular" units-per-em="1000" underline-position="-100" underline-thickness="50"/>
-<missing-glyph horiz-adv-x="500" d="M0,0l500,0l0,700l-500,0M250,395l-170,255l340,0M280,350l170,255l0,-510M80,50l170,255l170,-255M50,605l170,-255l-170,-255z"/>
-<glyph unicode="?" horiz-adv-x="406" d="M219,191l-1,26C215,268 231,312 275,364C323,421 361,470 361,538C361,614 309,685 194,685C141,685 84,669 51,645l24,-63C100,601 140,613 176,613C239,612 271,578 271,527C271,482 246,443 201,390C151,330 133,271 139,217l2,-26M178,-11C215,-11 238,16 238,51C238,88 214,114 179,114C144,114 119,88 119,51C119,16 143,-11 178,-11z"/>
+<font horiz-adv-x="2048">
+<!-- Helvetica is a registered trademark of Linotype AG -->
+<!-- Copyright: Copyright 2015 Adobe System Incorporated. All rights reserved. -->
+<font-face font-family="Helvetica-Bold" units-per-em="2048" underline-position="-155" underline-thickness="101"/>
+<missing-glyph horiz-adv-x="1479" d="M154,0l0,1474l1187,0l0,-1474M1157,184l0,1106l-819,0l0,-1106z"/>
+<glyph unicode="?" horiz-adv-x="1251" d="M488,289l298,0l0,-289l-298,0M322,1413C401,1464 497,1489 612,1489C763,1489 888,1453 988,1381C1087,1309 1137,1202 1137,1061C1137,974 1115,901 1072,842C1047,806 998,760 926,704l-71,-55C816,619 791,584 778,544C770,519 766,479 765,426l-270,0C499,539 510,617 527,660C544,703 589,752 661,808l73,57C758,883 777,903 792,924C819,961 832,1001 832,1045C832,1096 817,1142 788,1184C758,1225 704,1246 625,1246C548,1246 493,1220 461,1169C428,1118 412,1064 412,1009l-289,0C131,1199 197,1334 322,1413z"/>
 </font>
 
-	<text transform="matrix(1 0 0 1 -13.6553 228.9804)" class="st0 st1 st2">?</text>
+	<circle class="st0" cx="41.3" cy="44.1" r="33.5"/>
+<text transform="matrix(1 0 0 1 22.344 66.5334)" class="st1 st2 st3">?</text>
 </svg>

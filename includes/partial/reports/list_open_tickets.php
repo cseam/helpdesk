@@ -71,13 +71,13 @@
 			<td>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="reassign">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
-				<input name="submit" value="" type="image" src="/public/images/ICONS-assign@2x.png" width="24" height="25" class="icon" alt="assign engineer"  title="assign engineer" />
+				<input name="submit" value="" type="image" src="/public/images/svg/ICONS-assign.svg" width="24" height="25" class="icon" alt="assign engineer"  title="assign engineer" />
 			</form>
 			</td>
 			<td>
 				<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="forward">
 				<input type="hidden" id="id" name="id" value="<?=$row->callid;?>" />
-				<input name="submit" value="" type="image" src="/public/images/ICONS-forward@2x.png" width="24" height="25" class="icon" alt="forward ticket"  title="forward ticket"/>
+				<input name="submit" value="" type="image" src="/public/images/svg/ICONS-forward.svg" width="24" height="25" class="icon" alt="forward ticket"  title="forward ticket"/>
 				</form>
 			</td>
 		</tr>

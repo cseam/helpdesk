@@ -44,7 +44,7 @@
 				<td>
 					<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="assignedtoyou">
 						<input type="hidden" id="id" name="id" value="<?=$row->id;?>" />
-						<input type="image" name="submit" value="submit" src="/public/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View objective" title="View objective" />
+						<input type="image" name="submit" value="submit" src="/public/images/svg/ICONS-view.svg" width="24" height="25" class="icon" alt="View objective" title="View objective" />
 					</form>
 				</td>
 			</tr>

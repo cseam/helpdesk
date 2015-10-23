@@ -6,4 +6,4 @@
 <?php if ($_SESSION['superuser'] === "1") { ?><a href="#" onclick="update_div('#ajax','reports/reports_default_view.php');update_div('#stats','reports/graph_reports_overview.php');update_div('#calllist','reports/list_reports_view_reports.php');">Admin View</a><br/><?php }; ?>
 <a href="/login/logout.php" class="logout">Log out</a><br/>
 </div>
-<a href="#sidr" id="mobile-menu"><img src="/public/images/ICONS-hamburger@2x.png" width="24" height="auto" /></a>
+<a href="#sidr" id="mobile-menu"><img src="/public/images/svg/ICONS-hamburger.svg" width="24" height="auto" /></a>

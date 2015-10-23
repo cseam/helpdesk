@@ -77,7 +77,7 @@
 		<td><?=$row->engineerName;?></td>
 		<td><?=$row->owner;?></td>
 		<td>
-			<? for ($i = 0; $i < round($row->satisfaction); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='24' width='auto' />"); }; ?>
+			<? for ($i = 0; $i < round($row->satisfaction); $i++) { echo("<img src='/public/images/svg/ICONS-star.svg' alt='star' height='24' width='auto' />"); }; ?>
 		 <?=$row->details;?></td>
 	</tr>
 <?};?>

@@ -29,7 +29,7 @@
 				<td>
 					<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="outofhourslist">
 						<input type="hidden" id="id" name="id" value="<?php echo($row->id);?>" />
-						<input type="image" name="submit" value="submit" src="/public/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View call" title="View call"/>
+						<input type="image" name="submit" value="submit" src="/public/images/svg/ICONS-view.svg" width="24" height="25" class="icon" alt="View call" title="View call"/>
 					</form>
 				</td>
 			</tr>

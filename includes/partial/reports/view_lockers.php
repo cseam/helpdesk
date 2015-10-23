@@ -45,7 +45,7 @@
 				<input type="hidden" id="locker" name="locker" value="<?php echo($row->lockerid);?>" />
 				<input type="hidden" id="owner" name="owner" value="<?php echo($row->name);?>" />
 				<input type="hidden" id="id" name="id" value="<?php echo($row->callid);?>" />
-				<input type="image" id="btn" name="btn" value="View" src="/public/images/ICONS-forward@2x.png" class="icon" width="24" height="25" alt="return to user" title="return to user" />
+				<input type="image" id="btn" name="btn" value="View" src="/public/images/svg/ICONS-forward.svg" class="icon" width="24" height="25" alt="return to user" title="return to user" />
 			</form>
 			<?php } ?>
 		</td>

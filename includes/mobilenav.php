@@ -9,9 +9,9 @@
 <br/>	
 <?php if ($_SESSION['engineerLevel'] === "1") { ?>
 <h3>My Tickets</h3>
-	<a href="#" onclick="update_div('#calllist','reports/list_engineers_tickets.php');update_div('#engineerscallview','reports/list_assigned_tickets.php');$.sidr('close', 'sidr');"><img src="/public/images/ICONS-yourcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> Assigned Tickets</a><br/>
-	<a href="#" onclick="update_div('#calllist','reports/list_engineers_tickets.php');update_div('#engineerscallview','reports/list_open_tickets_for_a_helpdesk.php');$.sidr('close', 'sidr');"><img src="/public/images/ICONS-allcalls@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> Departments Tickets</a><br/>
-	<a href="#" onclick="update_div('#engineerscallview','reports/list_my_performance_objectives.php');update_div('#engineerscallview','reports/list_engineer_reports.php');$.sidr('close', 'sidr');"><img src="/public/images/ICONS-allcalls@2x.png" alt="Performance Objectives" title="Performance Objectives"  width="16" height="17" />Performance Objectives</a><br/>
-	<a href="#" onclick="update_div('#calllist','reports/list_engineers_tickets.php');update_div('#engineerscallview','reports/list_engineer_reports.php');$.sidr('close', 'sidr');"><img src="/public/images/ICONS-workrate@2x.png" alt="your tickets" title="your tickets"  width="16" height="17" /> Reports</a><br/>
+	<a href="#" onclick="update_div('#calllist','reports/list_engineers_tickets.php');update_div('#engineerscallview','reports/list_assigned_tickets.php');$.sidr('close', 'sidr');"><img src="/public/images/svg/ICONS-yourcalls.svg" alt="your tickets" title="your tickets"  width="16" height="17" /> Assigned Tickets</a><br/>
+	<a href="#" onclick="update_div('#calllist','reports/list_engineers_tickets.php');update_div('#engineerscallview','reports/list_open_tickets_for_a_helpdesk.php');$.sidr('close', 'sidr');"><img src="/public/images/svg/ICONS-allcalls.svg" alt="your tickets" title="your tickets"  width="16" height="17" /> Departments Tickets</a><br/>
+	<a href="#" onclick="update_div('#engineerscallview','reports/list_my_performance_objectives.php');update_div('#engineerscallview','reports/list_engineer_reports.php');$.sidr('close', 'sidr');"><img src="/public/images/svg/ICONS-allcalls.svg" alt="Performance Objectives" title="Performance Objectives"  width="16" height="17" />Performance Objectives</a><br/>
+	<a href="#" onclick="update_div('#calllist','reports/list_engineers_tickets.php');update_div('#engineerscallview','reports/list_engineer_reports.php');$.sidr('close', 'sidr');"><img src="/public/images/svg/ICONS-workrate.svg" alt="your tickets" title="your tickets"  width="16" height="17" /> Reports</a><br/>
 <?php }; ?>
 </div>

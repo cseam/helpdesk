@@ -44,7 +44,7 @@
 			<td>
 				<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="yourcallslist">
 				<input type="hidden" id="id" name="id" value="<?php echo $latest->callid;?>" />
-				<input type="image" name="submit" value="submit" src="/public/images/ICONS-view@2x.png" width="24" height="25" class="icon" alt="View ticket" title="View ticket"/>
+				<input type="image" name="submit" value="submit" src="/public/images/svg/ICONS-view.svg" width="24" height="25" class="icon" alt="View ticket" title="View ticket"/>
 				</form>
 			</td>
 		</tr>

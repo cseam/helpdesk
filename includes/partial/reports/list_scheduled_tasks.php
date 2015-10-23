@@ -11,7 +11,7 @@
 			<th>#</th>
 			<th>Title</th>
 			<th>Schedule</th>
-			<th>&nbsp;</th>
+			<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove</th>
 		</tr>
 	</thead>
 	<tbody>
