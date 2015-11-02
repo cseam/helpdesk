@@ -25,7 +25,7 @@
 	while($row = $STH->fetch()) { ?>
 		<tr>
 			<td><?=$row->engineerName;?></td>
-			<td><? for ($i = 0; $i < round($row->FeedbackAVG); $i++) { echo("<img src='/public/images/ICONS-star.png' alt='star' height='24' width='auto' />"); }; ?></td>
+			<td><? for ($i = 0; $i < round($row->FeedbackAVG); $i++) { echo("<img src='/public/images/svg/ICONS-star.svg' alt='star' height='24' width='auto' />"); }; ?></td>
 			<td><?=$row->FeedbackCOUNT;?></td>
 		</tr>
 <?};?>
@@ -42,11 +42,11 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php 
+<?php
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
 		$STH = $DBH->Prepare("
-			SELECT calls.callid, engineers.engineerName, calls.owner, feedback.details, feedback.satisfaction FROM feedback 
-			INNER JOIN calls ON feedback.callid=calls.callid 
+			SELECT calls.callid, engineers.engineerName, calls.owner, feedback.details, feedback.satisfaction FROM feedback
+			INNER JOIN calls ON feedback.callid=calls.callid
 			INNER JOIN engineers ON engineers.idengineers=calls.closeengineerid
 			WHERE engineers.helpdesk <= :helpdeskid
 			AND satisfaction IN (1,2)
@@ -54,8 +54,8 @@
 		$hdid = 3;
 	} else {
 		$STH = $DBH->Prepare("
-			SELECT calls.callid, engineers.engineerName, calls.owner, feedback.details, feedback.satisfaction FROM feedback 
-			INNER JOIN calls ON feedback.callid=calls.callid 
+			SELECT calls.callid, engineers.engineerName, calls.owner, feedback.details, feedback.satisfaction FROM feedback
+			INNER JOIN calls ON feedback.callid=calls.callid
 			INNER JOIN engineers ON engineers.idengineers=calls.closeengineerid
 			WHERE engineers.helpdesk = :helpdeskid
 			AND satisfaction IN (1,2)
@@ -81,7 +81,7 @@
 		 <?=$row->details;?></td>
 	</tr>
 <?};?>
-	
+
 	</tbody>
 </table>
 <script type="text/javascript">
