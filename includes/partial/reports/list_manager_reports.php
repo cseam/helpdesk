@@ -1,5 +1,5 @@
 <div id="reportlinks">
-		
+
 <a href="#" onclick="update_div('#ajax','reports/list_escalated_tickets.php');">
 	<img src="/public/images/svg/ICONS-escalated.svg" alt="View escalated tickets" title="View escalated tickets" width="24" height="25" />Escalated
 </a>
@@ -39,7 +39,7 @@
 <a href="#" onclick="update_div('#ajax','reports/search_tickets.php');">
 	<img src="/public/images/svg/ICONS-search.svg" alt="Search tickets" title="Search tickets" width="24" height="25" />Search
 </a>
-<a href="#" onclick="update_div('#ajax','reports/search_tickets_new.php');">
+<a href="#" onclick="update_div('#ajax','reports/adv_search_tickets.php');">
 	<img src="/public/images/svg/ICONS-advancedsearch.svg" alt="Search tickets" title="Search tickets" width="24" height="25" />Advanced Search
 </a>
 <a href="#" onclick="update_div('#ajax','reports/list_working_on.php');">
@@ -47,7 +47,7 @@
 </a>
 <a href="#" onclick="update_div('#ajax','reports/list_job_sheet.php');">
 	<img src="/public/images/svg/ICONS-assignnotclosed.svg" alt="View job sheet" title="View job sheet" width="24" height="25" />Job Sheet
-</a>	
+</a>
 <a href="#" onclick="update_div('#ajax','reports/view_change_control.php');">
 	<img src="/public/images/svg/ICONS-changecontrol.svg" alt="View change control" title="View change control" width="24" height="25" />Change control
 </a>
@@ -65,5 +65,5 @@
 </a>
 <a href="#" onclick="update_div('#ajax','reports/view_punchcard.php');">
 	<img src="/public/images/svg/ICONS-punchcard.svg" alt="Punchcard" title="Punchcard" width="24" height="25" />Punchcard
-</a>	
+</a>
 </div>
