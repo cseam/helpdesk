@@ -21,18 +21,18 @@
 			</div>
 			<div id="leftpage">
 				<div id="stats">
-					<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/graph_reports_overview.php'); ?>
+					<?php //include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/graph_reports_overview.php'); ?>
 				</div>
 			<div id="calllist">
 				<div id="ajaxforms">
-					<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/list_reports_view_reports.php'); ?>
+					<?php //include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/list_reports_view_reports.php'); ?>
 				</div>
 			</div>
 		</div>
 	<div id="rightpage">
 		<div id="addcall">
 			<div id="ajax">
-				<?php include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/reports_default_view.php'); ?>
+				<?php //include($_SERVER['DOCUMENT_ROOT'] .'/includes/partial/reports/reports_default_view.php'); ?>
 			</div>
 		</div>
 	</div>
@@ -46,11 +46,11 @@
 				// Do something after 5 min 300000ms
 				update_div('#stats','reports/graph_reports_overview.php')
 			}, 300000);
-			
+
 			// Bind sidr to menu
 			$('#mobile-menu').sidr({
 				name: 'sidr',
-				side: 'right'	
+				side: 'right'
 			});
 		// End DOM ready check
 	});
