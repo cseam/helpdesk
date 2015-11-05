@@ -4,7 +4,6 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <h1>Search Tickets</h1>
-<p class="urgent">Advanced Search Form (in development for testing only) Please use the standard search for searching.</p>
 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="search" class="searchform">
 <div id="resultspost" style="clear: both;"></div>
 <fieldset>
@@ -81,15 +80,15 @@
 				data: $(this).serialize(),
 				beforeSend: function()
 				{
-				$('#resultspost').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
+				$('#ajax').html('<img src="/public/images/ICONS-spinny.gif" alt="loading" class="loading"/>');
     			},
 				success: function(data)
 				{
-				$('#resultspost').html(data);
+				$('#ajax').html(data);
     			},
 				error: function()
 				{
-				$('#resultspost').html('error loading data, please refresh.');
+				$('#ajax').html('error loading data, please refresh.');
     			}
 			});
        e.preventDefault();
