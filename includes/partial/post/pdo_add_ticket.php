@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 						// In case any of our lines are larger than 70 characters, we wordwrap()
 						$message = wordwrap($message, 70, "\r\n");
 						// Send email
-						mail($to, $msgtitle, $message, $headers);		
+						mail($to, $msgtitle, $message, $headers);
 					};
 		}
 	};
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 		$closeengineerid = null;
 	};
 
-	// is ticket PM or not 
+	// is ticket PM or not
 	if ($_POST['cmn-toggle-pm'] !== null) { $pm = '1'; } else { $pm = '0'; };
 
 	// Create new ticket object from form values
@@ -163,6 +163,17 @@ if ($_SERVER['REQUEST_METHOD']== "POST") {
 			$SLAETA = $date;
 	}
 
+	// Get out of hours details
+	$STH = $DBH->Prepare("SELECT * FROM out_of_hours_contact_details WHERE helpdesk = :helpdesk");
+	$STH->bindParam(':helpdesk', $_POST['helpdesk'], PDO::PARAM_INT);
+	$STH->setFetchMode(PDO::FETCH_OBJ);
+	$STH->execute();
+	while($row = $STH->fetch()) {
+		$OFHTIME = $row->end_of_day;
+		$OFHMESSAGE = $row->message;
+		$hour = date("G");
+		if ($hour > $OFHTIME) { $OFH = $OFHMESSAGE; } else { $OFH = null; };
+	}
 	// Update view and update call list
 ?>
 <h2>Thank you</h2>
@@ -173,6 +184,7 @@ Your ticket has been added and has been assigned to <?php echo(engineer_friendly
 Your ticket has been added to <?php echo(CODENAME) ?>
 <?php } ?>
 </p>
+<?php echo($OFH); ?>
 <p>An engineer will be in touch shortly if they require additional information, any correspondence will be emailed to the contact address you entered in the form.</p>
 <?php if ($SLA) { ?>
 <h3>Service Level Agreement</h3>
