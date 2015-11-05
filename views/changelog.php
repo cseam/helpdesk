@@ -40,13 +40,11 @@
 							<li>Terms and conditions on ticket creation</li>
 							<li>Ability to switch Helpdesks as manager</li>
 							<li>On hover pop-out details on ticket</li>
-							<li>Advanced search</li>
 							<li>Average durations report</li>
 							<li>Ticket timeline</li>
 							<li>Managers subscribe to notifications</li>
 							<li>Managers customise views</li>
 							<li>Edit/Delete Scheduled tasks and change-control</li>
-							<li>Update feedback page</li>
 						</ul>
 				</div>
 				</div>
@@ -54,6 +52,13 @@
 				<div id="call">
 					<div id="ajax">
 						<h3>Change Log</h3>
+						<h4>Nov, 2015 - Adv Search Cont.</h4>
+							<ul>
+								<li>updated user feedback page to make it clear what feedback is left</li>
+								<li>finished advanced search</li>
+								<li>notify users outside of working hours out of hours number</li>
+							</ul>
+
 						<hr/>
 						<h4>Oct, 2015 - Adv Search</h4>
 							<ul>
@@ -69,7 +74,7 @@
 								<li>added profile pictures to tickets</li>
 								<li>added pm calls</li>
 							</ul>
-						
+
 						<hr/>
 						<h4>Aug, 2015 - Reports Area</h4>
 							<ul>
@@ -79,7 +84,7 @@
 								<li>added mobile specific menus</li>
 								<li>added print stylesheet</li>
 							</ul>
-						
+
 						<hr/>
 						<h4>Apr, 2015 - CRON</h4>
 							<ul>
@@ -88,14 +93,14 @@
 								<li>added ticket hold feature</li>
 								<li>added out of hours form</li>
 							</ul>
-						
+
 						<hr/>
 						<h4>Mar, 2015 - PDO</h4>
 							<ul>
 								<li>switched forms to PDO to stop injection attacks</li>
 								<li>added front desk lockers for IT</li>
 							</ul>
-						
+
 						<hr/>
 						<h4>Feb, 2015 - Superusers</h4>
 							<ul>
@@ -112,7 +117,7 @@
 								<li>added urgent calls</li>
 								<li>added cfg file and git ignore on settings files</li>
 							</ul>
-						
+
 						<hr/>
 						<h4>Nov, 2014 - Search</h4>
 							<ul>
@@ -121,7 +126,7 @@
 								<li>added custom icons and artwork</li>
 								<li>added ticket feedback for managers only</li>
 							</ul>
-						
+
 						<hr/>
 						<h4>Oct, 2014 - LDAP authentication</h4>
 							<ul>
@@ -163,7 +168,7 @@
 							</ul>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	<a href="/views/changelog.php" target="_blank" class="changelog">changelog</a>
