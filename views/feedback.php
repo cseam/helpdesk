@@ -48,12 +48,79 @@
 					<form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="addForm">
 						<fieldset>
 						<legend>Satisfaction</legend>
-							<label for="satisfaction1" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction1" name="satisfaction" value="1" style="width: 10%;">
-							<label for="satisfaction2" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction2" name="satisfaction" value="2" style="width: 10%;">
-							<label for="satisfaction3" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction3" name="satisfaction" value="3" style="width: 10%;">
-							<label for="satisfaction4" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction4" name="satisfaction" value="4" style="width: 10%;">
-							<label for="satisfaction5" style="width: 80%;"><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /><img src="/public/images/ICONS-star.png" alt="star" /></label><input type="radio" id="satisfaction5" name="satisfaction" value="5" style="width: 10%;">
-							<input type="hidden" id="callid" name="callid" value="<?=$_GET['id'];?>" />
+						<p>Please leave feedback on how you feel your ticket was dealt with, Poor feedback may be followed up by the engineers line manager.</p>
+						<table>
+						<tr>
+							<th>Feedback</th>
+							<th>Select</th>
+						</tr>
+						<tr>
+							<td>
+								<label for="satisfaction1" style="display: inline-block;">
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+								</label>
+							</td>
+							<td>
+								<input type="radio" id="satisfaction1" name="satisfaction" value="1">
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<label for="satisfaction1" style="display: inline-block;">
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+								</label>
+							</td>
+							<td>
+								<input type="radio" id="satisfaction2" name="satisfaction" value="2">
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<label for="satisfaction1" style="display: inline-block;">
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+								</label>
+							</td>
+							<td>
+								<input type="radio" id="satisfaction3" name="satisfaction" value="3">
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<label for="satisfaction1" style="display: inline-block;">
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+								</label>
+							</td>
+							<td>
+								<input type="radio" id="satisfaction4" name="satisfaction" value="4">
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<label for="satisfaction1" style="display: inline-block;">
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+									<img src="/public/images/svg/ICONS-star.svg" alt="star" width="24" height="auto"/>
+								</label>
+							</td>
+							<td>
+								<input type="radio" id="satisfaction5" name="satisfaction" value="5">
+							</td>
+						</tr>
+						</table>
+						<p>Fewer star = Worse feedback / More stars = better feedback</p>
+						<input type="hidden" id="callid" name="callid" value="<?=$_GET['id'];?>" />
 						</fieldset>
 						<fieldset>
 						<legend>Details</legend>
