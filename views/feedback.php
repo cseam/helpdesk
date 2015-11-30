@@ -15,6 +15,7 @@
 	<body>
 		<div class="section">
 			<div id="branding">
+				<img src="/public/images/svg/BRANDING-CLC_Logo_PANTONE.svg" style="width:auto;height:10vh;float:left;margin-left:1rem;" alt="clc logo" />
 				<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/nav.php'); ?>
 			</div>
 		<div id="leftpage">

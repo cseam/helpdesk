@@ -147,7 +147,7 @@ em {
 }
 #branding {
 	height: 14.5%;
-	background: transparent url('/public/images/svg/BRANDING-CLC_Logo_PANTONE.svg') no-repeat top left;
+	/*background: transparent url('/public/images/svg/BRANDING-CLC_Logo_PANTONE.svg') no-repeat top left;*/
 	background-size: auto 80%;
 	text-align: right;
 	margin-bottom: 1rem;
