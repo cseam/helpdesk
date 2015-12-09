@@ -32,36 +32,50 @@
 </tr>
 <?	} ?>
 </table>
-<!--
-<p>Number of tickets assigned to engineer / of those closed / ratio complete last 30 days</p>
+<p>Average time engineer takes to close tickets in last 30 days, including out of hours</p>
 <table>
 <tr>
 	<th>Engineer Name</th>
-	<th>Assigned</th>
-	<th>Closed</th>
-	<th>Close Ratio</th>
+	<th>Avg H:M:S</th>
 </tr>
 <?php
-
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-		$STH = $DBH->Prepare("SELECT engineerName, Count(assigned) AS HowManyAssigned, sum(case when status=1 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid AND calls.opened >= DATE_SUB(CURDATE(),INTERVAL 30 DAY)
-GROUP BY assigned order by HowManyAssigned DESC");
+		$STH = $DBH->Prepare("
+		SELECT engineerName, callid, opened, closed,  SEC_TO_TIME(AVG(TIME_TO_SEC(TIMEDIFF(closed,opened)))) AS avgtimetoclose
+		FROM engineers 
+		LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers 
+		WHERE engineers.helpdesk <= :helpdeskid 
+		AND calls.opened != calls.closed
+		AND calls.status = 2
+		AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)  
+		GROUP BY engineerName
+		ORDER BY callid DESC");
 		$hdid = 3;
 	} else {
-		$STH = $DBH->Prepare("SELECT engineerName, Count(assigned) AS HowManyAssigned, sum(case when status=1 THEN 1 ELSE 0 END) AS OpenOnes FROM calls INNER JOIN engineers ON calls.assigned=engineers.idengineers WHERE engineers.helpdesk = :helpdeskid AND calls.opened >= DATE_SUB(CURDATE(),INTERVAL 30 DAY)
-GROUP BY assigned order by HowManyAssigned DESC");
-		$hdid = $_SESSION['engineerHelpdesk'];
+		$STH = $DBH->Prepare("
+		SELECT engineerName, callid, opened, closed,  SEC_TO_TIME(AVG(TIME_TO_SEC(TIMEDIFF(closed,opened)))) AS avgtimetoclose
+		FROM engineers 
+		LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers 
+		WHERE engineers.helpdesk = :helpdeskid 
+		AND calls.opened != calls.closed
+		AND calls.status = 2
+		AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+		GROUP BY engineerName
+		ORDER BY callid DESC");
+		$hdid = $_SESSION['engineerHelpdesk'];		
 	}
+	
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
-	while($row = $STH->fetch()) { ?>
+	while($row = $STH->fetch()) {
+?>		
 <tr>
 	<td><?=$row->engineerName;?></td>
-	<td><?=$row->HowManyAssigned;?></td>
-	<td><?=($row->HowManyAssigned-$row->OpenOnes);?></td>
-	<td><?=round(($row->HowManyAssigned-$row->OpenOnes) / $row->HowManyAssigned * 100); ?>%</td>
+	<td><?=$row->avgtimetoclose;?></td>
+	<td><?php 
+		
+	?></td>
 </tr>
-<? } ?>
+<?php } ?>
 </table>
--->
