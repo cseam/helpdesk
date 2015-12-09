@@ -13,10 +13,29 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
-		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk <= :helpdeskid GROUP BY engineerName ORDER BY Last30 DESC");
+		$STH = $DBH->Prepare("
+		SELECT engineerName, 
+		sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7, 
+		sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1, 
+		sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 
+		FROM engineers 
+		LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers 
+		WHERE engineers.helpdesk <= :helpdeskid
+		AND engineers.disabled != 1  
+		GROUP BY engineerName 
+		ORDER BY Last30 DESC");
 		$hdid = 3;
 	} else {
-		$STH = $DBH->Prepare("SELECT engineerName, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1 , sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers WHERE engineers.helpdesk = :helpdeskid GROUP BY engineerName ORDER BY Last30 DESC");
+		$STH = $DBH->Prepare("SELECT engineerName, 
+		sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7, 
+		sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1, 
+		sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 
+		FROM engineers 
+		LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers 
+		WHERE engineers.helpdesk = :helpdeskid 
+		AND engineers.disabled != 1 
+		GROUP BY engineerName 
+		ORDER BY Last30 DESC");
 		$hdid = $_SESSION['engineerHelpdesk'];
 	}
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
@@ -32,11 +51,11 @@
 </tr>
 <?	} ?>
 </table>
-<p>Average time engineer takes to close tickets in last 30 days, including out of hours</p>
+<p>Average time engineer takes to close tickets in last 30 days, including non working hours</p>
 <table>
 <tr>
 	<th>Engineer Name</th>
-	<th>Avg H:M:S</th>
+	<th>Avg Time Hrs:Min:Sec</th>
 </tr>
 <?php
 	if ($_SESSION['engineerHelpdesk'] <= '3') {
@@ -49,7 +68,7 @@
 		AND calls.status = 2
 		AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)  
 		GROUP BY engineerName
-		ORDER BY callid DESC");
+		ORDER BY avgtimetoclose");
 		$hdid = 3;
 	} else {
 		$STH = $DBH->Prepare("
@@ -61,10 +80,9 @@
 		AND calls.status = 2
 		AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
 		GROUP BY engineerName
-		ORDER BY callid DESC");
+		ORDER BY avgtimetoclose");
 		$hdid = $_SESSION['engineerHelpdesk'];		
 	}
-	
 	$STH->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
 	$STH->setFetchMode(PDO::FETCH_OBJ);
 	$STH->execute();
@@ -73,9 +91,6 @@
 <tr>
 	<td><?=$row->engineerName;?></td>
 	<td><?=$row->avgtimetoclose;?></td>
-	<td><?php 
-		
-	?></td>
 </tr>
 <?php } ?>
 </table>
