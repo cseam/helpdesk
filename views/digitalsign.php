@@ -14,7 +14,7 @@
 	<body>
 	<div class="section">
 	<div id="branding">
-		<img src="/public/images/svg/BRANDING-CLC_Logo_PANTONE.svg" style="width:auto;height:10vh;float:left;margin-left:1rem;" alt="clc logo" />
+		<img src="/public/images/svg/BRANDING-CLC_Logo_PANTONE.svg" style="width:auto;height:10vh;float:left;margin-left:16px;text-align: left !important;" alt="clc logo" />
 	</div>
 	<div id="leftpage">
 		<div id="digitalsign-stats">

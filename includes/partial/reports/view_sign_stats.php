@@ -77,7 +77,7 @@
 			<td class="xbig"><?php echo($totalcalls);?></td>
 			<td class="xbig"><?=$row->Last1;?></td>
 			<td class="xbig"><?=$row->Last7;?></td>
-			<td class="xbig"><? for ($i = 0; $i < round($totalstars); $i++) { echo "<img src='/public/images/ICONS-star.png' alt='star' height='40' width='auto' />"; }; ?></td>
+			<td class="xbig"><? for ($i = 0; $i < round($totalstars); $i++) { echo "<img src='/public/images/svg/ICONS-star.svg' alt='star' height='40' width='auto' />"; }; ?></td>
 		</tr>
 <?	} ?>
 		</tbody>
