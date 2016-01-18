@@ -13,6 +13,11 @@
 		<script src="/public/javascript/jquery.validate.min.js" type="text/javascript"></script>
 	</head>
 	<body>
+	<?php
+	if (empty($_GET[id])) { 
+	// no id post simple error
+	echo("<p class='urgent'>An Error has occurred, please contact IT support.</p>");
+} else { ?>
 		<div class="section">
 			<div id="branding">
 				<img src="/public/images/svg/BRANDING-CLC_Logo_PANTONE.svg" style="width:auto;height:10vh;float:left;margin-left:1rem;" alt="clc logo" />
@@ -124,7 +129,7 @@
 						<input type="hidden" id="callid" name="callid" value="<?=$_GET['id'];?>" />
 						</fieldset>
 						<fieldset>
-						<legend>Details</legend>
+						<legend>Feedback</legend>
 							<label for="details">Comments</label>
 							<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
 						</fieldset>
@@ -132,6 +137,32 @@
 							<button name="submit" value="submit" type="submit">Submit</button>
 							<button name="clear" value="clear" type="reset">Clear</button>
 						</p>
+						<br /><br /><br />
+						<fieldset>
+							<legend>Call Details for reference</legend>
+							
+							
+							<?php
+							
+								$STH = $DBH->Prepare("SELECT * FROM calls
+													INNER JOIN status ON calls.status=status.id
+													INNER JOIN location ON calls.location=location.id
+													INNER JOIN categories ON calls.category=categories.id
+													LEFT JOIN service_level_agreement 
+														ON service_level_agreement.urgency = calls.urgency
+														AND service_level_agreement.helpdesk = calls.helpdesk
+													WHERE callid = :callid
+								");
+								$STH->bindParam(':callid', $_GET['id'], PDO::PARAM_STR);
+								$STH->setFetchMode(PDO::FETCH_OBJ);
+								$STH->execute();
+								while($row = $STH->fetch()) { ?>
+									
+									<h3 class="callbody"><?php echo($row->title);?></h3>
+									<?php echo(nl2br($row->details));?>
+										<?php }; ?>
+						</fieldset>
+						
 					</form>
 					<? } ?>
 				</div>
@@ -144,5 +175,6 @@
 			});
 		</script>
 		<a href="/views/changelog.php" target="_blank" class="changelog">changelog</a>
+		<?php }; ?>
 	</body>
 </html>
