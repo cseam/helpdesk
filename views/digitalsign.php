@@ -13,9 +13,6 @@
 	</head>
 	<body>
 	<div class="section">
-	<div id="branding">
-		<img src="/public/images/svg/BRANDING-CLC_Logo_PANTONE.svg" style="width:auto;height:10vh;float:left;margin-left:16px;text-align: left !important;" alt="clc logo" />
-	</div>
 	<div id="leftpage">
 		<div id="digitalsign-stats">
 			<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/partial/reports/view_sign_stats.php'; ?>

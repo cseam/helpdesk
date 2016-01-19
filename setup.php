@@ -367,9 +367,27 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			}
 		$conn = null;
 	}	
-	// Create Dummy Data	
+	// Create Dummy Data for testing	
 	if(isset($_POST['createDummyData'])) { 
-		print_r($_POST);
+		try {
+			// Connect to dev db
+			$conn = new PDO("mysql:host=".DB_LOC.";dbname=".DEV_DB_SCHEMA, DB_USER, DB_PASSWORD);
+			// set the PDO error mode to exception
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			// create tables
+			// assign engineers
+			$sql = "
+				INSERT INTO status (statusCode) VALUES ('test');
+				INSERT INTO status (statusCode) VALUES ('test2');
+			";
+			$conn->exec($sql);
+				echo "<p>(dummy data) inserted</p>";
+			}
+		catch(PDOException $e)
+			{
+			echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
+			}
+		$conn = null;
 	}	
 			
 	
