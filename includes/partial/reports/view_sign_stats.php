@@ -77,7 +77,6 @@
 			<td class="xbig"><?php echo($totalcalls);?></td>
 			<td class="xbig"><?=$row->Last1;?></td>
 			<td class="xbig"><?=$row->Last7;?></td>
-			<td class="xbig"><? for ($i = 0; $i < round($totalstars); $i++) { echo "<img src='/public/images/svg/ICONS-star.svg' alt='star' height='40' width='auto' />"; }; ?></td>
 		</tr>
 <?	} ?>
 		</tbody>
@@ -86,7 +85,6 @@
 				<td>Open Tickets</td>
 				<td>Closed Today</td>
 				<td>Closed This Week</td>
-				<td>Average Feedback</td>
 			</tr>
 		</tfoot>
 	</table>
@@ -122,4 +120,16 @@
 			</tr>
 		</tfoot>
 	</table>
-
+	<p></p>
+	<table>
+		<tbody>
+		<tr>
+			<td class="xbig" style="width: 100%"><? for ($i = 0; $i < round($totalstars); $i++) { echo "<img src='/public/images/svg/ICONS-star.svg' alt='star' height='60' width='60' />"; }; ?></td>
+		</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>Average Feedback</td>
+			</tr>
+		</tfoot>
+	</table>

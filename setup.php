@@ -20,7 +20,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 	<p>This page will help create the initial databases to get Helpdesk up and running, once this page has been run management is done via the web login, this page should then be deleted. </p>
 	<form method="post">
 		<input type="submit" name="createTables" value="Create Tables" />
-		<input type="submit" name="createDummyData" value="Create Dummy Data" />
+		<input type="submit" name="createDefaultData" value="Create Default Data" />
 	</form>
 	<?php
 	// functions to create tables
@@ -366,9 +366,9 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
 			}
 		$conn = null;
-	}	
-	// Create Dummy Data for testing	
-	if(isset($_POST['createDummyData'])) { 
+	}
+	// Create Default Data	
+	if(isset($_POST['createDefaultData'])) { 
 		try {
 			// Connect to dev db
 			$conn = new PDO("mysql:host=".DB_LOC.";dbname=".DEV_DB_SCHEMA, DB_USER, DB_PASSWORD);
@@ -377,11 +377,18 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			// create tables
 			// assign engineers
 			$sql = "
-				INSERT INTO status (statusCode) VALUES ('test');
-				INSERT INTO status (statusCode) VALUES ('test2');
+				INSERT INTO assign_engineers (id, engineerId) VALUES (1, 0);
+				INSERT INTO engineers (engineerName, engineerEmail, availableDays, sAMAccountName, engineerLevel, helpdesk, superuser) VALUES ('Admin', 'Admin@email.com', '1,2,3,4,5,6,7', 'admin', 1, 1, 1);
+				INSERT INTO helpdesks (helpdesk_name, description, deactivate, auto_assign, email_on_newticket) VALUES ('Default Helpdesk','description for helpdesk',0,0,0);
+				INSERT INTO location (locationName, iconlocation, shorthand) VALUES ('Main Site','svg/ICONS-house.svg','MAI');
+				INSERT INTO status (id, statusCode) VALUES (1, 'Open');
+				INSERT INTO status (id, statusCode) VALUES (2, 'Closed');
+				INSERT INTO status (id, statusCode) VALUES (3, 'On Hold');
+				INSERT INTO status (id, statusCode) VALUES (4, 'Escalated');
+				INSERT INTO status (id, statusCode) VALUES (5, 'Sent Away');
 			";
 			$conn->exec($sql);
-				echo "<p>(dummy data) inserted</p>";
+				echo "<p>(Default data) inserted</p>";
 			}
 		catch(PDOException $e)
 			{
@@ -389,8 +396,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			}
 		$conn = null;
 	}	
-			
-	
+		
 } else {
 	echo("<h2>Config Error</h2>");
 	echo("<p class='urgent'>Config not found, please create config/config.php using the supplied dist-config.php with your mysql connection details. </p>");

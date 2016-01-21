@@ -420,6 +420,10 @@ h3.callbody {
 	overflow: auto;
 	background: rgba(0,0,0,0.1);
 }
+#digitalsign #call {
+	height: 100%;
+}
+
 .calllink {
 	font-size: .6rem;
 	float: right;

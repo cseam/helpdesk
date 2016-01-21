@@ -7,7 +7,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
 ?>
 <!DOCTYPE HTML>
-<html lang="en"  id="digitalsign">
+<html lang="en" id="digitalsign">
 	<head>
 		<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 	</head>
