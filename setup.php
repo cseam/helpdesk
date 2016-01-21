@@ -381,6 +381,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				INSERT INTO engineers (engineerName, engineerEmail, availableDays, sAMAccountName, engineerLevel, helpdesk, superuser) VALUES ('Admin', 'Admin@email.com', '1,2,3,4,5,6,7', 'admin', 1, 1, 1);
 				INSERT INTO helpdesks (helpdesk_name, description, deactivate, auto_assign, email_on_newticket) VALUES ('Default Helpdesk','description for helpdesk',0,0,0);
 				INSERT INTO location (locationName, iconlocation, shorthand) VALUES ('Main Site','svg/ICONS-house.svg','MAI');
+				INSERT INTO categories (categoryName, helpdesk) VALUES ('Other',1);
 				INSERT INTO status (id, statusCode) VALUES (1, 'Open');
 				INSERT INTO status (id, statusCode) VALUES (2, 'Closed');
 				INSERT INTO status (id, statusCode) VALUES (3, 'On Hold');
