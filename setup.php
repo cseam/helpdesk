@@ -24,11 +24,11 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 	</form>
 	<?php
 	// functions to create tables
-	if(isset($_POST['createTables'])) { 
+	if(isset($_POST['createTables'])) {
 		// try to create tables
 		try {
 			// Connect to dev db
-			$conn = new PDO("mysql:host=".DB_LOC.";dbname=".DEV_DB_SCHEMA, DB_USER, DB_PASSWORD);
+			$conn = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			// create tables
@@ -132,7 +132,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(categories) created successfully</p>";
-			// change control 
+			// change control
 			$sql = "
 				CREATE TABLE `changecontrol` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -147,7 +147,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(change control) created successfully</p>";
-			// change control tags 
+			// change control tags
 			$sql = "
 				CREATE TABLE `changecontrol_tags` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -158,7 +158,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(change control tags) created successfully</p>";
-			// engineers 
+			// engineers
 			$sql = "
 				CREATE TABLE `engineers` (
 				`idengineers` int(11) NOT NULL AUTO_INCREMENT,
@@ -176,7 +176,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(engineers) created successfully</p>";
-			// engineers punchcard 
+			// engineers punchcard
 			$sql = "
 				CREATE TABLE `engineers_punchcard` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -198,8 +198,8 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 				";
 			$conn->exec($sql);
-				echo "<p>(engineers status) created successfully</p>";				
-			// feedback 
+				echo "<p>(engineers status) created successfully</p>";
+			// feedback
 			$sql = "
 				CREATE TABLE `feedback` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -226,7 +226,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(helpdesks) created successfully</p>";
-			// location 
+			// location
 			$sql = "
 				CREATE TABLE `location` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -238,7 +238,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(location) created successfully</p>";
-			// out of hours 
+			// out of hours
 			$sql = "
 				CREATE TABLE `out_of_hours` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -257,7 +257,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(Out of hours) created successfully</p>";
-			// out of hours contact 
+			// out of hours contact
 			$sql = "
 				CREATE TABLE `out_of_hours_contact_details` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -269,7 +269,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(Out of hours contact) created successfully</p>";
-			// performance objectives 
+			// performance objectives
 			$sql = "
 				CREATE TABLE `performance_review_objectives` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -284,7 +284,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(Performance objectives) created successfully</p>";
-			// quick responses 
+			// quick responses
 			$sql = "
 				CREATE TABLE `quick_responses` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -295,7 +295,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(quick responses) created successfully</p>";
-			// scheduled calls 
+			// scheduled calls
 			$sql = "
 				CREATE TABLE `scheduled_calls` (
 				`callid` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -326,7 +326,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(scheduled calls) created successfully</p>";
-			// scheduled calls cron 
+			// scheduled calls cron
 			$sql = "
 				CREATE TABLE `scheduled_calls_cron_log` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -336,7 +336,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(scheduled calls cron) created successfully</p>";
-			// service level agreement 
+			// service level agreement
 			$sql = "
 				CREATE TABLE `service_level_agreement` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -349,7 +349,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(service level agreement) created successfully</p>";
-			// status 
+			// status
 			$sql = "
 				CREATE TABLE `status` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -359,7 +359,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
 			$conn->exec($sql);
-				echo "<p>(status) created successfully</p>";			
+				echo "<p>(status) created successfully</p>";
 			}
 		catch(PDOException $e)
 			{
@@ -367,11 +367,11 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			}
 		$conn = null;
 	}
-	// Create Default Data	
-	if(isset($_POST['createDefaultData'])) { 
+	// Create Default Data
+	if(isset($_POST['createDefaultData'])) {
 		try {
 			// Connect to dev db
-			$conn = new PDO("mysql:host=".DB_LOC.";dbname=".DEV_DB_SCHEMA, DB_USER, DB_PASSWORD);
+			$conn = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			// create tables
@@ -395,8 +395,8 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
 			}
 		$conn = null;
-	}	
-		
+	}
+
 } else {
 	echo("<h2>Config Error</h2>");
 	echo("<p class='urgent'>Config not found, please create config/config.php using the supplied dist-config.php with your mysql connection details. </p>");
