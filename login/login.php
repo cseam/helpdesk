@@ -5,6 +5,7 @@
 	// load functions
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
 	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php');
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/pbkdf2.php');
 	// reset session details
 	$_SESSION['engineerLevel'] = 0;
 	$_SESSION['engineerId'] = null;
@@ -16,6 +17,31 @@
 		// using ldap bind
 		$ldaprdn  = $_POST['username'] . '@' . COMPANY_SUFFIX;     // lusername from form + domain suffix
 		$ldappass = $_POST['password'];  // associated password
+		// Check config if local logins are allowed
+		if(LOCALLOGIN == true) {
+			// Check if username is local login
+			if (end(explode('.',$_POST['username'])) == "local") {
+					// get local login hash
+						$localdn = $_POST['username']; // localdn from form
+						$STH = $DBH->Prepare("SELECT * FROM engineers WHERE sAMAccountName = :username");
+						$STH->bindParam(":username", $_POST['username'], PDO::PARAM_STR);
+						$STH->setFetchMode(PDO::FETCH_OBJ);
+						$STH->execute();
+							while($row = $STH->fetch()) {
+								// Check authentication
+								if (validate_password($ldappass,$row->localLoginHash) == 1) {
+									// Valid so setup session
+									$_SESSION['sAMAccountName'] = $row->sAMAccountName;
+									$_SESSION['engineerLevel'] = $row->engineerLevel;
+									$_SESSION['engineerId'] = $row->idengineers;
+									$_SESSION['superuser'] = $row->superuser;
+									$_SESSION['engineerHelpdesk'] = $row->helpdesk;
+									die("<script>location.href = '".$_GET['return']."'</script>");
+								}
+							}
+			}
+		}
+		// Ldap login
 		// check password isnt blank as ldap allows anon login that results in true
 			if($ldappass == "") {
 				// error return false

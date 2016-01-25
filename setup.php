@@ -170,6 +170,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				`helpdesk` int(11) NOT NULL,
 				`superuser` int(11) DEFAULT NULL,
 				`disabled` int(11) DEFAULT '0',
+				`localLoginHash` varchar(255) DEFAULT NULL,
 				PRIMARY KEY (`idengineers`),
 				UNIQUE KEY `idengineers_UNIQUE` (`idengineers`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -378,7 +379,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			// assign engineers
 			$sql = "
 				INSERT INTO assign_engineers (id, engineerId) VALUES (1, 0);
-				INSERT INTO engineers (engineerName, engineerEmail, availableDays, sAMAccountName, engineerLevel, helpdesk, superuser) VALUES ('Admin', 'Admin@email.com', '1,2,3,4,5,6,7', 'admin', 1, 1, 1);
+				INSERT INTO engineers (engineerName, engineerEmail, availableDays, sAMAccountName, engineerLevel, helpdesk, superuser, localLoginHash) VALUES ('admin.local', 'null', '1,2,3,4,5,6,7', 'admin.local', 1, 1, 1, 'sha256:1000:F54fR+eQd+D4UgMz4uZrOy2eranRNB68:WETpRZTYLiWVBwC7I+L9AqJd3vhcpzCb');
 				INSERT INTO helpdesks (helpdesk_name, description, deactivate, auto_assign, email_on_newticket) VALUES ('Default Helpdesk','description for helpdesk',0,0,0);
 				INSERT INTO location (locationName, iconlocation, shorthand) VALUES ('Main Site','svg/ICONS-house.svg','MAI');
 				INSERT INTO categories (categoryName, helpdesk) VALUES ('Other',1);
@@ -389,7 +390,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				INSERT INTO status (id, statusCode) VALUES (5, 'Sent Away');
 			";
 			$conn->exec($sql);
-				echo "<p>(Default data) inserted</p>";
+				echo "<p>(Default data) inserted</p><p>Default local admin created: 'admin.local' password: 'helpdesk'</p>";
 			}
 		catch(PDOException $e)
 			{

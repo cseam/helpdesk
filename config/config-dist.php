@@ -12,6 +12,8 @@ define('CODENAME', 'helpdesk');
 define('COMPANY_NAME', 'Great Company PLC');
 // company suffix used to postfix username for auto complete email etc
 define('COMPANY_SUFFIX', 'domainnamehere.co.uk');
+// allow local admin login
+define('LOCALLOGIN', true);
 // companys ldap server location for authentications
 define('LDAP_SERVER', 'ldap://ldapserver.domainnamehere.co.uk');
 // websever location and protocol you wish to connect using set to https for production
