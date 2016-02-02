@@ -5,3 +5,9 @@
   $route->add('/', 'homeController');
   $route->add('/login', 'loginController');
   $route->add('/logout', 'logoutController');
+
+  $route->add('/ticket', 'homeController');
+  $route->add('/engineer', 'engineerController');
+  $route->add('/manager', 'managerController');
+  $route->add('/reports', 'reportsController');
+  $route->add('/admin', 'adminController');

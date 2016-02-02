@@ -1,11 +1,11 @@
 <div id="sidr">
 <h3>Controls</h3>
-	<a href="">Add Ticket</a><br/>
-<?php if ($_SESSION['engineerLevel'] === "1") { ?><a href="">Engineer View</a><br/><?php }; ?>
-<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="">Manager View</a><br/><?php }; ?>
-<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="">Reports View</a><br/><?php }; ?>
-<?php if ($_SESSION['superuser'] === "1") { ?><a href="">Admin View</a><br/><?php }; ?>
-<a href="logout/" class="logout">Log out</a><br/>
+	<a href="/ticket/">Add Ticket</a><br/>
+<?php if ($_SESSION['engineerLevel'] === "1") { ?><a href="/engineer/">Engineer View</a><br/><?php }; ?>
+<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="/manager/">Manager View</a><br/><?php }; ?>
+<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="/reports/">Reports View</a><br/><?php }; ?>
+<?php if ($_SESSION['superuser'] === "1") { ?><a href="/admin/">Admin View</a><br/><?php }; ?>
+<a href="/logout/" class="logout">Log out</a><br/>
 <br/>
 <?php if ($_SESSION['engineerLevel'] === "1") { ?>
 <h3>My Tickets</h3>
