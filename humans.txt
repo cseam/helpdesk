@@ -1,0 +1,18 @@
+/* TEAM */
+Title:      Elliot Goode.
+Position:   Full Stack Developer
+Email:      me@elliotgoode.co.uk
+Twitter:    @atomicjam
+Location:   Cheltenham, Uk.
+
+/* THANKS */
+  Name: Mark Burrows
+  Name: Mat McMahon
+  Name: Graham Langley
+
+/* SITE */
+Created:     2016
+Language:    English (UK)
+Standards:   HTML5, CSS3
+Components:  PHP, jQuery
+Software:    Adobe Photoshop CC, Adobe Illustrator CC, Atom

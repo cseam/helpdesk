@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 380.9 354" style="enable-background:new 0 0 380.9 354;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#706F6E;stroke-width:24;stroke-miterlimit:10;}
+	.st1{fill:#5A7F72;}
+	.st2{font-family:'Arial-BoldMT';}
+	.st3{font-size:210px;}
+	.st4{font-family:'ArialMT';}
+	.st5{font-size:90px;}
+	.st6{letter-spacing:-1;}
+</style>
+<font horiz-adv-x="2048">
+<!-- Arial is a trademark of The Monotype Corporation in the United States and/or other countries. -->
+<!-- Copyright: Copyright 2015 Adobe System Incorporated. All rights reserved. -->
+<font-face font-family="ArialMT" units-per-em="2048" underline-position="-217" underline-thickness="150"/>
+<missing-glyph horiz-adv-x="1536" d="M256,0l0,1280l1024,0l0,-1280M288,32l960,0l0,1216l-960,0z"/>
+<glyph unicode="h" horiz-adv-x="1139" d="M135,0l0,1466l180,0l0,-526C399,1037 505,1086 633,1086C712,1086 780,1071 838,1040C896,1009 938,966 963,911C988,856 1000,777 1000,673l0,-673l-180,0l0,673C820,763 801,829 762,870C723,911 667,931 596,931C543,931 493,917 446,890C399,862 365,824 345,777C325,730 315,664 315,581l0,-581z"/>
+<glyph unicode="r" horiz-adv-x="682" d="M133,0l0,1062l162,0l0,-161C336,976 375,1026 410,1050C445,1074 483,1086 525,1086C586,1086 647,1067 710,1028l-62,-167C604,887 560,900 516,900C477,900 441,888 410,865C379,841 356,808 343,766C323,702 313,632 313,556l0,-556z"/>
+</font>
+
+	<font horiz-adv-x="2048">
+<!-- Arial is a trademark of The Monotype Corporation in the United States and/or other countries. -->
+<!-- Copyright: Copyright 2015 Adobe System Incorporated. All rights reserved. -->
+<font-face font-family="Arial-BoldMT" units-per-em="2048" underline-position="-217" underline-thickness="215"/>
+<missing-glyph horiz-adv-x="1536" d="M256,0l0,1280l1024,0l0,-1280M288,32l960,0l0,1216l-960,0z"/>
+<glyph unicode="2" horiz-adv-x="1139" d="M1036,261l0,-261l-985,0C62,99 94,192 147,281C200,369 306,486 463,632C590,750 667,830 696,872C735,930 754,987 754,1044C754,1107 737,1155 704,1189C670,1222 623,1239 564,1239C505,1239 459,1221 424,1186C389,1151 369,1092 364,1010l-280,28C101,1193 153,1304 241,1371C329,1438 439,1472 571,1472C716,1472 829,1433 912,1355C995,1277 1036,1180 1036,1064C1036,998 1024,935 1001,876C977,816 939,753 888,688C854,645 793,582 704,501C615,420 559,366 536,339C512,312 493,286 478,261z"/>
+<glyph unicode="4" horiz-adv-x="1139" d="M638,0l0,295l-600,0l0,246l636,931l236,0l0,-930l182,0l0,-247l-182,0l0,-295M638,542l0,501l-337,-501z"/>
+</font>
+
+	<ellipse class="st0" cx="190.4" cy="177.2" rx="176.2" ry="163.2"/>
+<text transform="matrix(1 0 0 1 72.2033 221.9395)" class="st1 st2 st3">24</text>
+<text transform="matrix(1 0 0 1 149.2542 302.9398)" class="st1 st4 st5 st6">hr</text>
+</svg>
