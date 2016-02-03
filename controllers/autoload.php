@@ -6,6 +6,12 @@ function controllerAutoload($controller_name) {
     require_once "controllers/".$controller_name.".php";
   }
 }
+// function used to auto load controller methods when required
+function methodAutoload($method_name) {
+  if (file_exists("controllers/methods/".$method_name.".php")) {
+    require_once "controllers/methods/".$method_name.".php";
+  }
+}
 // function used to auto load models when required
 function modelAutoload($model_name) {
   if (file_exists("models/".$model_name.".php")) {
@@ -14,4 +20,5 @@ function modelAutoload($model_name) {
 }
 // register function with spl_autoload_register
 spl_autoload_register('controllerAutoload');
+spl_autoload_register('methodAutoload');
 spl_autoload_register('modelAutoload');

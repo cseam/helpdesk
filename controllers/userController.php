@@ -6,8 +6,8 @@ class userController {
     // look for methods or render default routes
     // create methods object
     $methods = new Route();
-    $methods->add('/', 'userHomeMethod');
-    $methods->add('/add', 'addticketMethod');
+    $methods->add('/', 'userDefaultMethod');
+    $methods->add('/add', 'addTicketMethod');
     $methods->process(2);
 
     // render page
