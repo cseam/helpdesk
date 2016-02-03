@@ -520,7 +520,7 @@ h3.callbody {
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 15px;
+	border-radius: 5px;
 	background-color: rgba(0, 82, 90, 0.1);
 	color: rgb(100, 125, 106);
 	display: block;
@@ -530,7 +530,7 @@ h3.callbody {
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 15px;
+	border-radius: 5px;
 	background-color: rgba(88, 70, 0, 0.1);
 	color: rgba(194, 151, 9, 1);
 	display: block;
@@ -540,7 +540,7 @@ h3.callbody {
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 15px;
+	border-radius: 5px;
 	background-color: rgba(90, 0, 24, 0.1);
 	color: rgba(194, 10, 13, 1);
 	display: block;

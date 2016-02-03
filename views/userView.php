@@ -15,7 +15,8 @@
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->summary ?></p>
         <p>
-          //TODO add new ticket
+          //TODO recent activity for this user accross all tickets <br/>
+          //TODO user profile information for user with ability to change
         </p>
       </div>
     </div>

@@ -6,6 +6,7 @@ class userDefaultMethod {
     // populate my tickets list
       $ticketModel = new ticketModel();
       $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
+      //$listdata = $ticketModel->getAllTickets(50);
 
     // populate page content
       $pagedata = new stdClass();

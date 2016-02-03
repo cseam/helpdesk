@@ -29,7 +29,7 @@ class Route {
       // no matches display 404
       $error = new stdClass();
       $error->title = "404 Error";
-      $error->message = "No routes found.";
+      $error->message = "Opps! Page not found.";
       require_once "views/errorView.php";
     }
   }
