@@ -1,6 +1,6 @@
 <div id="sidr">
 <h3>Controls</h3>
-	<a href="/ticket/">Add Ticket</a><br/>
+	<a href="/user/">Add Ticket</a><br/>
 <?php if ($_SESSION['engineerLevel'] === "1") { ?><a href="/engineer/">Engineer View</a><br/><?php }; ?>
 <?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="/manager/">Manager View</a><br/><?php }; ?>
 <?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="/reports/">Reports View</a><br/><?php }; ?>

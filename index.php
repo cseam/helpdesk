@@ -15,4 +15,4 @@ require_once "routes/routes.php";
 require_once "controllers/autoload.php";
 
 // process routes
-$route->process();
+$route->process(1);
