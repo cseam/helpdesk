@@ -6,7 +6,7 @@
 
     public function getMyTickets($username, $limit = 10) {
       $database = new Database();
-      $database->query("SELECT * FROM calls WHERE owner = :username ORDER BY callid DESC LIMIT :limit");
+      $database->query("SELECT * FROM calls INNER JOIN status ON calls.status=status.id WHERE owner = :username ORDER BY callid DESC LIMIT :limit");
       $database->bind(":username", $username);
       $database->bind(":limit", $limit);
       $results = $database->resultset();

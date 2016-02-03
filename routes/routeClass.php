@@ -9,7 +9,7 @@ class Route {
     $this->_controler[] = $controler;
   }
   // process the routes from uri
-  public function process($urisegment) {
+  public function process($urisegment = 1) {
     // explode uri as we are only interested in the top route at this point
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $segment = $urisegment;
