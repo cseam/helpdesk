@@ -1,13 +1,11 @@
 <?php
 
-class userDefaultMethod {
+class actionUserDefault {
   public function __construct()
   {
     // populate my tickets list
       $ticketModel = new ticketModel();
       $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
-      //$listdata = $ticketModel->getAllTickets(50);
-      //$listdata = $ticketModel->getTicketsByHelpdesk(4, 10);
 
     // populate page content
       $pagedata = new stdClass();

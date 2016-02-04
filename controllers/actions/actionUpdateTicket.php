@@ -1,6 +1,6 @@
 <?php
 
-class addTicketMethod {
+class actionUpdateTicket {
   public function __construct()
   {
     // do controller things and request data from model

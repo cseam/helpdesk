@@ -6,10 +6,10 @@ function controllerAutoload($controller_name) {
     require_once "controllers/".$controller_name.".php";
   }
 }
-// function used to auto load controller methods when required
+// function used to auto load controller methods/actions when required
 function methodAutoload($method_name) {
-  if (file_exists("controllers/methods/".$method_name.".php")) {
-    require_once "controllers/methods/".$method_name.".php";
+  if (file_exists("controllers/actions/".$method_name.".php")) {
+    require_once "controllers/actions/".$method_name.".php";
   }
 }
 // function used to auto load models when required

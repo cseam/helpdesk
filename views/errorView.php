@@ -1,12 +1,9 @@
 <?php require_once "views/partials/header.php"; ?>
 
   <div id="leftpage">
-    <div id="stats">
-
-    </div>
-    <div id="calllist">
-
-    </div>
+    <p>
+      //TODO left side of this page (what next?)
+    </p>
     </div>
   <div id="rightpage">
     <div id="call">

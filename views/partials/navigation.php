@@ -3,7 +3,7 @@
 <a href="/ticket/add/">Add Ticket</a> / <a href="/user/">My Tickets</a><br/>
 <?php if ($_SESSION['engineerLevel'] === "1" or $_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="/engineer/">Engineer View</a><br/><?php }; ?>
 <?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="/manager/">Manager View</a><br/><?php }; ?>
-<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="/reports/">Reports View</a><br/><?php }; ?>
+<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?><a href="/report/">Reports View</a><br/><?php }; ?>
 <?php if ($_SESSION['superuser'] === "1") { ?><a href="/admin/">Admin View</a><br/><?php }; ?>
 <a href="/logout/" class="logout">Log out</a><br/>
 </div>
