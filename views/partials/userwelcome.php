@@ -1,3 +1,4 @@
-<h3>Information</h3>
-<p>Welcome to <?php echo(CODENAME);?>. Please use the form to log tickets for engineers. Once your ticket is logged you will receive email feedback on your issue.</p><p>Return here any time to see the status of your ticket, clicking the ticket title under 'Your Tickets' to view updates.</p>
-<p class="note">Remember, the more information you provide, the quicker the engineer can fix your problem. For example, if your printer is out of ink, please include the location of the printer, the printer model, the colour of the ink cartridge, etc.</p>
+<h3>Welcome to <?php echo(CODENAME);?>.</h3>
+<p>Please log your support issues by adding tickets to the helpdesk system, click 'add ticket' from the menu, then use the form to provide information for engineers.</p>
+<p>Once your ticket is logged, enginners will provide you with email feedback on your issue, you can also return here any time to see the progress of your ticket.</p>
+<p>To view the progress of your tickets click the ticket title under 'Your Tickets' to view updates, you can also update the ticket should details change.</p>

@@ -80,7 +80,7 @@
       $database->bind(":helpdesk", $helpdeskid);
       $result = $database->single();
       // if no results return nulla
-      if ($databse->rowCount() == 0) { return null;}
+      if ($database->rowCount() == 0) { return null;}
       // else populate object with ticket details
       return $result;
     }

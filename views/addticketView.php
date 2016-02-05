@@ -3,16 +3,16 @@
 
   <div id="leftpage">
     <div id="stats">
-      <?php include "views/partials/viewticketwelcome.php"; ?>
+      <?php include "views/partials/addticketwelcome.php"; ?>
     </div>
     <div id="calllist">
-        <?php include "views/partials/yourtickets.php"; ?>
+      <?php include "views/partials/yourtickets.php"; ?>
     </div>
     </div>
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
-        <?php include "views/partials/viewticket.php"; ?>
+        <?php include "views/partials/addticketForm.php"; ?>
       </div>
     </div>
   </div>
