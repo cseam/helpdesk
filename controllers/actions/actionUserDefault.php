@@ -6,6 +6,8 @@ class actionUserDefault {
     // populate my tickets list
       $ticketModel = new ticketModel();
       $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
+      //$listdata = $ticketModel->getTicketsByHelpdesk(4,50);
+      //$listdata = $ticketModel->getOldestTicketByHelpdesk(1);
 
     // populate page content
       $pagedata = new stdClass();
