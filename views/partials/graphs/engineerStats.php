@@ -3,7 +3,7 @@
     // WAIT FOR DOM
     // Draw Pie chartist.js
     var pieData = {
-                  series: [<?php echo $stats["totalTickets"];?>,<?php echo $stats["totalTicketsByHelpdesk"];?>]
+                  series: [<?php echo $stats["countAllTickets"];?>,<?php echo $stats["countTicketsByHelpdesk"];?>]
     };
     var pieOptions = {
                       chartPadding: {top: 20, right:5, bottom:20, left:5},
@@ -53,8 +53,8 @@
 <div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; height:85%; float: left; display:table;">
 <span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 2.5rem;font-weight: 100;">
 <?php
-  $engineernum = $stats["totalTicketsByHelpdesk"];
-  $totaltickets = $stats["totalTickets"];
+  $engineernum = $stats["countTicketsByHelpdesk"];
+  $totaltickets = $stats["countAllTickets"];
   echo number_format((100.0*$engineernum)/$totaltickets, 2) . "%";
 ?>
 </span>
