@@ -13,7 +13,6 @@ class actionEngineerDefault {
       $stats = @array();
       $stats = array_merge($stats, $statsModel->countAllTickets());
       $stats = array_merge($stats, $statsModel->countTicketsByHelpdesk(1));
-
     // render page
     require_once "views/engineerView.php";
   }
