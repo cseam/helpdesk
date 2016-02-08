@@ -12,7 +12,7 @@ class actionEngineerDefault {
       $statsModel = new statsModel();
       $stats = @array();
       $stats = array_merge($stats, $statsModel->countAllTickets());
-      $stats = array_merge($stats, $statsModel->countTicketsByHelpdesk(1));
+      $stats = array_merge($stats, $statsModel->countTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
     // render page
     require_once "views/engineerView.php";
   }
