@@ -8,19 +8,13 @@
       </p>
     </div>
     <div id="calllist">
-      <p>
-        //TODO engineers jobs list
-      </p>
+        <?php if ($listdata) { include "views/partials/assignedtickets.php"; } else { echo "No assigned tickets"; }?>
     </div>
     </div>
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
-        <h1><?php echo $pagedata->title ?></h1>
-        <p><?php echo $pagedata->summary ?></p>
-        <p>
-          //TODO engineer view tickets
-        </p>
+        <?php if ($ticketDetails) { include "views/partials/viewticket.php"; } else { echo "No open tickets"; }?>
       </div>
     </div>
   </div>

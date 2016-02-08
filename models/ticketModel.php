@@ -21,6 +21,22 @@
       return $results;
     }
 
+    public function getMyOpenAssignedTickets($engineerid) {
+      // function takes $engineerid and returns object containing array of tickets for id
+      $database = new Database();
+      $database->query("SELECT * FROM calls 
+                        INNER JOIN status ON calls.status=status.id
+                        WHERE assigned = :engineerid
+                        AND status !='2'
+                        ORDER by callid");
+      $database->bind(":engineerid", $engineerid);
+      $results = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() ==0) { return null;}
+      // else populate object with db resultsset
+      return $results;
+    }
+
     public function getAllTickets($limit = 10) {
       // function takes optional $limit to return object containing array of all ticket tickets limited by $limit
       $database = new Database();
