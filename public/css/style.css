@@ -210,7 +210,7 @@ input, textarea, button {
 	font-weight: 300;
 }
 select {
-	background: rgba(255,255,255,0.4) url('/public/images/svg/ICONS-dropdown.svg') no-repeat 99% 50%;
+	background: rgba(255,255,255,0.4) url('/public/images/ICONS-dropdown.svg') no-repeat 99% 50%;
 	background-size: 16px;
 	color: #777777;
 	border: 1px solid #ccc;
@@ -262,7 +262,7 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	font-size: 0.8rem;
-	background: rgba(55, 215, 2, 0.05) url('/public/images/svg/ICONS-here.svg') no-repeat 99% 50%;
+	background: rgba(55, 215, 2, 0.05) url('/public/images/ICONS-here.svg') no-repeat 99% 50%;
 	background-size: 16px;
 }
 #calldetails textarea {
@@ -447,21 +447,21 @@ h3.callbody {
 .tags button {
 	border: 1px solid transparent;
 	padding: 3px 15px 3px 30px;
-	background: rgba(255,255,255,0.25) url('/public/images/svg/ICONS-tag.svg') no-repeat 0% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-tag.svg') no-repeat 0% 50%;
 	background-size: contain;
 	cursor: pointer;
 	float: left;
 }
 .deltag button{
 	padding: 3px 30px 3px 15px;
-	background: rgba(255,255,255,0.25) url('/public/images/svg/ICONS-null.svg') no-repeat 95% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-null.svg') no-repeat 95% 50%;
 	background-size: auto 60%;
 	cursor: pointer;
 	float: left;
 }
 .addtagform button{
 	padding: 3px 15px 3px 30px;
-	background: rgba(255,255,255,0.25) url('/public/images/svg/ICONS-tag.svg') no-repeat 0% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-tag.svg') no-repeat 0% 50%;
 	background-size: contain;
 	cursor: pointer;
 	float: left;
@@ -674,7 +674,7 @@ select.error, input.error, textarea.error {
 	border: 1px solid silver;
 }
 select.error {
-	background: #ffe0e0 url('/public/images/svg/ICONS-dropdown.svg') no-repeat 99% 50%;
+	background: #ffe0e0 url('/public/images/ICONS-dropdown.svg') no-repeat 99% 50%;
 	background-size: 16px;
 }
 label.error {
