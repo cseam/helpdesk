@@ -4,11 +4,11 @@
   <div id="leftpage">
     <div id="stats">
       <p>
-        //TODO engineer performance graphs
+        <?php include "views/partials/graphs/engineerStats.php" ?>
       </p>
     </div>
     <div id="calllist">
-        <?php if ($listdata) { include "views/partials/assignedtickets.php"; } else { echo "No assigned tickets"; }?>
+        <?php if ($listdata) { include "views/partials/assignedtickets.php"; } else { echo "0 assigned tickets"; }?>
     </div>
     </div>
   <div id="rightpage">
