@@ -3,7 +3,7 @@
     // WAIT FOR DOM
     // Draw Pie chartist.js
     var pieData = {
-                  series: [<?php echo $stats["total"];?>,<?php echo $stats["total"];?>]
+                  series: [<?php echo $stats["totalTickets"];?>,<?php echo $stats["totalTicketsByHelpdesk"];?>]
     };
     var pieOptions = {
                       chartPadding: {top: 20, right:5, bottom:20, left:5},
@@ -17,7 +17,10 @@
     var data = {
                 labels: ['Su','Mo','Tu','We','Th','Fr','Sa'],
                 series: [
-                        [0,40,20,30,2,10,0],
+                        [0,40,21,30,2,10,0],
+                        [0,10,44,33,12,100,0],
+                        [0,22,24,3,22,15,0],
+                        [0,44,0,40,44,10,0],
                         [0,5,10,50,5,7,11]
                         ]
     };
@@ -35,7 +38,7 @@
       if(data.type === 'line' || data.type === 'area') {
         data.element.animate({
           d: {
-            begin: 2000 * data.index,
+            begin: 500 * data.index,
             dur: 2000,
             from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
             to: data.path.clone().stringify(),
@@ -50,14 +53,10 @@
 <div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; height:85%; float: left; display:table;">
 <span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 2.5rem;font-weight: 100;">
 <?php
-if ($allpie > 0) {
-$alltotal = $allpie + $allopen;
-$display = round(($allpie / $alltotal) * 100);
-} else {
-$display = '0';
-}
-echo $display;
-?>%
+  $engineernum = $stats["totalTicketsByHelpdesk"];
+  $totaltickets = $stats["totalTickets"];
+  echo number_format((100.0*$engineernum)/$totaltickets, 2) . "%";
+?>
 </span>
 </div>
 <div id="weekstats" class="ct-chart ct-golden-section" style="width: 60%; height: 85%;float:left;"></div>

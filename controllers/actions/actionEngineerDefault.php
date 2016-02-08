@@ -8,9 +8,12 @@ class actionEngineerDefault {
       $listdata = $ticketModel->getMyOpenAssignedTickets($_SESSION['engineerId']);
     // populate page content with oldest open ticket
       $ticketDetails = $ticketModel->getOldestTicketByHelpdesk($_SESSION['engineerHelpdesk']);
-    // populate stats object for grapheme_strlen
+    // populate stats object for graphs
       $statsModel = new statsModel();
-      $stats = $statsModel->countAllTickets();
+      $stats = @array();
+      $stats = array_merge($stats, $statsModel->countAllTickets());
+      $stats = array_merge($stats, $statsModel->countTicketsByHelpdesk(1));
+
     // render page
     require_once "views/engineerView.php";
   }
