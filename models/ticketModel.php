@@ -85,4 +85,16 @@
       return $result;
     }
 
+    public function getAdditionalDetails($ticketid) {
+      // function takes $ticketid and returns object for additional fields stored for ticket
+      $database = new Database();
+      $database->query("SELECT * FROM call_additional_results WHERE callid = :ticketid");
+      $database->bind(":ticketid", $ticketid);
+      $results = $database->resultset();
+      // if no results return null
+      if ($database->rowcount() == 0) { return null;}
+      // else return results
+      return $results;
+    }
+
 }

@@ -6,194 +6,39 @@
     <input type="hidden" id="details" name="details" value="<?php echo $ticketDetails["details"];?>" />
     <h2>Ticket details #<?php echo $ticketDetails["callid"]; ?></h2>
     <p class="callheader">#<?php echo $ticketDetails["callid"];?></p>
-    <p class="callheader"><?php echo $ticketDetails["categoryName"];?></p>
-    <p class="callheader">Created by <?php echo $ticketDetails["name"];?></p>
+    <p class="callheader">Category: <?php echo $ticketDetails["categoryName"];?></p>
+    <p class="callheader">Created by: <?php echo $ticketDetails["name"];?></p>
     <p class="callheader">Contact number: <?php echo $ticketDetails["tel"];?></p>
-    <p class="callheader"><?php echo $ticketDetails["locationName"];?></p>
-    <p class="callheader"><?php echo $ticketDetails["room"];?></p>
+    <p class="callheader">Location: <?php echo $ticketDetails["locationName"];?></p>
+    <p class="callheader">Room: <?php echo $ticketDetails["room"];?></p>
+    <p class="callheader">Assigned to: <?php echo $ticketDetails["assigned"];?></p>
+    <p class="callheader">Opened: <?php echo date("d/m/Y H:i:s", strtotime($ticketDetails["opened"]));?></p>
+    <p class="callheader">Closed: <?php echo date("d/m/Y H:i:s", strtotime($ticketDetails["closed"]));?></p>
+    <p class="callheader">Last Update: <?php echo date("d/m/Y H:i:s", strtotime($ticketDetails["lastupdate"]));?></p>
+    <p class="callheader">Locker: <?php echo $ticketDetails["lockerid"];?></p>
+    <h3 class="callbody"><?php echo $ticketDetails["title"];?></h3>
+    <p class="callbody">
+      <ul>
+        <?php foreach ($additionalDetails as $key => $value) { echo "<li>" . $value["label"] .": ". $value["value"] . "</li>"; } ?>
+      </ul>
+    </p>
+    <p class="callbody">
 
-<br/><br/><br/>
-<pre>
-  <?php print_r($ticketDetails) ?>
-</pre>
+      <?php if (@getimagesize(PROFILE_IMAGES . strtolower($ticketDetails["owner"]) . ".jpg")) {
+        // check profile image exists for user
+        echo "<img src=\" " . PROFILE_IMAGES . strtolower($ticketDetails["owner"]) . ".jpg" . "\" alt=\"default profile picture\" class=\"profile-picture\" />";
+      } else {
+        // display default placeholder
+        echo "<img src=\"/uploads/profile_images/default.jpg\" alt=\"default profile picture\" class=\"profile-picture\" />";
+      }?>
+      <?php echo nl2br($ticketDetails["details"]);?>
+    </p>
+    <fieldset>
+      <legend>Update Ticket</legend>
+      <p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
+      <p>
+        //TODO UPDATE TICKET CONTROLS & FORM
+      </p>
+    </fieldset>
 
-		<!-- <p class="callheader"><?php if ($row->assigned == NULL) { echo("Not assigned yet"); } else {?>Assigned to <?php echo(engineer_friendlyname($row->assigned)); }?></p>
-		<p class="callheader">
-		<?php
-		if ($row->status === '2') { echo("Closed in ");} else { echo("Open for ");};
-			$date1 = strtotime($row->opened);
-			if ($row->status ==='2') {$date2 = strtotime($row->closed);} else {$date2 = time();};
-			$diff = $date2 - $date1;
-			$d = ($diff/(60*60*24))%365;
-			$h = ($diff/(60*60))%24;
-			$m = ($diff/60)%60;
-			echo( $d." days, ".$h." hours, ".$m." minutes");
-		?>
-		</p>
-		<p class="callheader">Call Opened <?php echo(date("d/m/Y H:i:s", strtotime($row->opened)));?></p>
-		<p class="callheader">Last Update <?php echo(date("d/m/Y H:i:s", strtotime($row->lastupdate)));?></p>
-		<?php if ($row->lockerid != null) { ?><p class="callheader">Locker #<?php echo($row->lockerid);?></p><?php }; ?>
-		<?php
-			// populate additional fields
-				$STHloop = $DBH->Prepare("SELECT * FROM call_additional_results WHERE callid = :callid");
-				$STHloop->bindParam(':callid', $row->callid, PDO::PARAM_STR);
-				$STHloop->setFetchMode(PDO::FETCH_OBJ);
-				$STHloop->execute();
-				while($row2 = $STHloop->fetch()) { ?>
-					<p class="callheader"><?php echo($row2->label);?> - <?php echo($row2->value);?></p>
-				<?php }; ?>
-		<?php
-			if ($row->close_eta_days) { ?>
-		<p class="sla">Due on or before: <?php
-			$datenow = date("d-m-Y");
-			$datedue = strtotime(date("d-m-Y", strtotime($row->opened)) . $row->close_eta_days . " days");
-			$datedue = date("d-m-Y",$datedue);
-			echo(str_replace('-', '/', $datedue));
-
-			$sla = strtotime($datedue) - strtotime($datenow);
-			$days = ($sla/(60*60*24))%365;
-			echo( " ".$days." days time (SLA)");
-
-			?>
-			</p>
-		<? }; ?>
-		<h3 class="callbody"><?php echo($row->title);?></h3>
-		<p class="callbody">
-		<?php
-			$src = HELPDESK_LOC . "/uploads/profile_images/" . strtolower($row->owner) . ".jpg";
-			if (@getimagesize($src)) {
-				//use profile image ?>
-				<img src="<?php echo($src);?>" alt="<?php echo(strtolower($row->owner));?> profile picture" class="profile-picture" />
-			<?php } else {
-				//use default image ?>
-				<img src="/uploads/profile_images/default.jpg" alt="default profile picture" class="profile-picture" />
-		<?php };?>
-			<?php echo(nl2br($row->details));?>
-		</p>
-	<fieldset>
-		<legend>Update Ticket</legend>
-		<p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
-		<p><label for="attachment">Picture or Screenshot</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
-		<?php if ($_SESSION['engineerId'] !== null) {?>
-	</fieldset>
-	<fieldset>
-		<legend>Engineer Controls</legend>
-			<span class="engineercontrols">
-				<label for="callreason">Reason for issue</label>
-				<select id="callreason" name="callreason" REQUIRED>
-					<option value="" <?php if($row->callreason == NULL) {echo("SELECTED");};?>>Please Select</option>
-					<option value="0" >Unknown</option>
-
-
-					<?php
-						if ($_SESSION['engineerHelpdesk'] <= '3') {
-							$STHloop = $DBH->Prepare("SELECT * FROM callreasons WHERE helpdesk_id <= :helpdeskid ORDER BY reason_name");
-							$hdid = 3;
-						} else {
-							$STHloop = $DBH->Prepare("SELECT * FROM callreasons WHERE helpdesk_id = :helpdeskid ORDER BY reason_name");
-							$hdid = $_SESSION['engineerHelpdesk'];
-						}
-						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
-						$STHloop->setFetchMode(PDO::FETCH_OBJ);
-						$STHloop->execute();
-						while($row2 = $STHloop->fetch()) { ?>
-						<option value="<?php echo($row2->id);?>" <?php if ($row2->id == $row->callreason) {echo("SELECTED");}; ?>><?php echo($row2->reason_name);?></option>
-					<?php }; ?>
-				</select>
-				<label for="quickresponse">Quick Response</label>
-				<select id="quickresponse" name="quickresponse">
-					<option value="" SELECTED>Please Select</option>
-					<?php
-						if ($_SESSION['engineerHelpdesk'] <= '3') {
-							$STHloop = $DBH->Prepare("SELECT * FROM quick_responses WHERE helpdesk_id <= :helpdeskid ORDER BY quick_response");
-							$hdid = 3;
-						} else {
-							$STHloop = $DBH->Prepare("SELECT * FROM quick_responses WHERE helpdesk_id = :helpdeskid ORDER BY quick_response");
-							$hdid = $_SESSION['engineerHelpdesk'];
-						}
-						$STHloop->bindParam(":helpdeskid", $hdid, PDO::PARAM_STR);
-						$STHloop->setFetchMode(PDO::FETCH_OBJ);
-						$STHloop->execute();
-						while($row2 = $STHloop->fetch()) { ?>
-						<option value="<?php echo($row2->quick_response);?>"><?php echo($row2->quick_response);?></option>
-					<?php }; ?>
-				</select>
-				<script type="text/javascript">
-					$("#quickresponse").change(function(e) {
-						$('#updatedetails').val($('#quickresponse').val() + ', ' + $('#updatedetails').val());
-					});
-				</script>
-			</span>
-	</fieldset>
-	<?php }; ?>
-	<fieldset>
-		<legend>Update Controls</legend>
-			<p class="buttons">
-			<?php if ($row->status === '1') {?>
-
-			<?php if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?>
-				<button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">assign</button>
-			<?php }; ?>
-
-
-
-			<button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button>
-			<button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
-			<button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
-			<button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
-			<?php };?>
-			<?php if ($row->status === '2') {
-				echo("<a href='". HELPDESK_LOC ."/views/feedback.php?id=" . $row->callid ."'>Leave Feedback</a> or");
-			};?>
-			<?php if ($row->status === '2') {?>
-			<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">still have an issue?</button>
-			<?php } else { ?>
-				<button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
-			<?php }; ?>
-
-			</p>
-	</fieldset>
-	</form>
-	<script type="text/javascript">
-	$(function() {
-		// Wait for DOM ready state
-		// Client side form validation
-		$("#updateForm").validate({
-			rules: {
-				updatedetails: {
-					required: false,
-					}
-			},
-			// Submit via ajax if valid
-			submitHandler: function(form) {
-				// Setup formdata object
-				var formData = new FormData(document.getElementById("updateForm"));
-				// Main magic with files here
-				formData.append('attachment', $('input[type=file]')[0].files[0]);
-				console.log(formData);
-				$.ajax(
-					{
-					type: 'post',
-					url: '/includes/partial/post/update_ticket.php',
-					data: formData,
-					async: false,
-					cache: false,
-					contentType: false,
-					processData: false,
-					success: function(data)
-					{
-						$('#ajax').html(data);
-						console.log ("updated ticket");
-					},
-					error: function()
-					{
-						$('#ajax').html('error :' + error() );
-						console.log ("error updating ticket");
-					}
-				});
-			}
-		});
-		// End DOM Ready
-	});
-	</script> -->
 </div>

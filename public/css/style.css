@@ -375,7 +375,7 @@ h3.callbody {
 	color: #919191;
 }
 .profile-picture {
-	border-radius: 50px;
+	border-radius: 10px;
 	height: 120px;
 	width: auto;
 	float: left;
