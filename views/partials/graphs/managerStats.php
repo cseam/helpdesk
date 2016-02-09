@@ -3,19 +3,19 @@
 	// WAIT FOR DOM
 	// Draw Bar chartist.js
 	var data = {
-		labels: ['test','test2','test3'],
+		labels: ['Engineer One','Engineer Two','Engineer Three','Engineer Four','Engineer Five','Engineer Six'],
 		series: [
-			['3','3','3'],
-			['3','3','3'],
-			['3','3','3'],
-			['3','3','3'],
-			['3','3','3'],
-			['3','3','3'],
-			['3','3','3']
+			['3','6','9','12','9','6'],
+			['3','3','3','3','3','3'],
+			['3','6','9','12','9','6'],
+			['6','3','1','10','4','2'],
+			['3','6','9','12','9','6'],
+			['3','13','33','1','7','11'],
+			['3','6','9','12','9','6']
 			]
 		};
 	var options = {
-		chartPadding: 20,
+		chartPadding: 15,
 		fullWidth: true,
 		horizontalBars: true,
 		stackBars: true,
