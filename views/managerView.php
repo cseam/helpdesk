@@ -4,13 +4,11 @@
   <div id="leftpage">
     <div id="stats">
       <p>
-        //TODO managers department stats
+        <?php include "views/partials/graphs/managerStats.php" ?>
       </p>
     </div>
     <div id="calllist">
-      <p>
-        //TODO managers reports list
-      </p>
+        <?php include "views/partials/listManagerReports.php" ?>
     </div>
     </div>
   <div id="rightpage">

@@ -2,17 +2,10 @@
 
 
   <div id="leftpage">
-    <div id="stats">
-      <p>
-        //TODO admin welcome
-      </p>
-    </div>
     <div id="calllist">
-      <p>
-        //TODO admin reports list
-      </p>
+      <?php include "views/partials/listAdminReports.php" ?>
     </div>
-    </div>
+  </div>
   <div id="rightpage">
     <div id="call">
       <div id="ajax">

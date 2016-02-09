@@ -4,13 +4,11 @@
   <div id="leftpage">
     <div id="stats">
       <p>
-        //TODO all helpdesk tickets year overview graph
+        <?php include "views/partials/graphs/reportStats.php" ?>
       </p>
     </div>
     <div id="calllist">
-      <p>
-        //TODO list of reports for all helpdesks
-      </p>
+        <?php include "views/partials/listReportReports.php" ?>
     </div>
     </div>
   <div id="rightpage">
