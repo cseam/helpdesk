@@ -24,7 +24,7 @@
     public function getMyOpenAssignedTickets($engineerid) {
       // function takes $engineerid and returns object containing array of tickets for id
       $database = new Database();
-      $database->query("SELECT * FROM calls 
+      $database->query("SELECT * FROM calls
                         INNER JOIN status ON calls.status=status.id
                         WHERE assigned = :engineerid
                         AND status !='2'
@@ -112,5 +112,57 @@
       // else return results
       return $results;
     }
+
+    public function getAllEscalatedTickets() {
+      // function reutrns object for escalted tickets
+      $database = new Database();
+      $database->query("SELECT * FROM calls
+                        INNER JOIN engineers ON calls.assigned=engineers.idengineers
+                        INNER JOIN status ON calls.status=status.id
+                        INNER JOIN location ON calls.location=location.id
+                        WHERE status = 4
+                        ORDER BY opened
+      ");
+      $results = $database->resultset();
+      if ($database->rowcount() == 0) { return null;}
+      return $results;
+    }
+
+    public function getEscalatedTicketsByHelpdesk($helpdeskid) {
+      // function reutrns object for escalted tickets by $helpdeskid
+      $database = new Database();
+      $database->query("SELECT * FROM calls
+                        INNER JOIN engineers ON calls.assigned=engineers.idengineers
+                        INNER JOIN status ON calls.status=status.id
+                        INNER JOIN location ON calls.location=location.id
+                        WHERE status = 4
+                        AND calls.helpdesk = :helpdesk
+                        ORDER BY opened
+      ");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowcount() == 0) { return null;}
+      return $results;
+    }
+
+    public function getUnassignedTicketsByHelpdesk($helpdeskid) {
+      // function reutrns object for escalted tickets by $helpdeskid
+      $database = new Database();
+      $database->query("SELECT * FROM calls
+                        INNER JOIN engineers ON calls.assigned=engineers.idengineers
+                        INNER JOIN status ON calls.status=status.id
+                        INNER JOIN location ON calls.location=location.id
+                        WHERE calls.helpdesk = :helpdesk
+                        AND calls.assigned IS NULL
+                        ORDER BY opened
+      ");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowcount() == 0) { return null;}
+      return $results;
+    }
+
+
+
 
 }

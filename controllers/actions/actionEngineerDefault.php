@@ -10,7 +10,7 @@ class actionEngineerDefault {
       $ticketDetails = $ticketModel->getOldestTicketByHelpdesk($_SESSION['engineerHelpdesk']);
     // populate stats object for graphs
       $statsModel = new statsModel();
-      $stats = @array();
+      $stats = array();
       $stats = array_merge($stats, $statsModel->countAllTickets());
       $stats = array_merge($stats, $statsModel->countTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
     // render page

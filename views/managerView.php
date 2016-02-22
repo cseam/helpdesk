@@ -15,10 +15,9 @@
     <div id="call">
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
-        <p><?php echo $pagedata->summary ?></p>
-        <p>
-          //TODO helpdesk summary ticket list
-        </p>
+        <pre>
+          <?php print_r($pagedata) ?>
+        </pre>
       </div>
     </div>
   </div>
