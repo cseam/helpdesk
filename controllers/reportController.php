@@ -3,11 +3,22 @@
 class reportController {
   public function __construct()
   {
-    // look for methods or render default routes
-    // create methods object
-    $methods = new Route();
-    $methods->add('/', 'actionReportDefault');
-    $methods->process(2);
+    // create route for reports
+    $generatereport = new Route();
+    $generatereport->add('/', 'actionReportDefault');
+    $generatereport->add('/engineerbreakdown', 'actionReportEngineerbreakdown');
+    $generatereport->add('/helpdeskbreakdown', 'actionReportHelpdeskbreakdown');
+    $generatereport->add('/categorybreakdown', 'actionReportCategorybreakdown');
+    $generatereport->add('/urgencybreakdown', 'actionReportUrgencybreakdown');
+    $generatereport->add('/plannedvs', 'actionReportPlannedvs');
+    $generatereport->add('/yearonyear', 'actionReportYearonyear');
+    $generatereport->add('/sla', 'actionReportSla');
+    $generatereport->add('/feedback', 'actionReportFeedback');
+    $generatereport->add('/workrate', 'actionReportWorkrate');
+    $generatereport->add('/assignednumbers', 'actionReportAssignednumbers');
+    $generatereport->add('/emergingissues', 'actionReportEmergingissues');
+    $generatereport->add('/reason', 'actionReportReason');
+    $generatereport->process(2);
   }
 
 }
