@@ -57,7 +57,9 @@
       $database = new Database();
       $database->query("SELECT * FROM calls
                         INNER JOIN status ON calls.status=status.id
-                        WHERE helpdesk = :helpdesk
+                        INNER JOIN location ON calls.location=location.id
+                        INNER JOIN engineers ON calls.assigned=engineers.idengineers
+                        WHERE calls.helpdesk = :helpdesk
                         ORDER BY callid
                         DESC LIMIT :limit");
       $database->bind(":helpdesk", $helpdeskid);
