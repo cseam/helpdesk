@@ -12,7 +12,7 @@ class actionReportClosed {
     $reportname = "Closed";
     // populate report results for use in view
     $ticketModel = new ticketModel();
-    $pagedata->reportResults = $ticketModel->getTicketsByHelpdesk($_SESSION['engineerHelpdesk'], 100);
+    $pagedata->reportResults = $ticketModel->getClosedTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
     // get helpdesk details
     $helpdeskModel = new helpdeskModel();
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);

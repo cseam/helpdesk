@@ -9,10 +9,10 @@ class actionReport7days {
     // Setup pagedata object
     $pagedata = new stdClass();
     // Set report name
-    $reportname = "7 Days";
+    $reportname = "Older than 7 Days";
     // populate report results for use in view
     $ticketModel = new ticketModel();
-    $pagedata->reportResults = $ticketModel->getTicketsByHelpdesk($_SESSION['engineerHelpdesk'], 100);
+    $pagedata->reportResults = $ticketModel->get7DayTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
     // get helpdesk details
     $helpdeskModel = new helpdeskModel();
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);

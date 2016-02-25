@@ -16,12 +16,10 @@ class actionManagerReports {
     $generatereport->add('/7days', 'actionReport7days');
     $generatereport->add('/sentaway', 'actionReportSentaway');
     $generatereport->add('/onhold', 'actionReportOnhold');
-    $generatereport->add('/oldest', 'actionReportOldest');
     $generatereport->add('/closed', 'actionReportClosed');
     $generatereport->add('/all', 'actionReportAll');
     $generatereport->add('/invoice', 'actionReportInvoice');
     $generatereport->add('/search', 'actionReportSearch');
-    $generatereport->add('/advanced-search', 'actionReportAdvancedsearch');
     $generatereport->add('/working-on', 'actionReportWorkingon');
     $generatereport->add('/jobsheet', 'actionReportJobsheet');
     $generatereport->add('/changecontrol', 'actionReportChangecontrol');

@@ -12,7 +12,7 @@ class actionReportEscalated {
     $reportname = "Escalated";
     // populate report results for use in view
     $ticketModel = new ticketModel();
-    $pagedata->reportResults = $ticketModel->getTicketsByHelpdesk(4, 1000);
+    $pagedata->reportResults = $ticketModel->getEscalatedTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
     // get helpdesk details
     $helpdeskModel = new helpdeskModel();
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
