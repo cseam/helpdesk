@@ -4,8 +4,10 @@ class actionReportOnhold {
   public function __construct()
   {
     // Dont need to populate $listdata as fixed partial in manager view
-    // Dont need to populate $stats as fixed partial in manager view
 
+    // Populate $stats for Graph
+    $statsModel = new statsModel();
+    $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
     // Setup pagedata object
     $pagedata = new stdClass();
     // Set report name

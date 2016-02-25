@@ -3,9 +3,12 @@
 class actionManagerDefault {
   public function __construct()
   {
-    // populate my tickets list
-      $ticketModel = new ticketModel();
-      $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
+    // Dont need to populate $listdata as fixed partial in manager view
+
+    // Populate Graph
+    // New Stats model
+      $statsModel = new statsModel();
+      $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
 
     // populate page content
       $pagedata = new stdClass();
