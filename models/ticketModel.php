@@ -18,7 +18,7 @@
       $database->bind(":limit", $limit);
       $results = $database->resultset();
       // if no results return empty object
-      if ($database->rowCount() == 0) { return null;}
+      if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
       return $results;
     }
@@ -36,7 +36,7 @@
       $database->bind(":engineerid", $engineerid);
       $results = $database->resultset();
       // if no results return empty object
-      if ($database->rowCount() ==0) { return null;}
+      if ($database->rowCount() === 0) { return null;}
       // else populate object with db resultsset
       return $results;
     }
@@ -53,7 +53,7 @@
       $database->bind(":limit", $limit);
       $results = $database->resultset();
       // if no results return empty object
-      if ($database->rowCount() == 0) { return null;}
+      if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
       return $results;
     }
@@ -75,7 +75,7 @@
       $database->bind(":limit", $limit);
       $results = $database->resultset();
       // if no results return empty object
-      if ($database->rowCount() == 0) { return null;}
+      if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
       return $results;
     }
@@ -90,7 +90,7 @@
       $database->bind(":ticketid", $ticketid);
       $result = $database->single();
       // if no results return null
-      if ($database->rowCount() == 0) { return null;}
+      if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
       return $result;
     }
@@ -111,7 +111,7 @@
       $database->bind(":helpdesk", $helpdeskid);
       $result = $database->single();
       // if no results return nulla
-      if ($database->rowCount() == 0) { return null;}
+      if ($database->rowCount() === 0) { return null;}
       // else populate object with ticket details
       return $result;
     }
@@ -126,7 +126,7 @@
       $database->bind(":ticketid", $ticketid);
       $results = $database->resultset();
       // if no results return null
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       // else return results
       return $results;
     }
@@ -144,7 +144,7 @@
                         ORDER BY opened
                         ");
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -165,7 +165,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -184,7 +184,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -204,7 +204,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -223,7 +223,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -243,7 +243,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -263,7 +263,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -282,7 +282,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -301,7 +301,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
 
@@ -322,9 +322,32 @@
       $database->bind(":helpdesk", $helpdeskid);
       $database->bind(":limit", $limit);
       $results = $database->resultset();
-      if ($database->rowcount() == 0) { return null;}
+      if ($database->rowcount() === 0) { return null;}
       return $results;
     }
+
+    public function getTicketsForInvoiceByHelpdesk($helpdeskid) {
+      // function returns object containing tickets that have invoice required from tickets
+      $database = new Database();
+      $database->query("SELECT *,
+                        datediff(CURDATE(),calls.opened) as daysold
+                        FROM calls
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        JOIN status ON calls.status=status.id
+                        JOIN location ON calls.location=location.id
+                        WHERE calls.helpdesk = :helpdesk
+                        AND status = 2
+                        AND requireinvoice IS NOT NULL
+                        ORDER BY opened
+                        LIMIT 200
+                        ");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowcount() === 0) { return null;}
+      return $results;
+    }
+
+
 
 
 }

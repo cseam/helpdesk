@@ -13,7 +13,7 @@
       $database->bind(":helpdeskid", $helpdeskid);
       $results = $database->single();
       // if no results return empty object
-      if ($database->rowCount() == 0) { return null;}
+      if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
       return $results;
     }

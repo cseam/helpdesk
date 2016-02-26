@@ -18,5 +18,4 @@
   <a href="/manager/report/scheduledtasks/"><img src="/public/images/ICONS-scheduledtask.svg" alt="scheduled tasks" title="sheduled tasks" width="24" height="25" />Scheduled tasks</a>
   <a href="/manager/report/outofhours/"><img src="/public/images/ICONS-outofhours.svg" alt="Out Of Hours" title="Out Of Hours" width="24" height="25" />Out Of Hours</a>
   <a href="/manager/report/performanceobjectives/"><img src="/public/images/ICONS-objective.svg" alt="Performance Objectives" title="Performance Objectvies" width="24" height="25" />Performance Objectives</a>
-  <a href="/manager/report/punchcard/"><img src="/public/images/ICONS-punchcard.svg" alt="Punchcard" title="Punchcard" width="24" height="25" />Punchcard</a>
 </div>

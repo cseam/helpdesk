@@ -27,7 +27,6 @@ class actionManagerReports {
     $generatereport->add('/scheduledtasks', 'actionReportScheduledtasks');
     $generatereport->add('/outofhours', 'actionReportOutofhours');
     $generatereport->add('/performanceobjectives', 'actionReportPerformanceobjectives');
-    $generatereport->add('/punchcard', 'actionReportPunchcard');
     $generatereport->process(3);
   }
 
