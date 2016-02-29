@@ -1,13 +1,31 @@
+<?php
+//TODO this should be in the controller not here this is crap but prof of concept
+    $series = $temp = "";
+
+    $currentYear = $statsModel->countTotalsThisYear(2016);
+    foreach($currentYear as $key => $value) {
+      $temp .= $value["Totals"] . ",";
+    }
+    $temp = rtrim($temp, ",");
+    $currentSeries = "[". $temp ."],";
+
+    $temp = "";
+    $preYear = $statsModel->countTotalsThisYear(2015);
+    foreach($preYear as $key => $value) {
+      $temp .= $value["Totals"] . ",";
+    }
+    $temp = rtrim($temp, ",");
+    $preSeries = "[0,0,0,". $temp ."],";
+?>
+
 <script type="text/javascript">
   $(function() {
-    // WAIT FOR DOM
     // Draw Bar chartist.js
     var data = {
                 labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
                 series: [
-                        // TODO get this data from db
-                        [2250,2000,1976,500,2300,2100,1100,500,3800,2500,2000,1600],
-                        [2241,2122]
+                        <?php echo $preSeries ?>
+                        <?php echo $currentSeries ?>
                         ]
     };
     var options = {
@@ -25,8 +43,8 @@
       if(data.type === 'line' || data.type === 'area') {
         data.element.animate({
           d: {
-            begin: 500 * data.index,
-            dur: 2000,
+            begin: 100 * data.index,
+            dur: 500,
             from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
             to: data.path.clone().stringify(),
             easing: Chartist.Svg.Easing.easeOutQuint

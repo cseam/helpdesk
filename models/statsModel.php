@@ -56,5 +56,135 @@
       return $result;
     }
 
+    public function countEngineerTotalsThisMonth() {
+      $database = new Database();
+      $database->query("SELECT engineers.engineerName,
+                        count(calls.callid) AS Totals
+                        FROM calls
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        WHERE status = 2
+                        AND Month(closed) = :month
+                        AND Year(closed) = :year
+                        GROUP BY calls.closeengineerid
+                        ORDER BY Totals
+                        ");
+      $database->bind(':month', date("m"));
+      $database->bind(':year', date("o"));
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+    public function countHelpdeskTotalsThisMonth() {
+      $database = new Database();
+      $database->query("SELECT helpdesks.helpdesk_name,
+                        count(calls.callid) AS Totals
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk=helpdesks.id
+                        WHERE status = 2
+                        AND Month(closed) = :month
+                        AND Year(closed) = :year
+                        GROUP BY calls.helpdesk, Month(calls.closed)
+                        ORDER BY Totals
+                      ");
+      $database->bind(':month', date("m"));
+      $database->bind(':year', date("o"));
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+    public function countCategoryTotalsThisMonth() {
+      $database = new Database();
+      $database->query("SELECT categories.categoryName,
+                        count(calls.callid) AS Totals
+                        FROM calls
+                        JOIN categories ON calls.category=categories.id
+                        WHERE status = 2
+                        AND Month(closed) = :month
+                        AND Year(closed) = :year
+                        GROUP BY calls.category, Month(calls.closed)
+                        ORDER BY Totals
+                      ");
+      $database->bind(':month', date("m"));
+      $database->bind(':year', date("o"));
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+    public function countUrgencyTotalsThisMonth() {
+      $database = new Database();
+      $database->query("SELECT calls.urgency,
+                        count(calls.callid) AS Totals
+                        FROM calls
+                        JOIN categories ON calls.category=categories.id
+                        WHERE status = 2
+                        AND Month(closed) = :month
+                        AND Year(closed) = :year
+                        GROUP BY calls.urgency, Month(calls.closed)
+                        ORDER BY Totals
+                      ");
+      $database->bind(':month', date("m"));
+      $database->bind(':year', date("o"));
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // update array values with friendly name as they arent in the db!!!!
+      foreach($result as $key => $value) {
+        $result[$key]["urgency"] = urgency_friendlyname(array_values($value)[0]);
+      }
+      return $result;
+    }
+
+    public function countPlannedVsReactiveTotalsThisMonth() {
+      $database = new Database();
+      $database->query("SELECT calls.pm,
+                        count(calls.callid) AS Totals
+                        FROM calls
+                        WHERE status = 2
+                        AND Month(closed) = :month
+                        AND Year(closed) = :year
+                        GROUP BY calls.pm
+                        ORDER BY Totals
+                      ");
+      $database->bind(':month', date("m"));
+      $database->bind(':year', date("o"));
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      // update array values with friendly name as they arent in the db!!!!
+      foreach($result as $key => $value) {
+        if ($result[$key]["pm"] == 1) {$result[$key]["pm"] = "Planned Tickets";} else {$result[$key]["pm"] = "Reactive Tickets";};
+      }
+      return $result;
+    }
+
+    public function countTotalsThisYear($year) {
+      $database = new Database();
+      $database->query("SELECT Month(closed) AS MonthNum,
+                        count(callid) AS Totals
+                        FROM calls
+                        WHERE status = 2
+                        AND Year(closed) = :year
+                        GROUP BY Month(closed)
+                        ORDER BY MonthNum, helpdesk
+                      ");
+      $database->bind(':year', $year);
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+
   }
 ?>

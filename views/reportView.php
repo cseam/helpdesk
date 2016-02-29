@@ -15,10 +15,7 @@
     <div id="call">
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
-        <p><?php echo $pagedata->summary ?></p>
-        <p>
-          //TODO stats default page
-        </p>
+        <p><?php echo $pagedata->details ?></p>
       </div>
     </div>
   </div>
