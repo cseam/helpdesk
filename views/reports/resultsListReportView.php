@@ -4,7 +4,7 @@
   <div id="leftpage">
     <div id="stats">
       <p>
-        <?php include "views/partials/graphs/managerStats.php" ?>
+        <?php ($stats ? include "views/partials/graphs/managerStats.php" : print("no data")) ?>
       </p>
     </div>
     <div id="calllist">
