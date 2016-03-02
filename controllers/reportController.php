@@ -11,12 +11,10 @@ class reportController {
     $generatereport->add('/categorybreakdown', 'actionReportCategorybreakdown');
     $generatereport->add('/urgencybreakdown', 'actionReportUrgencybreakdown');
     $generatereport->add('/plannedvs', 'actionReportPlannedvs');
-    $generatereport->add('/yearonyear', 'actionReportYearonyear');
     $generatereport->add('/sla', 'actionReportSla');
     $generatereport->add('/feedback', 'actionReportFeedback');
     $generatereport->add('/workrate', 'actionReportWorkrate');
     $generatereport->add('/assignednumbers', 'actionReportAssignednumbers');
-    $generatereport->add('/emergingissues', 'actionReportEmergingissues');
     $generatereport->add('/reason', 'actionReportReason');
     $generatereport->process(2);
   }

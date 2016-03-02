@@ -16,7 +16,6 @@
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
-
             <?php
             // parse $pagedata for graph,
             //TODO this should be in the controler not the view idealy
