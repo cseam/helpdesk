@@ -19,22 +19,22 @@
         <table id="tablesorter" class="tablesorter">
           <thead>
             <tr>
-              <th class="left nowrap">Engineer Name</th>
-              <th class="left nowrap">Helpdesk</th>
-              <th class="nowrap">0-7</th>
-              <th class="nowrap">7-8</th>
-              <th class="nowrap">8-9</th>
-              <th class="nowrap">9-10</th>
-              <th class="nowrap">10-11</th>
-              <th class="nowrap">11-12</th>
-              <th class="nowrap">12-13</th>
-              <th class="nowrap">13-14</th>
-              <th class="nowrap">14-15</th>
-              <th class="nowrap">15-16</th>
-              <th class="nowrap">16-17</th>
-              <th class="nowrap">17-18</th>
-              <th class="nowrap">18-19</th>
-              <th class="nowrap">19-24</th>
+              <th class="left">Engineer Name</th>
+              <th class="left">Helpdesk</th>
+              <th>0-7</th>
+              <th>7-8</th>
+              <th>8-9</th>
+              <th>9-10</th>
+              <th>10-11</th>
+              <th>11-12</th>
+              <th>12-13</th>
+              <th>13-14</th>
+              <th>14-15</th>
+              <th>15-16</th>
+              <th>16-17</th>
+              <th>17-18</th>
+              <th>18-19</th>
+              <th>19-24</th>
             </tr>
           </thead>
           <tbody>

@@ -16,7 +16,7 @@ class actionReportUrgencybreakdown {
     // populate report results for use in view
     $pagedata->reportResults = $statsModel->countUrgencyTotalsThisMonth();
     // set page details
-    $pagedata->details = $reportname. " showing total tickets by urgency this month for " .sizeof($pagedata->reportResults)." urgency categories accross all helpdesks.";
+    $pagedata->details = $reportname. " showing total tickets by urgency this month for " .sizeof($pagedata->reportResults)." urgency categories across all helpdesks.";
 
     // render template using $pagedata object
     require_once "views/reports/resultsGraphBarView.php";

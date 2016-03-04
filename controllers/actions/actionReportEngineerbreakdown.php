@@ -16,7 +16,7 @@ class actionReportEngineerbreakdown {
     // populate report results for use in view
     $pagedata->reportResults = $statsModel->countEngineerTotalsThisMonth();
     // set page details
-    $pagedata->details = $reportname. " showing tickets closed this month for " .sizeof($pagedata->reportResults)." enginners accross all helpdesks.";
+    $pagedata->details = $reportname. " showing tickets closed this month for " .sizeof($pagedata->reportResults)." enginners across all helpdesks.";
 
     // render template using $pagedata object
     require_once "views/reports/resultsGraphBarView.php";

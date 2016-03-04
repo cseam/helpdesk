@@ -3,20 +3,23 @@
 class actionReportDefault {
   public function __construct()
   {
-
-    // Populate $stats for Graph
-    $statsModel = new statsModel();
-    // populate my tickets list
-      $ticketModel = new ticketModel();
-      $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
-
-    // populate page content
+    // create new models for required data
+      $statsModel = new statsModel();
       $pagedata = new stdClass();
-      $pagedata->title = "report default method";
-      $pagedata->summary = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+      // Dont need to populate $listdata as fixed partial in manager view
 
-    // render page
-    require_once "views/reportView.php";
+    // Set report name
+    $reportname = "Day Breakdown";
+    // set report title
+    $pagedata->title = $reportname . " Report";
+
+    // populate report results for use in view
+    $pagedata->reportResults = $statsModel->countDayBreakdownTotalsLastMonth();
+    // set page details
+    $pagedata->details = $reportname. " showing helpdesk activity by time of day for ". date("F Y", strtotime("first day of previous month")) ." across all helpdesks.";
+
+    // render template using $pagedata object
+    require_once "views/reports/resultsDayBreakdownReportView.php";
 
   }
 }

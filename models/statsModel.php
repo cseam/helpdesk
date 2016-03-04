@@ -248,7 +248,7 @@
       return $result;
     }
 
-    public function countDayBreakdownTotalsThisMonth() {
+    public function countDayBreakdownTotalsLastMonth() {
       $database = new Database();
       $database->query("SELECT engineers.engineerName,
                         helpdesks.helpdesk_name,
@@ -270,12 +270,12 @@
                         JOIN calls ON calls.closeengineerid = engineers.idengineers
                         JOIN helpdesks ON engineers.helpdesk = helpdesks.id
                         WHERE engineers.disabled != 1
-                        AND month(calls.closed) = 11
-                        AND year(calls.closed) = 2015
+                        AND month(calls.closed) = :month
+                        AND year(calls.closed) = :year
                         GROUP BY engineers.engineerName
                         ORDER BY helpdesks.id
                       ");
-      $database->bind(':month', date("m"));
+      $database->bind(':month', date("m", strtotime("first day of previous month")));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
       // if no results return empty object
