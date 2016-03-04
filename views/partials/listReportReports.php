@@ -3,6 +3,7 @@
   <a href="/report/helpdeskbreakdown/"><img src="/public/images/ICONS-viewfulldetails.svg" alt="Helpdesk Breakdown" title="Helpdesk Breakdown" width="24" height="25" />Helpdesk Breakdown</a>
   <a href="/report/categorybreakdown/"><img src="/public/images/ICONS-unassigned.svg" alt="Category Breakdown" title="Category Breakdown" width="24" height="25" />Category Breakdown</a>
   <a href="/report/urgencybreakdown/"><img src="/public/images/ICONS-urgent.svg" alt="Urgency Breakdown" title="Urgency Breakdown" width="24" height="25" />Urgency Breakdown</a>
+  <a href="/report/daybreakdown/"><img src="/public/images/ICONS-daybreakdown.svg" alt="Day Breakdown" title="Day Breakdown" width="24" height="25" />Day Breakdown</a>
   <a href="/report/plannedvs/"><img src="/public/images/ICONS-punchcard.svg" alt="Planned vs Reactive" title="Planned vs Reactive" width="24" height="25" />Planned vs Reactive</a>
   <a href="/report/workrate/"><img src="/public/images/ICONS-workrate.svg" alt="Engineer work rate" title="Engineer work rate" width="24" height="25" />Work rate</a>
   <a href="/report/sla/"><img src="/public/images/ICONS-scheduledtask.svg" alt="SLA Performance" title="SLA Performance" width="24" height="25" />SLA Performance</a>

@@ -10,6 +10,7 @@ class reportController {
     $generatereport->add('/helpdeskbreakdown', 'actionReportHelpdeskbreakdown');
     $generatereport->add('/categorybreakdown', 'actionReportCategorybreakdown');
     $generatereport->add('/urgencybreakdown', 'actionReportUrgencybreakdown');
+    $generatereport->add('/daybreakdown', 'actionReportDaybreakdown');
     $generatereport->add('/plannedvs', 'actionReportPlannedvs');
     $generatereport->add('/sla', 'actionReportSla');
     $generatereport->add('/feedback', 'actionReportFeedback');
