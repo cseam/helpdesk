@@ -595,6 +595,9 @@ h3.callbody {
 	float: right;
 	margin: 0 5px 5px 5px;
 }
+.tablesorter {
+	cursor: pointer;
+}
 /* END Reports */
 /* Login area */
 #login {

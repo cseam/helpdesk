@@ -27,6 +27,8 @@
   <script src="/public/javascript/jquery.validate.min.js" type="text/javascript"></script>
   <!-- Side popout slider for hamburger menu on mobile -->
   <script src="/public/javascript/jquery.sidr.min.js" type="text/javascript"></script>
+  <!-- table sorting jquery plugin for simple sortting on reports -->
+  <script src="/public/javascript/jquery.tablesorter.min.js" type="text/javascript"></script>
 </head>
 
 <body>

@@ -21,9 +21,8 @@
             <tr>
               <th>Engineer Name</th>
               <th>Helpdesk</th>
-              <th>30 Days</th>
-              <th>7 Days</th>
-              <th>24 Hours</th>
+              <th>Open Tickets Assigned</th>
+              <th>Total Ever</th>
             </tr>
           </thead>
           <tbody>
@@ -31,9 +30,8 @@
             <tr>
               <td><?php echo $value["engineerName"] ?></td>
               <td><?php echo $value["helpdesk_name"] ?></td>
-              <td><?php echo $value["Last30"] ?></td>
-              <td><?php echo $value["Last7"] ?></td>
-              <td><?php echo $value["Last1"] ?></td>
+              <td><?php echo $value["OpenOnes"] ?></td>
+              <td><?php echo $value["HowManyAssigned"] ?></td>
             </tr>
             <?php } ?>
           </tbody>

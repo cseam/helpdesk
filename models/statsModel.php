@@ -210,5 +210,45 @@
       return $result;
     }
 
+    public function countReasonForTicketsThisMonth() {
+      $database = new Database();
+      $database->query("SELECT callreasons.reason_name,
+                        count(*) AS last7
+                        FROM calls
+                        INNER JOIN callreasons ON calls.callreason = callreasons.id
+                        WHERE calls.status='2'
+                        AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+                        GROUP BY callreasons.reason_name
+                      ");
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+    public function countAssignedTickets() {
+      $database = new Database();
+      $database->query("SELECT helpdesks.helpdesk_name,
+                        engineers.idengineers,
+                        engineers.engineerName,
+                        Count(assigned) AS HowManyAssigned,
+                        sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes
+                        FROM calls
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        JOIN helpdesks ON engineers.helpdesk=helpdesks.id
+                        WHERE engineers.disabled != 1 
+                        GROUP BY calls.assigned
+                        ORDER BY calls.helpdesk
+                      ");
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+
+
   }
 ?>
