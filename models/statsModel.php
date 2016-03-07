@@ -284,5 +284,44 @@
       return $result;
     }
 
+    public function countEngineerFeedbackTotals() {
+      $database = new Database();
+      $database->query("SELECT engineers.engineerName,
+                        helpdesks.helpdesk_name,
+                        AVG(feedback.satisfaction) as FeedbackAVG,
+                        COUNT(calls.callid) as FeedbackCOUNT
+                        FROM calls
+                        JOIN feedback ON feedback.callid=calls.callid
+                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
+                        JOIN helpdesks ON engineers.helpdesk = helpdesks.id
+                        GROUP BY calls.closeengineerid
+                      ");
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+    public function getPoorFeedback() {
+      $database = new Database();
+      $database->query("SELECT calls.callid,
+                        engineers.engineerName,
+                        calls.owner,
+                        feedback.details,
+                        feedback.satisfaction
+                        FROM feedback
+                        JOIN calls ON feedback.callid=calls.callid
+                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
+                        WHERE satisfaction IN (1,2)
+                      ");
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+
   }
 ?>
