@@ -16,11 +16,11 @@ class actionReportFeedback {
   // populate report results for use in view
   $pagedata->reportResults = $statsModel->countEngineerFeedbackTotals();
   $pagedata->poorFeedback = $statsModel->getPoorFeedback();
-  
+
   // set page details
   $pagedata->details = $reportname. " showing average feedback for " .sizeof($pagedata->reportResults)." enginners across all helpdesks.";
 
   // render template using $pagedata object
-  require_once "views/reports/resultsFeedbackReportView.php";  }
-
+  require_once "views/reports/resultsFeedbackReportView.php";
+  }
 }

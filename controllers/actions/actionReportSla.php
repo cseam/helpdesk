@@ -4,17 +4,23 @@ class actionReportSla {
   public function __construct()
   {
     // Dont need to populate $listdata as fixed partial in manager view
-    // Dont need to populate $stats as fixed partial in manager view
-
+    $statsModel = new statsModel();
     $pagedata = new stdClass();
-    $pagedata->title = "Changecontrol Tickets";
+    // Dont need to populate $listdata as fixed partial in manager view
 
-    // populate report
-    $ticketModel = new ticketModel();
-    $pagedata->reportResults = $ticketModel->getUnassignedTicketsByHelpdesk(4);
+  // Set report name
+  $reportname = "Service Level Agreement";
+  // set report title
+  $pagedata->title = $reportname . " report";
 
-    // render page
-    require_once "views/reportView.php";
+  // populate report results for use in view
+  $pagedata->reportResults = $statsModel->GetFailedSLAThisMonth();
+
+  // set page details
+  $pagedata->details = $reportname. " showing tickets that failed SLA this month.";
+
+  // render template using $pagedata object
+  require_once "views/reports/resultsSLAReportView.php";
   }
 
 }

@@ -322,6 +322,34 @@
       return $result;
     }
 
+    public function GetFailedSLAThisMonth() {
+      $database = new Database();
+      $database->query("SELECT calls.callid,
+                        calls.title,
+                        helpdesks.helpdesk_name,
+                        engineers.engineerName,
+                        calls.urgency,
+                        service_level_agreement.close_eta_days,
+                        datediff(calls.closed, calls.opened) AS 'total_days_to_close'
+                        FROM calls
+                        INNER JOIN service_level_agreement ON calls.helpdesk = service_level_agreement.helpdesk
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        JOIN engineers ON engineers.idengineers=calls.assigned
+                        WHERE service_level_agreement.urgency = calls.urgency
+                        AND Year(closed) = :year
+                        AND Month(closed) = :month
+                        ORDER BY assigned
+                        ");
+      $database->bind(':month', date("m"));
+      $database->bind(':year', date("o"));
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+
 
   }
 ?>
