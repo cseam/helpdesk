@@ -347,6 +347,44 @@
       return $results;
     }
 
+    public function getLastViewedByHelpdesk($helpdeskid) {
+      // function returns object containing list of helpdesk enginners and the last ticket they viewed
+      $database = new Database();
+        // should be able to do this in 1 sql query but havent got it working yet so two for now
+      $database->query("SELECT engineers.sAMAccountName,
+                               engineers.idengineers,
+                               engineers.engineerName
+                               FROM calls
+                               JOIN engineers ON calls.assigned=engineers.idengineers
+                               WHERE engineers.helpdesk IN (:helpdesk)
+                               AND engineers.disabled != 1
+                               GROUP BY assigned
+                               ORDER BY calls.helpdesk
+      ");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowcount() === 0) { return null;}
+        // now have list of enginners with tickets open in $results, itterate over and get last ticket looked at
+        // create new array to store enginner results in
+        $ticketviews = [];
+        foreach($results as $key => $value) {
+          // query each engineer (//TODO this is a clown fiesta should be done in 1 query above (note to future self FIX THIS))
+          $database->query("SELECT engineers.engineerName, call_views.callid, call_views.stamp, calls.title, calls.status, status.statusCode, calls.opened, datediff(CURDATE(),calls.opened) as daysold, timediff(NOW(),call_views.stamp) as minago, location.locationName, location.iconlocation
+                                  FROM call_views
+                                  JOIN calls ON call_views.callid = calls.callid
+                                  JOIN status ON calls.status=status.id
+                                  JOIN location ON calls.location = location.id
+                                  JOIN engineers ON call_views.sAMAccountName=engineers.sAMAccountName
+                                  WHERE call_views.sAMAccountName = :sAMAccountName
+                                  ORDER BY call_views.id DESC
+                                  LIMIT 1
+                            ");
+          $database->bind(":sAMAccountName", $value["sAMAccountName"]);
+          $results = $database->single();
+          if ($database->rowcount() > 0) {array_push($ticketviews, $results);}
+        }
+      return $ticketviews;
+    }
 
 
 

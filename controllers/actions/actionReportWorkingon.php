@@ -3,18 +3,26 @@
 class actionReportWorkingon {
   public function __construct()
   {
-    // Dont need to populate $listdata as fixed partial in manager view
-    // Dont need to populate $stats as fixed partial in manager view
+    // create new models for required data
+      $statsModel = new statsModel();
+      $ticketModel = new ticketModel();
+      $pagedata = new stdClass();
+      // Dont need to populate $listdata as fixed partial in manager view
 
-    $pagedata = new stdClass();
-    $pagedata->title = "Working On Tickets";
+    // Set report name
+    $reportname = "Enginners working on";
+    // set report title
+    $pagedata->title = $reportname . ".";
 
-    // populate report
-    $ticketModel = new ticketModel();
-    $pagedata->reportResults = $ticketModel->getUnassignedTicketsByHelpdesk(4);
+    // get department workrate for graph
+    $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
+    // populate report results for use in view
+    $pagedata->reportResults = $ticketModel->getLastViewedByHelpdesk($_SESSION['engineerHelpdesk']);
+    // set page details
+    $pagedata->details = sizeof($pagedata->reportResults)." ".$reportname." the following tickets (last ticket the engineer looked at on helpdesk).";
 
-    // render page
-    require_once "views/managerView.php";
+    // render template using $pagedata object
+    require_once "views/reports/resultsWorkingOnReportView.php";
   }
 
 }
