@@ -371,11 +371,11 @@
           // query each engineer (//TODO this is a clown fiesta should be done in 1 query above (note to future self FIX THIS))
           $database->query("SELECT engineers.engineerName, call_views.callid, call_views.stamp, calls.title, calls.status, status.statusCode, calls.opened, datediff(CURDATE(),calls.opened) as daysold, timediff(NOW(),call_views.stamp) as minago, location.locationName, location.iconlocation
                                   FROM call_views
-                                  JOIN calls ON call_views.callid = calls.callid
+                                  JOIN calls ON call_views.callid=calls.callid
                                   JOIN status ON calls.status=status.id
-                                  JOIN location ON calls.location = location.id
+                                  JOIN location ON calls.location=location.id
                                   JOIN engineers ON call_views.sAMAccountName=engineers.sAMAccountName
-                                  WHERE call_views.sAMAccountName = :sAMAccountName
+                                  WHERE call_views.sAMAccountName=:sAMAccountName
                                   ORDER BY call_views.id DESC
                                   LIMIT 1
                             ");
@@ -386,6 +386,23 @@
       return $ticketviews;
     }
 
-
+    public function getJobSheetByHelpdesk($helpdeskid) {
+      // function to return object containing list of assigned tickets
+      $database = new Database();
+      $database->query("SELECT *,
+                        datediff(CURDATE(),calls.opened) as daysold
+                        FROM calls
+                        JOIN status ON calls.status=status.id
+                        JOIN location ON calls.location=location.id
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        WHERE calls.status !=2
+                        AND calls.helpdesk IN (:helpdesk)
+                        ORDER BY calls.assigned
+                        ");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowcount() === 0) {return null;}
+      return $results;
+    }
 
 }

@@ -352,6 +352,9 @@ select::-ms-expand {
 	text-transform: uppercase;
 	line-height: 1.4rem;
 }
+.titlepadding {
+ padding-top: 40px;
+}
 /* END Additional message styles */
 /* Call details */
 #calldetails {
