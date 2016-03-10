@@ -22,7 +22,7 @@ class actionReportStagnate {
     // get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     // set page details
-    $pagedata->details = "Report of ".$reportname." tickets where the ticket has not been updated by an enginner in the last 72 hours. ". sizeof($pagedata->reportResults)." ".$reportname." tickets for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+    $pagedata->details = "Report of ".$reportname." tickets where the ticket has not been updated by an enginner in the last 72 hours.<br /><br />". sizeof($pagedata->reportResults)." ".$reportname." tickets for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
 
     // render template using $pagedata object
     require_once "views/reports/resultsListReportView.php";

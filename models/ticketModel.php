@@ -316,7 +316,7 @@
                         JOIN location ON calls.location=location.id
                         WHERE calls.helpdesk = :helpdesk
                         AND status = 2
-                        ORDER BY opened
+                        ORDER BY opened DESC
                         LIMIT :limit
                         ");
       $database->bind(":helpdesk", $helpdeskid);
