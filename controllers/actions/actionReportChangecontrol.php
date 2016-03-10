@@ -18,8 +18,7 @@ class actionReportChangecontrol {
     // get department workrate for graph
     $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
     // populate report results for use in view
-    //$pagedata->reportResults = $changecontrolModel->getChangeControlsByHelpdesk($_SESSION['engineerHelpdesk']);
-    $pagedata->reportResults = $changecontrolModel->getChangeControlsByHelpdesk(1);
+    $pagedata->reportResults = $changecontrolModel->getChangeControlsByHelpdesk($_SESSION['engineerHelpdesk']);
     // get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     // set page details

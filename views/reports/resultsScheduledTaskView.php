@@ -17,26 +17,27 @@
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
         <p>
-          //TODO crud change controls 
+          //TODO crud scheduled tasks
         </p>
         <table id="changecontrol">
+          <thead>
+            <tr class="head">
+              <th>#</th>
+              <th>Title</th>
+              <th>Scheduled</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody>
             <?php foreach($pagedata->reportResults as $key => $value) { ?>
-              <tbody>
               <tr>
-                <td class="hdtitle listheader" colspan="2"><?php echo $value["server"] ?></td>
+                <td><?php echo $value["callid"] ?></td>
+                <td><?php echo $value["title"]?></td>
+                <td><?php echo $value["frequencytype"]?></td>
+                <td>//TODO update</td>
               </tr>
-              <tr>
-                <td><?php echo date("d-m-Y @ H:i", strtotime($value["stamp"])) ?></td>
-                <td><?php echo $value["engineerName"] ?></td>
-              </tr>
-              <tr>
-                <td colspan="2"><?php echo nl2br($value["changemade"]) ?></td>
-              </tr>
-              <tr>
-                <td colspan="2" class="hdtitle"><?php echo $value["tags"] ?></td>
-              </tr>
-              </tbody>
             <?php } ?>
+          </tbody>
         </table>
 
       </div>

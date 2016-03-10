@@ -624,6 +624,15 @@ h3.callbody {
 	max-width: 50px;
 	max-height: 50px;
 }
+#changecontrol tbody {
+		border-top: 3px solid rgba(100,125,106, 0.3);
+}
+
+#changecontrol tbody::after {
+	content: '';
+	display: block;
+	height: 15px;
+}
 /* END Reports */
 /* Login area */
 #login {
