@@ -116,6 +116,27 @@
       return $result;
     }
 
+    public function getOldestTicketByEngineer($engineerid) {
+      // function takes $helpdeskid to return single object containing oldest open ticket details for helpdesk
+      $database = new Database();
+      $database->query("SELECT *
+                        FROM calls
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        JOIN status ON calls.status=status.id
+                        JOIN location ON calls.location=location.id
+                        WHERE calls.assigned IN (:engineer)
+                        AND status != 2
+                        ORDER BY calls.opened
+                        LIMIT 1
+                        ");
+      $database->bind(":engineer", $engineerid);
+      $result = $database->single();
+      // if no results return nulla
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with ticket details
+      return $result;
+    }
+
     public function getAdditionalDetails($ticketid) {
       // function takes $ticketid and returns object for additional fields stored for ticket
       $database = new Database();
