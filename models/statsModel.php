@@ -303,7 +303,7 @@
       return $result;
     }
 
-    public function getPoorFeedback() {
+    public function getPoorFeedback($helpdeskid) {
       $database = new Database();
       $database->query("SELECT calls.callid,
                         engineers.engineerName,
@@ -314,7 +314,10 @@
                         JOIN calls ON feedback.callid=calls.callid
                         JOIN engineers ON engineers.idengineers=calls.closeengineerid
                         WHERE satisfaction IN (1,2)
+                        AND feedback.opened > DATE_SUB(CURDATE(),INTERVAL 30 DAY)
+                        AND calls.helpdesk IN (:helpdesk)
                       ");
+      $database->bind(":helpdesk", $helpdeskid);
       $result = $database->resultset();
       // if no results return empty object
       if ($database->rowCount() === 0) { return null;}

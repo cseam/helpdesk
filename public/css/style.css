@@ -201,6 +201,9 @@ table th {
 .left {
 	text-align: left !important;
 }
+.default-padding {
+	padding: 1rem 0;
+}
 /* helpder classes */
 /* Standard forms */
 input, textarea, button {
@@ -624,7 +627,7 @@ h3.callbody {
 	max-width: 50px;
 	max-height: 50px;
 }
-#changecontrol tbody {
+#changecontrol tbody, #escalatedtickets tbody, #unassignedtickets tbody, #stagnatetickets tbody, #poorfeedback tbody {
 		border-top: 3px solid rgba(100,125,106, 0.3);
 }
 
