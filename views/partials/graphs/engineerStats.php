@@ -3,13 +3,13 @@
     // WAIT FOR DOM
     // Draw Pie chartist.js
     var pieData = {
-                  series: [<?php echo $stats["countAllTickets"];?>,<?php echo $stats["countTicketsByHelpdesk"];?>]
+                  series: [<?php echo $stats["engineerClose"] ?>,<?php echo $stats["engineerAll"]-$stats["engineerClose"] ?>]
     };
     var pieOptions = {
                       chartPadding: {top: 20, right:5, bottom:20, left:5},
                       donut: true,
                       showLabel: false,
-                      donutWidth: 40
+                      donutWidth: 25
     };
     new Chartist.Pie('#myperformance', pieData, pieOptions);
 
@@ -17,11 +17,7 @@
     var data = {
                 labels: ['Su','Mo','Tu','We','Th','Fr','Sa'],
                 series: [
-                        [0,40,21,30,2,10,0],
-                        [0,10,44,33,12,100,0],
-                        [0,22,24,3,22,15,0],
-                        [0,44,0,40,44,10,0],
-                        [0,5,10,50,5,7,11]
+                        [<?php echo $stats["Sun"] ?>,<?php echo $stats["Mon"] ?>,<?php echo $stats["Tue"] ?>,<?php echo $stats["Wed"] ?>,<?php echo $stats["Thu"] ?>,<?php echo $stats["Fri"] ?>,<?php echo $stats["Sat"] ?>],
                         ]
     };
     var options = {
@@ -51,10 +47,10 @@
 </script>
 
 <div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; height:85%; float: left; display:table;">
-<span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 2.5rem;font-weight: 100;">
+<span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 1.8rem;font-weight: 100;">
 <?php
-  $engineernum = $stats["countTicketsByHelpdesk"];
-  $totaltickets = $stats["countAllTickets"];
+  $engineernum = $stats["engineerClose"];
+  $totaltickets = $stats["engineerAll"];
   echo number_format((100.0*$engineernum)/$totaltickets, 2) . "%";
 ?>
 </span>

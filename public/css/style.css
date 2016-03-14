@@ -683,6 +683,14 @@ h3.callbody {
 	color:#577d6a !important;
 	font-weight: 300;
 }
+.logoutstats {
+	font-size: 30px;
+	line-height: auto;
+	height: auto;
+	min-height: auto;
+	color:#577d6a !important;
+	font-weight: 300;
+}
 .mbig {
 	font-size: 80px;
 	line-height: 3.5rem;

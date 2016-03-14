@@ -16,6 +16,19 @@
       return $result;
     }
 
+    public function countAllOpenTickets() {
+      $database = new Database();
+      $database->query("SELECT COUNT(*) AS countAllOpenTickets
+                        FROM calls
+                        WHERE status !=2
+                        ");
+      $result = $database->single();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
     public function countTicketsByHelpdesk($helpdeskid) {
       $database = new Database();
       $database->query("SELECT COUNT(*) AS countTicketsByHelpdesk
@@ -23,6 +36,20 @@
                         WHERE helpdesk = :helpdeskid
                         ");
       $database->bind(":helpdeskid", $helpdeskid);
+      $result = $database->single();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+    public function countTicketsByOwner($owner) {
+      $database = new Database();
+      $database->query("SELECT COUNT(*) AS countTicketsByOwner
+                        FROM calls
+                        WHERE owner = :owner
+                        ");
+      $database->bind(":owner", $owner);
       $result = $database->single();
       // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
@@ -303,6 +330,24 @@
       return $result;
     }
 
+    public function avgHelpdeskFeedback() {
+      $database = new Database();
+      $database->query("SELECT AVG(feedback.satisfaction) as FeedbackAVG
+                        FROM calls
+                        JOIN feedback ON feedback.callid=calls.callid
+                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
+                        JOIN helpdesks ON engineers.helpdesk = helpdesks.id
+                        WHERE calls.status = 2
+                        GROUP BY calls.status
+                      ");
+      $result = $database->single();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $result;
+    }
+
+
     public function getPoorFeedback($helpdeskid) {
       $database = new Database();
       $database->query("SELECT calls.callid,
@@ -352,6 +397,87 @@
       return $result;
     }
 
+    public function countEngineerTotalsLastWeek($engineerId) {
+      $database = new Database();
+      $database->query("SELECT DATE_FORMAT(closed, '%a') AS DAY_OF_WEEK
+                        FROM calls
+                        WHERE closeengineerid = :engineerId
+                        AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+                        ");
+      $database->bind(':engineerId', $engineerId);
+      $result = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      $engineermon = $engineertue = $engineerwed = $engineerthu = $engineerfri = $engineersat = $engineersun = 0;
 
+      foreach($result as $key => $value) {
+        SWITCH ($value["DAY_OF_WEEK"]) {
+          CASE "Mon":
+            ++$engineermon;
+            break;
+          CASE "Tue":
+            ++$engineertue;
+            break;
+          CASE "Wed":
+            ++$engineerwed;
+            break;
+          CASE "Thu":
+            ++$engineerthu;
+            break;
+          CASE "Fri":
+            ++$engineerfri;
+            break;
+          CASE "Sat":
+            ++$engineersat;
+            break;
+          CASE "Sun":
+            ++$engineersun;
+            break;
+        }
+      }
+
+      $count = array();
+      $count["Mon"] = $engineermon;
+      $count["Tue"] = $engineertue;
+      $count["Wed"] = $engineerwed;
+      $count["Thu"] = $engineerthu;
+      $count["Fri"] = $engineerfri;
+      $count["Sat"] = $engineersat;
+      $count["Sun"] = $engineersun;
+      // else return db results
+      return $count;
+    }
+
+    public function countClosedByEngineerIdLastWeek($engineerId) {
+      $database = new Database();
+      $database->query("SELECT
+                        count(closeengineerid) AS engineerClose
+                        FROM calls
+                        WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+                        AND closeengineerid = :engineerId
+                        ");
+      $database->bind(':engineerId', $engineerId);
+      $result = $database->single();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else return db results
+      return $result;
+    }
+
+    public function countAllTicketsByEngineerIdLastWeek($engineerId) {
+      $database = new Database();
+      $database->query("SELECT
+                        count(callid) AS engineerAll
+                        FROM calls
+                        WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+                        AND closeengineerid = :engineerId
+                        ");
+      $database->bind(':engineerId', $engineerId);
+      $result = $database->single();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else return db results
+      return $result;
+    }
 
   }

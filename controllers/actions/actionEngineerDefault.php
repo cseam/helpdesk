@@ -11,8 +11,10 @@ class actionEngineerDefault {
     //populate stats object for graphs
     $statsModel = new statsModel();
     $stats = array();
-    $stats = array_merge($stats, $statsModel->countAllTickets());
-    $stats = array_merge($stats, $statsModel->countTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
+    $stats = array_merge($stats, $statsModel->countAllTicketsByEngineerIdLastWeek($_SESSION['engineerId']));
+    $stats = array_merge($stats, $statsModel->countClosedByEngineerIdLastWeek($_SESSION['engineerId']));
+    $stats = array_merge($stats, $statsModel->countEngineerTotalsLastWeek($_SESSION['engineerId']));
+
     //render page
     require_once "views/engineerView.php";
   }

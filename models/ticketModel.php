@@ -426,4 +426,22 @@
       return $results;
     }
 
+    public function getRecentActivityByOwner($owner) {
+      $database = new Database();
+      $database->query("SELECT *,
+                        datediff(CURDATE(),calls.opened) as daysold
+                        FROM calls
+                        JOIN status ON calls.status=status.id
+                        JOIN location ON calls.location=location.id
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 12 DAY)
+                        AND owner = :owner
+                        ORDER BY callid DESC
+      ");
+      $database->bind(":owner", $owner);
+      $results = $database->resultset();
+      if ($database->rowcount() === 0) {return null;}
+      return $results;
+    }
+
 }

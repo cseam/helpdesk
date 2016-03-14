@@ -3,15 +3,16 @@
 class actionUserDefault {
   public function __construct()
   {
-    //populate my tickets list
+    //create new models for required data
     $ticketModel = new ticketModel();
-    $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
-    //$listdata = $ticketModel->getTicketsByHelpdesk(4,50);
-    //$listdata = $ticketModel->getOldestTicketByHelpdesk(1);
-    // populate page content
     $pagedata = new stdClass();
-    $pagedata->title = "user home";
-    $pagedata->summary = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    //populate listdata for left pannel
+    $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 30);
+    //set report name
+    $pagedata->title = "Recent Ticket Activity";
+    $pagedata->reportResults = $ticketModel->getRecentActivityByOwner($_SESSION['sAMAccountName']);
+    //set page details
+    $pagedata->details = "The following tickets have recently been updated by an engineer, and require a response or feedback left.<br /><br /> To add a new ticket please click \"Add Ticket\" in the top right corner, to update a tickets details or leave feedback please click on the ticket title. ";
     // render page
     require_once "views/userView.php";
   }
