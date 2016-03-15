@@ -1,4 +1,4 @@
-<form action="" method="post" enctype="multipart/form-data" id="search" class="searchform">
+<form action="#" method="post" enctype="multipart/form-data" id="search" class="searchform">
 <fieldset>
 		<legend>Search all tickets</legend>
 		<label for="term">Search Query</label>

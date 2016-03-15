@@ -444,4 +444,32 @@
       return $results;
     }
 
+    public function searchTicketsByTerm($term, $limit = 150) {
+      // function takes $helpdeskid and optional $limit to return object containing array of tickets for helpdesk
+      $database = new Database();
+      $database->query("SELECT *,
+                        datediff(CURDATE(),calls.opened) as daysold
+                        FROM calls
+                        JOIN status ON calls.status=status.id
+                        JOIN location ON calls.location=location.id
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        WHERE (details LIKE :term OR callid LIKE :term OR title LIKE :term OR name LIKE :term OR email LIKE :term OR tel LIKE :term OR room LIKE :term)
+                        ORDER BY callid DESC
+                        LIMIT :limit
+                        ");
+      $wildcard = '%'.$term.'%';
+      $database->bind(":term", $wildcard);
+      $database->bind(":limit", $limit);
+      $results = $database->resultset();
+      // if no results return empty object
+      if ($database->rowCount() === 0) { return null;}
+      // else populate object with db results
+      return $results;
+    }
+
+
+
+
+
+
 }
