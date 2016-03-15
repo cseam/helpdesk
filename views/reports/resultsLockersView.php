@@ -16,9 +16,6 @@
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
-        <p>
-          //TODO crud lockers
-        </p>
         <table id="changecontrol">
           <thead>
             <tr class="head">
@@ -35,11 +32,17 @@
                 <td><?php echo $value["lockerid"] ?></td>
                 <td><?php if ($value["status"] === "2") {echo "<span class=\"status1\">Ready</span>";} else {echo "<span class=\"status3\">In Progress</span>";} ?></td>
                 <td><?php echo $value["name"]?></td>
-                <td><?php echo substr(strip_tags($value["title"]), 0, 20) ?></td>
+                <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo substr(strip_tags($value["title"]), 0, 30) ?></a></td>
                 <td>
-                  <?php if ($value["status"] === "2") { ?>
-                    <input type="image" id="btn" name="btn" value="View" src="/public/images/ICONS-forward.svg" class="icon" width="24" height="25" alt="return to user" title="return to user" />
-                  <?php } ?>
+                  <form action="#" method="post" enctype="multipart/form-data" class="removefromlocker">
+                    <input type="hidden" name="callid" value="<?php echo $value["callid"] ?>" />
+                    <input type="hidden" name="lockerid" value="<?php echo $value["lockerid"] ?>" />
+                    <input type="hidden" name="owner" value="<?php echo $value["name"] ?>" />
+
+                    <?php if ($value["status"] === "2") { ?>
+                      <input type="image" id="btn" name="btn" value="View" src="/public/images/ICONS-forward.svg" class="icon" width="24" height="25" alt="return to user" title="return to user" />
+                    <?php } ?>
+                  </form>
                 </td>
               </tr>
             <?php } ?>
@@ -49,6 +52,12 @@
       </div>
     </div>
   </div>
-
+<script type="text/javascript">
+$('.removefromlocker').submit(function(event){
+  if(!confirm("\nPlease Confirm \n\nLocker : "+ this.lockerid.value +" \nOwner : "+ this.owner.value + "\n\nReturn this item?")){
+    event.preventDefault();
+  }
+});
+</script>
 
 <?php require_once "views/partials/footer.php"; ?>
