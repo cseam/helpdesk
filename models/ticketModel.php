@@ -83,8 +83,13 @@
     public function getTicketDetails($ticketid) {
       // function takes $ticketid to return object containing ticket details
       $database = new Database();
-      $database->query("SELECT *
+      $database->query("SELECT *,
+                        datediff(CURDATE(),calls.opened) as daysold
                         FROM calls
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        JOIN status ON calls.status=status.id
+                        JOIN location ON calls.location=location.id
+                        JOIN categories ON calls.category=categories.id
                         WHERE callid = :ticketid
                         ");
       $database->bind(":ticketid", $ticketid);

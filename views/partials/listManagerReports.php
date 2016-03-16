@@ -3,7 +3,7 @@
   <a href="/manager/report/unassigned/"><img src="/public/images/ICONS-unassigned.svg" alt="View unassigned tickets" title="View unassigned tickets" width="24" height="25" />Unassigned</a>
   <a href="/manager/report/assigned/"><img src="/public/images/ICONS-assigned.svg" alt="View Assigned tickets" title="View Assigned tickets" width="24" height="25" />Assigned</a>
   <a href="/manager/report/open/"><img src="/public/images/ICONS-view.svg" alt="View Open tickets" title="View Open tickets" width="24" height="25" />Open</a>
-  <a href="/manager/report/stagnate/"><img src="/public/images/ICONS-stagnate.svg" alt="Stagnate Tickets" title="Stagnate Tickets" width="24" height="25" />Stagnate</a>
+  <!--<a href="/manager/report/stagnate/"><img src="/public/images/ICONS-stagnate.svg" alt="Stagnate Tickets" title="Stagnate Tickets" width="24" height="25" />Stagnate</a> -->
   <a href="/manager/report/7days/"><img src="/public/images/ICONS-over7.svg" alt="View 7 day tickets" title="View 7 day tickets"  width="24" height="25" />&gt; 7 Days</a>
   <a href="/manager/report/sentaway/"><img src="/public/images/ICONS-sentaway.svg" alt="Sent away for repair" title="Sent away for repair" width="24" height="25" />Sent away</a>
   <a href="/manager/report/onhold/"><img src="/public/images/ICONS-hold.svg" alt="On Hold" title="On Hold" width="24" height="25" />On Hold</a>

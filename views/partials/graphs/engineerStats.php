@@ -22,11 +22,11 @@
     };
     var options = {
                   showPoint: true,
-                  lineSmooth: true,
+                  lineSmooth: false,
                   fullWidth: true,
                   chartPadding: { right: 20, left: 10, bottom: 10 },
                   axisX: { showGrid: false },
-                  axisY: { showLabel: false }
+                  axisY: { showLabel: true, onlyInteger: true }
     };
 
     var chart = new Chartist.Line('#weekstats', data, options);

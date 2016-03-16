@@ -21,7 +21,7 @@ class actionReportInvoice {
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
     $pagedata->details = sizeof($pagedata->reportResults)." ".$reportname." tickets for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
-    $pagedata->details .= "<br /><br />//TODO setup toggle to update when invoice complete.";
+    $pagedata->details .= "";
     //render template using $pagedata object
     require_once "views/reports/resultsListReportView.php";
   }
