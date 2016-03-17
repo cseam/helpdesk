@@ -6,54 +6,35 @@
 
     public function countAllTickets() {
       $database = new Database();
-      $database->query("SELECT COUNT(*) AS countAllTickets
-                        FROM calls
-                        ");
+      $database->query("SELECT COUNT(*) AS countAllTickets FROM calls");
       $result = $database->single();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countAllOpenTickets() {
       $database = new Database();
-      $database->query("SELECT COUNT(*) AS countAllOpenTickets
-                        FROM calls
-                        WHERE status !=2
-                        ");
+      $database->query("SELECT COUNT(*) AS countAllOpenTickets FROM calls WHERE status !=2");
       $result = $database->single();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countTicketsByHelpdesk($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT COUNT(*) AS countTicketsByHelpdesk
-                        FROM calls
-                        WHERE helpdesk = :helpdeskid
-                        ");
+      $database->query("SELECT COUNT(*) AS countTicketsByHelpdesk FROM calls WHERE helpdesk = :helpdeskid");
       $database->bind(":helpdeskid", $helpdeskid);
       $result = $database->single();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countTicketsByOwner($owner) {
       $database = new Database();
-      $database->query("SELECT COUNT(*) AS countTicketsByOwner
-                        FROM calls
-                        WHERE owner = :owner
-                        ");
+      $database->query("SELECT COUNT(*) AS countTicketsByOwner FROM calls WHERE owner = :owner");
       $database->bind(":owner", $owner);
       $result = $database->single();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
@@ -77,70 +58,36 @@
                         ");
       $database->bind(":helpdeskid", $helpdeskid);
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countEngineerTotalsThisMonth() {
       $database = new Database();
-      $database->query("SELECT engineers.engineerName,
-                        count(calls.callid) AS Totals
-                        FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
-                        WHERE status = 2
-                        AND Month(closed) = :month
-                        AND Year(closed) = :year
-                        GROUP BY calls.closeengineerid
-                        ORDER BY Totals
-                        ");
+      $database->query("SELECT engineers.engineerName, count(calls.callid) AS Totals FROM calls JOIN engineers ON calls.assigned=engineers.idengineers WHERE status = 2 AND Month(closed) = :month AND Year(closed) = :year GROUP BY calls.closeengineerid ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countHelpdeskTotalsThisMonth() {
       $database = new Database();
-      $database->query("SELECT helpdesks.helpdesk_name,
-                        count(calls.callid) AS Totals
-                        FROM calls
-                        JOIN helpdesks ON calls.helpdesk=helpdesks.id
-                        WHERE status = 2
-                        AND Month(closed) = :month
-                        AND Year(closed) = :year
-                        GROUP BY calls.helpdesk, Month(calls.closed)
-                        ORDER BY Totals
-                      ");
+      $database->query("SELECT helpdesks.helpdesk_name, count(calls.callid) AS Totals FROM calls JOIN helpdesks ON calls.helpdesk=helpdesks.id WHERE status = 2 AND Month(closed) = :month AND Year(closed) = :year GROUP BY calls.helpdesk, Month(calls.closed) ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countCategoryTotalsThisMonth() {
       $database = new Database();
-      $database->query("SELECT categories.categoryName,
-                        count(calls.callid) AS Totals
-                        FROM calls
-                        JOIN categories ON calls.category=categories.id
-                        WHERE status = 2
-                        AND Month(closed) = :month
-                        AND Year(closed) = :year
-                        GROUP BY calls.category, Month(calls.closed)
-                        ORDER BY Totals
-                      ");
+      $database->query("SELECT categories.categoryName, count(calls.callid) AS Totals FROM calls JOIN categories ON calls.category=categories.id WHERE status = 2 AND Month(closed) = :month AND Year(closed) = :year GROUP BY calls.category, Month(calls.closed) ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
       return $result;
@@ -148,20 +95,10 @@
 
     public function countUrgencyTotalsThisMonth() {
       $database = new Database();
-      $database->query("SELECT calls.urgency,
-                        count(calls.callid) AS Totals
-                        FROM calls
-                        JOIN categories ON calls.category=categories.id
-                        WHERE status = 2
-                        AND Month(closed) = :month
-                        AND Year(closed) = :year
-                        GROUP BY calls.urgency, Month(calls.closed)
-                        ORDER BY Totals
-                      ");
+      $database->query("SELECT calls.urgency, count(calls.callid) AS Totals FROM calls JOIN categories ON calls.category=categories.id WHERE status = 2 AND Month(closed) = :month AND Year(closed) = :year GROUP BY calls.urgency, Month(calls.closed) ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
       // update array values with friendly name as they arent in the db!!!!
       foreach($result as $key => $value) {
@@ -172,19 +109,10 @@
 
     public function countPlannedVsReactiveTotalsThisMonth() {
       $database = new Database();
-      $database->query("SELECT calls.pm,
-                        count(calls.callid) AS Totals
-                        FROM calls
-                        WHERE status = 2
-                        AND Month(closed) = :month
-                        AND Year(closed) = :year
-                        GROUP BY calls.pm
-                        ORDER BY Totals
-                      ");
+      $database->query("SELECT calls.pm, count(calls.callid) AS Totals FROM calls WHERE status = 2 AND Month(closed) = :month AND Year(closed) = :year GROUP BY calls.pm ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
       // update array values with friendly name as they arent in the db!!!!
@@ -196,82 +124,36 @@
 
     public function countTotalsThisYear($year) {
       $database = new Database();
-      $database->query("SELECT Month(closed) AS MonthNum,
-                        count(callid) AS Totals
-                        FROM calls
-                        WHERE status = 2
-                        AND Year(closed) = :year
-                        GROUP BY Month(closed)
-                        ORDER BY MonthNum, helpdesk
-                      ");
+      $database->query("SELECT Month(closed) AS MonthNum, count(callid) AS Totals FROM calls WHERE status = 2 AND Year(closed) = :year GROUP BY Month(closed) ORDER BY MonthNum, helpdesk");
       $database->bind(':year', $year);
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countWorkRateTotalsThisMonth() {
       $database = new Database();
-      $database->query("SELECT engineers.engineerName,
-                         helpdesks.helpdesk_name,
-                        sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7,
-                        sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1,
-                        sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30
-                        FROM engineers
-                        JOIN calls ON calls.closeengineerid = engineers.idengineers
-                        JOIN helpdesks ON engineers.helpdesk=helpdesks.id
-                        WHERE engineers.disabled != 1
-                        AND Month(closed) = :month
-                        AND Year(closed) = :year
-                        GROUP BY engineers.engineerName
-                        ORDER BY Last30 DESC
-                        ");
+      $database->query("SELECT engineers.engineerName, helpdesks.helpdesk_name, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 30 DAY) THEN 1 ELSE 0 END) AS Last30 FROM engineers JOIN calls ON calls.closeengineerid = engineers.idengineers JOIN helpdesks ON engineers.helpdesk=helpdesks.id WHERE engineers.disabled != 1 AND Month(closed) = :month AND Year(closed) = :year GROUP BY engineers.engineerName ORDER BY Last30 DESC");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countReasonForTicketsThisMonth() {
       $database = new Database();
-      $database->query("SELECT callreasons.reason_name,
-                        count(*) AS last7
-                        FROM calls
-                        INNER JOIN callreasons ON calls.callreason = callreasons.id
-                        WHERE calls.status='2'
-                        AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
-                        GROUP BY callreasons.reason_name
-                      ");
+      $database->query("SELECT callreasons.reason_name, count(*) AS last7 FROM calls INNER JOIN callreasons ON calls.callreason = callreasons.id WHERE calls.status='2' AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) GROUP BY callreasons.reason_name");
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countAssignedTickets() {
       $database = new Database();
-      $database->query("SELECT helpdesks.helpdesk_name,
-                        engineers.idengineers,
-                        engineers.engineerName,
-                        Count(assigned) AS HowManyAssigned,
-                        sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes
-                        FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
-                        JOIN helpdesks ON engineers.helpdesk=helpdesks.id
-                        WHERE engineers.disabled != 1
-                        GROUP BY calls.assigned
-                        ORDER BY calls.helpdesk
-                      ");
+      $database->query("SELECT helpdesks.helpdesk_name, engineers.idengineers, engineers.engineerName, Count(assigned) AS HowManyAssigned, sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes FROM calls JOIN engineers ON calls.assigned=engineers.idengineers JOIN helpdesks ON engineers.helpdesk=helpdesks.id WHERE engineers.disabled != 1 GROUP BY calls.assigned ORDER BY calls.helpdesk");
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
@@ -305,108 +187,51 @@
       $database->bind(':month', date("m", strtotime("first day of previous month")));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countEngineerFeedbackTotals() {
       $database = new Database();
-      $database->query("SELECT engineers.engineerName,
-                        helpdesks.helpdesk_name,
-                        AVG(feedback.satisfaction) as FeedbackAVG,
-                        COUNT(calls.callid) as FeedbackCOUNT
-                        FROM calls
-                        JOIN feedback ON feedback.callid=calls.callid
-                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
-                        JOIN helpdesks ON engineers.helpdesk = helpdesks.id
-                        GROUP BY calls.closeengineerid
-                      ");
+      $database->query("SELECT engineers.engineerName, helpdesks.helpdesk_name, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT FROM calls JOIN feedback ON feedback.callid=calls.callid JOIN engineers ON engineers.idengineers=calls.closeengineerid JOIN helpdesks ON engineers.helpdesk = helpdesks.id GROUP BY calls.closeengineerid");
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function avgHelpdeskFeedback() {
       $database = new Database();
-      $database->query("SELECT AVG(feedback.satisfaction) as FeedbackAVG
-                        FROM calls
-                        JOIN feedback ON feedback.callid=calls.callid
-                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
-                        JOIN helpdesks ON engineers.helpdesk = helpdesks.id
-                        WHERE calls.status = 2
-                        GROUP BY calls.status
-                      ");
+      $database->query("SELECT AVG(feedback.satisfaction) as FeedbackAVG FROM calls JOIN feedback ON feedback.callid=calls.callid JOIN engineers ON engineers.idengineers=calls.closeengineerid JOIN helpdesks ON engineers.helpdesk = helpdesks.id WHERE calls.status = 2 GROUP BY calls.status");
       $result = $database->single();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
 
     public function getPoorFeedback($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT calls.callid,
-                        engineers.engineerName,
-                        calls.owner,
-                        feedback.details,
-                        feedback.satisfaction
-                        FROM feedback
-                        JOIN calls ON feedback.callid=calls.callid
-                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
-                        WHERE satisfaction IN (1,2)
-                        AND feedback.opened > DATE_SUB(CURDATE(),INTERVAL 30 DAY)
-                        AND calls.helpdesk IN (:helpdesk)
-                      ");
+      $database->query("SELECT calls.callid, engineers.engineerName, calls.owner, feedback.details, feedback.satisfaction FROM feedback JOIN calls ON feedback.callid=calls.callid JOIN engineers ON engineers.idengineers=calls.closeengineerid WHERE satisfaction IN (1,2) AND feedback.opened > DATE_SUB(CURDATE(),INTERVAL 30 DAY) AND calls.helpdesk IN (:helpdesk)");
       $database->bind(":helpdesk", $helpdeskid);
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function GetFailedSLAThisMonth() {
       $database = new Database();
-      $database->query("SELECT calls.callid,
-                        calls.title,
-                        helpdesks.helpdesk_name,
-                        engineers.engineerName,
-                        calls.urgency,
-                        service_level_agreement.close_eta_days,
-                        datediff(calls.closed, calls.opened) AS 'total_days_to_close'
-                        FROM calls
-                        INNER JOIN service_level_agreement ON calls.helpdesk = service_level_agreement.helpdesk
-                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
-                        JOIN engineers ON engineers.idengineers=calls.assigned
-                        WHERE service_level_agreement.urgency = calls.urgency
-                        AND Year(closed) = :year
-                        AND Month(closed) = :month
-                        ORDER BY assigned
-                        ");
+      $database->query("SELECT calls.callid, calls.title, helpdesks.helpdesk_name, engineers.engineerName, calls.urgency, service_level_agreement.close_eta_days, datediff(calls.closed, calls.opened) AS 'total_days_to_close' FROM calls INNER JOIN service_level_agreement ON calls.helpdesk = service_level_agreement.helpdesk JOIN helpdesks ON calls.helpdesk = helpdesks.id JOIN engineers ON engineers.idengineers=calls.assigned WHERE service_level_agreement.urgency = calls.urgency AND Year(closed) = :year AND Month(closed) = :month ORDER BY assigned ");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else populate object with db results
       return $result;
     }
 
     public function countEngineerTotalsLastWeek($engineerId) {
       $database = new Database();
-      $database->query("SELECT DATE_FORMAT(closed, '%a') AS DAY_OF_WEEK
-                        FROM calls
-                        WHERE closeengineerid = :engineerId
-                        AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
-                        ");
+      $database->query("SELECT DATE_FORMAT(closed, '%a') AS DAY_OF_WEEK FROM calls WHERE closeengineerid = :engineerId AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)");
       $database->bind(':engineerId', $engineerId);
       $result = $database->resultset();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
       $engineermon = $engineertue = $engineerwed = $engineerthu = $engineerfri = $engineersat = $engineersun = 0;
 
@@ -435,7 +260,6 @@
             break;
         }
       }
-
       $count = array();
       $count["Mon"] = $engineermon;
       $count["Tue"] = $engineertue;
@@ -444,39 +268,24 @@
       $count["Fri"] = $engineerfri;
       $count["Sat"] = $engineersat;
       $count["Sun"] = $engineersun;
-      // else return db results
       return $count;
     }
 
     public function countClosedByEngineerIdLastWeek($engineerId) {
       $database = new Database();
-      $database->query("SELECT
-                        count(closeengineerid) AS engineerClose
-                        FROM calls
-                        WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
-                        AND closeengineerid = :engineerId
-                        ");
+      $database->query("SELECT count(closeengineerid) AS engineerClose FROM calls WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND closeengineerid = :engineerId ");
       $database->bind(':engineerId', $engineerId);
       $result = $database->single();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else return db results
       return $result;
     }
 
     public function countAllTicketsByEngineerIdLastWeek($engineerId) {
       $database = new Database();
-      $database->query("SELECT
-                        count(callid) AS engineerAll
-                        FROM calls
-                        WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
-                        AND closeengineerid = :engineerId
-                        ");
+      $database->query("SELECT count(callid) AS engineerAll FROM calls WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND closeengineerid = :engineerId");
       $database->bind(':engineerId', $engineerId);
       $result = $database->single();
-      // if no results return empty object
       if ($database->rowCount() === 0) { return null;}
-      // else return db results
       return $result;
     }
 

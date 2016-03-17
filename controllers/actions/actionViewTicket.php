@@ -12,21 +12,19 @@ class actionViewTicket {
     //create new models for required data
     $ticketModel = new ticketModel();
     $callreasonsModel = new callreasonsModel();
+    $quickresponseModel = new quickresponseModel();
 
     //populate users ticket list
     $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
-
     //populate tickets data
     $ticketDetails = $ticketModel->getTicketDetails($ticketid);
     $additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
     //populate call reasons for this tickets helpdeskid
     $callreasons = $callreasonsModel->getReasonsByHelpdeskId($ticketDetails["helpdesk"]);
     //populate quick responses
-    //TODO populate quick responses
-
+    $quickresponse = $quickresponseModel->getQuickResponseByHelpdeskId($ticketDetails["helpdesk"]);
     //update ticket views with user id and time stamp
-    //TODO Function to log ticket views
-
+    $ticketModel->logViewTicketById($ticketid, $_SESSION['sAMAccountName']);
     //render page
     require_once "views/ticketView.php";
   }

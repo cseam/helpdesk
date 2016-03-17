@@ -5,9 +5,9 @@
     <div id="stats">
       <?php include "views/partials/addticketwelcome.php"; ?>
     </div>
-    <div id="calllist">
+    <!--<div id="calllist">
       <?php include "views/partials/yourtickets.php"; ?>
-    </div>
+    </div>-->
     </div>
   <div id="rightpage">
     <div id="call">

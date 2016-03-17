@@ -56,6 +56,7 @@
       <label for="quickresponse">Quick Response</label>
         <select id="quickresponse" name="quickresponse">
           <option value="" SELECTED>Please Select</option>
+          <?php foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["quick_response"]."</option>"; } ?>
         </select>
       </p>
       <div class="buttons">
