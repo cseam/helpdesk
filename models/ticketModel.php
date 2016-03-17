@@ -243,5 +243,24 @@
       return null;
     }
 
+    public function updateTicketStatusById($ticketid, $statuscode) {
+      $database = new Database();
+      $database->query("UPDATE calls SET status = :statuscode WHERE callid = :callid");
+      $database->bind(":callid", $ticketid);
+      $database->bind(":statuscode", $statuscode);
+      $database->execute();
+      return null;
+    }
+
+    public function updateTicketRequireInvoiceById($ticketid) {
+      $database = new Database();
+      $database->query("UPDATE calls SET requireinvoice = 1 WHERE callid = :callid");
+      $database->bind(":callid", $ticketid);
+      $database->execute();
+      return null;
+    }
+
+
+
 
 }
