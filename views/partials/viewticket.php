@@ -40,49 +40,43 @@
       <input type="hidden" id="id" name="id" value="<?php echo $ticketDetails["callid"]; ?>" />
       <input type="hidden" id="button_value" name="button_value" value="" />
       <input type="hidden" id="details" name="details" value="<?php echo $ticketDetails["details"];?>" />
-
-
-    <fieldset>
-      <legend>Update Ticket</legend>
-      <p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
-      <p><label for="attachment">Picture or Attachment</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
-      <p><label for="callreason">Reason for issue</label>
-        <select id="callreason" name="callreason" REQUIRED>
-          <option value="" SELECTED>Please Select</option>
-          <?php foreach ($callreasons as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["reason_name"]."</option>"; } ?>
-        </select>
-      </p>
-      <p>
-      <label for="quickresponse">Quick Response</label>
-        <select id="quickresponse" name="quickresponse">
-          <option value="" SELECTED>Please Select</option>
-          <?php foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["quick_response"]."</option>"; } ?>
-        </select>
-      </p>
-      <div class="buttons">
-        <br/>
-        <br/>// Manager Buttons<br />
-        <button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">Assign Engineer</button>
-        <button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button>
-        <br/><br />// Engineer Buttons<br />
-        <button name="locker" value="locker" type="submit" onclick="this.form.button_value.value = this.value;">Add to Locker</button>
-        <button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button>
-        <button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">UnSend Away</button>
-        <button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
-        <button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">UnEscalate</button>
-        <button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
-        <button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Unhold</button>
-        <button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
-        <br/><br />// Everyone Buttons<br />
-        <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
-        <br/><br />// Ticket Owner Buttons<br />
-        <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Still have an issue?</button>
-        <button name="feedback" value="feedback" type="submit" onclick="this.form.button_value.value = this.value;">Leave Feedback</button>
-        <br/><br />//TODO FORM VALIDATION
-
-      </div>
-    </fieldset>
-
+      <fieldset>
+        <legend>Update Ticket</legend>
+        <p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
+        <p><label for="attachment">Picture or Attachment</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
+        <p><label for="callreason">Reason for issue</label>
+          <select id="callreason" name="callreason" REQUIRED>
+            <option value="" SELECTED>Please Select</option>
+            <?php foreach ($callreasons as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["reason_name"]."</option>"; } ?>
+          </select>
+        </p>
+        <p>
+        <label for="quickresponse">Quick Response</label>
+          <select id="quickresponse" name="quickresponse">
+            <option value="" SELECTED>Please Select</option>
+            <?php foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["quick_response"]."</option>"; } ?>
+          </select>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>Ticket Controls</legend>
+        <div class="buttons">
+          <!--//TODO show only for managers -->
+          <button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">Assign Engineer</button>
+          <button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button>
+          <!--//TODO show only for engineers -->
+          <button name="locker" value="locker" type="submit" onclick="this.form.button_value.value = this.value;">Add to Locker</button>
+          <button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button>
+          <button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
+          <button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
+          <button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
+          <!--//TODO show only for everyone or if ticket closed 'Still have an issue?' button -->
+          <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
+          <!--//TODO show only for ticket owner -->
+          <button name="feedback" value="feedback" type="submit" onclick="this.form.button_value.value = this.value;">Leave Feedback</button>
+          <!--//TODO FORM Validation -->
+        </div>
+      </fieldset>
     </form>
 
 </div>
