@@ -39,3 +39,29 @@ function urgency_friendlyname($data)
 	};
 	return 	$friendly;
 }
+
+function random_locker()
+{
+	global $db;
+		$min=1;
+		$max=30;
+		$lockerid = rand($min,$max);
+	return $lockerid;
+}
+
+function email_user($to, $from, $title, $message)
+{
+	$headers = "From:" . $from . "\r\n";
+	$headers .= "Reply-To:" . $from . "\r\n";
+	$headers .= "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+	$headers .= "X-Mailer: PHP/" . phpversion();
+	$msgto = $to;
+	$msgtitle = $title;
+	$msgheaders = $headers;
+	// In case any of our lines are larger than 70 characters, we wordwrap()
+	$message = wordwrap($message, 70, "\r\n");
+	$msgbody = $message;
+	//send email
+	mail($msgto, $msgtitle, $msgbody, $msgheaders);
+}

@@ -38,6 +38,7 @@
 
     <form action="/ticket/update/" method="post" enctype="multipart/form-data" id="updateForm">
       <input type="hidden" id="id" name="id" value="<?php echo $ticketDetails["callid"]; ?>" />
+      <input type="hidden" id="contact_email" name="contact_email" value="<?php echo $ticketDetails["email"]; ?>" />
       <input type="hidden" id="button_value" name="button_value" value="" />
       <input type="hidden" id="details" name="details" value="<?php echo $ticketDetails["details"];?>" />
       <fieldset>
@@ -47,6 +48,7 @@
         <p><label for="callreason">Reason for issue</label>
           <select id="callreason" name="callreason" REQUIRED>
             <option value="" SELECTED>Please Select</option>
+            <option value="test" >Test Value</option>
             <?php foreach ($callreasons as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["reason_name"]."</option>"; } ?>
           </select>
         </p>
@@ -63,6 +65,7 @@
         <div class="buttons">
           <!--//TODO show only for managers -->
           <button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">Assign Engineer</button>
+          <button name="forward" value="forward" type="submit" onclick="this.form.button_value.value = this.value;">Forward To Helpdesk</button>
           <button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button>
           <!--//TODO show only for engineers -->
           <button name="locker" value="locker" type="submit" onclick="this.form.button_value.value = this.value;">Add to Locker</button>
@@ -78,5 +81,7 @@
         </div>
       </fieldset>
     </form>
-
+    <script>
+      $("#updateForm").validate();
+    </script>
 </div>

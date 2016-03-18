@@ -24,4 +24,14 @@
       return $result;
     }
 
+    public function updateTicketLockerById($callid, $lockerid) {
+      $database = new Database();
+      $database->query("UPDATE calls SET calls.lockerid = :lockerid , lastupdate = :lastupdate WHERE callid = :callid");
+      $database->bind(":callid", $callid);
+      $database->bind(":lockerid", $lockerid);
+      $database->bind(":lastupdate", date("c"));
+      $database->execute();
+      return null;
+    }
+
 }

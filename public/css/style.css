@@ -427,14 +427,14 @@ h3.callbody {
 .update h3 {
 	text-align: left;
 	font-size: 0.9rem;
-	color: #577d6a;
+	/*color: #577d6a;*/
 	margin: 0.6rem 0;
 	padding: 0.6rem 0 0.6rem 1rem;
 	font-style: normal;
 	text-transform: lowercase;
 	width: auto;
 	display: block;
-	background: rgba(88, 126, 107, 0.1);
+	/*background: rgba(88, 126, 107, 0.1);*/
 	border-radius: 5px;
 }
 .original {
@@ -469,7 +469,7 @@ h3.callbody {
 	text-transform: uppercase;
 	font-size: 0.7rem;
 	border-radius: 2px;
-	min-width: 160px;
+	min-width: 180px;
 }
 .tags button {
 	border: 1px solid transparent;
@@ -570,7 +570,7 @@ h3.callbody {
 	display: block;
 	text-align: center;
 }
-.update .hold {
+.update .hold, .update .sendaway {
 	color: rgba(194, 151, 9, 1);
 	background-color: rgba(88, 70, 0, 0.1);
 }

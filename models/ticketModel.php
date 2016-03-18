@@ -260,7 +260,27 @@
       return null;
     }
 
+    public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "") {
+      $message = "<div class=update>" . htmlspecialchars($update) . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
+      $database = new Database();
+      $database->query("UPDATE calls SET details = CONCAT(calls.details, :details), lastupdate = :lastupdate WHERE callid = :callid");
+      $database->bind(":callid", $ticketid);
+      $database->bind(":details", $message);
+      $database->bind(":lastupdate", date("c"));
+      $database->execute();
+      return null;
+    }
 
-
+    public function closeTicketById($ticketid, $engineerid, $closereason) {
+      $database = new Database();
+      $database->query("UPDATE calls SET closed = :closed, status = 2, callreason = :callreason, lastupdate = :lastupdate, closeengineerid = :closeengineerid WHERE callid = :callid");
+      $database->bind(":callid", $ticketid);
+      $database->bind(":closeengineerid", $engineerid);
+      $database->bind(":closereason", $closereason);
+      $database->bind(":closed", date("c"));
+      $database->bind(":lastupdate", date("c"));
+      $database->execute();
+      return null;
+    }
 
 }
