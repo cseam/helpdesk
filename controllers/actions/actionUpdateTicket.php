@@ -12,6 +12,7 @@ class actionUpdateTicket {
     if ($_POST) {
       // check post button behaviour to confirm action
       SWITCH ($_POST["button_value"]) {
+        //TODO need to sort the button toggles if already on hold etc
         CASE "feedback":
           //render feedback form
           //TODO render form
