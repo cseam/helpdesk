@@ -13,16 +13,19 @@ class actionUpdateTicket {
       SWITCH ($_POST["button_value"]) {
         //TODO need to sort the button toggles if already on hold etc
         CASE "feedback":
-          //render feedback form
-          //TODO render form
+            // reroute to feedback form
+            header('Location: /ticket/feedback/'.$_POST["id"]);
+            exit;
           break;
         CASE "forward":
-          //render forward form
-          //TODO render form
+            // reroute to forward form
+            header('Location: /ticket/forward/'.$_POST["id"]);
+            exit;
           break;
         CASE "assign":
-          //render assign form
-          //TODO render form
+            // reroute to assign form
+            header('Location: /ticket/assign/'.$_POST["id"]);
+            exit;
           break;
         CASE "locker":
           $lockerid = random_locker();

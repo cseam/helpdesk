@@ -10,9 +10,9 @@ class ticketController {
     $methods->add('/add', 'actionAddTicket');
     $methods->add('/update', 'actionUpdateTicket');
     $methods->add('/view', 'actionViewTicket');
-    //TODO Assign route
-    //TODO Forward route
-    //TODO feedback route
+    $methods->add('/assign', 'actionAssignTicket');
+    $methods->add('/forward', 'actionForwardTicket');
+    $methods->add('/feedback', 'actionFeedbackTicket');
     $methods->process(2);
   }
 }
