@@ -245,7 +245,7 @@
 
     public function updateTicketStatusById($ticketid, $statuscode) {
       $database = new Database();
-      $database->query("UPDATE calls SET status = :statuscode WHERE callid = :callid");
+      $database->query("UPDATE calls SET calls.status = :statuscode WHERE calls.callid = :callid");
       $database->bind(":callid", $ticketid);
       $database->bind(":statuscode", $statuscode);
       $database->execute();
@@ -254,7 +254,7 @@
 
     public function updateTicketRequireInvoiceById($ticketid) {
       $database = new Database();
-      $database->query("UPDATE calls SET requireinvoice = 1 WHERE callid = :callid");
+      $database->query("UPDATE calls SET calls.requireinvoice = 1 WHERE calls.callid = :callid");
       $database->bind(":callid", $ticketid);
       $database->execute();
       return null;
@@ -263,7 +263,7 @@
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "") {
       $message = "<div class=update>" . htmlspecialchars($update) . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
       $database = new Database();
-      $database->query("UPDATE calls SET details = CONCAT(calls.details, :details), lastupdate = :lastupdate WHERE callid = :callid");
+      $database->query("UPDATE calls SET calls.details = CONCAT(calls.details, :details), calls.lastupdate = :lastupdate WHERE calls.callid = :callid");
       $database->bind(":callid", $ticketid);
       $database->bind(":details", $message);
       $database->bind(":lastupdate", date("c"));
@@ -273,7 +273,7 @@
 
     public function closeTicketById($ticketid, $engineerid, $closereason) {
       $database = new Database();
-      $database->query("UPDATE calls SET closed = :closed, status = 2, callreason = :callreason, lastupdate = :lastupdate, closeengineerid = :closeengineerid WHERE callid = :callid");
+      $database->query("UPDATE calls SET calls.closed = :closed, calls.status = 2, calls.callreason = :closereason, calls.lastupdate = :lastupdate, calls.closeengineerid = :closeengineerid WHERE calls.callid = :callid");
       $database->bind(":callid", $ticketid);
       $database->bind(":closeengineerid", $engineerid);
       $database->bind(":closereason", $closereason);
