@@ -3,29 +3,33 @@
 class actionForwardTicket {
   public function __construct()
   {
-    //TODO add some validation here for uri params and also some authentication checking to see if user has permission to see ticket also (if desired)
-    echo "testing forward";
     //get ticket id from uri params
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
-
     //create new models for required data
     $ticketModel = new ticketModel();
-    $callreasonsModel = new callreasonsModel();
-    $quickresponseModel = new quickresponseModel();
-
+    $helpdeskModel = new helpdeskModel();
     //populate users ticket list
     $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
-    //populate tickets data
-    $ticketDetails = $ticketModel->getTicketDetails($ticketid);
-    $additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
-    //populate call reasons for this tickets helpdeskid
-    $callreasons = $callreasonsModel->getReasonsByHelpdeskId($ticketDetails["helpdesk"]);
-    //populate quick responses
-    $quickresponse = $quickresponseModel->getQuickResponseByHelpdeskId($ticketDetails["helpdesk"]);
-    //update ticket views with user id and time stamp
-    $ticketModel->logViewTicketById($ticketid, $_SESSION['sAMAccountName']);
+    //populate helpdesks for dropdown
+    $helpdesks = $helpdeskModel->getListOfHelpdesks();
+
+    if ($_POST) {
+      //update ticket
+      $updatemessage = "Ticket forwarded by " . $_SESSION["sAMAccountName"] . " for the following reason: " . $_POST["reason"];
+      $ticketModel->updateTicketDetailsById($ticketid, "open", $_SESSION["sAMAccountName"] , $updatemessage);
+      //change helpdesk
+      $ticketModel->updateTicketHelpdeskById($ticketid, $_POST["fwdhelpdesk"]);
+      //remove engineer assigned
+      $ticketModel->updateTicketRemoveAssignmentById($ticketid);
+      //set ticket status to open
+      $ticketModel->updateTicketStatusById($ticketid, 1);
+      //reroute to ticket
+      header('Location: /ticket/view/'.$ticketid);
+      exit;
+    }
+
     //render page
-    require_once "views/ticketView.php";
+    require_once "views/forwardTicketView.php";
   }
 }

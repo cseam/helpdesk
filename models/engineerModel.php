@@ -20,4 +20,23 @@
         $userObject->localHash = $row['localLoginHash'];
       return $userObject;
     }
+
+    public function getListOfEngineersByHelpdeskId($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT * FROM engineers WHERE helpdesk = :helpdesk AND disabled != 1");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
+    public function getEngineerFriendlyNameById($engineerid) {
+      $database = new Database();
+      $database->query("SELECT engineerName FROM engineers WHERE idengineers = :engineer");
+      $database->bind(":engineer", $engineerid);
+      $result = $database->single();
+      return $result["engineerName"];
+    }
+
+
 }

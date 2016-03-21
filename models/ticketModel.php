@@ -44,7 +44,7 @@
 
     public function getTicketDetails($ticketid) {
       $database = new Database();
-      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id JOIN categories ON calls.category=categories.id WHERE callid = :ticketid");
+      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls LEFT OUTER JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id JOIN categories ON calls.category=categories.id WHERE callid = :ticketid");
       $database->bind(":ticketid", $ticketid);
       $result = $database->single();
       if ($database->rowCount() === 0) { return null;}
@@ -53,7 +53,7 @@
 
     public function getOldestTicketByHelpdesk($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT * FROM calls JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE engineers.helpdesk = :helpdesk AND status != 2 ORDER BY opened LIMIT 1");
+      $database->query("SELECT * FROM calls LEFT OUTER JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE engineers.helpdesk = :helpdesk AND status != 2 ORDER BY opened LIMIT 1");
       $database->bind(":helpdesk", $helpdeskid);
       $result = $database->single();
       if ($database->rowCount() === 0) { return null;}
@@ -80,7 +80,7 @@
 
     public function getAllEscalatedTickets() {
       $database = new Database();
-      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE status = 4 ORDER BY opened");
+      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls LEFT OUTER JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE status = 4 ORDER BY opened");
       $results = $database->resultset();
       if ($database->rowcount() === 0) { return null;}
       return $results;
@@ -97,7 +97,7 @@
 
     public function getUnassignedTicketsByHelpdesk($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE calls.helpdesk = :helpdesk AND calls.assigned IS NULL ORDER BY opened");
+      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls LEFT OUTER JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE calls.helpdesk = :helpdesk AND calls.assigned IS NULL AND calls.status !=2 ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
       if ($database->rowcount() === 0) { return null;}
@@ -115,7 +115,7 @@
 
     public function getOpenTicketsByHelpdesk($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE calls.helpdesk = :helpdesk AND calls.status != 2 ORDER BY opened");
+      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls LEFT OUTER JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE calls.helpdesk = :helpdesk AND calls.status != 2 ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
       if ($database->rowcount() === 0) { return null;}
@@ -124,7 +124,7 @@
 
     public function getStagnateTicketsByHelpdesk($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE calls.helpdesk = :helpdesk AND status IN (1,4) AND DATE(calls.lastupdate) <= DATE_SUB(CURDATE(),INTERVAL 72 HOUR) ORDER BY opened");
+      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls LEFT OUTER JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE calls.helpdesk = :helpdesk AND status IN (1,4) AND DATE(calls.lastupdate) <= DATE_SUB(CURDATE(),INTERVAL 72 HOUR) ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
       if ($database->rowcount() === 0) { return null;}
@@ -133,7 +133,7 @@
 
     public function get7DayTicketsByHelpdesk($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE calls.helpdesk = :helpdesk AND status != 2 AND DATE(calls.opened) <= DATE_SUB(CURDATE(),INTERVAL 7 DAY) ORDER BY opened");
+      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls LEFT OUTER JOIN engineers ON calls.assigned=engineers.idengineers JOIN status ON calls.status=status.id JOIN location ON calls.location=location.id WHERE calls.helpdesk = :helpdesk AND status != 2 AND DATE(calls.opened) <= DATE_SUB(CURDATE(),INTERVAL 7 DAY) ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
       if ($database->rowcount() === 0) { return null;}
@@ -279,6 +279,32 @@
       $database->bind(":closereason", $closereason);
       $database->bind(":closed", date("c"));
       $database->bind(":lastupdate", date("c"));
+      $database->execute();
+      return null;
+    }
+
+    public function updateTicketHelpdeskById($ticketid, $helpdeskid) {
+      $database = new Database();
+      $database->query("UPDATE calls SET calls.helpdesk = :helpdesk WHERE calls.callid = :callid");
+      $database->bind(":callid", $ticketid);
+      $database->bind(":helpdesk", $helpdeskid);
+      $database->execute();
+      return null;
+    }
+
+    public function updateTicketRemoveAssignmentById($ticketid) {
+      $database = new Database();
+      $database->query("UPDATE calls SET calls.assigned = NULL WHERE calls.callid = :callid");
+      $database->bind(":callid", $ticketid);
+      $database->execute();
+      return null;
+    }
+
+    public function updateTicketAssignmentById($ticketid, $assigned) {
+      $database = new Database();
+      $database->query("UPDATE calls SET calls.assigned = :assigned WHERE calls.callid = :ticket");
+      $database->bind(":ticket", $ticketid);
+      $database->bind(":assigned", $assigned);
       $database->execute();
       return null;
     }

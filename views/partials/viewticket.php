@@ -77,7 +77,6 @@
           <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
           <!--//TODO show only for ticket owner -->
           <button name="feedback" value="feedback" type="submit" onclick="this.form.button_value.value = this.value;">Leave Feedback</button>
-          <!--//TODO FORM Validation -->
         </div>
       </fieldset>
     </form>

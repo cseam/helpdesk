@@ -13,4 +13,12 @@
       return $results;
     }
 
+    public function getListOfHelpdesks() {
+      $database = new Database();
+      $database->query("SELECT * FROM helpdesks");
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
 }

@@ -3,29 +3,32 @@
 class actionAssignTicket {
   public function __construct()
   {
-    //TODO add some validation here for uri params and also some authentication checking to see if user has permission to see ticket also (if desired)
-    echo "testing assign";
     //get ticket id from uri params
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
-
     //create new models for required data
     $ticketModel = new ticketModel();
-    $callreasonsModel = new callreasonsModel();
-    $quickresponseModel = new quickresponseModel();
-
+    $helpdeskModel = new helpdeskModel();
+    $engineerModel = new engineerModel();
     //populate users ticket list
     $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
-    //populate tickets data
+    //get ticket details
     $ticketDetails = $ticketModel->getTicketDetails($ticketid);
-    $additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
-    //populate call reasons for this tickets helpdeskid
-    $callreasons = $callreasonsModel->getReasonsByHelpdeskId($ticketDetails["helpdesk"]);
-    //populate quick responses
-    $quickresponse = $quickresponseModel->getQuickResponseByHelpdeskId($ticketDetails["helpdesk"]);
-    //update ticket views with user id and time stamp
-    $ticketModel->logViewTicketById($ticketid, $_SESSION['sAMAccountName']);
+    //populate engineers for dropdown
+    $engineers = $engineerModel->getListOfEngineersByHelpdeskId($ticketDetails["helpdesk"]);
+
+    if ($_POST) {
+      //update ticket
+      $updatemessage = "Ticket Assigned to " . $engineerModel->getEngineerFriendlyNameById($_POST["assignto"]) . " for the following reason: " . $_POST["reason"];
+      $ticketModel->updateTicketDetailsById($ticketid, "open", $_SESSION["sAMAccountName"] , $updatemessage);
+      //change assignment
+      $ticketModel->updateTicketAssignmentById($ticketid, $_POST["assignto"]);
+      //reroute to ticket
+      header('Location: /ticket/view/'.$ticketid);
+      exit;
+    }
+
     //render page
-    require_once "views/ticketView.php";
+    require_once "views/assignTicketView.php";
   }
 }
