@@ -9,7 +9,7 @@ class actionManagerDefault {
     $pagedata = new stdClass();
     //dont need to populate $listdata as fixed partial in manager view
     //set report name
-    $reportname = "Manager Intervention";
+    $reportname = "Problematic Tickets";
     //set report title
     $pagedata->title = $reportname . "";
     //get department workrate for graph

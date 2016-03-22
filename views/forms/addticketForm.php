@@ -124,8 +124,8 @@
 		</fieldset>
 	<?php }; ?>
 	<p class="buttons">
-		<button name="add" value="add" type="submit" title="add" onclick="this.form.button_value.value = this.value;">Create Ticket</button>
 		<button name="clear" value="clear" type="reset" title="Clear">Clear</button>
+		<button name="add" value="add" type="submit" title="add" onclick="this.form.button_value.value = this.value;">Create Ticket</button>
 	</p>
 </form>
 <script type="text/javascript">

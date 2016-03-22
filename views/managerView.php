@@ -37,7 +37,7 @@
           </tbody>
         </table>
 
-        <h3 class="default-padding">Unassigned Tickets</h3>
+        <h3 class="default-padding">New/Unassigned Tickets</h3>
         <?php if (!$pagedata->unassignedResults) { echo "<p>0 Unassigned tickets.</p>"; } ?>
         <table id="unassignedtickets">
           <tbody>
@@ -58,7 +58,7 @@
         </table>
 
         <h3 class="default-padding">Stagnate Tickets</h3>
-        <?php if (!$pagedata->stagnateResults) { echo "<p>0 Stagnate tickets.</p>"; } ?>
+        <?php if (!$pagedata->stagnateResults) { echo "<p>0 Stagnate tickets.</p>"; } else { echo "<p>Stagnate tickets are tickets not updated in 72 hours, these tickets should be updated so user knows what is happening or put on hold/sent away.</p>"; } ?>
         <table id="stagnatetickets">
           <tbody>
             <?php foreach($pagedata->stagnateResults as $key => $value) { ?>
@@ -78,7 +78,7 @@
         </table>
 
         <h3 class="default-padding">Poor Feedback</h3>
-        <?php if (!$pagedata->poorfeedbackResults) { echo "<p>0 Poor Feedback tickets in last 30 days.</p>"; } else { echo "<p>Poor feedback left recently for these tickets.</p>"; } ?>
+        <?php if (!$pagedata->poorfeedbackResults) { echo "<p>0 Poor Feedback tickets in last 30 days.</p>"; } else { echo "<p>Poor feedback left recently for these tickets, you may wish to speak with the ticket owner to address this.</p>"; } ?>
         <table id="poorfeedback">
           <tbody>
             <?php foreach($pagedata->poorfeedbackResults as $key => $value) { ?>

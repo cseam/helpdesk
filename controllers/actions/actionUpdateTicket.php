@@ -13,6 +13,8 @@ class actionUpdateTicket {
       SWITCH ($_POST["button_value"]) {
         //TODO need to sort the button toggles if already on hold etc
         CASE "add":
+            //process ticket add
+
             //TODO add ticket
             print_r($_POST);
           break;
