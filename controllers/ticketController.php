@@ -13,6 +13,8 @@ class ticketController {
     $methods->add('/assign', 'actionAssignTicket');
     $methods->add('/forward', 'actionForwardTicket');
     $methods->add('/feedback', 'actionFeedbackTicket');
+    $methods->add('/description', 'actionDescriptionTicket');
+    $methods->add('/category', 'actionCategoryTicket');
     $methods->process(2);
   }
 }

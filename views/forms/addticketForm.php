@@ -11,12 +11,14 @@
 			<input type="text" id="tel" name="tel" value="" />
 	</fieldset>
 	<fieldset>
+
+
 		<legend>Location of issue</legend>
 			<label for="location" title="location of issue">Building</label>
 			<select id="location" name="location">
 				<option value="" SELECTED>Please select</option>
+				<?php foreach ($pagedata->location as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["locationName"]."</option>";} ?>
 			</select>
-			//TODO auto fetch locations from db
 			<label for="room" title="Room where issue is">Room or Place</label>
 			<input type="text" id="room" name="room" value="" />
 	</fieldset>
@@ -25,14 +27,11 @@
 			<label for="callurgency" title="how the issue effects me">Urgency</label>
 			<select id="callurgency" name="callurgency">
 				<option value="1" SELECTED>None</option>
-				<!--<option value="2">Very Minor</option>-->
 				<option value="3">Minor</option>
-				<!--<option value="4">Very Low</option>-->
 				<option value="5">Low</option>
 				<option value="6">Moderate</option>
 				<option value="7">High</option>
 				<option value="8">Very High</option>
-				<!--<option value="9">Extremely High</option>-->
 				<option value="10">Dangerous</option>
 			</select>
 			<label for="callseverity" title="how the issue effects me">Severity</label>
@@ -58,10 +57,24 @@
 			<label for="helpdesk" title="select the college department">Report to this Department</label>
 			<select id="helpdesk" name="helpdesk" required>
 				<option value="" SELECTED>Please Select</option>
+				<?php foreach ($pagedata->helpdesks as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["helpdesk_name"]."</option>";} ?>
 			</select>
-			//TODO populate helpdesks from db
+			<script type="text/javascript">
+				$("#helpdesk").change(function(e) {
+					$.post('/ticket/category/' + $("#helpdesk").val(), $(this).serialize(), function(resp){
+						$('#category option').remove();
+						$('#category').html(resp);
+					});
+					$.post('/ticket/description/' + $("#helpdesk").val(), $(this).serialize(), function(resp) {
+						$('#helpdesk_description').hide();
+						$('#helpdesk_description').html(resp);
+						$('#helpdesk_description').slideDown();
+					});
+					e.preventDefault();
+					return false;
+				});
+			</script>
 			<div id="helpdesk_description"></div>
-			//TODO update helpdesk description on department change
 	</fieldset>
 	<fieldset>
 		<legend>Details of problem</legend>
@@ -69,9 +82,10 @@
 			<select id="category" name="category">
 				<option value="" SELECTED>Please select department first</option>
 			</select>
-			//TODO update categorys from helpdesk dropdown
+
 			<div id="additional_fields"></div>
 			//TODO update additional fields from helpdesk
+
 			<label for="title" title="short one line title of your problem">Short description of issue (Title)</label>
 			<input type="text" id="title" name="title" value="" required />
 			<label for="details" title="enter the full details of your problem">Describe issue in detail</label>
@@ -104,4 +118,29 @@
 		</fieldset>
 	<?php }; ?>
 	//TODO Form Controls
+	<p class="buttons">
+		<button name="submit" value="submit" type="submit">Create Ticket</button>
+	</p>
+
 </form>
+
+<script type="text/javascript">
+	$(function() {
+		// Wait for DOM ready state
+		// Client side form validation
+		$("#addForm").validate({
+			rules: {
+				email: {
+					required: true,
+					email: true
+					},
+				location: {
+					required: true,
+					},
+				category: {
+					required: true,
+					}
+				}
+			});
+		});
+</script>
