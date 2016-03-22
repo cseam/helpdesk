@@ -1,18 +1,17 @@
 <h3>Add Ticket</h3>
-<form action="ticket/add" method="post" enctype="multipart/form-data" id="addForm">
+<form action="/ticket/update/" method="post" enctype="multipart/form-data" id="addForm">
+<input type="hidden" id="button_value" name="button_value" value="" />
 	<fieldset>
 		<legend>Contact details</legend>
 			<label for="name" title="Contact name for this call">Your/Contact Name</label>
 			<input type="text" id="name" name="name" value=""  required />
 			<p class="note">Please enter your name, not a generic house name; then engineer can contact you directly if any problems arise.</p>
-			<label for="email" title="Contact email so engineer can comunicate">Contact Email</label>
-			<input type="text" id="email" name="email" value="<?php echo $_SESSION['sAMAccountName']."@". COMPANY_SUFFIX;?>"  required />
+			<label for="contact_email" title="Contact email so engineer can comunicate">Contact Email</label>
+			<input type="text" id="contact_email" name="contact_email" value="<?php echo $_SESSION['sAMAccountName']."@". COMPANY_SUFFIX;?>"  required />
 			<label for="tel" title="Contact telephone so engineer can comunicate">Telephone / Mobile Number</label>
 			<input type="text" id="tel" name="tel" value="" />
 	</fieldset>
 	<fieldset>
-
-
 		<legend>Location of issue</legend>
 			<label for="location" title="location of issue">Building</label>
 			<select id="location" name="location">
@@ -82,10 +81,18 @@
 			<select id="category" name="category">
 				<option value="" SELECTED>Please select department first</option>
 			</select>
-
+			<script type="text/javascript">
+							$("#category").change(function(e) {
+								$.post('/ticket/additional/' + $("#category").val(), $(this).serialize(), function(resp) {
+									$('#additional_fields').hide();
+									$('#additional_fields').html(resp);
+									$('#additional_fields').slideDown();
+								});
+								e.preventDefault();
+								return false;
+							});
+			</script>
 			<div id="additional_fields"></div>
-			//TODO update additional fields from helpdesk
-
 			<label for="title" title="short one line title of your problem">Short description of issue (Title)</label>
 			<input type="text" id="title" name="title" value="" required />
 			<label for="details" title="enter the full details of your problem">Describe issue in detail</label>
@@ -96,7 +103,6 @@
 			<label for="attachment" title="add attachments if required">Picture or Screenshot</label>
 			<input type="file" name="attachment" accept="image/*">
 	</fieldset>
-	//TODO Engineer Controls
 	<?php if ($_SESSION['engineerId'] !== null) {?>
 		<input type="hidden" name="engineerid" id="engineerid" value="<?php echo $_SESSION['engineerId'];?>" />
 		<fieldset>
@@ -117,13 +123,11 @@
 				</table>
 		</fieldset>
 	<?php }; ?>
-	//TODO Form Controls
 	<p class="buttons">
-		<button name="submit" value="submit" type="submit">Create Ticket</button>
+		<button name="add" value="add" type="submit" title="add" onclick="this.form.button_value.value = this.value;">Create Ticket</button>
+		<button name="clear" value="clear" type="reset" title="Clear">Clear</button>
 	</p>
-
 </form>
-
 <script type="text/javascript">
 	$(function() {
 		// Wait for DOM ready state

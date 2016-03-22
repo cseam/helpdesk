@@ -11,6 +11,7 @@ class actionCategoryTicket {
     //get helpdesk description
     $category = $categoryModel->getListOfCategorysByHelpdesk($helpdeskid);
     //since not being viewed used to update dropdown not passed to view just rendered
+    echo "<option value=\"\" SELECTED>Please Select</option>";
     foreach ($category as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["categoryName"]."</option>";}
   }
 

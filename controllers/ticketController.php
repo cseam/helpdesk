@@ -15,6 +15,7 @@ class ticketController {
     $methods->add('/feedback', 'actionFeedbackTicket');
     $methods->add('/description', 'actionDescriptionTicket');
     $methods->add('/category', 'actionCategoryTicket');
+    $methods->add('/additional', 'actionAdditionalTicket');
     $methods->process(2);
   }
 }

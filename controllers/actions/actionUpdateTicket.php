@@ -12,6 +12,10 @@ class actionUpdateTicket {
     if ($_POST) {
       SWITCH ($_POST["button_value"]) {
         //TODO need to sort the button toggles if already on hold etc
+        CASE "add":
+            //TODO add ticket
+            print_r($_POST);
+          break;
         CASE "feedback":
             // reroute to feedback form
             header('Location: /ticket/feedback/'.$_POST["id"]);
