@@ -349,6 +349,7 @@ select::-ms-expand {
 	padding: 0.2rem 1rem;
 	border-left: 2px solid #aaa;
 	line-height: 1.1rem !important;
+	text-align: left !important;
 }
 .smalltxt {
 	font-size: 0.8rem;

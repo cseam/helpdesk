@@ -100,7 +100,7 @@
 	<fieldset>
 		<legend>Attachments (optional)</legend>
 			<label for="attachment" title="add attachments if required">Picture or Screenshot</label>
-			<input type="file" name="attachment" accept="image/*">
+			<input type="file" name="attachment" accept="application/pdf,application/msword,image/*">
 	</fieldset>
 	<?php if ($_SESSION['engineerId'] !== null) {?>
 		<input type="hidden" name="engineerid" id="engineerid" value="<?php echo $_SESSION['engineerId'];?>" />
@@ -123,15 +123,14 @@
 		</fieldset>
 	<?php }; ?>
 	<p class="buttons">
-		<button name="clear" value="clear" type="reset" title="Clear">Clear</button>
-		<button name="add" value="add" type="submit" title="add" onclick="this.form.button_value.value = this.value;">Create Ticket</button>
+		<button name="add" value="add" type="submit" title="add" onclick="this.form.button_value.value = this.value;">Submit</button>
 	</p>
 </form>
 <script type="text/javascript">
 	$(function() {
 		// Wait for DOM ready state
 		// Client side form validation
-		$("#addForm").validate({
+		$("#addForm2").validate({
 			rules: {
 				email: {
 					required: true,

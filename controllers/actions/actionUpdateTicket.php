@@ -14,9 +14,35 @@ class actionUpdateTicket {
         //TODO need to sort the button toggles if already on hold etc
         CASE "add":
             //process ticket add
+              //upload attachments if required
+              if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
+                //rename file to random name to avoid file name clash
+                $name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10);
+                //define uploads folder from config
+                $folder = ROOT . UPLOAD_LOC . $name_of_uploaded_file;
+                //define temp upload location
+                $tmp_path = $_FILES["attachment"]["tmp_name"];
+                //move file from temp location to uploads folder
+                move_uploaded_file($tmp_path, $folder);
+                //create html img tag for images else just add link to file in ticket details
+                if (mime_content_type($folder) == "image/jpeg") {
+                  $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
+                } else {
+                  $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" >Link to user uploaded file ref: #".$name_of_uploaded_file."</a>";
+                }
+              }
+              //calculate ticket urgency
+              $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
+              //generate locker number if needed
+              $lockerid = null;
+              if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) { $lockerid = random_locker(); };
+              //generate ticket details including any images/files uploaded in wrapper
+              $ticketdetails = "<div class=\"original\">" . $upload_code . htmlspecialchars($_POST['details']) . "</div>";
+
+
 
             //TODO add ticket
-            print_r($_POST);
+            //print_r($_POST);
           break;
         CASE "feedback":
             // reroute to feedback form
