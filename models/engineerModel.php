@@ -38,5 +38,37 @@
       return $result["engineerName"];
     }
 
+    public function getNextEngineerIdByHelpdeskId($helpdeskid) {
+      $database = new Database();
+      $day = "%".date("N")."%";
+      //find last engineer used for helpdeskid
+      $database->query("SELECT * FROM assign_engineers INNER JOIN engineers ON assign_engineers.engineerid=engineers.idengineers WHERE id= :id");
+      $database->bind(":id", $helpdeskid);
+      $results = $database->single();
+      $lastengineerid = $results["idengineers"];
+      //get next engineer id greater than current id
+      $database->query("SELECT idengineers FROM engineers WHERE idengineers > :lastengineerid AND helpdesk = :id AND engineerLevel=1 AND disabled=0 AND availableDays LIKE :available ORDER BY idengineers LIMIT 1");
+      $database->bind(":lastengineerid", $lastengineerid);
+      $database->bind(":available", $day);
+      $database->bind(":id", $helpdeskid);
+      $results = $database->single();
+      if ($database->rowCount() ===0) {
+        //no results so start from beginning of table and accept values less than current id
+        $database->query("SELECT idengineers FROM engineers WHERE helpdesk= :id AND engineerLevel=1 AND disabled=0 AND availableDays LIKE :available LIMIT 1");
+        $database->bind(":available", $day);
+        $database->bind(":id", $helpdeskid);
+        $results = $database->single();
+      }
+      return $results["idengineers"];
+    }
+
+    public function updateAutoAssignEngineerByHelpdeskId($helpdeskid, $engineerid) {
+      $database = new Database();
+      $database->query("UPDATE assign_engineers SET engineerId = :engineerid WHERE id = :id");
+      $database->bind(":id", $helpdeskid);
+      $database->bind(":engineerid", $engineerid);
+      $database->execute();
+      return true;
+    }
 
 }

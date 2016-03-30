@@ -47,5 +47,26 @@
       return $results;
     }
 
+    public function getSLADetailsByUrgencyId($urgency, $helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT agreement, close_eta_days FROM service_level_agreement WHERE helpdesk = :helpdesk AND urgency = :urgency");
+      $database->bind(":helpdesk", $helpdeskid);
+      $database->bind(":urgency", $urgency);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function getOutOfHoursContactDetailsByHelpdeskId($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT * FROM out_of_hours_contact_details WHERE helpdesk = :helpdesk");
+      $database->bind(":helpdesk", $helpdeskid);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      $ofhTime = $result['end_of_day'];
+      $ofhMessage = $result['message'];
+      $hour = date("G");
+      if ($hour > $ofhTime) { return $ofhMessage; } else { return null; }
+    }
 
 }

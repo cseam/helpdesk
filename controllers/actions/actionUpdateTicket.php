@@ -7,6 +7,7 @@ class actionUpdateTicket {
     $ticketModel = new ticketModel();
     $lockersModel = new lockersModel();
     $helpdeskModel = new helpdeskModel();
+    $engineerModel = new engineerModel();
     $pagedata = new stdClass();
     //set page defaults
     $pagedata->button_value = $_POST["button_value"];
@@ -34,20 +35,18 @@ class actionUpdateTicket {
               }
               //calculate ticket urgency
                 $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
-              //generate locker number if needed
+              //generate locker number if needed for specific categorys (TODO this should be in db not hard coded category ids)
                 $lockerid = null;
                 if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) { $lockerid = random_locker(); };
               //generate ticket details including any images/files uploaded in wrapper
                 $ticketdetails = "<div class=\"original\">" . $upload_code . htmlspecialchars($_POST['details']) . "</div>";
-              //check if helpdesk is auto assign and requires email on new helpdesk
+              //check if helpdesk is auto assign and assign engineer if required
                 $autoassigncheck = $helpdeskModel->isHelpdeskAutoAssign($_POST['helpdesk']);
-                if ($autoassigncheck["auto_assign"] == 0) { $assignedengineer = NULL; } else {
-                //TODO auto assign engineer for this helpdesk;
-                $assignedengineer = 'autoassigned';
+                $autoassigncheck["auto_assign"] == 0 ? $assignedengineer = NULL : $assignedengineer = $engineerModel->getNextEngineerIdByHelpdeskId($_POST['helpdesk']);
+              //check if helpdesk manager required email on new tickets
                 //TODO check if helpdesk requires email on new ticket? this might not be best done here
-                };
               //check engineer hasnt assigned to themselfs
-                ($_POST['cmn-toggle-selfassign'] !== null ? $assigned = $_SESSION['sAMAccountName'] : $assigned = $assignedengineer);
+                $_POST['cmn-toggle-selfassign'] !== null ? $assigned = $_SESSION['sAMAccountName'] : $assigned = $assignedengineer;
               //check auto close
                 if ($_POST['cmn-toggle-retro'] !== null) {
                   $status = '2';
@@ -59,7 +58,7 @@ class actionUpdateTicket {
                   $closeengineerid = null;
                 };
               //check ticket is pm (premtive maintanence)
-                ($_POST['cmn-toggle-pm'] !== null ? $pm=1 : $pm=0 );
+                $_POST['cmn-toggle-pm'] !== null ? $pm=1 : $pm=0 ;
               //insert ticket base detail
                 $baseTicket = new stdClass();
                 $baseTicket->name = htmlspecialchars($_POST['name']);
@@ -83,18 +82,20 @@ class actionUpdateTicket {
                 $baseTicket->title = htmlspecialchars($_POST['title']);
                 $baseTicket->lockerid = htmlspecialchars($lockerid);
                 $baseTicket->pm = htmlspecialchars($pm);
+
                 //TODO base details insert
               //insert additional ticket details
                 //TODO find id of base details and then insert addtional details
-              //update engineers assignment table
-                //TODO function to udpate engineers
-              //get SLA if helpdesk has one and update message for view
-                //TODO function to get SLA
-              //get Out of hours message and update view
-                //TODO function to check time and display out of hours message for helpdesk if required
 
-              print_r($baseTicket);
-            //print_r($_POST);
+              //update engineers assignment table
+                $engineerModel->updateAutoAssignEngineerByHelpdeskId($_POST['helpdesk'], $assignedengineer);
+              //get SLA if helpdesk has one and update message for view
+                $pagedata->sla = $helpdeskModel->getSLADetailsByUrgencyId($urgency, $_POST['helpdesk']);
+              //get Out of hours message and update view
+                $pagedata->outofhourscontact = $helpdeskModel->getOutOfHoursContactDetailsByHelpdeskId($_POST['helpdesk']);
+              //update page details for view
+                $pagedata->title = "Ticket Created";
+                $pagedata->details = "ticket created";
           break;
         CASE "feedback":
             // reroute to feedback form
@@ -127,6 +128,8 @@ class actionUpdateTicket {
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and marked for invoice, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "sendaway":
+          //TODO image upload
+          //TODO reason for issue update
           $ticketModel->updateTicketStatusById($_POST["id"], 5);
           $ticketModel->updateTicketDetailsById($_POST["id"], "sendaway", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
@@ -134,6 +137,8 @@ class actionUpdateTicket {
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and sent away, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "escalate":
+          //TODO image upload
+          //TODO reason for issue update
           $ticketModel->updateTicketStatusById($_POST["id"], 4);
           $ticketModel->updateTicketDetailsById($_POST["id"], "escalated", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
@@ -141,6 +146,8 @@ class actionUpdateTicket {
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and escalated to managment, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "hold":
+          //TODO image upload
+          //TODO reason for issue update
           $ticketModel->updateTicketStatusById($_POST["id"], 3);
           $ticketModel->updateTicketDetailsById($_POST["id"], "hold", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
@@ -148,6 +155,8 @@ class actionUpdateTicket {
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and put on hold, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "close":
+          //TODO image upload
+          //TODO reason for issue update
           $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been closed.</p>";
           $ticketModel->closeTicketById($_POST["id"], $_SESSION["engineerId"], $_POST["callreason"]);
@@ -155,6 +164,8 @@ class actionUpdateTicket {
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and closed, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "update":
+          //TODO image upload
+          //TODO reason for issue update
           $ticketModel->updateTicketDetailsById($_POST["id"], "open", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated";
