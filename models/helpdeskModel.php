@@ -38,4 +38,14 @@
       return $results;
     }
 
+    public function isHelpdeskAutoAssign($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT auto_assign, email_on_newticket FROM helpdesks WHERE id = :helpdesk");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
+
 }

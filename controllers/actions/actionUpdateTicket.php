@@ -6,12 +6,13 @@ class actionUpdateTicket {
     //create new models for required data
     $ticketModel = new ticketModel();
     $lockersModel = new lockersModel();
+    $helpdeskModel = new helpdeskModel();
     $pagedata = new stdClass();
     //set page defaults
     $pagedata->button_value = $_POST["button_value"];
     if ($_POST) {
+      //TODO need to sort the button toggles if already on hold etc
       SWITCH ($_POST["button_value"]) {
-        //TODO need to sort the button toggles if already on hold etc
         CASE "add":
             //process ticket add
               //upload attachments if required
@@ -32,16 +33,67 @@ class actionUpdateTicket {
                 }
               }
               //calculate ticket urgency
-              $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
+                $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
               //generate locker number if needed
-              $lockerid = null;
-              if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) { $lockerid = random_locker(); };
+                $lockerid = null;
+                if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) { $lockerid = random_locker(); };
               //generate ticket details including any images/files uploaded in wrapper
-              $ticketdetails = "<div class=\"original\">" . $upload_code . htmlspecialchars($_POST['details']) . "</div>";
+                $ticketdetails = "<div class=\"original\">" . $upload_code . htmlspecialchars($_POST['details']) . "</div>";
+              //check if helpdesk is auto assign and requires email on new helpdesk
+                $autoassigncheck = $helpdeskModel->isHelpdeskAutoAssign($_POST['helpdesk']);
+                if ($autoassigncheck["auto_assign"] == 0) { $assignedengineer = NULL; } else {
+                //TODO auto assign engineer for this helpdesk;
+                $assignedengineer = 'autoassigned';
+                //TODO check if helpdesk requires email on new ticket? this might not be best done here
+                };
+              //check engineer hasnt assigned to themselfs
+                ($_POST['cmn-toggle-selfassign'] !== null ? $assigned = $_SESSION['sAMAccountName'] : $assigned = $assignedengineer);
+              //check auto close
+                if ($_POST['cmn-toggle-retro'] !== null) {
+                  $status = '2';
+                  $closed = date("c");
+                  $closeengineerid = $_POST['engineerid'];
+                } else {
+                  $status = '1';
+                  $closed = null;
+                  $closeengineerid = null;
+                };
+              //check ticket is pm (premtive maintanence)
+                ($_POST['cmn-toggle-pm'] !== null ? $pm=1 : $pm=0 );
+              //insert ticket base detail
+                $baseTicket = new stdClass();
+                $baseTicket->name = htmlspecialchars($_POST['name']);
+                $baseTicket->contact_email = htmlspecialchars($_POST['contact_email']);
+                $baseTicket->tel = htmlspecialchars($_POST['tel']);
+                $baseTicket->details = $ticketdetails;
+                $baseTicket->assigned = htmlspecialchars($assigned);
+                $baseTicket->opened = date("c");
+                $baseTicket->lastupdate = date("c");
+                $baseTicket->status = htmlspecialchars($status);
+                $baseTicket->closed = htmlspecialchars($closed);
+                $baseTicket->closeengineerid = htmlspecialchars($closeengineerid);
+                $baseTicket->urgency = htmlspecialchars($urgency);
+                $baseTicket->location = htmlspecialchars($_POST['location']);
+                $baseTicket->room = htmlspecialchars($_POST['room']);
+                $baseTicket->category = htmlspecialchars($_POST['category']);
+                $baseTicket->owner = htmlspecialchars($_SESSION['sAMAccountName']);
+                $baseTicket->helpdesk = htmlspecialchars($_POST['helpdesk']);
+                $baseTicket->invoice = null;
+                $baseTicket->callreason = null;
+                $baseTicket->title = htmlspecialchars($_POST['title']);
+                $baseTicket->lockerid = htmlspecialchars($lockerid);
+                $baseTicket->pm = htmlspecialchars($pm);
+                //TODO base details insert
+              //insert additional ticket details
+                //TODO find id of base details and then insert addtional details
+              //update engineers assignment table
+                //TODO function to udpate engineers
+              //get SLA if helpdesk has one and update message for view
+                //TODO function to get SLA
+              //get Out of hours message and update view
+                //TODO function to check time and display out of hours message for helpdesk if required
 
-
-
-            //TODO add ticket
+              print_r($baseTicket);
             //print_r($_POST);
           break;
         CASE "feedback":
