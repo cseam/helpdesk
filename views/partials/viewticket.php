@@ -63,20 +63,26 @@
       <fieldset>
         <legend>Ticket Controls</legend>
         <div class="buttons">
-          <!--//TODO show only for managers -->
+          <?php
+          // show only for managers & superusers
+          if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?>
           <button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">Assign Engineer</button>
           <button name="forward" value="forward" type="submit" onclick="this.form.button_value.value = this.value;">Forward To Helpdesk</button>
           <button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button>
-          <!--//TODO show only for engineers -->
+          <?php }
+          // show only for engineers, managers & superusers
+          if ($_SESSION['engineerLevel'] >= "1" or $_SESSION['superuser'] === "1") {
+          ?>
           <button name="locker" value="locker" type="submit" onclick="this.form.button_value.value = this.value;">Add to Locker</button>
           <button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button>
           <button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
           <button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
           <button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
-          <!--//TODO show only for everyone or if ticket closed 'Still have an issue?' button -->
-          <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
-          <!--//TODO show only for ticket owner -->
+          <?php } ?>
+          <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;"><?php ($ticketDetails["status"] == 2 ? print("Still Have Issue?") : print("Update")); ?></button>
+          <?php if ($ticketDetails["status"] == 2) {?>
           <button name="feedback" value="feedback" type="submit" onclick="this.form.button_value.value = this.value;">Leave Feedback</button>
+          <?php } ?>
         </div>
       </fieldset>
     </form>
