@@ -40,7 +40,7 @@
       <input type="hidden" id="id" name="id" value="<?php echo $ticketDetails["callid"]; ?>" />
       <input type="hidden" id="contact_email" name="contact_email" value="<?php echo $ticketDetails["email"]; ?>" />
       <input type="hidden" id="button_value" name="button_value" value="" />
-      <input type="hidden" id="details" name="details" value="<?php echo $ticketDetails["details"];?>" />
+      <input type="hidden" id="details" name="details" value="<?php echo htmlspecialchars($ticketDetails["details"]);?>" />
       <fieldset>
         <legend>Update Ticket</legend>
         <p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>

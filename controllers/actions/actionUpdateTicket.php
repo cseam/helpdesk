@@ -31,7 +31,7 @@ class actionUpdateTicket {
                 if (mime_content_type($folder) == "image/jpeg") {
                   $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
                 } else {
-                  $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" >Link to user uploaded file ref: #".$name_of_uploaded_file."</a>";
+                  $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" class=\"uploadfile\">Uploaded file ref: #".$name_of_uploaded_file."</a>";
                 }
               }
               //calculate ticket urgency

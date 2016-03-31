@@ -130,7 +130,7 @@
 	$(function() {
 		// Wait for DOM ready state
 		// Client side form validation
-		$("#addForm2").validate({
+		$("#addForm").validate({
 			rules: {
 				email: {
 					required: true,

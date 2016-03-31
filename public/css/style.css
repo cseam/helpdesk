@@ -364,6 +364,12 @@ select::-ms-expand {
 .highlight {
 	color: #577d6a;
 }
+.uploadfile {
+	display: block;
+	padding-left: 30px;
+	background: url('/public/images/ICONS-tag.svg') no-repeat 6px 35%;
+	background-size: 18px;
+}
 /* END Additional message styles */
 /* Call details */
 #calldetails {

@@ -7,7 +7,7 @@ define('DEVELOPMENT_ENVIRONMENT',true);
 // websever location and protocol you wish to connect using set to https for production
 define('HELPDESK_LOC', 'http://' . $_SERVER['HTTP_HOST']);
 // directory images submitted by the system will be saved into (set permissions on os)
-define('UPLOAD_LOC', '/uploads/');
+define('UPLOAD_LOC', '/uploads/ticket_uploads/');
 define('PROFILE_IMAGES', HELPDESK_LOC . '/uploads/profile_images/');
 // name for the helpdesk to be used
 define('CODENAME', 'Scaffold');
