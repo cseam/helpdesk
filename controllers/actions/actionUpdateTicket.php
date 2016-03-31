@@ -8,6 +8,7 @@ class actionUpdateTicket {
     $lockersModel = new lockersModel();
     $helpdeskModel = new helpdeskModel();
     $engineerModel = new engineerModel();
+    $additionalModel = new additionalModel();
     $pagedata = new stdClass();
     //set page defaults
     $pagedata->button_value = $_POST["button_value"];
@@ -35,7 +36,7 @@ class actionUpdateTicket {
               }
               //calculate ticket urgency
                 $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
-              //generate locker number if needed for specific categorys (TODO this should be in db not hard coded category ids)
+              //generate locker number if needed for specific categorys (clown fiesta: note to future self, put this in the db!)
                 $lockerid = null;
                 if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) { $lockerid = random_locker(); };
               //generate ticket details including any images/files uploaded in wrapper
@@ -44,7 +45,18 @@ class actionUpdateTicket {
                 $autoassigncheck = $helpdeskModel->isHelpdeskAutoAssign($_POST['helpdesk']);
                 $autoassigncheck["auto_assign"] == 0 ? $assignedengineer = NULL : $assignedengineer = $engineerModel->getNextEngineerIdByHelpdeskId($_POST['helpdesk']);
               //check if helpdesk manager required email on new tickets
-                //TODO check if helpdesk requires email on new ticket? this might not be best done here
+                $emailmanagers = $helpdeskModel->isHelpdeskEmailEnabled($_POST['helpdesk']);
+                if ($emailmanagers) {
+                  foreach($emailmanagers as $key => $value) {
+                    //email managers letting them know a new ticket has been added.
+                    $to = $value["engineerEmail"];
+                    $from = "helpdesk@cheltladiescollege.org";
+                    $title = "New Helpdesk Ticket Added";
+                    $emailmanagersmessage .= "<p>A new ticket has been added to your helpdesk, To view the details of this ticket please <a href=\"". HELPDESK_LOC ."\">Visit ". CODENAME ."</a></p>";
+                    $emailmanagersmessage .= "<p>This is an automated message please do not reply</p></span>";
+                    email_user($to, $from, $title, $emailmanagersmessage);
+                  }
+                }
               //check engineer hasnt assigned to themselfs
                 $_POST['cmn-toggle-selfassign'] !== null ? $assigned = $_SESSION['sAMAccountName'] : $assigned = $assignedengineer;
               //check auto close
@@ -82,11 +94,14 @@ class actionUpdateTicket {
                 $baseTicket->title = htmlspecialchars($_POST['title']);
                 $baseTicket->lockerid = htmlspecialchars($lockerid);
                 $baseTicket->pm = htmlspecialchars($pm);
-
-                //TODO base details insert
+                $ticketid = $ticketModel->createNewTicket($baseTicket);
               //insert additional ticket details
-                //TODO find id of base details and then insert addtional details
-
+                $fieldCount = $additionalModel->countFieldsByCategoryId(htmlspecialchars($_POST['category']));
+                for ($x = 1; $x <= $fieldCount; $x++) {
+                  $fieldname = "label".$x;
+                  $labelname = "labelname".$x;
+                  $additionalModel->addAdditionalResult($ticketid, htmlspecialchars($_POST[$labelname]), htmlspecialchars($_POST[$fieldname]));
+                };
               //update engineers assignment table
                 $engineerModel->updateAutoAssignEngineerByHelpdeskId($_POST['helpdesk'], $assignedengineer);
               //get SLA if helpdesk has one and update message for view
@@ -95,7 +110,8 @@ class actionUpdateTicket {
                 $pagedata->outofhourscontact = $helpdeskModel->getOutOfHoursContactDetailsByHelpdeskId($_POST['helpdesk']);
               //update page details for view
                 $pagedata->title = "Ticket Created";
-                $pagedata->details = "ticket created";
+                $pagedata->details = "Thank you, your ticket has been created an engineer will be in touch shortly regarding your request.";
+              //TODO populate graphs and my tickets for view
           break;
         CASE "feedback":
             // reroute to feedback form

@@ -309,4 +309,32 @@
       return null;
     }
 
+    public function createNewTicket($baseTicket) {
+      $database = new Database();
+      $database->query("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, pm) VALUES (:name, :contact_email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoice, :callreason, :title, :lockerid, :pm)");
+      $database->bind(":name", $baseTicket->name);
+      $database->bind(":contact_email", $baseTicket->contact_email);
+      $database->bind(":tel", $baseTicket->tel);
+      $database->bind(":details", $baseTicket->details);
+      $database->bind(":assigned", $baseTicket->assigned);
+      $database->bind(":opened", $baseTicket->opened);
+      $database->bind(":lastupdate", $baseTicket->lastupdate);
+      $database->bind(":status", $baseTicket->status);
+      $database->bind(":closed", $baseTicket->closed);
+      $database->bind(":closeengineerid", $baseTicket->closeengineerid);
+      $database->bind(":urgency", $baseTicket->urgency);
+      $database->bind(":location", $baseTicket->location);
+      $database->bind(":room", $baseTicket->room);
+      $database->bind(":category", $baseTicket->category);
+      $database->bind(":owner", $baseTicket->owner);
+      $database->bind(":helpdesk", $baseTicket->helpdesk);
+      $database->bind(":invoice", $baseTicket->invoice);
+      $database->bind(":callreason", $baseTicket->callreason);
+      $database->bind(":title", $baseTicket->title);
+      $database->bind(":lockerid", $baseTicket->lockerid);
+      $database->bind(":pm", $baseTicket->pm);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
 }

@@ -14,6 +14,7 @@ class actionAdditionalTicket {
     foreach ($additionalfields as $key => $value) {
       echo "<label for=\"label". $value["id"] ."\">" . $value["label"] ."</label>";
       echo "<input type=\"text\" id=\"label" . $value["id"] . "\" name=\"label" . $value["id"] . "\" value=\"\" required />";
+      echo "<input type=\"hidden\" id=\"labelname" . $value["id"] . "\" name=\"labelname" . $value["id"] . "\" value=\"".$value["label"]."\" />";
     }
   }
 
