@@ -9,7 +9,7 @@
 <div class="section">
 <?php
 // HELPDESK SETUP SCRIPT
-// Used to create initial databases, delete this setup.php once you have run successfully
+// Used to create initial databases, delete this install.php once you have run successfully
 // Ensure config/config.php is updated with correct mysql details before this script is run
 if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 	// Load config

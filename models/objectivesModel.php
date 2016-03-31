@@ -13,4 +13,13 @@
       return $result;
     }
 
+    public function getObjectivesByEngineerId($engineerid) {
+      $database = new Database();
+      $database->query("SELECT * FROM performance_review_objectives  WHERE engineerid = :engineerid");
+      $database->bind(":engineerid", $engineerid);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
 }

@@ -12,7 +12,7 @@ Name: Graham Langley
 Name: James Pothecary
 
 /* SITE */
-Created:     2016
+Created:     2015/2016
 Language:    English (UK)
-Components:  HTML5, CSS3, PHP, JAVASCRIPT, MYSQL
-Software:    Adobe Photoshop CC, Adobe Illustrator CC, Atom
+Components:  HTML5, CSS3, PHP, ECMAScript, MYSQL
+Software:    Adobe Photoshop CC, Adobe Illustrator CC, Atom 1.6

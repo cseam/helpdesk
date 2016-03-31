@@ -534,7 +534,7 @@ h3.callbody {
 }
 /* END Buttons */
 /* Calls list */
-#calllist {
+#calllist, #deptlist, #objlist {
 	background: trasparent;
 	height: 50%;
 	overflow: auto;
@@ -542,7 +542,7 @@ h3.callbody {
 	overflow: hidden;
 	margin-right: 15px;
 }
-#calllist:hover {
+#calllist:hover, #deptlist:hover, #objlist:hover {
 	overflow: auto;
 	margin-right: 15px;
 }

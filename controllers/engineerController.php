@@ -7,6 +7,12 @@ class engineerController {
     // create methods object
     $methods = new Route();
     $methods->add('/', 'actionEngineerDefault');
+    $methods->add('/search', 'actionReportSearch');
+    $methods->add('/lockers', 'actionReportLockers');
+    $methods->add('/changecontrol', 'actionReportChangecontrol');
+    $methods->add('/outofhours', 'actionReportOutofhours');
+    $methods->add('/workrate', 'actionReportWorkrate');
+
     $methods->process(2);
   }
 
