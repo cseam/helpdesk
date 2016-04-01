@@ -5,6 +5,7 @@ PRINT "\nCRON JOB STARTED : ENGINEER LOGOUTS" . date("h:i:s") . "\n";
 // include functions and classes used
 require_once "../config/config.php";
 require_once "../models/Database.php";
+// /var/www/html/helpdesk/config/config.php?
 $database = new Database();
 PRINT "\n-- Connected to database : " . date("h:i:s") . "\n";
 PRINT "\n-- Starting Process Logouts : ". date("h:i:s") . "\n";
