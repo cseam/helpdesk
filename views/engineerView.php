@@ -11,7 +11,7 @@
       <a href="#" onclick="$('.engineerReports').hide();$('#calllist').slideDown('fast')"><img src="/public/images/ICONS-yourcalls.svg" alt="your tickets" title="your tickets" width="16" height="17"> Assigned</a>
       <a href="#" onclick="$('.engineerReports').hide();$('#deptlist').slideDown('fast')"><img src="/public/images/ICONS-allcalls.svg" alt="department tickets" title="department tickets" width="16" height="17"> Department</a>
       <a href="#" onclick="$('.engineerReports').hide();$('#objlist').slideDown('fast')"><img src="/public/images/ICONS-objective.svg" alt="performance objectives" title="performance objectives" width="16" height="17"> Objectives</a>
-      <a href="#" onclick="$('.engineerReports').hide();$('#morelist').slideDown('fast')"><img src="/public/images/ICONS-workrate.svg" alt="more" title="more" width="16" height="17"> More</a>
+      <a href="#" onclick="$('.engineerReports').hide();$('#morelist').slideDown('fast')"><img src="/public/images/ICONS-workrate.svg" alt="more" title="more" width="16" height="17"> More </a>
     </div>
       <div id="calllist" class="engineerReports"><?php ($listdata ? include "views/partials/assignedtickets.php" : print("<h3>Assigned Tickets</h3><p>0 assigned tickets</p>")) ?></div>
       <div id="deptlist" class="engineerReports"><?php ($deptdata ? include "views/partials/departmenttickets.php" : print("<h3>Department Tickets</h3><p>0 department tickets</p>")) ?></div>
@@ -26,7 +26,6 @@
         <a href="/engineer/workrate"><img src="/public/images/ICONS-workrate.svg" alt="" title="" width="24" height="25" />Work Rate</a>
         </div>
       </div>
-
   </div>
   <div id="rightpage">
     <div id="call">
