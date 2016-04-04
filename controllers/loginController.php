@@ -65,6 +65,7 @@ class loginController {
               //verify binding
               if ($ldapbind) {
                 // bind succesful authenticate username
+                  // check if they are enginner and populate if they are
                 $engineerModel = new engineerModel();
                 $dbUserDetails = $engineerModel->getDetailsByUsername($_POST['username']);
                   if ($dbUserDetails) {
@@ -75,7 +76,12 @@ class loginController {
                     $_SESSION['engineerHelpdesk'] = $dbUserDetails->helpdesk;
                     // TODO update engineer status as logged into system
                     // TODO update engineer punchcard
-
+                    // reroute
+                      header('Location: /');
+                      exit;
+                  } else {
+                    // assume user isnt engineer
+                    $_SESSION['sAMAccountName'] = $_POST['username'];
                     // reroute
                       header('Location: /');
                       exit;

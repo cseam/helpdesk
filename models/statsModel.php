@@ -282,7 +282,7 @@
 
     public function countAllTicketsByEngineerIdLastWeek($engineerId) {
       $database = new Database();
-      $database->query("SELECT count(callid) AS engineerAll FROM calls WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND closeengineerid = :engineerId");
+      $database->query("SELECT count(callid) AS engineerAll FROM calls WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND assigned = :engineerId");
       $database->bind(':engineerId', $engineerId);
       $result = $database->single();
       if ($database->rowCount() === 0) { return null;}
