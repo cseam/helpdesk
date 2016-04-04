@@ -13,34 +13,37 @@ class actionUpdateTicket {
     //set page defaults
     $pagedata->button_value = $_POST["button_value"];
     if ($_POST) {
-      //TODO need to sort the button toggles if already on hold etc
+      // check if files uploaded in form
+      $upload_code = "";
+      if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
+        //rename file to random name to avoid file name clash
+        $name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10);
+        //define uploads folder from config
+        $folder = ROOT . UPLOAD_LOC . $name_of_uploaded_file;
+        //define temp upload location
+        $tmp_path = $_FILES["attachment"]["tmp_name"];
+        //move file from temp location to uploads folder
+        move_uploaded_file($tmp_path, $folder);
+        //create html img tag for images else just add link to file in ticket details
+        if (mime_content_type($folder) == "image/jpeg") {
+          $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
+        } else {
+          $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" class=\"uploadfile\">Uploaded file ref: #".$name_of_uploaded_file."</a>";
+        }
+      }
+      $ticketdetails = $upload_code . htmlspecialchars($_POST["updatedetails"]);
+
+      // check which button is pressed and process correctly 
       SWITCH ($_POST["button_value"]) {
         CASE "add":
             //process ticket add
-              //upload attachments if required
-              if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
-                //rename file to random name to avoid file name clash
-                $name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10);
-                //define uploads folder from config
-                $folder = ROOT . UPLOAD_LOC . $name_of_uploaded_file;
-                //define temp upload location
-                $tmp_path = $_FILES["attachment"]["tmp_name"];
-                //move file from temp location to uploads folder
-                move_uploaded_file($tmp_path, $folder);
-                //create html img tag for images else just add link to file in ticket details
-                if (mime_content_type($folder) == "image/jpeg") {
-                  $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
-                } else {
-                  $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" class=\"uploadfile\">Uploaded file ref: #".$name_of_uploaded_file."</a>";
-                }
-              }
               //calculate ticket urgency
                 $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
               //generate locker number if needed for specific categorys (clown fiesta: note to future self, put this in the db!)
                 $lockerid = null;
                 if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) { $lockerid = random_locker(); };
               //generate ticket details including any images/files uploaded in wrapper
-                $ticketdetails = "<div class=\"original\">" . $upload_code . htmlspecialchars($_POST['details']) . "</div>";
+                $ticketdetails = "<div class=\"original\">" . $ticketdetails . "</div>";
               //check if helpdesk is auto assign and assign engineer if required
                 $autoassigncheck = $helpdeskModel->isHelpdeskAutoAssign($_POST['helpdesk']);
                 $autoassigncheck["auto_assign"] == 0 ? $assignedengineer = NULL : $assignedengineer = $engineerModel->getNextEngineerIdByHelpdeskId($_POST['helpdesk']);
@@ -138,51 +141,46 @@ class actionUpdateTicket {
           break;
         CASE "invoice":
           $ticketModel->updateTicketRequireInvoiceById($_POST["id"]);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "open", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "open", $_SESSION["sAMAccountName"] , $ticketdetails);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been marked as awaiting invoice.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Marked for Invoice";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and marked for invoice, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "sendaway":
-          //TODO image upload
-          //TODO reason for issue update
           $ticketModel->updateTicketStatusById($_POST["id"], 5);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "sendaway", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "sendaway", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Sent Away";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and sent away, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "escalate":
-          //TODO image upload
-          //TODO reason for issue update
           $ticketModel->updateTicketStatusById($_POST["id"], 4);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "escalated", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "escalated", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Escalated";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and escalated to managment, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "hold":
-          //TODO image upload
-          //TODO reason for issue update
           $ticketModel->updateTicketStatusById($_POST["id"], 3);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "hold", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "hold", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - On Hold";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and put on hold, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "close":
-          //TODO image upload
-          //TODO reason for issue update
-          $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been closed.</p>";
           $ticketModel->closeTicketById($_POST["id"], $_SESSION["engineerId"], $_POST["callreason"]);
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Closed";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and closed, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "update":
-          //TODO image upload
-          //TODO reason for issue update
-          $ticketModel->updateTicketDetailsById($_POST["id"], "open", $_SESSION["sAMAccountName"] , $_POST["updatedetails"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "open", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";

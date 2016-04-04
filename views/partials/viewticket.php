@@ -44,11 +44,11 @@
       <fieldset>
         <legend>Update Ticket</legend>
         <p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
-        <p><label for="attachment">Picture or Attachment</label><input type="file" name="attachment" accept="image/*" style="background-color: transparent;" id="attachment"></p>
+        <p><label for="attachment">Picture or Attachment</label><input type="file" name="attachment" accept="application/pdf,application/msword,image/*" style="background-color: transparent;" id="attachment"></p>
         <p><label for="callreason">Reason for issue</label>
           <select id="callreason" name="callreason" REQUIRED>
             <option value="" SELECTED>Please Select</option>
-            <option value="test" >Test Value</option>
+            <option value="0" >Test Value</option>
             <?php foreach ($callreasons as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["reason_name"]."</option>"; } ?>
           </select>
         </p>
