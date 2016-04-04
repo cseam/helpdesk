@@ -10,9 +10,13 @@ class actionUpdateTicket {
     $engineerModel = new engineerModel();
     $additionalModel = new additionalModel();
     $pagedata = new stdClass();
+
     //set page defaults
     $pagedata->button_value = $_POST["button_value"];
+
+    // on post process form
     if ($_POST) {
+
       // check if files uploaded in form
       $upload_code = "";
       if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
@@ -33,7 +37,7 @@ class actionUpdateTicket {
       }
       $ticketdetails = $upload_code . htmlspecialchars($_POST["updatedetails"]);
 
-      // check which button is pressed and process correctly 
+      // check which button is pressed and process correctly
       SWITCH ($_POST["button_value"]) {
         CASE "add":
             //process ticket add
@@ -154,6 +158,14 @@ class actionUpdateTicket {
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Sent Away";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and sent away, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
+        CASE "return":
+          $ticketModel->updateTicketStatusById($_POST["id"], 1);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "returned", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
+          $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
+          $pagedata->title = "#".$_POST["id"]." Ticket Updated - Returned";
+          $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and returned, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
+          break;
         CASE "escalate":
           $ticketModel->updateTicketStatusById($_POST["id"], 4);
           $ticketModel->updateTicketDetailsById($_POST["id"], "escalated", $_SESSION["sAMAccountName"] , $ticketdetails);
@@ -162,6 +174,14 @@ class actionUpdateTicket {
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Escalated";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and escalated to managment, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
+        CASE "deescalate":
+          $ticketModel->updateTicketStatusById($_POST["id"], 1);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "deescalated", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
+          $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
+          $pagedata->title = "#".$_POST["id"]." Ticket Updated - De-Escalated";
+          $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and de-escalated, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
+          break;
         CASE "hold":
           $ticketModel->updateTicketStatusById($_POST["id"], 3);
           $ticketModel->updateTicketDetailsById($_POST["id"], "hold", $_SESSION["sAMAccountName"] , $ticketdetails);
@@ -169,6 +189,14 @@ class actionUpdateTicket {
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - On Hold";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and put on hold, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
+          break;
+        CASE "unhold":
+          $ticketModel->updateTicketStatusById($_POST["id"], 1);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "unhold", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
+          $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
+          $pagedata->title = "#".$_POST["id"]." Ticket Updated - Un Hold";
+          $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and taken off hold, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "close":
           $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"] , $ticketdetails);

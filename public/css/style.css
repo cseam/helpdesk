@@ -577,7 +577,7 @@ h3.callbody {
 	display: block;
 	text-align: center;
 }
-.update .hold, .update .sendaway {
+.update .hold, .update .unhold, .update .sendaway, .update .returned {
 	color: rgba(194, 151, 9, 1);
 	background-color: rgba(88, 70, 0, 0.1);
 }
@@ -594,7 +594,7 @@ h3.callbody {
 	text-align: center;
 }
 
-.update .escalated {
+.update .escalated, .update .deescalated {
 	background-color: rgba(90, 0, 24, 0.1);
 	color: rgba(194, 10, 13, 1);
 }

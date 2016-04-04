@@ -74,12 +74,12 @@
           if ($_SESSION['engineerLevel'] >= "1" or $_SESSION['superuser'] === "1") {
           ?>
           <button name="locker" value="locker" type="submit" onclick="this.form.button_value.value = this.value;">Add to Locker</button>
-          <button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button>
-          <button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button>
-          <button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button>
+          <?php if ($ticketDetails["status"] == 5) { ?><button name="return" value="return" type="submit" onclick="this.form.button_value.value = this.value;">Return</button><?php } else { ?><button name="sendaway" value="sendaway" type="submit" onclick="this.form.button_value.value = this.value;">Send Away</button><?php } ?>
+          <?php if ($ticketDetails["status"] == 4) { ?><button name="deescalate" value="deescalate" type="submit" onclick="this.form.button_value.value = this.value;">de-Escalate</button><?php } else { ?><button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button><?php } ?>
+          <?php if ($ticketDetails["status"] == 3) { ?><button name="unhold" value="unhold" type="submit" onclick="this.form.button_value.value = this.value;">un-Hold</button><?php } else { ?><button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button><?php } ?>
           <button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
           <?php } ?>
-          <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;"><?php ($ticketDetails["status"] == 2 ? print("Still Have Issue?") : print("Update")); ?></button>
+          <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
           <?php if ($ticketDetails["status"] == 2) {?>
           <button name="feedback" value="feedback" type="submit" onclick="this.form.button_value.value = this.value;">Leave Feedback</button>
           <?php } ?>
