@@ -56,7 +56,7 @@
         <label for="quickresponse">Quick Response</label>
           <select id="quickresponse" name="quickresponse">
             <option value="" SELECTED>Please Select</option>
-            <?php foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["quick_response"]."</option>"; } ?>
+            <?php foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["quick_response"]."\">".$value["quick_response"]."</option>"; } ?>
           </select>
         </p>
       </fieldset>
@@ -88,5 +88,8 @@
     </form>
     <script>
       $("#updateForm").validate();
+      $("#quickresponse").change(function(e) {
+      $('#updatedetails').val($('#quickresponse').val() + ', ' + $('#updatedetails').val());
+      });
     </script>
 </div>
