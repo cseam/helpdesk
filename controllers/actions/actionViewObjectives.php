@@ -3,25 +3,23 @@
 class actionViewObjectives {
   public function __construct()
   {
+    //get ticket id from uri params
+    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $objectiveid = $baseurl[3];
+
     //create new models for required data
-    $statsModel = new statsModel();
     $helpdeskModel = new helpdeskModel();
     $objectivesModel = new objectivesModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
+
     //set report name
-    $reportname = "My Performance Objectives";
+    $reportname = "Performance Objective #".$objectiveid;
     //set report title
-    $pagedata->title = $reportname . "";
-    //get department workrate for graph
-    //$stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
+    $pagedata->title = $reportname;
+
     //populate report results for use in view
-    //$pagedata->reportResults = $scheduledtaskModel->gettest($_SESSION['engineerHelpdesk']);
-    $pagedata->reportResults = $objectivesModel->getAllObjectivesByHelpdesk(1);
-    //get helpdesk details
-    $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
-    //set page details
-    $pagedata->details = sizeof($pagedata->reportResults)." ".$reportname." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+    $pagedata->reportResults = $objectivesModel->getObjectiveById($objectiveid);
+
     //render template using $pagedata object
     require_once "views/ObjectivesView.php";
   }

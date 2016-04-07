@@ -22,4 +22,13 @@
       return $results;
     }
 
+    public function getObjectiveById($objectiveid) {
+      $database = new Database();
+      $database->query("SELECT * FROM performance_review_objectives  WHERE id = :objectiveid");
+      $database->bind(":objectiveid", $objectiveid);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
 }
