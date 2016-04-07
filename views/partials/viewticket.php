@@ -80,7 +80,7 @@
           <button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
           <?php } ?>
           <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
-          <?php if ($ticketDetails["status"] == 2) {?>
+          <?php if ($ticketDetails["status"] == 2 or $_SESSION['engineerLevel'] != 1) {?>
           <button name="feedback" value="feedback" type="submit" onclick="this.form.button_value.value = this.value;">Leave Feedback</button>
           <?php } ?>
         </div>
