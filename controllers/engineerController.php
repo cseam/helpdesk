@@ -12,6 +12,7 @@ class engineerController {
     $methods->add('/changecontrol', 'actionReportChangecontrol');
     $methods->add('/outofhours', 'actionReportOutofhours');
     $methods->add('/workrate', 'actionReportWorkrate');
+    $methods->add('/objectives', 'actionViewObjectives');
 
     $methods->process(2);
   }
