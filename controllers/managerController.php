@@ -9,6 +9,8 @@ class managerController {
     $methods->add('/', 'actionManagerDefault');
     $methods->add('/report', 'actionManagerReports');
     $methods->add('/objectives', 'actionViewObjectives');
+    $methods->add('/addobjectives','actionAddObjectives');
+    $methods->add('/modifyobjectives','actionModifyObjectives');
     $methods->process(2);
   }
 

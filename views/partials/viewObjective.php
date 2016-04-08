@@ -1,8 +1,8 @@
-<?php if ($pagedata->errorMessage) {
-  echo $pagedata->errorMessage;
+<?php if ($error) {
+  echo $error;
+} else if ($pagedata->complete) {
+  echo $pagedata->complete;
 } else { ?>
-
-
 <div id="calldetails">
 <h2>Performance Objective #<?php echo $pagedata->reportResults[0]['id'] ?></h2>
 <p class="callheader"><span class="nowrap">Due by:</span>       <span class="nowrap"><?php echo $pagedata->reportResults[0]['datedue'] ?></span></p>
@@ -45,7 +45,7 @@
     <div class="buttons">
       <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
       <?php if ($_SESSION['engineerLevel'] > 1 OR $_SESSION['superuser'] == true) { ?>
-        <button name="modify" value="modify" type="submit" onclick="this.form.button_value.value = this.value;">Modify</button>
+        <button name="modify" value="modify" type="submit" onclick="this.form.button_value.value = this.value;">Modify Details</button>
         <button name="delete" value="delete" type="submit" onclick="this.form.button_value.value = this.value;">Delete</button>
       <?php } ?>
     </div>
