@@ -8,6 +8,7 @@ class managerController {
     $methods = new Route();
     $methods->add('/', 'actionManagerDefault');
     $methods->add('/report', 'actionManagerReports');
+    $methods->add('/objectives', 'actionViewObjectives');
     $methods->process(2);
   }
 

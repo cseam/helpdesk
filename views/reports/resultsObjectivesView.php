@@ -16,9 +16,6 @@
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
-        <p>
-          //TODO crud performance objectives
-        </p>
         <table id="changecontrol">
               <thead>
                 <tr>
@@ -31,7 +28,7 @@
               <tbody>
             <?php foreach($pagedata->reportResults as $key => $value) { ?>
               <tr>
-                <td><?php echo substr(strip_tags($value["title"]), 0, 50) ?></td>
+                <td><a href="/manager/objectives/<?php echo $value["id"] ?>"><?php echo substr(strip_tags($value["title"]), 0, 50) ?></a></td>
                 <td><?php echo $value["engineerName"] ?></td>
                 <td><?php echo date("M Y", strtotime($value["datedue"]))  ?></td>
                 <td><?php echo $value["progress"] ?>%</td>
