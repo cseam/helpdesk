@@ -8,7 +8,27 @@ class actionReportOutofhours {
     $helpdeskModel = new helpdeskModel();
     $outofhoursModel = new outofhoursModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
+
+    //Post Update Objective
+      if ($_POST) {
+        SWITCH ($_POST["button_value"]) {
+          CASE "add":
+            // reroute to add form
+            header('Location: /outofhours/add');
+            exit;
+          break;
+          CASE "update":
+            //TODO should change control be updatable?
+          break;
+          CASE "modify":
+            //TODO should change control be modifiable?
+          break;
+          CASE "delete":
+            //TODO should engineers be able to delete change controls?
+          break;
+        }
+      }
+
     //set report name
     $reportname = "Out of hours";
     //set report title

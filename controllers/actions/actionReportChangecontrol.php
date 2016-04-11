@@ -8,7 +8,6 @@ class actionReportChangecontrol {
     $helpdeskModel = new helpdeskModel();
     $changecontrolModel = new changecontrolModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
 
     //Post Update Objective
       if ($_POST) {

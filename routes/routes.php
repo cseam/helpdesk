@@ -15,3 +15,4 @@
   $route->add('/report', 'reportController');
   $route->add('/ticket', 'ticketController');
   $route->add('/changecontrol', 'changecontrolController');
+  $route->add('/outofhours', 'outofhoursController');
