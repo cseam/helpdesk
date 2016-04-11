@@ -16,9 +16,10 @@
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
-        <p>
-          //TODO crud change controls 
-        </p>
+        <p><form action="#" method="post" id="addForm">
+            <input type="hidden" id="button_value" name="button_value" value="" />
+            <button name="add" value="add" type="submit" onclick="this.form.button_value.value = this.value;">Add Change Control</button>
+        </form></p>
         <table id="changecontrol">
             <?php foreach($pagedata->reportResults as $key => $value) { ?>
               <tbody>

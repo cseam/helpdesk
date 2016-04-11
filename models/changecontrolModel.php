@@ -13,5 +13,17 @@
       return $result;
     }
 
+    public function addChangeControl($engineersid, $stamp, $changemade, $tags, $server, $helpdesk) {
+      $database = new Database();
+      $database->query("INSERT INTO changecontrol (engineersid, stamp, changemade, tags, server, helpdesk) VALUES (:engineersid, :stamp, :changemade, :tags, :server, :helpdesk)");
+      $database->bind(':engineersid', $engineersid);
+      $database->bind(':stamp', $stamp);
+      $database->bind(':changemade', $changemade);
+      $database->bind(':tags', $tags);
+      $database->bind(':server', $server);
+      $database->bind(':helpdesk', $helpdesk);
+      $database->execute();
+      return true;
+    }
 
 }

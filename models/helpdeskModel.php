@@ -56,6 +56,15 @@
       return $results;
     }
 
+    public function getEngineerEmails($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT engineerEmail FROM engineers WHERE engineers.helpdesk IN(:helpdesk) AND engineers.disabled !=1");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowCount() ===0) { return null;}
+      return $results;
+    }
+
     public function getSLADetailsByUrgencyId($urgency, $helpdeskid) {
       $database = new Database();
       $database->query("SELECT agreement, close_eta_days FROM service_level_agreement WHERE helpdesk = :helpdesk AND urgency = :urgency");

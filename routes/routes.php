@@ -14,3 +14,4 @@
   // top level routes
   $route->add('/report', 'reportController');
   $route->add('/ticket', 'ticketController');
+  $route->add('/changecontrol', 'changecontrolController');
