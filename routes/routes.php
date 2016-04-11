@@ -16,3 +16,4 @@
   $route->add('/ticket', 'ticketController');
   $route->add('/changecontrol', 'changecontrolController');
   $route->add('/outofhours', 'outofhoursController');
+  $route->add('/scheduledtask', 'scheduledtaskController');
