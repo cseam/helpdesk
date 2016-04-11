@@ -33,7 +33,7 @@
 
     public function updateObjectiveById($objectiveid, $details, $progress) {
       // updates an objective with an engineers comments on progress
-      $message = "<div class=update>" . $details . "<h3 class=\"status1\">update by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
+      $message = "<div class=update>" . $details . "<h3 class=\"status1\">update by ".$_SESSION['sAMAccountName']." - " . date("d/m/Y H:i") . "</h3></div>";
       $database = new Database();
       $database->query("UPDATE performance_review_objectives SET progress=:progress, details = CONCAT(details, :details) WHERE id = :objectiveid");
       $database->bind(":objectiveid", $objectiveid);
@@ -51,18 +51,25 @@
       return true;
     }
 
-    public function addObjective($objective) {
+    public function addObjective($assignto, $title, $datedue, $details) {
       $database = new Database();
-      $database->query("");
-      //$database-bind(":title", $objective->title);
+      $database->query("INSERT INTO performance_review_objectives (engineerid, title, details, datedue) VALUES (:assignto, :title, :details, :datedue)");
+      $database->bind(":assignto", $assignto);
+      $database->bind(":title", $title);
+      $database->bind(":datedue", $datedue);
+      $database->bind(":details", $details);
       $database->execute();
       return true;
     }
 
-    public function modifyObjectiveById($objective) {
+    public function modifyObjectiveById($objectiveid, $title, $details, $datedue) {
       // modify objective details once created usualy done by manager
       $database = new Database();
-      $database->query("");
+      $database->query("UPDATE performance_review_objectives SET title=:title, details=:details, datedue=:datedue WHERE id = :objectiveid");
+      $database->bind(":title", $title);
+      $database->bind(":details", $details);
+      $database->bind(":datedue", $datedue);
+      $database->bind(":objectiveid", $objectiveid);
       $database->execute();
       return true;
     }
