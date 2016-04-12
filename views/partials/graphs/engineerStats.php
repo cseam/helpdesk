@@ -3,7 +3,7 @@
     // WAIT FOR DOM
     // Draw Pie chartist.js
     var pieData = {
-                  series: [<?php echo $stats["engineerClose"] ?>,<?php echo $stats["engineerAll"]-$stats["engineerClose"] ?>]
+                  series: [<?php echo $left->sideData["graphdata"]["engineerClose"] ?>,<?php echo $left->sideData["graphdata"]["engineerAll"]-$left->sideData["graphdata"]["engineerClose"] ?>]
     };
     var pieOptions = {
                       chartPadding: {top: 20, right:5, bottom:20, left:5},
@@ -17,7 +17,15 @@
     var data = {
                 labels: ['Su','Mo','Tu','We','Th','Fr','Sa'],
                 series: [
-                        [<?php echo $stats["Sun"] ?>,<?php echo $stats["Mon"] ?>,<?php echo $stats["Tue"] ?>,<?php echo $stats["Wed"] ?>,<?php echo $stats["Thu"] ?>,<?php echo $stats["Fri"] ?>,<?php echo $stats["Sat"] ?>],
+                        [
+                          <?php echo $left->sideData["graphdata"]["Sun"] ?>,
+                          <?php echo $left->sideData["graphdata"]["Mon"] ?>,
+                          <?php echo $left->sideData["graphdata"]["Tue"] ?>,
+                          <?php echo $left->sideData["graphdata"]["Wed"] ?>,
+                          <?php echo $left->sideData["graphdata"]["Thu"] ?>,
+                          <?php echo $left->sideData["graphdata"]["Fri"] ?>,
+                          <?php echo $left->sideData["graphdata"]["Sat"] ?>,
+                        ],
                         ]
     };
     var options = {
@@ -49,8 +57,8 @@
 <div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; height:85%; float: left; display:table;">
 <span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 1.8rem;font-weight: 100;">
 <?php
-  $engineernum = $stats["engineerClose"];
-  $totaltickets = $stats["engineerAll"];
+  $engineernum = $left->sideData["graphdata"]["engineerClose"];
+  $totaltickets = $left->sideData["graphdata"]["engineerAll"];
   echo number_format((100.0*$engineernum)/$totaltickets, 2) . "%";
 ?>
 </span>

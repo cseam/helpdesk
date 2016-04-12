@@ -2,7 +2,7 @@
 
 
   <div id="leftpage">
-    //TODO Left side
+    <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
   </div>
   <div id="rightpage">
     <div id="call">

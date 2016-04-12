@@ -1,6 +1,6 @@
 <?php
 // using spl_autoload_register to auto load classes instead of __autoload so doesnt clash with any future libries
-// function used to auto load controlers when required
+// function used to auto load controlers when required.
 function controllerAutoload($controller_name) {
   if (file_exists("controllers/".$controller_name.".php")) {
     require_once "controllers/".$controller_name.".php";

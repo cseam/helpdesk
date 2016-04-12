@@ -8,7 +8,7 @@
     <div id="calllist">
         <?php include "views/partials/yourtickets.php"; ?>
     </div>
-    </div>
+  </div>
   <div id="rightpage">
     <div id="call">
       <div id="ajax">

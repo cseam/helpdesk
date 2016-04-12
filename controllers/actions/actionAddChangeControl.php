@@ -3,11 +3,12 @@
 class actionAddChangeControl {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
     $changecontrolModel = new changecontrolModel();
     $helpdeskModel = new helpdeskModel();
     $pagedata = new stdClass();
-
     //Post Update Objective
       if ($_POST) {
         //create change control
@@ -36,13 +37,11 @@ class actionAddChangeControl {
             }
           }
       }
-
     //set report name
     $reportname = "Add Change Control";
     //set report title
     $pagedata->title = $reportname;
     $pagedata->details = "Please complete the form to add a change control for the team.";
-
     //render template using $pagedata object
     require_once "views/addChangeControl.php";
 

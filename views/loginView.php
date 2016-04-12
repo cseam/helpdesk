@@ -18,7 +18,7 @@
         <p>You do not need to prefix your username with CLC\. Login like you would to one of the College computers, e.g. username: smitha</p>
         <p>If you have any issues with <?php echo CODENAME ?>, please contact IT Support.</p>
 			</fieldset>
-  </div>
+  </div> 
   <div id="rightpage">
     <div id="call">
       <div id="ajax">

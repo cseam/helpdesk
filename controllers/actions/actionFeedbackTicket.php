@@ -3,15 +3,12 @@
 class actionFeedbackTicket {
   public function __construct()
   {
-
     //get ticket id from uri params
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
-
     //create new models for required data
     $ticketModel = new ticketModel();
     $feedbackModel = new feedbackModel();
-
     //populate users ticket list
     $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
     //populate tickets data

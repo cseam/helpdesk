@@ -3,7 +3,7 @@
 class logoutController {
   public function __construct()
   {
-    // process Logouts
+    // process Logouts.
       // update engineers status as out
         //TODO create model for enginners and logout method
       // update engineer punchcard with date and time stamp

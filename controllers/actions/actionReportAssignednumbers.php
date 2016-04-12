@@ -6,7 +6,6 @@ class actionReportAssignednumbers {
     //create new models for required data
     $statsModel = new statsModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
     //set report name
     $reportname = "Assigned Tickets";
     //set report title

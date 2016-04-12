@@ -3,8 +3,9 @@
 class actionReportScheduledtasks {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
-    $statsModel = new statsModel();
     $helpdeskModel = new helpdeskModel();
     $scheduledtaskModel = new scheduledtaskModel();
     $pagedata = new stdClass();
@@ -36,8 +37,6 @@ class actionReportScheduledtasks {
     $reportname = "Scheduled Task";
     //set report title
     $pagedata->title = $reportname . "";
-    //get department workrate for graph
-    $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
     //populate report results for use in view
     $pagedata->reportResults = $scheduledtaskModel->getScheduledTasksByHelpdesk($_SESSION['engineerHelpdesk']);
     //get helpdesk details

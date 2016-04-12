@@ -3,11 +3,11 @@
 class actionUserDefault {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
     $ticketModel = new ticketModel();
     $pagedata = new stdClass();
-    //populate listdata for left pannel
-    $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 30);
     //set report name
     $pagedata->title = "Recent Ticket Activity";
     $pagedata->reportResults = $ticketModel->getRecentActivityByOwner($_SESSION['sAMAccountName']);

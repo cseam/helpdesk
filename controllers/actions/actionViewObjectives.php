@@ -3,15 +3,15 @@
 class actionViewObjectives {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //get ticket id from uri params
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $objectiveid = $baseurl[3];
-
     //create new models for required data
     $helpdeskModel = new helpdeskModel();
     $objectivesModel = new objectivesModel();
     $pagedata = new stdClass();
-
     //Post Update Objective
       if ($_POST) {
         SWITCH ($_POST["button_value"]) {
@@ -35,7 +35,6 @@ class actionViewObjectives {
           break;
         }
       }
-
     //set report name
     $reportname = "Performance Objective #".$objectiveid;
     //set report title
@@ -48,7 +47,6 @@ class actionViewObjectives {
         $error = "<h3>Access Denied</h3><p>You do not have permission to view this performance objective.</p>";
         $pagedata->reportResults = null;
       }
-
     //render template using $pagedata object
     require_once "views/ObjectivesView.php";
   }

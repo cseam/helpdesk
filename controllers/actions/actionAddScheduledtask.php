@@ -3,6 +3,8 @@
 class actionAddScheduledtask {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
     $scheduledtaskModel = new scheduledtaskModel();
     $helpdeskModel = new helpdeskModel();
@@ -13,7 +15,6 @@ class actionAddScheduledtask {
     $engineers = $engineerModel->getListOfEngineersByHelpdeskId($_SESSION['engineerHelpdesk']);
     $pagedata->location = $locationModel->getListOfLocations();
     $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
-
     //Post Update Scheduledtask
       if ($_POST) {
         //create scheduled ticket
@@ -50,13 +51,11 @@ class actionAddScheduledtask {
         $baseTicket->startschedule = htmlspecialchars($_POST['starton']);
         $scheduledtaskModel->createNewTicket($baseTicket);
       }
-
     //set report name
     $reportname = "Add Scheduled Task";
     //set report title
     $pagedata->title = $reportname;
     $pagedata->details = "Please complete the form to add a scheduled task for the team.";
-
     //render template using $pagedata object
     require_once "views/addScheduledtask.php";
 

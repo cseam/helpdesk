@@ -1,10 +1,9 @@
 <?php require_once "views/partials/header.php"; ?>
 
   <div id="leftpage">
-    <p>
-      //TODO left side of this page (what next?)
-    </p>
-    </div>
+    <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
+  </div>
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">

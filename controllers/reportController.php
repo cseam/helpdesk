@@ -3,7 +3,7 @@
 class reportController {
   public function __construct()
   {
-    // create route for reports
+    // create route for reports.
     $generatereport = new Route();
     $generatereport->add('/', 'actionReportDefault');
     $generatereport->add('/engineerbreakdown', 'actionReportEngineerbreakdown');

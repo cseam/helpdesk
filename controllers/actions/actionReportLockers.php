@@ -3,18 +3,16 @@
 class actionReportLockers {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
-    $statsModel = new statsModel();
     $helpdeskModel = new helpdeskModel();
     $lockersModel = new lockersModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
     //set report name
     $reportname = "lockers";
     //set report title
     $pagedata->title = $reportname . "";
-    //get department workrate for graph
-    $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details

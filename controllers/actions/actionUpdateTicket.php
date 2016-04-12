@@ -3,6 +3,8 @@
 class actionUpdateTicket {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
     $ticketModel = new ticketModel();
     $lockersModel = new lockersModel();

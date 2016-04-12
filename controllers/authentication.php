@@ -1,6 +1,6 @@
 <?php
 new authentication();
-// check users is authenticated else route to login
+// check users is authenticated else route to login.
 class authentication
 {
   function __construct()

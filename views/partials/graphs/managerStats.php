@@ -1,10 +1,10 @@
 <?php
-	//TODO must be better way to do this this is a faff 
+	//TODO must be better way to do this this is a faff
 	// reset strings
 	$label = "";
 	$series = "";
 	// loop stats object to populate strings for graph
-	foreach($stats as $key => $value) {
+	foreach($left->sideData["graphdata"] as $key => $value) {
 		$label .= "'" . $value["engineerName"] . "',";
 		$mon .= "'" . $value["mon"] . "',";
 		$tue .= "'" . $value["tue"] . "',";

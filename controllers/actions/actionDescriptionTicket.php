@@ -3,7 +3,7 @@
 class actionDescriptionTicket {
   public function __construct()
   {
-    //get ticket id from uri params
+    //get ticket id from uri params.
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $helpdeskid = $baseurl[3];
     //create new models for required data

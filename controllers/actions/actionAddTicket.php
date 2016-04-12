@@ -3,7 +3,7 @@
 class actionAddTicket {
   public function __construct()
   {
-    //create new models for required data
+    //create new models for required data.
     $ticketModel = new ticketModel();
     $locationModel = new locationModel();
     $helpdeskModel = new helpdeskModel();

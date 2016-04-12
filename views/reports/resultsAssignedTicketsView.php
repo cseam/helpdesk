@@ -2,15 +2,9 @@
 
 
   <div id="leftpage">
-    <div id="stats">
-      <p>
-        <?php include "views/partials/graphs/reportStats.php" ?>
-      </p>
-    </div>
-    <div id="calllist">
-        <?php include "views/partials/listReportReports.php" ?>
-    </div>
-    </div>
+    <?php require_once "views/partials/leftside/reports.php" ?>
+  </div>
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">

@@ -2,7 +2,7 @@
 
 
   <div id="leftpage">
-    <div id="calllist">
+    <div id="calllist"> 
       <?php include "views/partials/listAdminReports.php" ?>
     </div>
   </div>

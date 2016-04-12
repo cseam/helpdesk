@@ -3,18 +3,16 @@
 class actionReportSearch {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
-    $statsModel = new statsModel();
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
     //set report name
     $reportname = "search";
     //set report title
     $pagedata->title = $reportname . " tickets";
-    //populate $stats for Graph
-    $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //populate page default message

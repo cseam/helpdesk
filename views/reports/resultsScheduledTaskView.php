@@ -2,15 +2,9 @@
 
 
   <div id="leftpage">
-    <div id="stats">
-      <p>
-        <?php ($stats ? include "views/partials/graphs/managerStats.php" : print("no data")) ?>
-      </p>
-    </div>
-    <div id="calllist">
-        <?php include "views/partials/listManagerReports.php" ?>
-    </div>
-    </div>
+    <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
+  </div>
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">

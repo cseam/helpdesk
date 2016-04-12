@@ -6,7 +6,6 @@ class actionReportFeedback {
     //dont need to populate $listdata as fixed partial in manager view
     $statsModel = new statsModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
     //set report name
     $reportname = "Engineer feedback";
     //set report title

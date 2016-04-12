@@ -3,7 +3,7 @@
 class actionManagerReports {
   public function __construct()
   {
-    //create routes for reports
+    //create routes for reports.
     $generatereport = new Route();
     $generatereport->add('/', 'actionManagerDefault');
     $generatereport->add('/escalated', 'actionReportEscalated');

@@ -2,13 +2,9 @@
 
 
   <div id="leftpage">
-    <div id="stats">
+    <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
+  </div>
 
-    </div>
-    <div id="calllist">
-
-    </div>
-    </div>
   <div id="rightpage">
     <div id="call">
       <div id="ajax">

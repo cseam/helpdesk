@@ -6,7 +6,6 @@ class actionReportUrgencybreakdown {
     //create new models for required data
     $statsModel = new statsModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
     //set report name
     $reportname = "Urgency Breakdown";
     //set report title

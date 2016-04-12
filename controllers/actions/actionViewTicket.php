@@ -5,7 +5,7 @@ class actionViewTicket {
   {
     //TODO add some validation here for uri params and also some authentication checking to see if user has permission to see ticket also (if desired)
 
-    //get ticket id from uri params
+    //get ticket id from uri params.
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
 

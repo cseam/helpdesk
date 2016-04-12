@@ -3,17 +3,15 @@
 class actionReportWorkingon {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
-    $statsModel = new statsModel();
     $ticketModel = new ticketModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
     //set report name
     $reportname = "Enginners working on";
     //set report title
     $pagedata->title = $reportname . ".";
-    //get department workrate for graph
-    $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
     //populate report results for use in view
     $pagedata->reportResults = $ticketModel->getLastViewedByHelpdesk($_SESSION['engineerHelpdesk']);
     //set page details

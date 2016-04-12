@@ -1,6 +1,5 @@
 <?php require_once "views/partials/header.php"; ?>
 
-
   <div id="leftpage">
     <br />
     <h3>Did you know</h3>

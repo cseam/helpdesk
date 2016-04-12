@@ -3,8 +3,9 @@
 class actionReportOutofhours {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
-    $statsModel = new statsModel();
     $helpdeskModel = new helpdeskModel();
     $outofhoursModel = new outofhoursModel();
     $pagedata = new stdClass();
@@ -33,10 +34,7 @@ class actionReportOutofhours {
     $reportname = "Out of hours";
     //set report title
     $pagedata->title = $reportname . "";
-    //get department workrate for graph
-    $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
     //populate report results for use in view
-    //$pagedata->reportResults = $scheduledtaskModel->gettest($_SESSION['engineerHelpdesk']);
     $pagedata->reportResults = $outofhoursModel->getOutOfHours(1);
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);

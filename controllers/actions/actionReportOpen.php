@@ -3,8 +3,9 @@
 class actionReportOpen {
   public function __construct()
   {
+    //load content for left side of page
+    $left = new leftpageController();
     //create new models for required data
-    $statsModel = new statsModel();
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
     $pagedata = new stdClass();
@@ -13,8 +14,6 @@ class actionReportOpen {
     $reportname = "Open";
     //set report title
     $pagedata->title = $reportname . " Tickets";
-    //populate $stats for Graph
-    $stats = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
     //populate report results for use in view
     $pagedata->reportResults = $ticketModel->getOpenTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
     //get helpdesk details
