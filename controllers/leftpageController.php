@@ -37,6 +37,31 @@ class leftpageController {
           $this->sideData["partial"] = "manager.php";
         break;
     }
+      // superusers have different left menus as they see much more
+    if ($_SESSION['superuser']) {
+      //change side partial depending on uri.
+      $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+      SWITCH ($baseurl[1]) {
+        CASE "engineer":
+          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 30);
+          $this->sideData["listdata"] = $ticketModel->getMyOpenAssignedTickets($_SESSION['engineerId']);
+          $this->sideData["deptdata"] = $ticketModel->getOpenTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
+          $this->sideData["objdata"] = $objectivesModel->getObjectivesByEngineerId($_SESSION['engineerId']);
+            $graphstats = array();
+            $graphstats = array_merge($graphstats, $statsModel->countAllTicketsByEngineerIdLastWeek($_SESSION['engineerId']));
+            $graphstats = array_merge($graphstats, $statsModel->countClosedByEngineerIdLastWeek($_SESSION['engineerId']));
+            $graphstats = array_merge($graphstats, $statsModel->countEngineerTotalsLastWeek($_SESSION['engineerId']));
+          $this->sideData["graphdata"] = $graphstats;
+          $this->sideData["partial"] = "engineer.php";
+        break;
+        CASE "manager":
+          $this->sideData["partial"] = "manager.php";
+          $this->sideData["graphdata"] = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
+        break;
+      };
+
+    }
+
 
   }
 
