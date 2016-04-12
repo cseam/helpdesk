@@ -39,7 +39,6 @@
                   <form action="#" method="post" id="modifyForm">
                       <input type="hidden" id="button_modify_value" name="button_modify_value" value="" />
                       <input type="hidden" id="callid" name="callid" value="<?php echo $value["callid"] ?>" />
-                      <button name="modify" value="modify" type="submit" onclick="this.form.button_modify_value.value = this.value;">Modify</button>
                       <button name="delete" value="delete" type="submit" onclick="this.form.button_modify_value.value = this.value;">Delete</button>
                   </form>
                 </td>

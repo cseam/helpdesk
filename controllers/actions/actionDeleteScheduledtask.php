@@ -3,31 +3,29 @@
 class actionDeleteScheduledtask {
   public function __construct()
   {
+    //get ticket id from uri params
+    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $taskid = $baseurl[3];
     //create new models for required data
-    $changecontrolModel = new changecontrolModel();
+    $scheduledtaskModel = new scheduledtaskModel();
     $helpdeskModel = new helpdeskModel();
     $pagedata = new stdClass();
-
-    //Post Update Objective
-      if ($_POST) {
-        //create change control
-//          $engineersid = htmlspecialchars($_SESSION['engineerId']);
-//          $stamp = date("c");
-//          $changemade = htmlspecialchars($_POST['details']);
-//          $tags = null;
-//          $server = htmlspecialchars($_POST['servername']);
-//          $helpdesk = $_SESSION['engineerHelpdesk'];
-//          $changecontrolModel->addChangeControl($engineersid, $stamp, $changemade, $tags, $server, $helpdesk);
+    //Post Update Scheduledtask
+      if ($taskid) {
+        //delete Scheduledtask
+        //this needs refactorying url could be changed to remove items (CLOWN FIESTA) also at least prompt user dont just instantly remove
+        $taskid = htmlspecialchars($taskid);
+        $scheduledtaskModel->removeScheduledTaskById($taskid);
       }
 
     //set report name
-    $reportname = "Add Scheduled Task";
+    $reportname = "Scheduled Task Deleted";
     //set report title
     $pagedata->title = $reportname;
-    $pagedata->details = "Please complete the form to add a scheduled task for the team.";
+    $pagedata->details = "Your scheduled task has now been deleted.";
 
     //render template using $pagedata object
-    require_once "views/addScheduledtask.php";
+    require_once "views/deleteScheduledtask.php";
 
   }
 }

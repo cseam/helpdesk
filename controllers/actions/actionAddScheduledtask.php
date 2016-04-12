@@ -4,20 +4,51 @@ class actionAddScheduledtask {
   public function __construct()
   {
     //create new models for required data
-    $changecontrolModel = new changecontrolModel();
+    $scheduledtaskModel = new scheduledtaskModel();
     $helpdeskModel = new helpdeskModel();
+    $engineerModel = new engineerModel();
+    $locationModel = new locationModel();
     $pagedata = new stdClass();
+    //populate form dropdowns
+    $engineers = $engineerModel->getListOfEngineersByHelpdeskId($_SESSION['engineerHelpdesk']);
+    $pagedata->location = $locationModel->getListOfLocations();
+    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
 
-    //Post Update Objective
+    //Post Update Scheduledtask
       if ($_POST) {
-        //create change control
-//          $engineersid = htmlspecialchars($_SESSION['engineerId']);
-//          $stamp = date("c");
-//          $changemade = htmlspecialchars($_POST['details']);
-//          $tags = null;
-//          $server = htmlspecialchars($_POST['servername']);
-//          $helpdesk = $_SESSION['engineerHelpdesk'];
-//          $changecontrolModel->addChangeControl($engineersid, $stamp, $changemade, $tags, $server, $helpdesk);
+        //create scheduled ticket
+        $baseTicket = new stdClass();
+        $baseTicket->name = htmlspecialchars($_POST['name']);
+        $baseTicket->contact_email = htmlspecialchars($_POST['contact_email']);
+        $baseTicket->tel = htmlspecialchars($_POST['tel']);
+        $baseTicket->location = htmlspecialchars($_POST['location']);
+        $baseTicket->room = htmlspecialchars($_POST['room']);
+        $baseTicket->urgency = 1;
+        $baseTicket->helpdesk = htmlspecialchars($_POST['helpdesk']);
+        $baseTicket->category = htmlspecialchars($_POST['category']);
+        $ticketdetails = "<div class=\"original\">" . htmlspecialchars($_POST['details']) . "</div>";
+        $baseTicket->details = $ticketdetails;
+        if ($_POST['assigned'] == 'DONT') {
+          $assignedengineer = NULL;
+        } elseif ($_POST['assigned'] == 'AUTO') {
+          $assignedengineer = -1;
+        } else {
+          $assignedengineer = $_POST['assigned'];
+        };
+        $baseTicket->assigned = htmlspecialchars($assignedengineer);
+        $baseTicket->opened = date("c");
+        $baseTicket->lastupdate = date("c");
+        $baseTicket->closed = null;
+        $baseTicket->status = 1;
+        $baseTicket->closeengineerid = null;
+        $baseTicket->owner = htmlspecialchars($_SESSION['sAMAccountName']);
+        $baseTicket->invoice = null;
+        $baseTicket->callreason = null;
+        $baseTicket->title = htmlspecialchars($_POST['title']);
+        $baseTicket->lockerid = null;
+        $baseTicket->frequencytype = htmlspecialchars($_POST['reoccurance']);
+        $baseTicket->startschedule = htmlspecialchars($_POST['starton']);
+        $scheduledtaskModel->createNewTicket($baseTicket);
       }
 
     //set report name
