@@ -48,7 +48,6 @@
         <p><label for="callreason">Reason for issue</label>
           <select id="callreason" name="callreason" REQUIRED>
             <option value="" SELECTED>Please Select</option>
-            <option value="0" >Test Value</option>
             <?php foreach ($callreasons as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["reason_name"]."</option>"; } ?>
           </select>
         </p>

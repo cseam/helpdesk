@@ -9,7 +9,6 @@ class actionReportOpen {
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
     $pagedata = new stdClass();
-    //dont need to populate $listdata as fixed partial in manager view
     //set report name
     $reportname = "Open";
     //set report title

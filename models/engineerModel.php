@@ -6,7 +6,8 @@
 
     public function getDetailsByUsername($username) {
       $database = new Database();
-      $database->query("SELECT * FROM engineers WHERE sAMAccountName = :username");
+      $database->query("SELECT * FROM engineers
+                        WHERE sAMAccountName = :username");
       $database->bind(":username", $username);
       $row = $database->single();
       if ($database->rowCount() === 0) { return null;}
@@ -23,7 +24,8 @@
 
     public function getListOfEngineersByHelpdeskId($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT * FROM engineers WHERE helpdesk = :helpdesk AND disabled != 1");
+      $database->query("SELECT * FROM engineers
+                        WHERE helpdesk IN(:helpdesk) AND disabled != 1");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
@@ -32,7 +34,8 @@
 
     public function getEngineerFriendlyNameById($engineerid) {
       $database = new Database();
-      $database->query("SELECT engineerName FROM engineers WHERE idengineers = :engineer");
+      $database->query("SELECT engineerName FROM engineers
+                        WHERE idengineers = :engineer");
       $database->bind(":engineer", $engineerid);
       $result = $database->single();
       return $result["engineerName"];
@@ -42,7 +45,9 @@
       $database = new Database();
       $day = "%".date("N")."%";
       //find last engineer used for helpdeskid
-      $database->query("SELECT * FROM assign_engineers INNER JOIN engineers ON assign_engineers.engineerid=engineers.idengineers WHERE id= :id");
+      $database->query("SELECT * FROM assign_engineers
+                        INNER JOIN engineers ON assign_engineers.engineerid=engineers.idengineers
+                        WHERE id= :id");
       $database->bind(":id", $helpdeskid);
       $results = $database->single();
       $lastengineerid = $results["idengineers"];
@@ -64,7 +69,9 @@
 
     public function updateAutoAssignEngineerByHelpdeskId($helpdeskid, $engineerid) {
       $database = new Database();
-      $database->query("UPDATE assign_engineers SET engineerId = :engineerid WHERE id = :id");
+      $database->query("UPDATE assign_engineers
+                        SET engineerId = :engineerid
+                        WHERE id = :id");
       $database->bind(":id", $helpdeskid);
       $database->bind(":engineerid", $engineerid);
       $database->execute();
