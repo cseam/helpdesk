@@ -1,4 +1,4 @@
-<h3>Ticket History</h3>
+<h3>Ticket Timeline</h3>
 <ol class="timeline">
   <li>
     Created <span class="smalltxt highlight">01/01/2016</span>

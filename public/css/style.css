@@ -347,8 +347,8 @@ select::-ms-expand {
 	font-size: 0.8rem !important;
 	font-style: italic;
 	padding: 0.2rem 1rem;
-	border-left: 2px solid #aaa;
-	line-height: 1.1rem !important;
+	border-left: 2px solid #bbb;
+	line-height: 1rem !important;
 	text-align: left !important;
 }
 .smalltxt {
@@ -550,11 +550,9 @@ h3.callbody {
 	width: auto;
 }
 .closed, .status2 {
-	/*float: left;*/
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
-	/* border: 1px solid #ccc; */
-	border-radius: 5px;
+	border-radius: 2px;
 	background-color: rgba(0, 25, 91, 0.1);
 	color: rgba(0, 25, 91, 0.6);
 	display: block;
@@ -567,11 +565,9 @@ h3.callbody {
 }
 
 .hold, .status3, .status5 {
-	/*float: left;*/
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
-	/* border: 1px solid #ccc; */
-	border-radius: 5px;
+	border-radius: 2px;
 	background-color: rgba(88, 70, 0, 0.1);
 	color: rgba(194, 151, 9, 1);
 	display: block;
@@ -583,11 +579,9 @@ h3.callbody {
 }
 
 .escalated, .status4 {
-	/* float: left; */
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
-	/* border: 1px solid #ccc; */
-	border-radius: 5px;
+	border-radius: 2px;
 	background-color: rgba(90, 0, 24, 0.1);
 	color: rgba(194, 10, 13, 1);
 	display: block;
@@ -600,14 +594,12 @@ h3.callbody {
 }
 
 .open, .status1 {
-	/*float: left;*/
 	color: rgb(100, 125, 106);
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
-	border-radius: 5px;
 	background-color: rgba(26, 88, 0, 0.1);
 	display: block;
-	border-radius: 5px;
+	border-radius: 2px;
 	text-align: center;
 }
 /* END Calls list */

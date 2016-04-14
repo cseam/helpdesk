@@ -25,7 +25,7 @@
             <?php foreach($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td>#<?php echo $value["callid"] ?></td>
-              <td class="left"><?php echo $value["title"] ?></td>
+              <td class="left"><?php echo substr(strip_tags($value["title"]), 0, 50) ?></td>
               <td><?php echo $value["helpdesk_name"] ?></td>
               <td><?php echo $value["engineerName"] ?></td>
               <td><?php echo $value["total_days_to_close"] - $value["close_eta_days"] ?> days</td>

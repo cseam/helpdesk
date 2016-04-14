@@ -12,7 +12,7 @@ class actionUserDefault {
     $pagedata->title = "Recent Ticket Activity";
     $pagedata->reportResults = $ticketModel->getRecentActivityByOwner($_SESSION['sAMAccountName']);
     //set page details
-    $pagedata->details = "The following tickets have recently been updated by an engineer, and require a response or feedback left.<br /><br /> To add a new ticket please click \"Add Ticket\" in the top right corner, to update a tickets details or leave feedback please click on the ticket title. ";
+    $pagedata->details = "The following tickets have recently been updated by an engineer, and require a response or feedback left.<br /> To add a new ticket please click \"Add Ticket\" in the top right corner, to update a tickets details or leave feedback please click on the ticket title. ";
     // render page
     require_once "views/userView.php";
   }
