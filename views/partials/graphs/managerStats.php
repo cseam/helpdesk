@@ -31,30 +31,28 @@
 		series: [<?php echo $series ?>]
 		};
 	var options = {
-		chartPadding: 15,
 		fullWidth: true,
 		horizontalBars: true,
 		stackBars: true,
 		reverseData: true,
-		seriesBarDistance: 10,
 		axisY: {
 			onlyInteger: true,
-			offset: 150
+			offset: 125,
 			},
 		axisX: {
-			onlyInteger: true
+			onlyInteger: true,
 			}
 		};
 	new Chartist.Bar('#teamperformance', data, options);
 	});
 </script>
 <div id="teamperformance" class="ct-chart ct-golden-section" style="width: 100%;height:85%;float:left;"></div>
-<div style="float:right;margin-top: -20px;margin-right: 8px;">
-  <span style="font-size: 0.6rem;color: white;background: #BFCC80;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-6 day")));?></span>
-  <span style="font-size: 0.6rem;color: white;background: #FFA38B;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-5 day")));?></span>
-  <span style="font-size: 0.6rem;color: white;background: #FDD26E;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-4 day")));?></span>
-  <span style="font-size: 0.6rem;color: white;background: #C09C83;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-3 day")));?></span>
-  <span style="font-size: 0.6rem;color: white;background: #B8CCEA;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-2 day")));?></span>
-  <span style="font-size: 0.6rem;color: white;background: #BFCEC2;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-1 day")));?></span>
-  <span style="font-size: 0.6rem;color: white;background: #D1CCBD;padding: 0.1rem 0.5rem;">Today</span>
+<div style="float:right;margin-top: -10px;margin-right: 8px;">
+  <span style="font-size: 0.7rem;color: white;background: #BFCC80;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-6 day")));?></span>
+  <span style="font-size: 0.7rem;color: white;background: #FFA38B;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-5 day")));?></span>
+  <span style="font-size: 0.7rem;color: white;background: #FDD26E;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-4 day")));?></span>
+  <span style="font-size: 0.7rem;color: white;background: #C09C83;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-3 day")));?></span>
+  <span style="font-size: 0.7rem;color: white;background: #B8CCEA;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-2 day")));?></span>
+  <span style="font-size: 0.7rem;color: white;background: #BFCEC2;padding: 0.1rem 0.5rem;"><?php echo(date("j/m/Y",strtotime("-1 day")));?></span>
+  <span style="font-size: 0.7rem;color: white;background: #D1CCBD;padding: 0.1rem 0.5rem;">TODAY</span>&nbsp;
 </div>
