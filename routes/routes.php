@@ -17,3 +17,5 @@
   $route->add('/changecontrol', 'changecontrolController');
   $route->add('/outofhours', 'outofhoursController');
   $route->add('/scheduledtask', 'scheduledtaskController');
+  // digital sign routes
+  $route->add('/digitalsign', 'digitalsignController');
