@@ -1,1 +1,2 @@
-[^.]*
+/profile_images/*
+/ticket_uploads/*

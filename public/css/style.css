@@ -120,12 +120,11 @@ hr {
 	border: 0;
 	border-bottom: solid 1px #c9c7c7;
 }
-ul li:before {
-	content: '\2014\a0\a0';
-}
 ul {
 	list-style-position: inside;
 	margin: 0.5rem 0rem;
+	color: #577d6a;
+	list-style-image: url('/public/images/ICONS-dropdown.svg');
 }
 strong {
 	font-weight: 300;
@@ -195,6 +194,18 @@ table th {
 	display: block;
 	line-height: 0;
 }
+.nowrap {
+	white-space: nowrap;
+}
+.left {
+	text-align: left !important;
+}
+.default-padding {
+	padding: 1rem 0;
+}
+.noborder td{
+	border: none;
+}
 /* helpder classes */
 /* Standard forms */
 input, textarea, button {
@@ -210,7 +221,7 @@ input, textarea, button {
 	font-weight: 300;
 }
 select {
-	background: rgba(255,255,255,0.4) url('/public/images/svg/ICONS-dropdown.svg') no-repeat 99% 50%;
+	background: rgba(255,255,255,0.4) url('/public/images/ICONS-dropdown.svg') no-repeat 99% 50%;
 	background-size: 16px;
 	color: #777777;
 	border: 1px solid #ccc;
@@ -262,7 +273,7 @@ input[type=text]:focus, textarea:focus, select:focus, #calldetails textarea:focu
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	font-size: 0.8rem;
-	background: rgba(55, 215, 2, 0.05) url('/public/images/svg/ICONS-here.svg') no-repeat 99% 50%;
+	background: rgba(55, 215, 2, 0.05) url('/public/images/ICONS-here.svg') no-repeat 99% 50%;
 	background-size: 16px;
 }
 #calldetails textarea {
@@ -338,9 +349,26 @@ select::-ms-expand {
 	padding: 0.2rem 1rem;
 	border-left: 2px solid #aaa;
 	line-height: 1.1rem !important;
+	text-align: left !important;
 }
 .smalltxt {
 	font-size: 0.8rem;
+}
+.listheader {
+	text-transform: uppercase;
+	line-height: 1.4rem;
+}
+.titlepadding {
+ padding-top: 40px;
+}
+.highlight {
+	color: #577d6a;
+}
+.uploadfile {
+	display: block;
+	padding-left: 30px;
+	background: url('/public/images/ICONS-tag.svg') no-repeat 6px 35%;
+	background-size: 18px;
 }
 /* END Additional message styles */
 /* Call details */
@@ -350,10 +378,12 @@ select::-ms-expand {
 .callheader {
 	color: #577d6a;
 	margin: 2px 0;
-	font-size: 1rem;
-	border-bottom: 0px solid rgba(88, 126, 107, 0.2);
-	width: 50%;
+	font-size: 0.8rem;
+	border-bottom: 1px solid rgba(88, 126, 107, 0.2);
 	float: left;
+	display: inline-block;
+	width: 50%;
+	text-transform: uppercase;
 }
 .sla {
 	color: #D97700;
@@ -369,17 +399,18 @@ select::-ms-expand {
 h3.callbody {
 	clear: left;
 	padding-top: 30px;
-	color: #919191 !important;
+	color: #6b6b6b !important;
+	font-size: 1.3rem;
 }
 .callbody {
 	color: #919191;
 }
 .profile-picture {
-	border-radius: 50px;
+	border-radius: 10px;
 	height: 120px;
 	width: auto;
 	float: left;
-	margin: 0.4rem 1rem 0.4rem 0.4rem;
+	margin: 0.4rem 0.4rem 0.4rem 0rem;
 	display: inline-block;
 }
 .callfooter {
@@ -393,20 +424,25 @@ h3.callbody {
 	font-style: italic;
 }
 .update {
-	padding: 1rem 0 0.5rem 0rem;
+	padding: 1rem 1rem 0.5rem 1rem;
 	margin: 0.5rem 0rem;
-	border-top: 1px solid rgba(204, 204, 204, 1.0);
+	border-top: 0px solid rgba(204, 204, 204, 1.0);
 	line-height: 1.5rem;
 	clear: both;
+	background: rgba(88, 126, 107, 0.1);
 }
 .update h3 {
 	text-align: left;
-	font-size: 1rem;
-	color: #577d6a;
+	font-size: 0.9rem;
+	/*color: #577d6a;*/
 	margin: 0.6rem 0;
-	padding: 0;
+	padding: 0.6rem 0 0.6rem 1rem;
 	font-style: normal;
 	text-transform: lowercase;
+	width: auto;
+	display: block;
+	/*background: rgba(88, 126, 107, 0.1);*/
+	border-radius: 5px;
 }
 .original {
 	border-left: 1px solid transparent;
@@ -423,7 +459,6 @@ h3.callbody {
 #digitalsign #call {
 	height: 100%;
 }
-
 .calllink {
 	font-size: .6rem;
 	float: right;
@@ -431,10 +466,8 @@ h3.callbody {
 /* END Call details */
 /* Buttons */
 .buttons {
-	margin: 0 0 2rem 1rem;
-	text-align: right;
-	width: auto;
-	float: right;
+	margin: 1rem 0 1rem 0;
+	text-align: left;
 }
 .buttons button {
 	background-color: rgba(255,255,255,0.4);
@@ -442,26 +475,27 @@ h3.callbody {
 	cursor: pointer;
 	text-transform: uppercase;
 	font-size: 0.7rem;
-	border-radius: 6px;
+	border-radius: 2px;
+	min-width: 180px;
 }
 .tags button {
 	border: 1px solid transparent;
 	padding: 3px 15px 3px 30px;
-	background: rgba(255,255,255,0.25) url('/public/images/svg/ICONS-tag.svg') no-repeat 0% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-tag.svg') no-repeat 0% 50%;
 	background-size: contain;
 	cursor: pointer;
 	float: left;
 }
 .deltag button{
 	padding: 3px 30px 3px 15px;
-	background: rgba(255,255,255,0.25) url('/public/images/svg/ICONS-null.svg') no-repeat 95% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-null.svg') no-repeat 95% 50%;
 	background-size: auto 60%;
 	cursor: pointer;
 	float: left;
 }
 .addtagform button{
 	padding: 3px 15px 3px 30px;
-	background: rgba(255,255,255,0.25) url('/public/images/svg/ICONS-tag.svg') no-repeat 0% 50%;
+	background: rgba(255,255,255,0.25) url('/public/images/ICONS-tag.svg') no-repeat 0% 50%;
 	background-size: contain;
 	cursor: pointer;
 	float: left;
@@ -500,7 +534,7 @@ h3.callbody {
 }
 /* END Buttons */
 /* Calls list */
-#calllist {
+#calllist, #deptlist, #objlist {
 	background: trasparent;
 	height: 50%;
 	overflow: auto;
@@ -508,49 +542,79 @@ h3.callbody {
 	overflow: hidden;
 	margin-right: 15px;
 }
-#calllist:hover {
+#calllist:hover, #deptlist:hover, #objlist:hover {
 	overflow: auto;
 	margin-right: 15px;
 }
 .view_td {
 	width: auto;
 }
-.closed {
-	float: left;
+.closed, .status2 {
+	/*float: left;*/
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 15px;
-	background-color: rgba(0, 82, 90, 0.1);
-	color: rgb(100, 125, 106);
+	border-radius: 5px;
+	background-color: rgba(0, 25, 91, 0.1);
+	color: rgba(0, 25, 91, 0.6);
 	display: block;
+	text-align: center;
 }
-.hold {
-	float: left;
+
+.update .closed {
+	background-color: rgba(0, 25, 91, 0.1);
+	color: rgba(0, 25, 91, 0.6);
+}
+
+.hold, .status3, .status5 {
+	/*float: left;*/
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 15px;
+	border-radius: 5px;
 	background-color: rgba(88, 70, 0, 0.1);
 	color: rgba(194, 151, 9, 1);
 	display: block;
+	text-align: center;
 }
-.escalated {
-	float: left;
+.update .hold, .update .unhold, .update .sendaway, .update .returned {
+	color: rgba(194, 151, 9, 1);
+	background-color: rgba(88, 70, 0, 0.1);
+}
+
+.escalated, .status4 {
+	/* float: left; */
 	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
 	font-size: 0.7rem;
 	/* border: 1px solid #ccc; */
-	border-radius: 15px;
+	border-radius: 5px;
 	background-color: rgba(90, 0, 24, 0.1);
 	color: rgba(194, 10, 13, 1);
 	display: block;
+	text-align: center;
 }
-.open {
+
+.update .escalated, .update .deescalated {
+	background-color: rgba(90, 0, 24, 0.1);
+	color: rgba(194, 10, 13, 1);
+}
+
+.open, .status1 {
+	/*float: left;*/
 	color: rgb(100, 125, 106);
-	padding: 0.2rem 0.6rem;
+	padding: 0.3rem 0.6rem 0.2rem 0.7rem;
+	font-size: 0.7rem;
+	border-radius: 5px;
+	background-color: rgba(26, 88, 0, 0.1);
+	display: block;
+	border-radius: 5px;
+	text-align: center;
 }
 /* END Calls list */
 /* Engineers sub nav */
+.engineerReports {
+	margin-bottom: 50px;
+}
 .engineersubnav {
 	text-align: right;
 }
@@ -580,6 +644,35 @@ h3.callbody {
 #reportlinks a img {
 	float: right;
 	margin: 0 5px 5px 5px;
+}
+.tablesorter {
+	cursor: pointer;
+	white-space: nowrap;
+}
+.tablesorter td {
+	cursor: default;
+	padding: 5px;
+}
+.tablesorter tr,.tablesorter th {
+	text-align: center;
+}
+.day {
+	background-color: rgba(100,125,106, 0.8);
+	display: inline-block;
+	overflow: hidden;
+	border-radius: 50%;
+	color: transparent;
+	max-width: 50px;
+	max-height: 50px;
+}
+#changecontrol tbody, #escalatedtickets tbody, #unassignedtickets tbody, #stagnatetickets tbody, #poorfeedback tbody {
+		border-top: 3px solid rgba(100,125,106, 0.3);
+}
+
+#changecontrol tbody::after {
+	content: '';
+	display: block;
+	height: 15px;
 }
 /* END Reports */
 /* Login area */
@@ -623,6 +716,14 @@ h3.callbody {
 .xbig  {
 	font-size: 150px;
 	line-height: 5.5rem;
+	height: auto;
+	min-height: auto;
+	color:#577d6a !important;
+	font-weight: 300;
+}
+.logoutstats {
+	font-size: 30px;
+	line-height: auto;
 	height: auto;
 	min-height: auto;
 	color:#577d6a !important;
@@ -674,7 +775,7 @@ select.error, input.error, textarea.error {
 	border: 1px solid silver;
 }
 select.error {
-	background: #ffe0e0 url('/public/images/svg/ICONS-dropdown.svg') no-repeat 99% 50%;
+	background: #ffe0e0 url('/public/images/ICONS-dropdown.svg') no-repeat 99% 50%;
 	background-size: 16px;
 }
 label.error {
