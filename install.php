@@ -167,7 +167,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				`availableDays` varchar(45) NOT NULL DEFAULT '1,2,3,4,5,6,7',
 				`sAMAccountName` varchar(45) NOT NULL DEFAULT '',
 				`engineerLevel` int(11) NOT NULL DEFAULT '1',
-				`helpdesk` int(11) NOT NULL,
+				`helpdesk` varchar(45) NOT NULL,
 				`superuser` int(11) DEFAULT NULL,
 				`disabled` int(11) DEFAULT '0',
 				`localLoginHash` varchar(255) DEFAULT NULL,

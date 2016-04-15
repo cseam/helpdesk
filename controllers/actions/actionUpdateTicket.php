@@ -85,7 +85,7 @@ class actionUpdateTicket {
                 $baseTicket->contact_email = htmlspecialchars($_POST['contact_email']);
                 $baseTicket->tel = htmlspecialchars($_POST['tel']);
                 $baseTicket->details = $ticketdetails;
-                $baseTicket->assigned = htmlspecialchars($assigned);
+                $baseTicket->assigned = $assigned;
                 $baseTicket->opened = date("c");
                 $baseTicket->lastupdate = date("c");
                 $baseTicket->status = htmlspecialchars($status);
@@ -100,7 +100,7 @@ class actionUpdateTicket {
                 $baseTicket->invoice = null;
                 $baseTicket->callreason = null;
                 $baseTicket->title = htmlspecialchars($_POST['title']);
-                $baseTicket->lockerid = htmlspecialchars($lockerid);
+                $baseTicket->lockerid = $lockerid;
                 $baseTicket->pm = htmlspecialchars($pm);
                 $ticketid = $ticketModel->createNewTicket($baseTicket);
               //insert additional ticket details

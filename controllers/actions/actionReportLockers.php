@@ -16,7 +16,7 @@ class actionReportLockers {
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = sizeof($pagedata->reportResults)." items in ".$reportname." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+    //$pagedata->details = sizeof($pagedata->reportResults)." items in ".$reportname." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
     //if post update database
     if ($_POST) {
       //remove item from lockers
