@@ -45,6 +45,10 @@
         <legend>Update Ticket</legend>
         <p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
         <p><label for="attachment">Picture or Attachment</label><input type="file" name="attachment" accept="application/pdf,application/msword,image/*" style="background-color: transparent;" id="attachment"></p>
+        <?php
+        // show only for engineers, managers & superusers
+        if ($_SESSION['engineerLevel'] >= "1" or $_SESSION['superuser'] === "1") {
+        ?>
         <p><label for="callreason">Reason for issue</label>
           <select id="callreason" name="callreason" REQUIRED>
             <option value="" SELECTED>Please Select</option>
@@ -58,6 +62,7 @@
             <?php foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["quick_response"]."\">".$value["quick_response"]."</option>"; } ?>
           </select>
         </p>
+        <?php } ?>
       </fieldset>
       <fieldset>
         <legend>Ticket Controls</legend>

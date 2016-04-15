@@ -365,8 +365,8 @@
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
-                        JOIN engineers ON calls.assigned=engineers.idengineers
-                        WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 12 DAY)
+                        LEFT OUTER JOIN engineers ON calls.assigned=engineers.idengineers
+                        WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 5 DAY)
                         AND owner = :owner
                         ORDER BY callid DESC");
       $database->bind(":owner", $owner);

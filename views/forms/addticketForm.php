@@ -94,8 +94,8 @@
 			<div id="additional_fields"></div>
 			<label for="title" title="short one line title of your problem">Short description of issue (Title)</label>
 			<input type="text" id="title" name="title" value="" required />
-			<label for="details" title="enter the full details of your problem">Describe issue in detail</label>
-			<textarea name="details" id="details" rows="10" cols="40"  required></textarea>
+			<label for="updatedetails" title="enter the full details of your problem">Describe issue in detail</label>
+			<textarea name="updatedetails" id="updatedetails" rows="10" cols="40"  required></textarea>
 	</fieldset>
 	<fieldset>
 		<legend>Attachments (optional)</legend>

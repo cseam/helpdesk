@@ -9,11 +9,11 @@
     <div id="call">
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
-        <p class="note"><?php echo $pagedata->details ?></p>
+        <p><?php echo $pagedata->details ?></p>
         <table id="yourcalls">
           <tbody>
             <?php
-            if (!$pagedata->reportResults) { echo "<tr><td>0 recent activity on your tickets.</td></tr>"; }
+            if (!$pagedata->reportResults) { echo "<tr><td style=\"border-bottom:none;\"><em>* there has been no recent activity on your tickets.</em></td></tr>"; }
             foreach($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td class="hdtitle listheader" colspan="6"><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>

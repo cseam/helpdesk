@@ -7,8 +7,8 @@
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
-        <h2><?php echo $pagedata->title ?></h2>
-        <p><?php echo $pagedata->details ?></p>
+        <!--<h2><?php echo $pagedata->title ?></h2>
+        <p><?php echo $pagedata->details ?></p>-->
         <table id="changecontrol">
           <thead>
             <tr class="head">

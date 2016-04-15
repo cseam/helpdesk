@@ -2,12 +2,6 @@
 
 
   <div id="leftpage">
-    <div id="stats">
-      <?php include "views/partials/viewticketwelcome.php"; ?>
-    </div>
-    <div id="calllist">
-        <?php include "views/partials/yourtickets.php"; ?>
-    </div>
   </div>
   <div id="rightpage">
     <div id="call">

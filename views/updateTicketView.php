@@ -2,7 +2,6 @@
 
 
   <div id="leftpage">
-    <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
   </div>
 
   <div id="rightpage">

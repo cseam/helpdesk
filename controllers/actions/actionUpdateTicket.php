@@ -38,7 +38,6 @@ class actionUpdateTicket {
         }
       }
       $ticketdetails = $upload_code . htmlspecialchars($_POST["updatedetails"]);
-
       // check which button is pressed and process correctly
       SWITCH ($_POST["button_value"]) {
         CASE "add":
@@ -90,7 +89,7 @@ class actionUpdateTicket {
                 $baseTicket->opened = date("c");
                 $baseTicket->lastupdate = date("c");
                 $baseTicket->status = htmlspecialchars($status);
-                $baseTicket->closed = htmlspecialchars($closed);
+                $baseTicket->closed = $closed;
                 $baseTicket->closeengineerid = htmlspecialchars($closeengineerid);
                 $baseTicket->urgency = htmlspecialchars($urgency);
                 $baseTicket->location = htmlspecialchars($_POST['location']);
@@ -209,8 +208,8 @@ class actionUpdateTicket {
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and closed, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "update":
-          $ticketModel->updateTicketDetailsById($_POST["id"], "open", $_SESSION["sAMAccountName"] , $ticketdetails);
-          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "update", $_SESSION["sAMAccountName"] , $ticketdetails);
+          if ($_POST["callreason"]) { $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]); }
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
