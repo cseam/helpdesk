@@ -7,11 +7,11 @@
           <option value="daily" >Daily</option>
           <option value="weekly" SELECTED >Weekly</option>
           <option value="monthly" >Monthly</option>
-          <option value="spring">Spring Term (TODO)</option>
-          <option value="summer">Summer Term (TODO)</option>
-          <option value="winter">Winter Term (TODO)</option>
+          <option value="spring">Spring Term</option>
+          <option value="summer">Summer Term</option>
+          <option value="winter">Winter Term</option>
           <option value="yearly" >Yearly</option>
-          <option value="bi-annual">bi-annual (TODO)</option>
+          <option value="bi-annual">bi-annual</option>
         </select>
       <label for="starton" title="Start On">Starting On (yyyy/mm/dd)</label>
         <input type="date" id="starton" name="starton" value="<?php echo date("Y/m/d");?>" />

@@ -49,6 +49,18 @@ class actionAddScheduledtask {
         $baseTicket->lockerid = null;
         $baseTicket->frequencytype = htmlspecialchars($_POST['reoccurance']);
         $baseTicket->startschedule = htmlspecialchars($_POST['starton']);
+        if ($_POST['reoccurance'] == 'spring') {
+          $baseTicket->frequencytype = 'yearly';
+          $baseTicket->startschedule =  date("Y") . '/01/15';
+        }
+        if ($_POST['reoccurance'] == 'summer') {
+          $baseTicket->frequencytype = 'yearly';
+          $baseTicket->startschedule = date("Y") . '/04/15';
+        }
+        if ($_POST['reoccurance'] == 'winter') {
+          $baseTicket->frequencytype = 'yearly';
+          $baseTicket->startschedule = date("Y") . '/09/15';
+        }
         $scheduledtaskModel->createNewTicket($baseTicket);
       }
     //set report name
