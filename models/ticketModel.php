@@ -422,6 +422,18 @@
       return null;
     }
 
+    public function updateTicketInvoiceReceivedById($ticketid) {
+        $database = new Database();
+        $database->query("UPDATE calls
+                          SET calls.requireinvoice = null,
+                          calls.invoicedate = :invoicedate
+                          WHERE calls.callid = :callid");
+        $database->bind(":invoicedate", date("c"));
+        $database->bind(":callid", $ticketid);
+        $database->execute();
+        return null;
+    }
+
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "") {
       $message = "<div class=update>" . $update . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
       $database = new Database();

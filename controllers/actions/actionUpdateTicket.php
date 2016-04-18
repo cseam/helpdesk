@@ -146,10 +146,17 @@ class actionUpdateTicket {
           break;
         CASE "invoice":
           $ticketModel->updateTicketRequireInvoiceById($_POST["id"]);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "open", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "update", $_SESSION["sAMAccountName"] , "Awaiting invoice:".$ticketdetails);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been marked as awaiting invoice.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Marked for Invoice";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and marked for invoice, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
+          break;
+        CASE "invoicearrived":
+          $ticketModel->updateTicketInvoiceReceivedById($_POST["id"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "update", $_SESSION["sAMAccountName"] , "Invoice received:".$ticketdetails);
+          $pagedata->title = "#".$_POST["id"]." Ticket Updated - Invoice Arrived";
+          $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and marked as invoice received.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "sendaway":
           $ticketModel->updateTicketStatusById($_POST["id"], 5);

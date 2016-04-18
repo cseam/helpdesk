@@ -76,7 +76,7 @@
           if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?>
           <button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">Assign Engineer</button>
           <button name="forward" value="forward" type="submit" onclick="this.form.button_value.value = this.value;">Forward To Helpdesk</button>
-          <button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button>
+          <?php if ($ticketDetails["requireinvoice"] == 1) {?><button name="invoicearrived" value="invoicearrived" type="submit" onclick="this.form.button_value.value = this.value;">Invoice Received</button><?php } else {?><button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button><?php } ?>
           <?php }
           // show only for engineers, managers & superusers
           if ($_SESSION['engineerLevel'] >= "1" or $_SESSION['superuser'] === "1") {
