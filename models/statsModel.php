@@ -55,7 +55,7 @@
                         sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS total7
                         FROM engineers
                         LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers
-                        WHERE FIND_IN_SET(engineers.helpdesk, :helpdeskid)
+                        WHERE FIND_IN_SET(calls.helpdesk, :helpdeskid)
                         AND engineers.disabled=0
                         GROUP BY engineerName
                         ORDER BY total7 DESC

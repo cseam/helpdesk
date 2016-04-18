@@ -15,11 +15,11 @@ class leftpageController {
         CASE "0":
         // standard user
           $this->sideData["partial"] = "user.php";
-          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 30);
+          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 15);
         break;
         CASE "1":
         // engineer
-          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 30);
+          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 15);
           $this->sideData["listdata"] = $ticketModel->getMyOpenAssignedTickets($_SESSION['engineerId']);
           $this->sideData["deptdata"] = $ticketModel->getOpenTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
           $this->sideData["objdata"] = $objectivesModel->getObjectivesByEngineerId($_SESSION['engineerId']);
@@ -32,7 +32,7 @@ class leftpageController {
         break;
         CASE "2":
         // manager
-          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 30);
+          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 15);
           $this->sideData["graphdata"] = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
           $this->sideData["partial"] = "manager.php";
         break;
@@ -43,7 +43,7 @@ class leftpageController {
       $baseurl = explode('/',$_SERVER['REQUEST_URI']);
       SWITCH ($baseurl[1]) {
         CASE "engineer":
-          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 30);
+          $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 15);
           $this->sideData["listdata"] = $ticketModel->getMyOpenAssignedTickets($_SESSION['engineerId']);
           $this->sideData["deptdata"] = $ticketModel->getOpenTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
           $this->sideData["objdata"] = $objectivesModel->getObjectivesByEngineerId($_SESSION['engineerId']);
