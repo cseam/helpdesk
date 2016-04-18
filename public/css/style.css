@@ -902,6 +902,7 @@ input.cmn-toggle-round:checked + label:after {
 	}
 	#leftpage {
 		overflow: auto;
+		max-height: 200px;
 	}
 	#login p {
 		display: none;
