@@ -66,7 +66,7 @@ class actionUpdateTicket {
                   }
                 }
               //check engineer hasnt assigned to themselfs
-                $_POST['cmn-toggle-selfassign'] !== null ? $assigned = $_SESSION['sAMAccountName'] : $assigned = $assignedengineer;
+                $_POST['cmn-toggle-selfassign'] !== null ? $assigned = $_POST['cmn-toggle-selfassign'] : $assigned = $assignedengineer;
               //check auto close
                 if ($_POST['cmn-toggle-retro'] !== null) {
                   $status = '2';
