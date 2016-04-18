@@ -52,7 +52,11 @@
         <p><label for="callreason">Reason for issue</label>
           <select id="callreason" name="callreason" REQUIRED>
             <option value="" SELECTED>Please Select</option>
-            <?php foreach ($callreasons as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["reason_name"]."</option>"; } ?>
+            <?php foreach ($callreasons as $key => $value) { ?>
+              <option value="<?php echo $value["id"] ?>" <?php if ($ticketDetails["callreason"] == $value["id"]) { echo "SELECTED"; } ?> >
+                <?php echo $value["reason_name"] ?>
+              </option>
+            <?php } ?>
           </select>
         </p>
         <p>
