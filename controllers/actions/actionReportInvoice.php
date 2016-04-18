@@ -14,7 +14,7 @@ class actionReportInvoice {
     //set report title
     $pagedata->title = $reportname . " Tickets";
     //populate report results for use in view
-    $pagedata->reportResults = $ticketModel->getTicketsForInvoiceByHelpdesk(4);
+    $pagedata->reportResults = $ticketModel->getTicketsForInvoiceByHelpdesk($_SESSION['engineerHelpdesk']);
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details

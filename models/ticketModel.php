@@ -300,8 +300,7 @@
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE FIND_IN_SET(calls.helpdesk, :helpdesk)
-                        AND status = 2
-                        AND requireinvoice IS NOT NULL
+                        AND requireinvoice = 1
                         ORDER BY opened
                         LIMIT 200");
       $database->bind(":helpdesk", $helpdeskid);
