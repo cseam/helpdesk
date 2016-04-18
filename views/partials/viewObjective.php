@@ -5,7 +5,7 @@
 } else { ?>
 <div id="calldetails">
 <h2>Performance Objective #<?php echo $pagedata->reportResults[0]['id'] ?></h2>
-<p class="callheader"><span class="nowrap">Due by:</span>       <span class="nowrap"><?php echo $pagedata->reportResults[0]['datedue'] ?></span></p>
+<p class="callheader"><span class="nowrap">Due by:</span>       <span class="nowrap"><?php echo date("M Y", strtotime($pagedata->reportResults[0]['datedue'])) ?></span></p>
 <p class="callheader"><span class="nowrap">Progress:</span>       <span class="nowrap"><?php echo $pagedata->reportResults[0]['progress'] ?>%</span></p>
 <h3 class="callbody"><?php echo $pagedata->reportResults[0]['title'] ?></h3>
 <p class="callbody"><?php echo $pagedata->reportResults[0]['details'] ?></p>

@@ -13,7 +13,7 @@
       <tr>
         <td><a href="/engineer/objectives/<?php echo $value["id"] ?>"><?php echo substr(strip_tags($value["title"]), 0, 50) ?></a></td>
         <td><?php echo $value["progress"] ?>%</td>
-        <td><?php echo date("M/Y", strtotime($value["datedue"])) ?></td>
+        <td><?php echo date("M Y", strtotime($value["datedue"])) ?></td>
         <td><a href="/engineer/objectives/<?php echo $value["id"] ?>"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
       </tr>
     <?php } ?>
