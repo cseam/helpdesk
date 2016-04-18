@@ -2,10 +2,8 @@
 
 
   <div id="leftpage">
-    <div id="stats">
       <?php include "views/partials/ticketTimeline.php"; ?>
-    </div>
-    </div>
+  </div>
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
