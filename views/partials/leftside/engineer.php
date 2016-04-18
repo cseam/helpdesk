@@ -19,6 +19,6 @@
     <a href="/engineer/lockers"><img src="/public/images/ICONS-lockers.svg" alt="" title="" width="24" height="25" />Lockers</a>
     <a href="/engineer/changecontrol"><img src="/public/images/ICONS-changecontrol.svg" alt="" title="" width="24" height="25" />Change Control</a>
     <a href="/engineer/outofhours"><img src="/public/images/ICONS-outofhours.svg" alt="" title="" width="24" height="25" />Out Of Hours</a>
-    <a href="/engineer/workrate"><img src="/public/images/ICONS-workrate.svg" alt="" title="" width="24" height="25" />Work Rate</a>
+    <a href="/engineer/workrate"><img src="/public/images/ICONS-workrate.svg" alt="" title="" width="24" height="25" />Reports &amp; Stats</a>
   </div>
 </div>
