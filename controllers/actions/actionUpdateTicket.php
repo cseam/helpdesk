@@ -104,12 +104,12 @@ class actionUpdateTicket {
                 $baseTicket->pm = htmlspecialchars($pm);
                 $ticketid = $ticketModel->createNewTicket($baseTicket);
               //insert additional ticket details
-                $fieldCount = $additionalModel->countFieldsByCategoryId(htmlspecialchars($_POST['category']));
-                for ($x = 1; $x <= $fieldCount; $x++) {
-                  $fieldname = "label".$x;
-                  $labelname = "labelname".$x;
+                $fieldIdentify = $additionalModel->getListOfAdditionalFieldsByCategorys(htmlspecialchars($_POST['category']));
+                foreach ($fieldIdentify as $key => $value) {
+                  $fieldname = "label".$value["id"];
+                  $labelname = "labelname".$value["id"];
                   $additionalModel->addAdditionalResult($ticketid, htmlspecialchars($_POST[$labelname]), htmlspecialchars($_POST[$fieldname]));
-                };
+                }
               //update engineers assignment table
                 $engineerModel->updateAutoAssignEngineerByHelpdeskId($_POST['helpdesk'], $assignedengineer);
               //get SLA if helpdesk has one and update message for view
