@@ -374,17 +374,19 @@
       return $results;
     }
 
-    public function searchTicketsByTerm($term, $limit = 150) {
+    public function searchTicketsByTerm($term, $scope = NULL, $limit = 150) {
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         JOIN engineers ON calls.assigned=engineers.idengineers
                         WHERE (details LIKE :term OR callid LIKE :term OR title LIKE :term OR name LIKE :term OR email LIKE :term OR tel LIKE :term OR room LIKE :term)
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         ORDER BY callid DESC
                         LIMIT :limit");
       $wildcard = '%'.$term.'%';
       $database->bind(":term", $wildcard);
+      $database->bind(":scope", $scope);
       $database->bind(":limit", $limit);
       $results = $database->resultset();
       if ($database->rowCount() === 0) { return null;}

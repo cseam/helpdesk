@@ -7,7 +7,7 @@
     public function getScheduledTasksByHelpdesk($helpdeskid) {
       $database = new Database();
       $database->query("SELECT * FROM scheduled_calls
-                        WHERE helpdesk IN (:helpdesk)");
+                        WHERE FIND_IN_SET(helpdesk, :helpdesk)");
       $database->bind(':helpdesk', $helpdeskid);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}

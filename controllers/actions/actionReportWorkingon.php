@@ -9,7 +9,7 @@ class actionReportWorkingon {
     $ticketModel = new ticketModel();
     $pagedata = new stdClass();
     //set report name
-    $reportname = "Enginners working on";
+    $reportname = "Last Viewed Ticket";
     //set report title
     $pagedata->title = $reportname . ".";
     //populate report results for use in view

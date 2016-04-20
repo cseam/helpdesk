@@ -11,7 +11,7 @@
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE calls.lockerid > 0
-                        AND calls.helpdesk IN (:helpdesk)
+                        AND FIND_IN_SET(calls.helpdesk, :helpdesk)
                         ORDER BY lockerid");
       $database->bind(':helpdesk', $helpdeskid);
       $result = $database->resultset();

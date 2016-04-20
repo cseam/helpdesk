@@ -19,9 +19,9 @@ class actionReportSearch {
     $pagedata->details = "Please enter a search term to search the tickets database";
     //if form submitted query database else render form
     if ($_POST) {
-      $pagedata->reportResults = $ticketModel->searchTicketsByTerm($_POST["term"]);
+      $pagedata->reportResults = $ticketModel->searchTicketsByTerm($_POST["term"], $_SESSION['engineerHelpdesk']);
       //set page details
-      $pagedata->details = "First " . sizeof($pagedata->reportResults)." ".$reportname." result for '".$_POST["term"]."' on helpdesk.";
+      $pagedata->details = "First " . sizeof($pagedata->reportResults)." (limited) ".$reportname." result for '".$_POST["term"]."' on helpdesk.";
     }
     //render template using $pagedata object
     require_once "views/searchView.php";

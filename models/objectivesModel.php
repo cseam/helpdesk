@@ -8,7 +8,7 @@
       $database = new Database();
       $database->query("SELECT * FROM performance_review_objectives
                         JOIN engineers ON performance_review_objectives.engineerid=engineers.idengineers
-                        WHERE engineers.helpdesk IN (:helpdesk)
+                        WHERE FIND_IN_SET(engineers.helpdesk, :helpdesk)
                         AND status !='2'
                         ORDER BY engineers.idengineers");
       $database->bind(':helpdesk', $helpdeskid);
