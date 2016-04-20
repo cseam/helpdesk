@@ -7,7 +7,7 @@ class actionReportAssignednumbers {
     $statsModel = new statsModel();
     $pagedata = new stdClass();
     //set report name
-    $reportname = "Assigned Tickets";
+    $reportname = "Assigned tickets";
     //set report title
     $pagedata->title = $reportname . " Report";
     //populate report results for use in view

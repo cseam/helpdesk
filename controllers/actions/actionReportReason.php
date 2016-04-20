@@ -7,9 +7,9 @@ class actionReportReason {
     $statsModel = new statsModel();
     $pagedata = new stdClass();
     //set report name
-    $reportname = "Ticket Reported Reasons";
+    $reportname = "Ticket reported reasons";
     //set report title
-    $pagedata->title = $reportname . " Report";
+    $pagedata->title = $reportname . "";
     //populate report results for use in view
     $pagedata->reportResults = $statsModel->countReasonForTicketsThisMonth();
     //set page details

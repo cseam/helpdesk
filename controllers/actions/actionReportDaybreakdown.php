@@ -7,7 +7,7 @@ class actionReportDaybreakdown {
     $statsModel = new statsModel();
     $pagedata = new stdClass();
     //set report name
-    $reportname = "Day Breakdown";
+    $reportname = "Day activity";
     //set report title
     $pagedata->title = $reportname . " Report";
     //populate report results for use in view

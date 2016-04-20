@@ -7,7 +7,7 @@ class actionReportHelpdeskbreakdown {
     $statsModel = new statsModel();
     $pagedata = new stdClass();
     //set report name
-    $reportname = "Helpdesk Breakdown";
+    $reportname = "Helpdesk totals";
     //set report title
     $pagedata->title = $reportname . " Report";
     //populate report results for use in view

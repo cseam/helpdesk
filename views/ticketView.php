@@ -2,7 +2,10 @@
 
 
   <div id="leftpage">
-      <?php include "views/partials/ticketTimeline.php"; ?>
+      <?php
+      // temp removed as not happy with it include "views/partials/ticketTimeline.php";
+      include "views/partials/leftside/".$left->sideData["partial"];
+      ?>
   </div>
   <div id="rightpage">
     <div id="call">

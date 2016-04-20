@@ -7,7 +7,7 @@ class actionReportCategorybreakdown {
     $statsModel = new statsModel();
     $pagedata = new stdClass();
     //set report name
-    $reportname = "Category Breakdown";
+    $reportname = "Category totals";
     //set report title
     $pagedata->title = $reportname . " Report";
     //populate report results for use in view

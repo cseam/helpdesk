@@ -1,8 +1,10 @@
+
+<h3>My Performance Objectives</h3>
 <br/>
 <table id="yourcalls">
   <thead>
     <tr>
-      <th>My Performance Objectives</th>
+      <th>Objective</th>
       <th>Progress</th>
       <th>Due</th>
       <th>&nbsp;</th>

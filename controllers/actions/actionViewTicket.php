@@ -3,8 +3,8 @@
 class actionViewTicket {
   public function __construct()
   {
-    //TODO add some validation here for uri params and also some authentication checking to see if user has permission to see ticket also (if desired)
-
+    //load content for left side of page
+    $left = new leftpageController();
     //get ticket id from uri params.
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
