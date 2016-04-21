@@ -65,3 +65,11 @@ function email_user($to, $from, $title, $message)
 	//send email
 	mail($msgto, $msgtitle, $msgbody, $msgheaders);
 }
+
+function _mime_content_type($filename) {
+    $result = new finfo();
+    if (is_resource($result) === true) {
+        return $result->file($filename, FILEINFO_MIME_TYPE);
+    }
+    return false;
+}
