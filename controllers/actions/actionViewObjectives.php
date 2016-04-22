@@ -48,6 +48,6 @@ class actionViewObjectives {
         $pagedata->reportResults = null;
       }
     //render template using $pagedata object
-    require_once "views/ObjectivesView.php";
+    require_once "views/objectivesView.php";
   }
 }
