@@ -15,7 +15,7 @@ class actionAssignTicket {
     //get ticket details
     $ticketDetails = $ticketModel->getTicketDetails($ticketid);
     //populate engineers for dropdown
-    $engineers = $engineerModel->getListOfEngineersByHelpdeskId($ticketDetails["helpdesk"]);
+    $engineers = $engineerModel->getListOfEngineersByHelpdeskId($_SESSION['engineerHelpdesk']);
     if ($_POST) {
       //update ticket
       $updatemessage = "Ticket Assigned to " . $engineerModel->getEngineerFriendlyNameById($_POST["assignto"]) . " for the following reason: " . $_POST["reason"];

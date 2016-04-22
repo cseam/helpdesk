@@ -24,12 +24,23 @@
 
     public function getListOfEngineersByHelpdeskId($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT * FROM engineers
-                        WHERE helpdesk IN(:helpdesk) AND disabled != 1");
-      $database->bind(":helpdesk", $helpdeskid);
-      $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
-      return $results;
+      $hdary = explode(",", $helpdeskid);
+      $engineers = array();
+      foreach($hdary as $key => $val) {
+        $database->query("SELECT * FROM engineers
+                          WHERE helpdesk = :helpdesk AND disabled != 1");
+        $database->bind(":helpdesk", $val);
+        $results = $database->resultset();
+        $engineers = array_merge($engineers, $results);
+      }
+      if (sizeof($hdary) > 1) {
+        $database->query("SELECT * FROM engineers
+                        WHERE helpdesk = :helpdesk AND disabled != 1");
+        $database->bind(":helpdesk", $helpdeskid);
+        $results = $database->resultset();
+        $engineers = array_merge($engineers, $results);
+      }
+      return $engineers;
     }
 
     public function getEngineerFriendlyNameById($engineerid) {
