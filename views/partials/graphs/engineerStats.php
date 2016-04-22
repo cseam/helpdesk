@@ -59,7 +59,7 @@
 <?php
   $engineernum = $left->sideData["graphdata"]["engineerClose"];
   $totaltickets = $left->sideData["graphdata"]["engineerAll"];
-  echo number_format((100.0*$engineernum)/$totaltickets, 2) . "%";
+  echo number_format(($engineernum / $totaltickets ) * 100 ,2) ."%";
 ?>
 </span>
 </div>
