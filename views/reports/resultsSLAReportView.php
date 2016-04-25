@@ -22,7 +22,9 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php foreach($pagedata->reportResults as $key => $value) {
+              if (($value["total_days_to_close"] - $value["close_eta_days"]) > 0) {
+              ?>
             <tr>
               <td>#<?php echo $value["callid"] ?></td>
               <td class="left"><?php echo substr(strip_tags($value["title"]), 0, 50) ?></td>
@@ -31,7 +33,9 @@
               <td><?php echo $value["total_days_to_close"] - $value["close_eta_days"] ?> days</td>
               <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
             </tr>
-            <?php } ?>
+            <?php
+            }
+           } ?>
           </tbody>
         </table>
         <script>
