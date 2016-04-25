@@ -353,6 +353,7 @@ select::-ms-expand {
 }
 .smalltxt {
 	font-size: 0.8rem;
+	margin: 0.5rem;
 }
 .listheader {
 	text-transform: uppercase;
@@ -446,7 +447,7 @@ h3.callbody {
 }
 .original {
 	border-left: 1px solid transparent;
-	padding: 0.5rem 0rem;
+	padding: 0.5rem 0.5rem;
 	margin: 0.8rem 0rem;
 	line-height: 1.5rem;
 }
