@@ -221,6 +221,14 @@ class actionUpdateTicket {
           $pagedata->title = "#".$_POST["id"]." Ticket Updated";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
+        CASE "open":
+          $ticketModel->updateTicketStatusById($_POST["id"], 1);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "open", $_SESSION["sAMAccountName"] , "ticket has been reopened for the following reason: ".$ticketdetails);
+          if ($_POST["callreason"]) { $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]); }
+          $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been reopened.</p>";
+          $pagedata->title = "#".$_POST["id"]." Ticket Reopened";
+          $pagedata->details = "Ticket " .$_POST["id"] . " has been updated, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
+          break;
       }
 
       if ($emailmessage) {

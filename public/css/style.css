@@ -570,6 +570,7 @@ h3.callbody {
 	color: rgba(0, 25, 91, 0.6);
 	display: block;
 	text-align: center;
+	width: 75px;
 }
 
 .update .closed {
@@ -585,6 +586,7 @@ h3.callbody {
 	color: rgba(194, 151, 9, 1);
 	display: block;
 	text-align: center;
+	width: 75px;
 }
 .update .hold, .update .unhold, .update .sendaway, .update .returned {
 	color: rgba(194, 151, 9, 1);
@@ -599,6 +601,7 @@ h3.callbody {
 	color: rgba(194, 10, 13, 1);
 	display: block;
 	text-align: center;
+	width: 75px;
 }
 
 .update .escalated, .update .deescalated {
@@ -614,6 +617,7 @@ h3.callbody {
 	display: block;
 	border-radius: 2px;
 	text-align: center;
+	width: 75px;
 }
 /* END Calls list */
 /* Engineers sub nav */
@@ -902,7 +906,7 @@ input.cmn-toggle-round:checked + label:after {
 	}
 	#leftpage {
 		overflow: auto;
-		max-height: 200px;
+		max-height: 280px;
 	}
 	#login p {
 		display: none;
@@ -939,8 +943,12 @@ input.cmn-toggle-round:checked + label:after {
 	-webkit-box-sizing:border-box;
 	}
 	#yourcalls td:nth-child(2) {
+		/*display: none;*/
+	}
+	#yourcalls td:nth-child(5), #deptlist td:nth-child(5) {
 		display: none;
 	}
+
 	.view_td {
 		width: 60%;
 		max-width: 60%;
@@ -971,6 +979,14 @@ input.cmn-toggle-round:checked + label:after {
 	#non-mobile-menu, .engineersubnav {
 		display: none;
 	}
+	#calllist, #deptlist, #objlist {
+		margin-right: 0;
+	}
+	.engineerReports {
+		margin-bottom: 10px;
+	}
+
+
 }
 
 @media screen and (max-width: 768px) and (orientation: portrait) {

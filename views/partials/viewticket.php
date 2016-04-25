@@ -1,5 +1,8 @@
 <div id="calldetails">
-  <h2>Ticket details #<?php echo $ticketDetails["callid"]; ?></h2>
+  <h2>
+    #<?php echo $ticketDetails["callid"]; ?>
+    <?php echo $ticketDetails["title"];?>
+    </h2>
   <table class="noborder">
     <tr>
       <td>
@@ -27,8 +30,6 @@
       </td>
     </tr>
   </table>
-
-  <h3 class="callbody"><?php echo $ticketDetails["title"];?></h3>
     <p class="callbody">
       <ul><?php foreach ($additionalDetails as $key => $value) { echo "<li>" . $value["label"] .": ". $value["value"] . "</li>"; } ?></ul>
     </p>
@@ -88,6 +89,8 @@
           <button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
           <?php } ?>
           <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
+
+          <?php if ($ticketDetails["status"] == 2) { ?><button name="open" value="open" type="submit" onclick="this.form.button_value.value = this.value;">Reopen</button><?php } ?>
           <?php if ($ticketDetails["status"] == 2 or $_SESSION['engineerLevel'] != 1) {?>
           <button name="feedback" value="feedback" type="submit" onclick="this.form.button_value.value = this.value;">Leave Feedback</button>
           <?php } ?>

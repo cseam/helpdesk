@@ -7,7 +7,9 @@
 <?php if ($_SESSION['superuser'] === "1") { ?><a href="/admin/">Admin View</a><br/><?php }; ?>
 <a href="/logout/" class="logout">Log out</a><br/>
 <br/>
-<?php if ($_SESSION['engineerLevel'] === "1") { ?>
+<?php if ($_SESSION['engineerLevel'] === "0") {
+	//this section isnt required can be removed once tested
+	?>
 <h3>My Tickets</h3>
 	<a href="#calllist" onclick="$('#leftpage').animate({scrollTop: $('#calllist').offset().top-130}, 2000);" class="menubutton"><img src="/public/images/ICONS-yourcalls.svg" alt="your tickets" title="your tickets"  width="16" height="17" /> Assigned Tickets</a><br/>
 	<a href="#deptlist" onclick="$('#leftpage').animate({scrollTop: $('#deptlist').offset().top-130}, 2000);" class="menubutton"><img src="/public/images/ICONS-allcalls.svg" alt="your tickets" title="your tickets"  width="16" height="17" /> Departments Tickets</a><br/>
