@@ -4,14 +4,14 @@
   <div id="leftpage">
     <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
   </div>
-  
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
 
-        <h3 class="default-padding">Escalated Tickets</h3>
+        <h3 class="default-padding"><?php echo sizeof($pagedata->escalatedResults) ?> Escalated Tickets</h3>
         <?php if (!$pagedata->escalatedResults) { echo "<p>0 Escalated tickets.</p>"; } ?>
         <table id="escalatedtickets">
           <tbody>
@@ -31,7 +31,7 @@
           </tbody>
         </table>
 
-        <h3 class="default-padding">New/Unassigned Tickets</h3>
+        <h3 class="default-padding"><?php echo sizeof($pagedata->unassignedResults) ?> New/Unassigned Tickets</h3>
         <?php if (!$pagedata->unassignedResults) { echo "<p>0 Unassigned tickets.</p>"; } ?>
         <table id="unassignedtickets">
           <tbody>
@@ -51,8 +51,9 @@
           </tbody>
         </table>
 
-        <h3 class="default-padding">Stagnate Tickets</h3>
+        <h3 class="default-padding"><?php echo sizeof($pagedata->stagnateResults) ?> Stagnate Tickets</h3>
         <?php if (!$pagedata->stagnateResults) { echo "<p>0 Stagnate tickets.</p>"; } else { echo "<p>Stagnate tickets are tickets not updated in 72 hours, these tickets should be updated so user knows what is happening or put on hold/sent away.</p>"; } ?>
+
         <table id="stagnatetickets">
           <tbody>
             <?php foreach($pagedata->stagnateResults as $key => $value) { ?>
