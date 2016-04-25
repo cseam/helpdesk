@@ -4,10 +4,10 @@
 $start_time = MICROTIME(TRUE);
 PRINT "\nCRON JOB STARTED : SCHEDULED TASKS " . date("h:i:s") . "\n";
 // include functions and classes used
-require_once "../config/config.php";
-require_once "../models/Database.php";
-require_once "../models/ticketModel.php";
-require_once "../models/engineerModel.php";
+require_once "/var/www/html/helpdesk/config/config.php";
+require_once "/var/www/html/helpdesk/models/Database.php";
+require_once "/var/www/html/helpdesk/models/ticketModel.php";
+require_once "/var/www/html/helpdesk/models/engineerModel.php";
 // /var/www/html/helpdesk/config/config.php?
 $database = new Database();
 $ticketModel = new ticketModel();
