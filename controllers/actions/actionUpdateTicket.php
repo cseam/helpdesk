@@ -242,8 +242,11 @@ class actionUpdateTicket {
       }
 
     }
-    // render page
-    require_once "views/updateTicketView.php";
+    // PRG forward to stop double posts
+    $_SESSION['pagedata'] = $pagedata;
+    header('Location: /ticket/updated/');
+    exit;
+
   }
 
 }
