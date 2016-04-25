@@ -9,6 +9,7 @@ class ticketController {
     $methods->add('/', 'actionTicketDefault');
     $methods->add('/add', 'actionAddTicket');
     $methods->add('/update', 'actionUpdateTicket');
+    $methods->add('/updated', 'actionUpdatedTicket');
     $methods->add('/view', 'actionViewTicket');
     $methods->add('/assign', 'actionAssignTicket');
     $methods->add('/forward', 'actionForwardTicket');
