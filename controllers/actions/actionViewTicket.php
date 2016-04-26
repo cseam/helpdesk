@@ -13,12 +13,14 @@ class actionViewTicket {
     $ticketModel = new ticketModel();
     $callreasonsModel = new callreasonsModel();
     $quickresponseModel = new quickresponseModel();
+    $subscriptionModel = new subscriptionModel();
 
     //populate users ticket list
     $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
     //populate tickets data
     $ticketDetails = $ticketModel->getTicketDetails($ticketid);
     $additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
+    $ticketDetails["subscribed"] = $subscriptionModel->amISuscribedToTicket($_SESSION['engineerId'], $ticketid);
     //populate call reasons for this tickets helpdeskid
     $callreasons = $callreasonsModel->getReasonsByHelpdeskId($ticketDetails["helpdesk"]);
     //populate quick responses

@@ -11,14 +11,12 @@ class actionUpdateTicket {
     $helpdeskModel = new helpdeskModel();
     $engineerModel = new engineerModel();
     $additionalModel = new additionalModel();
+    $subscriptionModel = new subscriptionModel();
     $pagedata = new stdClass();
-
     //set page defaults
     $pagedata->button_value = $_POST["button_value"];
-
     // on post process form
     if ($_POST) {
-
       // check if files uploaded in form
       $upload_code = "";
       if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
@@ -229,14 +227,29 @@ class actionUpdateTicket {
           $pagedata->title = "#".$_POST["id"]." Ticket Reopened";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
+        CASE "subscribe":
+          $subscriptionModel->subscribeEngineerToTicket($_SESSION['engineerId'], $_POST["id"]);
+          $pagedata->title = "Subscribed to ticket";
+          $pagedata->details = "You have subscribed to the ticket any updates by the engineers and users will also be sent to you.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
+          break;
+        CASE "unsubscribe":
+          $subscriptionModel->unsubscribeEngineerFromTicket($_SESSION['engineerId'], $_POST["id"]);
+          $pagedata->title = "Unsubscribed from ticket";
+          $pagedata->details = "You have unsubscribed and will nolonger receive updates.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
+          break;
       }
 
       if ($emailmessage) {
+      //get subscribed managers email addresses
+      $subscribed = $subscriptionModel->getSubscriptionEmailsForTicketId($_POST["id"]);
+        foreach ($subscribed as $key => $value) {
+          $to .= $value["engineerEmail"] .";";
+        }
       //if message set email user to update them
-      $to = $_POST["contact_email"];
+      $to .= $_POST["contact_email"];
       $from = "helpdesk@cheltladiescollege.org";
       $title = "Helpdesk update";
-      $emailmessage .= "<p>To view the details of this ticket please <a href=\"". HELPDESK_LOC ."\">Visit ". CODENAME ."</a></p>";
+      $emailmessage .= "<p>To view the details of this ticket please <a href=\"". HELPDESK_LOC ."/ticket/view/".$_POST["id"]."\">Visit ". CODENAME ."</a></p>";
       $emailmessage .= "<p>This is an automated message please do not reply</p></span>";
       email_user($to, $from, $title, $emailmessage);
       }
