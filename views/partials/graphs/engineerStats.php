@@ -55,7 +55,7 @@
 </script>
 
 <div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; height:85%; float: left; display:table;">
-<span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 1.8rem;font-weight: 100;">
+<span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 1.5rem;font-weight: 100;">
 <?php
   $engineernum = $left->sideData["graphdata"]["engineerClose"];
   $totaltickets = $left->sideData["graphdata"]["engineerAll"];
