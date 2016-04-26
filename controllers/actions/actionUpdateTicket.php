@@ -182,7 +182,7 @@ class actionUpdateTicket {
           break;
         CASE "deescalate":
           $ticketModel->updateTicketStatusById($_POST["id"], 1);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "deescalated", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "de-escalated", $_SESSION["sAMAccountName"] , $ticketdetails);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - De-Escalated";

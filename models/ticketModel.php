@@ -272,7 +272,7 @@
       return $results;
     }
 
-    public function getClosedTicketsByHelpdesk($helpdeskid, $limit = 1000) {
+    public function getClosedTicketsByHelpdesk($helpdeskid, $limit = 500) {
       // EPIC FAIL :( couldent get SQL IN to work with comma helpdesk list so using FIND IN SET as fudge, CLOWN FIESTA! (note to future self: FIX THIS!)
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold

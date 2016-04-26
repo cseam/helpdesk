@@ -51,8 +51,8 @@
           </tbody>
         </table>
 
-        <h3 class="default-padding"><?php echo sizeof($pagedata->stagnateResults) ?> Stagnate Tickets</h3>
-        <?php if (!$pagedata->stagnateResults) { echo "<p>0 Stagnate tickets.</p>"; } else { echo "<p>Stagnate tickets are tickets not updated in 72 hours, these tickets should be updated so user knows what is happening or put on hold/sent away.</p>"; } ?>
+        <h3 class="default-padding"><?php echo sizeof($pagedata->stagnateResults) ?> Stagnant Tickets</h3>
+        <?php if (!$pagedata->stagnateResults) { echo "<p>0 Stagnant tickets.</p>"; } else { echo "<p>Stagnant tickets are tickets not updated in 72 hours, these tickets should be updated so user knows what is happening or put on hold/sent away.</p>"; } ?>
 
         <table id="stagnatetickets">
           <tbody>
