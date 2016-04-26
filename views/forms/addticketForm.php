@@ -49,6 +49,20 @@
 				<option value="5">Affects the Parabola Arts Centre facilities</option>
 				<option value="6">Issue is time critical</option>
 			</select>
+			<script type="text/javascript">
+				$("#callseverity").change(function(e) {
+					if ($("#callseverity").val() == 6) {
+						$("#timecritical").slideDown();
+					} else {
+						$("#timecritical").slideUp();
+					}
+				});
+			</script>
+			<div id="timecritical" style="display: none;">
+				<label for="timerequired" title="time this required for?">Time required for?</label>
+				<input type="text" id="timerequired" name="timerequired" value="" />
+			</div>
+
 	</fieldset>
 	<fieldset>
 		<legend>Department</legend>

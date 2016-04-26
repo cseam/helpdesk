@@ -40,13 +40,15 @@ class actionUpdateTicket {
       SWITCH ($_POST["button_value"]) {
         CASE "add":
             //process ticket add
+              // check timecritical field if set
+                if ($_POST['timerequired']) { $timecritical = "<span class=\"urgent\">User marked ticket as time critial, required for: ".$_POST['timerequired']."</span><br/>" ;};
               //calculate ticket urgency
                 $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
               //generate locker number if needed for specific categorys (clown fiesta: note to future self, put this in the db!)
                 $lockerid = null;
                 if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) { $lockerid = random_locker(); };
               //generate ticket details including any images/files uploaded in wrapper
-                $ticketdetails = "<div class=\"original\">" . $ticketdetails . "</div>";
+                $ticketdetails = "<div class=\"original\">" . $timecritical . $ticketdetails . "</div>";
               //check if helpdesk is auto assign and assign engineer if required
                 $autoassigncheck = $helpdeskModel->isHelpdeskAutoAssign($_POST['helpdesk']);
                 $autoassigncheck["auto_assign"] == 0 ? $assignedengineer = NULL : $assignedengineer = $engineerModel->getNextEngineerIdByHelpdeskId($_POST['helpdesk']);
