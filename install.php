@@ -361,7 +361,21 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				";
 			$conn->exec($sql);
 				echo "<p>(status) created successfully</p>";
+			// call subscriptions
+			$sql = "
+				CREATE TABLE `call_subscriptions` (
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`call_id` int(11) DEFAULT NULL,
+				`engineer_id` int(11) DEFAULT NULL,
+				PRIMARY KEY (`id`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+			";
+			$conn->exec($sql);
+				echo "<p>(call subscriptions) created successfully</p>";
+
 			}
+
+
 		catch(PDOException $e)
 			{
 			echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
