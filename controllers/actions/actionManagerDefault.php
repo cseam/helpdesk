@@ -10,7 +10,7 @@ class actionManagerDefault {
     $ticketModel = new ticketModel();
     $pagedata = new stdClass();
     //set report name
-    $reportname = "Problematic Tickets";
+    $reportname = "Actionable Tickets";
     //set report title
     $pagedata->title = $reportname . "";
     //populate report results for use in view
