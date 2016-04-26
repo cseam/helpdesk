@@ -17,6 +17,7 @@ class reportController {
     $generatereport->add('/workrate', 'actionReportWorkrate');
     $generatereport->add('/assignednumbers', 'actionReportAssignednumbers');
     $generatereport->add('/reason', 'actionReportReason');
+    $generatereport->add('/recentwork', 'actionReportRecentWork');
     $generatereport->process(2);
   }
 

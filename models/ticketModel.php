@@ -18,6 +18,23 @@
       return $results;
     }
 
+    public function getRecentTicketsByEngineerId($engineerid) {
+      $database = new Database();
+      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
+                        FROM calls
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        JOIN status ON calls.status=status.id
+                        JOIN location ON calls.location=location.id
+                        WHERE calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND calls.assigned = :engineerid
+                        OR calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND calls.closeengineerid = :engineerid
+                        ORDER BY opened DESC
+                        ");
+      $database->bind(":engineerid", $engineerid);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
     public function getMyOpenAssignedTickets($engineerid) {
       $database = new Database();
       $database->query("SELECT * FROM calls
