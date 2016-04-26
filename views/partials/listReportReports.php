@@ -9,6 +9,7 @@
   <a href="/report/workrate/"><img src="/public/images/ICONS-workrate.svg" alt="Engineer work rate" title="Engineer work rate" width="24" height="25" />Closed Totals</a>
   <a href="/report/assignednumbers/"><img src="/public/images/ICONS-assignnotclosed.svg" alt="View assigned numbers" title="View assigned numbers" width="24" height="25" />Assigned Breakdown</a>
   <a href="/report/reason/"><img src="/public/images/ICONS-reason.svg" alt="reason behind issue" title="reason behind issue" width="24" height="25" />Reason behind issue</a>
+  <a href="/report/recentwork/"><img src="/public/images/ICONS-workingon.svg" alt="working on" title="working on" width="24" height="25" />Recent Work</a>
 
 <?php
   // manager reports

@@ -58,6 +58,10 @@ class leftpageController {
           $this->sideData["partial"] = "manager.php";
           $this->sideData["graphdata"] = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
         break;
+        CASE "report":
+          $this->sideData["partial"] = "reports.php";
+        break;
+
       };
 
     }
