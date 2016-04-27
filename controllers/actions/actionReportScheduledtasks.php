@@ -12,7 +12,7 @@ class actionReportScheduledtasks {
 
     //Post Update Objective
       if ($_POST) {
-        $callid = $_POST['callid'];
+        $callid = isset($_POST['callid']) ? $_POST['callid'] : null;
         $switch = (isset($_POST["button_modify_value"]) ? $_POST["button_modify_value"] : $_POST["button_value"]);
         SWITCH ($switch) {
           CASE "add":
