@@ -1,8 +1,7 @@
 <?php
 	//TODO must be better way to do this this is a faff
 	// reset strings
-	$label = "";
-	$series = "";
+	$mon = $tue = $wed = $thu = $fri = $sat = $sun = $label = $series = null;
 	// loop stats object to populate strings for graph
 	foreach($left->sideData["graphdata"] as $key => $value) {
 		$label .= "'" . $value["engineerName"] . "',";

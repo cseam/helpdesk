@@ -15,7 +15,7 @@
         <?php if (!$pagedata->escalatedResults) { echo "<p>0 Escalated tickets.</p>"; } ?>
         <table id="escalatedtickets">
           <tbody>
-            <?php foreach($pagedata->escalatedResults as $key => $value) { ?>
+            <?php if (isset($pagedata->escalatedResults)) { foreach($pagedata->escalatedResults as $key => $value) { ?>
               <tr>
                 <td class="hdtitle listheader" colspan="6"><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>
               </tr>
@@ -27,7 +27,7 @@
                 <td><?php echo $value["engineerName"] ?></td>
                 <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
               </tr>
-            <?php } ?>
+            <?php } } ?>
           </tbody>
         </table>
 
@@ -35,7 +35,7 @@
         <?php if (!$pagedata->unassignedResults) { echo "<p>0 Unassigned tickets.</p>"; } ?>
         <table id="unassignedtickets">
           <tbody>
-            <?php foreach($pagedata->unassignedResults as $key => $value) { ?>
+            <?php if (isset($pagedata->unassignedResults)) { foreach($pagedata->unassignedResults as $key => $value) { ?>
               <tr>
                 <td class="hdtitle listheader" colspan="6"><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>
               </tr>
@@ -47,7 +47,7 @@
                 <td><?php echo $value["engineerName"] ?></td>
                 <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
               </tr>
-            <?php } ?>
+            <?php } } ?>
           </tbody>
         </table>
 
@@ -56,7 +56,7 @@
 
         <table id="stagnatetickets">
           <tbody>
-            <?php foreach($pagedata->stagnateResults as $key => $value) { ?>
+            <?php if (isset($pagedata->stagnateResults)) { foreach($pagedata->stagnateResults as $key => $value) { ?>
               <tr>
                 <td class="hdtitle listheader" colspan="6"><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>
               </tr>
@@ -68,7 +68,7 @@
                 <td><?php echo $value["engineerName"] ?></td>
                 <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
               </tr>
-            <?php } ?>
+            <?php } } ?>
           </tbody>
         </table>
 
@@ -76,7 +76,7 @@
         <?php if (!$pagedata->poorfeedbackResults) { echo "<p>0 Poor Feedback tickets in last 30 days.</p>"; } else { echo "<p>Poor feedback left recently for these tickets, you may wish to speak with the ticket owner to address this.</p>"; } ?>
         <table id="poorfeedback">
           <tbody>
-            <?php foreach($pagedata->poorfeedbackResults as $key => $value) { ?>
+            <?php if (isset($pagedata->poorfeedbackResults)) { foreach($pagedata->poorfeedbackResults as $key => $value) { ?>
               <tr>
                 <td><?php echo $value["engineerName"] ?></td>
                 <td><?php echo $value["owner"] ?></td>
@@ -84,7 +84,7 @@
                 <td><?php for ($i = 0; $i < round($value["satisfaction"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?></td>
                 <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
               </tr>
-            <?php } ?>
+            <?php } } ?>
           </tbody>
         </table>
 
