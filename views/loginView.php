@@ -7,7 +7,7 @@
           <label for="username">Username</label><input id="username" type="text" name="username" value="" autofocus>
           <label for="password">Password</label><input id="password" type="password" name="password" value="">
           <input id="btnLogin" type="submit" name="btnLogin" value="LOG IN" />
-          <?php if ($error) { ?>
+          <?php if (isset($error)) { ?>
             <div class="note urgent">
               <h3>Error</h3>
               <?php echo $error->message ?>, check your details and try again.
@@ -18,7 +18,7 @@
         <p>You do not need to prefix your username with CLC\. Login like you would to one of the College computers, e.g. username: smitha</p>
         <p>If you have any issues with <?php echo CODENAME ?>, please contact IT Support.</p>
 			</fieldset>
-  </div> 
+  </div>
   <div id="rightpage">
     <div id="call">
       <div id="ajax">

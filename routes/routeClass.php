@@ -17,12 +17,13 @@ class Route {
     $matches = array();
     // check for matches
     foreach ($this->_uri as $key => $value) {
-      if (preg_match("#^$value$#", "/".$baseurl[$segment])) {
-        // on match update matches and start controler for match
-        $useControler = $this->_controler[$key];
-        $matches[] = $this->_controler[$key];
-        new $useControler();
-      }
+      isset($baseurl[$segment]) ? $compare = "/".$baseurl[$segment] : $compare = "/";
+        if (preg_match("#^$value$#", $compare)) {
+          // on match update matches and start controler for match
+          $useControler = $this->_controler[$key];
+          $matches[] = $this->_controler[$key];
+          new $useControler();
+        }
     }
     // check if no matches 404
     if (sizeof($matches) < 1) {

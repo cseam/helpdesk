@@ -13,7 +13,7 @@
 // Ensure config/config.php is updated with correct mysql details before this script is run
 if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 	// Load config
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/config/config.php');
+	include_once $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
 	// Options for user
 	?>
 	<h2>Helpdesk Setup</h2>

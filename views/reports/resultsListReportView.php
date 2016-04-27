@@ -12,7 +12,7 @@
         <p><?php echo $pagedata->details ?></p>
         <table id="yourcalls">
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php if (isset($pagedata->reportResults)) { foreach($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td class="hdtitle listheader" colspan="6"><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>
             </tr>
@@ -24,7 +24,7 @@
               <td><?php echo $value["engineerName"] ?></td>
               <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
             </tr>
-            <?php } ?>
+            <?php } } ?>
           </tbody>
         </table>
 

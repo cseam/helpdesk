@@ -20,6 +20,8 @@ class loginController {
       $_SESSION['engineerHelpdesk'] = null;
       $_SESSION['sAMAccountName'] = null;
       // form inputs
+      $explode_username = explode('.',$_POST['username']);
+      $localusr = end($explode_username);
       $formusername = $_POST['username'] . "@" . COMPANY_SUFFIX;
       $formpassword = $_POST['password'];
       // check password isnt blank as ldap allows anon login that result in true
@@ -31,7 +33,7 @@ class loginController {
         // check if local logins are allowed and proc
         if (LOCALLOGIN == true) {
           // check if username is local login
-          if (end(explode('.',$_POST['username'])) == "local") {
+          if ($localusr == "local") {
             // query engineers model to get login hash for this login to compare to form inputs
             $engineerModel = new engineerModel();
             $dbUserDetails = $engineerModel->getDetailsByUsername($_POST['username']);
