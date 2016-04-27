@@ -1,6 +1,6 @@
-<?php if ($error) {
+<?php if (isset($error)) {
   echo $error;
-} else if ($pagedata->complete) {
+} else if (isset($pagedata->complete)) {
   echo $pagedata->complete;
 } else { ?>
 <div id="calldetails">
