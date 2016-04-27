@@ -31,7 +31,7 @@
     </tr>
   </table>
     <p class="callbody">
-      <ul><?php foreach ($additionalDetails as $key => $value) { echo "<li>" . $value["label"] .": ". $value["value"] . "</li>"; } ?></ul>
+      <ul><?php if (isset($additionalDetails)) { foreach ($additionalDetails as $key => $value) { echo "<li>" . $value["label"] .": ". $value["value"] . "</li>"; } } ?></ul>
     </p>
     <p class="callbody"><?php echo nl2br($ticketDetails["details"]);?></p>
 
@@ -64,7 +64,7 @@
         <label for="quickresponse">Quick Response</label>
           <select id="quickresponse" name="quickresponse">
             <option value="" SELECTED>Please Select</option>
-            <?php foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["quick_response"]."\">".$value["quick_response"]."</option>"; } ?>
+            <?php if (isset($quickresponse)) { foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["quick_response"]."\">".$value["quick_response"]."</option>"; } } ?>
           </select>
         </p>
         <?php } ?>
