@@ -20,14 +20,14 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php if (isset($pagedata->reportResults)) { foreach($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td><?php echo $value["engineerName"] ?></td>
               <td><?php echo $value["helpdesk_name"] ?></td>
               <td><?php for ($i = 0; $i < round($value["FeedbackAVG"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?></td>
               <td><?php echo $value["FeedbackCOUNT"] ?></td>
             </tr>
-            <?php } ?>
+            <?php } } ?>
           </tbody>
         </table>
         <script>
@@ -50,7 +50,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($pagedata->poorFeedback as $key => $value) { ?>
+            <?php if (isset($pagedata->poorFeedback)) { foreach($pagedata->poorFeedback as $key => $value) { ?>
             <tr>
              <td><?php echo $value["engineerName"] ?></td>
               <td><?php echo $value["owner"] ?></td>
@@ -58,7 +58,7 @@
               <td><?php for ($i = 0; $i < round($value["satisfaction"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?></td>
               <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
             </tr>
-            <?php } ?>
+            <?php } } ?>
           </tbody>
         </table>
       </div>
