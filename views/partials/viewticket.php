@@ -15,18 +15,18 @@
         }?>
       </td>
       <td>
-        <p class="callheader"><span class="nowrap">Created by:</span>       <span class="nowrap"><?php echo $ticketDetails["name"];?></span></p>
-        <p class="callheader"><span class="nowrap">Contact number:</span>   <span class="nowrap"><?php echo $ticketDetails["tel"];?></span></p>
-        <p class="callheader"><span class="nowrap">Location:</span>         <span class="nowrap"><?php echo $ticketDetails["locationName"];?></span></p>
-        <p class="callheader"><span class="nowrap">Room:</span>             <span class="nowrap"><?php echo $ticketDetails["room"];?></span></p>
-        <p class="callheader"><span class="nowrap">Category:</span>         <span class="nowrap"><?php echo $ticketDetails["categoryName"];?></span></p>
-        <p class="callheader"><span class="nowrap">Assigned to:</span>      <span class="nowrap"><?php echo $ticketDetails["engineerName"];?></span></p>
-        <p class="callheader"><span class="nowrap">Opened:</span>           <span class="nowrap"><?php echo date("d/m/Y H:i", strtotime($ticketDetails["opened"]));?></span></p>
-        <p class="callheader"><span class="nowrap">Closed:</span>           <span class="nowrap"><?php if ($ticketDetails["closed"]) {echo date("d/m/Y H:i", strtotime($ticketDetails["closed"])); } ?></span></p>
-        <p class="callheader"><span class="nowrap">Ticket Age:</span>       <span class="nowrap"><?php echo $ticketDetails["daysold"];?> day(s)</span></p>
-        <p class="callheader"><span class="nowrap">Scheduled Ticket:</span> <span class="nowrap"><?php echo $ticketDetails["pm"] == true ? 'Yes' : 'No'; ?></span></p>
+        <p class="callheader"><span class="nowrap">Created by:</span>       <span class="nowrap"><?php if (isset($ticketDetails["name"])) { echo $ticketDetails["name"]; } ?></span></p>
+        <p class="callheader"><span class="nowrap">Contact number:</span>   <span class="nowrap"><?php if (isset($ticketDetails["tel"])) { echo $ticketDetails["tel"]; } ?></span></p>
+        <p class="callheader"><span class="nowrap">Location:</span>         <span class="nowrap"><?php if (isset($ticketDetails["locationName"])) { echo $ticketDetails["locationName"]; } ?></span></p>
+        <p class="callheader"><span class="nowrap">Room:</span>             <span class="nowrap"><?php if (isset($ticketDetails["room"])) { echo $ticketDetails["room"]; } ?></span></p>
+        <p class="callheader"><span class="nowrap">Category:</span>         <span class="nowrap"><?php if (isset($ticketDetails["categoryName"])) { echo $ticketDetails["categoryName"]; } ?></span></p>
+        <p class="callheader"><span class="nowrap">Assigned to:</span>      <span class="nowrap"><?php if (isset($ticketDetails["engineerName"])) { echo $ticketDetails["engineerName"]; } ?></span></p>
+        <p class="callheader"><span class="nowrap">Opened:</span>           <span class="nowrap"><?php if (isset($ticketDetails["opened"])) { echo date("d/m/Y H:i", strtotime($ticketDetails["opened"])); } ?></span></p>
+        <p class="callheader"><span class="nowrap">Closed:</span>           <span class="nowrap"><?php if (isset($ticketDetails["closed"])) {echo date("d/m/Y H:i", strtotime($ticketDetails["closed"])); } ?></span></p>
+        <p class="callheader"><span class="nowrap">Ticket Age:</span>       <span class="nowrap"><?php if (isset($ticketDetails["daysold"])) { echo $ticketDetails["daysold"]; } ?> day(s)</span></p>
+        <p class="callheader"><span class="nowrap">Scheduled Ticket:</span> <span class="nowrap"><?php if (isset($ticketDetails["pm"])) { echo $ticketDetails["pm"] == true ? 'Yes' : 'No'; } ?></span></p>
         <p class="callheader"><span class="nowrap">Urgency:</span>          <span class="nowrap"><img src="/public/images/ICONS-urgency<?php echo $ticketDetails["urgency"];?>.svg" alt="<?php echo $ticketDetails["urgency"];?>" title="<?php echo $ticketDetails["urgency"];?>" style="height: 14px; width: 100px" /></span></p>
-        <p class="callheader"><span class="nowrap">Locker:</span>           <span class="nowrap"><?php echo $ticketDetails["lockerid"];?></span></p>
+        <p class="callheader"><span class="nowrap">Locker:</span>           <span class="nowrap"><?php if (isset($ticketDetails["lockerid"])) { echo $ticketDetails["lockerid"]; } ?></span></p>
       </td>
     </tr>
   </table>
@@ -77,7 +77,7 @@
           if ($_SESSION['engineerLevel'] === "2" or $_SESSION['superuser'] === "1") { ?>
           <button name="assign" value="assign" type="submit" onclick="this.form.button_value.value = this.value;">Assign</button>
           <button name="forward" value="forward" type="submit" onclick="this.form.button_value.value = this.value;">Forward</button>
-          <?php if ($ticketDetails["subscribed"] == true) {?><button name="unsubscribe" value="unsubscribe" type="submit" onclick="this.form.button_value.value = this.value;">Unsubscribe</button><?php } else {?><button name="subscribe" value="subscribe" type="submit" onclick="this.form.button_value.value = this.value;">Subscribe</button><?php } ?>
+          <?php if (isset($ticketDetails["subscribed"])) {?><button name="unsubscribe" value="unsubscribe" type="submit" onclick="this.form.button_value.value = this.value;">Unsubscribe</button><?php } else {?><button name="subscribe" value="subscribe" type="submit" onclick="this.form.button_value.value = this.value;">Subscribe</button><?php } ?>
           <?php if ($ticketDetails["requireinvoice"] == 1) {?><button name="invoicearrived" value="invoicearrived" type="submit" onclick="this.form.button_value.value = this.value;">Invoice Received</button><?php } else {?><button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button><?php } ?>
           <?php }
           // show only for engineers, managers & superusers
