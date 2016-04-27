@@ -908,6 +908,8 @@ input.cmn-toggle-round:checked + label:after {
 	#leftpage {
 		overflow: auto;
 		max-height: 280px;
+		margin-bottom: 1rem;
+		margin-top: 1rem;
 	}
 	#login p {
 		display: none;
@@ -943,13 +945,21 @@ input.cmn-toggle-round:checked + label:after {
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	}
-	#yourcalls td:nth-child(2) {
-		/*display: none;*/
-	}
-	#yourcalls td:nth-child(5), #deptlist td:nth-child(5) {
+	#yourcalls td:nth-child(2), #yourcalls td:nth-child(3), #yourcalls td:nth-child(5) {
 		display: none;
 	}
-
+	#departmentcalls td:nth-child(2),#departmentcalls td:nth-child(3),#departmentcalls td:nth-child(5) {
+		display: none;
+	}
+	#myobjectives th:nth-child(2),#myobjectives th:nth-child(3),#myobjectives th:nth-child(4),#myobjectives th:nth-child(5) {
+		display: none;
+	}
+	#myobjectives td:nth-child(2),#myobjectives td:nth-child(3),#myobjectives td:nth-child(4),#myobjectives td:nth-child(5) {
+		display: none;
+	}
+	#yourcalls,#departmentcalls,#myobjectives {
+		margin-bottom: 10px;
+	}
 	.view_td {
 		width: 60%;
 		max-width: 60%;
