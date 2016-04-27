@@ -945,7 +945,7 @@ input.cmn-toggle-round:checked + label:after {
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	}
-	#yourcalls td:nth-child(2), #yourcalls td:nth-child(3), #yourcalls td:nth-child(5) {
+	#yourcalls td:nth-child(3), #yourcalls td:nth-child(5) {
 		display: none;
 	}
 	#departmentcalls td:nth-child(2),#departmentcalls td:nth-child(3),#departmentcalls td:nth-child(5) {
