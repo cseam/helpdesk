@@ -907,7 +907,7 @@ input.cmn-toggle-round:checked + label:after {
 	}
 	#leftpage {
 		overflow: auto;
-		max-height: 280px;
+		max-height: 45vh;
 		margin-bottom: 1rem;
 		margin-top: 1rem;
 	}
