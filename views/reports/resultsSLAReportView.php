@@ -22,7 +22,9 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) {
+            <?php
+            if (isset($pagedata->reportResults)) {
+            foreach($pagedata->reportResults as $key => $value) {
               if (($value["total_days_to_close"] - $value["close_eta_days"]) > 0) {
               ?>
             <tr>
@@ -34,6 +36,7 @@
               <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
             </tr>
             <?php
+             }
             }
            } ?>
           </tbody>

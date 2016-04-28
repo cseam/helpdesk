@@ -66,56 +66,66 @@
       return $result;
     }
 
-    public function countEngineerTotalsThisMonth() {
+    public function countEngineerTotalsThisMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT engineers.engineerName, count(calls.callid) AS Totals FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        JOIN engineers ON calls.closeengineerid=engineers.idengineers
                         WHERE status = 2
                         AND Month(closed) = :month
                         AND Year(closed) = :year
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY calls.closeengineerid
                         ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
     }
 
-    public function countHelpdeskTotalsThisMonth() {
+    public function countHelpdeskTotalsThisMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT helpdesks.helpdesk_name, count(calls.callid) AS Totals FROM calls
                         JOIN helpdesks ON calls.helpdesk=helpdesks.id
                         WHERE status = 2
                         AND Month(closed) = :month
                         AND Year(closed) = :year
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY calls.helpdesk, Month(calls.closed)
                         ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
     }
 
-    public function countCategoryTotalsThisMonth() {
+    public function countCategoryTotalsThisMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT categories.categoryName, count(calls.callid) AS Totals FROM calls
                         JOIN categories ON calls.category=categories.id
                         WHERE status = 2
                         AND Month(closed) = :month
                         AND Year(closed) = :year
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY calls.category, Month(calls.closed)
                         ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
       return $result;
     }
 
-    public function countUrgencyTotalsThisMonth() {
+    public function countUrgencyTotalsThisMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT calls.urgency, count(calls.callid) AS Totals
                         FROM calls
@@ -123,10 +133,12 @@
                         WHERE status = 2
                         AND Month(closed) = :month
                         AND Year(closed) = :year
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY calls.urgency, Month(calls.closed)
                         ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       // update array values with friendly name as they arent in the db!!!!
@@ -136,16 +148,19 @@
       return $result;
     }
 
-    public function countPlannedVsReactiveTotalsThisMonth() {
+    public function countPlannedVsReactiveTotalsThisMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT calls.pm, count(calls.callid) AS Totals FROM calls
                         WHERE status = 2
                         AND Month(closed) = :month
                         AND Year(closed) = :year
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY calls.pm
                         ORDER BY Totals");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       // else populate object with db results
@@ -170,7 +185,8 @@
       return $result;
     }
 
-    public function countWorkRateTotalsThisMonth() {
+    public function countWorkRateTotalsThisMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT engineers.engineerName, helpdesks.helpdesk_name, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7,
                         sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS Last1,
@@ -181,37 +197,45 @@
                         WHERE engineers.disabled != 1
                         AND Month(closed) = :month
                         AND Year(closed) = :year
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY engineers.engineerName
                         ORDER BY Last30 DESC");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
     }
 
-    public function countReasonForTicketsThisMonth() {
+    public function countReasonForTicketsThisMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT callreasons.reason_name, count(*) AS last7
                         FROM calls
                         INNER JOIN callreasons ON calls.callreason = callreasons.id
                         WHERE calls.status='2'
                         AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY callreasons.reason_name");
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
     }
 
-    public function countAssignedTickets() {
+    public function countAssignedTickets($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT helpdesks.helpdesk_name, engineers.idengineers, engineers.engineerName, Count(assigned) AS HowManyAssigned, sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes
                         FROM calls
                         JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN helpdesks ON engineers.helpdesk=helpdesks.id
                         WHERE engineers.disabled != 1
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY calls.assigned
                         ORDER BY calls.helpdesk");
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
@@ -251,14 +275,17 @@
       return $result;
     }
 
-    public function countEngineerFeedbackTotals() {
+    public function countEngineerFeedbackTotals($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT engineers.engineerName, helpdesks.helpdesk_name, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT
                         FROM calls
                         JOIN feedback ON feedback.callid=calls.callid
                         JOIN engineers ON engineers.idengineers=calls.closeengineerid
                         JOIN helpdesks ON engineers.helpdesk = helpdesks.id
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY calls.closeengineerid");
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
@@ -279,7 +306,8 @@
     }
 
 
-    public function getPoorFeedback($helpdeskid) {
+    public function getPoorFeedback($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT calls.callid, engineers.engineerName, calls.owner, feedback.details, feedback.satisfaction
                         FROM feedback
@@ -287,14 +315,16 @@
                         JOIN engineers ON engineers.idengineers=calls.closeengineerid
                         WHERE satisfaction IN (1,2)
                         AND feedback.opened > DATE_SUB(CURDATE(),INTERVAL 30 DAY)
-                        AND calls.helpdesk IN (:helpdesk)");
-      $database->bind(":helpdesk", $helpdeskid);
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
+                        ");
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
     }
 
-    public function GetFailedSLAThisMonth() {
+    public function GetFailedSLAThisMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT calls.callid, calls.title, helpdesks.helpdesk_name, engineers.engineerName, calls.urgency, service_level_agreement.close_eta_days, datediff(calls.closed, calls.opened) AS 'total_days_to_close'
                         FROM calls
@@ -304,9 +334,11 @@
                         WHERE service_level_agreement.urgency = calls.urgency
                         AND Year(closed) = :year
                         AND Month(closed) = :month
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         ORDER BY assigned ");
       $database->bind(':month', date("m"));
       $database->bind(':year', date("o"));
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;

@@ -11,7 +11,7 @@ class actionReportSla {
     //set report title
     $pagedata->title = $reportname . " report";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->GetFailedSLAThisMonth();
+    $pagedata->reportResults = $statsModel->GetFailedSLAThisMonth($_SESSION['engineerHelpdesk']);
     //set page details
     $pagedata->details = $reportname. " showing tickets that failed SLA this month.";
     //render template using $pagedata object

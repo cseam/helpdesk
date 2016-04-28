@@ -11,10 +11,10 @@ class actionReportFeedback {
     //set report title
     $pagedata->title = $reportname . " report";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->countEngineerFeedbackTotals();
+    $pagedata->reportResults = $statsModel->countEngineerFeedbackTotals($_SESSION['engineerHelpdesk']);
     $pagedata->poorFeedback = $statsModel->getPoorFeedback($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing average feedback for " .sizeof($pagedata->reportResults)." enginners across all helpdesks, and poor feedback in last 30 days.";
+    $pagedata->details = $reportname. " showing average feedback for " .sizeof($pagedata->reportResults)." engineers, and poor feedback in last 30 days.";
     //render template using $pagedata object
     require_once "views/reports/resultsFeedbackReportView.php";
   }

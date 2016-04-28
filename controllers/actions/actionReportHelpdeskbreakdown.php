@@ -9,9 +9,9 @@ class actionReportHelpdeskbreakdown {
     //set report name
     $reportname = "Helpdesk totals";
     //set report title
-    $pagedata->title = $reportname . " Report";
+    $pagedata->title = $reportname . " report";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->countHelpdeskTotalsThisMonth();
+    $pagedata->reportResults = $statsModel->countHelpdeskTotalsThisMonth($_SESSION['engineerHelpdesk']);
     //set page details
     $pagedata->details = $reportname. " showing total tickets closed this month for " .sizeof($pagedata->reportResults)." helpdesks.";
     //render template using $pagedata object

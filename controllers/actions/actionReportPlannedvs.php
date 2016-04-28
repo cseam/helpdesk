@@ -9,11 +9,11 @@ class actionReportPlannedvs {
     //set report name
     $reportname = "Planned Vs Reactive Breakdown";
     //set report title
-    $pagedata->title = $reportname . " Report";
+    $pagedata->title = $reportname . " report";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->countPlannedVsReactiveTotalsThisMonth();
+    $pagedata->reportResults = $statsModel->countPlannedVsReactiveTotalsThisMonth($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing total tickets planned vs reactive this month for all helpdesks.";
+    $pagedata->details = $reportname. " showing total tickets planned vs reactive this month.";
     //render template using $pagedata object
     require_once "views/reports/resultsGraphPieView.php";
   }
