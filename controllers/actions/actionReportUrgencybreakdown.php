@@ -9,11 +9,11 @@ class actionReportUrgencybreakdown {
     //set report name
     $reportname = "Urgency Breakdown";
     //set report title
-    $pagedata->title = $reportname . " Report";
+    $pagedata->title = $reportname . " report";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->countUrgencyTotalsThisMonth();
+    $pagedata->reportResults = $statsModel->countUrgencyTotalsThisMonth($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing total tickets by urgency this month for " .sizeof($pagedata->reportResults)." urgency categories across all helpdesks.";
+    $pagedata->details = $reportname. " showing total tickets by urgency this month for " .sizeof($pagedata->reportResults)." urgency categories.";
     //render template using $pagedata object
     require_once "views/reports/resultsGraphBarView.php";
   }

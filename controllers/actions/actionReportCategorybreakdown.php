@@ -9,11 +9,11 @@ class actionReportCategorybreakdown {
     //set report name
     $reportname = "Category totals";
     //set report title
-    $pagedata->title = $reportname . " Report";
+    $pagedata->title = $reportname . " report";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->countCategoryTotalsThisMonth();
+    $pagedata->reportResults = $statsModel->countCategoryTotalsThisMonth($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing total tickets by category this month for " .sizeof($pagedata->reportResults)." categorys across all helpdesks.";
+    $pagedata->details = $reportname. " showing total tickets by category this month for " .sizeof($pagedata->reportResults)." categorys.";
     //render template using $pagedata object
     require_once "views/reports/resultsGraphBarView.php";
   }

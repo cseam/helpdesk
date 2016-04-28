@@ -11,7 +11,7 @@ class actionReportReason {
     //set report title
     $pagedata->title = $reportname . "";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->countReasonForTicketsThisMonth();
+    $pagedata->reportResults = $statsModel->countReasonForTicketsThisMonth($_SESSION['engineerHelpdesk']);
     //set page details
     $pagedata->details = $reportname. " showing tickets closed this month grouped by the reason the ticket was closed.";
     //render template using $pagedata object
