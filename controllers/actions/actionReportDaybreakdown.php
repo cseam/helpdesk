@@ -11,9 +11,9 @@ class actionReportDaybreakdown {
     //set report title
     $pagedata->title = $reportname . " Report";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->countDayBreakdownTotalsLastMonth();
+    $pagedata->reportResults = $statsModel->countDayBreakdownTotalsLastMonth($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing helpdesk activity by time of day for ". date("F Y", strtotime("first day of previous month")) ." across all helpdesks.";
+    $pagedata->details = $reportname. " showing helpdesk activity by time of day for ". date("F Y", strtotime("first day of previous month")) .".";
     //render template using $pagedata object
     require_once "views/reports/resultsDayBreakdownReportView.php";
   }
