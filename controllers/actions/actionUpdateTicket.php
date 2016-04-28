@@ -33,7 +33,7 @@ class actionUpdateTicket {
         if (mime_content_type($folder) == "image/jpeg") {
           $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
         }
-        if (mime_content_type($folder) == "application/pdf" OR mime_content_type($folder) == "application/msword") {
+        if (mime_content_type($folder) == "application/pdf" || mime_content_type($folder) == "application/msword") {
           $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" class=\"uploadfile\">Uploaded file ref: #".$name_of_uploaded_file."</a>";
         }
       }
