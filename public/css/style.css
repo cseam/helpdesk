@@ -924,7 +924,7 @@ input.cmn-toggle-round:checked + label:after {
 	#branding {
 		line-height: 16px;
 		padding-bottom: 0.5rem;
-		max-height: 70px;
+		max-height: 4vh;
 	}
 	#ajax {
 		padding: 1rem;
