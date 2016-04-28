@@ -241,7 +241,8 @@
       return $result;
     }
 
-    public function countDayBreakdownTotalsLastMonth() {
+    public function countDayBreakdownTotalsLastMonth($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT engineers.engineerName,
                         helpdesks.helpdesk_name,
@@ -265,11 +266,13 @@
                         WHERE engineers.disabled != 1
                         AND month(calls.closed) = :month
                         AND year(calls.closed) = :year
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY engineers.engineerName
                         ORDER BY helpdesks.id
                       ");
       $database->bind(':month', date("m", strtotime("first day of previous month")));
       $database->bind(':year', date("o"));
+      $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
