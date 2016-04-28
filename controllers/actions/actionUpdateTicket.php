@@ -18,7 +18,8 @@ class actionUpdateTicket {
     // on post process form
     if ($_POST) {
       // check if files uploaded in form
-      $upload_code = "";
+      $upload_code = null;
+      $ticketdetails = null;
       if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
         //rename file to random name to avoid file name clash
         $name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10);
@@ -28,10 +29,11 @@ class actionUpdateTicket {
         $tmp_path = $_FILES["attachment"]["tmp_name"];
         //move file from temp location to uploads folder
         move_uploaded_file($tmp_path, $folder);
-        //create html img tag for images else just add link to file in ticket details
+        //create html img tag for jpeg and links for pdf or word else drop files as could be malicious
         if (mime_content_type($folder) == "image/jpeg") {
           $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
-        } else {
+        }
+        if (mime_content_type($folder) == "application/pdf" OR mime_content_type($folder) == "application/msword") {
           $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" class=\"uploadfile\">Uploaded file ref: #".$name_of_uploaded_file."</a>";
         }
       }
@@ -41,7 +43,8 @@ class actionUpdateTicket {
         CASE "add":
             //process ticket add
               // check timecritical field if set
-                if ($_POST['timerequired']) { $timecritical = "<span class=\"urgent\">User marked ticket as time critial, required for: ".$_POST['timerequired']."</span><br/>" ;};
+                $timecritical = null;
+                if ($_POST['timerequired']) { $timecritical = "<span class=\"urgent\">User marked ticket as time critial, required for: ".htmlspecialchars($_POST['timerequired'])."</span><br/>" ;};
               //calculate ticket urgency
                 $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
               //generate locker number if needed for specific categorys (clown fiesta: note to future self, put this in the db!)
@@ -241,12 +244,15 @@ class actionUpdateTicket {
           break;
       }
 
-      if ($emailmessage) {
+      if (isset($emailmessage)) {
+      $to = null;
       //get subscribed managers email addresses
       $subscribed = $subscriptionModel->getSubscriptionEmailsForTicketId($_POST["id"]);
+      if (isset($subscribed)) {
         foreach ($subscribed as $key => $value) {
           $to .= $value["engineerEmail"] .";";
         }
+      }
       //if message set email user to update them
       $to .= $_POST["contact_email"];
       $from = "helpdesk@cheltladiescollege.org";
