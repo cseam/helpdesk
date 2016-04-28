@@ -246,20 +246,20 @@
       $database = new Database();
       $database->query("SELECT engineers.engineerName,
                         helpdesks.helpdesk_name,
-                        sum(case when hour(calls.closed) < 7 OR hour(calls.lastupdate) < 7 THEN 1 ELSE 0 END) AS '0-7',
-                        sum(case when hour(calls.closed) = 7 OR hour(calls.lastupdate) = 7 THEN 1 ELSE 0 END) AS '7-8',
-                        sum(case when hour(calls.closed) = 8 OR hour(calls.lastupdate) = 8 THEN 1 ELSE 0 END) AS '8-9',
-                        sum(case when hour(calls.closed) = 9 OR hour(calls.lastupdate) = 9 THEN 1 ELSE 0 END) AS '9-10',
-                        sum(case when hour(calls.closed) = 10 OR hour(calls.lastupdate) = 10 THEN 1 ELSE 0 END) AS '10-11',
-                        sum(case when hour(calls.closed) = 11 OR hour(calls.lastupdate) = 11 THEN 1 ELSE 0 END) AS '11-12',
-                        sum(case when hour(calls.closed) = 12 OR hour(calls.lastupdate) = 12 THEN 1 ELSE 0 END) AS '12-13',
-                        sum(case when hour(calls.closed) = 13 OR hour(calls.lastupdate) = 13 THEN 1 ELSE 0 END) AS '13-14',
-                        sum(case when hour(calls.closed) = 14 OR hour(calls.lastupdate) = 14 THEN 1 ELSE 0 END) AS '14-15',
-                        sum(case when hour(calls.closed) = 15 OR hour(calls.lastupdate) = 15 THEN 1 ELSE 0 END) AS '15-16',
-                        sum(case when hour(calls.closed) = 16 OR hour(calls.lastupdate) = 16 THEN 1 ELSE 0 END) AS '16-17',
-                        sum(case when hour(calls.closed) = 17 OR hour(calls.lastupdate) = 17 THEN 1 ELSE 0 END) AS '17-18',
-                        sum(case when hour(calls.closed) = 18 OR hour(calls.lastupdate) = 18 THEN 1 ELSE 0 END) AS '18-19',
-                        sum(case when hour(calls.closed) > 19 OR hour(calls.lastupdate) > 19 THEN 1 ELSE 0 END) AS '19-24'
+                        sum(case when hour(calls.closed) < 7 || hour(calls.lastupdate) < 7 THEN 1 ELSE 0 END) AS '0-7',
+                        sum(case when hour(calls.closed) = 7 || hour(calls.lastupdate) = 7 THEN 1 ELSE 0 END) AS '7-8',
+                        sum(case when hour(calls.closed) = 8 || hour(calls.lastupdate) = 8 THEN 1 ELSE 0 END) AS '8-9',
+                        sum(case when hour(calls.closed) = 9 || hour(calls.lastupdate) = 9 THEN 1 ELSE 0 END) AS '9-10',
+                        sum(case when hour(calls.closed) = 10 || hour(calls.lastupdate) = 10 THEN 1 ELSE 0 END) AS '10-11',
+                        sum(case when hour(calls.closed) = 11 || hour(calls.lastupdate) = 11 THEN 1 ELSE 0 END) AS '11-12',
+                        sum(case when hour(calls.closed) = 12 || hour(calls.lastupdate) = 12 THEN 1 ELSE 0 END) AS '12-13',
+                        sum(case when hour(calls.closed) = 13 || hour(calls.lastupdate) = 13 THEN 1 ELSE 0 END) AS '13-14',
+                        sum(case when hour(calls.closed) = 14 || hour(calls.lastupdate) = 14 THEN 1 ELSE 0 END) AS '14-15',
+                        sum(case when hour(calls.closed) = 15 || hour(calls.lastupdate) = 15 THEN 1 ELSE 0 END) AS '15-16',
+                        sum(case when hour(calls.closed) = 16 || hour(calls.lastupdate) = 16 THEN 1 ELSE 0 END) AS '16-17',
+                        sum(case when hour(calls.closed) = 17 || hour(calls.lastupdate) = 17 THEN 1 ELSE 0 END) AS '17-18',
+                        sum(case when hour(calls.closed) = 18 || hour(calls.lastupdate) = 18 THEN 1 ELSE 0 END) AS '18-19',
+                        sum(case when hour(calls.closed) > 19 || hour(calls.lastupdate) > 19 THEN 1 ELSE 0 END) AS '19-24'
                         FROM engineers
                         JOIN calls ON calls.closeengineerid = engineers.idengineers
                         JOIN helpdesks ON engineers.helpdesk = helpdesks.id
