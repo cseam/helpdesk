@@ -33,7 +33,7 @@ class actionUpdateTicket {
         if (mime_content_type($folder) == "image/jpeg") {
           $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
         }
-        if (mime_content_type($folder) == "application/pdf" OR mime_content_type($folder) == "application/msword") {
+        if (mime_content_type($folder) == "application/pdf" || mime_content_type($folder) == "application/msword") {
           $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" class=\"uploadfile\">Uploaded file ref: #".$name_of_uploaded_file."</a>";
         }
       }
@@ -57,21 +57,22 @@ class actionUpdateTicket {
                 $autoassigncheck["auto_assign"] == 0 ? $assignedengineer = NULL : $assignedengineer = $engineerModel->getNextEngineerIdByHelpdeskId($_POST['helpdesk']);
               //check if helpdesk manager required email on new tickets
                 $emailmanagers = $helpdeskModel->isHelpdeskEmailEnabled($_POST['helpdesk']);
-                if ($emailmanagers) {
+                if (isset($emailmanagers)) {
                   foreach($emailmanagers as $key => $value) {
                     //email managers letting them know a new ticket has been added.
                     $to = $value["engineerEmail"];
                     $from = "helpdesk@cheltladiescollege.org";
                     $title = "New Helpdesk Ticket Added";
+                    $emailmanagersmessage = null;
                     $emailmanagersmessage .= "<p>A new ticket has been added to your helpdesk, To view the details of this ticket please <a href=\"". HELPDESK_LOC ."\">Visit ". CODENAME ."</a></p>";
                     $emailmanagersmessage .= "<p>This is an automated message please do not reply</p></span>";
                     email_user($to, $from, $title, $emailmanagersmessage);
                   }
                 }
               //check engineer hasnt assigned to themselfs
-                $_POST['cmn-toggle-selfassign'] !== null ? $assigned = $_POST['cmn-toggle-selfassign'] : $assigned = $assignedengineer;
+                isset($_POST['cmn-toggle-selfassign']) ? $assigned = $_POST['cmn-toggle-selfassign'] : $assigned = $assignedengineer;
               //check auto close
-                if ($_POST['cmn-toggle-retro'] !== null) {
+                if (isset($_POST['cmn-toggle-retro'])) {
                   $status = '2';
                   $closed = date("c");
                   $closeengineerid = $_POST['engineerid'];
@@ -81,7 +82,7 @@ class actionUpdateTicket {
                   $closeengineerid = null;
                 };
               //check ticket is pm (premtive maintanence)
-                $_POST['cmn-toggle-pm'] !== null ? $pm=1 : $pm=0 ;
+                isset($_POST['cmn-toggle-pm']) ? $pm=1 : $pm=0 ;
               //insert ticket base detail
                 $baseTicket = new stdClass();
                 $baseTicket->name = htmlspecialchars($_POST['name']);
@@ -108,10 +109,12 @@ class actionUpdateTicket {
                 $ticketid = $ticketModel->createNewTicket($baseTicket);
               //insert additional ticket details
                 $fieldIdentify = $additionalModel->getListOfAdditionalFieldsByCategorys(htmlspecialchars($_POST['category']));
-                foreach ($fieldIdentify as $key => $value) {
-                  $fieldname = "label".$value["id"];
-                  $labelname = "labelname".$value["id"];
-                  $additionalModel->addAdditionalResult($ticketid, htmlspecialchars($_POST[$labelname]), htmlspecialchars($_POST[$fieldname]));
+                if (isset($fieldIdentify)) {
+                  foreach ($fieldIdentify as $key => $value) {
+                    $fieldname = "label".$value["id"];
+                    $labelname = "labelname".$value["id"];
+                    $additionalModel->addAdditionalResult($ticketid, htmlspecialchars($_POST[$labelname]), htmlspecialchars($_POST[$fieldname]));
+                  }
                 }
               //update engineers assignment table
                 $engineerModel->updateAutoAssignEngineerByHelpdeskId($_POST['helpdesk'], $assignedengineer);

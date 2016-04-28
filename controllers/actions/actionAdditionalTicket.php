@@ -11,10 +11,12 @@ class actionAdditionalTicket {
     //get category additional fields
     $additionalfields = $additionalModel->getListOfAdditionalFieldsByCategorys($categoryid);
     //since not being viewed used to update dropdown not passed to view just rendered
-    foreach ($additionalfields as $key => $value) {
-      echo "<label for=\"label". $value["id"] ."\">" . $value["label"] ."</label>";
-      echo "<input type=\"text\" id=\"label" . $value["id"] . "\" name=\"label" . $value["id"] . "\" required />";
-      echo "<input type=\"hidden\" id=\"labelname" . $value["id"] . "\" name=\"labelname" . $value["id"] . "\" value=\"".$value["label"]."\" />";
+    if (isset($additionalfields)) {
+      foreach ($additionalfields as $key => $value) {
+        echo "<label for=\"label". $value["id"] ."\">" . $value["label"] ."</label>";
+        echo "<input type=\"text\" id=\"label" . $value["id"] . "\" name=\"label" . $value["id"] . "\" required />";
+        echo "<input type=\"hidden\" id=\"labelname" . $value["id"] . "\" name=\"labelname" . $value["id"] . "\" value=\"".$value["label"]."\" />";
+      }
     }
   }
 

@@ -42,7 +42,7 @@ class actionViewObjectives {
     //populate objective
     $pagedata->reportResults = $objectivesModel->getObjectiveById($objectiveid);
     //check engineerid is same as engineer assigned to objective {CLOWN FIESTA need to fix this but it works for now}
-      if ($pagedata->reportResults[0]['engineerid'] === $_SESSION['engineerId']) { } else if ($_SESSION['engineerLevel'] > 1 OR $_SESSION['superuser'] == true) { } else {
+      if ($pagedata->reportResults[0]['engineerid'] === $_SESSION['engineerId']) { } else if ($_SESSION['engineerLevel'] > 1 || $_SESSION['superuser'] == true) { } else {
         //no access to this objective throw error
         $error = "<h3>Access Denied</h3><p>You do not have permission to view this performance objective.</p>";
         $pagedata->reportResults = null;
