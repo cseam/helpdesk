@@ -3,7 +3,7 @@
     <div id="calldetails">
       <h2>:(</h2>
       <p>
-        Engineers cannot leave feedback for themselfs.
+        Engineers cannot leave feedback for themselves.
       </p>
     </div>
 <?php
