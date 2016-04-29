@@ -1,4 +1,14 @@
-<?php if ($message) { echo $message; } else {?>
+<?php if (isset($message)) { echo $message; } else {
+      if ($ticketDetails["owner"] == $_SESSION['sAMAccountName']) { ?>
+    <div id="calldetails">
+      <h2>:(</h2>
+      <p>
+        Engineers cannot leave feedback for themselfs.
+      </p>
+    </div>
+<?php
+      } else {
+  ?>
 <div id="calldetails">
   <h2>Leave Feedback For Ticket #<?php echo $ticketDetails["callid"]; ?></h2>
   <p>
@@ -79,4 +89,4 @@
       });
     </script>
 </div>
-<?php } ?>
+<?php } } ?>
