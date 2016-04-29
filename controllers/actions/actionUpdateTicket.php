@@ -216,6 +216,7 @@ class actionUpdateTicket {
           $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"] , $ticketdetails);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been closed.</p>";
+          $emailmessage .= "<p>Please take some time to leave feedback on how your engineer performed. <a href=\"". HELPDESK_LOC ."/ticket/feedback/".$_POST["id"]."\">Leave feedback here</a></p>";
           $ticketModel->closeTicketById($_POST["id"], $_SESSION["engineerId"], $_POST["callreason"]);
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Closed";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and closed, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
