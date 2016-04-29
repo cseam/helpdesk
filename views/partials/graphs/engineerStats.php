@@ -1,9 +1,15 @@
+<?php
+  $engineernum = $left->sideData["graphdata"]["engineerClose"];
+  $totaltickets = $left->sideData["graphdata"]["engineerAll"];
+  $engineercalc = $left->sideData["graphdata"]["engineerAll"]-$left->sideData["graphdata"]["engineerClose"];
+  $ticketsleft = ($left->sideData["graphdata"]["engineerAll"]-$left->sideData["graphdata"]["engineerClose"] < 0) ? 0 : $engineercalc ;
+?>
 <script type="text/javascript">
   $(function() {
     // WAIT FOR DOM
     // Draw Pie chartist.js
     var pieData = {
-                  series: [<?php echo $left->sideData["graphdata"]["engineerClose"] ?>,<?php echo $left->sideData["graphdata"]["engineerAll"]-$left->sideData["graphdata"]["engineerClose"] ?>]
+                  series: [<?php echo $engineernum ?>,<?php echo $ticketsleft ?>]
     };
     var pieOptions = {
                       chartPadding: {top: 20, right:5, bottom:20, left:5},
@@ -56,11 +62,7 @@
 
 <div id="myperformance" class="ct-chart ct-perfect-fourth" style="width:40%; height:85%; float: left; display:table;">
 <span style="display:table-cell; vertical-align: middle; text-align: center; font-size: 1.5rem;font-weight: 100;">
-<?php
-  $engineernum = $left->sideData["graphdata"]["engineerClose"];
-  $totaltickets = $left->sideData["graphdata"]["engineerAll"];
-  echo number_format(($engineernum / $totaltickets ) * 100 ,2) ."%";
-?>
+<?php echo number_format(($engineernum / $totaltickets ) * 100 ,2) ."%"; ?>
 </span>
 </div>
 <div id="weekstats" class="ct-chart ct-golden-section" style="width: 60%; height: 85%;float:left;"></div>
