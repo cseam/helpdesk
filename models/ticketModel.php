@@ -319,7 +319,7 @@
                         WHERE FIND_IN_SET(calls.helpdesk, :helpdesk)
                         AND requireinvoice = 1
                         ORDER BY opened
-                        LIMIT 200");
+                        LIMIT 250");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
       if ($database->rowcount() === 0) { return null;}
