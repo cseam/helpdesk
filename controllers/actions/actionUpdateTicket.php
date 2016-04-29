@@ -30,7 +30,7 @@ class actionUpdateTicket {
         //move file from temp location to uploads folder
         move_uploaded_file($tmp_path, $folder);
         //create html img tag for jpeg and links for pdf or word else drop files as could be malicious
-        if (mime_content_type($folder) == "image/jpeg") {
+        if (mime_content_type($folder) == "image/jpeg" || mime_content_type($folder) == "image/png") {
           $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
         }
         if (mime_content_type($folder) == "application/pdf" || mime_content_type($folder) == "application/msword") {
