@@ -1,4 +1,4 @@
-<?php if ($message) { echo $message; } else {?>
+<?php if (isset($message)) { echo $message; } else {?>
 <div id="calldetails">
   <h2>Leave Feedback For Ticket #<?php echo $ticketDetails["callid"]; ?></h2>
   <p>
