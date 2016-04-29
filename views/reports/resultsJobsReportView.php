@@ -4,7 +4,7 @@
   <div id="leftpage">
     <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
   </div>
-  
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
@@ -15,6 +15,7 @@
 
             <?php
             $engineergroup = 0;
+            if (isset($pagedata->reportResults)) {
             foreach($pagedata->reportResults as $key => $value) { ?>
             <tbody>
                 <?php // write engineerName each time engineer changes
@@ -34,7 +35,8 @@
                 <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
               </tr>
             </tbody>
-            <?php } ?>
+            <?php }
+            } ?>
         </table>
 
       </div>
