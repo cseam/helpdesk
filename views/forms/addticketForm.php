@@ -114,7 +114,7 @@
 	<fieldset>
 		<legend>Attachments (optional)</legend>
 			<label for="attachment" title="add attachments if required">Picture or Screenshot</label>
-			<input type="file" name="attachment" accept="application/pdf,application/msword,image/jpeg">
+			<input type="file" name="attachment" accept="application/pdf,application/msword,image/jpeg,image/png">
 	</fieldset>
 	<?php if ($_SESSION['engineerId'] !== null) {?>
 		<input type="hidden" name="engineerid" id="engineerid" value="<?php echo $_SESSION['engineerId'];?>" />
