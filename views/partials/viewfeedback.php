@@ -1,5 +1,5 @@
 <?php if (isset($message)) { echo $message; } else {
-      if ($ticketDetails["owner"] == $_SESSION['sAMAccountName']) { ?>
+      if ($_SESSION['engineerLevel'] > 0 && $ticketDetails["owner"] == $_SESSION['sAMAccountName']) { ?>
     <div id="calldetails">
       <h2>:(</h2>
       <p>
