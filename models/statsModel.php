@@ -32,6 +32,41 @@
       return $result;
     }
 
+    public function countTicketsByStatusCode($statuscode, $scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $database = new Database();
+      $database->query("SELECT COUNT(*) AS countTotal
+                        FROM calls
+                        WHERE status = :status
+                        AND FIND_IN_SET(calls.helpdesk, :scope)");
+      $database->bind(":status", $statuscode);
+      $database->bind(":scope", $helpdesks);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countEngineerTotalsOutstatnding($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $database = new Database();
+      $database->query("SELECT engineerName,
+                        sum(CASE WHEN calls.status = 1 THEN 1 ELSE 0 END) AS open,
+                        sum(CASE WHEN calls.status = 3 THEN 1 ELSE 0 END) AS onhold,
+                        sum(CASE WHEN calls.status = 4 THEN 1 ELSE 0 END) AS escalated
+                        FROM engineers
+                        LEFT JOIN calls ON calls.assigned = engineers.idengineers
+                        WHERE FIND_IN_SET(calls.helpdesk, :scope)
+                        AND engineers.disabled = 0
+                        AND calls.status !=2
+                        GROUP BY engineerName
+                        ORDER BY engineerName
+      ");
+      $database->bind(":scope", $helpdesks);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
     public function countTicketsByOwner($owner) {
       $database = new Database();
       $database->query("SELECT COUNT(*) AS countTicketsByOwner FROM calls
