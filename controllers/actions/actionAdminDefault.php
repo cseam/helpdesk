@@ -3,9 +3,7 @@
 class actionAdminDefault {
   public function __construct()
   {
-    //populate my tickets list TODO
     $ticketModel = new ticketModel();
-    $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
     //populate page content
     $pagedata = new stdClass();
     $pagedata->title = CODENAME . " Admin";
