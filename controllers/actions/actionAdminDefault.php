@@ -8,8 +8,8 @@ class actionAdminDefault {
     $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
     //populate page content
     $pagedata = new stdClass();
-    $pagedata->title = "admin method";
-    $pagedata->summary = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    $pagedata->title = CODENAME . " Admin";
+    $pagedata->details = "Superuser admin pages for ".CODENAME." to allow key stake holders the ability to manage helpdesk without requirment to change tables in the database.<br /><br />Changes to these pages effect all helpdesks, ensure you know what you are doing and snapshot the virtual machine before you begin.";
     // render page
     require_once "views/adminView.php";
   }
