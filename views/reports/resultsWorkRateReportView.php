@@ -4,7 +4,7 @@
   <div id="leftpage">
     <?php require_once "views/partials/leftside/reports.php" ?>
   </div>
-  
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
@@ -21,7 +21,9 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php
+            if (isset($pagedata->reportResults)) {
+            foreach($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td><?php echo $value["engineerName"] ?></td>
               <td><?php echo $value["helpdesk_name"] ?></td>
@@ -29,7 +31,8 @@
               <td><?php echo $value["Last7"] ?></td>
               <td><?php echo $value["Last1"] ?></td>
             </tr>
-            <?php } ?>
+            <?php }
+            } ?>
           </tbody>
         </table>
 
