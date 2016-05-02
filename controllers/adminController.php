@@ -15,6 +15,15 @@ class adminController {
     // create methods object.
     $methods = new Route();
     $methods->add('/', 'actionAdminDefault');
+    $methods->add('/managehelpdesks', 'actionAdminManageHelpdesks');
+    $methods->add('/manageengineers', 'actionAdminManageEngineers');
+    $methods->add('/managelocations', 'actionAdminManageLocations');
+    $methods->add('/manageadditional', 'actionAdminManageAdditional');
+    $methods->add('/managecallreasons', 'actionAdminManageCallreasons');
+    $methods->add('/managecatagories', 'actionAdminManageCatagories');
+    $methods->add('/manageoutofhours', 'actionAdminManageOutofhours');
+    $methods->add('/managequickresponses', 'actionAdminManageQuickresponses');
+    $methods->add('/managesla', 'actionAdminManageSla');
     $methods->process(2);
   }
 
