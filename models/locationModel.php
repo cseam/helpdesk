@@ -13,4 +13,16 @@
       return $results;
     }
 
+    public function removeLocationById($id) {
+
+    }
+
+    public function addLocation($locationobject) {
+
+    }
+
+    public function modifyLocationById($id, $locationobject) {
+      
+    }
+
 }
