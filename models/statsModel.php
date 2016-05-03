@@ -250,7 +250,7 @@
                         FROM calls
                         INNER JOIN callreasons ON calls.callreason = callreasons.id
                         WHERE calls.status='2'
-                        AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+                        AND calls.closed >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
                         AND FIND_IN_SET(calls.helpdesk, :scope)
                         GROUP BY callreasons.reason_name");
       $database->bind(':scope', $helpdesks);
@@ -352,7 +352,7 @@
                         JOIN calls ON feedback.callid=calls.callid
                         JOIN engineers ON engineers.idengineers=calls.closeengineerid
                         WHERE satisfaction IN (1,2)
-                        AND feedback.opened > DATE_SUB(CURDATE(),INTERVAL 30 DAY)
+                        AND feedback.opened > DATE_SUB(CURDATE(),INTERVAL 1 MONTH)
                         AND FIND_IN_SET(calls.helpdesk, :scope)
                         ");
       $database->bind(':scope', $helpdesks);
@@ -387,7 +387,7 @@
       $database->query("SELECT DATE_FORMAT(closed, '%a') AS DAY_OF_WEEK
                         FROM calls
                         WHERE closeengineerid = :engineerId
-                        AND closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)");
+                        AND closed >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK)");
       $database->bind(':engineerId', $engineerId);
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
@@ -433,7 +433,7 @@
       $database = new Database();
       $database->query("SELECT count(closeengineerid) AS engineerClose
                         FROM calls
-                        WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+                        WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK)
                         AND closeengineerid = :engineerId ");
       $database->bind(':engineerId', $engineerId);
       $result = $database->single();
@@ -445,7 +445,7 @@
       $database = new Database();
       $database->query("SELECT count(callid) AS engineerAll
                         FROM calls
-                        WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 7 DAY)
+                        WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK)
                         AND assigned = :engineerId");
       $database->bind(':engineerId', $engineerId);
       $result = $database->single();
