@@ -13,4 +13,40 @@
       return $results;
     }
 
+    public function removeLocationById($id) {
+      $database = new Database();
+      $database->query("DELETE FROM location WHERE id=:id");
+      $database->bind(':id', $id);
+      $database->execute();
+      return true;
+    }
+
+    public function addLocation($locationobject) {
+      $database = new Database();
+      $database->query("INSERT INTO location (locationName, iconlocation, shorthand)
+                        VALUES (:locaionName, :iconlocation, :shorthand)
+                      ");
+      $database->bind(":locationName", $locationobject->locationName);
+      $database->bind(":iconlocation", $locationobject->iconlocation);
+      $database->bind(":shorthand", $locationobject->shorthand);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function modifyLocationById($locationobject) {
+      $database = new Database();
+      $database->query("UPDATE location
+                        SET location.locationName = :locationName,
+                            location.iconlocation = :iconlocation,
+                            location.shorthand = :shorthand
+                        WHERE location.id = :id
+                      ");
+      $database->bind(":id", $locationobject->id);
+      $database->bind(":locationName", $locationobject->locationName);
+      $database->bind(":iconlocation", $locationobject->iconlocation);
+      $database->bind(":shorthand", $locationobject->shorthand);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
 }
