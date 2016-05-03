@@ -20,7 +20,8 @@ class logoutController {
       $stats = array_merge($stats, $statsModel->countTicketsByOwner($_SESSION['sAMAccountName']));
       $stats = array_merge($stats, $statsModel->countAllOpenTickets());
       $stats = array_merge($stats, $statsModel->avgHelpdeskFeedback());
-
+      $tmp_array["avgInDays"] = $statsModel->avgCloseTimeInDays();
+      $stats = array_merge($stats,$tmp_array);
       // render page
     require_once "views/logoutView.php";
   }
