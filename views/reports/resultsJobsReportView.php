@@ -12,15 +12,21 @@
         <p><?php echo $pagedata->details ?></p>
 
         <table id="yourcalls">
-
             <?php
+            // count for engineers totals
+            $tmp_array = array();
+            foreach($pagedata->reportResults as $key => $value) {
+              array_push($tmp_array, $value["engineerName"]);
+            }
+            $outputCount = array_count_values($tmp_array);
+
             $engineergroup = 0;
             if (isset($pagedata->reportResults)) {
             foreach($pagedata->reportResults as $key => $value) { ?>
             <tbody>
                 <?php // write engineerName each time engineer changes
                   while($engineergroup != $value["idengineers"]) {
-                    echo "<tr><td class=\"hdtitle listheader titlepadding\" colspan=\"6\"><h3>".$value["engineerName"]."</h3></td></tr>";
+                    echo "<tr><td class=\"hdtitle listheader titlepadding\" colspan=\"6\"><h3>".$value["engineerName"] . " (".$outputCount[$value["engineerName"]] .")</h3></td></tr>";
                     $engineergroup = $value["idengineers"];
                   }?>
               <tr>
