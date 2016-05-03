@@ -29,6 +29,11 @@
               <td><?php echo $value["engineerName"] ?></td>
               <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
             </tr>
+            <tr>
+              <td colspan="6" style="border: 0;">
+                &nbsp;
+              </td>
+            </tr>
             <?php } ?>
           </tbody>
         </table>

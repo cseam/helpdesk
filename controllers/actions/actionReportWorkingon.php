@@ -15,7 +15,7 @@ class actionReportWorkingon {
     //populate report results for use in view
     $pagedata->reportResults = $ticketModel->getLastViewedByHelpdesk($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = sizeof($pagedata->reportResults)." ".$reportname." the following tickets (last ticket the engineer looked at on helpdesk).";
+    $pagedata->details = $reportname." the engineer looked at on helpdesk, with time and date information to help narrow down possible whereabouts.";
     //render template using $pagedata object
     require_once "views/reports/resultsWorkingOnReportView.php";
   }
