@@ -25,7 +25,9 @@
                 </tr>
               </thead>
               <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php
+            if (isset($pagedata->reportResults)) {
+            foreach($pagedata->reportResults as $key => $value) { ?>
               <tr>
                 <td><a href="/manager/objectives/<?php echo $value["id"] ?>"><?php echo substr(strip_tags($value["title"]), 0, 50) ?></a></td>
                 <td><?php echo $value["engineerName"] ?></td>
@@ -33,7 +35,8 @@
                 <td><?php echo $value["progress"] ?>%</td>
                 <td><a href="/manager/objectives/<?php echo $value["id"] ?>"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
               </tr>
-            <?php } ?>
+            <?php }
+            }?>
             </tbody>
         </table>
 

@@ -4,7 +4,7 @@
   <div id="leftpage">
     <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
   </div>
-  
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
@@ -21,7 +21,9 @@
                   <th>Reported by</th>
                 </tr>
               </thead>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php
+            if (isset($pagedata->reportResults)) {
+            foreach($pagedata->reportResults as $key => $value) { ?>
               <tbody>
               <tr>
                 <td><?php echo $value["dateofcall"] ?> @ <?php echo $value["timeofcall"] ?></td>
@@ -31,7 +33,8 @@
                 <td colspan="2"><?php echo nl2br($value["problem"]) ?></td>
               </tr>
               </tbody>
-            <?php } ?>
+            <?php }
+            } ?>
         </table>
 
       </div>
