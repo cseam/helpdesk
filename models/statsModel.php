@@ -453,4 +453,16 @@
       return $result;
     }
 
+    public function avgCloseTimeInDays() {
+      $database = new Database();
+      $database->query("SELECT helpdesks.helpdesk_name, avg(datediff(calls.closed, calls.opened)) as avg_days
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        GROUP By helpdesk");
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null; }
+      return $results;
+    }
+
+
   }

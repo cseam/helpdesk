@@ -16,6 +16,13 @@
     <p>
       Average feedback for tickets on helpdesk is <span class="logoutstats"><?php echo round($stats["FeedbackAVG"],2)?></span> <?php for ($i = 0; $i < round($stats["FeedbackAVG"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?>
     </p>
+    <ul>
+    <?php
+      foreach($stats["avgInDays"] as $key => $value) {
+        echo "<li>" . $value["helpdesk_name"] . " on average take <span class=\"logoutstats\">" . number_format($value["avg_days"], 1) . "</span> days to close a ticket.</li>";
+      }
+    ?>
+    </ul>
   </div>
   <div id="rightpage">
     <div id="call">
