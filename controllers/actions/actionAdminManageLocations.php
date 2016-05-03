@@ -8,10 +8,12 @@ class actionAdminManageLocations {
     //populate page content
     $pagedata = new stdClass();
     $pagedata->title = "Manage Locations";
-    $pagedata->details = "//TODO create management controls";
+    $pagedata->details = "Locations available for users to select when adding a new ticket to " . CODENAME;
+
     $pagedata->listoflocations = $locationModel->getListOfLocations();
+
     // render page
-    require_once "views/adminView.php";
+    require_once "views/adminManageLocationsView.php";
 
   }
 }
