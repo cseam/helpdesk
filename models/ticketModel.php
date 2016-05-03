@@ -9,6 +9,7 @@
       $database->query("SELECT * FROM calls
                         JOIN status ON calls.status=status.id
                         WHERE owner = :username
+                        AND status != 2
                         ORDER BY callid DESC
                         LIMIT :limit");
       $database->bind(":username", $username);

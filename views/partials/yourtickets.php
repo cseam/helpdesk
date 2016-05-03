@@ -2,6 +2,7 @@
 <table id="yourcalls">
   <tbody>
     <?php
+    if (isset($left->sideData["mytickets"])) {
     foreach($left->sideData["mytickets"] as $key => $value) { ?>
     <tr>
       <td>#<?php echo $value["callid"] ?></td>
@@ -10,6 +11,7 @@
       <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>
       <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
     </tr>
-    <?php } ?>
+    <?php }
+  } ?>
   </tbody>
 </table>
