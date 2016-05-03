@@ -15,7 +15,9 @@
             <button name="add" value="add" type="submit" onclick="this.form.button_value.value = this.value;">Add Change Control</button>
         </form></p>
         <table id="changecontrol">
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php
+            if (isset($pagedata->reportResults)) {
+             foreach($pagedata->reportResults as $key => $value) { ?>
               <tbody>
               <tr>
                 <td class="hdtitle listheader" colspan="2"><?php echo $value["server"] ?></td>
@@ -31,7 +33,8 @@
                 <td colspan="2" class="hdtitle"><?php echo $value["tags"] ?></td>
               </tr>
               </tbody>
-            <?php } ?>
+            <?php }
+            } ?>
         </table>
 
       </div>

@@ -4,7 +4,7 @@
   <div id="leftpage">
     <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
   </div>
-  
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
@@ -21,7 +21,9 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php
+            if (isset($pagedata->reportResults)) {
+            foreach($pagedata->reportResults as $key => $value) { ?>
               <tr>
                 <td><?php echo $value["lockerid"] ?></td>
                 <td><?php if ($value["status"] === "2") {echo "<span class=\"status1\">Ready</span>";} else {echo "<span class=\"status3\">In Progress</span>";} ?></td>
@@ -39,7 +41,8 @@
                   </form>
                 </td>
               </tr>
-            <?php } ?>
+            <?php }
+            } ?>
           </tbody>
         </table>
 
