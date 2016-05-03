@@ -4,7 +4,7 @@
   <div id="leftpage">
     <?php require_once "views/partials/leftside/".$left->sideData["partial"] ?>
   </div>
-  
+
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
@@ -15,7 +15,8 @@
           <tbody>
             <?php foreach($pagedata->reportResults as $key => $value) { ?>
             <tr>
-                <td class="hdtitle smalltxt" colspan="6"><?php echo $value["engineerName"] ?> last viewed this ticket on <?php echo date("G:i d/m/Y", strtotime($value["stamp"])) ?> (<?php echo $value["minago"] ?> ago)</td>
+                <td class="hdtitle smalltxt" colspan="6"><?php echo $value["engineerName"] ?> last viewed this ticket on <?php echo date("G:i d/m/Y", strtotime($value["stamp"])) ?>
+                  (<?php echo gmdate("H \h\o\u\\r i \m\i\\n s \s\\e\c\o\\n\d\s \a\g\o" , (strtotime($value["minago"]) - strtotime('TODAY'))) ?>)</td>
             </tr>
             <tr>
               <td class="hdtitle listheader" colspan="6"><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>

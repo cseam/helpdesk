@@ -15,18 +15,10 @@
         <table>
         <thead>
           <tr>
-            <th>
-              Location Name
-            </th>
-            <th>
-              Location Icon
-            </th>
-            <th>
-              Location Shorthand
-            </th>
-            <th>
-              Manage
-            </th>
+            <th>Location Name</th>
+            <th>Location Icon</th>
+            <th>Location Shorthand</th>
+            <th>Manage</th>
           </tr>
         </thead>
         <tbody>
@@ -34,26 +26,17 @@
           if (isset($pagedata->listoflocations)) {
               foreach ($pagedata->listoflocations as $key => $value) { ?>
                 <tr>
-                  <td>
-                    <?php echo $value["locationName"]; ?>
-                  </td>
-                  <td>
-                    <img src="/public/images/<?php echo $value["iconlocation"]; ?>" alt="<?php echo $value["iconlocation"]; ?>" title="<?php echo $value["iconlocation"]; ?>" width="16" height="16" />&nbsp;<?php echo $value["iconlocation"]; ?>
-                  </td>
-                  <td>
-                    <?php echo $value["shorthand"]; ?>
-                  </td>
-                  <td>
-                    <?php echo $value["id"]; ?>
-                  </td>
+                  <td><?php echo $value["locationName"]; ?></td>
+                  <td><img src="/public/images/<?php echo $value["iconlocation"]; ?>" alt="<?php echo $value["iconlocation"]; ?>" title="<?php echo $value["iconlocation"]; ?>" width="16" height="16" />&nbsp;<?php echo $value["iconlocation"]; ?></td>
+                  <td><?php echo $value["shorthand"]; ?></td>
+                  <td><?php echo $value["id"]; ?></td>
                 </tr>
         <?php  }
           }
         ?>
         </tbody>
         </table>
-
-
+        
       </div>
     </div>
   </div>
