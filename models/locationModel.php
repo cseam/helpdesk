@@ -21,10 +21,14 @@
       return true;
     }
 
+    public function upsertLocation($locationobject) {
+      isset($locationobject->id) ? $this->modifyLocationById($locationobject) : $this->addLocation($locationobject);
+    }
+
     public function addLocation($locationobject) {
       $database = new Database();
       $database->query("INSERT INTO location (locationName, iconlocation, shorthand)
-                        VALUES (:locaionName, :iconlocation, :shorthand)
+                        VALUES (:locationName, :iconlocation, :shorthand)
                       ");
       $database->bind(":locationName", $locationobject->locationName);
       $database->bind(":iconlocation", $locationobject->iconlocation);
@@ -47,6 +51,15 @@
       $database->bind(":shorthand", $locationobject->shorthand);
       $database->execute();
       return $database->lastInsertId();
+    }
+
+    public function getLocationById($locationid) {
+      $database = new Database();
+      $database->query("SELECT * FROM location
+                        WHERE id = :id");
+      $database->bind(":id", $locationid);
+      $result = $database->single();
+      return $result;
     }
 
 }

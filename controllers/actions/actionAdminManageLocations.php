@@ -16,11 +16,11 @@ class actionAdminManageLocations {
         $switch = (isset($_POST["button_modify_value"]) ? $_POST["button_modify_value"] : $_POST["button_value"]);
         SWITCH ($switch) {
           CASE "add":
-            // TODO 
+            header('Location: /admin/location/add');
             exit;
           break;
           CASE "modify":
-            // TODO
+            header('Location: /admin/location/'.$id);
             exit;
           break;
           CASE "delete":

@@ -25,6 +25,7 @@ class adminController {
     $methods->add('/managequickresponses', 'actionAdminManageQuickresponses');
     $methods->add('/managesla', 'actionAdminManageSla');
     $methods->add('/complete', 'actionAdminComplete');
+    $methods->add('/location', 'actionAdminModifyLocation');
     $methods->process(2);
   }
 
