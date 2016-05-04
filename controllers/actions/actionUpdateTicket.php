@@ -44,7 +44,7 @@ class actionUpdateTicket {
             //process ticket add
               // check timecritical field if set
                 $timecritical = null;
-                if ($_POST['timerequired']) { $timecritical = "<span class=\"urgent\">User marked ticket as time critial, required for: ".htmlspecialchars($_POST['timerequired'])."</span><br/>" ;};
+                if ($_POST['timerequired']) { $timecritical = "<span class=\"urgent\">User marked ticket as time critical, required for: ".htmlspecialchars($_POST['timerequired'])."</span><br/>" ;};
               //calculate ticket urgency
                 $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
               //generate locker number if needed for specific categorys (clown fiesta: note to future self, put this in the db!)
