@@ -24,6 +24,7 @@ class adminController {
     $methods->add('/manageoutofhours', 'actionAdminManageOutofhours');
     $methods->add('/managequickresponses', 'actionAdminManageQuickresponses');
     $methods->add('/managesla', 'actionAdminManageSla');
+    $methods->add('/complete', 'actionAdminComplete');
     $methods->process(2);
   }
 

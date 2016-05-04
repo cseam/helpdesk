@@ -10,8 +10,30 @@ class actionAdminManageLocations {
     $pagedata->title = "Manage Locations";
     $pagedata->details = "Locations available for users to select when adding a new ticket to " . CODENAME;
 
-    $pagedata->listoflocations = $locationModel->getListOfLocations();
+    //Post Update Locations
+      if ($_POST) {
+        $id = isset($_POST['id']) ? $_POST['id'] : null;
+        $switch = (isset($_POST["button_modify_value"]) ? $_POST["button_modify_value"] : $_POST["button_value"]);
+        SWITCH ($switch) {
+          CASE "add":
+            // TODO 
+            exit;
+          break;
+          CASE "modify":
+            // TODO
+            exit;
+          break;
+          CASE "delete":
+            // Remove location
+            $locationModel->removeLocationById($id);
+            // PRG Redirect
+            header('Location: /admin/complete');
+            exit;
+          break;
+        }
+      }
 
+    $pagedata->listoflocations = $locationModel->getListOfLocations();
     // render page
     require_once "views/adminManageLocationsView.php";
 
