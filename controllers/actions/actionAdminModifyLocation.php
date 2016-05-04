@@ -8,7 +8,8 @@ class actionAdminModifyLocation {
     $id = $baseurl[3];
     //load required models
     $locationModel = new locationModel();
-
+    //create page data objects
+    $pagedata = new stdClass();
     // on post update
     if ($_POST) {
       // upsert locations
@@ -22,14 +23,11 @@ class actionAdminModifyLocation {
       header('Location: /admin/complete');
       exit;
     }
-
     $pagedata->title = "Add Location";
-    $pagedata->details = "Please add the details for your location changes";
+    $pagedata->details = "Please update the details for your location changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata = new stdClass();
       $pagedata->title = "Modify Location";
-      $pagedata->details = "Please modify the details for your location change.";
       $pagedata->reportResults = $locationModel->getLocationById($id);
     }
 
