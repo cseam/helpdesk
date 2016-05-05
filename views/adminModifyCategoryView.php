@@ -13,14 +13,18 @@
         <p><?php echo $pagedata->details ?></p>
         <form action="#" method="post" id="modifyForm">
           <fieldset>
-        		<legend>Location Details</legend>
+        		<legend>Category Details</legend>
               <input type="hidden" id="id" name="id" value="<?php if (isset($pagedata->reportResults["id"])) { echo $pagedata->reportResults["id"]; } ?>" />
-              <label for="locationName" title="location name">Location name</label>
-              <input type="text" id="locationName" name="locationName" value="<?php if (isset($pagedata->reportResults["locationName"])) { echo $pagedata->reportResults["locationName"]; } ?>" REQUIRED/>
-              <label for="iconlocation" title="iconlocation">iconlocation (filename in public images)</label>
-              <input type="text" id="iconlocation" name="iconlocation" value="<?php if (isset($pagedata->reportResults["iconlocation"])) { echo $pagedata->reportResults["iconlocation"]; } ?>" REQUIRED/>
-              <label for="shorthand" title="shorthand">shorthand</label>
-              <input type="text" id="shorthand" name="shorthand" value="<?php if (isset($pagedata->reportResults["shorthand"])) { echo $pagedata->reportResults["shorthand"]; } ?>" REQUIRED/>
+              <label for="categoryName" title="category name">Category name</label>
+              <input type="text" id="categoryName" name="categoryName" value="<?php if (isset($pagedata->reportResults["categoryName"])) { echo $pagedata->reportResults["categoryName"]; } ?>" REQUIRED/>
+              <label for="helpdesk" title="helpdesk">helpdesk</label>
+
+              <select id="helpdesk" name="helpdesk" REQUIRED>
+        				<option value="" SELECTED>Please Select</option>
+        				<?php foreach ($pagedata->helpdesks as $key => $value) { ?>
+                <option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $pagedata->reportResults["helpdesk"]) { echo "SELECTED"; } ?>><?php echo $value["helpdesk_name"] ?></option>
+              <?php  } ?>
+        			</select>
               <p class="buttons">
               <button name="add" value="add" type="submit" onclick="this.form.button_value.value = this.value;">
                 <?php isset($pagedata->reportResults["id"]) ? print("Update") : print("Add");?>
