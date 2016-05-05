@@ -27,6 +27,7 @@ class adminController {
     $methods->add('/complete', 'actionAdminComplete');
     $methods->add('/location', 'actionAdminModifyLocation');
     $methods->add('/category', 'actionAdminModifyCategory');
+    $methods->add('/reason', 'actionAdminModifyReason');
     $methods->process(2);
   }
 
