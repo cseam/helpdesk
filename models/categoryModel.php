@@ -14,6 +14,16 @@
       return $results;
     }
 
+    public function getListOfCategorys() {
+      $database = new Database();
+      $database->query("SELECT categories.*, helpdesks.helpdesk_name FROM categories
+                        JOIN helpdesks ON categories.helpdesk = helpdesks.id
+        ORDER BY helpdesk");
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
     public function removeCategoryById($id) {
       $database = new Database();
       $database->query("DELETE FROM categories WHERE id=:id");
