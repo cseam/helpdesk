@@ -18,8 +18,9 @@
 
     public function getListOfReasons() {
       $database = new Database();
-      $database->query("SELECT * FROM callreasons
+      $database->query("SELECT callreasons.*, helpdesks.helpdesk_name FROM callreasons
                         JOIN helpdesks ON callreasons.helpdesk_id = helpdesks.id
+                        ORDER BY helpdesk_id
                         ");
       $results = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
@@ -65,11 +66,11 @@
 
     public function getReasonById($id) {
       $database = new Database();
-      $database->query("SELECT * FROM callreasonsModel
+      $database->query("SELECT * FROM callreasons
                         WHERE id=:id");
       $database->bind(':id', $id);
       $result = $database->single();
-      return $result; 
+      return $result;
     }
 
 }
