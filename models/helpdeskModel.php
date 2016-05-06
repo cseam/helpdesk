@@ -100,4 +100,65 @@
       if ($hour > $ofhTime) { return $ofhMessage; } else { return null; }
     }
 
+    public function removeHelpdeskById($id) {
+      $database = new Database();
+      //$database->query("DELETE FROM helpdesks WHERE id=:id");
+      $database->query("UPDATE helpdesks
+                        SET helpdesks.deactivate = 1
+                        WHERE helpdesks.id = :id
+      ");
+      $database->bind(':id', $id);
+      $database->execute();
+      return true;
+    }
+
+    public function upsertHelpdesk($helpdeskobject) {
+      isset($helpdeskobject->id) ? $this->modifyHelpdesk($helpdeskobject) : $this->addHelpdesk($helpdeskobject);
+    }
+
+    public function addHelpdesk($helpdeskobject) {
+      $database = new Database();
+      $database->query("INSERT INTO helpdesks (helpdesk_name, description, deactivate, auto_assign, email_on_newticket)
+                        VALUES (:helpdesk_name, :description, :deactivate, :auto_assign, :email_on_newticket)
+                      ");
+      $database->bind(':helpdesk_name', $helpdeskobject->helpdesk_name);
+      $database->bind(':description', $helpdeskobject->description);
+      $database->bind(':deactivate', $helpdeskobject->deactivate);
+      $database->bind(':auto_assign', $helpdeskobject->auto_assign);
+      $database->bind(':email_on_newticket', $helpdeskobject->email_on_newticket);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function modifyHelpdesk($helpdeskobject) {
+      $database = new Database();
+      $database->query("UPDATE helpdesks
+                        SET helpdesks.helpdesk_name = :helpdesk_name,
+                            helpdesks.description = :description,
+                            helpdesks.deactivate = :deactivate,
+                            helpdesks.auto_assign = :auto_assign,
+                            helpdesks.email_on_newticket = :email_on_newticket
+                        WHERE helpdesks.id = :id
+                      ");
+      $database->bind(':id', $helpdeskobject->id);
+      $database->bind(':helpdesk_name', $helpdeskobject->helpdesk_name);
+      $database->bind(':description', $helpdeskobject->description);
+      $database->bind(':deactivate', $helpdeskobject->deactivate);
+      $database->bind(':auto_assign', $helpdeskobject->auto_assign);
+      $database->bind(':email_on_newticket', $helpdeskobject->email_on_newticket);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function getHelpdeskById($id) {
+      $database = new Database();
+      $database->query("SELECT *
+                        FROM helpdesks
+                        WHERE id=:id
+                      ");
+      $database->bind(':id', $id);
+      $result = $database->single();
+      return $result;
+    }
+
 }
