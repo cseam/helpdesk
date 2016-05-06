@@ -56,13 +56,13 @@
                         WHERE quick_responses.id = :id
                         ");
       $database->bind(':id', $quickresponseobject->id);
-      $database->bind(':categoryName', $quickresponseobject->quick_response);
-      $database->bind(':helpdesk', $quickresponseobject->helpdesk_id);
+      $database->bind(':quick_response', $quickresponseobject->quick_response);
+      $database->bind(':helpdesk_id', $quickresponseobject->helpdesk_id);
       $database->execute();
       return $database->lastInsertId();
     }
 
-    public function getCategoryById($id) {
+    public function getQuickResponseById($id) {
       $database = new Database();
       $database->query("SELECT *
                         FROM quick_responses
