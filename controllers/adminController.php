@@ -28,6 +28,7 @@ class adminController {
     $methods->add('/location', 'actionAdminModifyLocation');
     $methods->add('/category', 'actionAdminModifyCategory');
     $methods->add('/reason', 'actionAdminModifyReason');
+    $methods->add('/outofhours', 'actionAdminModifyOutofhours');
     $methods->process(2);
   }
 
