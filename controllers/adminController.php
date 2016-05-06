@@ -30,6 +30,7 @@ class adminController {
     $methods->add('/reason', 'actionAdminModifyReason');
     $methods->add('/outofhours', 'actionAdminModifyOutofhours');
     $methods->add('/quickresponse', 'actionAdminModifyQuickResponse');
+    $methods->add('/helpdesk', 'actionAdminModifyHelpdesk');
     $methods->process(2);
   }
 

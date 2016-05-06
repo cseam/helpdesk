@@ -3,12 +3,38 @@
 class actionAdminManageHelpdesks {
   public function __construct()
   {
-    $ticketModel = new ticketModel();
+    //load required models
+    $helpdeskModel = new helpdeskModel();
     //populate page content
     $pagedata = new stdClass();
     $pagedata->title = "Manage Helpdesks";
-    $pagedata->details = "//TODO create management controls";
+    $pagedata->details = "helpdesks available for users to select when adding a new ticket to " . CODENAME;
+
+    //Post Update Locations
+      if ($_POST) {
+        $id = isset($_POST['id']) ? $_POST['id'] : null;
+        $switch = (isset($_POST["button_modify_value"]) ? $_POST["button_modify_value"] : $_POST["button_value"]);
+        SWITCH ($switch) {
+          CASE "add":
+            header('Location: /admin/helpdesk/add');
+            exit;
+          break;
+          CASE "modify":
+            header('Location: /admin/helpdesk/'.$id);
+            exit;
+          break;
+          CASE "delete":
+            // Remove location
+            $helpdeskModel->removeHelpdeskById($id);
+            // PRG Redirect
+            header('Location: /admin/complete');
+            exit;
+          break;
+        }
+      }
+
+    $pagedata->listofHelpdesks = $helpdeskModel->getListOfHelpdesks();
     // render page
-    require_once "views/adminView.php";
+    require_once "views/adminManageHelpdesksView.php";
   }
 }
