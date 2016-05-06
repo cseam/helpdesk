@@ -32,4 +32,39 @@
       return true;
     }
 
+    public function getOutOfHoursMessages() {
+      $database = new Database();
+      $database->query("SELECT out_of_hours_contact_details.*, helpdesks.helpdesk_name FROM out_of_hours_contact_details
+                        JOIN helpdesks ON out_of_hours_contact_details.helpdesk = helpdesks.id
+                        ORDER BY out_of_hours_contact_details.helpdesk
+                        ");
+      $results = $database->resultset();
+      return $results;
+    }
+
+    public function updateOutOfHoursMessages($newmessage) {
+      $database = new Database();
+      $database->query("UPDATE out_of_hours_contact_details
+                        SET out_of_hours_contact_details.message = :message,
+                            out_of_hours_contact_details.end_of_day = :endofday,
+                            out_of_hours_contact_details.helpdesk = :helpdesk
+                        WHERE out_of_hours_contact_details.id = :id
+                        ");
+      $database->bind(':id', $newmessage->id);
+      $database->bind(':message', $newmessage->message);
+      $database->bind(':endofday', $newmessage->end_of_day);
+      $database->bind(':helpdesk', $newmessage->helpdesk);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function getOutOfHoursMessagesById($id) {
+      $database = new Database();
+      $database->query("SELECT * FROM out_of_hours_contact_details
+                        WHERE id=:id");
+      $database->bind(':id', $id);
+      $result = $database->single();
+      return $result;
+    }
+
 }
