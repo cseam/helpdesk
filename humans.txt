@@ -1,7 +1,7 @@
 /* TEAM */
 Title:      Elliot Goode.
 Position:   Full Stack Developer
-Email:      goodeej@cheltladiescollege.org
+Email:      me@elliotgoode.co.uk
 Twitter:    @atomicjam
 Location:   Cheltenham, Uk.
 
