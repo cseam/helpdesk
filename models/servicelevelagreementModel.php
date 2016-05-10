@@ -6,10 +6,10 @@
 
   public function getListOfSLAs() {
     $database = new Database();
-    $database->query("SELECT service_level_agreement.*, helpdesk.helpdesk_name
+    $database->query("SELECT service_level_agreement.*, helpdesks.helpdesk_name
                       FROM service_level_agreement
                       JOIN helpdesks ON service_level_agreement.helpdesk = helpdesks.id
-                      ORDER BY service_level_agreement.helpdesk
+                      ORDER BY service_level_agreement.helpdesk, service_level_agreement.urgency
                       ");
     $results = $database->resultset();
     if ($database->rowCount() === 0) {return null;}
