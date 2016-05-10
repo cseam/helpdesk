@@ -23,6 +23,7 @@
             <th>Helpdesk</th>
             <th>Agreement</th>
             <th>Urgency</th>
+            <th>Close days</th>
             <th>Manage</th>
           </tr>
         </thead>
@@ -34,6 +35,7 @@
                   <td><?php echo $value["helpdesk_name"]; ?></td>
                   <td><?php echo $value["agreement"]; ?></td>
                   <td><?php echo $value["urgency"]; ?></td>
+                  <td><?php echo $value["close_eta_days"]; ?></td>
                   <td>
                     <form action="#" method="post" id="modifyForm" class="modifyconfirm">
                         <input type="hidden" id="button_modify_value" name="button_modify_value" value="" />
