@@ -1,6 +1,6 @@
 <?php
 
-  class servicelevelagreementsModel {
+  class servicelevelagreementModel {
   public function __construct()
     { }
 
