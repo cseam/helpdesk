@@ -34,4 +34,61 @@
       $database->execute();
       return null;
     }
+
+    public function getListOfAdditionalFields() {
+      $database = new Database();
+      $database->query("SELECT * FROM call_additional_fields
+                        ORDER BY typeid
+                        ");
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
+    public function removeAdditionalFieldsById($id) {
+      $database = new Database();
+      $database->query("DELETE FROM call_additional_fields WHERE id=:id");
+      $database->bind(":id", $id);
+      $database->execute();
+      return true;
+    }
+
+    public function upsertAdditionalFields($additionalfields) {
+      isset($addiotnalfields->id) ? $this->modifyAdditionalFieldsById($additionalfields) : $this->addAdditionalFields($additionalfields);
+    }
+
+    public function addAdditionalFields($additionalfields) {
+      $database = new Database();
+      $database->query("INSERT INTO call_additional_fields (typeid, label)
+                        VALUES (:typeid, :label)
+                        ");
+      $database->bind(":typeid", $additionalfields->typeid);
+      $database->bind(":label", $additionalfields->label);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function modifyAdditionalFieldsById($additionalfields) {
+      $database = new Database();
+      $database->query("UPDATE call_additional_fields
+                        SET call_additional_fields.typeid = :typeid,
+                            call_additional_fields.label = :label
+                        WHERE call_additional_fields.id = :id
+                        ");
+      $database->bind(":id", $additionalfields->id);
+      $database->bind(":typeid", $additionalfields->typeid);
+      $database->bind(":label", $additionalfields->label);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function getAdditionalFieldsById($id) {
+      $database = new Database();
+      $database->query("SELECT * FROM call_additional_fields
+                        WHERE id = :id");
+      $database->bind(":id", $id);
+      $result = $database->single();
+      return $result;
+    }
+
 }
