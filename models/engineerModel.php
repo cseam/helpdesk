@@ -89,4 +89,81 @@
       return true;
     }
 
+    public function getListOfEngineers() {
+      $database = new Database();
+      $database->query("SELECT * FROM engineers
+                        ORDER BY helpdesk, engineerName");
+      $results = $database->resultset();
+      return $results;
+    }
+
+    public function disableEngineerById($id) {
+      $database = new Database();
+      $database->query("UPDATE engineers
+                        SET engineers.disabled = 1
+                        WHERE engineers.idengineers = :id");
+      $database->bind(":id", $id);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function upsertEngineer($engineerobject) {
+      isset($engineerobject->id) ? $this->modifyEngineerById($engineerobject) : $this->addEngineer($engineerobject);
+    }
+
+    public function addEngineer($engineerobject) {
+      $database = new Database();
+      $database->query("INSERT INTO engineers (engineerName, engineerEmail, availableDays, sAMAccountName, engineerLevel, helpdesk, superuser, disabled, localLoginHash)
+                        VALUES (:engineerName, :engineerEmail, :availableDays, :sAMAccountName, :engineerLevel, :helpdesk, :superuser, :disabled, :localLoginHash)
+                        ");
+      $database->bind(":engineerName", $engineerobject->engineerName);
+      $database->bind(":engineerEmail", $engineerobject->engineerEmail);
+      $database->bind(":availableDays", $engineerobject->availableDays);
+      $database->bind(":sAMAccountName", $engineerobject->sAMAccountName);
+      $database->bind(":engineerLevel", $engineerobject->engineerLevel);
+      $database->bind(":helpdesk", $engineerobject->helpdesk);
+      $database->bind(":superuser", $engineerobject->superuser);
+      $database->bind(":disabled", $engineerobject->disabled);
+      $database->bind(":localLoginHash", $engineerobject->localLoginHash);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function modifyEngineerById($engineerobject) {
+      $database = new Database();
+      $database->query("UPDATE engineers
+                        SET engineers.engineerName = :engineerName,
+                            engineers.engineerEmail = :engineerEmail,
+                            engineers.availableDays = :availableDays,
+                            engineers.sAMAccountName = :sAMAccountName,
+                            engineers.engineerLevel = :engineerLevel,
+                            engineers.helpdesk = :helpdesk,
+                            engineers.superuser = :superuser,
+                            engineers.disabled = :disabled,
+                            engineers.localLoginHash = :localLoginHash
+                        WHERE engineers.idengineers = :id
+                        ");
+      $database->bind(":id", $engineerobject->id);
+      $database->bind(":engineerName", $engineerobject->engineerName);
+      $database->bind(":engineerEmail", $engineerobject->engineerEmail);
+      $database->bind(":availableDays", $engineerobject->availableDays);
+      $database->bind(":sAMAccountName", $engineerobject->sAMAccountName);
+      $database->bind(":engineerLevel", $engineerobject->engineerLevel);
+      $database->bind(":helpdesk", $engineerobject->helpdesk);
+      $database->bind(":superuser", $engineerobject->superuser);
+      $database->bind(":disabled", $engineerobject->disabled);
+      $database->bind(":localLoginHash", $engineerobject->localLoginHash);
+      $database->execute();
+      return $database->lastInsertId();
+    }
+
+    public function getEngineerById($id) {
+      $database = new Database();
+      $database->query("SELECT * FROM engineers
+                        WHERE idengineers = :id");
+      $database->bind(":id", $id);
+      $result = $database->single();
+      return $result;
+    }
+
 }
