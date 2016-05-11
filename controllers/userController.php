@@ -7,6 +7,7 @@ class userController {
     // create methods object
     $methods = new Route();
     $methods->add('/', 'actionUserDefault');
+    $methods->add('/profile', 'actionUserProfile');
     $methods->process(2);
   }
 
