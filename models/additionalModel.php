@@ -37,7 +37,9 @@
 
     public function getListOfAdditionalFields() {
       $database = new Database();
-      $database->query("SELECT * FROM call_additional_fields
+      $database->query("SELECT call_additional_fields.*, categories.categoryName, helpdesks.helpdesk_name FROM call_additional_fields
+                        JOIN categories ON categories.id = call_additional_fields.typeid
+                        JOIN helpdesks ON categories.helpdesk = helpdesks.id
                         ORDER BY typeid
                         ");
       $results = $database->resultset();
@@ -54,7 +56,7 @@
     }
 
     public function upsertAdditionalFields($additionalfields) {
-      isset($addiotnalfields->id) ? $this->modifyAdditionalFieldsById($additionalfields) : $this->addAdditionalFields($additionalfields);
+      isset($additionalfields->id) ? $this->modifyAdditionalFieldsById($additionalfields) : $this->addAdditionalFields($additionalfields);
     }
 
     public function addAdditionalFields($additionalfields) {
