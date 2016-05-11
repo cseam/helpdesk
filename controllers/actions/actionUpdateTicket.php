@@ -37,7 +37,7 @@ class actionUpdateTicket {
           $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" class=\"uploadfile\">Uploaded file ref: #".$name_of_uploaded_file."</a>";
         }
       }
-      $ticketdetails = $upload_code . htmlspecialchars($_POST["updatedetails"]);
+      $ticketdetails = $upload_code . htmlspecialchars($_POST["updatedetails"], ENT_COMPAT, 'ISO-8859-1', true);
       // check which button is pressed and process correctly
       SWITCH ($_POST["button_value"]) {
         CASE "add":
