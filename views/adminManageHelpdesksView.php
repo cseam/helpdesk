@@ -43,7 +43,7 @@
                         <input type="hidden" id="button_modify_value" name="button_modify_value" value="" />
                         <input type="hidden" id="id" name="id" value="<?php echo $value["id"] ?>" />
                         <button name="modify" value="modify" type="submit" onclick="this.form.button_modify_value.value = this.value;">Modify</button>
-                        <button name="delete" value="delete" type="submit" onclick="this.form.button_modify_value.value = this.value;">Delete</button>
+                        <button name="delete" value="delete" type="submit" onclick="this.form.button_modify_value.value = this.value;">Deactivate</button>
                     </form>
                 </tr>
         <?php  }

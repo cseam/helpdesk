@@ -79,13 +79,13 @@ class loginController {
                     // TODO update engineer status as logged into system
                     // TODO update engineer punchcard
                     // reroute
-                      header('Location: /');
+                      isset($_SESSION['entrypoint']) ? header('Location: ' . $_SESSION['entrypoint'] ) : header('Location: /');
                       exit;
                   } else {
                     // assume user isnt engineer
                     $_SESSION['sAMAccountName'] = $_POST['username'];
                     // reroute
-                      header('Location: /');
+                      isset($_SESSION['entrypoint']) ? header('Location: ' . $_SESSION['entrypoint'] ) : header('Location: /');
                       exit;
                   }
               } else {
