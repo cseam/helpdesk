@@ -91,7 +91,8 @@
 
     public function getListOfEngineers() {
       $database = new Database();
-      $database->query("SELECT * FROM engineers");
+      $database->query("SELECT * FROM engineers
+                        ORDER BY helpdesk, engineerName");
       $results = $database->resultset();
       return $results;
     }
@@ -100,7 +101,7 @@
       $database = new Database();
       $database->query("UPDATE engineers
                         SET engineers.disabled = 1
-                        WHERE engineers.id = :id");
+                        WHERE engineers.idengineers = :id");
       $database->bind(":id", $id);
       $database->execute();
       return $database->lastInsertId();
@@ -125,7 +126,7 @@
       $database->bind(":disabled", $engineerobject->disabled);
       $database->bind(":localLoginHash", $engineerobject->localLoginHash);
       $database->execute();
-      return $database_>lastInsertId();
+      return $database->lastInsertId();
     }
 
     public function modifyEngineerById($engineerobject) {
@@ -153,7 +154,7 @@
       $database->bind(":disabled", $engineerobject->disabled);
       $database->bind(":localLoginHash", $engineerobject->localLoginHash);
       $database->execute();
-      return $database_>lastInsertId();
+      return $database->lastInsertId();
     }
 
     public function getEngineerById($id) {

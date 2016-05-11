@@ -32,6 +32,7 @@ class adminController {
     $methods->add('/quickresponse', 'actionAdminModifyQuickResponse');
     $methods->add('/helpdesk', 'actionAdminModifyHelpdesk');
     $methods->add('/sla', 'actionAdminModifySla');
+    $methods->add('/engineer', 'actionAdminModifyEngineer');
     $methods->process(2);
   }
 
