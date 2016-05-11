@@ -33,6 +33,7 @@ class adminController {
     $methods->add('/helpdesk', 'actionAdminModifyHelpdesk');
     $methods->add('/sla', 'actionAdminModifySla');
     $methods->add('/engineer', 'actionAdminModifyEngineer');
+    $methods->add('/additional', 'actionAdminModifyAdditional');
     $methods->process(2);
   }
 
