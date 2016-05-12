@@ -20,7 +20,7 @@ define('LOCALLOGIN', true);
 // companys ldap server location for authentications
 define('LDAP_SERVER', 'ldap://ldapserver.domainnamehere.co.uk');
 // database location, schema, username and password
-define('DB_LOC', 'localhost');
+define('DB_LOC', 'localhost:port');
 define('DB_SCHEMA', 'helpdesk');
 define('DB_USER','username');
 define('DB_PASSWORD','password');
