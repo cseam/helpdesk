@@ -4,18 +4,23 @@
 	<fieldset>
 		<legend>Contact details</legend>
 			<label for="name" title="Contact name for this call">Your/Contact Name</label>
-			<input type="text" id="name" name="name" value=""  required />
+			<input type="text" id="name" name="name" value="<?php isset($pagedata->userProfile['contactName']) ? print($pagedata->userProfile['contactName']) : '' ?>"  required />
 			<label for="contact_email" title="Contact email so engineer can comunicate">Contact Email</label>
-			<input type="text" id="contact_email" name="contact_email" value="<?php echo $_SESSION['sAMAccountName']."@". COMPANY_SUFFIX;?>"  required />
+			<input type="text" id="contact_email" name="contact_email" value="<?php isset($pagedata->userProfile['contactEmail']) ? print($pagedata->userProfile['contactEmail']) : '' ?>"  required />
 			<label for="tel" title="Contact telephone so engineer can comunicate">Telephone / Mobile Number</label>
-			<input type="text" id="tel" name="tel" value="" />
+			<input type="text" id="tel" name="tel" value="<?php isset($pagedata->userProfile['contactTel']) ? print($pagedata->userProfile['contactTel']) : '' ?>" />
 	</fieldset>
 	<fieldset>
 		<legend>Location of issue</legend>
 			<label for="location" title="location of issue">Building</label>
+			<?php
+				$userProfileLocationId = isset($pagedata->userProfile['location']) ? $pagedata->userProfile['location'] : '';
+			?>
 			<select id="location" name="location">
-				<option value="" SELECTED>Please select</option>
-				<?php foreach ($pagedata->location as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["locationName"]."</option>";} ?>
+				<option value="" SELECTED>Please Select</option>
+				<?php foreach ($pagedata->location as $key => $value) { ?>
+				<option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $userProfileLocationId) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
+				<?php  } ?>
 			</select>
 			<label for="room" title="Room where issue is">Room or Place</label>
 			<input type="text" id="room" name="room" value="" />
