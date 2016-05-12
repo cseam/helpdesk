@@ -10,6 +10,7 @@
                         WHERE sAMAccountName = :sAMAccountName");
       $database->bind(":sAMAccountName", $sAMAccountName);
       $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
       return $result;
     }
 
