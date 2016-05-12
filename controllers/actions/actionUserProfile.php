@@ -28,7 +28,27 @@ class actionUserProfile {
             $object->contactEmail = htmlspecialchars($_POST["contactEmail"]);
             $object->contactTel = htmlspecialchars($_POST["contactTel"]);
             $object->location = htmlspecialchars($_POST["location"]);
+            $object->notify = htmlspecialchars($_POST["notify"]);
             $userProfileModel->upsertUserProfile($object);
+            // update profile picture
+              $upload_code = $ext = null;
+              if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
+                //define uploads folder from config
+                $upload = ROOT . "/uploads/profile_images/" . $_SESSION['sAMAccountName'] . ".jpg";
+                //define temp upload location
+                $tmp_path = $_FILES["attachment"]["tmp_name"];
+                //check file is jpeg
+                if (mime_content_type($tmp_path) == "image/jpeg") {
+                  //resize image
+                  $resize_tmp = imagecreatefromjpeg($tmp_path);
+                  $resize_scl = imagescale($resize_tmp, 200, 300);
+                  imagejpeg($resize_scl, $tmp_path);
+                  imagedestroy($resize_tmp);
+                  imagedestroy($resize_scl);
+                  //move file from temp location to uploads folder
+                  move_uploaded_file($tmp_path, $upload);
+                }
+              }
             // PRG Redirect
             header('Location: /user/complete');
             exit;
