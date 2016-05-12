@@ -20,14 +20,15 @@
 
     public function addUserProfile($object) {
       $database = new Database();
-      $database->query("INSERT INTO user_profiles (sAMAccountName, contactName, contactEmail, contactTel, location)
-                        VALUES (:sAMAccountName, :contactName, :contactEmail, :contactTel, :location)
+      $database->query("INSERT INTO user_profiles (sAMAccountName, contactName, contactEmail, contactTel, location, notify)
+                        VALUES (:sAMAccountName, :contactName, :contactEmail, :contactTel, :location, :notify)
                       ");
       $database->bind(":sAMAccountName", $object->sAMAccountName);
       $database->bind(":contactName", $object->contactName);
       $database->bind(":contactEmail", $object->contactEmail);
       $database->bind(":contactTel", $object->contactTel);
       $database->bind(":location", $object->location);
+      $database->bind(":notify", $object->notify);
       $database->execute();
       return $database->lastInsertId();
     }
@@ -39,7 +40,8 @@
                             user_profiles.contactName = :contactName,
                             user_profiles.contactEmail = :contactEmail,
                             user_profiles.contactTel = :contactTel,
-                            user_profiles.location = :location
+                            user_profiles.location = :location,
+                            user_profiles.notify = :notify
                         WHERE user_profiles.id = :id
                       ");
       $database->bind(":id", $object->id);
@@ -48,6 +50,7 @@
       $database->bind(":contactEmail", $object->contactEmail);
       $database->bind(":contactTel", $object->contactTel);
       $database->bind(":location", $object->location);
+      $database->bind(":notify", $object->notify);
       $database->execute();
       return $database->lastInsertId();
     }
