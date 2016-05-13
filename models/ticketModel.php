@@ -67,7 +67,7 @@
                         FROM calls
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         WHERE calls.helpdesk = :helpdesk
                         ORDER BY callid DESC
                         LIMIT :limit");
@@ -113,7 +113,7 @@
     public function getOldestTicketByEngineer($engineerid) {
       $database = new Database();
       $database->query("SELECT * FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE calls.assigned
@@ -155,7 +155,7 @@
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
                         FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE status = 4
@@ -191,7 +191,7 @@
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
                         FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE FIND_IN_SET(calls.helpdesk, :helpdesk)
@@ -261,7 +261,7 @@
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
                         FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE FIND_IN_SET(calls.helpdesk, :helpdesk)
@@ -278,7 +278,7 @@
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
                         FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE FIND_IN_SET(calls.helpdesk, :helpdesk)
@@ -295,7 +295,7 @@
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
                         FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE FIND_IN_SET(calls.helpdesk, :helpdesk)
@@ -314,7 +314,7 @@
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
                         FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
                         WHERE FIND_IN_SET(calls.helpdesk, :helpdesk)
@@ -331,7 +331,7 @@
       // EPIC FAIL :( couldent get SQL IN to work with comma helpdesk list so using FIND IN SET as fudge, CLOWN FIESTA! (note to future self: FIX THIS!)
       $database = new Database();
       $database->query("SELECT engineers.sAMAccountName, engineers.idengineers, engineers.engineerName FROM calls
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         WHERE FIND_IN_SET(engineers.helpdesk, :helpdesk)
                         AND engineers.disabled != 1
                         GROUP BY assigned
@@ -367,7 +367,7 @@
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         WHERE calls.status !=2
                         AND FIND_IN_SET(calls.helpdesk, :helpdesk)
                         ORDER BY calls.assigned, calls.opened");
@@ -397,7 +397,7 @@
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold FROM calls
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
-                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         WHERE (details LIKE :term OR callid LIKE :term OR title LIKE :term OR name LIKE :term OR email LIKE :term OR tel LIKE :term OR room LIKE :term)
                         AND FIND_IN_SET(calls.helpdesk, :scope)
                         ORDER BY callid DESC
