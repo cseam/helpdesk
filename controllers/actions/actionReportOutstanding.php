@@ -22,6 +22,7 @@ class actionReportOutstanding {
     $pagedata->sentaway = $statsModel->countTicketsByStatusCode(5, $_SESSION['engineerHelpdesk']);
     $pagedata->unassigned = sizeof($ticketModel->getUnassignedTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
     $pagedata->over7days = sizeof($ticketModel->get7DayTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
+    $pagedata->stagnate = sizeof($ticketModel->getStagnateTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
     $pagedata->reportResults = $statsModel->countEngineerTotalsOutstatnding($_SESSION['engineerHelpdesk']);
 
     //render template using $pagedata object

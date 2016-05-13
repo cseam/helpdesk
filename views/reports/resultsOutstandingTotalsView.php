@@ -42,6 +42,10 @@
               <td>Open</td>
               <td><?php echo $pagedata->open["countTotal"] ?></td>
             </tr>
+            <tr>
+              <td>Stagnant</td>
+              <td><?php echo $pagedata->stagnate ?></td>
+            </tr>
           </tbody>
         </table>
         <p>
