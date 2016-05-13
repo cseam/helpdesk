@@ -1,4 +1,4 @@
-<h3>Your Tickets</h3>
+<h3>Your Open Tickets</h3>
 <table id="yourcalls">
   <tbody>
     <?php
