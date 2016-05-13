@@ -372,6 +372,21 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			";
 			$conn->exec($sql);
 				echo "<p>(call subscriptions) created successfully</p>";
+			// user profiles
+			$sql = "
+			CREATE TABLE `user_profiles` (
+			`id` int(11) NOT NULL AUTO_INCREMENT,
+			`sAMAccountName` varchar(255) DEFAULT NULL,
+			`contactName` varchar(255) DEFAULT NULL,
+			`contactEmail` varchar(255) DEFAULT NULL,
+			`contactTel` varchar(255) DEFAULT NULL,
+			`location` varchar(255) DEFAULT NULL,
+			`notify` varchar(255) DEFAULT NULL,
+			PRIMARY KEY (`id`)
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+		";
+		$conn->exec($sql);
+			echo "<p>(user profiles) created successfully</p>";
 
 			}
 
