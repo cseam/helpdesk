@@ -172,6 +172,16 @@ class actionUpdateTicket {
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Sent Away";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and sent away, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
+        CASE "sendinv":
+          $ticketModel->updateTicketStatusById($_POST["id"], 5);
+          $ticketModel->updateTicketRequireInvoiceById($_POST["id"]);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "sendaway", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "update", $_SESSION["sAMAccountName"] , "Awaiting invoice:".$ticketdetails);
+          $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
+          $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
+          $pagedata->title = "#".$_POST["id"]." Ticket Updated - Sent Away, Awaiting invoice";
+          $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and sent away and is awaiting invoice, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
+          break;
         CASE "return":
           $ticketModel->updateTicketStatusById($_POST["id"], 1);
           $ticketModel->updateTicketDetailsById($_POST["id"], "returned", $_SESSION["sAMAccountName"] , $ticketdetails);

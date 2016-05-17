@@ -79,6 +79,7 @@
           <button name="forward" value="forward" type="submit" onclick="this.form.button_value.value = this.value;">Forward</button>
           <?php if (isset($ticketDetails["subscribed"])) {?><button name="unsubscribe" value="unsubscribe" type="submit" onclick="this.form.button_value.value = this.value;">Unsubscribe</button><?php } else {?><button name="subscribe" value="subscribe" type="submit" onclick="this.form.button_value.value = this.value;">Subscribe</button><?php } ?>
           <?php if ($ticketDetails["requireinvoice"] == 1) {?><button name="invoicearrived" value="invoicearrived" type="submit" onclick="this.form.button_value.value = this.value;">Invoice Received</button><?php } else {?><button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button><?php } ?>
+          <button name="sendinv" value="sendinv" type="submit" onclick="this.form.button_value.value = this.value;">Send Away & Invoice</button>
           <?php }
           // show only for engineers, managers & superusers
           if ($_SESSION['engineerLevel'] >= "1" or $_SESSION['superuser'] === "1") { ?>
@@ -87,7 +88,9 @@
           <?php if ($ticketDetails["status"] == 4) { ?><button name="deescalate" value="deescalate" type="submit" onclick="this.form.button_value.value = this.value;">De-escalate</button><?php } else { ?><button name="escalate" value="escalate" type="submit" onclick="this.form.button_value.value = this.value;">Escalate</button><?php } ?>
           <?php if ($ticketDetails["status"] == 3) { ?><button name="unhold" value="unhold" type="submit" onclick="this.form.button_value.value = this.value;">un-Hold</button><?php } else { ?><button name="hold" value="hold" type="submit" onclick="this.form.button_value.value = this.value;">Hold</button><?php } ?>
           <button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
-          <?php } ?>
+          <?php }
+          // show only for users ?>
+
           <button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button>
           <?php if ($ticketDetails["status"] == 2) { ?><button name="open" value="open" type="submit" onclick="this.form.button_value.value = this.value;">Reopen</button><?php } ?>
           <?php if ($ticketDetails["status"] == 2 or $_SESSION['engineerLevel'] != 1) {?>
