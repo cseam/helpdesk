@@ -890,7 +890,54 @@ input.cmn-toggle-round:checked + label:after {
 	padding-bottom: 0.4rem;
 }
 
+/* chart colours */
 
+.ct-series-1 {
+	background: #BFCC80;
+}
+.ct-series-2 {
+	background: #FFA38B;
+}
+.ct-series-3 {
+	background: #FDD26E;
+}
+.ct-series-4 {
+	background: #C09C83;
+}
+.ct-series-5 {
+	background: #B8CCEA;
+}
+.ct-series-6 {
+	background: #BFCEC2;
+}
+.ct-series-7 {
+	background: #D1CCBD;
+}
+.ct-series-8 {
+	background: #a748ca;
+}
+.ct-series-9 {
+	background: #f05b4f;
+}
+.ct-series-10 {
+	background: #dda458;
+}
+.ct-series-11 {
+	background: #eacf7d;
+}
+.ct-series-12 {
+	background: #86797d;
+}
+.ct-series-13 {
+	background: #b2c326;
+}
+.ct-series-14 {
+	background: #6188e2;
+}
+.ct-series-15 {
+	background: #6b0392;
+}
+	
 
 /*** Responsive Stuff ***/
 @media screen and (max-width: 768px) and (orientation: portrait), screen and (max-width: 768px) and (orientation: landscape) {

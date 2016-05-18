@@ -19,6 +19,7 @@ class reportController {
     $generatereport->add('/reason', 'actionReportReason');
     $generatereport->add('/recentwork', 'actionReportRecentWork');
     $generatereport->add('/outstanding', 'actionReportOutstanding');
+    $generatereport->add('/annualgraphs', 'actionReportAnnualgraphs');
     $generatereport->process(2);
   }
 
