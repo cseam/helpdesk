@@ -11,10 +11,6 @@
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
 
-        <pre>
-          <?php print_r($pagedata->graphstats) ?>
-        </pre>
-
 
 <script type="text/javascript">
 
@@ -25,8 +21,8 @@ new Chartist.Line('.annualgraph', {
     <?php
     foreach($pagedata->graphstats as $key => $value) {
       echo "[";
-        foreach($value as $sqlname => $sqlvalue) {
-          echo $sqlvalue["result"] . ",";
+        foreach($value as $resultskey => $resultsvalue) {
+          echo $resultsvalue . ",";
         }
       echo "],";
     } ?>
@@ -42,7 +38,14 @@ new Chartist.Line('.annualgraph', {
 
 });
 </script>
-<div class="annualgraph"></div>
+<div class="annualgraph" style="height: 50vh;"></div>
+<?php
+  $counter = 0;
+  foreach($pagedata->graphstats as $key => $value) {
+    $counter++;
+    ?>
+  <span style="font-size: 0.7rem;color: white;padding: 0.1rem 0.5rem;" class="ct-series-<?php echo $counter ?>"><?php echo $key;?></span>
+<?php  } ?>
 
 
       </div>

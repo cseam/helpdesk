@@ -8,6 +8,7 @@ class actionReportAnnualgraphs {
     //create new models for required data
     $ticketModel = new ticketModel();
     $statsModel = new statsModel();
+    $helpdeskModel = new helpdeskModel();
     $pagedata = new stdClass();
     //set report name
     $reportname = "Annual Graphs Totals";
@@ -39,7 +40,8 @@ class actionReportAnnualgraphs {
       }
 
     // take this helpdesks results and add to array for page data
-    $pagedata->graphstats[$value] = $results;
+    $friendlyname = $helpdeskModel->getFriendlyHelpdeskName($value);
+    $pagedata->graphstats[$friendlyname["helpdesk_name"]] = $results;
 
     }
 
