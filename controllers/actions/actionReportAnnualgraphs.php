@@ -30,16 +30,16 @@ class actionReportAnnualgraphs {
     //iterate over and merge to get 1 years full data
       for($i=1; $i <= 12; $i++) {
         $results[$i] = 0;
-        foreach ($lastyear as $key => $value) {
-          if ($value["MonthNum"] == $i) { $results[$i] = $value["Totals"]; }
+        foreach ($lastyear as $lykey => $lyvalue) {
+          if ($lyvalue["MonthNum"] == $i) { $results[$i] = $lyvalue["Totals"]; }
         }
-        foreach ($thisyear as $key => $value) {
-          if ($value["MonthNum"] == $i) { $results[$i] = $value["Totals"]; }
+        foreach ($thisyear as $tykey => $tyvalue) {
+          if ($tyvalue["MonthNum"] == $i) { $results[$i] = $tyvalue["Totals"]; }
         }
       }
 
     // take this helpdesks results and add to array for page data
-    $pagedata->graphstats[$key] = $results;
+    $pagedata->graphstats[$value] = $results;
 
     }
 
