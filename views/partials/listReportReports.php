@@ -11,7 +11,7 @@
   <a href="/report/reason/"><img src="/public/images/ICONS-reason.svg" alt="reason behind issue" title="reason behind issue" width="24" height="25" />Reason behind issue</a>
   <a href="/report/recentwork/"><img src="/public/images/ICONS-workingon.svg" alt="working on" title="working on" width="24" height="25" />Recent Work</a>
   <a href="/report/outstanding"><img src="/public/images/ICONS-workrate.svg" alt="outstanding" title="outstanding" width="24" height="25" />Outstanding Totals</a>
-  <a href="/report/annualgraphs"><img src="/public/images/ICONS-workrate.svg" alt="annualgraphs" title="annualgraphs" width="24" height="25" />Annual Graphs</a>
+  <a href="/report/annualgraphs"><img src="/public/images/ICONS-graph.svg" alt="annualgraphs" title="annualgraphs" width="24" height="25" />Annual Graphs</a>
 <?php
   // manager reports
   if ($_SESSION['engineerLevel'] > 1 || $_SESSION['superuser'] == 1) { ?>
