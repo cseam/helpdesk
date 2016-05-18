@@ -16,31 +16,33 @@ class actionReportAnnualgraphs {
     //set page details
     $pagedata->details = "Graph showing the monthly numbers for a defined helpdesk.";
 
-    $helpdesks = explode(",", $_SESSION['engineerHelpdesk']);
+    //define arrays
     $graphstats = $lastyear = $thisyear = $results = array();
+    //get helpdesks to plot
+    $helpdesks = explode(",", $_SESSION['engineerHelpdesk']);
+    // loop over arrays
     foreach ($helpdesks as &$value) {
-    //  $graphstats[$value] = $statsModel->countTotalsThisYearbyHelpdesk(date("Y"), $value);
 
+    //get results for year
     $thisyear = $statsModel->countTotalsThisYearbyHelpdesk(date("Y"), $value);
     $lastyear = $statsModel->countTotalsThisYearbyHelpdesk(date("Y")-1, $value);
 
+    //iterate over and merge to get 1 years full data
       for($i=1; $i <= 12; $i++) {
-        $results[$i]["result"] = 0;
-        foreach ($lastyear as &$value) {
-          if ($value["MonthNum"] == $i) {
-            $results[$i]["result"] = $value["Totals"];
-          }
+        $results[$i] = 0;
+        foreach ($lastyear as $key => $value) {
+          if ($value["MonthNum"] == $i) { $results[$i] = $value["Totals"]; }
         }
-        foreach ($thisyear as &$value) {
-            if ($value["MonthNum"] == $i) {
-              $results[$i]["result"] = $value["Totals"];
-          }
+        foreach ($thisyear as $key => $value) {
+          if ($value["MonthNum"] == $i) { $results[$i] = $value["Totals"]; }
         }
-        $graphstats[$value] = $results[$i];
       }
+
+    // take this helpdesks results and add to array for page data
+    $pagedata->graphstats[$key] = $results;
+
     }
 
-    $pagedata->graphstats = $graphstats;
     //render template using $pagedata object
     require_once "views/reports/resultsAnnualGraphsView.php";
   }

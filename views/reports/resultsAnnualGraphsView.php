@@ -11,6 +11,10 @@
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
 
+        <pre>
+          <?php print_r($pagedata->graphstats) ?>
+        </pre>
+
 
 <script type="text/javascript">
 
