@@ -220,6 +220,22 @@
       return $result;
     }
 
+    public function countTotalsThisYearbyHelpdesk($year,$helpdesk) {
+      $database = new Database();
+      $database->query("SELECT MONTH(calls.closed) AS MonthNum, count(calls.callid) AS Totals
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk=helpdesks.id
+                        WHERE calls.status = 2
+                        AND calls.helpdesk = :helpdesk
+                        AND Year(calls.closed) = :year
+                        GROUP BY Month(calls.closed)
+                        ORDER BY MonthNum, calls.helpdesk");
+      $database->bind(':helpdesk', $helpdesk);
+      $database->bind(':year', $year);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
     public function countWorkRateTotalsThisMonth($scope = null) {
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
