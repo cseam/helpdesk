@@ -15,7 +15,10 @@ class authentication
           // needs some work to stop post to pages other than login working but in principal posts to login need to not reroute
           if (!preg_match("%login%", $baseurl[1])) {
             if (preg_match("%digitalsign%", $baseurl[1])) { } else {
-              if (!preg_match("%logout%", $baseurl[1])) { $_SESSION['entrypoint'] = $_SERVER['REQUEST_URI']; }
+              if (!preg_match("%logout%", $baseurl[1])) {
+                  // if not on the logout page set the entry point
+                    $_SESSION['entrypoint'] = $_SERVER['REQUEST_URI'];
+              }
               // reroute
               header('Location: /login/');
               exit;

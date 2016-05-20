@@ -28,6 +28,7 @@ class Route {
     // check if no matches 404
     if (sizeof($matches) < 1) {
       // no matches display 404
+      header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
       $error = new stdClass();
       $error->title = "404 Error";
       $error->message = "Opps! Page not found.";
