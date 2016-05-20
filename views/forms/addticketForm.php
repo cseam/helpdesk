@@ -119,7 +119,24 @@
 	<fieldset>
 		<legend>Attachments (optional)</legend>
 			<label for="attachment" title="add attachments if required">Picture or Screenshot</label>
-			<input type="file" name="attachment" accept="application/pdf,application/msword,image/jpeg,image/png">
+			<input type="file" name="attachment" accept="application/pdf,application/msword,image/jpeg,image/png" id="attachment">
+			<label>Attachment Image Preview</label>
+			<img id="imgPreview" src="#" style="max-width:200px;min-height:100px;min-width:100px;border:1px solid silver;background:#eee; padding: 15px;" />
+			<script type="text/javascript">
+			$(function() {
+				// Wait for DOM ready state
+				function previewImg(input) {
+					if (input.files && input.files[0]) {
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							$('#imgPreview').attr('src', e.target.result);
+						}
+						reader.readAsDataURL(input.files[0]);
+					}
+				}
+				$("#attachment").change(function() { previewImg(this); });
+			});
+			</script>
 	</fieldset>
 	<?php if ($_SESSION['engineerId'] !== null) {?>
 		<input type="hidden" name="engineerid" id="engineerid" value="<?php echo $_SESSION['engineerId'];?>" />

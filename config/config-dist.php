@@ -16,7 +16,7 @@ define('COMPANY_NAME', 'Great Company PLC');
 // company suffix used to postfix username for auto complete email etc
 define('COMPANY_SUFFIX', 'domainnamehere.co.uk');
 // allow local admin login
-define('LOCALLOGIN', true);
+define('LOCALLOGIN', false);
 // companys ldap server location for authentications
 define('LDAP_SERVER', 'ldap://ldapserver.domainnamehere.co.uk');
 // database location, schema, username and password
