@@ -61,6 +61,16 @@
       return $results;
     }
 
+    public function getAllTicketsNoLimit() {
+      $database = new Database();
+      $database->query("SELECT * FROM calls
+                        JOIN status ON calls.status=status.id
+                        ORDER BY callid DESC
+                        ");
+      $results = $database->resultset();
+      return $results;
+    }
+
     public function getTicketsByHelpdesk($helpdeskid = 0, $limit = 10) {
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
