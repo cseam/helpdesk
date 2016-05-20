@@ -46,6 +46,30 @@
         <legend>Update Ticket</legend>
         <p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
         <p><label for="attachment">Picture or Attachment</label><input type="file" name="attachment" accept="application/pdf,application/msword,image/*" style="background-color: transparent;" id="attachment"></p>
+        <span id="preview" style="display: none;">
+          <label>Attachment Image Preview</label>
+          <img id="imgPreview" src="#" style="max-width:200px;min-height:100px;min-width:100px;border:1px solid silver;background:#eee; padding: 15px;" />
+          <p id="imageClear" class="hyperbutton" style="display: block; margin: 0">Remove Attachment</p>
+        </span>
+        <script type="text/javascript">
+        $(function() {
+          // Wait for DOM ready state
+          function previewImg(input) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                $('#imgPreview').attr('src', e.target.result);
+              }
+              reader.readAsDataURL(input.files[0]);
+            }
+          }
+          $("#attachment").change(function() { previewImg(this); $("#preview").slideDown(); });
+          $("#imageClear").on('click', function() { $("#attachment").val(""); $("#preview").slideUp(); });
+        });
+        </script>
+
+
+
         <?php
         // show only for engineers, managers & superusers
         if ($_SESSION['engineerLevel'] >= "1" or $_SESSION['superuser'] === "1") {
