@@ -123,6 +123,7 @@
 			<span id="preview" style="display: none;">
 				<label>Attachment Image Preview</label>
 				<img id="imgPreview" src="#" style="max-width:200px;min-height:100px;min-width:100px;border:1px solid silver;background:#eee; padding: 15px;" />
+				<p id="imageClear" class="hyperbutton" style="display: block; margin: 0">Remove Attachment</p>
 			</span>
 			<script type="text/javascript">
 			$(function() {
@@ -137,6 +138,7 @@
 					}
 				}
 				$("#attachment").change(function() { previewImg(this); $("#preview").slideDown(); });
+				$("#imageClear").on('click', function() { $("#attachment").val(""); $("#preview").slideUp(); });
 			});
 			</script>
 	</fieldset>
