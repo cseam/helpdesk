@@ -120,8 +120,10 @@
 		<legend>Attachments (optional)</legend>
 			<label for="attachment" title="add attachments if required">Picture or Screenshot</label>
 			<input type="file" name="attachment" accept="application/pdf,application/msword,image/jpeg,image/png" id="attachment">
-			<label>Attachment Image Preview</label>
-			<img id="imgPreview" src="#" style="max-width:200px;min-height:100px;min-width:100px;border:1px solid silver;background:#eee; padding: 15px;" />
+			<span id="preview" style="display: none;">
+				<label>Attachment Image Preview</label>
+				<img id="imgPreview" src="#" style="max-width:200px;min-height:100px;min-width:100px;border:1px solid silver;background:#eee; padding: 15px;" />
+			</span>
 			<script type="text/javascript">
 			$(function() {
 				// Wait for DOM ready state
@@ -134,7 +136,7 @@
 						reader.readAsDataURL(input.files[0]);
 					}
 				}
-				$("#attachment").change(function() { previewImg(this); });
+				$("#attachment").change(function() { previewImg(this); $("#preview").slideDown(); });
 			});
 			</script>
 	</fieldset>
