@@ -7,20 +7,28 @@
 </head>
 <body>
 <div class="section" style="overflow: auto;">
-  <h2>Upgrade Database Existing Records</h2>
+  <h2>Split Call Details Out, Upgrade Database Existing Records</h2>
   <p>
     Used to upgrade ticket details from single record to split ones
   </p>
   <p>
-    listed are all updates for all tickets split out
+    listed are all updates for all tickets split out 
   </p>
 
+<style>
+  table
+  {
+      table-layout: fixed;
+      width: 100%;
+  }
+</style>
 
   <table>
     <thead>
       <tr>
         <th>Call ID</th>
         <th>Update</th>
+        <th>Calculated Timestamp</th>
       </tr>
     </thead>
     <tbody>
@@ -41,7 +49,7 @@
 
   // get all tickets to process
   //$ticketDetails = $ticketModel->getAllTicketsNoLimit();
-  $ticketDetails = $ticketModel->getAllTickets(10000);
+  $ticketDetails = $ticketModel->getAllTickets(1000);
   // loop all tickets
   foreach ($ticketDetails as $key => $value) {
 
@@ -54,6 +62,8 @@
               echo "<tr>";
               echo "<td>" . $value["callid"] . "</td>";
               echo "<td>" . getNodeInnerHTML($tag1) . "</td>";
+              // need to parse date and time from $tag1 else output $value[opened]
+              echo "<td>" . $value["opened"] . "</td>";
               echo "</tr>";
             }
 
