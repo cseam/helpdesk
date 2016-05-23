@@ -54,7 +54,7 @@
   // get all tickets to process
   // $ticketDetails = $ticketModel->getAllTicketsNoLimit();
   // get 1000 tickets used when testing instead of getting 20,000 records
-  $ticketDetails = $ticketModel->getAllTickets(1000);
+  $ticketDetails = $ticketModel->getAllTickets(6000);
   // loop all tickets
   foreach ($ticketDetails as $key => $value) {
     // parse each ticket pulling out details
@@ -69,12 +69,18 @@
               echo "<td>" . $value["callid"] . "</td>";
               echo "<td>" . getNodeInnerHTML($tag1) . "</td>";
               echo "<td>";
+
+              // Match for new style ticket updates (works for all styles ! yay)
+              preg_match('/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $newupdates );
+              echo $newupdates[0];
+
+
               // need to parse date and time from $tag1 else output $value[opened], also need to make this more advanced to deal with 3 different formats, can split on right two spaces for datetime then strip () and check length for those that have seconds and those that dont
               if (DateTime::createFromFormat('d/m/Y H:i', substr($tag1->nodeValue, -16)) !== FALSE) {
                 $calcDT = DateTime::createFromFormat('d/m/Y H:i', substr($tag1->nodeValue, -16));
-                echo "<span style=\"color: orange\">" . $calcDT->format("Y-m-d H:i:s") . "</span>";
+                //echo "<span style=\"color: orange\">" . $calcDT->format("Y-m-d H:i:s") . "</span>";
               } else {
-                echo $value["opened"];
+                //echo $value["opened"];
               }
               echo "</td>";
             echo "</tr>";
