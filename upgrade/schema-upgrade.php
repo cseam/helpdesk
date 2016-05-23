@@ -52,47 +52,35 @@
 
   $counter = 0;
   // get all tickets to process
-  $ticketDetails = $ticketModel->getAllTicketsNoLimit();
-  // get 10 tickets used when testing instead of getting 20,000 records
-  // $ticketDetails = $ticketModel->getAllTickets(100);
+  // $ticketDetails = $ticketModel->getAllTicketsNoLimit();
+  // get 1000 tickets used when testing instead of getting 20,000 records
+  $ticketDetails = $ticketModel->getAllTickets(1000);
   // loop all tickets
   foreach ($ticketDetails as $key => $value) {
-
     // parse each ticket pulling out details
         $doc = new DOMDocument();
         $doc->loadHTML($value["details"]);
         $items = $doc->documentElement->getElementsByTagName('div');
             foreach ($items as $tag1)
             {
-              $counter++;
-              echo "<tr>";
+            $counter++;
+            echo "<tr>";
               echo "<td>".$counter."</td>";
               echo "<td>" . $value["callid"] . "</td>";
               echo "<td>" . getNodeInnerHTML($tag1) . "</td>";
-
               echo "<td>";
-              // need to parse date and time from $tag1 else output $value[opened]
+              // need to parse date and time from $tag1 else output $value[opened], also need to make this more advanced to deal with 3 different formats, can split on right two spaces for datetime then strip () and check length for those that have seconds and those that dont
               if (DateTime::createFromFormat('d/m/Y H:i', substr($tag1->nodeValue, -16)) !== FALSE) {
-                // it's a date
                 $calcDT = DateTime::createFromFormat('d/m/Y H:i', substr($tag1->nodeValue, -16));
-                //echo substr($tag1->nodeValue, -16);
                 echo "<span style=\"color: orange\">" . $calcDT->format("Y-m-d H:i:s") . "</span>";
               } else {
                 echo $value["opened"];
               }
-
-
-               echo "</td>";
-
-
-
-              echo "</tr>";
+              echo "</td>";
+            echo "</tr>";
             }
-
   }
-
- ?>
-
+?>
   </tbody>
 </table>
 </div>
