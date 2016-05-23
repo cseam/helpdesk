@@ -64,6 +64,7 @@
             foreach ($items as $tag1)
             {
             $counter++;
+            unset($newupdates);
             echo "<tr>";
               echo "<td>".$counter."</td>";
               echo "<td>" . $value["callid"] . "</td>";
@@ -72,7 +73,10 @@
 
               // Match for new style ticket updates (works for all styles ! yay)
               preg_match('/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $newupdates );
-              echo $newupdates[0];
+
+              if (isset($newupdates)) {
+               echo $newupdates[0];
+             } 
 
 
               // need to parse date and time from $tag1 else output $value[opened], also need to make this more advanced to deal with 3 different formats, can split on right two spaces for datetime then strip () and check length for those that have seconds and those that dont
