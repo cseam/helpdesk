@@ -29,7 +29,7 @@
       <tr>
         <th>Call ID</th>
         <th>Update Details</th>
-        <th>Parsed Timestamp</th>
+        <th>Action Taken</th>
       </tr>
     </thead>
     <tbody>
@@ -73,9 +73,9 @@
     }
 
   // get all tickets to process
-  // $ticketDetails = $ticketModel->getAllTicketsNoLimit();
+  $ticketDetails = $ticketModel->getAllTicketsNoLimit();
   // get 1000 tickets used when testing instead of getting 20,000 records
-  $ticketDetails = $ticketModel->getAllTickets(5000);
+  // $ticketDetails = $ticketModel->getAllTickets(5000);
 
   // Parse 1, loop all tickets, export all ticket updates to new table
   foreach ($ticketDetails as $key => $value) {
@@ -95,10 +95,8 @@
                 // this record should be inserted into a new table as its a ticket update
                 // create mysql date time stamp
                 $stamp = DateTime::createFromFormat('d/m/Y H:i', $timestamp[0]);
-
                 // parse sAMAccountName and status type
                 preg_match('/(\w*) (\w*) (\w*) - (\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $updatetoken );
-
                 // fudge as no space to split on
                 $switchval = substr($updatetoken[1] , -4);
                 SWITCH ($switchval) {
@@ -124,11 +122,18 @@
                     $status = 1;
                   break;
                 }
-
                 // execute query
-                $query = "INSERT INTO call_updates (callid, details, stamp, sAMAccountName, status) VALUES ('".$value["callid"]."','".getNodeInnerHTML($tag1)."','".$stamp->format("Y-m-d H:i:s")."','".$updatetoken[3]."','".$status."');";
-                $conn->exec($query);
-                //echo "Inserted Into Call_Updates - " . $stamp->format("Y-m-d H:i:s");
+                $database = new Database();
+                $database->query("INSERT INTO call_updates (callid, details, stamp, sAMAccountName, status)
+                                  VALUES (:callid, :details, :stamp, :sAMA, :status)
+                                ");
+                $database->bind(":callid", $value["callid"]);
+                $database->bind(":detail", getNodeInnerHTML($tag1));
+                $database->bind(":stamp", $stamp->format("Y-m-d H:i:s"));
+                $database->bind(":sAMA", $updatetoken[3]);
+                $database->bind(":status", $status);
+                $database->execute();
+                echo "Inserted Into Call_Updates";
               }
 
               echo "</td>";
