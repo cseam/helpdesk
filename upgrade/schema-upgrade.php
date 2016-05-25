@@ -75,7 +75,7 @@
   // get all tickets to process
   $ticketDetails = $ticketModel->getAllTicketsNoLimit();
   // get 1000 tickets used when testing instead of getting 20,000 records
-  // $ticketDetails = $ticketModel->getAllTickets(5000);
+  //$ticketDetails = $ticketModel->getAllTickets(10);
 
   // Parse 1, loop all tickets, export all ticket updates to new table
   foreach ($ticketDetails as $key => $value) {
@@ -96,7 +96,7 @@
                 // create mysql date time stamp
                 $stamp = DateTime::createFromFormat('d/m/Y H:i', $timestamp[0]);
                 // parse sAMAccountName and status type
-                preg_match('/(\w*) (\w*) (\w*) - (\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $updatetoken );
+                preg_match('/(\w*) (\w*) (\w*),{0,1}\s{0,1}-{0,1}\s{0,1}(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $updatetoken );
                 // fudge as no space to split on
                 $switchval = substr($updatetoken[1] , -4);
                 SWITCH ($switchval) {
@@ -122,15 +122,23 @@
                     $status = 1;
                   break;
                 }
+                // set sAMAccountName
+                if (isset($updatetoken[3])) {
+                  $sam = $updatetoken[3];
+                } else {
+                  // need to do additional checking for reassigned tickets eg "Ticket reassigned by danielsd2 (07/01/2016 09:37:33)"
+                  preg_match('/(\w*)\s{1}[(](\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $reassigned);
+                  $sam = $reassigned[1];
+                }
                 // execute query
                 $database = new Database();
-                $database->query("INSERT INTO call_updates (callid, details, stamp, sAMAccountName, status)
-                                  VALUES (:callid, :details, :stamp, :sAMA, :status)
+                $database->query("INSERT INTO call_updates (callid, stamp, details, sAMAccountName, status)
+                                  VALUES (:callid, :stamp, :detail, :sAMA, :status)
                                 ");
                 $database->bind(":callid", $value["callid"]);
-                $database->bind(":detail", getNodeInnerHTML($tag1));
                 $database->bind(":stamp", $stamp->format("Y-m-d H:i:s"));
-                $database->bind(":sAMA", $updatetoken[3]);
+                $database->bind(":detail", getNodeInnerHTML($tag1));
+                $database->bind(":sAMA", $sam);
                 $database->bind(":status", $status);
                 $database->execute();
                 echo "Inserted Into Call_Updates";
