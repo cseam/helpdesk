@@ -27,10 +27,9 @@
   <table>
     <thead>
       <tr>
-        <th>DB Row</th>
         <th>Call ID</th>
-        <th>Update</th>
-        <th>Calculated Timestamp</th>
+        <th>Update Details</th>
+        <th>Parsed Timestamp</th>
       </tr>
     </thead>
     <tbody>
@@ -50,12 +49,35 @@
       return $oDom->saveHTML();
   }
 
-  $counter = 0;
+  // create new db tables to store results
+  try {
+    // Connect to dev db
+    $conn = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $queryCreateUpdatesTable = "CREATE TABLE IF NOT EXISTS `call_updates` (
+        `ID` int(11) unsigned NOT NULL auto_increment,
+        `callid` int(11) DEFAULT NULL,
+        `stamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `details` longtext,
+        `sAMAccountName` varchar(45) DEFAULT NULL,
+        `status` int(11) DEFAULT '1',
+        PRIMARY KEY  (`ID`)
+      )";
+    $conn->exec($queryCreateUpdatesTable);
+    }
+  catch(PDOException $e)
+    {
+    echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
+    }
+
   // get all tickets to process
   // $ticketDetails = $ticketModel->getAllTicketsNoLimit();
   // get 1000 tickets used when testing instead of getting 20,000 records
-  $ticketDetails = $ticketModel->getAllTickets(6000);
-  // loop all tickets
+  $ticketDetails = $ticketModel->getAllTickets(1000);
+
+  // Parse 1, loop all tickets, export all ticket updates to new table
   foreach ($ticketDetails as $key => $value) {
     // parse each ticket pulling out details
         $doc = new DOMDocument();
@@ -63,33 +85,59 @@
         $items = $doc->documentElement->getElementsByTagName('div');
             foreach ($items as $tag1)
             {
-            $counter++;
-            unset($newupdates);
             echo "<tr>";
-              echo "<td>".$counter."</td>";
               echo "<td>" . $value["callid"] . "</td>";
               echo "<td>" . getNodeInnerHTML($tag1) . "</td>";
               echo "<td>";
+              // pull out date/time update from ticket
+              preg_match('/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $timestamp );
+              if (sizeof($timestamp) > 0) {
+                // this record should be inserted into a new table as its a ticket update
+                // create mysql date time stamp
+                $stamp = DateTime::createFromFormat('d/m/Y H:i', $timestamp[0]);
 
-              // Match for new style ticket updates (works for all styles ! yay)
-              preg_match('/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $newupdates );
+                // parse sAMAccountName and status type
+                preg_match('/(\w*) (\w*) (\w*) - (\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $updatetoken );
 
-              if (isset($newupdates)) {
-               echo $newupdates[0];
-             } 
+                // fudge as no space to split on
+                $switchval = substr($updatetoken[1] , -4);
+                SWITCH ($switchval) {
+                  CASE "osed":
+                    echo "STATUS: CLOSED";
+                  break;
+                  CASE "open":
+                    echo "STATUS: OPEN";
+                  break;
+                  CASE "hold":
+                    echo "STATUS: HOLD";
+                  break;
+                  CASE "ated":
+                    echo "STATUS: ESCALATED";
+                  break;
+                  CASE "away":
+                    echo "STATUS: AWAY";
+                  break;
+                  CASE "date":
+                    echo "STATUS: UPDATE";
+                  break;
+                  default:
+                    echo "NO SWITCH (UPDATE)";
+                  break;
+                }
 
-
-              // need to parse date and time from $tag1 else output $value[opened], also need to make this more advanced to deal with 3 different formats, can split on right two spaces for datetime then strip () and check length for those that have seconds and those that dont
-              if (DateTime::createFromFormat('d/m/Y H:i', substr($tag1->nodeValue, -16)) !== FALSE) {
-                $calcDT = DateTime::createFromFormat('d/m/Y H:i', substr($tag1->nodeValue, -16));
-                //echo "<span style=\"color: orange\">" . $calcDT->format("Y-m-d H:i:s") . "</span>";
-              } else {
-                //echo $value["opened"];
+                // execute query
+                $query = "INSERT INTO call_updates (callid, details, stamp, sAMAccountName) VALUES ('".$value["callid"]."','".getNodeInnerHTML($tag1)."','".$stamp->format("Y-m-d H:i:s")."','".$updatetoken[3]."');";
+                $conn->exec($query);
+                //echo "Inserted Into Call_Updates - " . $stamp->format("Y-m-d H:i:s");
               }
+
               echo "</td>";
             echo "</tr>";
             }
   }
+  // Parse 2, Remove ticket updates from call details leaving only original comment
+
+$conn = null;
 ?>
   </tbody>
 </table>
