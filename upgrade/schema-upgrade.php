@@ -75,7 +75,7 @@
   // get all tickets to process
   // $ticketDetails = $ticketModel->getAllTicketsNoLimit();
   // get 1000 tickets used when testing instead of getting 20,000 records
-  $ticketDetails = $ticketModel->getAllTickets(1000);
+  $ticketDetails = $ticketModel->getAllTickets(5000);
 
   // Parse 1, loop all tickets, export all ticket updates to new table
   foreach ($ticketDetails as $key => $value) {
@@ -103,30 +103,30 @@
                 $switchval = substr($updatetoken[1] , -4);
                 SWITCH ($switchval) {
                   CASE "osed":
-                    echo "STATUS: CLOSED";
+                    $status = 2;
                   break;
                   CASE "open":
-                    echo "STATUS: OPEN";
+                    $status = 1;
                   break;
                   CASE "hold":
-                    echo "STATUS: HOLD";
+                    $status = 3;
                   break;
                   CASE "ated":
-                    echo "STATUS: ESCALATED";
+                    $status = 4;
                   break;
                   CASE "away":
-                    echo "STATUS: AWAY";
+                    $status = 5;
                   break;
                   CASE "date":
-                    echo "STATUS: UPDATE";
+                    $status = 1;
                   break;
                   default:
-                    echo "NO SWITCH (UPDATE)";
+                    $status = 1;
                   break;
                 }
 
                 // execute query
-                $query = "INSERT INTO call_updates (callid, details, stamp, sAMAccountName) VALUES ('".$value["callid"]."','".getNodeInnerHTML($tag1)."','".$stamp->format("Y-m-d H:i:s")."','".$updatetoken[3]."');";
+                $query = "INSERT INTO call_updates (callid, details, stamp, sAMAccountName, status) VALUES ('".$value["callid"]."','".getNodeInnerHTML($tag1)."','".$stamp->format("Y-m-d H:i:s")."','".$updatetoken[3]."','".$status."');";
                 $conn->exec($query);
                 //echo "Inserted Into Call_Updates - " . $stamp->format("Y-m-d H:i:s");
               }
