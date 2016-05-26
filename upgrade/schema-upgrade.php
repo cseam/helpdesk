@@ -36,6 +36,7 @@
 <?php
   // up memory size to process request
   ini_set('memory_limit', '1024M');
+  ini_set('max_execution_time', 300);
   //hard code fudge as not using framework for this but this page will be destroyed once upgrade is done
   require_once "../config/config.php";
   require_once "../models/ticketModel.php";
