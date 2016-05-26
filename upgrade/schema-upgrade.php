@@ -49,6 +49,18 @@
       return $oDom->saveHTML();
   }
 
+  function getElementsByClass(&$parentNode, $className) {
+      $nodes=array();
+      $childNodeList = $parentNode;
+      for ($i = 0; $i < $childNodeList->length; $i++) {
+          $temp = $childNodeList->item($i);
+          if (stripos($temp->getAttribute('class'), $className) !== false) {
+              $nodes[]=$temp;
+          }
+      }
+
+      return $nodes;
+  }
   // create new db tables to store results
   try {
     // Connect to dev db
@@ -73,9 +85,9 @@
     }
 
   // get all tickets to process
-  $ticketDetails = $ticketModel->getAllTicketsNoLimit();
+  //$ticketDetails = $ticketModel->getAllTicketsNoLimit();
   // get 1000 tickets used when testing instead of getting 20,000 records
-  //$ticketDetails = $ticketModel->getAllTickets(10);
+  $ticketDetails = $ticketModel->getAllTickets(10);
 
   // Parse 1, loop all tickets, export all ticket updates to new table
   foreach ($ticketDetails as $key => $value) {
@@ -83,6 +95,9 @@
         $doc = new DOMDocument();
         $doc->loadHTML($value["details"]);
         $items = $doc->documentElement->getElementsByTagName('div');
+        $classValue=getElementsByClass($items, 'original');//will contain the three nodes under "content_node"
+        $original = getNodeInnerHTML($classValue[0]);
+
             foreach ($items as $tag1)
             {
             echo "<tr>";
@@ -147,9 +162,15 @@
               echo "</td>";
             echo "</tr>";
             }
+        // Parse 2, Remove ticket updates from call details leaving only original comment
+        $database = new Database();
+        $database->query("UPDATE calls
+                          SET calls.details = :original
+                          WHERE calls.callid = :callid");
+        $database->bind(":original", $original);
+        $database->bind(":callid", $value["callid"]);
+        $database->execute();
   }
-  // Parse 2, Remove ticket updates from call details leaving only original comment
-
 $conn = null;
 ?>
   </tbody>
