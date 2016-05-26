@@ -85,9 +85,9 @@
     }
 
   // get all tickets to process
-  //$ticketDetails = $ticketModel->getAllTicketsNoLimit();
+  $ticketDetails = $ticketModel->getAllTicketsNoLimit();
   // get 1000 tickets used when testing instead of getting 20,000 records
-  $ticketDetails = $ticketModel->getAllTickets(10);
+  //$ticketDetails = $ticketModel->getAllTickets(10);
 
   // Parse 1, loop all tickets, export all ticket updates to new table
   foreach ($ticketDetails as $key => $value) {
