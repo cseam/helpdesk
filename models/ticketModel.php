@@ -474,14 +474,42 @@
     }
 
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "") {
+      // needs updating to point to new call_updates table
       $message = "<div class=update>" . $update . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
+      // update timestamp
       $database = new Database();
       $database->query("UPDATE calls
-                        SET calls.details = CONCAT(calls.details, :details), calls.lastupdate = :lastupdate
+                        SET calls.lastupdate = :lastupdate
                         WHERE calls.callid = :callid");
+      $database->bind(":callid", $ticketid);
+      $database->bind(":lastupdate", date("c"));
+      $database->execute();
+      // update call_updates
+        SWITCH ($statuscode) {
+          CASE "sendaway":
+            $status = 5;
+          break;
+          CASE "hold":
+            $status = 3;
+          break;
+          CASE "escalated":
+            $status = 4;
+          break;
+          CASE "closed":
+            $status = 2;
+          break;
+          default:
+            $status = 1;
+          break;
+      }
+
+      $database->query("INSERT INTO call_updates (callid, stamp, details, sAMAccountName, status)
+                        VALUES (:callid, :lastupdate, :details, :who, :status)");
       $database->bind(":callid", $ticketid);
       $database->bind(":details", $message);
       $database->bind(":lastupdate", date("c"));
+      $database->bind(":who", $sAMAccountName);
+      $database->bind(":status", $status);
       $database->execute();
       return null;
     }
