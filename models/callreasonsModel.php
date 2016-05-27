@@ -6,9 +6,9 @@
 
     public function getReasonsByHelpdeskId($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT callreasons.id, callreasons.reason_name FROM callreasons
+      $database->query("SELECT call_reasons.id, call_reasons.reason_name FROM call_reasons
                         WHERE helpdesk_id IN(:helpdesk)
-                        ORDER BY callreasons.reason_name ASC
+                        ORDER BY call_reasons.reason_name ASC
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
@@ -18,8 +18,8 @@
 
     public function getListOfReasons() {
       $database = new Database();
-      $database->query("SELECT callreasons.*, helpdesks.helpdesk_name FROM callreasons
-                        JOIN helpdesks ON callreasons.helpdesk_id = helpdesks.id
+      $database->query("SELECT call_reasons.*, helpdesks.helpdesk_name FROM call_reasons
+                        JOIN helpdesks ON call_reasons.helpdesk_id = helpdesks.id
                         ORDER BY helpdesk_id
                         ");
       $results = $database->resultset();
@@ -29,7 +29,7 @@
 
     public function removeReasonById($id) {
       $database = new Database();
-      $database->query("DELETE FROM callreasons WHERE id=:id");
+      $database->query("DELETE FROM call_reasons WHERE id=:id");
       $database->bind(':id', $id);
       $database->execute();
       return true;
@@ -41,7 +41,7 @@
 
     public function addReason($reasonobject) {
       $database = new Database();
-      $database->query("INSERT INTO callreasons (reason_name, helpdesk_id)
+      $database->query("INSERT INTO call_reasons (reason_name, helpdesk_id)
                         VALUES (:reason_name, :helpdesk_id)
                         ");
       $database->bind(':reason_name', $reasonobject->reason_name);
@@ -52,10 +52,10 @@
 
     public function modifyReason($reasonobject) {
       $database = new Database();
-      $database->query("UPDATE callreasons
-                        SET callreasons.reason_name = :reason_name,
-                            callreasons.helpdesk_id = :helpdesk_id
-                        WHERE callreasons.id = :id
+      $database->query("UPDATE call_reasons
+                        SET call_reasons.reason_name = :reason_name,
+                            call_reasons.helpdesk_id = :helpdesk_id
+                        WHERE call_reasons.id = :id
                       ");
       $database->bind(':id', $reasonobject->id);
       $database->bind(':reason_name', $reasonobject->reason_name);
@@ -66,7 +66,7 @@
 
     public function getReasonById($id) {
       $database = new Database();
-      $database->query("SELECT * FROM callreasons
+      $database->query("SELECT * FROM call_reasons
                         WHERE id=:id");
       $database->bind(':id', $id);
       $result = $database->single();

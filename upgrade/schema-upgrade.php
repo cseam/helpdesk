@@ -171,6 +171,13 @@
         $database->bind(":callid", $value["callid"]);
         $database->execute();
   }
+
+// Finaly rename callreasons table as inconsistantly named
+$database = new Database();
+$database->query("RENAME TABLE callreasons TO call_reasons;");
+$database->execute();
+
+//tidy up 
 $conn = null;
 ?>
   </tbody>
