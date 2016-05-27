@@ -387,6 +387,21 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 		";
 		$conn->exec($sql);
 			echo "<p>(user profiles) created successfully</p>";
+			// call_updates
+			$sql = "
+			CREATE TABLE `call_updates` (
+			`ID` int(11) unsigned NOT NULL auto_increment,
+			`callid` int(11) DEFAULT NULL,
+			`stamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+			`details` longtext,
+			`sAMAccountName` varchar(45) DEFAULT NULL,
+			`status` int(11) DEFAULT '1',
+			PRIMARY KEY  (`ID`)
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+			";
+		$conn->exec($sql);
+			echo "<p>(call_updates) created successfully</p>";
+
 
 			}
 
