@@ -474,7 +474,6 @@
     }
 
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "") {
-      // needs updating to point to new call_updates table
       $message = "<div class=update>" . $update . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
       // update timestamp
       $database = new Database();
@@ -502,7 +501,6 @@
             $status = 1;
           break;
       }
-
       $database->query("INSERT INTO call_updates (callid, stamp, details, sAMAccountName, status)
                         VALUES (:callid, :lastupdate, :details, :who, :status)");
       $database->bind(":callid", $ticketid);
