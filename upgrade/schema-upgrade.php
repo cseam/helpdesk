@@ -59,7 +59,6 @@
               $nodes[]=$temp;
           }
       }
-
       return $nodes;
   }
   // create new db tables to store results

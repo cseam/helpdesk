@@ -19,6 +19,15 @@
       return $results;
     }
 
+    public function getTicketUpdatesByCallId($callid) {
+      $database = new Database();
+      $database->query("SELECT * FROM call_updates WHERE callid = :callid ORDER BY id");
+      $database->bind(":callid", $callid);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
     public function getRecentTicketsByEngineerId($engineerid) {
       $database = new Database();
       $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold

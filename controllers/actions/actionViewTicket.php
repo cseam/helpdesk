@@ -19,6 +19,7 @@ class actionViewTicket {
     $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
     //populate tickets data
     $ticketDetails = $ticketModel->getTicketDetails($ticketid);
+    $ticketUpdates = $ticketModel->getTicketUpdatesByCallId($ticketid);
     $additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
     $ticketDetails["subscribed"] = $subscriptionModel->amISuscribedToTicket($_SESSION['engineerId'], $ticketid);
     //populate call reasons for this tickets helpdeskid
