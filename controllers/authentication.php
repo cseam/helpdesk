@@ -17,7 +17,12 @@ class authentication
             if (preg_match("%digitalsign%", $baseurl[1])) { } else {
               if (!preg_match("%logout%", $baseurl[1])) {
                   // if not on the logout page set the entry point
-                    $_SESSION['entrypoint'] = $_SERVER['REQUEST_URI'];
+                    $favicons = array("/favicon.ico", "/apple-touch-icon.png", "/apple-touch-icon-precomposed.png");
+                      if (in_array($_SERVER['REQUEST_URI'], $favicons)) {
+                        $_SESSION['entrypoint'] = "";
+                      } else {
+                        $_SESSION['entrypoint'] = $_SERVER['REQUEST_URI'];
+                      }
               }
               // reroute
               header('Location: /login/');
