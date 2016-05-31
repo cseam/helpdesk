@@ -33,7 +33,12 @@
     <p class="callbody">
       <ul><?php if (isset($additionalDetails)) { foreach ($additionalDetails as $key => $value) { echo "<li>" . $value["label"] .": ". $value["value"] . "</li>"; } } ?></ul>
     </p>
-    <p class="callbody"><?php echo nl2br($ticketDetails["details"]);?></p>
+    <p class="callbody">
+      <?php echo nl2br($ticketDetails["details"]);?>
+      <?php foreach ($ticketUpdates as &$update) {
+            echo nl2br($update["details"]);
+      }?>
+    </p>
 
     <p class="highlight smalltxt">Last Update: <?php echo date("d/m/Y H:i", strtotime($ticketDetails["lastupdate"]));?></p>
 
