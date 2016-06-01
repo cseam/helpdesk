@@ -11,6 +11,7 @@ class actionEngineerDefault {
     $quickresponseModel = new quickresponseModel();
     //populate page content with oldest open ticket
     $ticketDetails = $ticketModel->getOldestTicketByEngineer($_SESSION['engineerId']);
+    $ticketUpdates = $ticketModel->getTicketUpdatesByCallId($ticketDetails["callid"]);
     $additionalDetails = $ticketModel->getAdditionalDetails($ticketDetails["callid"]);
     //populate call reasons for this tickets helpdeskid
     $callreasons = $callreasonsModel->getReasonsByHelpdeskId($ticketDetails["helpdesk"]);
