@@ -21,8 +21,11 @@ class actionUpdateTicket {
       $upload_code = null;
       $ticketdetails = null;
       if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
+        $original_name_of_uploaded_file = basename($_FILES["attachment"]['name']);
+        //get the file extension of the file
+        $type_of_uploaded_file = substr($original_name_of_uploaded_file, strrpos($original_name_of_uploaded_file, '.') + 1);
         //rename file to random name to avoid file name clash
-        $name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10);
+        $name_of_uploaded_file = substr(md5(microtime()),rand(0,26),10) . "." . $type_of_uploaded_file;
         //define uploads folder from config
         $folder = ROOT . UPLOAD_LOC . $name_of_uploaded_file;
         //define temp upload location
@@ -33,7 +36,7 @@ class actionUpdateTicket {
         if (mime_content_type($folder) == "image/jpeg" || mime_content_type($folder) == "image/png") {
           $upload_code = "<img src=" . UPLOAD_LOC . $name_of_uploaded_file . " alt=\"upload\" style=\"width: 100%;\" />";
         }
-        if (mime_content_type($folder) == "application/pdf" || mime_content_type($folder) == "application/msword") {
+        if (mime_content_type($folder) == "application/pdf" || mime_content_type($folder) == "application/msword" || mime_content_type($folder) == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
           $upload_code = "<a href=\"" . UPLOAD_LOC . $name_of_uploaded_file . "\" class=\"uploadfile\">Uploaded file ref: #".$name_of_uploaded_file."</a>";
         }
       }
