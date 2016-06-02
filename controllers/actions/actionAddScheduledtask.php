@@ -36,7 +36,7 @@ class actionAddScheduledtask {
         } else {
           $assignedengineer = $_POST['assigned'];
         };
-        $baseTicket->assigned = htmlspecialchars($assignedengineer);
+        $baseTicket->assigned = $assignedengineer;
         $baseTicket->opened = date("c");
         $baseTicket->lastupdate = date("c");
         $baseTicket->closed = null;

@@ -389,7 +389,7 @@
                         LEFT JOIN engineers ON calls.assigned=engineers.idengineers
                         WHERE calls.status !=2
                         AND FIND_IN_SET(calls.helpdesk, :helpdesk)
-                        ORDER BY calls.assigned, calls.opened");
+                        ORDER BY calls.assigned, calls.status, calls.opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
       if ($database->rowcount() === 0) {return null;}
