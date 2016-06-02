@@ -47,14 +47,15 @@ class actionUpdateTicket {
             //process ticket add
               // check timecritical field if set
                 $timecritical = null;
-                if ($_POST['timerequired']) { $timecritical = "<span class=\"urgent\">User marked ticket as time critical, required for: ".htmlspecialchars($_POST['timerequired'])."</span><br/>" ;};
+                if ($_POST['timerequired']) { $timecritical = "<span class=\"urgent\">User marked ticket as time critical, required for: ".htmlspecialchars($_POST['timerequired'])."</span>" ;};
+                $timecriticaldetails = $timecritical . "<br/>";
               //calculate ticket urgency
                 $urgency = round(($_POST['callurgency'] + $_POST['callseverity']) / 2 );
               //generate locker number if needed for specific categorys (clown fiesta: note to future self, put this in the db!)
                 $lockerid = null;
                 if ($_POST['category'] == 11 || $_POST['category'] == 41 || $_POST['category'] == 73 ) { $lockerid = random_locker(); };
               //generate ticket details including any images/files uploaded in wrapper
-                $ticketdetails = "<div class=\"original\">" . $timecritical . $ticketdetails . "</div>";
+                $ticketdetails = "<div class=\"original\">" . $timecriticaldetails . $ticketdetails . "</div>";
               //check if helpdesk is auto assign and assign engineer if required
                 $autoassigncheck = $helpdeskModel->isHelpdeskAutoAssign($_POST['helpdesk']);
                 $autoassigncheck["auto_assign"] == 0 ? $assignedengineer = NULL : $assignedengineer = $engineerModel->getNextEngineerIdByHelpdeskId($_POST['helpdesk']);
@@ -109,6 +110,7 @@ class actionUpdateTicket {
                 $baseTicket->title = htmlspecialchars($_POST['title']);
                 $baseTicket->lockerid = $lockerid;
                 $baseTicket->pm = htmlspecialchars($pm);
+                $baseTicket->requiredfor = $timecritical;
                 $ticketid = $ticketModel->createNewTicket($baseTicket);
               //insert additional ticket details
                 $fieldIdentify = $additionalModel->getListOfAdditionalFieldsByCategorys(htmlspecialchars($_POST['category']));

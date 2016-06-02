@@ -571,8 +571,8 @@
 
     public function createNewTicket($baseTicket) {
       $database = new Database();
-      $database->query("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, pm)
-                        VALUES (:name, :contact_email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoice, :callreason, :title, :lockerid, :pm)");
+      $database->query("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, pm, requiredfor)
+                        VALUES (:name, :contact_email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoice, :callreason, :title, :lockerid, :pm, :requiredfor)");
       $database->bind(":name", $baseTicket->name);
       $database->bind(":contact_email", $baseTicket->contact_email);
       $database->bind(":tel", $baseTicket->tel);
@@ -594,6 +594,7 @@
       $database->bind(":title", $baseTicket->title);
       $database->bind(":lockerid", $baseTicket->lockerid);
       $database->bind(":pm", $baseTicket->pm);
+      $database->bind(":requiredfor", $baseTicket->requiredfor);
       $database->execute();
       return $database->lastInsertId();
     }

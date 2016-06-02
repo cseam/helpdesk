@@ -16,6 +16,9 @@
             <tr>
               <td class="hdtitle listheader" colspan="6"><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>
             </tr>
+            <?php if (isset($value["requiredfor"])) { ?>
+              <tr><td class="hdtitle" colspan="6"><?php echo $value["requiredfor"] ?></td></tr>
+            <?php } ?>
             <tr>
               <td><span class="status<?php echo $value["status"] ?>"><?php echo $value["statusCode"] ?></span></td>
               <td>#<?php echo $value["callid"] ?></td>

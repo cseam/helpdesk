@@ -8,9 +8,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <meta name="robots" content="nofollow" />
-  <!-- stylesheets -->
+  <!-- critical path inline styles -->
+  <style>
+    /* development held on critical path css due to browser support */
+  </style>
+  <!-- additional stylesheets -->
+  <!-- <link rel="preload" as="style" href="/public/css/reset.css" onload="this.rel='stylesheet'" /> -->
   <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+  <!-- <link rel="preload" as="style" href="/public/css/style.css" onload="this.rel='stylesheet'" /> -->
   <link rel="stylesheet" type="text/css" href="/public/css/style.css" />
+  <!-- <link rel="preload" as="style" href="/public/css/sidr.css" onload="this.rel='stylesheet'" /> -->
   <link rel="stylesheet" type="text/css" href="/public/css/sidr.css" />
   <link rel="stylesheet" type="text/css" href="/public/css/print.css" media="print" />
   <!-- jquery library -->
