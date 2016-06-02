@@ -1,12 +1,1 @@
-#leftpage, #branding, .calllink, .engineercontrols, .buttons {
-	display: none !important;
-}
-#rightpage {
-	width: 100%;
-}
-#calldetails, #rightpage, #call, #ajax {
-	background: transparent !important;
-}
-body, .section, #rightpage, #call, #ajax, #calldetails {
-	height: auto !important;
-}
+#leftpage,#branding,.calllink,.engineercontrols,.buttons{display:none!important}#rightpage{width:100%}#calldetails,#rightpage,#call,#ajax{background:transparent!important}body,.section,#rightpage,#call,#ajax,#calldetails{height:auto!important}
