@@ -1,25 +1,31 @@
 <?php require_once "views/partials/header.php"; ?>
 
-  <div id="leftpage">
+  <div id="leftpage" style="overflow: scroll;">
     <br />
     <h3>Did you know</h3>
-    <br/>
     <p>
       You have logged <span class="logoutstats"><?php echo number_format($stats["countTicketsByOwner"]) ?></span> tickets on the helpdesk
     </p>
     <p>
       Total tickets logged by users <span class="logoutstats"><?php echo number_format($stats["countAllTickets"]) ?></span>
     </p>
-    <p>
-      Open outstanding tickets on helpdesk <span class="logoutstats"><?php echo number_format($stats["countAllOpenTickets"]) ?></span>
-    </p>
-    <p>
-      Average feedback for tickets on helpdesk is <span class="logoutstats"><?php echo round($stats["FeedbackAVG"],2)?></span> <?php for ($i = 0; $i < round($stats["FeedbackAVG"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?>
-    </p>
-    <ul>
+    <ul style="font-size: 0.9rem;">
     <?php
-      foreach($stats["avgInDays"] as $key => $value) {
-        echo "<li>" . $value["helpdesk_name"] . " on average take <span class=\"logoutstats\">" . number_format($value["avg_days"], 1) . "</span> days to close a ticket.</li>";
+      foreach($logoutstats as &$value) {
+          echo "<li style=\"margin-bottom: 10px;margin-right: 50px;\">";
+          echo $value["Name"];
+          echo " have ";
+          echo number_format($value["outstanding"]["outstanding"]);
+          echo " outstanding tickets, on average tickets take ";
+          echo number_format($value["avgCloseTime"]["avg_days"]);
+          echo " days to close. " . $value["Name"] . "'s ";
+          echo number_format($value["totalclosed"]["countTotal"]);
+          echo " closed tickets have a average feedback of ";
+          echo round($value["avgfeedback"]["FeedbackAVG"],2) . "&nbsp;&nbsp;";
+          for ($i = 0; $i < round($value["avgfeedback"]["FeedbackAVG"]); $i++) {
+            echo "<img src='/public/images/ICONS-star.svg' alt='star' height='16' width='auto' />";
+            }
+          echo "</li>";
       }
     ?>
     </ul>
