@@ -18,15 +18,15 @@
     $route->add('/engineer/changecontrol', 'actionReportChangecontrol');
     $route->add('/engineer/outofhours', 'actionReportOutofhours');
     $route->add('/engineer/workrate', 'actionReportWorkrate');
-    $route->add('/engineer/objectives', 'actionViewObjectives');
+    $route->add('/engineer/objectives/\d*', 'actionViewObjectives');
   }
   // manager routes
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
     $route->add('/manager', 'actionManagerDefault');
     $route->add('/manager/report', 'actionManagerReports');
-    $route->add('/manager/objectives', 'actionViewObjectives');
+    $route->add('/manager/objectives/\d*', 'actionViewObjectives');
     $route->add('/manager/addobjectives','actionAddObjectives');
-    $route->add('/manager/modifyobjectives','actionModifyObjectives');
+    $route->add('/manager/modifyobjectives/\d*','actionModifyObjectives');
     $route->add('/manager/report/escalated', 'actionReportEscalated');
     $route->add('/manager/report/unassigned', 'actionReportUnassigned');
     $route->add('/manager/report/assigned', 'actionReportAssigned');
@@ -60,15 +60,15 @@
     $route->add('/admin/managequickresponses', 'actionAdminManageQuickresponses');
     $route->add('/admin/managesla', 'actionAdminManageSla');
     $route->add('/admin/complete', 'actionAdminComplete');
-    $route->add('/admin/location', 'actionAdminModifyLocation');
-    $route->add('/admin/category', 'actionAdminModifyCategory');
-    $route->add('/admin/reason', 'actionAdminModifyReason');
-    $route->add('/admin/outofhours', 'actionAdminModifyOutofhours');
-    $route->add('/admin/quickresponse', 'actionAdminModifyQuickResponse');
-    $route->add('/admin/helpdesk', 'actionAdminModifyHelpdesk');
-    $route->add('/admin/sla', 'actionAdminModifySla');
-    $route->add('/admin/engineer', 'actionAdminModifyEngineer');
-    $route->add('/admin/additional', 'actionAdminModifyAdditional');
+    $route->add('/admin/location/\d*', 'actionAdminModifyLocation');
+    $route->add('/admin/category/\d*', 'actionAdminModifyCategory');
+    $route->add('/admin/reason/\d*', 'actionAdminModifyReason');
+    $route->add('/admin/outofhours/\d*', 'actionAdminModifyOutofhours');
+    $route->add('/admin/quickresponse/\d*', 'actionAdminModifyQuickResponse');
+    $route->add('/admin/helpdesk/\d*', 'actionAdminModifyHelpdesk');
+    $route->add('/admin/sla/\d*', 'actionAdminModifySla');
+    $route->add('/admin/engineer/\d*', 'actionAdminModifyEngineer');
+    $route->add('/admin/additional/\d*', 'actionAdminModifyAdditional');
   }
   // report routes
     $route->add('/report', 'actionReportDefault');
@@ -83,7 +83,7 @@
     $route->add('/report/workrate', 'actionReportWorkrate');
     $route->add('/report/assignednumbers', 'actionReportAssignednumbers');
     $route->add('/report/reason', 'actionReportReason');
-    $route->add('/report/recentwork', 'actionReportRecentWork');
+    $route->add('/report/recentwork/\d*', 'actionReportRecentWork');
     $route->add('/report/outstanding', 'actionReportOutstanding');
     $route->add('/report/annualgraphs', 'actionReportAnnualgraphs');
   // ticket routes
@@ -93,12 +93,12 @@
     $route->add('/ticket/updated', 'actionUpdatedTicket');
     $route->add('/ticket/view', 'actionViewTicket');
     $route->add('/ticket/view/\d*', 'actionViewTicket');
-    $route->add('/ticket/assign', 'actionAssignTicket');
-    $route->add('/ticket/forward', 'actionForwardTicket');
-    $route->add('/ticket/feedback', 'actionFeedbackTicket');
-    $route->add('/ticket/description', 'actionDescriptionTicket');
-    $route->add('/ticket/category', 'actionCategoryTicket');
-    $route->add('/ticket/additional', 'actionAdditionalTicket');
+    $route->add('/ticket/assign/\d*', 'actionAssignTicket');
+    $route->add('/ticket/forward/\d*', 'actionForwardTicket');
+    $route->add('/ticket/feedback/\d*', 'actionFeedbackTicket');
+    $route->add('/ticket/description/\d*', 'actionDescriptionTicket');
+    $route->add('/ticket/category/\d*', 'actionCategoryTicket');
+    $route->add('/ticket/additional/\d*', 'actionAdditionalTicket');
   // change control routes
   if ($_SESSION['engineerLevel'] > 0 || $_SESSION['superuser'] == 1) {
     $route->add('/changecontrol', 'actionAddChangeControl');
@@ -110,7 +110,7 @@
     $route->add('/scheduledtask', 'actionAddScheduledtask');
     $route->add('/scheduledtask/add', 'actionAddScheduledtask');
     $route->add('/scheduledtask/modify', 'actionModifyScheduledtask');
-    $route->add('/scheduledtask/delete', 'actionDeleteScheduledtask');
+    $route->add('/scheduledtask/delete/\d*', 'actionDeleteScheduledtask');
   }
   // digital sign routes
     $route->add('/digitalsign', 'actionDigitalSignDefault');
