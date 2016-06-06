@@ -6,13 +6,13 @@ class homeController {
     // Route to default landing page depending on engineer level.
     SWITCH ($_SESSION['engineerLevel']) {
       CASE 2:
-        header('Location: /manager');
+        header('Location: /manager/');
         exit;
       CASE 1:
-        header('Location: /engineer');
+        header('Location: /engineer/');
         exit;
       DEFAULT:
-        header('Location: /user');
+        header('Location: /user/');
         exit;
     }
   }
