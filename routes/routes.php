@@ -18,15 +18,15 @@
     $route->add('/engineer/changecontrol', 'actionReportChangecontrol');
     $route->add('/engineer/outofhours', 'actionReportOutofhours');
     $route->add('/engineer/workrate', 'actionReportWorkrate');
-    $route->add('/engineer/objectives/\d*', 'actionViewObjectives');
+    $route->add('/engineer/objectives/\d*', 'actionViewObjectives'); //wildcard route
   }
   // manager routes
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
     $route->add('/manager', 'actionManagerDefault');
     $route->add('/manager/report', 'actionManagerReports');
-    $route->add('/manager/objectives/\d*', 'actionViewObjectives');
+    $route->add('/manager/objectives/\d*', 'actionViewObjectives'); //wildcard route
     $route->add('/manager/addobjectives','actionAddObjectives');
-    $route->add('/manager/modifyobjectives/\d*','actionModifyObjectives');
+    $route->add('/manager/modifyobjectives/\d*','actionModifyObjectives'); //wildcard route
     $route->add('/manager/report/escalated', 'actionReportEscalated');
     $route->add('/manager/report/unassigned', 'actionReportUnassigned');
     $route->add('/manager/report/assigned', 'actionReportAssigned');
@@ -60,15 +60,15 @@
     $route->add('/admin/managequickresponses', 'actionAdminManageQuickresponses');
     $route->add('/admin/managesla', 'actionAdminManageSla');
     $route->add('/admin/complete', 'actionAdminComplete');
-    $route->add('/admin/location/\d*', 'actionAdminModifyLocation');
-    $route->add('/admin/category/\d*', 'actionAdminModifyCategory');
-    $route->add('/admin/reason/\d*', 'actionAdminModifyReason');
-    $route->add('/admin/outofhours/\d*', 'actionAdminModifyOutofhours');
-    $route->add('/admin/quickresponse/\d*', 'actionAdminModifyQuickResponse');
-    $route->add('/admin/helpdesk/\d*', 'actionAdminModifyHelpdesk');
-    $route->add('/admin/sla/\d*', 'actionAdminModifySla');
-    $route->add('/admin/engineer/\d*', 'actionAdminModifyEngineer');
-    $route->add('/admin/additional/\d*', 'actionAdminModifyAdditional');
+    $route->add('/admin/location/\d*', 'actionAdminModifyLocation'); //wildcard route
+    $route->add('/admin/category/\d*', 'actionAdminModifyCategory'); //wildcard route
+    $route->add('/admin/reason/\d*', 'actionAdminModifyReason'); //wildcard route
+    $route->add('/admin/outofhours/\d*', 'actionAdminModifyOutofhours'); //wildcard route
+    $route->add('/admin/quickresponse/\d*', 'actionAdminModifyQuickResponse'); //wildcard route
+    $route->add('/admin/helpdesk/\d*', 'actionAdminModifyHelpdesk'); //wildcard route
+    $route->add('/admin/sla/\d*', 'actionAdminModifySla'); //wildcard route
+    $route->add('/admin/engineer/\d*', 'actionAdminModifyEngineer'); //wildcard route
+    $route->add('/admin/additional/\d*', 'actionAdminModifyAdditional'); //wildcard route
   }
   // report routes
     $route->add('/report', 'actionReportDefault');
@@ -83,7 +83,7 @@
     $route->add('/report/workrate', 'actionReportWorkrate');
     $route->add('/report/assignednumbers', 'actionReportAssignednumbers');
     $route->add('/report/reason', 'actionReportReason');
-    $route->add('/report/recentwork/\d*', 'actionReportRecentWork');
+    $route->add('/report/recentwork/\d*', 'actionReportRecentWork'); //wildcard route
     $route->add('/report/outstanding', 'actionReportOutstanding');
     $route->add('/report/annualgraphs', 'actionReportAnnualgraphs');
   // ticket routes
@@ -92,13 +92,13 @@
     $route->add('/ticket/update', 'actionUpdateTicket');
     $route->add('/ticket/updated', 'actionUpdatedTicket');
     $route->add('/ticket/view', 'actionViewTicket');
-    $route->add('/ticket/view/\d*', 'actionViewTicket');
-    $route->add('/ticket/assign/\d*', 'actionAssignTicket');
-    $route->add('/ticket/forward/\d*', 'actionForwardTicket');
-    $route->add('/ticket/feedback/\d*', 'actionFeedbackTicket');
-    $route->add('/ticket/description/\d*', 'actionDescriptionTicket');
-    $route->add('/ticket/category/\d*', 'actionCategoryTicket');
-    $route->add('/ticket/additional/\d*', 'actionAdditionalTicket');
+    $route->add('/ticket/view/\d*', 'actionViewTicket'); //wildcard route
+    $route->add('/ticket/assign/\d*', 'actionAssignTicket'); //wildcard route
+    $route->add('/ticket/forward/\d*', 'actionForwardTicket'); //wildcard route
+    $route->add('/ticket/feedback/\d*', 'actionFeedbackTicket'); //wildcard route
+    $route->add('/ticket/description/\d*', 'actionDescriptionTicket'); //wildcard route
+    $route->add('/ticket/category/\d*', 'actionCategoryTicket'); //wildcard route
+    $route->add('/ticket/additional/\d*', 'actionAdditionalTicket'); //wildcard route
   // change control routes
   if ($_SESSION['engineerLevel'] > 0 || $_SESSION['superuser'] == 1) {
     $route->add('/changecontrol', 'actionAddChangeControl');
@@ -110,7 +110,7 @@
     $route->add('/scheduledtask', 'actionAddScheduledtask');
     $route->add('/scheduledtask/add', 'actionAddScheduledtask');
     $route->add('/scheduledtask/modify', 'actionModifyScheduledtask');
-    $route->add('/scheduledtask/delete/\d*', 'actionDeleteScheduledtask');
+    $route->add('/scheduledtask/delete/\d*', 'actionDeleteScheduledtask'); //wildcard route
   }
   // digital sign routes
     $route->add('/digitalsign', 'actionDigitalSignDefault');
