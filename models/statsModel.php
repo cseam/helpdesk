@@ -359,6 +359,22 @@
       return $result;
     }
 
+    public function avgHelpdeskFeedbackByHelpdesk($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT AVG(feedback.satisfaction) as FeedbackAVG
+                        FROM calls
+                        JOIN feedback ON feedback.callid=calls.callid
+                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
+                        JOIN helpdesks ON engineers.helpdesk = helpdesks.id
+                        WHERE calls.status = 2
+                        AND calls.helpdesk = :helpdesk
+                        GROUP BY calls.status");
+      $database->bind(':helpdesk', $helpdeskid);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
 
     public function getPoorFeedback($scope = null) {
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
@@ -474,9 +490,36 @@
       $database->query("SELECT helpdesks.helpdesk_name, avg(datediff(calls.closed, calls.opened)) as avg_days
                         FROM calls
                         JOIN helpdesks ON calls.helpdesk = helpdesks.id
-                        GROUP By helpdesk");
+                        GROUP BY helpdesk");
       $results = $database->resultset();
       if ($database->rowCount() === 0) { return null; }
+      return $results;
+    }
+
+    public function advCloseTimeByHelpdeskIdInDays($helpdesk) {
+      $database = new Database();
+      $database->query("SELECT avg(datediff(calls.closed, calls.opened)) as avg_days
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        WHERE calls.helpdesk = :helpdesk
+                        GROUP BY calls.helpdesk");
+      $database->bind(':helpdesk', $helpdesk);
+      $results = $database->single();
+      if ($database->rowCount() === 0) { return 0; }
+      return $results;
+    }
+
+    public function countOutstandingTicketsByHelpdesk($helpdesk) {
+      $database = new Database();
+      $database->query("SELECT count(calls.callid) as outstanding
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        WHERE calls.status != 2
+                        AND calls.helpdesk = :helpdesk
+                        GROUP BY calls.helpdesk");
+      $database->bind(':helpdesk', $helpdesk);
+      $results = $database->single();
+      if ($database->rowCount() ===0) { return 0; }
       return $results;
     }
 
