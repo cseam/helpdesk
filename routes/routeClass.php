@@ -9,16 +9,15 @@ class Route {
     $this->_controler[] = $controler;
   }
   // process the routes from uri
-  public function process($urisegment = 1) {
+  public function process() {
     // explode uri as we are only interested in the top route at this point
-    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
-    $segment = $urisegment;
+    $baseurl = $_SERVER['REQUEST_URI'];
     // setup matches
     $matches = array();
     // check for matches
     foreach ($this->_uri as $key => $value) {
-      isset($baseurl[$segment]) ? $compare = "/".$baseurl[$segment] : $compare = "/";
-        if (preg_match("#^$value$#", $compare)) {
+      isset($baseurl) ? $compare = $baseurl : $compare = "/";
+        if (preg_match("#^$value(/{0,1})$#", $compare)) {
           // on match update matches and start controler for match
           $useControler = $this->_controler[$key];
           $matches[] = $this->_controler[$key];
