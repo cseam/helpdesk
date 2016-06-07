@@ -59,6 +59,7 @@
         // activate table sorting jquery library
         $(document).ready(function() {
                 $("#tablesorter").tablesorter();
+                //$('#tablesorter').ddTableFilter();
         });
         </script>
 
