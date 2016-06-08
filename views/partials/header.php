@@ -16,7 +16,7 @@
   <!-- <link rel="preload" as="style" href="/public/css/reset.css" onload="this.rel='stylesheet'" /> -->
   <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
   <!-- <link rel="preload" as="style" href="/public/css/style.css" onload="this.rel='stylesheet'" /> -->
-  <link rel="stylesheet" type="text/css" href="/public/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/public/css/style.css?version=1.0" />
   <!-- <link rel="preload" as="style" href="/public/css/sidr.css" onload="this.rel='stylesheet'" /> -->
   <link rel="stylesheet" type="text/css" href="/public/css/sidr.css" />
   <link rel="stylesheet" type="text/css" href="/public/css/print.css" media="print" />
