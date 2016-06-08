@@ -20,6 +20,8 @@ class actionUpdateTicket {
       // check if files uploaded in form
       $upload_code = null;
       $ticketdetails = null;
+      $workedwith = null;
+
       if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
         $original_name_of_uploaded_file = basename($_FILES["attachment"]['name']);
         //get the file extension of the file
@@ -41,6 +43,11 @@ class actionUpdateTicket {
         }
       }
       $ticketdetails = $upload_code . htmlspecialchars($_POST["updatedetails"], ENT_COMPAT, 'ISO-8859-1', true);
+      //process worked with array
+      if ($_POST["workedwitharray"]) {
+        $workedwith = substr(htmlspecialchars($_POST["workedwitharray"]), 2);
+      }
+
       // check which button is pressed and process correctly
       SWITCH ($_POST["button_value"]) {
         CASE "add":
@@ -228,7 +235,7 @@ class actionUpdateTicket {
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and taken off hold, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "close":
-          $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"] , $ticketdetails, $workedwith);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been closed.</p>";
           $emailmessage .= "<p>Please take some time to leave feedback on how your engineer performed. <a href=\"". HELPDESK_LOC ."/ticket/feedback/".$_POST["id"]."\">Leave feedback here</a></p>";
@@ -237,7 +244,7 @@ class actionUpdateTicket {
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and closed, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "update":
-          $ticketModel->updateTicketDetailsById($_POST["id"], "update", $_SESSION["sAMAccountName"] , $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "update", $_SESSION["sAMAccountName"] , $ticketdetails, $workedwith);
           if ($_POST["callreason"]) { $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]); }
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated";

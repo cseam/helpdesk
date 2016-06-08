@@ -14,7 +14,7 @@ class actionViewTicket {
     $callreasonsModel = new callreasonsModel();
     $quickresponseModel = new quickresponseModel();
     $subscriptionModel = new subscriptionModel();
-
+    $engineersModel = new engineerModel();
     //populate users ticket list
     $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
     //populate tickets data
@@ -26,6 +26,8 @@ class actionViewTicket {
     $callreasons = $callreasonsModel->getReasonsByHelpdeskId($ticketDetails["helpdesk"]);
     //populate quick responses
     $quickresponse = $quickresponseModel->getQuickResponseByHelpdeskId($ticketDetails["helpdesk"]);
+    //get engineers for helpdesk
+    $engineersList = $engineersModel->getListOfEngineersByHelpdeskId($ticketDetails["helpdesk"]);
     //update ticket views with user id and time stamp
     $ticketModel->logViewTicketById($ticketid, $_SESSION['sAMAccountName']);
     //render page

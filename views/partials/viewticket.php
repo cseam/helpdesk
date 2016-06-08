@@ -96,6 +96,37 @@
             <?php if (isset($quickresponse)) { foreach ($quickresponse as $key => $value) { echo "<option value=\"".$value["quick_response"]."\">".$value["quick_response"]."</option>"; } } ?>
           </select>
         </p>
+        <p>
+        <label for="workedwith">Worked on this job with</label>
+          <input type="hidden" id="workedwitharray" name="workedwitharray" value="" />
+          <?php
+          if (isset($engineersList)) {
+            foreach ($engineersList as &$value) {
+              if ($value["idengineers"] != $_SESSION['engineerId']) {
+                  echo "<div class=\"engineer\" data-engineerid=\"".$value["idengineers"]."\">";
+                    if (@getimagesize(PROFILE_IMAGES.strtolower($value["sAMAccountName"]).".jpg")) { echo "<img src='/uploads/profile_images/".$value["sAMAccountName"].".jpg' class='mugshot'  />";} else {echo "<img src='/uploads/profile_images/default.jpg' class='mugshot' />";}
+                  echo substr($value["engineerName"], 0, 17);
+                  echo "</div>";
+              }
+            }
+          }?>
+          <script type="text/javascript">
+          function toggleArrayItem(a, v) {
+              var i = a.indexOf(v);
+              if (i === -1)
+                  a.push(v);
+              else
+                  a.splice(i,1);
+          }
+          $( ".engineer" ).click(function() {
+            $( this ).toggleClass( "selected-engineer" );
+              var arr = new Array();
+              arr = $("#workedwitharray").val().split(",").map(Number);
+              toggleArrayItem(arr, $( this ).data("engineerid"));
+            $("#workedwitharray").val(arr);
+          });
+          </script>
+        </p>
         <?php } ?>
       </fieldset>
       <fieldset>
@@ -134,4 +165,9 @@
       $('#updatedetails').val($('#quickresponse').val() + ', ' + $('#updatedetails').val());
       });
     </script>
+
+
+
+
+
 </div>

@@ -396,6 +396,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			`details` longtext,
 			`sAMAccountName` varchar(45) DEFAULT NULL,
 			`status` int(11) DEFAULT '1',
+			`workedwith` varchar(255) DEFAULT NULL,
 			PRIMARY KEY  (`ID`)
 			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 			";
