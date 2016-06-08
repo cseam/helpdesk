@@ -473,7 +473,7 @@
         return null;
     }
 
-    public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "") {
+    public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "", $workedwith = null) {
       $message = "<div class=update>" . $update . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
       // update timestamp
       $database = new Database();
@@ -501,13 +501,14 @@
             $status = 1;
           break;
       }
-      $database->query("INSERT INTO call_updates (callid, stamp, details, sAMAccountName, status)
-                        VALUES (:callid, :lastupdate, :details, :who, :status)");
+      $database->query("INSERT INTO call_updates (callid, stamp, details, sAMAccountName, status, workedwith)
+                        VALUES (:callid, :lastupdate, :details, :who, :status, :workedwith)");
       $database->bind(":callid", $ticketid);
       $database->bind(":details", $message);
       $database->bind(":lastupdate", date("c"));
       $database->bind(":who", $sAMAccountName);
       $database->bind(":status", $status);
+      $database->bind(":workedwith", $workedwith);
       $database->execute();
       return null;
     }
