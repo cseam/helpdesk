@@ -35,8 +35,7 @@
                         JOIN engineers ON calls.assigned=engineers.idengineers
                         JOIN status ON calls.status=status.id
                         JOIN location ON calls.location=location.id
-                        WHERE calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND calls.assigned = :engineerid
-                        OR calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND calls.closeengineerid = :engineerid
+                        WHERE calls.closed >= DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND calls.closeengineerid = :engineerid
                         ORDER BY opened DESC
                         ");
       $database->bind(":engineerid", $engineerid);
