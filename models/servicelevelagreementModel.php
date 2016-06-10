@@ -101,16 +101,17 @@
     $database->query("SELECT calls.callid, calls.urgency, service_level_agreement.agreement, service_level_agreement.close_eta_days, call_updates.stamp, call_updates.status, calls.opened, calls.closed, service_level_agreement.firstresponse_in_min
                       FROM calls
                       INNER JOIN service_level_agreement ON calls.helpdesk = service_level_agreement.helpdesk
-					            JOIN call_updates on calls.callid=call_updates.callid
+                      JOIN call_updates on calls.callid=call_updates.callid
                       WHERE calls.urgency = :urgency
-                      and service_level_agreement.urgency=:urgency
+                      AND service_level_agreement.urgency=:urgency
                       AND year(opened) = :year
                       AND Month(opened) = :month
                       AND FIND_IN_SET(calls.helpdesk, :scope)
-                      and call_updates.status = 1
-                      and calls.status = 2
-                      group by calls.callid
-                      order by calls.callid ");
+                      AND call_updates.status = 1
+                      AND calls.status = 2
+                      GROUP BY calls.callid
+                      ORDER BY calls.callid
+                      ");
     $database->bind(':month', date("m")-1);
     $database->bind(':year', date("o"));
     $database->bind(':scope', $helpdesks);
@@ -121,7 +122,6 @@
     $countTotal = 0;
     $countRTSuccess = 0;
     $countFRSuccess = 0;
-
     // loop results
     foreach ($result as &$value) {
         // increment totals
