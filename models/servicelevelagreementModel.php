@@ -112,30 +112,39 @@
     $database->bind(':urgency', $urgency);
     $result = $database->resultset();
     if ($database->rowCount() === 0) { return null;}
-
-    $countRTSuccess = 0;
+    // create counters
     $countTotal = 0;
-    $countFTSuccess = 0;
-
+    $countRTSuccess = 0;
+    $countFRSuccess = 0;
+    // function for total mins
+    function getTotalMinutes(DateInterval $int){
+        return ($int->d * 24 * 60) + ($int->h * 60) + $int->i;
+    }
+    // loop results
     foreach ($result as &$value) {
-        // caculate fix time success
+        // increment totals
         $countTotal++;
-        $op = date_create($value['opened']);
-        $cl = date_create($value['closed']);
-        $fr = date_create($value['stamp']);
+        // setup dates
+        $op = date_create($value['opened']); // ticket open datetime
+        $cl = date_create($value['closed']); // ticket closed datetime
+        $fr = date_create($value['stamp']); // ticket first response datetime
         $dtdiff = date_diff($op, $cl);
         $frdiff = date_diff($fr, $op);
+        // process dates
         if ($dtdiff->format('%a') <= $value['close_eta_days']) {
-            $countFTSuccess++;
-        }
-        if ($frdiff->format('%i') <= $value['firstresponse_in_min']) {
+          // increment counter if closed before close eta in days
           $countRTSuccess++;
         }
-
+        if (getTotalMinutes($frdiff) <= $value['firstresponse_in_min']) {
+          // increment counter if first response before first response in min
+          $countFRSuccess++;
+        }
     }
-      echo $countRTSuccess . "<br/>";
-    echo $countFTSuccess  . "<br/>";
-    echo $countTotal . "<br/>" ;
+
+    // should not echo this should be returned as object
+    echo "Total Calls:" . $countTotal . "<br/>" ;
+    echo "First Response Success:" . $countFRSuccess . "<br/>";
+    echo "Response Time Success:" . $countRTSuccess  . "<br/>";
     //return $result;
 
   }
