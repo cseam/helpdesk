@@ -238,7 +238,7 @@ class actionUpdateTicket {
           $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"] , $ticketdetails, $workedwith);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been closed.</p>";
-          $emailmessage .= "<p>Please take some time to leave feedback on how your engineer performed. <a href=\"". HELPDESK_LOC ."/ticket/feedback/".$_POST["id"]."\">Leave feedback here</a></p>";
+          $feedbackemailmessage = "<p>Please take some time to leave feedback on how your engineer performed. <a href=\"". HELPDESK_LOC ."/ticket/feedback/".$_POST["id"]."\">Leave feedback here</a></p>";
           $ticketModel->closeTicketById($_POST["id"], $_SESSION["engineerId"], $_POST["callreason"]);
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Closed";
           $pagedata->details = "Ticket " .$_POST["id"] . " has been updated and closed, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
@@ -286,6 +286,14 @@ class actionUpdateTicket {
       $emailmessage .= "<p>To view the details of this ticket please <a href=\"". HELPDESK_LOC ."/ticket/view/".$_POST["id"]."\">Visit ". CODENAME ."</a></p>";
       $emailmessage .= "<p>This is an automated message please do not reply</p></span>";
       email_user($to, $from, $title, $emailmessage);
+      }
+
+      if (isset($feedbackemailmessage)) {
+        // email requesting feedback
+        $title = "Helpdesk Feedback";
+        $emailmessage = "<p>An Engineer has recently closed your Helpdesk ticket your feedback would be appreciated, this feedback takes 2min and is not visible for the engineer and is confidential between you and the engineers manager.</p>";
+        $emailmessage .= $feedbackemailmessage;
+        email_user($to, $from, $title, $emailmessage);
       }
 
     }
