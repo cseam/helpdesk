@@ -13,6 +13,7 @@ class actionReportSla {
     $pagedata->title = $reportname . " report";
     //populate report results for use in view
     $pagedata->reportResults = $servicelevelagreementModel->GetFailedSLAThisMonth($_SESSION['engineerHelpdesk']);
+    $pagedata->reportSLADATA = $servicelevelagreementModel->GetSLAPerformance($_SESSION['engineerHelpdesk'], $startdate, $enddate, 6);
     //set page details
     $pagedata->details = $reportname. " showing tickets that failed SLA this month.";
     //render template using $pagedata object

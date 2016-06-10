@@ -90,4 +90,55 @@
     return $result;
   }
 
+  public function GetSLAPerformance($scope = null, $startdate, $enddate, $urgency) {
+    isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+    $database = new Database();
+    $database->query("SELECT calls.callid, calls.urgency, service_level_agreement.close_eta_days, call_updates.stamp, call_updates.status, calls.opened, calls.closed, service_level_agreement.firstresponse_in_min
+                      FROM calls
+                      INNER JOIN service_level_agreement ON calls.helpdesk = service_level_agreement.helpdesk
+					            JOIN call_updates on calls.callid=call_updates.callid
+                      WHERE calls.urgency = :urgency
+                      and service_level_agreement.urgency=:urgency
+                      AND year(opened) = :year
+                      AND Month(opened) = :month
+                      AND FIND_IN_SET(calls.helpdesk, :scope)
+                      and call_updates.status = 1
+                      and calls.status = 2
+                      group by calls.callid
+                      order by calls.callid ");
+    $database->bind(':month', date("m")-1);
+    $database->bind(':year', date("o"));
+    $database->bind(':scope', $helpdesks);
+    $database->bind(':urgency', $urgency);
+    $result = $database->resultset();
+    if ($database->rowCount() === 0) { return null;}
+
+    $countRTSuccess = 0;
+    $countTotal = 0;
+    $countFTSuccess = 0;
+
+    foreach ($result as &$value) {
+        // caculate fix time success
+        $countTotal++;
+        $op = date_create($value['opened']);
+        $cl = date_create($value['closed']);
+        $fr = date_create($value['stamp']);
+        $dtdiff = date_diff($op, $cl);
+        $frdiff = date_diff($fr, $op);
+        if ($dtdiff->format('%a') <= $value['close_eta_days']) {
+            $countFTSuccess++;
+        }
+        if ($frdiff->format('%i') <= $value['firstresponse_in_min']) {
+          $countRTSuccess++;
+        }
+
+    }
+      echo $countRTSuccess . "<br/>";
+    echo $countFTSuccess  . "<br/>";
+    echo $countTotal . "<br/>" ;
+    //return $result;
+
+  }
+
+
 }
