@@ -142,9 +142,9 @@
     }
 
     // should not echo this should be returned as object
-    echo "Total Calls:" . $countTotal . "<br/>" ;
-    echo "First Response Success:" . $countFRSuccess . "<br/>";
-    echo "Response Time Success:" . $countRTSuccess  . "<br/>";
+    echo "Total Calls: " . $countTotal . "<br/>" ;
+    echo "First Response Success: " . $countFRSuccess . "<br/>";
+    echo "Response Time Success: " . $countRTSuccess  . "<br/>";
     //return $result;
 
   }
