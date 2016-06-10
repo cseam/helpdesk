@@ -1,6 +1,11 @@
 <?php
 
   class servicelevelagreementModel {
+  // function for total mins
+  function getTotalMinutes(DateInterval $int){
+      return ($int->d * 24 * 60) + ($int->h * 60) + $int->i;
+  }
+
   public function __construct()
     { }
 
@@ -93,7 +98,7 @@
   public function GetSLAPerformance($scope = null, $startdate, $enddate, $urgency) {
     isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
     $database = new Database();
-    $database->query("SELECT calls.callid, calls.urgency, service_level_agreement.close_eta_days, call_updates.stamp, call_updates.status, calls.opened, calls.closed, service_level_agreement.firstresponse_in_min
+    $database->query("SELECT calls.callid, calls.urgency, service_level_agreement.agreement, service_level_agreement.close_eta_days, call_updates.stamp, call_updates.status, calls.opened, calls.closed, service_level_agreement.firstresponse_in_min
                       FROM calls
                       INNER JOIN service_level_agreement ON calls.helpdesk = service_level_agreement.helpdesk
 					            JOIN call_updates on calls.callid=call_updates.callid
@@ -116,10 +121,7 @@
     $countTotal = 0;
     $countRTSuccess = 0;
     $countFRSuccess = 0;
-    // function for total mins
-    function getTotalMinutes(DateInterval $int){
-        return ($int->d * 24 * 60) + ($int->h * 60) + $int->i;
-    }
+
     // loop results
     foreach ($result as &$value) {
         // increment totals
@@ -135,18 +137,18 @@
           // increment counter if closed before close eta in days
           $countRTSuccess++;
         }
-        if (getTotalMinutes($frdiff) <= $value['firstresponse_in_min']) {
+        if ($this->getTotalMinutes($frdiff) <= $value['firstresponse_in_min']) {
           // increment counter if first response before first response in min
           $countFRSuccess++;
         }
     }
-
-    // should not echo this should be returned as object
-    echo "Total Calls: " . $countTotal . "<br/>" ;
-    echo "First Response Success: " . $countFRSuccess . "<br/>";
-    echo "Response Time Success: " . $countRTSuccess  . "<br/>";
-    //return $result;
-
+    // return formated results
+    $totals['SLA'] = $urgency;
+    $totals['Agreement'] = $result[0]["agreement"];
+    $totals['Total'] = $countTotal;
+    $totals['FirstResponseSuccess'] = $countFRSuccess;
+    $totals['ResponseTimeSuccess'] = $countRTSuccess;
+    return $totals;
   }
 
 

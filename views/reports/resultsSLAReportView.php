@@ -10,7 +10,10 @@
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
-        <pre><?php print_r ($pagedata->reportSLADATA) ?></pre>
+        <pre>
+          <?php print_r($SLAtotals) ?>
+        </pre>
+
         <table id="tablesorter" class="tablesorter">
           <thead>
             <tr>
