@@ -69,4 +69,25 @@
     return $result;
   }
 
+  public function GetFailedSLAThisMonth($scope = null) {
+    isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+    $database = new Database();
+    $database->query("SELECT calls.callid, calls.title, helpdesks.helpdesk_name, engineers.engineerName, calls.urgency, service_level_agreement.close_eta_days, datediff(calls.closed, calls.opened) AS 'total_days_to_close'
+                      FROM calls
+                      INNER JOIN service_level_agreement ON calls.helpdesk = service_level_agreement.helpdesk
+                      JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                      JOIN engineers ON engineers.idengineers=calls.assigned
+                      WHERE service_level_agreement.urgency = calls.urgency
+                      AND Year(closed) = :year
+                      AND Month(closed) = :month
+                      AND FIND_IN_SET(calls.helpdesk, :scope)
+                      ORDER BY assigned ");
+    $database->bind(':month', date("m"));
+    $database->bind(':year', date("o"));
+    $database->bind(':scope', $helpdesks);
+    $result = $database->resultset();
+    if ($database->rowCount() === 0) { return null;}
+    return $result;
+  }
+
 }
