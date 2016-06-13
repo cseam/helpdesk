@@ -234,6 +234,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				`locationName` varchar(45) DEFAULT NULL,
 				`iconlocation` varchar(255) DEFAULT NULL,
 				`shorthand` varchar(45) DEFAULT NULL,
+				`optiongroup` varchar(255) DEFAULT NULL,
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
@@ -426,7 +427,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				INSERT INTO assign_engineers (id, engineerId) VALUES (1, 0);
 				INSERT INTO engineers (engineerName, engineerEmail, availableDays, sAMAccountName, engineerLevel, helpdesk, superuser, localLoginHash) VALUES ('admin.local', 'null', '1,2,3,4,5,6,7', 'admin.local', 1, 1, 1, 'sha256:1000:F54fR+eQd+D4UgMz4uZrOy2eranRNB68:WETpRZTYLiWVBwC7I+L9AqJd3vhcpzCb');
 				INSERT INTO helpdesks (helpdesk_name, description, deactivate, auto_assign, email_on_newticket) VALUES ('Default Helpdesk','description for helpdesk',0,0,0);
-				INSERT INTO location (locationName, iconlocation, shorthand) VALUES ('Main Site','svg/ICONS-house.svg','MAI');
+				INSERT INTO location (locationName, iconlocation, shorthand, optiongroup) VALUES ('Main Site','svg/ICONS-house.svg','MAI','Site');
 				INSERT INTO categories (categoryName, helpdesk) VALUES ('Other',1);
 				INSERT INTO status (id, statusCode) VALUES (1, 'Open');
 				INSERT INTO status (id, statusCode) VALUES (2, 'Closed');

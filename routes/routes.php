@@ -61,14 +61,23 @@
     $route->add('/admin/managesla', 'actionAdminManageSla');
     $route->add('/admin/complete', 'actionAdminComplete');
     $route->add('/admin/location/\d*', 'actionAdminModifyLocation'); //wildcard route
+    $route->add('/admin/location/add', 'actionAdminModifyLocation');
     $route->add('/admin/category/\d*', 'actionAdminModifyCategory'); //wildcard route
+    $route->add('/admin/category/add', 'actionAdminModifyCategory');
     $route->add('/admin/reason/\d*', 'actionAdminModifyReason'); //wildcard route
+    $route->add('/admin/reason/add', 'actionAdminModifyReason');
     $route->add('/admin/outofhours/\d*', 'actionAdminModifyOutofhours'); //wildcard route
+    $route->add('/admin/outofhours/add', 'actionAdminModifyOutofhours');
     $route->add('/admin/quickresponse/\d*', 'actionAdminModifyQuickResponse'); //wildcard route
+    $route->add('/admin/quickresponse/add', 'actionAdminModifyQuickResponse');
     $route->add('/admin/helpdesk/\d*', 'actionAdminModifyHelpdesk'); //wildcard route
+    $route->add('/admin/helpdesk/add', 'actionAdminModifyHelpdesk');
     $route->add('/admin/sla/\d*', 'actionAdminModifySla'); //wildcard route
+    $route->add('/admin/sla/add', 'actionAdminModifySla');
     $route->add('/admin/engineer/\d*', 'actionAdminModifyEngineer'); //wildcard route
+    $route->add('/admin/engineer/add', 'actionAdminModifyEngineer');
     $route->add('/admin/additional/\d*', 'actionAdminModifyAdditional'); //wildcard route
+    $route->add('/admin/additional/add', 'actionAdminModifyAdditional');
   }
   // report routes
     $route->add('/report', 'actionReportDefault');

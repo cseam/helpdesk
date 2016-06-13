@@ -18,6 +18,7 @@ class actionAdminModifyLocation {
       $locationobject->locationName = htmlspecialchars($_POST["locationName"]);
       $locationobject->iconlocation = htmlspecialchars($_POST["iconlocation"]);
       $locationobject->shorthand = htmlspecialchars($_POST["shorthand"]);
+      $locationobject->optiongroup = htmlspecialchars($_POST["optiongroup"]);
       $locationModel->upsertLocation($locationobject);
       // PRG Redirect
       header('Location: /admin/complete');

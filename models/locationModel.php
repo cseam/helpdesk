@@ -7,7 +7,7 @@
     public function getListOfLocations() {
       $database = new Database();
       $database->query("SELECT * FROM location
-                        ORDER BY locationName");
+                        ORDER BY optiongroup, locationName");
       $results = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $results;
@@ -27,12 +27,13 @@
 
     public function addLocation($locationobject) {
       $database = new Database();
-      $database->query("INSERT INTO location (locationName, iconlocation, shorthand)
-                        VALUES (:locationName, :iconlocation, :shorthand)
+      $database->query("INSERT INTO location (locationName, iconlocation, shorthand, optiongroup)
+                        VALUES (:locationName, :iconlocation, :shorthand, :optiongroup)
                       ");
       $database->bind(":locationName", $locationobject->locationName);
       $database->bind(":iconlocation", $locationobject->iconlocation);
       $database->bind(":shorthand", $locationobject->shorthand);
+      $database->bind(":optiongroup", $locationobject->optiongroup);
       $database->execute();
       return $database->lastInsertId();
     }
@@ -42,13 +43,15 @@
       $database->query("UPDATE location
                         SET location.locationName = :locationName,
                             location.iconlocation = :iconlocation,
-                            location.shorthand = :shorthand
+                            location.shorthand = :shorthand,
+                            location.optiongroup = :optiongroup
                         WHERE location.id = :id
                       ");
       $database->bind(":id", $locationobject->id);
       $database->bind(":locationName", $locationobject->locationName);
       $database->bind(":iconlocation", $locationobject->iconlocation);
       $database->bind(":shorthand", $locationobject->shorthand);
+      $database->bind(":optiongroup", $locationobject->optiongroup);
       $database->execute();
       return $database->lastInsertId();
     }
