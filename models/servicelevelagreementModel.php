@@ -3,7 +3,7 @@
   class servicelevelagreementModel {
   // function for total mins
   function getTotalMinutes(DateInterval $int){
-      return ($int->d * 24 * 60) + ($int->h * 60) + $int->i;
+      return ($int->y * 365 * 24 * 60) + ($int->m * 30.4 * 24 * 60) + ($int->d * 24 * 60) + ($int->h * 60) + $int->i;
   }
 
   public function __construct()
@@ -74,7 +74,7 @@
     return $result;
   }
 
-  public function GetFailedSLAThisMonth($scope = null) {
+  public function GetFailedSLALastMonth($scope = null) {
     isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
     $database = new Database();
     $database->query("SELECT calls.callid, calls.title, helpdesks.helpdesk_name, engineers.engineerName, calls.urgency, service_level_agreement.close_eta_days, datediff(calls.closed, calls.opened) AS 'total_days_to_close'
@@ -87,7 +87,7 @@
                       AND Month(closed) = :month
                       AND FIND_IN_SET(calls.helpdesk, :scope)
                       ORDER BY assigned ");
-    $database->bind(':month', date("m"));
+    $database->bind(':month', date("m")-1);
     $database->bind(':year', date("o"));
     $database->bind(':scope', $helpdesks);
     $result = $database->resultset();
@@ -95,7 +95,7 @@
     return $result;
   }
 
-  public function GetSLAPerformance($scope = null, $startdate, $enddate, $urgency) {
+  public function GetSLAPerformance($scope = null, $urgency) {
     isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
     $database = new Database();
     $database->query("SELECT calls.callid, calls.urgency, service_level_agreement.agreement, service_level_agreement.close_eta_days, call_updates.stamp, call_updates.status, calls.opened, calls.closed, service_level_agreement.firstresponse_in_min
@@ -117,11 +117,8 @@
     $database->bind(':scope', $helpdesks);
     $database->bind(':urgency', $urgency);
     $result = $database->resultset();
-    if ($database->rowCount() === 0) { return null;}
     // create counters
-    $countTotal = 0;
-    $countRTSuccess = 0;
-    $countFRSuccess = 0;
+    $countTotal = $countRTSuccess = $countFRSuccess = 0;
     // loop results
     foreach ($result as &$value) {
         // increment totals
