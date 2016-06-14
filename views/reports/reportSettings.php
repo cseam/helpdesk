@@ -23,8 +23,8 @@
           <script type="text/javascript">
           $('#date-range').dateRangePicker({
             startOfWeek: 'monday',
-            separator : ' ~ ',
-            format: 'DD/MM/YYYY',
+            separator : ' / ',
+            format: 'YYYY-MM-DD',
             autoClose: true
           });
           </script>
