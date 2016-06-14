@@ -95,6 +95,7 @@
     $route->add('/report/recentwork/\d*', 'actionReportRecentWork'); //wildcard route
     $route->add('/report/outstanding', 'actionReportOutstanding');
     $route->add('/report/annualgraphs', 'actionReportAnnualgraphs');
+    $route->add('/report/settings', 'actionReportSettings');
   // ticket routes
     $route->add('/ticket', 'actionTicketDefault');
     $route->add('/ticket/add', 'actionAddTicket');

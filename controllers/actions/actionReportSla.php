@@ -3,7 +3,6 @@
 class actionReportSla {
   public function __construct()
   {
-    //dont need to populate $listdata as fixed partial in manager view
     $servicelevelagreementModel = new servicelevelagreementModel();
     $statsModel = new statsModel();
     $pagedata = new stdClass();
