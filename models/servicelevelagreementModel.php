@@ -1,13 +1,23 @@
 <?php
 
   class servicelevelagreementModel {
+
+  private $_startrange = null;
+  private $_endrangerange = null;
+  private $_helpdesks = null;
+
   // function for total mins
   function getTotalMinutes(DateInterval $int){
       return ($int->y * 365 * 24 * 60) + ($int->m * 30.4 * 24 * 60) + ($int->d * 24 * 60) + ($int->h * 60) + $int->i;
   }
 
   public function __construct()
-    { }
+    {
+      // populate custom report values
+      $this->_startrange = isset($_SESSION['customReportsRangeStart']) ? $_SESSION['customReportsRangeStart'] : date('Y-m-01');
+      $this->_endrange = isset($_SESSION['customReportsRangeEnd']) ? $_SESSION['customReportsRangeEnd'] : date('Y-m-t');
+      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null ;
+    }
 
   public function getListOfSLAs() {
     $database = new Database();
@@ -76,6 +86,8 @@
 
   public function GetFailedSLALastMonth($scope = null) {
     isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+    $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
+
     $database = new Database();
     $database->query("SELECT calls.callid, calls.title, helpdesks.helpdesk_name, engineers.engineerName, calls.urgency, service_level_agreement.close_eta_days, datediff(calls.closed, calls.opened) AS 'total_days_to_close'
                       FROM calls
@@ -83,12 +95,11 @@
                       JOIN helpdesks ON calls.helpdesk = helpdesks.id
                       JOIN engineers ON engineers.idengineers=calls.assigned
                       WHERE service_level_agreement.urgency = calls.urgency
-                      AND Year(closed) = :year
-                      AND Month(closed) = :month
                       AND FIND_IN_SET(calls.helpdesk, :scope)
+                      AND calls.closed BETWEEN :startrange AND :endrange
                       ORDER BY assigned ");
-    $database->bind(':month', date("m")-1);
-    $database->bind(':year', date("o"));
+    $database->bind(':startrange', $this->_startrange);
+    $database->bind(':endrange', $this->_endrange);
     $database->bind(':scope', $helpdesks);
     $result = $database->resultset();
     if ($database->rowCount() === 0) { return null;}
@@ -97,6 +108,8 @@
 
   public function GetSLAPerformance($scope = null, $urgency) {
     isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+    $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
+
     $database = new Database();
     $database->query("SELECT calls.callid, calls.urgency, service_level_agreement.agreement, service_level_agreement.close_eta_days, call_updates.stamp, call_updates.status, calls.opened, calls.closed, service_level_agreement.firstresponse_in_min
                       FROM calls
@@ -104,16 +117,15 @@
                       JOIN call_updates on calls.callid=call_updates.callid
                       WHERE calls.urgency = :urgency
                       AND service_level_agreement.urgency=:urgency
-                      AND year(opened) = :year
-                      AND Month(opened) = :month
                       AND FIND_IN_SET(calls.helpdesk, :scope)
                       AND call_updates.status = 1
                       AND calls.status = 2
+                      AND calls.closed BETWEEN :startrange AND :endrange
                       GROUP BY calls.callid
                       ORDER BY calls.callid
                       ");
-    $database->bind(':month', date("m")-1);
-    $database->bind(':year', date("o"));
+    $database->bind(':startrange', $this->_startrange);
+    $database->bind(':endrange', $this->_endrange);
     $database->bind(':scope', $helpdesks);
     $database->bind(':urgency', $urgency);
     $result = $database->resultset();

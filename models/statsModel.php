@@ -102,6 +102,7 @@
     }
 
     public function countEngineerTotalsThisMonth($scope = null) {
+      // DEPRICATED USE countEngineerTotals() METHOD ON ENGINEERS MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT engineers.engineerName, count(calls.callid) AS Totals FROM calls
@@ -121,6 +122,7 @@
     }
 
     public function countHelpdeskTotalsThisMonth($scope = null) {
+      // DEPRICATED USE countHelpdeskTotals() METHOD ON HELPDESK MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT helpdesks.helpdesk_name, count(calls.callid) AS Totals FROM calls
@@ -140,6 +142,7 @@
     }
 
     public function countCategoryTotalsThisMonth($scope = null) {
+      // DEPRICATED USE countCategoryTotals() METHOD ON CATEGORY MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT categories.categoryName, count(calls.callid) AS Totals FROM calls
@@ -160,6 +163,7 @@
     }
 
     public function countUrgencyTotalsThisMonth($scope = null) {
+      // DEPRICATED USE countUrgencyTotals() METHOD ON TICKETS MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT calls.urgency, count(calls.callid) AS Totals
@@ -184,6 +188,7 @@
     }
 
     public function countPlannedVsReactiveTotalsThisMonth($scope = null) {
+      // DEPRICATED USE countPlannedVsReactiveTotals() METHOD on TICKETS MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT calls.pm, count(calls.callid) AS Totals FROM calls
@@ -236,7 +241,9 @@
       if ($database->rowCount() === 0) { return null;}
       return $result;
     }
+
     public function countWorkRateTotalsThisMonth($scope = null) {
+      // DEPRICATED USE countWorkRateTotals() METHOD on TICKETS MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT engineers.engineerName, helpdesks.helpdesk_name, sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS Last7,
@@ -260,6 +267,7 @@
     }
 
     public function countReasonForTicketsThisMonth($scope = null) {
+      // DEPRICATED USE countReasonForTickets() METHOD ON TICKETS MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT call_reasons.reason_name, count(*) AS last7
@@ -276,6 +284,7 @@
     }
 
     public function countAssignedTickets($scope = null) {
+      // DEPRICATED USE countAssignedTickets() METHOD ON TICKETS MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT helpdesks.helpdesk_name, engineers.idengineers, engineers.engineerName, Count(assigned) AS HowManyAssigned, sum(case when status !=2 THEN 1 ELSE 0 END) AS OpenOnes
@@ -293,6 +302,7 @@
     }
 
     public function countDayBreakdownTotalsLastMonth($scope = null) {
+    // DEPRICATED USE countDayBreakdownTotals() METHOD ON TICKETS MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT engineers.engineerName,
@@ -330,6 +340,7 @@
     }
 
     public function countEngineerFeedbackTotals($scope = null) {
+      // DEPRICATED USE countEngineerFeedbackTotals() METHOD ON TICKETS MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT engineers.engineerName, helpdesks.helpdesk_name, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT
@@ -375,8 +386,8 @@
       return $result;
     }
 
-
     public function getPoorFeedback($scope = null) {
+      // DEPRICATED USE getPoorFeedback() METHOD ON FEEDBACK MODEL
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();
       $database->query("SELECT calls.callid, engineers.engineerName, calls.owner, feedback.details, feedback.satisfaction

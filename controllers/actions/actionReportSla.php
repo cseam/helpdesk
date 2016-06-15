@@ -19,7 +19,8 @@ class actionReportSla {
       $SLAtotals->$i = $servicelevelagreementModel->GetSLAPerformance($_SESSION['engineerHelpdesk'], $i);
     }
     //set page details
-    $pagedata->details = $reportname. " showing tickets that failed SLA last month.";
+    $pagedata->details = $reportname. " showing tickets that failed SLA, ";
+    if (isset($_SESSION['customReportsRangeStart'])) { $pagedata->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $pagedata->details .= " this month."; }
     //render template using $pagedata object
     require_once "views/reports/resultsSLAReportView.php";
   }
