@@ -32,7 +32,7 @@
         <fieldset>
           <legend>Helpdesk Filter</legend>
           <label for="helpdesks" title="which helpdesks should report show">Helpdesk Filter</label>
-          <select id="helpdesks" name="helpdesks">
+          <select id="helpdesks" name="helpdesks[]" multiple="multiple" style="height: 220px;">
             <option value="<?php echo $_SESSION['engineerHelpdesk']?>" SELECTED>My Helpdesks</option>
             <?php foreach ($pagedata->helpdesks as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["helpdesk_name"]."</option>";} ?>
           </select>
