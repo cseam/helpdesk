@@ -23,7 +23,7 @@
             <?php if (isset($pagedata->reportResults)) { foreach($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td><?php for ($i = 0; $i < round($value["satisfaction"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?></td>
-              <td><?php echo $value["owner"] ?></td>
+              <td><?php echo current(explode('@', $value["email"])); ?></td>
               <td><?php echo $value["details"] ?></td>
               <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" alt="view ticket" /></a></td>
             </tr>

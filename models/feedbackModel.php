@@ -49,7 +49,7 @@
 
     public function getFeedbackDetailsByEngineerId($id) {
       $database = new Database();
-      $database->query("SELECT feedback.satisfaction, feedback.details, feedback.callid, calls.owner
+      $database->query("SELECT feedback.satisfaction, feedback.details, feedback.callid, calls.email
                         FROM feedback
                         JOIN calls on feedback.callid=calls.callid
                         JOIN engineers on engineers.idengineers=calls.closeengineerid
