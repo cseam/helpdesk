@@ -49,6 +49,7 @@
   }
   // admin routes
   if ($_SESSION['superuser'] == 1) {
+    // for superusers only
     $route->add('/admin', 'actionAdminDefault');
     $route->add('/admin/managehelpdesks', 'actionAdminManageHelpdesks');
     $route->add('/admin/manageengineers', 'actionAdminManageEngineers');
@@ -95,6 +96,7 @@
     $route->add('/report/annualgraphs', 'actionReportAnnualgraphs');
     $route->add('/report/settings', 'actionReportSettings');
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
+    // reports for managers only
     $route->add('/report/feedback', 'actionReportFeedback');
     $route->add('/report/feedback/\d*', 'actionReportFeedbackList'); //wildcard route
     $route->add('/report/sla', 'actionReportSla');
