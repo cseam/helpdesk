@@ -96,7 +96,7 @@
     $route->add('/report/settings', 'actionReportSettings');
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
     $route->add('/report/feedback', 'actionReportFeedback');
-    $route->add('/report/feedback/\d*', 'actionReportFeedbackList');
+    $route->add('/report/feedback/\d*', 'actionReportFeedbackList'); //wildcard route
     $route->add('/report/sla', 'actionReportSla');
   }
   // ticket routes
