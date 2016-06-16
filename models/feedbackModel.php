@@ -47,4 +47,24 @@
       return $result;
     }
 
+    public function getFeedbackDetailsByEngineerId($id) {
+      $database = new Database();
+      $database->query("SELECT feedback.satisfaction, feedback.details, feedback.callid, calls.owner
+                        FROM feedback
+                        JOIN calls on feedback.callid=calls.callid
+                        JOIN engineers on engineers.idengineers=calls.closeengineerid
+                        WHERE closeengineerid = :id
+                        AND feedback.opened BETWEEN :startrange AND :endrange
+                        ORDER BY feedback.opened DESC
+                        ");
+      $database->bind(':startrange', $this->_startrange);
+      $database->bind(':endrange', $this->_endrange);
+      $database->bind(':id', $id);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $results;
+    }
+
+
+
 }

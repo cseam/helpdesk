@@ -17,6 +17,7 @@
               <th>Helpdesk</th>
               <th>Feedback Average</th>
               <th>Feedback Count</th>
+              <th>View All</th>
             </tr>
           </thead>
           <tbody>
@@ -26,6 +27,7 @@
               <td><?php echo $value["helpdesk_name"] ?></td>
               <td><?php for ($i = 0; $i < round($value["FeedbackAVG"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?></td>
               <td><?php echo $value["FeedbackCOUNT"] ?></td>
+              <td><a href="/report/feedback/<?php echo $value["closeengineerid"] ?>" alt="view feedback"><img src="/public/images/ICONS-view.svg" width="24" height="25" alt="view feedback" /></a></td>
             </tr>
             <?php } } ?>
           </tbody>

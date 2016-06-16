@@ -764,7 +764,7 @@
       $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
 
       $database = new Database();
-      $database->query("SELECT engineers.engineerName, helpdesks.helpdesk_name, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT
+      $database->query("SELECT calls.closeengineerid, engineers.engineerName, helpdesks.helpdesk_name, AVG(feedback.satisfaction) as FeedbackAVG, COUNT(calls.callid) as FeedbackCOUNT
                         FROM calls
                         JOIN feedback ON feedback.callid=calls.callid
                         JOIN engineers ON engineers.idengineers=calls.closeengineerid

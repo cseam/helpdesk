@@ -87,8 +87,6 @@
     $route->add('/report/urgencybreakdown', 'actionReportUrgencybreakdown');
     $route->add('/report/daybreakdown', 'actionReportDaybreakdown');
     $route->add('/report/plannedvs', 'actionReportPlannedvs');
-    $route->add('/report/sla', 'actionReportSla');
-    $route->add('/report/feedback', 'actionReportFeedback');
     $route->add('/report/workrate', 'actionReportWorkrate');
     $route->add('/report/assignednumbers', 'actionReportAssignednumbers');
     $route->add('/report/reason', 'actionReportReason');
@@ -96,6 +94,11 @@
     $route->add('/report/outstanding', 'actionReportOutstanding');
     $route->add('/report/annualgraphs', 'actionReportAnnualgraphs');
     $route->add('/report/settings', 'actionReportSettings');
+  if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
+    $route->add('/report/feedback', 'actionReportFeedback');
+    $route->add('/report/feedback/\d*', 'actionReportFeedbackList');
+    $route->add('/report/sla', 'actionReportSla');
+  }
   // ticket routes
     $route->add('/ticket', 'actionTicketDefault');
     $route->add('/ticket/add', 'actionAddTicket');
