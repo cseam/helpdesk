@@ -36,21 +36,42 @@
       $database = new Database();
       $hdary = explode(",", $helpdeskid);
       $engineers = array();
+
       foreach($hdary as $key => $val) {
         $database->query("SELECT * FROM engineers
-                          WHERE helpdesk = :helpdesk AND disabled != 1");
+                          WHERE helpdesk = :helpdesk
+                          AND disabled != 1");
         $database->bind(":helpdesk", $val);
         $results = $database->resultset();
         $engineers = array_merge($engineers, $results);
       }
       if (sizeof($hdary) > 1) {
         $database->query("SELECT * FROM engineers
-                        WHERE helpdesk = :helpdesk AND disabled != 1");
+                          WHERE helpdesk = :helpdesk
+                          AND disabled != 1");
         $database->bind(":helpdesk", $helpdeskid);
         $results = $database->resultset();
         $engineers = array_merge($engineers, $results);
       }
       return $engineers;
+    }
+
+    public function getListOfEngineersByHelpdeskId2($helpdeskid) {
+      // Reworked version of above method needs testing
+      $database = new Database();
+      $hdary = explode(",", $helpdeskid);
+      $engineers = array();
+
+      foreach($hdary as $key => $val) {
+      $database->query("SELECT * FROM engineers
+                        WHERE helpdesk REGEXP CONCAT('(', :helpdesk , ')[^0-9]|^(' , :helpdesk , ')$')
+                        AND disabled != 1");
+      $database->bind(":helpdesk", $val);
+      $results = $database->resultset();
+      $engineers = array_merge($engineers, $results);
+      }
+      $unique = array_map("unserialize", array_unique(array_map("serialize", $engineers)));
+      return $unique;
     }
 
     public function getEngineerFriendlyNameById($engineerid) {
