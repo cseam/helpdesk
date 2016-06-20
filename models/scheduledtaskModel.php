@@ -53,4 +53,20 @@
       return $database->lastInsertId();
     }
 
+    public function getLastComplianceDate($search) {
+      $database = new Database();
+      $database->query("SELECT calls.closed, calls.callid, datediff(CURDATE(), calls.closed) as daysago, engineers.engineerName
+                        FROM calls
+                        JOIN engineers ON calls.closeengineerid=engineers.idengineers
+                        WHERE calls.title = :search
+                        AND calls.status = 2
+                        ORDER BY calls.callid DESC
+                        LIMIT 1
+                        ");
+      $database->bind(':search', $search);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
 }
