@@ -10,7 +10,27 @@
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
-        
+          <table id="compliance">
+            <thead>
+              <tr class="head">
+                <th>Title</th>
+                <th>Frequency</th>
+                <th>Last Completed</th>
+                <th>Days ago</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($pagedata->reportResults as $key => $value) { ?>
+                <tr>
+                  <td><a href="/ticket/view/<?php echo $value["callid"]?>"><?php echo $value["task"]?></a></td>
+                  <td><?php echo $value["frequency"]?></td>
+                  <td><?php echo $value["compliancedate"]?></td>
+                  <td><?php echo $value["daysago"]?></td>
+                </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+
       </div>
     </div>
   </div>
