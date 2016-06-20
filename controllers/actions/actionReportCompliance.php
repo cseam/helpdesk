@@ -20,8 +20,9 @@ class actionReportCompliance {
       $pagedata->reportResults[$values["callid"]]["callid"] = $compliance["callid"];
       $pagedata->reportResults[$values["callid"]]["task"] = $values["title"];
       $pagedata->reportResults[$values["callid"]]["frequency"] = $values["frequencytype"];
-      $pagedata->reportResults[$values["callid"]]["compliancedate"] = $compliance['closed'];
-      $pagedata->reportResults[$values["callid"]]["daysago"] = $compliance['daysago'];
+      $pagedata->reportResults[$values["callid"]]["compliancedate"] = $compliance["closed"];
+      $pagedata->reportResults[$values["callid"]]["engineer"] = $compliance["engineerName"];
+      $pagedata->reportResults[$values["callid"]]["daysago"] = $compliance["daysago"];
     }
     //set page details
     $pagedata->details = $reportname. " showing scheduled task compliance last completed date. ";

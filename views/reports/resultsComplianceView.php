@@ -16,6 +16,7 @@
                 <th>Title</th>
                 <th>Frequency</th>
                 <th>Last Completed</th>
+                <th>Engineer</th>
                 <th>Days ago</th>
               </tr>
             </thead>
@@ -25,6 +26,7 @@
                   <td><a href="/ticket/view/<?php echo $value["callid"]?>"><?php echo $value["task"]?></a></td>
                   <td><?php echo $value["frequency"]?></td>
                   <td><?php echo $value["compliancedate"]?></td>
+                  <td><?php echo $value["engineer"]?></td>
                   <td><?php echo $value["daysago"]?></td>
                 </tr>
               <?php } ?>

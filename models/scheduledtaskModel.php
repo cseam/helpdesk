@@ -55,8 +55,9 @@
 
     public function getLastComplianceDate($search) {
       $database = new Database();
-      $database->query("SELECT calls.closed, calls.callid, datediff(CURDATE(), calls.closed) as daysago
+      $database->query("SELECT calls.closed, calls.callid, datediff(CURDATE(), calls.closed) as daysago, engineers.engineerName
                         FROM calls
+                        JOIN engineers ON calls.closeengineerid=engineers.idengineers
                         WHERE calls.title = :search
                         AND calls.status = 2
                         ORDER BY calls.callid DESC
