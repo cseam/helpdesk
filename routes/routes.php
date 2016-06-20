@@ -95,6 +95,7 @@
     $route->add('/report/outstanding', 'actionReportOutstanding');
     $route->add('/report/annualgraphs', 'actionReportAnnualgraphs');
     $route->add('/report/settings', 'actionReportSettings');
+    $route->add('/report/compliance', 'actionReportCompliance');
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
     // reports for managers only
     $route->add('/report/feedback', 'actionReportFeedback');
