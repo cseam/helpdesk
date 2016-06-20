@@ -15,15 +15,17 @@ class actionReportOutstanding {
     $pagedata->title = $reportname ;
     //set page details
     $pagedata->details = "Outstanding ticket totals count first by status then by engineer.";
+    //get helpdesks
+    $helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : $_SESSION['engineerHelpdesk'];
     //populate report results for use in view
-    $pagedata->open = $statsModel->countTicketsByStatusCode(1, $_SESSION['engineerHelpdesk']);
-    $pagedata->escalated = $statsModel->countTicketsByStatusCode(4, $_SESSION['engineerHelpdesk']);
-    $pagedata->onhold = $statsModel->countTicketsByStatusCode(3, $_SESSION['engineerHelpdesk']);
-    $pagedata->sentaway = $statsModel->countTicketsByStatusCode(5, $_SESSION['engineerHelpdesk']);
-    $pagedata->unassigned = sizeof($ticketModel->getUnassignedTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
-    $pagedata->over7days = sizeof($ticketModel->get7DayTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
-    $pagedata->stagnate = sizeof($ticketModel->getStagnateTicketsByHelpdesk($_SESSION['engineerHelpdesk']));
-    $pagedata->reportResults = $statsModel->countEngineerTotalsOutstatnding($_SESSION['engineerHelpdesk']);
+    $pagedata->open = $statsModel->countTicketsByStatusCode(1, $helpdesks);
+    $pagedata->escalated = $statsModel->countTicketsByStatusCode(4, $helpdesks);
+    $pagedata->onhold = $statsModel->countTicketsByStatusCode(3, $helpdesks);
+    $pagedata->sentaway = $statsModel->countTicketsByStatusCode(5, $helpdesks);
+    $pagedata->unassigned = sizeof($ticketModel->getUnassignedTicketsByHelpdesk($helpdesks));
+    $pagedata->over7days = sizeof($ticketModel->get7DayTicketsByHelpdesk($helpdesks));
+    $pagedata->stagnate = sizeof($ticketModel->getStagnateTicketsByHelpdesk($helpdesks));
+    $pagedata->reportResults = $statsModel->countEngineerTotalsOutstatnding($helpdesks);
 
     //render template using $pagedata object
     require_once "views/reports/resultsOutstandingTotalsView.php";

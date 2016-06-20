@@ -31,8 +31,10 @@ class actionReportRecentWork {
       $pagedata->title = $reportname;
       //set page details
       $pagedata->details = "Please select and engineer to view a list of recent tickets they have worked on.";
+      //get helpdesks
+      $helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : $_SESSION['engineerHelpdesk'];
       //get list of engineers
-      $pagedata->reportResults = $engineersModel->getListOfEngineersByHelpdeskId($_SESSION['engineerHelpdesk']);
+      $pagedata->reportResults = $engineersModel->getListOfEngineersByHelpdeskId($helpdesks);
       //render template using $pagedata object
       require_once "views/reports/resultsListEngineers.php";
     }

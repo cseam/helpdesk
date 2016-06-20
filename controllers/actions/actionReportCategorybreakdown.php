@@ -6,14 +6,16 @@ class actionReportCategorybreakdown {
     //create new models for required data
     $statsModel = new statsModel();
     $pagedata = new stdClass();
+    $categoryModel = new categoryModel();
     //set report name
     $reportname = "Category totals";
     //set report title
     $pagedata->title = $reportname . " report";
     //populate report results for use in view
-    $pagedata->reportResults = $statsModel->countCategoryTotalsThisMonth($_SESSION['engineerHelpdesk']);
+    $pagedata->reportResults = $categoryModel->countCategoryTotals($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing total tickets by category this month for " .sizeof($pagedata->reportResults)." categorys.";
+    $pagedata->details = $reportname. " showing total tickets by category for " .sizeof($pagedata->reportResults)." categorys,";
+    if (isset($_SESSION['customReportsRangeStart'])) { $pagedata->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $pagedata->details .= " this month."; }
     //render template using $pagedata object
     require_once "views/reports/resultsGraphBarView.php";
   }

@@ -1,8 +1,18 @@
 <?php
 
-  class helpdeskModel {
+class helpdeskModel {
+
+  private $_startrange = null;
+  private $_endrangerange = null;
+  private $_helpdesks = null;
+
   public function __construct()
-    { }
+    {
+      // populate custom report values
+      $this->_startrange = isset($_SESSION['customReportsRangeStart']) ? $_SESSION['customReportsRangeStart'] : date('Y-m-01');
+      $this->_endrange = isset($_SESSION['customReportsRangeEnd']) ? $_SESSION['customReportsRangeEnd'] : date('Y-m-t');
+      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null ;
+    }
 
     public function getFriendlyHelpdeskName($helpdeskid) {
       $database = new Database();
@@ -158,6 +168,25 @@
                       ");
       $database->bind(':id', $id);
       $result = $database->single();
+      return $result;
+    }
+
+    public function countHelpdeskTotals($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
+      $database = new Database();
+      $database->query("SELECT helpdesks.helpdesk_name, count(calls.callid) AS Totals FROM calls
+                        JOIN helpdesks ON calls.helpdesk=helpdesks.id
+                        WHERE calls.status = 2
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
+                        AND calls.closed BETWEEN :startrange AND :endrange
+                        GROUP BY calls.helpdesk
+                        ORDER BY Totals");
+      $database->bind(':startrange', $this->_startrange);
+      $database->bind(':endrange', $this->_endrange);
+      $database->bind(':scope', $helpdesks);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
       return $result;
     }
 

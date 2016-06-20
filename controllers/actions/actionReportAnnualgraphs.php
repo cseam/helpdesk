@@ -20,7 +20,7 @@ class actionReportAnnualgraphs {
     //define arrays
     $graphstats = $lastyear = $thisyear = $results = array();
     //get helpdesks to plot
-    $helpdesks = explode(",", $_SESSION['engineerHelpdesk']);
+    $helpdesks = explode(",",isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : $_SESSION['engineerHelpdesk'] );
     // loop over arrays
     foreach ($helpdesks as &$value) {
 

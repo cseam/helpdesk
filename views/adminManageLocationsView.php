@@ -23,6 +23,7 @@
             <th>Location Name</th>
             <th>Location Icon</th>
             <th>Location Shorthand</th>
+            <th>Option Group</th>
             <th>Manage</th>
           </tr>
         </thead>
@@ -34,6 +35,7 @@
                   <td><?php echo $value["locationName"]; ?></td>
                   <td><img src="/public/images/<?php echo $value["iconlocation"]; ?>" alt="<?php echo $value["iconlocation"]; ?>" title="<?php echo $value["iconlocation"]; ?>" width="16" height="16" />&nbsp;<?php echo $value["iconlocation"]; ?></td>
                   <td><?php echo $value["shorthand"]; ?></td>
+                  <td><?php echo $value["optiongroup"]; ?></td>
                   <td>
                     <form action="#" method="post" id="modifyForm" class="modifyconfirm">
                         <input type="hidden" id="button_modify_value" name="button_modify_value" value="" />

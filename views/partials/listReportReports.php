@@ -18,4 +18,5 @@
   <a href="/report/sla/"><img src="/public/images/ICONS-scheduledtask.svg" alt="SLA Performance" title="SLA Performance" width="24" height="25" />SLA Performance</a>
   <a href="/report/feedback/"><img src="/public/images/ICONS-userfeedback.svg" alt="User Feedback" title="User Feedback" width="24" height="25" />User feedback</a>
 <?php } ?>
+  <a href="/report/settings"><img src="/public/images/ICONS-settings.svg" alt="settings" title="settings" width="24" height="25" />Custom Settings</a>
 </div>

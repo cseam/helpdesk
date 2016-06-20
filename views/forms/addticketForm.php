@@ -18,9 +18,15 @@
 			?>
 			<select id="location" name="location">
 				<option value="" SELECTED>Please Select</option>
-				<?php foreach ($pagedata->location as $key => $value) { ?>
-				<option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $userProfileLocationId) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
-				<?php  } ?>
+				<?php
+					$optiongroup = null;
+				foreach ($pagedata->location as $key => $value) {
+					if ($optiongroup !== $value['optiongroup']) { echo "<optgroup label=\"" . $value['optiongroup'] . "\">"; $optiongroup = $value['optiongroup']; };
+					?>
+					<option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $userProfileLocationId) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
+				<?php
+					if ($optiongroup !== $value['optiongroup']) { echo "</optgroup>"; };
+				} ?>
 			</select>
 			<label for="room" title="Room where issue is">Room or Place</label>
 			<input type="text" id="room" name="room" value="" />
