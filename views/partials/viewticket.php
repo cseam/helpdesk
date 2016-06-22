@@ -30,6 +30,15 @@
       </td>
     </tr>
   </table>
+    <script type="text/javascript">
+    $(function() {
+      $("#scroll").click(function() {
+        $("#call").animate({scrollTop: $("#updateForm").offset().top-$("#branding").height()-50}, 2000);
+      });
+    });
+    </script>
+    <button id="scroll" title="scroll to bottom">scroll to bottom</button>
+
     <p class="callbody">
       <ul><?php if (isset($additionalDetails)) { foreach ($additionalDetails as $key => $value) { echo "<li>" . $value["label"] .": ". $value["value"] . "</li>"; } } ?></ul>
     </p>
