@@ -12,4 +12,4 @@ require_once "controllers/autoload.php";
 // load global functions
 require_once "libraries/functions.php";
 // process routes for top level(1)
-$route->process(1);
+$route->process();
