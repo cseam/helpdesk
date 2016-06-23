@@ -33,7 +33,11 @@
     <script type="text/javascript">
     $(function() {
       $("#scroll").click(function() {
-        $("#call").animate({scrollTop: $("#updateForm").offset().top-$("#branding").height()-50}, 2000);
+        if (screen.width >= 768) {
+          $("#call").animate({scrollTop: $("#updateForm").offset().top-$("#branding").height()-50}, 2000);
+         } else {
+          $(".section").animate({scrollTop: $("#updateForm").offset().top-$("#branding").height()}, 2000);
+         }
       });
     });
     </script>
