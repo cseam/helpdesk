@@ -23,7 +23,7 @@
   // manager routes
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
     $route->add('/manager', 'managerDefaultController');
-    $route->add('/manager/report', 'actionManagerReports');
+    //$route->add('/manager/report', 'actionManagerReports');
     $route->add('/manager/objectives/\d*', 'viewObjectivesController'); //wildcard route
     $route->add('/manager/addobjectives','addObjectivesController');
     $route->add('/manager/modifyobjectives/\d*','modifyObjectivesController'); //wildcard route

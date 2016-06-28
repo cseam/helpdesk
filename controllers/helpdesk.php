@@ -7,8 +7,6 @@ class helpdesk {
       require_once "libraries/functions.php";
       // authentication check
       require_once "controllers/authenticationController.php";
-      // autoload controller classes & models.
-      require_once "controllers/autoloadController.php";
       // add routes & process
       require_once "routes/routes.php";
       $route->process();
