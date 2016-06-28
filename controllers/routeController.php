@@ -1,6 +1,6 @@
 <?php
 
-class Route {
+class routeController {
   private $_uri = array();
   private $_controler = array();
   // build collection of internal routes

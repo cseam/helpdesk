@@ -1,6 +1,6 @@
 <?php
 
-class actionViewTicket {
+class viewTicketController {
   public function __construct()
   {
     //load content for left side of page

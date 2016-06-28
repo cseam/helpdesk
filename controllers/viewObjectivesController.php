@@ -1,6 +1,6 @@
 <?php
 
-class actionViewObjectives {
+class viewObjectivesController {
   public function __construct()
   {
     //load content for left side of page

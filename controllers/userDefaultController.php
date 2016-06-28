@@ -1,6 +1,6 @@
 <?php
 
-class actionUserDefault {
+class userDefaultController {
   public function __construct()
   {
     //load content for left side of page

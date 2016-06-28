@@ -1,6 +1,6 @@
 <?php
 
-class actionUserProfile {
+class userProfileController {
   public function __construct()
   {
     //load content for left side of page

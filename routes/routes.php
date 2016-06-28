@@ -1,14 +1,14 @@
 <?php
   // create routes object
-  $route = new Route();
+  $route = new routeController();
   // routes are regular expressions to load corisponding controller
   // default routes top level landing pages routes
     $route->add('/', 'homeController');
     $route->add('/login', 'loginController');
     $route->add('/logout', 'logoutController');
   // user routes
-    $route->add('/user', 'actionUserDefault');
-    $route->add('/user/profile', 'actionUserProfile');
+    $route->add('/user', 'userDefaultController');
+    $route->add('/user/profile', 'userProfileController');
     $route->add('/user/complete', 'actionComplete');
   // engineer routes
   if ($_SESSION['engineerLevel'] > 0 || $_SESSION['superuser'] == 1) {
@@ -18,13 +18,13 @@
     $route->add('/engineer/changecontrol', 'actionReportChangecontrol');
     $route->add('/engineer/outofhours', 'actionReportOutofhours');
     $route->add('/engineer/workrate', 'actionReportWorkrate');
-    $route->add('/engineer/objectives/\d*', 'actionViewObjectives'); //wildcard route
+    $route->add('/engineer/objectives/\d*', 'viewObjectivesController'); //wildcard route
   }
   // manager routes
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
     $route->add('/manager', 'actionManagerDefault');
     $route->add('/manager/report', 'actionManagerReports');
-    $route->add('/manager/objectives/\d*', 'actionViewObjectives'); //wildcard route
+    $route->add('/manager/objectives/\d*', 'viewObjectivesController'); //wildcard route
     $route->add('/manager/addobjectives','actionAddObjectives');
     $route->add('/manager/modifyobjectives/\d*','actionModifyObjectives'); //wildcard route
     $route->add('/manager/report/escalated', 'actionReportEscalated');
@@ -107,8 +107,7 @@
     $route->add('/ticket/add', 'actionAddTicket');
     $route->add('/ticket/update', 'actionUpdateTicket');
     $route->add('/ticket/updated', 'actionUpdatedTicket');
-    $route->add('/ticket/view', 'actionViewTicket');
-    $route->add('/ticket/view/\d*', 'actionViewTicket'); //wildcard route
+    $route->add('/ticket/view/\d*', 'viewTicketController'); //wildcard route
     $route->add('/ticket/assign/\d*', 'actionAssignTicket'); //wildcard route
     $route->add('/ticket/forward/\d*', 'actionForwardTicket'); //wildcard route
     $route->add('/ticket/feedback/\d*', 'actionFeedbackTicket'); //wildcard route
