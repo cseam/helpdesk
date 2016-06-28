@@ -482,6 +482,22 @@
         return null;
     }
 
+    public function updateTicketOpenById($ticketid, $opened) {
+        $database = new Database();
+        $database->query("UPDATE calls
+                          SET
+                          calls.original = calls.opened,
+                          calls.opened = :opened,
+                          calls.lastupdate = :lastupdate
+                          WHERE calls.callid = :callid
+                          ");
+        $database->bind(":opened", $opened);
+        $database->bind(":callid", $ticketid);
+        $database->bind(":lastupdate", date("c"));
+        $database->execute();
+        return null;
+    }
+
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "", $workedwith = null) {
       $message = "<div class=update>" . $update . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
       // update timestamp
@@ -494,6 +510,9 @@
       $database->execute();
       // update call_updates
         SWITCH ($statuscode) {
+          CASE "scheduled":
+            $status = 6;
+          break;
           CASE "sendaway":
             $status = 5;
           break;
@@ -778,6 +797,22 @@
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
+    }
+
+    public function processSchedule() {
+      $database = new Database();
+      $database->query("SELECT *
+                        FROM calls
+                        WHERE calls.status = 6");
+      $result = $database->resultset();
+        foreach ($result as &$value) {
+          if (strtotime($value["opened"]) < time()) {
+            // schedule due change ticket status
+            $this->updateTicketStatusById($value["callid"], 1);
+            echo "Scheduled change status \"#" . $value["callid"] . "\"";
+          }
+        }
+      return true;
     }
 
 }
