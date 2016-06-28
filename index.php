@@ -2,7 +2,7 @@
 // load config
 require_once "config/config.php";
 // authentication check
-require_once "controllers/authentication.php";
+require_once "controllers/authenticationController.php";
 // setup routing
 require_once "routes/routeClass.php";
 // add routes

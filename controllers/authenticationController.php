@@ -1,8 +1,6 @@
 <?php
-new authentication();
-// check users is authenticated else route to login.
-class authentication
-{
+
+class authenticationController {
   function __construct()
   {
     // start sessions
@@ -33,3 +31,6 @@ class authentication
     }
   }
 }
+
+new authenticationController();
+// check users is authenticated else route to login.
