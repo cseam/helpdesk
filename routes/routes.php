@@ -115,6 +115,7 @@
     $route->add('/ticket/description/\d*', 'actionDescriptionTicket'); //wildcard route
     $route->add('/ticket/category/\d*', 'actionCategoryTicket'); //wildcard route
     $route->add('/ticket/additional/\d*', 'actionAdditionalTicket'); //wildcard route
+    $route->add('/ticket/schedule/\d*', 'scheduleController'); //wildcard route
   // change control routes
   if ($_SESSION['engineerLevel'] > 0 || $_SESSION['superuser'] == 1) {
     $route->add('/changecontrol', 'actionAddChangeControl');

@@ -154,6 +154,11 @@ class actionUpdateTicket {
             header('Location: /ticket/assign/'.$_POST["id"]);
             exit;
           break;
+        CASE "schedule":
+            // reroute to schedule form
+            header('Location: /ticket/schedule/'.$_POST["id"]);
+            exit;
+          break;
         CASE "locker":
           $lockerid = random_locker();
           $lockersModel->updateTicketLockerById($_POST["id"], $lockerid);
