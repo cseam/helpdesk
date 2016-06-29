@@ -18,15 +18,14 @@
     $route->add('/engineer/changecontrol', 'reportChangeControlController');
     $route->add('/engineer/outofhours', 'reportOutOfHoursController');
     $route->add('/engineer/workrate', 'reportWorkrateController');
-    $route->add('/engineer/objectives/\d*', 'viewObjectivesController'); //wildcard route
+    $route->add('/engineer/objectives/\d*', 'viewObjectivesController'); //numerical wildcard route
   }
   // manager routes
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
     $route->add('/manager', 'managerDefaultController');
-    //$route->add('/manager/report', 'actionManagerReports');
-    $route->add('/manager/objectives/\d*', 'viewObjectivesController'); //wildcard route
+    $route->add('/manager/objectives/\d*', 'viewObjectivesController'); //numerical wildcard route
     $route->add('/manager/addobjectives','addObjectivesController');
-    $route->add('/manager/modifyobjectives/\d*','modifyObjectivesController'); //wildcard route
+    $route->add('/manager/modifyobjectives/\d*','modifyObjectivesController'); //numerical wildcard route
     $route->add('/manager/report/escalated', 'reportEscalatedController');
     $route->add('/manager/report/unassigned', 'reportUnassignedController');
     $route->add('/manager/report/assigned', 'reportAssignedController');
@@ -61,23 +60,23 @@
     $route->add('/admin/managequickresponses', 'adminManageQuickResponsesController');
     $route->add('/admin/managesla', 'adminManageSLAController');
     $route->add('/admin/complete', 'adminActionCompleteController');
-    $route->add('/admin/location/\d*', 'adminModifyLocationController'); //wildcard route
+    $route->add('/admin/location/\d*', 'adminModifyLocationController'); //numerical wildcard route
     $route->add('/admin/location/add', 'adminModifyLocationController');
-    $route->add('/admin/category/\d*', 'adminModifyCategoryController'); //wildcard route
+    $route->add('/admin/category/\d*', 'adminModifyCategoryController'); //numerical wildcard route
     $route->add('/admin/category/add', 'adminModifyCategoryController');
-    $route->add('/admin/reason/\d*', 'adminModifyReasonController'); //wildcard route
+    $route->add('/admin/reason/\d*', 'adminModifyReasonController'); //numerical wildcard route
     $route->add('/admin/reason/add', 'adminModifyReasonController');
-    $route->add('/admin/outofhours/\d*', 'adminModifyOutOfHoursController'); //wildcard route
+    $route->add('/admin/outofhours/\d*', 'adminModifyOutOfHoursController'); //numerical wildcard route
     $route->add('/admin/outofhours/add', 'adminModifyOutOfHoursController');
-    $route->add('/admin/quickresponse/\d*', 'adminModifyQuickResponseController'); //wildcard route
+    $route->add('/admin/quickresponse/\d*', 'adminModifyQuickResponseController'); //numerical wildcard route
     $route->add('/admin/quickresponse/add', 'adminModifyQuickResponseController');
-    $route->add('/admin/helpdesk/\d*', 'adminModifyHelpdeskController'); //wildcard route
+    $route->add('/admin/helpdesk/\d*', 'adminModifyHelpdeskController'); //numerical wildcard route
     $route->add('/admin/helpdesk/add', 'adminModifyHelpdeskController');
-    $route->add('/admin/sla/\d*', 'adminModifySLAController'); //wildcard route
+    $route->add('/admin/sla/\d*', 'adminModifySLAController'); //numerical wildcard route
     $route->add('/admin/sla/add', 'adminModifySLAController');
-    $route->add('/admin/engineer/\d*', 'adminModifyEngineerController'); //wildcard route
+    $route->add('/admin/engineer/\d*', 'adminModifyEngineerController'); //numerical wildcard route
     $route->add('/admin/engineer/add', 'adminModifyEngineerController');
-    $route->add('/admin/additional/\d*', 'adminModifyAdditionalController'); //wildcard route
+    $route->add('/admin/additional/\d*', 'adminModifyAdditionalController'); //numerical wildcard route
     $route->add('/admin/additional/add', 'adminModifyAdditionalController');
   }
   // report routes
@@ -91,7 +90,7 @@
     $route->add('/report/workrate', 'reportWorkrateController');
     $route->add('/report/assignednumbers', 'reportAssignedNumbersController');
     $route->add('/report/reason', 'reportReasonController');
-    $route->add('/report/recentwork/\d*', 'reportRecentWorkController'); //wildcard route
+    $route->add('/report/recentwork/\d*', 'reportRecentWorkController'); //numerical wildcard route
     $route->add('/report/outstanding', 'reportOutstandingController');
     $route->add('/report/annualgraphs', 'reportAnnualGraphsController');
     $route->add('/report/settings', 'reportSettingsController');
@@ -99,22 +98,21 @@
   if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
     // reports for managers only
     $route->add('/report/feedback', 'reportFeedbackController');
-    $route->add('/report/feedback/\d*', 'reportFeedbackListController'); //wildcard route
+    $route->add('/report/feedback/\d*', 'reportFeedbackListController'); //numerical wildcard route
     $route->add('/report/sla', 'reportSlaController');
   }
   // ticket routes
-    //$route->add('/ticket', 'ticketDefaultController');
     $route->add('/ticket/add', 'addTicketController');
     $route->add('/ticket/update', 'updateTicketController');
     $route->add('/ticket/updated', 'viewUpdatedTicketController');
-    $route->add('/ticket/view/\d*', 'viewTicketController'); //wildcard route
-    $route->add('/ticket/assign/\d*', 'assignTicketController'); //wildcard route
-    $route->add('/ticket/forward/\d*', 'forwardTicketController'); //wildcard route
-    $route->add('/ticket/feedback/\d*', 'feedbackTicketController'); //wildcard route
-    $route->add('/ticket/description/\d*', 'formDescriptionTicketController'); //wildcard route
-    $route->add('/ticket/category/\d*', 'formCategoryTicketController'); //wildcard route
-    $route->add('/ticket/additional/\d*', 'formAdditionalTicketController'); //wildcard route
-    $route->add('/ticket/schedule/\d*', 'scheduleController'); //wildcard route
+    $route->add('/ticket/view/\d*', 'viewTicketController'); //numerical wildcard route
+    $route->add('/ticket/assign/\d*', 'assignTicketController'); //numerical wildcard route
+    $route->add('/ticket/forward/\d*', 'forwardTicketController'); //numerical wildcard route
+    $route->add('/ticket/feedback/\d*', 'feedbackTicketController'); //numerical wildcard route
+    $route->add('/ticket/description/\d*', 'formDescriptionTicketController'); //numerical wildcard route
+    $route->add('/ticket/category/\d*', 'formCategoryTicketController'); //numerical wildcard route
+    $route->add('/ticket/additional/\d*', 'formAdditionalTicketController'); //numerical wildcard route
+    $route->add('/ticket/schedule/\d*', 'scheduleController'); //numerical wildcard route
   // change control routes
   if ($_SESSION['engineerLevel'] > 0 || $_SESSION['superuser'] == 1) {
     $route->add('/changecontrol', 'addChangeControlController');
@@ -126,7 +124,7 @@
     $route->add('/scheduledtask', 'addScheduledTaskController');
     $route->add('/scheduledtask/add', 'addScheduledTaskController');
     $route->add('/scheduledtask/modify', 'modifyScheduledTaskController');
-    $route->add('/scheduledtask/delete/\d*', 'deleteScheduledTaskController'); //wildcard route
+    $route->add('/scheduledtask/delete/\d*', 'deleteScheduledTaskController'); //numerical wildcard route
   }
   // digital sign routes
     $route->add('/digitalsign', 'digitalSignDefaultController');

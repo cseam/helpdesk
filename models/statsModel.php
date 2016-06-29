@@ -15,7 +15,8 @@
 
     public function countAllOpenTickets() {
       $database = new Database();
-      $database->query("SELECT COUNT(*) AS countAllOpenTickets FROM calls
+      $database->query("SELECT COUNT(*) AS countAllOpenTickets
+                        FROM calls
                         WHERE status !=2");
       $result = $database->single();
       if ($database->rowCount() === 0) { return null;}
@@ -24,7 +25,8 @@
 
     public function countTicketsByHelpdesk($helpdeskid) {
       $database = new Database();
-      $database->query("SELECT COUNT(*) AS countTicketsByHelpdesk FROM calls
+      $database->query("SELECT COUNT(*) AS countTicketsByHelpdesk
+                        FROM calls
                         WHERE helpdesk IN (:helpdeskid)");
       $database->bind(":helpdeskid", $helpdeskid);
       $result = $database->single();
@@ -69,7 +71,8 @@
 
     public function countTicketsByOwner($owner) {
       $database = new Database();
-      $database->query("SELECT COUNT(*) AS countTicketsByOwner FROM calls
+      $database->query("SELECT COUNT(*) AS countTicketsByOwner
+                        FROM calls
                         WHERE owner = :owner");
       $database->bind(":owner", $owner);
       $result = $database->single();
