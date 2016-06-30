@@ -65,6 +65,35 @@
       return $results;
     }
 
+    public function avgHelpdeskFeedback() {
+      $database = new Database();
+      $database->query("SELECT AVG(feedback.satisfaction) as FeedbackAVG
+                        FROM calls
+                        JOIN feedback ON feedback.callid=calls.callid
+                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
+                        JOIN helpdesks ON engineers.helpdesk = helpdesks.id
+                        WHERE calls.status = 2
+                        GROUP BY calls.status");
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function avgHelpdeskFeedbackByHelpdesk($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT AVG(feedback.satisfaction) as FeedbackAVG
+                        FROM calls
+                        JOIN feedback ON feedback.callid=calls.callid
+                        JOIN engineers ON engineers.idengineers=calls.closeengineerid
+                        JOIN helpdesks ON engineers.helpdesk = helpdesks.id
+                        WHERE calls.status = 2
+                        AND calls.helpdesk = :helpdesk
+                        GROUP BY calls.status");
+      $database->bind(':helpdesk', $helpdeskid);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
 
 
 }

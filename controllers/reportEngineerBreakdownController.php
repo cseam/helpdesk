@@ -4,9 +4,9 @@ class reportEngineerBreakdownController {
   public function __construct()
   {
     //create new models for required data
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
     $engineersModel = new engineerModel();
+    $ticketModel = new ticketModel();
     //set report name
     $reportname = "Engineer totals";
     //set report title

@@ -4,7 +4,6 @@ class reportFeedbackController {
   public function __construct()
   {
     //dont need to populate $listdata as fixed partial in manager view
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
     $ticketModel = new ticketModel();
     $feedbackModel = new feedbackModel();

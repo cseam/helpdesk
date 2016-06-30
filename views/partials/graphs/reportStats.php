@@ -3,7 +3,7 @@
 // also this should produce 12 months worth of values for each year including 0s atm im padding older data with 0's massive fudge :/
 
     $series = $temp = "";
-    $currentYear = $statsModel->countTotalsThisYear(date("Y"));
+    $currentYear = $ticketModel->countTotalsThisYear(date("Y"));
     foreach($currentYear as $key => $value) {
       $temp .= $value["Totals"] . ",";
     }
@@ -11,7 +11,7 @@
     $currentSeries = "[". $temp ."],";
 
     $temp = "";
-    $preYear = $statsModel->countTotalsThisYear(date("Y")-1);
+    $preYear = $ticketModel->countTotalsThisYear(date("Y")-1);
     foreach($preYear as $key => $value) {
       $temp .= $value["Totals"] . ",";
     }

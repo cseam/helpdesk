@@ -7,7 +7,7 @@ class reportOutstandingController {
     $left = new leftpageController();
     //create new models for required data
     $ticketModel = new ticketModel();
-    $statsModel = new statsModel();
+    $engineerModel = new engineerModel();
     $pagedata = new stdClass();
     //set report name
     $reportname = "Outstanding Totals";
@@ -18,14 +18,14 @@ class reportOutstandingController {
     //get helpdesks
     $helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : $_SESSION['engineerHelpdesk'];
     //populate report results for use in view
-    $pagedata->open = $statsModel->countTicketsByStatusCode(1, $helpdesks);
-    $pagedata->escalated = $statsModel->countTicketsByStatusCode(4, $helpdesks);
-    $pagedata->onhold = $statsModel->countTicketsByStatusCode(3, $helpdesks);
-    $pagedata->sentaway = $statsModel->countTicketsByStatusCode(5, $helpdesks);
+    $pagedata->open = $ticketModel->countTicketsByStatusCode(1, $helpdesks);
+    $pagedata->escalated = $ticketModel->countTicketsByStatusCode(4, $helpdesks);
+    $pagedata->onhold = $ticketModel->countTicketsByStatusCode(3, $helpdesks);
+    $pagedata->sentaway = $ticketModel->countTicketsByStatusCode(5, $helpdesks);
     $pagedata->unassigned = sizeof($ticketModel->getUnassignedTicketsByHelpdesk($helpdesks));
     $pagedata->over7days = sizeof($ticketModel->get7DayTicketsByHelpdesk($helpdesks));
     $pagedata->stagnate = sizeof($ticketModel->getStagnateTicketsByHelpdesk($helpdesks));
-    $pagedata->reportResults = $statsModel->countEngineerTotalsOutstatnding($helpdesks);
+    $pagedata->reportResults =  $engineerModel->countEngineerTotalsOutstatnding($helpdesks);
 
     //render template using $pagedata object
     require_once "views/reports/resultsOutstandingTotalsView.php";

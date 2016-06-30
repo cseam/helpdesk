@@ -6,8 +6,8 @@ class reportComplianceController {
     //load content for left side of page
     $left = new leftpageController();
     //create new models for required data
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
+    $ticketModel = new ticketModel();
     $scheduledtaskModel = new scheduledtaskModel();
     //set report name
     $reportname = "Scheduled Tasks Compliance";

@@ -10,7 +10,6 @@ class reportRecentWorkController {
     $engineerid = $baseurl[3];
     //create new models for required data
     $ticketModel = new ticketModel();
-    $statsModel = new statsModel();
     $engineersModel = new engineerModel();
     $pagedata = new stdClass();
     if ($engineerid) {

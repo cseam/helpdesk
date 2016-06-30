@@ -4,9 +4,9 @@ class reportSettingsController {
   public function __construct()
   {
     $left = new leftpageController();
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
     $helpdeskModel = new helpdeskModel();
+    $ticketModel = new ticketModel();
     //set report name
     $reportname = "Custom Settings";
     //set report title

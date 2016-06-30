@@ -4,9 +4,9 @@ class reportSlaController {
   public function __construct()
   {
     $servicelevelagreementModel = new servicelevelagreementModel();
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
     $SLAtotals = new stdClass();
+    $ticketModel = new ticketModel();
     //set report name
     $reportname = "Service Level Agreement";
     //set report title

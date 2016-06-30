@@ -7,9 +7,9 @@ class reportFeedbackListController {
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $id = $baseurl[3];
     //dont need to populate $listdata as fixed partial in manager view
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
     $feedbackModel = new feedbackModel();
+    $ticketModel = new ticketModel();
     //set report name
     $reportname = "Engineer feedback";
     //set report title

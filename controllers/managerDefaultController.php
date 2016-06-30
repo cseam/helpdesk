@@ -6,7 +6,6 @@ class managerDefaultController {
     //load content for left side of page
     $left = new leftpageController();
     //create new models for required data
-    $statsModel = new statsModel();
     $ticketModel = new ticketModel();
     $feedbackModel = new feedbackModel();
     $pagedata = new stdClass();

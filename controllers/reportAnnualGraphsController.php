@@ -7,7 +7,6 @@ class reportAnnualGraphsController {
     $left = new leftpageController();
     //create new models for required data
     $ticketModel = new ticketModel();
-    $statsModel = new statsModel();
     $helpdeskModel = new helpdeskModel();
     $pagedata = new stdClass();
     //set report name
@@ -25,8 +24,8 @@ class reportAnnualGraphsController {
     foreach ($helpdesks as &$value) {
 
     //get results for year
-    $thisyear = $statsModel->countTotalsThisYearbyHelpdesk(date("Y"), $value);
-    $lastyear = $statsModel->countTotalsThisYearbyHelpdesk(date("Y")-1, $value);
+    $thisyear = $ticketModel->countTotalsThisYearbyHelpdesk(date("Y"), $value);
+    $lastyear = $ticketModel->countTotalsThisYearbyHelpdesk(date("Y")-1, $value);
 
     //iterate over and merge to get 1 years full data
       for($i=1; $i <= 12; $i++) {

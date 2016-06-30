@@ -13,21 +13,21 @@ class logoutController {
       //create new models for required data
       $helpdeskModel = new helpdeskModel();
       $ticketModel = new ticketModel();
-      $statsModel = new statsModel();
+      $feedbackModel = new feedbackModel();
       //create objects for page
       $stats = array();
       //populate page with data
-      $stats = array_merge($stats, $statsModel->countAllTickets());
-      $stats = array_merge($stats, $statsModel->countTicketsByOwner($_SESSION['sAMAccountName']));
+      $stats = array_merge($stats, $ticketModel->countAllTickets());
+      $stats = array_merge($stats, $ticketModel->countTicketsByOwner($_SESSION['sAMAccountName']));
       //Logout stats
       $logoutstats = array();
       $helpdesks = $helpdeskModel->getListOfHelpdesks();
       foreach ($helpdesks as &$value) {
         $logoutstats[$value['id']]["Name"] = $value['helpdesk_name'];
-        $logoutstats[$value['id']]["avgCloseTime"] = $statsModel->advCloseTimeByHelpdeskIdInDays($value['id']);
-        $logoutstats[$value['id']]["outstanding"] = $statsModel->countOutstandingTicketsByHelpdesk($value['id']);
-        $logoutstats[$value['id']]["totalclosed"] = $statsModel->countTicketsByStatusCode(2 ,$value['id']);
-        $logoutstats[$value['id']]["avgfeedback"] = $statsModel->avgHelpdeskFeedbackByHelpdesk($value['id']);
+        $logoutstats[$value['id']]["avgCloseTime"] = $ticketModel->advCloseTimeByHelpdeskIdInDays($value['id']);
+        $logoutstats[$value['id']]["outstanding"] = $ticketModel->countOutstandingTicketsByHelpdesk($value['id']);
+        $logoutstats[$value['id']]["totalclosed"] = $ticketModel->countTicketsByStatusCode(2 ,$value['id']);
+        $logoutstats[$value['id']]["avgfeedback"] = $feedbackModel->avgHelpdeskFeedbackByHelpdesk($value['id']);
       }
       // render page
     require_once "views/logoutView.php";

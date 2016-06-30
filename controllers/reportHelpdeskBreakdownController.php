@@ -4,9 +4,9 @@ class reportHelpdeskBreakdownController {
   public function __construct()
   {
     //create new models for required data
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
     $helpdeskModel = new helpdeskModel();
+    $ticketModel = new ticketModel();
     //set report name
     $reportname = "Helpdesk totals";
     //set report title

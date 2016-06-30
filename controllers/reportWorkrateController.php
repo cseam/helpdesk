@@ -4,7 +4,6 @@ class reportWorkrateController {
   public function __construct()
   {
     //create new models for required data
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
     $ticketModel = new ticketModel();
     //set report name

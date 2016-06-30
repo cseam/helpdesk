@@ -4,9 +4,9 @@ class reportCategoryBreakdownController {
   public function __construct()
   {
     //create new models for required data
-    $statsModel = new statsModel();
     $pagedata = new stdClass();
     $categoryModel = new categoryModel();
+    $ticketModel = new ticketModel();
     //set report name
     $reportname = "Category totals";
     //set report title
