@@ -1,6 +1,6 @@
 <?php
 
-class helpdesk {
+class app {
     public function __construct() {
       // load config & helper functions
       require_once "config/config.php";
