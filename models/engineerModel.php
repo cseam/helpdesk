@@ -262,6 +262,28 @@
       return $result;
     }
 
+    public function logEngineerAccess($engineerId = 0, $direction = 1) {
+      $database = new Database();
+      $database->query("INSERT INTO engineers_punchcard (direction, stamp, engineerid)
+                        VALUES (:direction, :stamp ,:engineerId)
+                        ");
+      $database->bind(":engineerId", $engineerId);
+      $database->bind(":stamp", date("c"));
+      $database->bind(":direction", $direction);
+      $database->execute();
+      return;
+    }
 
+    public function updateEngineerStatus($engineerId = 0, $status = 0) {
+      $database = new Database();
+      $database->query("UPDATE engineers_status
+                        SET engineers_status.status = :status
+                        WHERE id = :engineerid
+                        ");
+      $database->bind(":engineerid", $engineerId);
+      $database->bind(":status", $status);
+      $database->execute();
+      return;
+    }
 
 }

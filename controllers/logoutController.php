@@ -3,17 +3,15 @@
 class logoutController {
   public function __construct()
   {
-    // process Logouts.
-      // update engineers status as out
-        //TODO create model for enginners and logout method
-      // update engineer punchcard with date and time stamp
-        //TODO create update punchcard method
-      // destory existing sessions
-      session_destroy();
-      //create new models for required data
+      // create models required
+      $engineerModel = new engineerModel();
       $helpdeskModel = new helpdeskModel();
       $ticketModel = new ticketModel();
       $feedbackModel = new feedbackModel();
+      // log engineer logout
+      $engineerModel->logEngineerAccess($_SESSION['engineerId'], 0);
+      // update engineers status as out
+      $engineerModel->updateEngineerStatus($_SESSION['engineerId'], 0);
       //create objects for page
       $stats = array();
       //populate page with data
@@ -29,8 +27,10 @@ class logoutController {
         $logoutstats[$value['id']]["totalclosed"] = $ticketModel->countTicketsByStatusCode(2 ,$value['id']);
         $logoutstats[$value['id']]["avgfeedback"] = $feedbackModel->avgHelpdeskFeedbackByHelpdesk($value['id']);
       }
+      // destory existing sessions
+      session_destroy();
       // render page
-    require_once "views/logoutView.php";
+      require_once "views/logoutView.php";
   }
 
 }
