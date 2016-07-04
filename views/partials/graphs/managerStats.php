@@ -22,13 +22,20 @@
 	$series .= "[" . rtrim($sun, ",") . "],";
 ?>
 <script type="text/javascript">
-	$(function() {
-	// WAIT FOR DOM
-	// Draw Bar chartist.js
-	var data = {
-		labels: [<?php echo $label ?>],
-		series: [<?php echo $series ?>]
-		};
+	function assists() {
+		var data = { labels: [<?php echo $label ?>], series: [[0]]};
+		new Chartist.Bar('#teamperformance', data, options);
+		$("#toggle").text("show closed");
+		$('#toggle').removeAttr('onclick');
+		$('#toggle').attr('onClick', 'closed();');
+	}
+	function closed() {
+		var data = { labels: [<?php echo $label ?>], series: [<?php echo $series ?>]};
+		new Chartist.Bar('#teamperformance', data, options);
+		$("#toggle").text("show assists");
+		$('#toggle').removeAttr('onclick');
+		$('#toggle').attr('onClick', 'assists();');
+	}
 	var options = {
 		fullWidth: true,
 		horizontalBars: true,
@@ -42,10 +49,17 @@
 			onlyInteger: true,
 			}
 		};
-	new Chartist.Bar('#teamperformance', data, options);
+
+	$(function() {
+	// WAIT FOR DOM
+		// Draw Bar chartist.js
+		closed();
 	});
 </script>
 <div id="teamperformance" class="ct-chart ct-golden-section" style="width: 100%;height:85%;float:left;"></div>
+<div style="float:left;margin-top: -10px;margin-right: 10px;">
+	<span style="font-size: 0.7rem;color: #aaa;background: #f0f0ef;padding: 0.1rem 0.5rem;cursor: pointer;" onclick="" id="toggle">toggle</span>
+</div>
 <div style="float:right;margin-top: -10px;margin-right: 10px;">
   <span style="font-size: 0.7rem;color: white;background: #BFCC80;padding: 0.1rem 0.5rem;"><?php echo(date("j M",strtotime("-6 day")));?></span>
   <span style="font-size: 0.7rem;color: white;background: #FFA38B;padding: 0.1rem 0.5rem;"><?php echo(date("j M",strtotime("-5 day")));?></span>
