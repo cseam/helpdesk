@@ -43,7 +43,7 @@
             }?>
               <p>This is your profile picture, it is attached to any ticket you create to help engineers identify users, pictures are periodicaly updated from College's repository, however if you would like to update your picture with one of your choosing please upload a picture here.</p>
               <label for="attachment" title="add attachments if required">Change Profile Picture</label>
-        			<input type="file" name="attachment" accept="image/jpeg">
+        			<input type="file" name="attachment" accept="image/jpeg" class="clearbreak">
           </fieldset>
           <fieldset>
             <legend>Notifications</legend>

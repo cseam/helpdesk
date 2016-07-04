@@ -1,22 +1,30 @@
 <?php
-//TODO this should be in the controller not here this is crap but prof of concept
-// also this should produce 12 months worth of values for each year including 0s atm im padding older data with 0's massive fudge :/
-
+  //TODO this should be in the controller not here this is clown fiesta!
+    //work out numbers for current year.
     $series = $temp = "";
-    $currentYear = $statsModel->countTotalsThisYear(date("Y"));
+    $currentYear = $ticketModel->countTotalsThisYear(date("Y"));
     foreach($currentYear as $key => $value) {
       $temp .= $value["Totals"] . ",";
     }
     $temp = rtrim($temp, ",");
     $currentSeries = "[". $temp ."],";
 
+    //work out numbers for previous year and pad with 0s if less than years data
     $temp = "";
-    $preYear = $statsModel->countTotalsThisYear(date("Y")-1);
+    $preYear = $ticketModel->countTotalsThisYear(date("Y")-1);
     foreach($preYear as $key => $value) {
       $temp .= $value["Totals"] . ",";
     }
     $temp = rtrim($temp, ",");
-    $preSeries = "[0,0,0,". $temp ."],";
+
+    $temp = explode("," , $temp);
+    $size = sizeof($temp);
+    $padcount = 12 - $size;
+    for($i = 1; $i <= $padcount; $i++) {
+      array_unshift($temp, 0);
+    }
+    $preSeries = "[" . implode("," , $temp) . "],";
+
 ?>
 
 <script type="text/javascript">

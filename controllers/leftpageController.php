@@ -7,8 +7,8 @@ class leftpageController {
   public function __construct()
   {
     $ticketModel = new ticketModel();
+    $engineerModel = new engineerModel();
     $objectivesModel = new objectivesModel();
-    $statsModel = new statsModel();
     //what level engineer are they in the system
     SWITCH ($_SESSION['engineerLevel']) {
       //populate objects with data for correct left side & tell view which partial to load
@@ -24,16 +24,16 @@ class leftpageController {
           $this->sideData["deptdata"] = $ticketModel->getOpenTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
           $this->sideData["objdata"] = $objectivesModel->getObjectivesByEngineerId($_SESSION['engineerId']);
             $graphstats = array();
-            $graphstats = array_merge($graphstats, $statsModel->countAllTicketsByEngineerIdLastWeek($_SESSION['engineerId']));
-            $graphstats = array_merge($graphstats, $statsModel->countClosedByEngineerIdLastWeek($_SESSION['engineerId']));
-            $graphstats = array_merge($graphstats, $statsModel->countEngineerTotalsLastWeek($_SESSION['engineerId']));
+            $graphstats = array_merge($graphstats, $ticketModel->countAllTicketsByEngineerIdLastWeek($_SESSION['engineerId']));
+            $graphstats = array_merge($graphstats, $ticketModel->countClosedByEngineerIdLastWeek($_SESSION['engineerId']));
+            $graphstats = array_merge($graphstats, $ticketModel->countEngineerTotalsLastWeek($_SESSION['engineerId']));
           $this->sideData["graphdata"] = $graphstats;
           $this->sideData["partial"] = "engineer.php";
         break;
         CASE "2":
         // manager
           $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 15);
-          $this->sideData["graphdata"] = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
+          $this->sideData["graphdata"] = $engineerModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
           $this->sideData["partial"] = "manager.php";
         break;
     }
@@ -48,15 +48,15 @@ class leftpageController {
           $this->sideData["deptdata"] = $ticketModel->getOpenTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
           $this->sideData["objdata"] = $objectivesModel->getObjectivesByEngineerId($_SESSION['engineerId']);
             $graphstats = array();
-            $graphstats = array_merge($graphstats, $statsModel->countAllTicketsByEngineerIdLastWeek($_SESSION['engineerId']));
-            $graphstats = array_merge($graphstats, $statsModel->countClosedByEngineerIdLastWeek($_SESSION['engineerId']));
-            $graphstats = array_merge($graphstats, $statsModel->countEngineerTotalsLastWeek($_SESSION['engineerId']));
+            $graphstats = array_merge($graphstats, $ticketModel->countAllTicketsByEngineerIdLastWeek($_SESSION['engineerId']));
+            $graphstats = array_merge($graphstats, $ticketModel->countClosedByEngineerIdLastWeek($_SESSION['engineerId']));
+            $graphstats = array_merge($graphstats, $ticketModel->countEngineerTotalsLastWeek($_SESSION['engineerId']));
           $this->sideData["graphdata"] = $graphstats;
           $this->sideData["partial"] = "engineer.php";
         break;
         CASE "manager":
           $this->sideData["partial"] = "manager.php";
-          $this->sideData["graphdata"] = $statsModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
+          $this->sideData["graphdata"] = $engineerModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
         break;
         CASE "report":
           $this->sideData["partial"] = "reports.php";

@@ -482,6 +482,22 @@
         return null;
     }
 
+    public function updateTicketOpenById($ticketid, $opened) {
+        $database = new Database();
+        $database->query("UPDATE calls
+                          SET
+                          calls.original = calls.opened,
+                          calls.opened = :opened,
+                          calls.lastupdate = :lastupdate
+                          WHERE calls.callid = :callid
+                          ");
+        $database->bind(":opened", $opened);
+        $database->bind(":callid", $ticketid);
+        $database->bind(":lastupdate", date("c"));
+        $database->execute();
+        return null;
+    }
+
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "", $workedwith = null) {
       $message = "<div class=update>" . $update . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
       // update timestamp
@@ -494,6 +510,9 @@
       $database->execute();
       // update call_updates
         SWITCH ($statuscode) {
+          CASE "scheduled":
+            $status = 6;
+          break;
           CASE "sendaway":
             $status = 5;
           break;
@@ -778,6 +797,217 @@
       $result = $database->resultset();
       if ($database->rowCount() === 0) { return null;}
       return $result;
+    }
+
+    public function countAllTickets() {
+      $database = new Database();
+      $database->query("SELECT COUNT(*) AS countAllTickets
+                        FROM calls");
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countAllOpenTickets() {
+      $database = new Database();
+      $database->query("SELECT COUNT(*) AS countAllOpenTickets
+                        FROM calls
+                        WHERE status !=2");
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countTicketsByHelpdesk($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT COUNT(*) AS countTicketsByHelpdesk
+                        FROM calls
+                        WHERE helpdesk IN (:helpdeskid)");
+      $database->bind(":helpdeskid", $helpdeskid);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countTicketsByStatusCode($statuscode, $scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $database = new Database();
+      $database->query("SELECT COUNT(*) AS countTotal
+                        FROM calls
+                        WHERE status = :status
+                        AND FIND_IN_SET(calls.helpdesk, :scope)");
+      $database->bind(":status", $statuscode);
+      $database->bind(":scope", $helpdesks);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countTicketsByOwner($owner) {
+      $database = new Database();
+      $database->query("SELECT COUNT(*) AS countTicketsByOwner
+                        FROM calls
+                        WHERE owner = :owner");
+      $database->bind(":owner", $owner);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countTotalsThisYear($year) {
+      $database = new Database();
+      $database->query("SELECT Month(closed) AS MonthNum, count(callid) AS Totals
+                        FROM calls
+                        WHERE status = 2
+                        AND Year(closed) = :year
+                        GROUP BY Month(closed)
+                        ORDER BY MonthNum, helpdesk");
+      $database->bind(':year', $year);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countTotalsThisYearbyHelpdesk($year,$helpdesk) {
+      $database = new Database();
+      $database->query("SELECT MONTH(calls.closed) AS MonthNum, count(calls.callid) AS Totals
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk=helpdesks.id
+                        WHERE calls.status = 2
+                        AND calls.helpdesk = :helpdesk
+                        AND Year(calls.closed) = :year
+                        GROUP BY Month(calls.closed)
+                        ORDER BY MonthNum, calls.helpdesk");
+      $database->bind(':helpdesk', $helpdesk);
+      $database->bind(':year', $year);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countEngineerTotalsLastWeek($engineerId) {
+      $database = new Database();
+      $database->query("SELECT DATE_FORMAT(closed, '%a') AS DAY_OF_WEEK
+                        FROM calls
+                        WHERE closeengineerid = :engineerId
+                        AND closed >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK)");
+      $database->bind(':engineerId', $engineerId);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      $engineermon = $engineertue = $engineerwed = $engineerthu = $engineerfri = $engineersat = $engineersun = 0;
+
+      foreach($result as $key => $value) {
+        SWITCH ($value["DAY_OF_WEEK"]) {
+          CASE "Mon":
+            ++$engineermon;
+            break;
+          CASE "Tue":
+            ++$engineertue;
+            break;
+          CASE "Wed":
+            ++$engineerwed;
+            break;
+          CASE "Thu":
+            ++$engineerthu;
+            break;
+          CASE "Fri":
+            ++$engineerfri;
+            break;
+          CASE "Sat":
+            ++$engineersat;
+            break;
+          CASE "Sun":
+            ++$engineersun;
+            break;
+        }
+      }
+      $count = array();
+      $count["Mon"] = $engineermon;
+      $count["Tue"] = $engineertue;
+      $count["Wed"] = $engineerwed;
+      $count["Thu"] = $engineerthu;
+      $count["Fri"] = $engineerfri;
+      $count["Sat"] = $engineersat;
+      $count["Sun"] = $engineersun;
+      return $count;
+    }
+
+    public function countClosedByEngineerIdLastWeek($engineerId) {
+      $database = new Database();
+      $database->query("SELECT count(closeengineerid) AS engineerClose
+                        FROM calls
+                        WHERE closed >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK)
+                        AND closeengineerid = :engineerId ");
+      $database->bind(':engineerId', $engineerId);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countAllTicketsByEngineerIdLastWeek($engineerId) {
+      $database = new Database();
+      $database->query("SELECT count(callid) AS engineerAll
+                        FROM calls
+                        WHERE lastupdate >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK)
+                        AND assigned = :engineerId");
+      $database->bind(':engineerId', $engineerId);
+      $result = $database->single();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function avgCloseTimeInDays() {
+      $database = new Database();
+      $database->query("SELECT helpdesks.helpdesk_name, avg(datediff(calls.closed, calls.opened)) as avg_days
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        GROUP BY helpdesk");
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null; }
+      return $results;
+    }
+
+    public function advCloseTimeByHelpdeskIdInDays($helpdesk) {
+      $database = new Database();
+      $database->query("SELECT avg(datediff(calls.closed, calls.opened)) as avg_days
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        WHERE calls.helpdesk = :helpdesk
+                        GROUP BY calls.helpdesk");
+      $database->bind(':helpdesk', $helpdesk);
+      $results = $database->single();
+      if ($database->rowCount() === 0) { return 0; }
+      return $results;
+    }
+
+    public function countOutstandingTicketsByHelpdesk($helpdesk) {
+      $database = new Database();
+      $database->query("SELECT count(calls.callid) as outstanding
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        WHERE calls.status != 2
+                        AND calls.helpdesk = :helpdesk
+                        GROUP BY calls.helpdesk");
+      $database->bind(':helpdesk', $helpdesk);
+      $results = $database->single();
+      if ($database->rowCount() ===0) { return 0; }
+      return $results;
+    }
+
+    public function processSchedule() {
+      $database = new Database();
+      $database->query("SELECT *
+                        FROM calls
+                        WHERE calls.status = 6");
+      $result = $database->resultset();
+        foreach ($result as &$value) {
+          if (strtotime($value["opened"]) < time()) {
+            // schedule due change ticket status
+            $this->updateTicketStatusById($value["callid"], 1);
+            echo "Scheduled change status \"#" . $value["callid"] . "\"";
+          }
+        }
+      return true;
     }
 
 }

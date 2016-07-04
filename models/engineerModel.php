@@ -217,5 +217,73 @@
       return $result;
     }
 
+    public function countEngineerTotalsOutstatnding($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $database = new Database();
+      $database->query("SELECT engineerName,
+                        sum(CASE WHEN calls.status = 1 THEN 1 ELSE 0 END) AS open,
+                        sum(CASE WHEN calls.status = 3 THEN 1 ELSE 0 END) AS onhold,
+                        sum(CASE WHEN calls.status = 4 THEN 1 ELSE 0 END) AS escalated
+                        FROM engineers
+                        LEFT JOIN calls ON calls.assigned = engineers.idengineers
+                        WHERE FIND_IN_SET(calls.helpdesk, :scope)
+                        AND engineers.disabled = 0
+                        AND calls.status !=2
+                        GROUP BY engineerName
+                        ORDER BY engineerName
+      ");
+      $database->bind(":scope", $helpdesks);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function countDepartmentWorkrateByDay($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT engineerName,
+                        sum(case when DATE(calls.closed) = DATE_SUB(CURDATE(),INTERVAL 0 DAY) THEN 1 ELSE 0 END) AS mon,
+                        sum(case when DATE(calls.closed) = DATE_SUB(CURDATE(),INTERVAL 1 DAY) THEN 1 ELSE 0 END) AS tue,
+                        sum(case when DATE(calls.closed) = DATE_SUB(CURDATE(),INTERVAL 2 DAY) THEN 1 ELSE 0 END) AS wed,
+                        sum(case when DATE(calls.closed) = DATE_SUB(CURDATE(),INTERVAL 3 DAY) THEN 1 ELSE 0 END) AS thu,
+                        sum(case when DATE(calls.closed) = DATE_SUB(CURDATE(),INTERVAL 4 DAY) THEN 1 ELSE 0 END) AS fri,
+                        sum(case when DATE(calls.closed) = DATE_SUB(CURDATE(),INTERVAL 5 DAY) THEN 1 ELSE 0 END) AS sat,
+                        sum(case when DATE(calls.closed) = DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS sun,
+                        sum(case when calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY) THEN 1 ELSE 0 END) AS total7
+                        FROM engineers
+                        LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers
+                        WHERE engineers.helpdesk IN (:helpdeskid) OR FIND_IN_SET(engineers.helpdesk, :helpdeskid)
+                        AND engineers.disabled=0
+                        GROUP BY engineerName
+                        ORDER BY total7 DESC
+                        ");
+      $database->bind(":helpdeskid", $helpdeskid);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      return $result;
+    }
+
+    public function logEngineerAccess($engineerId = 0, $direction = 1) {
+      $database = new Database();
+      $database->query("INSERT INTO engineers_punchcard (direction, stamp, engineerid)
+                        VALUES (:direction, :stamp ,:engineerId)
+                        ");
+      $database->bind(":engineerId", $engineerId);
+      $database->bind(":stamp", date("c"));
+      $database->bind(":direction", $direction);
+      $database->execute();
+      return;
+    }
+
+    public function updateEngineerStatus($engineerId = 0, $status = 0) {
+      $database = new Database();
+      $database->query("UPDATE engineers_status
+                        SET engineers_status.status = :status
+                        WHERE id = :engineerid
+                        ");
+      $database->bind(":engineerid", $engineerId);
+      $database->bind(":status", $status);
+      $database->execute();
+      return;
+    }
 
 }

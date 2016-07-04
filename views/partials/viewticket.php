@@ -30,6 +30,19 @@
       </td>
     </tr>
   </table>
+    <script type="text/javascript">
+    $(function() {
+      $("#scroll").click(function() {
+        if (screen.width >= 768) {
+          $("#call").animate({scrollTop: $("#updateForm").offset().top-$("#branding").height()-50}, 2000);
+         } else {
+          $(".section").animate({scrollTop: $("#updateForm").offset().top-$("#branding").height()}, 2000);
+         }
+      });
+    });
+    </script>
+    <button id="scroll" title="scroll to bottom">scroll to bottom</button>
+
     <p class="callbody">
       <ul><?php if (isset($additionalDetails)) { foreach ($additionalDetails as $key => $value) { echo "<li>" . $value["label"] .": ". $value["value"] . "</li>"; } } ?></ul>
     </p>
@@ -140,6 +153,7 @@
           <?php if (isset($ticketDetails["subscribed"])) {?><button name="unsubscribe" value="unsubscribe" type="submit" onclick="this.form.button_value.value = this.value;">Unsubscribe</button><?php } else {?><button name="subscribe" value="subscribe" type="submit" onclick="this.form.button_value.value = this.value;">Subscribe</button><?php } ?>
           <?php if ($ticketDetails["requireinvoice"] == 1) {?><button name="invoicearrived" value="invoicearrived" type="submit" onclick="this.form.button_value.value = this.value;">Invoice Received</button><?php } else {?><button name="invoice" value="invoice" type="submit" onclick="this.form.button_value.value = this.value;">Require Invoice</button><?php } ?>
           <button name="sendinv" value="sendinv" type="submit" onclick="this.form.button_value.value = this.value;">Send Away & Invoice</button>
+          <button name="schedule" value="schedule" type="submit" onclick="this.form.button_value.value = this.value;">Schedule</button>
           <?php }
           // show only for engineers, managers & superusers
           if ($_SESSION['engineerLevel'] >= "1" or $_SESSION['superuser'] === "1") { ?>

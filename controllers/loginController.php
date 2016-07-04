@@ -46,6 +46,8 @@ class loginController {
                   $_SESSION['engineerId'] = $dbUserDetails->idengineers;
                   $_SESSION['superuser'] = $dbUserDetails->superuser;
                   $_SESSION['engineerHelpdesk'] = $dbUserDetails->helpdesk;
+                // log engineer logon
+                  $engineerModel->logEngineerAccess($dbUserDetails->idengineers, 1);
                 // reroute
                   header('Location: /');
                   exit;
@@ -76,8 +78,10 @@ class loginController {
                     $_SESSION['engineerId'] = $dbUserDetails->idengineers;
                     $_SESSION['superuser'] = $dbUserDetails->superuser;
                     $_SESSION['engineerHelpdesk'] = $dbUserDetails->helpdesk;
-                    // TODO update engineer status as logged into system
-                    // TODO update engineer punchcard
+                    // log engineer logon
+                    $engineerModel->logEngineerAccess($dbUserDetails->idengineers, 1);
+                    // update engineer status
+                    $engineerModel->updateEngineerStatus($dbUserDetails->idengineers, 1);
                     // reroute
                       isset($_SESSION['entrypoint']) ? header('Location: ' . $_SESSION['entrypoint'] ) : header('Location: /');
                       exit;
