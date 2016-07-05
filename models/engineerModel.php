@@ -262,6 +262,38 @@
       return $result;
     }
 
+    public function countAssistWorkrateByDay($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT calls.callid, calls.closed, engineers.engineerName, call_updates.workedwith, calls.helpdesk
+                        FROM engineers
+                        LEFT JOIN calls ON calls.closeengineerid = engineers.idengineers
+                        JOIN call_updates ON calls.callid = call_updates.callid
+                        WHERE call_updates.workedwith IS NOT NULL
+                        AND calls.helpdesk IN (:helpdeskid)
+                        AND calls.closed >= DATE_SUB(CURDATE(),INTERVAL 6 DAY)
+                        ");
+      $database->bind(":helpdeskid", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null;}
+      $assistsids = null;
+        foreach ($results as &$values) {
+          //loop database assists and create long csv of assistsids
+          $assistsids .= $values["workedwith"] . ",";
+        }
+      //trim trailing comma
+      $assistsids = rtrim($assistsids, ",");
+      //explode csv into array
+      $assistsids = explode(",", $assistsids);
+      //count unique values
+      $assistcount = array_count_values($assistsids);
+      // update ids with friendly name for charts $this->getEngineerFriendlyNameById()
+      $assistchart = [];
+      foreach ($assistcount as $key => $value) {
+        $assistchart[$this->getEngineerFriendlyNameById($key)] = $value;
+      }
+      return $assistchart;
+    }
+
     public function logEngineerAccess($engineerId = 0, $direction = 1) {
       $database = new Database();
       $database->query("INSERT INTO engineers_punchcard (direction, stamp, engineerid)
