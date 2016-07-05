@@ -13,7 +13,6 @@ class Page {
     //set defaults if provided
     $this->_template = $template;
     $this->_data = $data;
-    //print_r($left);
   }
 
   public function setTemplate($templatename) {

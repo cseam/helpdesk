@@ -20,7 +20,7 @@ class reportOpenController {
 
     //pass complete data and template to view engine and render
     $view = new Page();
-    $view->setTemplate('reports/resultsListReportView');
+    $view->setTemplate('resultsListReportView');
     $view->setDataSrc($templateData);
     $view->render();
   }

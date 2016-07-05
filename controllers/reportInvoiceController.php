@@ -3,23 +3,25 @@
 class reportInvoiceController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //create new models for required data
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
-    $pagedata = new stdClass();
-    //set report name
-    $reportname = "Awaiting Invoice";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //set report title
-    $pagedata->title = $reportname . " Tickets";
+    $templateData->title = "Awaiting invoice tickets";
     //populate report results for use in view
-    $pagedata->reportResults = $ticketModel->getTicketsForInvoiceByHelpdesk($_SESSION['engineerHelpdesk']);
+    $templateData->reportResults = $ticketModel->getTicketsForInvoiceByHelpdesk($_SESSION['engineerHelpdesk']);
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = sizeof($pagedata->reportResults)." ".$reportname." tickets for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
-    //render template using $pagedata object
-    require_once "views/reports/resultsListReportView.php";
+    $templateData->details = sizeof($templateData->reportResults)." ".$templateData->title." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsListReportView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }
