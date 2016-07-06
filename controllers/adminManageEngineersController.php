@@ -5,10 +5,11 @@ class adminManageEngineersController {
   {
     //load required models
     $engineerModel = new engineerModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage Engineers";
-    $pagedata->details = "Engineers available to use " . CODENAME;
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage Engineers";
+    $templateData->details = "Engineers available to use " . CODENAME;
+    $templateData->listofengineers = $engineerModel->getListOfEngineers();
 
     //Post Update Locations
       if ($_POST) {
@@ -33,9 +34,10 @@ class adminManageEngineersController {
         }
       }
 
-    $pagedata->listofengineers = $engineerModel->getListOfEngineers();
-    // render page
-    require_once "views/adminManageEngineersView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageEngineersView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

@@ -3,7 +3,7 @@
 class routeController {
   private $_uri = array();
   private $_controler = array();
-  // build collection of internal routes
+  // build collection of internal routes.
   public function add($uri, $controler = null) {
     $this->_uri[] = $uri;
     $this->_controler[] = $controler;

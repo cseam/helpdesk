@@ -6,20 +6,23 @@ class reportFeedbackListController {
     //get ticket id from uri params.
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $id = $baseurl[3];
-    //dont need to populate $listdata as fixed partial in manager view
-    $pagedata = new stdClass();
+    //create new models for required data
     $feedbackModel = new feedbackModel();
     $ticketModel = new ticketModel();
-    //set report name
-    $reportname = "Engineer feedback";
-    //set report title
-    $pagedata->title = $reportname . " report";
-    //populate report results for use in view
-    $pagedata->reportResults = $feedbackModel->getFeedbackDetailsByEngineerId($id);
-    //set page details
-    $pagedata->details = $reportname. " showing feedback left by users.";
+    //create empty object to store data for template
+    $templateData = new stdClass();
 
-    //render template using $pagedata object
-    require_once "views/reports/resultsFeedbackListView.php";
+    //set report title
+    $templateData->title = "Engineer feedback report";
+    //populate report results for use in view
+    $templateData->reportResults = $feedbackModel->getFeedbackDetailsByEngineerId($id);
+    //set page details
+    $templateData->details = $templateData->title . " showing feedback left by users.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsFeedbackListView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

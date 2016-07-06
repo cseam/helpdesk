@@ -3,7 +3,7 @@
 class reportOpenController {
   public function __construct()
   {
-    //create new models for required data
+    //create new models required
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
     //create empty object to store data for template

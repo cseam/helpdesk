@@ -4,18 +4,22 @@ class reportReasonController {
   public function __construct()
   {
     //create new models for required data
-    $pagedata = new stdClass();
     $ticketModel = new ticketModel();
-    //set report name
-    $reportname = "Ticket reported reasons";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //set report title
-    $pagedata->title = $reportname . "";
+    $templateData->title = "Ticket reported reasons";
     //populate report results for use in view
-    $pagedata->reportResults = $ticketModel->countReasonForTickets($_SESSION['engineerHelpdesk']);
+    $templateData->reportResults = $ticketModel->countReasonForTickets($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing tickets closed grouped by the reason the ticket was closed, ";
-    if (isset($_SESSION['customReportsRangeStart'])) { $pagedata->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $pagedata->details .= " this month."; }
-    //render template using $pagedata object
-    require_once "views/reports/resultsGraphBarView.php";
+    $templateData->details = $templateData->title . " showing tickets closed grouped by the reason the ticket was closed, ";
+    if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsGraphBarView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

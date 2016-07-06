@@ -9,10 +9,11 @@ class adminModifyQuickResponseController {
     //load required models
     $quickresponseModel = new quickresponseModel();
     $helpdeskModel = new helpdeskModel();
-    //create page data objects
-    $pagedata = new stdClass();
+
+    //create empty object to store data for template
+    $templateData = new stdClass();
     //populate helpdesks
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
 
     // on post update
     if ($_POST) {
@@ -26,16 +27,18 @@ class adminModifyQuickResponseController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Add Quick Response";
-    $pagedata->details = "Please update the details for your changes.";
+    $templateData->title = "Add Quick Response";
+    $templateData->details = "Please update the details for your changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata->title = "Modify Quick Response";
-      $pagedata->reportResults = $quickresponseModel->getQuickResponseById($id);
+      $templateData->title = "Modify Quick Response";
+      $templateData->reportResults = $quickresponseModel->getQuickResponseById($id);
     }
 
-    //render page
-    require_once "views/adminModifyQuickResponseView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifyQuickResponseView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

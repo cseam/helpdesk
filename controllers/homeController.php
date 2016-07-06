@@ -3,7 +3,7 @@
 class homeController {
   public function __construct()
   {
-    // Route to default landing page depending on engineer level.
+    // Route to landing page depending on engineer level.
     SWITCH ($_SESSION['engineerLevel']) {
       CASE 2:
         header('Location: /manager/');

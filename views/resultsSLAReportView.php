@@ -22,9 +22,9 @@
             </tr>
           </thead>
           <tbody>
-            <?php if (isset($SLAtotals)) {
+            <?php if (isset($pagedata->SLAtotals)) {
               $pietotal = $firsttotal = $closetotal = 0;
-              foreach($SLAtotals as &$value) {
+              foreach($pagedata->SLAtotals as &$value) {
                 $pietotal += $value["Total"];
                 $firsttotal += $value["FirstResponseSuccess"];
                 $closetotal += $value["ResponseTimeSuccess"];

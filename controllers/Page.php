@@ -8,7 +8,7 @@ class Page {
 
   public function __construct($template = null, $data = null)
   {
-    //load content for left side of page
+    //load content for left side of page.
     $this->_left = new leftpageController();
     //set defaults if provided
     $this->_template = $template;

@@ -5,10 +5,11 @@ class adminManageAdditionalController {
   {
     //load required models
     $additionalModel = new additionalModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage Addititional Fields";
-    $pagedata->details = "additional fields that drop down when a catagory is selected when adding a new ticket to " . CODENAME;
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage Addititional Fields";
+    $templateData->details = "additional fields that drop down when a catagory is selected when adding a new ticket to " . CODENAME;
+    $templateData->listofadditional = $additionalModel->getListOfAdditionalFields();
 
     //Post Update Locations
       if ($_POST) {
@@ -33,9 +34,10 @@ class adminManageAdditionalController {
         }
       }
 
-    $pagedata->listofadditional = $additionalModel->getListOfAdditionalFields();
-    // render page
-    require_once "views/adminManageAdditionalView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageAdditionalView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

@@ -3,10 +3,17 @@
 class ticketDefaultController {
   public function __construct()
   {
+    //TODO no one should hit this atm
+    //create new models required
 
-    //TODO shouldent be used atm
-    // render page
-    require_once "views/ticketView.php";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('ticketView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 
 }

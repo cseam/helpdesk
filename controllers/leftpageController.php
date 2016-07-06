@@ -9,7 +9,7 @@ class leftpageController {
     $ticketModel = new ticketModel();
     $engineerModel = new engineerModel();
     $objectivesModel = new objectivesModel();
-    //what level engineer are they in the system
+    //check what level engineer are they in the system
     SWITCH ($_SESSION['engineerLevel']) {
       //populate objects with data for correct left side & tell view which partial to load
         CASE "0":

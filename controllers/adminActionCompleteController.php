@@ -3,12 +3,16 @@
 class adminActionCompleteController {
   public function __construct()
   {
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Thankyou";
-    $pagedata->details = "Your change has been made to the database";
-    // render page
-    require_once "views/adminCompleteView.php";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Thankyou";
+    $templateData->details = "Your change has been made to the database";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminCompleteView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 
 }

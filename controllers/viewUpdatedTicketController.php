@@ -3,11 +3,13 @@
 class viewUpdatedTicketController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
-    $pagedata = $_SESSION['pagedata'];
-    // render page
-    require_once "views/updateTicketView.php";
+    //create empty object to store data for template
+    $templateData = $_SESSION['pagedata'];
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('updateTicketView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 
 }

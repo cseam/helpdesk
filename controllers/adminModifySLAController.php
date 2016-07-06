@@ -9,10 +9,11 @@ class adminModifySLAController {
     //load required models
     $slaModel = new servicelevelagreementModel();
     $helpdeskModel = new helpdeskModel();
-    //create page data objects
-    $pagedata = new stdClass();
+
+    //create empty object to store data for template
+    $templateData = new stdClass();
     //populate helpdesks
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
     // on post update
     if ($_POST) {
       // upsert locations
@@ -27,16 +28,18 @@ class adminModifySLAController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Add SLA";
-    $pagedata->details = "Please update the details for your location changes.";
+    $templateData->title = "Add SLA";
+    $templateData->details = "Please update the details for your location changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata->title = "Modify SLA";
-      $pagedata->reportResults = $slaModel->getSLAById($id);
+      $templateData->title = "Modify SLA";
+      $templateData->reportResults = $slaModel->getSLAById($id);
     }
 
-    //render page
-    require_once "views/adminModifySLAView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifySLAView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

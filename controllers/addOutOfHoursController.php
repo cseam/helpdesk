@@ -3,12 +3,12 @@
 class addOutOfHoursController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //create new models for required data
     $outofhoursModel = new outofhoursModel();
     $helpdeskModel = new helpdeskModel();
-    $pagedata = new stdClass();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //Post Update Objective
       if ($_POST) {
         //create out of hours
@@ -24,12 +24,15 @@ class addOutOfHoursController {
         $resolution = htmlspecialchars($_POST['resolution']);
         $outofhoursModel->addOutofhours($name, $dateofcall, $timeofcall, $calloutby, $problem, $previsit, $timeonsite, $timeleftsite, $locations, $resolution);
       }
-    //set report name
-    $reportname = "Add Out Of Hours";
+
     //set report title
-    $pagedata->title = $reportname;
-    $pagedata->details = "Please complete the form to add an out of hours call for record.";
-    //render template using $pagedata object
-    require_once "views/addOutofhours.php";
+    $templateData->title = "Add Out Of Hours";
+    $templateData->details = "Please complete the form to add an out of hours call for record.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('addOutofhours');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

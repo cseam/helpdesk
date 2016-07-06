@@ -1,6 +1,6 @@
 <form action="#" method="post" enctype="multipart/form-data" id="schedule" class="scheduleform">
 <fieldset>
-		<legend>Schedule Ticket #<?php echo $ticketid ?></legend>
+		<legend>Schedule Ticket #<?php echo $pagedata->ticketid ?></legend>
 		<p>This ticket will be scheduled for the time selected, the ticket will automatically reopen on the selected date, reports will then calculate from the reopened time.</p>
 		<label for="date-range" title="select a date range">Schedule for</label>
 		<link rel="stylesheet" href="/public/css/daterangepicker.min.css">

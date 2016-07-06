@@ -5,10 +5,11 @@ class adminManageQuickResponsesController {
   {
     //load required models
     $quickresponseModel = new quickresponseModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage Quick Responses";
-    $pagedata->details = "quick responses available for engineers to select when updating a ticket to " . CODENAME;
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage Quick Responses";
+    $templateData->details = "quick responses available for engineers to select when updating a ticket to " . CODENAME;
+    $templateData->listofQuickresponses = $quickresponseModel->getListOfQuickResponses();
 
     //Post Update Locations
       if ($_POST) {
@@ -33,8 +34,10 @@ class adminManageQuickResponsesController {
         }
       }
 
-    $pagedata->listofQuickresponses = $quickresponseModel->getListOfQuickResponses();
-    // render page
-    require_once "views/adminManageQuickResponsesView.php";
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageQuickResponsesView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

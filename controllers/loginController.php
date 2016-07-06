@@ -9,7 +9,7 @@ class loginController {
 
   public function __construct()
   {
-    // load crypto library for hashing.
+    // load crypto library for hashing
     require_once "libraries/pbkdf2.php";
     // if user submitted form process login
     if ($_POST) {

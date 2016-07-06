@@ -5,10 +5,11 @@ class adminManageCatagoriesController {
   {
     //load required models
     $categoryModel = new categoryModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage Categories";
-    $pagedata->details = "Categories available for users to select when adding a new ticket to " . CODENAME;
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage Categories";
+    $templateData->details = "Categories available for users to select when adding a new ticket to " . CODENAME;
+    $templateData->listofcategorys = $categoryModel->getListOfCategorys();
 
     //Post Update Locations
       if ($_POST) {
@@ -33,8 +34,10 @@ class adminManageCatagoriesController {
         }
       }
 
-    $pagedata->listofcategorys = $categoryModel->getListOfCategorys();
-    // render page
-    require_once "views/adminManageCategoriesView.php";
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageCategoriesView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

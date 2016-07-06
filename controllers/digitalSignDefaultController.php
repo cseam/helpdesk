@@ -3,16 +3,20 @@
 class digitalSignDefaultController {
   public function __construct()
   {
-    $pagedata = new stdClass();
+    //create new models required
     $lockersModel = new lockersModel();
+    //create empty object to store data for template
+    $templateData = new stdClass();
 
-    //set report name
-    $reportname = "Lockers";
     //set report title
-    $pagedata->title = $reportname;
-    $pagedata->details = "";
-    $pagedata->reportResults = $lockersModel->getLockersByHelpdesk(1);
-    //render template using $pagedata object
-    require_once "views/digitalsignView.php";
+    $templateData->title = "Lockers";
+    $templateData->details = "";
+    $templateData->reportResults = $lockersModel->getLockersByHelpdesk(1);
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('digitalsignView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

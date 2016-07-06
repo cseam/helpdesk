@@ -9,10 +9,11 @@ class adminModifyAdditionalController {
     //load required models
     $categoryModel = new categoryModel();
     $additionalModel = new additionalModel();
-    //create page data objects
-    $pagedata = new stdClass();
+
+    //create empty object to store data for template
+    $templateData = new stdClass();
     //get list of catagories
-    $pagedata->catagories = $categoryModel->getListOfCategorys();
+    $templateData->catagories = $categoryModel->getListOfCategorys();
 
     // on post update
     if ($_POST) {
@@ -26,16 +27,18 @@ class adminModifyAdditionalController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Add Additional Fields";
-    $pagedata->details = "Please update the details for your changes.";
+    $templateData->title = "Add Additional Fields";
+    $templateData->details = "Please update the details for your changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata->title = "Modify Additional Fields";
-      $pagedata->reportResults = $additionalModel->getAdditionalFieldsById($id);
+      $templateData->title = "Modify Additional Fields";
+      $templateData->reportResults = $additionalModel->getAdditionalFieldsById($id);
     }
 
-    //render page
-    require_once "views/adminModifyAdditionalView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifyAdditionalView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

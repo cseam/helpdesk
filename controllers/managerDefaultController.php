@@ -3,7 +3,7 @@
 class managerDefaultController {
   public function __construct()
   {
-    //create new models for required data
+    //create new models for required data.
     $ticketModel = new ticketModel();
     $feedbackModel = new feedbackModel();
     //create empty object to store data for template

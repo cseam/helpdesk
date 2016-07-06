@@ -4,17 +4,21 @@ class reportAssignedNumbersController {
   public function __construct()
   {
     //create new models for required data
-    $pagedata = new stdClass();
     $ticketModel = new ticketModel();
-    //set report name
-    $reportname = "Assigned tickets";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //set report title
-    $pagedata->title = $reportname . " report";
+    $templateData->title = "Assigned tickets report";
     //populate report results for use in view
-    $pagedata->reportResults = $ticketModel->countAssignedTickets($_SESSION['engineerHelpdesk']);
+    $templateData->reportResults = $ticketModel->countAssignedTickets($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing number of tickets assigned, currently open and all time, grouped by engineer.";
-    //render template using $pagedata object
-    require_once "views/reports/resultsAssignedTicketsView.php";
+    $templateData->details = $templateData->title . " showing number of tickets assigned, currently open and all time, grouped by engineer.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsAssignedTicketsView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

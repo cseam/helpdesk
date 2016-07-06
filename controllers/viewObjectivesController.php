@@ -3,15 +3,15 @@
 class viewObjectivesController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //get ticket id from uri params
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $objectiveid = $baseurl[3];
     //create new models for required data
     $helpdeskModel = new helpdeskModel();
     $objectivesModel = new objectivesModel();
-    $pagedata = new stdClass();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //Post Update Objective
       if ($_POST) {
         SWITCH ($_POST["button_value"]) {
@@ -22,7 +22,7 @@ class viewObjectivesController {
           break;
           CASE "update":
             $objectivesModel->updateObjectiveById($_POST['id'], $_POST['updatedetails'], $_POST['progress']);
-            $pagedata->complete = "<h3>Thank you</h3><p>Your objective has been updated.</p>";
+            $templateData->complete = "<h3>Thank you</h3><p>Your objective has been updated.</p>";
           break;
           CASE "modify":
             // reroute to modify form
@@ -31,23 +31,25 @@ class viewObjectivesController {
           break;
           CASE "delete":
             $objectivesModel->removeObjectiveById($_POST['id']);
-            $pagedata->complete = "<h3>Objective Removed</h3><p>objective #".$_POST['id']." has been removed from the database.</p>";
+            $templateData->complete = "<h3>Objective Removed</h3><p>objective #".$_POST['id']." has been removed from the database.</p>";
           break;
         }
       }
-    //set report name
-    $reportname = "Performance Objective #".$objectiveid;
     //set report title
-    $pagedata->title = $reportname;
+    $templateData->title = "Performance Objective #".$objectiveid;
     //populate objective
-    $pagedata->reportResults = $objectivesModel->getObjectiveById($objectiveid);
+    $templateData->reportResults = $objectivesModel->getObjectiveById($objectiveid);
     //check engineerid is same as engineer assigned to objective {CLOWN FIESTA need to fix this but it works for now}
-      if ($pagedata->reportResults[0]['engineerid'] === $_SESSION['engineerId']) { } else if ($_SESSION['engineerLevel'] > 1 || $_SESSION['superuser'] == true) { } else {
+      if ($templateData->reportResults[0]['engineerid'] === $_SESSION['engineerId']) { } else if ($_SESSION['engineerLevel'] > 1 || $_SESSION['superuser'] == true) { } else {
         //no access to this objective throw error
         $error = "<h3>Access Denied</h3><p>You do not have permission to view this performance objective.</p>";
-        $pagedata->reportResults = null;
+        $templateData->reportResults = null;
       }
-    //render template using $pagedata object
-    require_once "views/objectivesView.php";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('objectivesView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

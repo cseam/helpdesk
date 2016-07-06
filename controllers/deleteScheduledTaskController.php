@@ -3,15 +3,15 @@
 class deleteScheduledTaskController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //get ticket id from uri params
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $taskid = $baseurl[3];
     //create new models for required data
     $scheduledtaskModel = new scheduledtaskModel();
     $helpdeskModel = new helpdeskModel();
-    $pagedata = new stdClass();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //Post Update Scheduledtask
       if ($taskid) {
         //delete Scheduledtask
@@ -19,12 +19,14 @@ class deleteScheduledTaskController {
         $taskid = htmlspecialchars($taskid);
         $scheduledtaskModel->removeScheduledTaskById($taskid);
       }
-    //set report name
-    $reportname = "Scheduled Task Deleted";
     //set report title
-    $pagedata->title = $reportname;
-    $pagedata->details = "Your scheduled task has now been deleted.";
-    //render template using $pagedata object
-    require_once "views/deleteScheduledtask.php";
+    $templateData->title = "Scheduled Task Deleted";
+    $templateData->details = "Your scheduled task has now been deleted.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('deleteScheduledtask');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

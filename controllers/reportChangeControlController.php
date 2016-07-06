@@ -3,12 +3,12 @@
 class reportChangeControlController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //create new models for required data
     $helpdeskModel = new helpdeskModel();
     $changecontrolModel = new changecontrolModel();
-    $pagedata = new stdClass();
+
+    //create empty object to store data for template
+    $templateData = new stdClass();
 
     //Post Update Objective
       if ($_POST) {
@@ -30,17 +30,19 @@ class reportChangeControlController {
         }
       }
 
-    //set report name
-    $reportname = "Change Control";
     //set report title
-    $pagedata->title = $reportname . "";
+    $templateData->title = "Change control";
     //populate report results for use in view
-    $pagedata->reportResults = $changecontrolModel->getChangeControlsByHelpdesk($_SESSION['engineerHelpdesk']);
+    $templateData->reportResults = $changecontrolModel->getChangeControlsByHelpdesk($_SESSION['engineerHelpdesk']);
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = sizeof($pagedata->reportResults)." ".$reportname." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
-    //render template using $pagedata object
-    require_once "views/reports/resultsChangeControlView.php";
+    $templateData->details = sizeof($templateData->reportResults)." ".$templateData->title." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsChangeControlView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

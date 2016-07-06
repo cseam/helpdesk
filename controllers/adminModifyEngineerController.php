@@ -9,10 +9,11 @@ class adminModifyEngineerController {
     //load required models
     $helpdeskModel = new helpdeskModel();
     $engineerModel = new engineerModel();
-    //create page data objects
-    $pagedata = new stdClass();
+
+    //create empty object to store data for template
+    $templateData = new stdClass();
     //populate helpdesks
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
 
     // on post update
     if ($_POST) {
@@ -33,16 +34,18 @@ class adminModifyEngineerController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Add Engineer";
-    $pagedata->details = "Please update the details for your changes.";
+    $templateData->title = "Add Engineer";
+    $templateData->details = "Please update the details for your changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata->title = "Modify Engineer";
-      $pagedata->reportResults = $engineerModel->getEngineerById($id);
+      $templateData->title = "Modify Engineer";
+      $templateData->reportResults = $engineerModel->getEngineerById($id);
     }
 
-    //render page
-    require_once "views/adminModifyEngineerView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifyEngineerView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }
