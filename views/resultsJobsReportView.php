@@ -15,10 +15,8 @@
             <?php
             // count for engineers totals
             $tmp_array = array();
-            foreach($pagedata->reportResults as $key => $value) {
-              array_push($tmp_array, $value["engineerName"]);
-            }
-            $outputCount = array_count_values($tmp_array);
+            foreach($pagedata->reportResults as &$value) { array_push($tmp_array, $value["engineerName"]); }
+            @$outputCount = array_count_values($tmp_array);
 
             $engineergroup = 0;
             if (isset($pagedata->reportResults)) {
