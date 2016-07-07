@@ -27,7 +27,7 @@
             <?php } } ?>
           </tbody>
         </table>
-        <?php include "views/forms/searchForm.php" ?>
+        <?php include "views/partials/forms/searchForm.php" ?>
       </div>
     </div>
   </div>

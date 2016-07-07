@@ -9,7 +9,7 @@
     <div id="call">
       <div id="ajax">
         <?php include "views/partials/addObjective.php"; ?>
-        <?php if (!$_POST) { include "views/forms/addObjectiveForm.php"; } ?>
+        <?php if (!$_POST) { include "views/partials/forms/addObjectiveForm.php"; } ?>
       </div>
     </div>
   </div>

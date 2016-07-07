@@ -8,7 +8,7 @@
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
-        <?php include "views/forms/scheduleForm.php"; ?>
+        <?php include "views/partials/forms/scheduleForm.php"; ?>
       </div>
     </div>
   </div>
