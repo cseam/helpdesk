@@ -9,12 +9,14 @@ class reportDefaultController {
     $templateData = new stdClass();
 
     //set report title
-    $templateData->title = "Day breakdown report";
-    //populate report results for use in view
-    $templateData->reportResults = $ticketModel->countDayBreakdownTotals($_SESSION['engineerHelpdesk']);
+    $templateData->title = "Reports Overview";
     //set page details
     $templateData->details = $templateData->title. " showing helpdesk activity by time of day, ";
     if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
+    //populate report results for use in view
+    //$templateData->reportResults = $ticketModel->countDayBreakdownTotals($_SESSION['engineerHelpdesk']);
+
+
 
     //pass complete data and template to view engine and render
     $view = new Page();

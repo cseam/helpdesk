@@ -4,8 +4,8 @@
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
-        <h1><?php echo $error->title ?></h1>
-        <p><?php echo $error->message ?></p>
+        <h1><?php echo $pagedata->title ?></h1>
+        <p><?php echo $pagedata->message ?></p>
       </div>
     </div>
   </div>

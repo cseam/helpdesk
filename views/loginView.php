@@ -7,10 +7,10 @@
           <label for="username">Username</label><input id="username" type="text" name="username" value="" autofocus>
           <label for="password">Password</label><input id="password" type="password" name="password" value="">
           <input id="btnLogin" type="submit" name="btnLogin" value="LOG IN" />
-          <?php if (isset($error)) { ?>
+          <?php if (isset($pagedata->message)) { ?>
             <div class="note urgent">
-              <h3>Error</h3>
-              <?php echo $error->message ?>, check your details and try again.
+              <h3 style="padding-left: 35px;">Error</h3>
+              <p style="padding-left: 35px;"><?php echo $pagedata->message ?>, check your details and try again.</p>
             </div>
           <?php  }; ?>
         </form>
