@@ -4,14 +4,14 @@
     <br />
     <h3>Did you know</h3>
     <p>
-      You have logged <span class="logoutstats"><?php echo number_format($stats["countTicketsByOwner"]) ?></span> tickets on the helpdesk
+      You have logged <span class="logoutstats"><?php echo number_format($pagedata->stats["countTicketsByOwner"]) ?></span> tickets on the helpdesk
     </p>
     <p>
-      Total tickets logged by users <span class="logoutstats"><?php echo number_format($stats["countAllTickets"]) ?></span>
+      Total tickets logged by users <span class="logoutstats"><?php echo number_format($pagedata->stats["countAllTickets"]) ?></span>
     </p>
     <ul style="font-size: 0.9rem;">
     <?php
-      foreach($logoutstats as &$value) {
+      foreach($pagedata->logoutstats as &$value) {
           echo "<li style=\"margin-bottom: 10px;margin-right: 50px;\">";
           echo $value["Name"];
           echo " have ";

@@ -11,7 +11,7 @@
     $route->add('/user/profile', 'userProfileController');
     $route->add('/user/complete', 'actionCompleteController');
   // engineer routes
-  if ($_SESSION['engineerLevel'] > 0 || $_SESSION['superuser'] == 1) {
+  if (@$_SESSION['engineerLevel'] > 0 || @$_SESSION['superuser'] == 1) {
     $route->add('/engineer', 'engineerDefaultController');
     $route->add('/engineer/search', 'reportSearchController');
     $route->add('/engineer/lockers', 'reportLockersController');
@@ -21,7 +21,7 @@
     $route->add('/engineer/objectives/\d*', 'viewObjectivesController'); //numerical wildcard route
   }
   // manager routes
-  if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
+  if (@$_SESSION['engineerLevel'] == 2 || @$_SESSION['superuser'] == 1) {
     $route->add('/manager', 'managerDefaultController');
     $route->add('/manager/objectives/\d*', 'viewObjectivesController'); //numerical wildcard route
     $route->add('/manager/addobjectives','addObjectivesController');
@@ -47,7 +47,7 @@
     $route->add('/manager/report/performanceobjectives', 'reportPerformanceObjectivesController');
   }
   // admin routes
-  if ($_SESSION['superuser'] == 1) {
+  if (@$_SESSION['superuser'] == 1) {
     // for superusers only
     $route->add('/admin', 'adminDefaultController');
     $route->add('/admin/managehelpdesks', 'adminManageHelpdesksController');
@@ -95,7 +95,7 @@
     $route->add('/report/annualgraphs', 'reportAnnualGraphsController');
     $route->add('/report/settings', 'reportSettingsController');
     $route->add('/report/compliance', 'reportComplianceController');
-  if ($_SESSION['engineerLevel'] == 2 || $_SESSION['superuser'] == 1) {
+  if (@$_SESSION['engineerLevel'] == 2 || @$_SESSION['superuser'] == 1) {
     // reports for managers only
     $route->add('/report/feedback', 'reportFeedbackController');
     $route->add('/report/feedback/\d*', 'reportFeedbackListController'); //numerical wildcard route
@@ -114,7 +114,7 @@
     $route->add('/ticket/additional/\d*', 'formAdditionalTicketController'); //numerical wildcard route
     $route->add('/ticket/schedule/\d*', 'scheduleController'); //numerical wildcard route
   // change control routes
-  if ($_SESSION['engineerLevel'] > 0 || $_SESSION['superuser'] == 1) {
+  if (@$_SESSION['engineerLevel'] > 0 || @$_SESSION['superuser'] == 1) {
     $route->add('/changecontrol', 'addChangeControlController');
     $route->add('/changecontrol/add', 'addChangeControlController');
   // out of hours routes

@@ -3,18 +3,19 @@
 class addScheduledTaskController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //create new models for required data
     $scheduledtaskModel = new scheduledtaskModel();
     $helpdeskModel = new helpdeskModel();
     $engineerModel = new engineerModel();
     $locationModel = new locationModel();
-    $pagedata = new stdClass();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //populate form dropdowns
-    $engineers = $engineerModel->getListOfEngineersByHelpdeskId($_SESSION['engineerHelpdesk']);
-    $pagedata->location = $locationModel->getListOfLocations();
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    $templateData->engineers = $engineerModel->getListOfEngineersByHelpdeskId($_SESSION['engineerHelpdesk']);
+    $templateData->location = $locationModel->getListOfLocations();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+
     //Post Update Scheduledtask
       if ($_POST) {
         //create scheduled ticket
@@ -63,13 +64,15 @@ class addScheduledTaskController {
         }
         $scheduledtaskModel->createNewTicket($baseTicket);
       }
-    //set report name
-    $reportname = "Add Scheduled Task";
-    //set report title
-    $pagedata->title = $reportname;
-    $pagedata->details = "Please complete the form to add a scheduled task for the team.";
-    //render template using $pagedata object
-    require_once "views/addScheduledtask.php";
 
+    //set report title
+    $templateData->title = "Add Scheduled Task";
+    $templateData->details = "Please complete the form to add a scheduled task for the team.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('addScheduledtask');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

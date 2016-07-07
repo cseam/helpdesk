@@ -3,27 +3,32 @@
 class engineerDefaultController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
-
+    //create new models required
     $ticketModel = new ticketModel();
     $callreasonsModel = new callreasonsModel();
     $quickresponseModel = new quickresponseModel();
     $engineersModel = new engineerModel();
+    //create empty object to store data for template
+    $templateData = new stdClass();
 
     //populate page content with oldest open ticket
-    $ticketDetails = $ticketModel->getOldestTicketByEngineer($_SESSION['engineerId']);
-    $ticketUpdates = $ticketModel->getTicketUpdatesByCallId($ticketDetails["callid"]);
-    $additionalDetails = $ticketModel->getAdditionalDetails($ticketDetails["callid"]);
+    $templateData->ticketDetails = $ticketModel->getOldestTicketByEngineer($_SESSION['engineerId']);
+    $templateData->ticketUpdates = $ticketModel->getTicketUpdatesByCallId($templateData->ticketDetails["callid"]);
+    $templateData->additionalDetails = $ticketModel->getAdditionalDetails($templateData->ticketDetails["callid"]);
     //populate call reasons for this tickets helpdeskid
-    $callreasons = $callreasonsModel->getReasonsByHelpdeskId($ticketDetails["helpdesk"]);
+    $templateData->callreasons = $callreasonsModel->getReasonsByHelpdeskId($templateData->ticketDetails["helpdesk"]);
     //populate quick responses
-    $quickresponse = $quickresponseModel->getQuickResponseByHelpdeskId($ticketDetails["helpdesk"]);
+    $templateData->quickresponse = $quickresponseModel->getQuickResponseByHelpdeskId($templateData->ticketDetails["helpdesk"]);
     //get engineers for helpdesk
-    $engineersList = $engineersModel->getListOfEngineersByHelpdeskId($ticketDetails["helpdesk"]);
+    $templateData->engineersList = $engineersModel->getListOfEngineersByHelpdeskId($templateData->ticketDetails["helpdesk"]);
+
     //update ticket views with user id and time stamp
-    $ticketModel->logViewTicketById($ticketDetails["callid"], $_SESSION['sAMAccountName']);
-    //render page
-    require_once "views/engineerView.php";
+    $ticketModel->logViewTicketById($templateData->ticketDetails["callid"], $_SESSION['sAMAccountName']);
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('engineerView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }
