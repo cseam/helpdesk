@@ -847,13 +847,12 @@ input.cmn-toggle-round:checked+label:after {
     text-transform: uppercase;
     display: block;
     text-align: center;
-    line-height: 1rem;
+    line-height: 2.5rem;
 }
 #overview .overviewValue {
     font-size: 5rem;
     line-height: 5rem;
     display: block;
-    color: rgb(99,125,106);
     text-align: center;
     text-transform: lowercase;
 }
