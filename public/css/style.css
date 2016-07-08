@@ -856,6 +856,9 @@ input.cmn-toggle-round:checked+label:after {
     text-align: center;
     text-transform: lowercase;
 }
+#overview .smaller {
+    font-size: 3rem;
+}
 .changelog {
     font-size: .6rem;
     position: fixed;

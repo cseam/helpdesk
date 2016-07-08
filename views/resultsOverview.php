@@ -72,13 +72,13 @@
         </a>
         <a href="/report/categorybreakdown/">
           <p>
-            <span class="overviewValue"><?php echo @$pagedata->topcategory["categoryName"] ?></span>
+            <span class="overviewValue smaller"><?php echo @$pagedata->topcategory["categoryName"] ?></span>
             <span class="overviewLabel">Top category</span>
           </p>
         </a>
         <a href="/report/urgencybreakdown/">
           <p>
-            <span class="overviewValue"><?php echo urgency_friendlyname(number_format(@$pagedata->avgurgency["avgUrgency"],0)) ?></span>
+            <span class="overviewValue smaller"><?php echo urgency_friendlyname(number_format(@$pagedata->avgurgency["avgUrgency"],0)) ?></span>
             <span class="overviewLabel">Average urgency</span>
           </p>
         </a>
