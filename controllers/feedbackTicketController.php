@@ -9,11 +9,16 @@ class feedbackTicketController {
     //create new models for required data
     $ticketModel = new ticketModel();
     $feedbackModel = new feedbackModel();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
+    //pass details for view
+    $templateData->ticketid = $ticketid;
     //populate users ticket list
-    $listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
+    $templateData->listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
     //populate tickets data
-    $ticketDetails = $ticketModel->getTicketDetails($ticketid);
-    $additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
+    $templateData->ticketDetails = $ticketModel->getTicketDetails($ticketid);
+    $templateData->additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
 
     // on post process form
     if ($_POST) {
@@ -21,10 +26,13 @@ class feedbackTicketController {
       $formdetails = htmlspecialchars($_POST['updatedetails']);
       $formsatisfaction = htmlspecialchars($_POST['satisfaction']);
       $feedbackModel->addFeedbackToTicketById($formid, $formsatisfaction, $formdetails);
-      $message = "<h2>Thankyou</h2><p>Your feedback has been submitted thankyou for taking the time to let us know how we performed.</p>";
+      $templateData->message = "<h2>Thankyou</h2><p>Your feedback has been submitted thankyou for taking the time to let us know how we performed.</p>";
     }
-    // render page
-    require_once "views/feedbackView.php";
 
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('feedbackView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

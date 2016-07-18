@@ -9,7 +9,7 @@ class leftpageController {
     $ticketModel = new ticketModel();
     $engineerModel = new engineerModel();
     $objectivesModel = new objectivesModel();
-    //what level engineer are they in the system
+    //check what level engineer are they in the system
     SWITCH ($_SESSION['engineerLevel']) {
       //populate objects with data for correct left side & tell view which partial to load
         CASE "0":
@@ -33,6 +33,7 @@ class leftpageController {
         CASE "2":
         // manager
           $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 15);
+          $this->sideData["assistdata"] = $engineerModel->countAssistWorkrateByDay($_SESSION['engineerHelpdesk']);
           $this->sideData["graphdata"] = $engineerModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
           $this->sideData["partial"] = "manager.php";
         break;
@@ -56,6 +57,7 @@ class leftpageController {
         break;
         CASE "manager":
           $this->sideData["partial"] = "manager.php";
+          $this->sideData["assistdata"] = $engineerModel->countAssistWorkrateByDay($_SESSION['engineerHelpdesk']);
           $this->sideData["graphdata"] = $engineerModel->countDepartmentWorkrateByDay($_SESSION['engineerHelpdesk']);
         break;
         CASE "report":

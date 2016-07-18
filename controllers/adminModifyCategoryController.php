@@ -9,11 +9,11 @@ class adminModifyCategoryController {
     //load required models
     $categoryModel = new categoryModel();
     $helpdeskModel = new helpdeskModel();
-    //create page data objects
-    $pagedata = new stdClass();
-    //populate helpdesks
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    //create empty object to store data for template
+    $templateData = new stdClass();
 
+    //populate helpdesks
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
     // on post update
     if ($_POST) {
       // upsert locations
@@ -26,16 +26,18 @@ class adminModifyCategoryController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Add Category";
-    $pagedata->details = "Please update the details for your changes.";
+    $templateData->title = "Add Category";
+    $templateData->details = "Please update the details for your changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata->title = "Modify Category";
-      $pagedata->reportResults = $categoryModel->getCategoryById($id);
+      $templateData->title = "Modify Category";
+      $templateData->reportResults = $categoryModel->getCategoryById($id);
     }
 
-    //render page
-    require_once "views/adminModifyCategoryView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifyCategoryView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

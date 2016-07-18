@@ -3,23 +3,25 @@
 class reportAllController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
-    //create new models for required data
+    //create new models for required data 
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
-    $pagedata = new stdClass();
-    //set report name
-    $reportname = "All";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //set report title
-    $pagedata->title = $reportname . " Tickets";
+    $templateData->title = "All tickets";
     //populate report results for use in view
-    $pagedata->reportResults = $ticketModel->getTicketsByHelpdesk($_SESSION['engineerHelpdesk'], 500);
+    $templateData->reportResults = $ticketModel->getTicketsByHelpdesk($_SESSION['engineerHelpdesk'], 500);
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = sizeof($pagedata->reportResults)." ".$reportname." tickets regardless of ticket state, for ".$helpdeskdetails["helpdesk_name"]." helpdesk. (limited to last 500 tickets)";
-    //render template using $pagedata object
-    require_once "views/reports/resultsListReportView.php";
+    $templateData->details = sizeof($templateData->reportResults)." ".$templateData->title." regardless of ticket state, for ".$helpdeskdetails["helpdesk_name"]." helpdesk. (limited to last 500 tickets)";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsListReportView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

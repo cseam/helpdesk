@@ -9,10 +9,11 @@ class adminModifyReasonController {
     //load required models
     $reasonModel = new callreasonsModel();
     $helpdeskModel = new helpdeskModel();
-    //create page data objects
-    $pagedata = new stdClass();
+
+    //create empty object to store data for template
+    $templateData = new stdClass();
     //populate helpdesks
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
 
     // on post update
     if ($_POST) {
@@ -26,16 +27,18 @@ class adminModifyReasonController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Add Call Reason";
-    $pagedata->details = "Please update the details for your changes.";
+    $templateData->title = "Add Call Reason";
+    $templateData->details = "Please update the details for your changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata->title = "Modify Call Reason";
-      $pagedata->reportResults = $reasonModel->getReasonById($id);
+      $templateData->title = "Modify Call Reason";
+      $templateData->reportResults = $reasonModel->getReasonById($id);
     }
 
-    //render page
-    require_once "views/adminModifyReasonView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifyReasonView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

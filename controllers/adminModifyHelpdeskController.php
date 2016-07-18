@@ -8,10 +8,11 @@ class adminModifyHelpdeskController {
     $id = $baseurl[3];
     //load required models
     $helpdeskModel = new helpdeskModel();
-    //create page data objects
-    $pagedata = new stdClass();
+
+    //create empty object to store data for template
+    $templateData = new stdClass();
     //populate helpdesks
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
 
     // on post update
     if ($_POST) {
@@ -28,16 +29,19 @@ class adminModifyHelpdeskController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Add Helpdesk";
-    $pagedata->details = "Please update the details for your changes.";
+    $templateData->title = "Add Helpdesk";
+    $templateData->details = "Please update the details for your changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata->title = "Modify Helpdesk";
-      $pagedata->reportResults = $helpdeskModel->getHelpdeskById($id);
+      $templateData->title = "Modify Helpdesk";
+      $templateData->reportResults = $helpdeskModel->getHelpdeskById($id);
     }
 
-    //render page
-    require_once "views/adminModifyHelpdeskView.php";
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifyHelpdeskView');
+    $view->setDataSrc($templateData);
+    $view->render();
 
   }
 }

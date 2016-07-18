@@ -3,14 +3,16 @@
 class actionCompleteController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Thankyou";
-    $pagedata->details = "Your change has been made to the database";
-    // render page
-    require_once "views/completeView.php";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Thankyou";
+    $templateData->details = "Your change has been made to the database";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('completeView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 
 }

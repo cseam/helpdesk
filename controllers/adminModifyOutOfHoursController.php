@@ -9,10 +9,11 @@ class adminModifyOutOfHoursController {
     //load required models
     $outofhoursModel = new outofhoursModel();
     $helpdeskModel = new helpdeskModel();
-    //create page data objects
-    $pagedata = new stdClass();
+
+    //create empty object to store data for template
+    $templateData = new stdClass();
     //populate helpdesks
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
 
     // on post update
     if ($_POST) {
@@ -27,12 +28,14 @@ class adminModifyOutOfHoursController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Update Out of hours message";
-    $pagedata->details = "Please update the details for your changes.";
-    $pagedata->reportResults = $outofhoursModel->getOutOfHoursMessagesById($id);
+    $templateData->title = "Update Out of hours message";
+    $templateData->details = "Please update the details for your changes.";
+    $templateData->reportResults = $outofhoursModel->getOutOfHoursMessagesById($id);
 
-    //render page
-    require_once "views/adminModifyOutofhoursView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifyOutofhoursView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

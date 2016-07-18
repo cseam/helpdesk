@@ -9,7 +9,9 @@ class loginController {
 
   public function __construct()
   {
-    // load crypto library for hashing.
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    // load crypto library for hashing
     require_once "libraries/pbkdf2.php";
     // if user submitted form process login
     if ($_POST) {
@@ -27,7 +29,7 @@ class loginController {
       // check password isnt blank as ldap allows anon login that result in true
       if ($formpassword == "") {
         // throw error
-        $error->message = "enter a password";
+        $templateData->message = "enter a password";
       } else {
         // process logins
         // check if local logins are allowed and proc
@@ -53,7 +55,7 @@ class loginController {
                   exit;
               } else {
                 // throw error
-                $error->message = "please check your password";
+                $templateData->message = "please check your password";
               }
             }
           }
@@ -94,14 +96,19 @@ class loginController {
                   }
               } else {
                 // bind failed
-                $error->message = "Password incorrect, account locked, or user does not exist";
+                $templateData->message = "Password incorrect, account locked, or user does not exist";
               }
           }
       // end process logins
       }
     }
-    // render page
-    require_once "views/loginView.php";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('loginView');
+    $view->setDataSrc($templateData);
+    $view->render();
+    
   }
 
 }

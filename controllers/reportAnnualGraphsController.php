@@ -3,18 +3,16 @@
 class reportAnnualGraphsController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //create new models for required data
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
-    $pagedata = new stdClass();
-    //set report name
-    $reportname = "Annual Graphs Totals";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //set report title
-    $pagedata->title = $reportname ;
+    $templateData->title = "Annual Graphs Totals";
     //set page details
-    $pagedata->details = "Graph showing the monthly numbers for a defined helpdesk.";
+    $templateData->details = "Graph showing the monthly numbers for a defined helpdesk.";
 
     //define arrays
     $graphstats = $lastyear = $thisyear = $results = array();
@@ -40,11 +38,15 @@ class reportAnnualGraphsController {
 
     // take this helpdesks results and add to array for page data
     $friendlyname = $helpdeskModel->getFriendlyHelpdeskName($value);
-    $pagedata->graphstats[$friendlyname["helpdesk_name"]] = $results;
+
+    $templateData->graphstats[$friendlyname["helpdesk_name"]] = $results;
 
     }
 
-    //render template using $pagedata object
-    require_once "views/reports/resultsAnnualGraphsView.php";
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsAnnualGraphsView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

@@ -3,16 +3,20 @@
 class forwardTicketController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //get ticket id from uri params
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
     //create new models for required data
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
+    //pass ticket id
+    $templateData->ticketid = $ticketid;
     //populate helpdesks for dropdown
-    $helpdesks = $helpdeskModel->getListOfHelpdesks();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdesks();
+
     if ($_POST) {
       //update ticket
       $updatemessage = "Ticket forwarded by " . $_SESSION["sAMAccountName"] . " for the following reason: " . $_POST["reason"];
@@ -27,7 +31,11 @@ class forwardTicketController {
       header('Location: /ticket/view/'.$ticketid);
       exit;
     }
-    //render page
-    require_once "views/forwardTicketView.php";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('forwardTicketView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

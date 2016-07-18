@@ -26,6 +26,8 @@ define('DB_USER','username');
 define('DB_PASSWORD','password');
 // default timezone for server
 date_default_timezone_set('Europe/London');
+// view engine location default
+define('VIEWS_LOC', 'views/'); 
 // helper items can be ignored
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);

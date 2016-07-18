@@ -3,12 +3,12 @@
 class addObjectivesController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //create new models for required data
     $objectivesModel = new objectivesModel();
     $engineerModel = new engineerModel();
-    $pagedata = new stdClass();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //Post Update Objective
       if ($_POST) {
         $assignto = htmlspecialchars($_POST['assignto']);
@@ -18,13 +18,15 @@ class addObjectivesController {
         $objectivesModel->addObjective($assignto, $title, $datedue, $details);
       }
     //get engineers list
-    $engineers = $engineerModel->getListOfEngineersByHelpdeskId($_SESSION["engineerHelpdesk"]);
-    //set report name
-    $reportname = "Add Performance Objective";
+    $templateData->engineers = $engineerModel->getListOfEngineersByHelpdeskId($_SESSION["engineerHelpdesk"]);
     //set report title
-    $pagedata->title = $reportname;
-    $pagedata->details = "Please complete the form to add a performance objective for an engineer.";
-    //render template using $pagedata object
-    require_once "views/addObjectives.php";
+    $templateData->title = "Add Performance Objective";
+    $templateData->details = "Please complete the form to add a performance objective for an engineer.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('addObjectives');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

@@ -8,8 +8,9 @@ class adminModifyLocationController {
     $id = $baseurl[3];
     //load required models
     $locationModel = new locationModel();
-    //create page data objects
-    $pagedata = new stdClass();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     // on post update
     if ($_POST) {
       // upsert locations
@@ -24,16 +25,19 @@ class adminModifyLocationController {
       header('Location: /admin/complete');
       exit;
     }
-    $pagedata->title = "Add Location";
-    $pagedata->details = "Please update the details for your location changes.";
+
+    $templateData->title = "Add Location";
+    $templateData->details = "Please update the details for your location changes.";
     // if not add ticket get ticket details
     if ($id !== "add") {
-      $pagedata->title = "Modify Location";
-      $pagedata->reportResults = $locationModel->getLocationById($id);
+      $templateData->title = "Modify Location";
+      $templateData->reportResults = $locationModel->getLocationById($id);
     }
 
-    //render page
-    require_once "views/adminModifyLocationView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminModifyLocationView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

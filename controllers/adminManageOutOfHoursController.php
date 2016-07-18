@@ -5,10 +5,11 @@ class adminManageOutOfHoursController {
   {
     //load required models
     $outofhoursModel = new outofhoursModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage Out of Hours Message";
-    $pagedata->details = "Messages shown to users who log a ticket outside of the working day";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage Out of Hours Message";
+    $templateData->details = "Messages shown to users who log a ticket outside of the working day";
+    $templateData->listofOutofhoursmessages = $outofhoursModel->getOutOfHoursMessages();
 
     //Post Update Locations
       if ($_POST) {
@@ -22,9 +23,10 @@ class adminManageOutOfHoursController {
         }
       }
 
-    $pagedata->listofOutofhoursmessages = $outofhoursModel->getOutOfHoursMessages();
-    //render page
-    require_once "views/adminManageOutofhoursView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageOutofhoursView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

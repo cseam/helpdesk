@@ -22,7 +22,7 @@
             <option value="AUTO" >Auto Assign</option>
           </optgroup>
           <optgroup label="Assign to engineer">
-            <?php foreach ($engineers as $key => $value) { echo "<option value=\"".$value["idengineers"]."\">".$value["engineerName"]."</option>";} ?>
+            <?php foreach ($pagedata->engineers as $key => $value) { echo "<option value=\"".$value["idengineers"]."\">".$value["engineerName"]."</option>";} ?>
           </optgroup>
         </select>
   </fieldset>

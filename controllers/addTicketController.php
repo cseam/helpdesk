@@ -8,12 +8,15 @@ class addTicketController {
     $locationModel = new locationModel();
     $helpdeskModel = new helpdeskModel();
     $userProfileModel = new userProfileModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->location = $locationModel->getListOfLocations();
-    $pagedata->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
-    $pagedata->userProfile = $userProfileModel->getuserProfileBysAMAccountName($_SESSION['sAMAccountName']);
-    // render page
-    require_once "views/addticketView.php";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->location = $locationModel->getListOfLocations();
+    $templateData->helpdesks = $helpdeskModel->getListOfHelpdeskWithoutDeactivated();
+    $templateData->userProfile = $userProfileModel->getuserProfileBysAMAccountName($_SESSION['sAMAccountName']);
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('addticketView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

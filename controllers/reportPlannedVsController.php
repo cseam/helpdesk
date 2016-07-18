@@ -4,18 +4,23 @@ class reportPlannedVsController {
   public function __construct()
   {
     //create new models for required data
-    $pagedata = new stdClass();
     $ticketModel = new ticketModel();
-    //set report name
-    $reportname = "Planned Vs Reactive Breakdown";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //set report title
-    $pagedata->title = $reportname . " report";
+    $templateData->title = "Planned vs reactive breakdown report";
     //populate report results for use in view
-    $pagedata->reportResults = $ticketModel->countPlannedVsReactiveTotals($_SESSION['engineerHelpdesk']);
+    $templateData->reportResults = $ticketModel->countPlannedVsReactiveTotals($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = $reportname. " showing total tickets planned vs reactive, ";
-    if (isset($_SESSION['customReportsRangeStart'])) { $pagedata->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $pagedata->details .= " this month."; }
-    //render template using $pagedata object
-    require_once "views/reports/resultsGraphPieView.php";
+    $templateData->details = $templateData->title. " showing total tickets planned vs reactive, ";
+    if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsGraphPieView');
+    $view->setDataSrc($templateData);
+    $view->render();
+
   }
 }

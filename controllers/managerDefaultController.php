@@ -3,25 +3,26 @@
 class managerDefaultController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
-    //create new models for required data
+    //create new models for required data.
     $ticketModel = new ticketModel();
     $feedbackModel = new feedbackModel();
-    $pagedata = new stdClass();
-    //set report name
-    $reportname = "Actionable Tickets";
-    //set report title
-    $pagedata->title = $reportname . "";
-    //populate report results for use in view
-    $pagedata->escalatedResults = $ticketModel->getEscalatedTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
-    $pagedata->unassignedResults = $ticketModel->getUnassignedTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
-    $pagedata->stagnateResults = $ticketModel->getStagnateTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
-    $pagedata->poorfeedbackResults = $feedbackModel->getPoorFeedback($_SESSION['engineerHelpdesk']);
-    //set page details
-    $pagedata->details = "The following tickets have been highlighted as they require some form of manager action to proceed.";
-    //render template using $pagedata object
-    require_once "views/managerView.php";
+    //create empty object to store data for template
+    $templateData = new stdClass();
 
+    //set report title
+    $templateData->title = "Actionable tickets";
+    //populate report results for use in view
+    $templateData->escalatedResults = $ticketModel->getEscalatedTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
+    $templateData->unassignedResults = $ticketModel->getUnassignedTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
+    $templateData->stagnateResults = $ticketModel->getStagnateTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
+    $templateData->poorfeedbackResults = $feedbackModel->getPoorFeedback($_SESSION['engineerHelpdesk']);
+    //set page details
+    $templateData->details = "The following tickets have been highlighted as they require some form of manager action to proceed.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('managerView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

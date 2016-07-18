@@ -3,27 +3,30 @@
 class reportSearchController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
-    //create new models for required data
+    //create new models for required data 
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
-    $pagedata = new stdClass();
-    //set report name
-    $reportname = "search";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //set report title
-    $pagedata->title = $reportname . " tickets";
+    $templateData->title = "Search tickets";
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //populate page default message
-    $pagedata->details = "Please enter a search term to search the tickets database";
+    $templateData->details = "Please enter a search term to search the tickets database";
+
     //if form submitted query database else render form
     if ($_POST) {
-      $pagedata->reportResults = $ticketModel->searchTicketsByTerm($_POST["term"], $_SESSION['engineerHelpdesk']);
+      $templateData->reportResults = $ticketModel->searchTicketsByTerm($_POST["term"], $_SESSION['engineerHelpdesk']);
       //set page details
-      $pagedata->details = "First " . sizeof($pagedata->reportResults)." (limited) ".$reportname." result for '".$_POST["term"]."' on helpdesk.";
+      $templateData->details = "First " . sizeof($templateData->reportResults)." (limited) ". $templateData->title ." result for '".$_POST["term"]."' on helpdesk.";
     }
-    //render template using $pagedata object
-    require_once "views/searchView.php";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('searchView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

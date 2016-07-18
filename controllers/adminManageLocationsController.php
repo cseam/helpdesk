@@ -5,10 +5,11 @@ class adminManageLocationsController {
   {
     //load required models
     $locationModel = new locationModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage Locations";
-    $pagedata->details = "Locations available for users to select when adding a new ticket to " . CODENAME;
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage Locations";
+    $templateData->details = "Locations available for users to select when adding a new ticket to " . CODENAME;
+    $templateData->listoflocations = $locationModel->getListOfLocations();
 
     //Post Update Locations
       if ($_POST) {
@@ -33,9 +34,10 @@ class adminManageLocationsController {
         }
       }
 
-    $pagedata->listoflocations = $locationModel->getListOfLocations();
-    // render page
-    require_once "views/adminManageLocationsView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageLocationsView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

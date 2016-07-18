@@ -3,16 +3,16 @@
 class userProfileController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //create new models for required data
-    $pagedata = new stdClass();
     $userProfileModel = new userProfileModel();
     $locationModel = new locationModel();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
     //set report name
-    $pagedata->title = "My Profile";
+    $templateData->title = "My Profile";
     //set page details
-    $pagedata->details = "Your profile information can be updated, by providing this additional information, new tickets added to helpdesk will default to your settings, saving time when completing various forms.";
+    $templateData->details = "Your profile information can be updated, by providing this additional information, new tickets added to helpdesk will default to your settings, saving time when completing various forms.";
 
     //Post Update Locations
       if ($_POST) {
@@ -57,10 +57,13 @@ class userProfileController {
       }
 
     //populate user profile
-    $pagedata->location = $locationModel->getListOfLocations();
-    $pagedata->reportResults = $userProfileModel->getuserProfileBysAMAccountName($_SESSION['sAMAccountName']);
+    $templateData->location = $locationModel->getListOfLocations();
+    $templateData->reportResults = $userProfileModel->getuserProfileBysAMAccountName($_SESSION['sAMAccountName']);
 
-    // render page
-    require_once "views/userProfileView.php";
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('userProfileView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

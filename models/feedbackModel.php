@@ -95,5 +95,22 @@
       return $result;
     }
 
+    public function avgFeedback($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
 
+      $database = new Database();
+      $database->query("SELECT avg(feedback.satisfaction) as avgFeedback
+                        FROM feedback
+                        JOIN calls ON feedback.callid = calls.callid
+                        WHERE feedback.opened BETWEEN :startrange AND :endrange
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
+                        GROUP BY calls.helpdesk");
+      $database->bind(':startrange', $this->_startrange);
+      $database->bind(':endrange', $this->_endrange);
+      $database->bind(':scope', $helpdesks);
+      $results = $database->single();
+      if ($database->rowCount() ===0) { return null; }
+      return $results;
+    }
 }

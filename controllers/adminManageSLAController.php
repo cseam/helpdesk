@@ -5,10 +5,11 @@ class adminManageSLAController {
   {
     //load required models
     $SLAModel = new servicelevelagreementModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage service level agreements";
-    $pagedata->details = "Service level agreements generated for users when adding a new ticket to " . CODENAME;
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage service level agreements";
+    $templateData->details = "Service level agreements generated for users when adding a new ticket to " . CODENAME;
+    $templateData->listofSlas = $SLAModel->getListOfSLAs();
 
     //Post Update Locations
       if ($_POST) {
@@ -33,9 +34,11 @@ class adminManageSLAController {
         }
       }
 
-    $pagedata->listofSlas = $SLAModel->getListOfSLAs();
-    // render page
-    require_once "views/adminManageSLAsView.php";
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageSLAsView');
+    $view->setDataSrc($templateData);
+    $view->render();
 
   }
 }

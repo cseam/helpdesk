@@ -3,22 +3,25 @@
 class reportFeedbackController {
   public function __construct()
   {
-    //dont need to populate $listdata as fixed partial in manager view
-    $pagedata = new stdClass();
+    //create new models for required data
     $ticketModel = new ticketModel();
     $feedbackModel = new feedbackModel();
-    //set report name
-    $reportname = "Engineer feedback";
-    //set report title
-    $pagedata->title = $reportname . " report";
-    //populate report results for use in view
-    $pagedata->reportResults = $ticketModel->countEngineerFeedbackTotals($_SESSION['engineerHelpdesk']);
-    $pagedata->poorFeedback = $feedbackModel->getPoorFeedback($_SESSION['engineerHelpdesk']);
-    //set page details
-    $pagedata->details = $reportname. " showing average feedback for " .sizeof($pagedata->reportResults)." engineers, and poor feedback, ";
-    if (isset($_SESSION['customReportsRangeStart'])) { $pagedata->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $pagedata->details .= " this month."; }
+    //create empty object to store data for template
+    $templateData = new stdClass();
 
-    //render template using $pagedata object
-    require_once "views/reports/resultsFeedbackReportView.php";
+    //set report title
+    $templateData->title = "Engineer feedback report";
+    //populate report results for use in view
+    $templateData->reportResults = $ticketModel->countEngineerFeedbackTotals($_SESSION['engineerHelpdesk']);
+    $templateData->poorFeedback = $feedbackModel->getPoorFeedback($_SESSION['engineerHelpdesk']);
+    //set page details
+    $templateData->details = $templateData->title . " showing average feedback for " .sizeof($templateData->reportResults)." engineers, and poor feedback, ";
+    if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsFeedbackReportView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

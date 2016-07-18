@@ -30,5 +30,5 @@ class authenticationController {
   }
 }
 
+// check users session is populated else reroute to login.
 new authenticationController();
-// check users session is populated else route to login.

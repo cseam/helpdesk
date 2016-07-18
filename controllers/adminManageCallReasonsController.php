@@ -5,10 +5,11 @@ class adminManageCallReasonsController {
   {
     //load required models
     $reasonModel = new callreasonsModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage Call Reasons";
-    $pagedata->details = "Reasons available for users to select when updating tickets on " . CODENAME;
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage Call Reasons";
+    $templateData->details = "Reasons available for users to select when updating tickets on " . CODENAME;
+    $templateData->listofreasons = $reasonModel->getListOfReasons();
 
     //Post Update reasons
       if ($_POST) {
@@ -33,9 +34,10 @@ class adminManageCallReasonsController {
         }
       }
 
-    $pagedata->listofreasons = $reasonModel->getListOfReasons();
-    // render page
-    require_once "views/adminManageReasonsView.php";
-
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageReasonsView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

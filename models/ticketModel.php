@@ -980,15 +980,89 @@
       return $results;
     }
 
-    public function countOutstandingTicketsByHelpdesk($helpdesk) {
+    public function avgUrgency($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
+      $database = new Database();
+      $database->query("SELECT avg(calls.urgency) as avgUrgency
+                        FROM calls
+                        WHERE calls.status = 2
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
+                        AND calls.closed BETWEEN :startrange AND :endrange
+                        GROUP BY calls.urgency
+                        ");
+      $database->bind(':startrange', $this->_startrange);
+      $database->bind(':endrange', $this->_endrange);
+      $database->bind(':scope', $helpdesks);
+      $results = $database->single();
+      if ($database->rowCount() ===0) { return null; }
+      return $results;
+    }
+
+    public function countOutstandingTicketsByHelpdesk($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
+
       $database = new Database();
       $database->query("SELECT count(calls.callid) as outstanding
                         FROM calls
                         JOIN helpdesks ON calls.helpdesk = helpdesks.id
                         WHERE calls.status != 2
-                        AND calls.helpdesk = :helpdesk
+                        AND calls.helpdesk = :scope
                         GROUP BY calls.helpdesk");
-      $database->bind(':helpdesk', $helpdesk);
+      $database->bind(':scope', $helpdesks);
+      $results = $database->single();
+      if ($database->rowCount() ===0) { return 0; }
+      return $results;
+    }
+
+    public function countClosed($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
+      $database = new Database();
+      $database->query("SELECT count(calls.callid) as countClosed
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        WHERE calls.status = 2
+                        AND FIND_IN_SET(calls.helpdesk, :scope)
+                        AND calls.closed BETWEEN :startrange AND :endrange
+                        GROUP BY calls.helpdesk");
+      $database->bind(':startrange', $this->_startrange);
+      $database->bind(':endrange', $this->_endrange);
+      $database->bind(':scope', $helpdesks);
+      $results = $database->single();
+      if ($database->rowCount() ===0) { return 0; }
+      return $results;
+    }
+
+    public function countActivity($scope = null) {
+      isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
+      $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
+      $database = new Database();
+      $database->query("SELECT
+                        sum(case when hour(calls.closed) < 7 || hour(calls.lastupdate) < 7 THEN 1 ELSE 0 END) AS '0-7',
+                        sum(case when hour(calls.closed) = 7 || hour(calls.lastupdate) = 7 THEN 1 ELSE 0 END) AS '7-8',
+                        sum(case when hour(calls.closed) = 8 || hour(calls.lastupdate) = 8 THEN 1 ELSE 0 END) AS '8-9',
+                        sum(case when hour(calls.closed) = 9 || hour(calls.lastupdate) = 9 THEN 1 ELSE 0 END) AS '9-10',
+                        sum(case when hour(calls.closed) = 10 || hour(calls.lastupdate) = 10 THEN 1 ELSE 0 END) AS '10-11',
+                        sum(case when hour(calls.closed) = 11 || hour(calls.lastupdate) = 11 THEN 1 ELSE 0 END) AS '11-12',
+                        sum(case when hour(calls.closed) = 12 || hour(calls.lastupdate) = 12 THEN 1 ELSE 0 END) AS '12-13',
+                        sum(case when hour(calls.closed) = 13 || hour(calls.lastupdate) = 13 THEN 1 ELSE 0 END) AS '13-14',
+                        sum(case when hour(calls.closed) = 14 || hour(calls.lastupdate) = 14 THEN 1 ELSE 0 END) AS '14-15',
+                        sum(case when hour(calls.closed) = 15 || hour(calls.lastupdate) = 15 THEN 1 ELSE 0 END) AS '15-16',
+                        sum(case when hour(calls.closed) = 16 || hour(calls.lastupdate) = 16 THEN 1 ELSE 0 END) AS '16-17',
+                        sum(case when hour(calls.closed) = 17 || hour(calls.lastupdate) = 17 THEN 1 ELSE 0 END) AS '17-18',
+                        sum(case when hour(calls.closed) = 18 || hour(calls.lastupdate) = 18 THEN 1 ELSE 0 END) AS '18-19',
+                        sum(case when hour(calls.closed) > 19 || hour(calls.lastupdate) > 19 THEN 1 ELSE 0 END) AS '19-24'
+                        FROM calls
+                        JOIN helpdesks ON calls.helpdesk = helpdesks.id
+                        WHERE FIND_IN_SET(calls.helpdesk, :scope)
+                        AND calls.closed BETWEEN :startrange AND :endrange
+                        GROUP BY calls.helpdesk
+                      ");
+      $database->bind(':startrange', $this->_startrange);
+      $database->bind(':endrange', $this->_endrange);
+      $database->bind(':scope', $helpdesks);
       $results = $database->single();
       if ($database->rowCount() ===0) { return 0; }
       return $results;

@@ -9,7 +9,7 @@
     <div id="call">
       <div id="ajax">
         <?php include "views/partials/addScheduledtask.php"; ?>
-        <?php if (!$_POST) { include "views/forms/addScheduledtaskForm.php"; } ?>
+        <?php if (!$_POST) { include "views/partials/forms/addScheduledtaskForm.php"; } ?>
       </div>
     </div>
   </div>

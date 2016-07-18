@@ -3,8 +3,6 @@
 class assignTicketController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //get ticket id from uri params
     $baseurl = explode('/',$_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
@@ -12,10 +10,16 @@ class assignTicketController {
     $ticketModel = new ticketModel();
     $helpdeskModel = new helpdeskModel();
     $engineerModel = new engineerModel();
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
+    //pass ticket id
+    $templateData->ticketid = $ticketid;
     //get ticket details
-    $ticketDetails = $ticketModel->getTicketDetails($ticketid);
+    $templateData->ticketDetails = $ticketModel->getTicketDetails($ticketid);
     //populate engineers for dropdown
-    $engineers = $engineerModel->getListOfEngineersByHelpdeskId2($_SESSION['engineerHelpdesk']);
+    $templateData->engineers = $engineerModel->getListOfEngineersByHelpdeskId2($_SESSION['engineerHelpdesk']);
+
     if ($_POST) {
       //update ticket
       $updatemessage = "Ticket Assigned to " . $engineerModel->getEngineerFriendlyNameById($_POST["assignto"]) . " for the following reason: " . $_POST["reason"];
@@ -26,7 +30,11 @@ class assignTicketController {
       header('Location: /ticket/view/'.$ticketid);
       exit;
     }
-    //render page
-    require_once "views/assignTicketView.php";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('assignTicketView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

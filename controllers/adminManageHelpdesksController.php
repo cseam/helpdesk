@@ -5,10 +5,10 @@ class adminManageHelpdesksController {
   {
     //load required models
     $helpdeskModel = new helpdeskModel();
-    //populate page content
-    $pagedata = new stdClass();
-    $pagedata->title = "Manage Helpdesks";
-    $pagedata->details = "helpdesks available for users to select when adding a new ticket to " . CODENAME;
+    //create empty object to store data for template
+    $templateData = new stdClass();
+    $templateData->title = "Manage Helpdesks";
+    $templateData->details = "helpdesks available for users to select when adding a new ticket to " . CODENAME;
 
     //Post Update Locations
       if ($_POST) {
@@ -33,8 +33,12 @@ class adminManageHelpdesksController {
         }
       }
 
-    $pagedata->listofHelpdesks = $helpdeskModel->getListOfHelpdesks();
-    // render page
-    require_once "views/adminManageHelpdesksView.php";
+    $templateData->listofHelpdesks = $helpdeskModel->getListOfHelpdesks();
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('adminManageHelpdesksView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

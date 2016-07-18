@@ -8,7 +8,7 @@
     <div id="call">
       <div id="ajax">
         <?php include "views/partials/modifyScheduledtask.php"; ?>
-        <?php if (!$_POST) { include "views/forms/modifyScheduledtaskForm.php"; } ?>
+        <?php if (!$_POST) { include "views/partials/forms/modifyScheduledtaskForm.php"; } ?>
       </div>
     </div>
   </div>

@@ -3,25 +3,34 @@
 class reportSlaController {
   public function __construct()
   {
+    //create new models required
     $servicelevelagreementModel = new servicelevelagreementModel();
-    $pagedata = new stdClass();
-    $SLAtotals = new stdClass();
     $ticketModel = new ticketModel();
-    //set report name
-    $reportname = "Service Level Agreement";
+    //create empty object to store data for template
+    $templateData = new stdClass();
+
+
+    $SLAtotals = new stdClass();
+
     //set report title
-    $pagedata->title = $reportname . " report";
+    $templateData->title = "Service Level Agreement report";
     //populate report results for use in view
-    $pagedata->reportResults = $servicelevelagreementModel->GetFailedSLALastMonth($_SESSION['engineerHelpdesk']);
+    $templateData->reportResults = $servicelevelagreementModel->GetFailedSLALastMonth($_SESSION['engineerHelpdesk']);
     //calculate SLA performance
     for ($i=1; $i<=10; $i++) {
       // hard coded 10 SLAs {clown fiesta should not be hard coded FIX THIS}
       $SLAtotals->$i = $servicelevelagreementModel->GetSLAPerformance($_SESSION['engineerHelpdesk'], $i);
     }
     //set page details
-    $pagedata->details = $reportname. " showing tickets that failed SLA, ";
-    if (isset($_SESSION['customReportsRangeStart'])) { $pagedata->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $pagedata->details .= " this month."; }
-    //render template using $pagedata object
-    require_once "views/reports/resultsSLAReportView.php";
+    $templateData->details = $templateData->title . " showing tickets that failed SLA, ";
+    if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
+
+    $templateData->SLAtotals = $SLAtotals;
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsSLAReportView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

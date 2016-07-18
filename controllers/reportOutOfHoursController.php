@@ -3,12 +3,11 @@
 class reportOutOfHoursController {
   public function __construct()
   {
-    //load content for left side of page
-    $left = new leftpageController();
     //create new models for required data
     $helpdeskModel = new helpdeskModel();
     $outofhoursModel = new outofhoursModel();
-    $pagedata = new stdClass();
+    //create empty object to store data for template
+    $templateData = new stdClass();
 
     //Post Update Objective
       if ($_POST) {
@@ -30,17 +29,19 @@ class reportOutOfHoursController {
         }
       }
 
-    //set report name
-    $reportname = "Out of hours";
     //set report title
-    $pagedata->title = $reportname . "";
+    $templateData->title = "Out of hours";
     //populate report results for use in view
-    $pagedata->reportResults = $outofhoursModel->getOutOfHours(1);
+    $templateData->reportResults = $outofhoursModel->getOutOfHours(1);
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
-    $pagedata->details = sizeof($pagedata->reportResults)." ".$reportname." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
-    //render template using $pagedata object
-    require_once "views/reports/resultsOutOfHoursView.php";
+    $templateData->details = sizeof($templateData->reportResults)." ".$templateData->title." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+
+    //pass complete data and template to view engine and render
+    $view = new Page();
+    $view->setTemplate('resultsOutOfHoursView');
+    $view->setDataSrc($templateData);
+    $view->render();
   }
 }

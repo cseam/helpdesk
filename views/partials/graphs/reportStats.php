@@ -1,5 +1,6 @@
 <?php
   //TODO this should be in the controller not here this is clown fiesta!
+  $ticketModel = new ticketModel();
     //work out numbers for current year.
     $series = $temp = "";
     $currentYear = $ticketModel->countTotalsThisYear(date("Y"));

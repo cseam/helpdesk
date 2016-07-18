@@ -3,7 +3,7 @@
 class routeController {
   private $_uri = array();
   private $_controler = array();
-  // build collection of internal routes
+  // build collection of internal routes.
   public function add($uri, $controler = null) {
     $this->_uri[] = $uri;
     $this->_controler[] = $controler;
@@ -28,10 +28,16 @@ class routeController {
     if (sizeof($matches) < 1) {
       // no matches display 404
       header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
-      $error = new stdClass();
-      $error->title = "404 Error";
-      $error->message = "Opps! Page not found.";
-      require_once "views/errorView.php";
+      //create empty object to store data for template
+      $templateData = new stdClass();
+      $templateData->title = "404 Error";
+      $templateData->message = "Opps! Page not found.";
+      $templateData->errorcode = "404";
+      //pass complete data and template to view engine and render
+      $view = new Page();
+      $view->setTemplate('errorView');
+      $view->setDataSrc($templateData);
+      $view->render();
     }
   }
 }
