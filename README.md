@@ -1,4 +1,4 @@
-# Helpdesk
+# Helpdesk.
 
 Internal Helpdesk system to allow users to log (tickets) or issues that they have around campus.
 
