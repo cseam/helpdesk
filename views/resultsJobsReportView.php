@@ -20,7 +20,7 @@
 
             $engineergroup = 0;
             if (isset($pagedata->reportResults)) {
-            foreach($pagedata->reportResults as $key => $value) { ?>
+            foreach($pagedata->reportResults as &$value) { ?>
             <tbody>
                 <?php // write engineerName each time engineer changes
                   while($engineergroup != $value["idengineers"]) {
