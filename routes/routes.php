@@ -43,7 +43,7 @@
     $route->add('/manager/report/changecontrol', 'reportChangeControlController');
     $route->add('/manager/report/lockers', 'reportLockersController');
     $route->add('/manager/report/scheduledtasks', 'reportScheduledTasksController');
-    $route->add('/manager/report/outofhours', 'reportOutOfHoursCOntroller');
+    $route->add('/manager/report/outofhours', 'reportOutOfHoursController');
     $route->add('/manager/report/performanceobjectives', 'reportPerformanceObjectivesController');
   }
   // admin routes
