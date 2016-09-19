@@ -178,7 +178,7 @@
 		// Client side form validation
 		$("#addForm").validate({
 			rules: {
-				email: {
+				contact_email: {
 					required: true,
 					email: true
 					},

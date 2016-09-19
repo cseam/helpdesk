@@ -22,7 +22,7 @@
         <p class="callheader"><span class="nowrap">Category:</span>         <span class="nowrap"><?php echo @$pagedata->ticketDetails["categoryName"]; ?></span></p>
         <p class="callheader"><span class="nowrap">Assigned to:</span>      <span class="nowrap"><?php echo @$pagedata->ticketDetails["engineerName"]; ?></span></p>
         <p class="callheader"><span class="nowrap">Opened:</span>           <span class="nowrap"><?php echo date("d/m/Y H:i", strtotime(@$pagedata->ticketDetails["opened"])); ?></span></p>
-        <p class="callheader"><span class="nowrap">Closed:</span>           <span class="nowrap"><?php echo date("d/m/Y H:i", strtotime(@$pagedata->ticketDetails["closed"])); ?></span></p>
+        <p class="callheader"><span class="nowrap">Closed:</span>           <span class="nowrap"><?php if (isset($pagedata->ticketDetails["closed"])) { echo date("d/m/Y H:i", strtotime(@$pagedata->ticketDetails["closed"])); } ?></span></p>
         <p class="callheader"><span class="nowrap">Ticket Age:</span>       <span class="nowrap"><?php echo @$pagedata->ticketDetails["daysold"]; ?> day(s)</span></p>
         <p class="callheader"><span class="nowrap">Scheduled Ticket:</span> <span class="nowrap"><?php echo @$pagedata->ticketDetails["pm"] == true ? 'Yes' : 'No'; ?></span></p>
         <p class="callheader"><span class="nowrap">Urgency:</span>          <span class="nowrap"><img src="/public/images/ICONS-urgency<?php echo @$pagedata->ticketDetails["urgency"];?>.svg" alt="<?php echo @$pagedata->ticketDetails["urgency"];?>" title="<?php echo @$pagedata->ticketDetails["urgency"];?>" style="height: 14px; width: 100px" /></span></p>

@@ -1017,6 +1017,7 @@
     }
 
     public function countClosed($scope = null) {
+
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
       $database = new Database();
@@ -1026,7 +1027,7 @@
                         WHERE calls.status = 2
                         AND FIND_IN_SET(calls.helpdesk, :scope)
                         AND calls.closed BETWEEN :startrange AND :endrange
-                        GROUP BY calls.helpdesk");
+                        ");
       $database->bind(':startrange', $this->_startrange);
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
