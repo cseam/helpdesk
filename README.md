@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/atomicjam/helpdesk.svg?branch=master)](https://travis-ci.org/atomicjam/helpdesk)
+
 # Helpdesk.
 
 Internal Helpdesk system to allow users to log (tickets) or issues that they have around campus.
