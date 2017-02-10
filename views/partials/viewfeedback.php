@@ -71,7 +71,7 @@
                 <input type="radio" id="satisfaction<?php echo $i ?>" name="satisfaction" value="<?php echo $i ?>" required>
               </td>
             </tr>
-            <? } ?>
+            <?php } ?>
           </tbody>
         </table>
         <p>Please leave any additional comments</p>
