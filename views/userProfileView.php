@@ -28,7 +28,7 @@
               <select id="location" name="location" REQUIRED>
                 <option value="" SELECTED>Please Select</option>
                 <?php foreach ($pagedata->location as $key => $value) { ?>
-                <option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $pagedata->reportResults["location"]) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
+                <option value="<?php echo $value["id"] ?>" <?php if ($value["id"] == $pagedata->reportResults["location"]) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
               <?php  } ?>
               </select>
           </fieldset>
@@ -52,7 +52,7 @@
               <select id="notify" name="notify">
                 <option value="" SELECTED>No Area Notifications</option>
                 <?php foreach ($pagedata->location as $key => $value) { ?>
-                <option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $pagedata->reportResults["notify"]) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
+                <option value="<?php echo $value["id"] ?>" <?php if ($value["id"] == $pagedata->reportResults["notify"]) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
               <?php  } ?>
               </select>
               <p>This can be useful for house staff working shift patterns to maintain visability of tickets logged by other house members</p>

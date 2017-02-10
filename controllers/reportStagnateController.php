@@ -16,7 +16,7 @@ class reportStagnateController {
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
-    $templateData->details = "Report of ".$templateData->title." tickets where the ticket has not been updated by an enginner in the last 72 hours.<br /><br />". sizeof($templateData->reportResults)." ".$templateData->title." tickets for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+    $templateData->details = "Report of ".$templateData->title." tickets where the ticket has not been updated by an enginner in the last 72 hours.<br /><br />".sizeof($templateData->reportResults)." ".$templateData->title." tickets for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
 
     //pass complete data and template to view engine and render
     $view = new Page();

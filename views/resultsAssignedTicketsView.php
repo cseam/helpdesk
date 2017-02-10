@@ -20,7 +20,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php foreach ($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td><?php echo $value["engineerName"] ?></td>
               <td><?php echo $value["helpdesk_name"] ?></td>

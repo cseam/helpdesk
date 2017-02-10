@@ -10,7 +10,7 @@
                         WHERE FIND_IN_SET(helpdesk, :helpdesk)");
       $database->bind(':helpdesk', $helpdeskid);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -65,7 +65,7 @@
                         ");
       $database->bind(':search', $search);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 

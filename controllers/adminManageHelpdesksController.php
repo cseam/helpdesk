@@ -8,7 +8,7 @@ class adminManageHelpdesksController {
     //create empty object to store data for template
     $templateData = new stdClass();
     $templateData->title = "Manage Helpdesks";
-    $templateData->details = "helpdesks available for users to select when adding a new ticket to " . CODENAME;
+    $templateData->details = "helpdesks available for users to select when adding a new ticket to ".CODENAME;
 
     //Post Update Locations
       if ($_POST) {

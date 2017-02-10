@@ -29,6 +29,6 @@ class Page {
   public function render() {
     $left = $this->_left;
     $pagedata = $this->_data;
-    require_once VIEWS_LOC . $this->_template .".php";
+    require_once VIEWS_LOC.$this->_template.".php";
   }
 }

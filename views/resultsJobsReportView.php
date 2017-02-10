@@ -14,16 +14,16 @@
             <?php
             // count for engineers totals
             $tmp_array = array();
-            foreach($pagedata->reportResults as &$value) { array_push($tmp_array, $value["engineerName"]); }
+            foreach ($pagedata->reportResults as &$value) { array_push($tmp_array, $value["engineerName"]); }
             @$outputCount = array_count_values($tmp_array);
             $engineergroup = 0;
             if (isset($pagedata->reportResults)) {
 
-            foreach($pagedata->reportResults as &$value) { ?>
+            foreach ($pagedata->reportResults as &$value) { ?>
               <tbody>
                 <?php // write engineerName each time engineer changes
-                  while($engineergroup !== $value["idengineers"]) {
-                    echo "<tr><td class=\"hdtitle listheader titlepadding\" colspan=\"6\"><h3>".$value["engineerName"] . " (".$outputCount[$value["engineerName"]] .")</h3></td></tr>";
+                  while ($engineergroup !== $value["idengineers"]) {
+                    echo "<tr><td class=\"hdtitle listheader titlepadding\" colspan=\"6\"><h3>".$value["engineerName"]." (".$outputCount[$value["engineerName"]].")</h3></td></tr>";
                     $engineergroup = $value["idengineers"];
                   }?>
                 <tr>

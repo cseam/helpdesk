@@ -20,7 +20,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php if (isset($pagedata->reportResults)) { foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php if (isset($pagedata->reportResults)) { foreach ($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td><?php for ($i = 0; $i < round($value["satisfaction"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?></td>
               <td><?php echo current(explode('@', $value["email"])); ?></td>

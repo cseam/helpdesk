@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach($left->sideData["objdata"] as $key => $value) { ?>
+    <?php foreach ($left->sideData["objdata"] as $key => $value) { ?>
       <tr>
         <td><a href="/engineer/objectives/<?php echo $value["id"] ?>"><?php echo substr(strip_tags($value["title"]), 0, 50) ?></a></td>
         <td><?php echo $value["progress"] ?>%</td>

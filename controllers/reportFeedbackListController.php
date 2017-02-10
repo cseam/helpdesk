@@ -4,7 +4,7 @@ class reportFeedbackListController {
   public function __construct()
   {
     //get ticket id from uri params.
-    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $baseurl = explode('/', $_SERVER['REQUEST_URI']);
     $id = $baseurl[3];
     //create new models for required data
     $feedbackModel = new feedbackModel();
@@ -17,7 +17,7 @@ class reportFeedbackListController {
     //populate report results for use in view
     $templateData->reportResults = $feedbackModel->getFeedbackDetailsByEngineerId($id);
     //set page details
-    $templateData->details = $templateData->title . " showing feedback left by users.";
+    $templateData->details = $templateData->title." showing feedback left by users.";
 
     //pass complete data and template to view engine and render
     $view = new Page();

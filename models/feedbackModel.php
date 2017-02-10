@@ -11,7 +11,7 @@
       // populate custom report values
       $this->_startrange = isset($_SESSION['customReportsRangeStart']) ? $_SESSION['customReportsRangeStart'] : date('Y-m-01');
       $this->_endrange = isset($_SESSION['customReportsRangeEnd']) ? $_SESSION['customReportsRangeEnd'] : date('Y-m-t');
-      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null ;
+      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null;
     }
 
     /**
@@ -48,7 +48,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -66,7 +66,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':id', $id);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -80,7 +80,7 @@
                         WHERE calls.status = 2
                         GROUP BY calls.status");
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -96,7 +96,7 @@
                         GROUP BY calls.status");
       $database->bind(':helpdesk', $helpdeskid);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -115,7 +115,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $results = $database->single();
-      if ($database->rowCount() ===0) { return null; }
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 }

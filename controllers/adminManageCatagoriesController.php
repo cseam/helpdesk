@@ -8,7 +8,7 @@ class adminManageCatagoriesController {
     //create empty object to store data for template
     $templateData = new stdClass();
     $templateData->title = "Manage Categories";
-    $templateData->details = "Categories available for users to select when adding a new ticket to " . CODENAME;
+    $templateData->details = "Categories available for users to select when adding a new ticket to ".CODENAME;
     $templateData->listofcategorys = $categoryModel->getListOfCategorys();
 
     //Post Update Locations

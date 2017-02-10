@@ -27,7 +27,7 @@
               <tbody>
             <?php
             if (isset($pagedata->reportResults)) {
-            foreach($pagedata->reportResults as $key => $value) { ?>
+            foreach ($pagedata->reportResults as $key => $value) { ?>
               <tr>
                 <td><a href="/manager/objectives/<?php echo $value["id"] ?>"><?php echo substr(strip_tags($value["title"]), 0, 50) ?></a></td>
                 <td><?php echo $value["engineerName"] ?></td>

@@ -4,7 +4,7 @@ class forwardTicketController {
   public function __construct()
   {
     //get ticket id from uri params
-    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $baseurl = explode('/', $_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
     //create new models for required data
     $ticketModel = new ticketModel();
@@ -19,8 +19,8 @@ class forwardTicketController {
 
     if ($_POST) {
       //update ticket
-      $updatemessage = "Ticket forwarded by " . $_SESSION["sAMAccountName"] . " for the following reason: " . $_POST["reason"];
-      $ticketModel->updateTicketDetailsById($ticketid, "open", $_SESSION["sAMAccountName"] , $updatemessage);
+      $updatemessage = "Ticket forwarded by ".$_SESSION["sAMAccountName"]." for the following reason: ".$_POST["reason"];
+      $ticketModel->updateTicketDetailsById($ticketid, "open", $_SESSION["sAMAccountName"], $updatemessage);
       //change helpdesk
       $ticketModel->updateTicketHelpdeskById($ticketid, $_POST["fwdhelpdesk"]);
       //remove engineer assigned

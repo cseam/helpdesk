@@ -32,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php foreach ($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td class="left"><?php echo $value["engineerName"] ?></td>
               <td class="left"><?php echo $value["helpdesk_name"] ?></td>

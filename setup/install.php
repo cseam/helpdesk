@@ -11,9 +11,9 @@
 // HELPDESK SETUP SCRIPT
 // Used to create initial databases, delete this install.php once you have run successfully
 // Ensure config/config.php is updated with correct mysql details before this script is run
-if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
+if (file_exists($_SERVER['DOCUMENT_ROOT'].'/config/config.php')) {
   // Load config
-  include_once $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+  include_once $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
   // Options for user
   ?>
 	<h2>Helpdesk Setup</h2>
@@ -24,7 +24,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 	</form>
 	<?php
   // functions to create tables
-  if(isset($_POST['createTables'])) {
+  if (isset($_POST['createTables'])) {
     // try to create tables
     try {
       // Connect to dev db
@@ -405,14 +405,14 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
       echo "<p>(call_updates) created successfully</p>";
 
 
-      } catch(PDOException $e)
+      } catch (PDOException $e)
       {
-      echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
+      echo "<p class='urgent'>ERROR: ".$e->getMessage()."</p>";
       }
     $conn = null;
   }
   // Create Default Data
-  if(isset($_POST['createDefaultData'])) {
+  if (isset($_POST['createDefaultData'])) {
     try {
       // Connect to dev db
       $conn = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
@@ -434,9 +434,9 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			";
       $conn->exec($sql);
         echo "<p>(Default data) inserted</p><p>Default local admin created: 'admin.local' password: 'helpdesk'</p>";
-      } catch(PDOException $e)
+      } catch (PDOException $e)
       {
-      echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
+      echo "<p class='urgent'>ERROR: ".$e->getMessage()."</p>";
       }
     $conn = null;
   }

@@ -21,9 +21,9 @@
 				<?php
           $optiongroup = null;
         foreach ($pagedata->location as $key => $value) {
-          if ($optiongroup !== $value['optiongroup']) { echo "<optgroup label=\"" . $value['optiongroup'] . "\">"; $optiongroup = $value['optiongroup']; };
+          if ($optiongroup !== $value['optiongroup']) { echo "<optgroup label=\"".$value['optiongroup']."\">"; $optiongroup = $value['optiongroup']; };
           ?>
-					<option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $userProfileLocationId) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
+					<option value="<?php echo $value["id"] ?>" <?php if ($value["id"] == $userProfileLocationId) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
 				<?php
           if ($optiongroup !== $value['optiongroup']) { echo "</optgroup>"; };
         } ?>
@@ -80,7 +80,7 @@
 			<label for="helpdesk" title="select the college department">Report to this Department</label>
 			<select id="helpdesk" name="helpdesk" required>
 				<option value="" SELECTED>Please Select</option>
-				<?php foreach ($pagedata->helpdesks as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["helpdesk_name"]."</option>";} ?>
+				<?php foreach ($pagedata->helpdesks as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["helpdesk_name"]."</option>"; } ?>
 			</select>
 			<script type="text/javascript">
 				$("#helpdesk").change(function(e) {
@@ -149,13 +149,13 @@
 			</script>
 	</fieldset>
 	<?php if ($_SESSION['engineerId'] !== null) {?>
-		<input type="hidden" name="engineerid" id="engineerid" value="<?php echo $_SESSION['engineerId'];?>" />
+		<input type="hidden" name="engineerid" id="engineerid" value="<?php echo $_SESSION['engineerId']; ?>" />
 		<fieldset>
 			<legend>Engineer Controls</legend>
 				<table>
 					<tr>
 						<td><label for="cmn-toggle-selfassign" title="assign call to myself">Assign ticket to myself</label></td>
-						<td><input type="checkbox" name="cmn-toggle-selfassign" id="cmn-toggle-selfassign" value="<?php echo $_SESSION['engineerId'];?>"></td>
+						<td><input type="checkbox" name="cmn-toggle-selfassign" id="cmn-toggle-selfassign" value="<?php echo $_SESSION['engineerId']; ?>"></td>
 					</tr>
 					<tr>
 						<td><label for="cmn-toggle-retro" title="open call closed work already complete" >Instantly close ticket</label></td>

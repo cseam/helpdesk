@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach($pagedata->reportResults as $key => $value) { ?>
+              <?php foreach ($pagedata->reportResults as $key => $value) { ?>
                 <tr>
                   <td><a href="/ticket/view/<?php echo $value["callid"]?>"><?php echo $value["task"]?></a></td>
                   <td><?php echo $value["frequency"]?></td>

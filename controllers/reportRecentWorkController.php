@@ -4,7 +4,7 @@ class reportRecentWorkController {
   public function __construct()
   {
     //get uri params.
-    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $baseurl = explode('/', $_SERVER['REQUEST_URI']);
     $engineerid = $baseurl[3];
     //create new models for required data
     $ticketModel = new ticketModel();

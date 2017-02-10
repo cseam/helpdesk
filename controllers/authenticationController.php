@@ -8,7 +8,7 @@ class authenticationController {
     // check session populated
     if (empty($_SESSION['sAMAccountName'])) {
       // session looks empty route to login page if not already there
-        $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+        $baseurl = explode('/', $_SERVER['REQUEST_URI']);
 
         if (!$_POST) {
         // needs some work to stop post to pages other than login working but in principal posts to login need to not reroute

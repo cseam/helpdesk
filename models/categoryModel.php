@@ -11,7 +11,7 @@
       // populate custom report values
       $this->_startrange = isset($_SESSION['customReportsRangeStart']) ? $_SESSION['customReportsRangeStart'] : date('Y-m-01');
       $this->_endrange = isset($_SESSION['customReportsRangeEnd']) ? $_SESSION['customReportsRangeEnd'] : date('Y-m-t');
-      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null ;
+      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null;
     }
 
     public function getListOfCategorysByHelpdesk($helpdeskid) {
@@ -20,7 +20,7 @@
                         WHERE helpdesk IN(:helpdesk)");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -30,7 +30,7 @@
                         JOIN helpdesks ON categories.helpdesk = helpdesks.id
         ORDER BY helpdesk");
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -105,7 +105,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       // else populate object with db results
       return $result;
     }
@@ -127,7 +127,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $results = $database->single();
-      if ($database->rowCount() ===0) { return null; }
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 

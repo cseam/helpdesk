@@ -8,7 +8,7 @@ class adminManageEngineersController {
     //create empty object to store data for template
     $templateData = new stdClass();
     $templateData->title = "Manage Engineers";
-    $templateData->details = "Engineers available to use " . CODENAME;
+    $templateData->details = "Engineers available to use ".CODENAME;
     $templateData->listofengineers = $engineerModel->getListOfEngineers();
 
     //Post Update Locations

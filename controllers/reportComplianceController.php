@@ -23,7 +23,7 @@ class reportComplianceController {
       $templateData->reportResults[$values["callid"]]["daysago"] = $compliance["daysago"];
     }
     //set page details
-    $templateData->details = $templateData->title . " showing scheduled task compliance last completed date. ";
+    $templateData->details = $templateData->title." showing scheduled task compliance last completed date. ";
 
     //pass complete data and template to view engine and render
     $view = new Page();

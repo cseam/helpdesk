@@ -11,7 +11,7 @@
                         WHERE helpdesk_id = :helpdesk");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 

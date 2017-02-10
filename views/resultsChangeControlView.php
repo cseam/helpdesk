@@ -17,7 +17,7 @@
         <table id="changecontrol">
             <?php
             if (isset($pagedata->reportResults)) {
-              foreach($pagedata->reportResults as $key => $value) { ?>
+              foreach ($pagedata->reportResults as $key => $value) { ?>
               <tbody>
               <tr>
                 <td class="hdtitle listheader" colspan="2"><?php echo $value["server"] ?></td>

@@ -33,7 +33,7 @@
 
               <p class="buttons">
               <button name="add" value="add" type="submit" onclick="this.form.button_value.value = this.value;">
-                <?php isset($pagedata->reportResults["id"]) ? print("Update") : print("Add");?>
+                <?php isset($pagedata->reportResults["id"]) ? print("Update") : print("Add"); ?>
               </button>
               </p>
           </fieldset>

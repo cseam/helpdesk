@@ -4,7 +4,7 @@ class adminModifyOutOfHoursController {
   public function __construct()
   {
     //get ticket id from uri params.
-    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $baseurl = explode('/', $_SERVER['REQUEST_URI']);
     $id = $baseurl[3];
     //load required models
     $outofhoursModel = new outofhoursModel();

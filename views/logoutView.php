@@ -11,17 +11,17 @@
     </p>
     <ul style="font-size: 0.9rem;">
     <?php
-      foreach($pagedata->logoutstats as &$value) {
+      foreach ($pagedata->logoutstats as &$value) {
           echo "<li style=\"margin-bottom: 10px;margin-right: 50px;\">";
           echo $value["Name"];
           echo " have ";
           echo number_format($value["outstanding"]["outstanding"]);
           echo " outstanding tickets, on average tickets take ";
           echo number_format($value["avgCloseTime"]["avg_days"]);
-          echo " days to close. " . $value["Name"] . "'s ";
+          echo " days to close. ".$value["Name"]."'s ";
           echo number_format($value["totalclosed"]["countTotal"]);
           echo " closed tickets have a average feedback of ";
-          echo round($value["avgfeedback"]["FeedbackAVG"],2) . "&nbsp;&nbsp;";
+          echo round($value["avgfeedback"]["FeedbackAVG"], 2)."&nbsp;&nbsp;";
           for ($i = 0; $i < round($value["avgfeedback"]["FeedbackAVG"]); $i++) {
             echo "<img src='/public/images/ICONS-star.svg' alt='star' height='16' width='auto' />";
             }
