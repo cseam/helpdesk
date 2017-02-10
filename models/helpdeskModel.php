@@ -132,6 +132,9 @@ class helpdeskModel {
       isset($helpdeskobject->id) ? $this->modifyHelpdesk($helpdeskobject) : $this->addHelpdesk($helpdeskobject);
     }
 
+    /**
+     * @param stdClass $helpdeskobject
+     */
     public function addHelpdesk($helpdeskobject) {
       $database = new Database();
       $database->query("INSERT INTO helpdesks (helpdesk_name, description, deactivate, auto_assign, email_on_newticket)
@@ -146,6 +149,9 @@ class helpdeskModel {
       return $database->lastInsertId();
     }
 
+    /**
+     * @param stdClass $helpdeskobject
+     */
     public function modifyHelpdesk($helpdeskobject) {
       $database = new Database();
       $database->query("UPDATE helpdesks

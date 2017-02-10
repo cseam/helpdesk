@@ -24,8 +24,8 @@
   if (@$_SESSION['engineerLevel'] == 2 || @$_SESSION['superuser'] == 1) {
     $route->add('/manager', 'managerDefaultController');
     $route->add('/manager/objectives/\d*', 'viewObjectivesController'); //numerical wildcard route
-    $route->add('/manager/addobjectives','addObjectivesController');
-    $route->add('/manager/modifyobjectives/\d*','modifyObjectivesController'); //numerical wildcard route
+    $route->add('/manager/addobjectives', 'addObjectivesController');
+    $route->add('/manager/modifyobjectives/\d*', 'modifyObjectivesController'); //numerical wildcard route
     $route->add('/manager/report/escalated', 'reportEscalatedController');
     $route->add('/manager/report/unassigned', 'reportUnassignedController');
     $route->add('/manager/report/assigned', 'reportAssignedController');
