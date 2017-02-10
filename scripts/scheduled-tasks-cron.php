@@ -57,51 +57,51 @@ foreach($results as $key => $value) {
   $startdate = date("Y-m-d", strtotime($value["startschedule"]));
   // Process each ticket checking frequency
   SWITCH ($value["frequencytype"]) {
-  CASE "once":
-    // create ticket once on start date
-      if ($startdate == date("Y-m-d")) {
-        // frequency matches create ticket
-        $ticketModel->createNewTicket($baseTicket);
-        PRINT "Ticket created for scheduled task #".$value["callid"]." using once frequency rule\n";
-      } else {
-        PRINT "Ticket #".$value["callid"]." deferred start dates dont match"."<br/>";
-      };
-    break;
-  CASE "daily":
-    // frequency matches create ticket
-    $ticketModel->createNewTicket($baseTicket);
-    PRINT "Ticket created for scheduled task #".$value["callid"]." using daily frequency rule\n";
-    break;
-  CASE "weekly":
-    // create ticket if day of week as number matches start date
-      if (date('N', strtotime($startdate)) == date('N')) {
-        // frequency matches create ticket
-        $ticketModel->createNewTicket($baseTicket);
-        PRINT "Ticket created for scheduled task #".$value["callid"]." using weekly frequency rule\n";
-      } else {
-        PRINT "Ticket #".$value["callid"]." deferred start date was a different day of the week\n";
-      };
-    break;
-  CASE "monthly":
-    // create ticket if day of month matches start date
-      if (date('d', strtotime($startdate)) == date("d")) {
-        // frequency matches create ticket
-        $ticketModel->createNewTicket($baseTicket);
-        PRINT "Ticket created for scheduled task #" . $value["callid"] . " using monthly frequency rule\n";
-      } else {
-        PRINT "Ticket #". $value["callid"] . " deferred start date was a different day of the month\n";
-      };
-    break;
-  CASE "yearly":
-    // create ticket if day of month matches start date
-      if (date('m-d', strtotime($startdate)) == date("m-d")) {
-        // frequency matches create ticket
-        $ticketModel->createNewTicket($baseTicket);
-        PRINT "Ticket created for scheduled task #" . $value["callid"] . " using yearly frequency rule\n";
-      } else {
-        PRINT "Ticket #". $value["callid"] . " deferred start date was a different day and month\n";
-      };
-    break;
+    CASE "once":
+      // create ticket once on start date
+        if ($startdate == date("Y-m-d")) {
+          // frequency matches create ticket
+          $ticketModel->createNewTicket($baseTicket);
+          PRINT "Ticket created for scheduled task #".$value["callid"]." using once frequency rule\n";
+        } else {
+          PRINT "Ticket #".$value["callid"]." deferred start dates dont match"."<br/>";
+        };
+      break;
+    CASE "daily":
+      // frequency matches create ticket
+      $ticketModel->createNewTicket($baseTicket);
+      PRINT "Ticket created for scheduled task #".$value["callid"]." using daily frequency rule\n";
+      break;
+    CASE "weekly":
+      // create ticket if day of week as number matches start date
+        if (date('N', strtotime($startdate)) == date('N')) {
+          // frequency matches create ticket
+          $ticketModel->createNewTicket($baseTicket);
+          PRINT "Ticket created for scheduled task #".$value["callid"]." using weekly frequency rule\n";
+        } else {
+          PRINT "Ticket #".$value["callid"]." deferred start date was a different day of the week\n";
+        };
+      break;
+    CASE "monthly":
+      // create ticket if day of month matches start date
+        if (date('d', strtotime($startdate)) == date("d")) {
+          // frequency matches create ticket
+          $ticketModel->createNewTicket($baseTicket);
+          PRINT "Ticket created for scheduled task #" . $value["callid"] . " using monthly frequency rule\n";
+        } else {
+          PRINT "Ticket #". $value["callid"] . " deferred start date was a different day of the month\n";
+        };
+      break;
+    CASE "yearly":
+      // create ticket if day of month matches start date
+        if (date('m-d', strtotime($startdate)) == date("m-d")) {
+          // frequency matches create ticket
+          $ticketModel->createNewTicket($baseTicket);
+          PRINT "Ticket created for scheduled task #" . $value["callid"] . " using yearly frequency rule\n";
+        } else {
+          PRINT "Ticket #". $value["callid"] . " deferred start date was a different day and month\n";
+        };
+      break;
   }
 }
 PRINT "\n-- Ending Process Scheduled Tickets : ". date("h:i:s") . "\n";

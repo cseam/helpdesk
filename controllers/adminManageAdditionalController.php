@@ -8,7 +8,7 @@ class adminManageAdditionalController {
     //create empty object to store data for template
     $templateData = new stdClass();
     $templateData->title = "Manage Addititional Fields";
-    $templateData->details = "additional fields that drop down when a catagory is selected when adding a new ticket to " . CODENAME;
+    $templateData->details = "additional fields that drop down when a catagory is selected when adding a new ticket to ".CODENAME;
     $templateData->listofadditional = $additionalModel->getListOfAdditionalFields();
 
     //Post Update Locations

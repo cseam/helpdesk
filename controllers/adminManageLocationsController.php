@@ -8,7 +8,7 @@ class adminManageLocationsController {
     //create empty object to store data for template
     $templateData = new stdClass();
     $templateData->title = "Manage Locations";
-    $templateData->details = "Locations available for users to select when adding a new ticket to " . CODENAME;
+    $templateData->details = "Locations available for users to select when adding a new ticket to ".CODENAME;
     $templateData->listoflocations = $locationModel->getListOfLocations();
 
     //Post Update Locations

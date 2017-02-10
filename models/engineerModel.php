@@ -145,6 +145,9 @@
       isset($engineerobject->id) ? $this->modifyEngineerById($engineerobject) : $this->addEngineer($engineerobject);
     }
 
+    /**
+     * @param stdClass $engineerobject
+     */
     public function addEngineer($engineerobject) {
       $database = new Database();
       $database->query("INSERT INTO engineers (engineerName, engineerEmail, availableDays, sAMAccountName, engineerLevel, helpdesk, superuser, disabled, localLoginHash)
@@ -163,6 +166,9 @@
       return $database->lastInsertId();
     }
 
+    /**
+     * @param stdClass $engineerobject
+     */
     public function modifyEngineerById($engineerobject) {
       $database = new Database();
       $database->query("UPDATE engineers

@@ -405,10 +405,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
       echo "<p>(call_updates) created successfully</p>";
 
 
-      }
-
-
-    catch(PDOException $e)
+      } catch(PDOException $e)
       {
       echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
       }
@@ -437,8 +434,7 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			";
       $conn->exec($sql);
         echo "<p>(Default data) inserted</p><p>Default local admin created: 'admin.local' password: 'helpdesk'</p>";
-      }
-    catch(PDOException $e)
+      } catch(PDOException $e)
       {
       echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
       }

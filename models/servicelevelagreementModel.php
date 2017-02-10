@@ -47,6 +47,9 @@
     isset($slaobject->id) ? $this->modifySLAById($slaobject) : $this->addSLA($slaobject);
   }
 
+  /**
+   * @param stdClass $slaobject
+   */
   public function addSLA($slaobject) {
     $database = new Database();
     $database->query("INSERT INTO service_level_agreement (helpdesk, urgency, agreement, close_eta_days)
@@ -60,6 +63,9 @@
     return $database->lastInsertId();
   }
 
+  /**
+   * @param stdClass $slaobject
+   */
   public function modifySLAById($slaobject) {
     $database = new Database();
     $database->query("UPDATE service_level_agreement

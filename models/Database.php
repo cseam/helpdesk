@@ -16,8 +16,7 @@ class Database {
     // PDO_MYSQL
     try {
       $this->dbh = new PDO($dsn, $this->user, $this->pass);
-    }
-    catch (PDOException $error) {
+    } catch (PDOException $error) {
       echo $error->getMessage();
     }
   }

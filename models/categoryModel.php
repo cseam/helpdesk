@@ -49,6 +49,9 @@
       isset($categoryobject->id) ? $this->modifyCategory($categoryobject) : $this->addCategory($categoryobject);
     }
 
+    /**
+     * @param stdClass $categoryobject
+     */
     public function addCategory($categoryobject) {
       $database = new Database();
       $database->query("INSERT INTO categories (categoryName, helpdesk)
@@ -60,6 +63,9 @@
       return $database->lastInsertId();
     }
 
+    /**
+     * @param stdClass $categoryobject
+     */
     public function modifyCategory($categoryobject) {
       $database = new Database();
       $database->query("UPDATE categories
