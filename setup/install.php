@@ -12,10 +12,10 @@
 // Used to create initial databases, delete this install.php once you have run successfully
 // Ensure config/config.php is updated with correct mysql details before this script is run
 if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
-	// Load config
-	include_once $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
-	// Options for user
-	?>
+  // Load config
+  include_once $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+  // Options for user
+  ?>
 	<h2>Helpdesk Setup</h2>
 	<p>This page will help create the initial databases to get Helpdesk up and running, once this page has been run management is done via the web login, this page should then be deleted. </p>
 	<form method="post">
@@ -23,17 +23,17 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 		<input type="submit" name="createDefaultData" value="Create Default Data" />
 	</form>
 	<?php
-	// functions to create tables
-	if(isset($_POST['createTables'])) {
-		// try to create tables
-		try {
-			// Connect to dev db
-			$conn = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
-			// set the PDO error mode to exception
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			// create tables
-			// assign engineers
-			$sql = "
+  // functions to create tables
+  if(isset($_POST['createTables'])) {
+    // try to create tables
+    try {
+      // Connect to dev db
+      $conn = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
+      // set the PDO error mode to exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      // create tables
+      // assign engineers
+      $sql = "
 				CREATE TABLE `assign_engineers` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`engineerId` int(11) NOT NULL,
@@ -41,10 +41,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				UNIQUE KEY `idengineers_UNIQUE` (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 			";
-			$conn->exec($sql);
-				echo "<p>(assign_engineers) created successfully</p>";
-			// call_additional_fields
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(assign_engineers) created successfully</p>";
+      // call_additional_fields
+      $sql = "
 				CREATE TABLE `call_additional_fields` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`typeid` int(11) DEFAULT NULL,
@@ -52,10 +52,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 			";
-			$conn->exec($sql);
-				echo "<p>(call_additional_fields) created successfully</p>";
-			// call additional results
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(call_additional_fields) created successfully</p>";
+      // call additional results
+      $sql = "
 				CREATE TABLE `call_additional_results` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`callid` int(11) DEFAULT NULL,
@@ -64,10 +64,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 			";
-			$conn->exec($sql);
-				echo "<p>(call_additional_results) created successfully</p>";
-			// call_views
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(call_additional_results) created successfully</p>";
+      // call_views
+      $sql = "
 				CREATE TABLE `call_views` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`sAMAccountName` varchar(45) DEFAULT NULL,
@@ -76,10 +76,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 			";
-			$conn->exec($sql);
-				echo "<p>(call_views) created successfully</p>";
-			// call reasons
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(call_views) created successfully</p>";
+      // call reasons
+      $sql = "
 				CREATE TABLE `callreasons` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`reason_name` varchar(255) DEFAULT '',
@@ -87,10 +87,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(call reasons) created successfully</p>";
-			// calls
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(call reasons) created successfully</p>";
+      // calls
+      $sql = "
 				CREATE TABLE `calls` (
 				`callid` int(11) NOT NULL AUTO_INCREMENT,
 				`name` varchar(45) DEFAULT NULL,
@@ -119,10 +119,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				UNIQUE KEY `callid_UNIQUE` (`callid`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(calls) created successfully</p>";
-			// categories
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(calls) created successfully</p>";
+      // categories
+      $sql = "
 				CREATE TABLE `categories` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`categoryName` varchar(45) DEFAULT NULL,
@@ -130,10 +130,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(categories) created successfully</p>";
-			// change control
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(categories) created successfully</p>";
+      // change control
+      $sql = "
 				CREATE TABLE `changecontrol` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`engineersid` int(11) DEFAULT NULL,
@@ -145,10 +145,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(change control) created successfully</p>";
-			// change control tags
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(change control) created successfully</p>";
+      // change control tags
+      $sql = "
 				CREATE TABLE `changecontrol_tags` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`tagname` varchar(45) DEFAULT NULL,
@@ -156,10 +156,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(change control tags) created successfully</p>";
-			// engineers
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(change control tags) created successfully</p>";
+      // engineers
+      $sql = "
 				CREATE TABLE `engineers` (
 				`idengineers` int(11) NOT NULL AUTO_INCREMENT,
 				`engineerName` varchar(45) NOT NULL,
@@ -175,10 +175,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				UNIQUE KEY `idengineers_UNIQUE` (`idengineers`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(engineers) created successfully</p>";
-			// engineers punchcard
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(engineers) created successfully</p>";
+      // engineers punchcard
+      $sql = "
 				CREATE TABLE `engineers_punchcard` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`direction` int(11) NOT NULL,
@@ -188,20 +188,20 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(engineers punchcard) created successfully</p>";
-			// engineer status
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(engineers punchcard) created successfully</p>";
+      // engineer status
+      $sql = "
 				CREATE TABLE `engineers_status` (
 				`id` int(11) unsigned NOT NULL DEFAULT '0',
 				`status` int(11) NOT NULL DEFAULT '0',
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(engineers status) created successfully</p>";
-			// feedback
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(engineers status) created successfully</p>";
+      // feedback
+      $sql = "
 				CREATE TABLE `feedback` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`callid` int(11) DEFAULT NULL,
@@ -211,10 +211,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(feedback) created successfully</p>";
-			// helpdesks
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(feedback) created successfully</p>";
+      // helpdesks
+      $sql = "
 				CREATE TABLE `helpdesks` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`helpdesk_name` varchar(45) DEFAULT NULL,
@@ -225,10 +225,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(helpdesks) created successfully</p>";
-			// location
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(helpdesks) created successfully</p>";
+      // location
+      $sql = "
 				CREATE TABLE `location` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`locationName` varchar(45) DEFAULT NULL,
@@ -238,10 +238,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(location) created successfully</p>";
-			// out of hours
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(location) created successfully</p>";
+      // out of hours
+      $sql = "
 				CREATE TABLE `out_of_hours` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`name` varchar(255) DEFAULT NULL,
@@ -257,10 +257,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(Out of hours) created successfully</p>";
-			// out of hours contact
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(Out of hours) created successfully</p>";
+      // out of hours contact
+      $sql = "
 				CREATE TABLE `out_of_hours_contact_details` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`helpdesk` int(11) DEFAULT NULL,
@@ -269,10 +269,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(Out of hours contact) created successfully</p>";
-			// performance objectives
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(Out of hours contact) created successfully</p>";
+      // performance objectives
+      $sql = "
 				CREATE TABLE `performance_review_objectives` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`engineerid` int(11) DEFAULT NULL,
@@ -284,10 +284,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(Performance objectives) created successfully</p>";
-			// quick responses
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(Performance objectives) created successfully</p>";
+      // quick responses
+      $sql = "
 				CREATE TABLE `quick_responses` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`quick_response` varchar(255) DEFAULT NULL,
@@ -295,10 +295,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(quick responses) created successfully</p>";
-			// scheduled calls
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(quick responses) created successfully</p>";
+      // scheduled calls
+      $sql = "
 				CREATE TABLE `scheduled_calls` (
 				`callid` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`name` varchar(45) DEFAULT NULL,
@@ -326,20 +326,20 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`callid`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(scheduled calls) created successfully</p>";
-			// scheduled calls cron
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(scheduled calls) created successfully</p>";
+      // scheduled calls cron
+      $sql = "
 				CREATE TABLE `scheduled_calls_cron_log` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`message` varchar(255) DEFAULT NULL,
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(scheduled calls cron) created successfully</p>";
-			// service level agreement
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(scheduled calls cron) created successfully</p>";
+      // service level agreement
+      $sql = "
 				CREATE TABLE `service_level_agreement` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`helpdesk` int(11) DEFAULT NULL,
@@ -349,10 +349,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(service level agreement) created successfully</p>";
-			// status
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(service level agreement) created successfully</p>";
+      // status
+      $sql = "
 				CREATE TABLE `status` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`statusCode` varchar(45) NOT NULL DEFAULT '',
@@ -360,10 +360,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				UNIQUE KEY `idengineers_UNIQUE` (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 				";
-			$conn->exec($sql);
-				echo "<p>(status) created successfully</p>";
-			// call subscriptions
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(status) created successfully</p>";
+      // call subscriptions
+      $sql = "
 				CREATE TABLE `call_subscriptions` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`call_id` int(11) DEFAULT NULL,
@@ -371,10 +371,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 			";
-			$conn->exec($sql);
-				echo "<p>(call subscriptions) created successfully</p>";
-			// user profiles
-			$sql = "
+      $conn->exec($sql);
+        echo "<p>(call subscriptions) created successfully</p>";
+      // user profiles
+      $sql = "
 			CREATE TABLE `user_profiles` (
 			`id` int(11) NOT NULL AUTO_INCREMENT,
 			`sAMAccountName` varchar(255) DEFAULT NULL,
@@ -386,10 +386,10 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			PRIMARY KEY (`id`)
 			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 		";
-		$conn->exec($sql);
-			echo "<p>(user profiles) created successfully</p>";
-			// call_updates
-			$sql = "
+    $conn->exec($sql);
+      echo "<p>(user profiles) created successfully</p>";
+      // call_updates
+      $sql = "
 			CREATE TABLE `call_updates` (
 			`ID` int(11) unsigned NOT NULL auto_increment,
 			`callid` int(11) DEFAULT NULL,
@@ -401,29 +401,29 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 			PRIMARY KEY  (`ID`)
 			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 			";
-		$conn->exec($sql);
-			echo "<p>(call_updates) created successfully</p>";
+    $conn->exec($sql);
+      echo "<p>(call_updates) created successfully</p>";
 
 
-			}
+      }
 
 
-		catch(PDOException $e)
-			{
-			echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
-			}
-		$conn = null;
-	}
-	// Create Default Data
-	if(isset($_POST['createDefaultData'])) {
-		try {
-			// Connect to dev db
-			$conn = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
-			// set the PDO error mode to exception
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			// create tables
-			// assign engineers
-			$sql = "
+    catch(PDOException $e)
+      {
+      echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
+      }
+    $conn = null;
+  }
+  // Create Default Data
+  if(isset($_POST['createDefaultData'])) {
+    try {
+      // Connect to dev db
+      $conn = new PDO("mysql:host=".DB_LOC.";dbname=".DB_SCHEMA, DB_USER, DB_PASSWORD);
+      // set the PDO error mode to exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      // create tables
+      // assign engineers
+      $sql = "
 				INSERT INTO assign_engineers (id, engineerId) VALUES (1, 0);
 				INSERT INTO engineers (engineerName, engineerEmail, availableDays, sAMAccountName, engineerLevel, helpdesk, superuser, localLoginHash) VALUES ('admin.local', 'null', '1,2,3,4,5,6,7', 'admin.local', 1, 1, 1, 'sha256:1000:F54fR+eQd+D4UgMz4uZrOy2eranRNB68:WETpRZTYLiWVBwC7I+L9AqJd3vhcpzCb');
 				INSERT INTO helpdesks (helpdesk_name, description, deactivate, auto_assign, email_on_newticket) VALUES ('Default Helpdesk','description for helpdesk',0,0,0);
@@ -435,18 +435,18 @@ if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/config/config.php')) {
 				INSERT INTO status (id, statusCode) VALUES (4, 'Escalated');
 				INSERT INTO status (id, statusCode) VALUES (5, 'Sent Away');
 			";
-			$conn->exec($sql);
-				echo "<p>(Default data) inserted</p><p>Default local admin created: 'admin.local' password: 'helpdesk'</p>";
-			}
-		catch(PDOException $e)
-			{
-			echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
-			}
-		$conn = null;
-	}
+      $conn->exec($sql);
+        echo "<p>(Default data) inserted</p><p>Default local admin created: 'admin.local' password: 'helpdesk'</p>";
+      }
+    catch(PDOException $e)
+      {
+      echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
+      }
+    $conn = null;
+  }
 } else {
-	echo("<h2>Config Error</h2>");
-	echo("<p class='urgent'>Config not found, please create config/config.php using the supplied dist-config.php with your mysql connection details. </p>");
+  echo("<h2>Config Error</h2>");
+  echo("<p class='urgent'>Config not found, please create config/config.php using the supplied dist-config.php with your mysql connection details. </p>");
 }
 ?>
 </div>

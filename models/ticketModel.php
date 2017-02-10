@@ -449,6 +449,9 @@
       return null;
     }
 
+    /**
+     * @param integer $statuscode
+     */
     public function updateTicketStatusById($ticketid, $statuscode) {
       $database = new Database();
       $database->query("UPDATE calls
@@ -482,6 +485,9 @@
         return null;
     }
 
+    /**
+     * @param string $opened
+     */
     public function updateTicketOpenById($ticketid, $opened) {
         $database = new Database();
         $database->query("UPDATE calls
@@ -498,6 +504,9 @@
         return null;
     }
 
+    /**
+     * @param string $workedwith
+     */
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "", $workedwith = null) {
       $message = "<div class=update>" . $update . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
       // update timestamp
@@ -598,6 +607,9 @@
       return null;
     }
 
+    /**
+     * @param stdClass $baseTicket
+     */
     public function createNewTicket($baseTicket) {
       $database = new Database();
       $database->query("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, pm, requiredfor)
@@ -829,6 +841,9 @@
       return $result;
     }
 
+    /**
+     * @param integer $statuscode
+     */
     public function countTicketsByStatusCode($statuscode, $scope = null) {
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $database = new Database();

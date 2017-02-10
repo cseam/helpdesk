@@ -85,6 +85,9 @@ class helpdeskModel {
       return $results;
     }
 
+    /**
+     * @param double $urgency
+     */
     public function getSLADetailsByUrgencyId($urgency, $helpdeskid) {
       $database = new Database();
       $database->query("SELECT agreement, close_eta_days FROM service_level_agreement
@@ -122,6 +125,9 @@ class helpdeskModel {
       return true;
     }
 
+    /**
+     * @param stdClass $helpdeskobject
+     */
     public function upsertHelpdesk($helpdeskobject) {
       isset($helpdeskobject->id) ? $this->modifyHelpdesk($helpdeskobject) : $this->addHelpdesk($helpdeskobject);
     }

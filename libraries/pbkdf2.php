@@ -58,7 +58,7 @@ function validate_password($password, $correct_hash)
 {
     $params = explode(":", $correct_hash);
     if(count($params) < HASH_SECTIONS)
-       return false;
+        return false;
     $pbkdf2 = base64_decode($params[HASH_PBKDF2_INDEX]);
     return slow_equals(
         $pbkdf2,
@@ -74,6 +74,9 @@ function validate_password($password, $correct_hash)
 }
 
 // Compares two strings $a and $b in length-constant time.
+/**
+ * @param string $a
+ */
 function slow_equals($a, $b)
 {
     $diff = strlen($a) ^ strlen($b);
@@ -98,6 +101,10 @@ function slow_equals($a, $b)
  *
  * This implementation of PBKDF2 was originally created by https://defuse.ca
  * With improvements by http://www.variations-of-shadow.com
+ */
+/**
+ * @param integer $count
+ * @param integer $key_length
  */
 function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false)
 {

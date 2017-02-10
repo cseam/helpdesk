@@ -138,6 +138,9 @@
       return $database->lastInsertId();
     }
 
+    /**
+     * @param stdClass $engineerobject
+     */
     public function upsertEngineer($engineerobject) {
       isset($engineerobject->id) ? $this->modifyEngineerById($engineerobject) : $this->addEngineer($engineerobject);
     }

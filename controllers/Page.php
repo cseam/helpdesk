@@ -15,6 +15,9 @@ class Page {
     $this->_data = $data;
   }
 
+  /**
+   * @param string $templatename
+   */
   public function setTemplate($templatename) {
     $this->_template = $templatename;
   }

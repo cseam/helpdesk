@@ -49,6 +49,11 @@ function random_locker()
 	return $lockerid;
 }
 
+/**
+ * @param string $from
+ * @param string $title
+ * @param string $message
+ */
 function email_user($to, $from, $title, $message)
 {
 	$headers = "From:" . $from . "\r\n";

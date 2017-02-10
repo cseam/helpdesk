@@ -78,8 +78,7 @@
         PRIMARY KEY  (`ID`)
       )";
     $conn->exec($queryCreateUpdatesTable);
-    }
-  catch(PDOException $e)
+    } catch(PDOException $e)
     {
     echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
     }

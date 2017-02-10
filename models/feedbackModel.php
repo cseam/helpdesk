@@ -14,6 +14,11 @@
       $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null ;
     }
 
+    /**
+     * @param string $ticketid
+     * @param string $satisfaction
+     * @param string $details
+     */
     public function addFeedbackToTicketById($ticketid, $satisfaction, $details) {
       $database = new Database();
       $database->query("INSERT INTO feedback (callid, satisfaction, details, opened)

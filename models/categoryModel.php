@@ -42,6 +42,9 @@
       return true;
     }
 
+    /**
+     * @param stdClass $categoryobject
+     */
     public function upsertCategory($categoryobject) {
       isset($categoryobject->id) ? $this->modifyCategory($categoryobject) : $this->addCategory($categoryobject);
     }
