@@ -38,8 +38,8 @@
                   <td><?php echo $value["helpdesk"]; ?></td>
                   <td><?php echo $value["sAMAccountName"]; ?></td>
                   <td><?php echo $value["engineerLevel"]; ?></td>
-                  <td><?php echo ($value["disabled"]? 'yes' : 'no'); ?></td>
-                  <td><?php echo ($value["superuser"]? 'yes' : 'no') ; ?></td>
+                  <td><?php echo ($value["disabled"] ? 'yes' : 'no'); ?></td>
+                  <td><?php echo ($value["superuser"] ? 'yes' : 'no'); ?></td>
                   <td>
                     <form action="#" method="post" id="modifyForm" class="modifyconfirm">
                         <input type="hidden" id="button_modify_value" name="button_modify_value" value="" />

@@ -1,7 +1,7 @@
 <div id="calldetails">
   <h2>
     #<?php echo $pagedata->ticketDetails["callid"]; ?>
-    <?php echo $pagedata->ticketDetails["title"];?>
+    <?php echo $pagedata->ticketDetails["title"]; ?>
     </h2>
   <table class="noborder">
     <tr>
@@ -25,7 +25,7 @@
         <p class="callheader"><span class="nowrap">Closed:</span>           <span class="nowrap"><?php if (isset($pagedata->ticketDetails["closed"])) { echo date("d/m/Y H:i", strtotime(@$pagedata->ticketDetails["closed"])); } ?></span></p>
         <p class="callheader"><span class="nowrap">Ticket Age:</span>       <span class="nowrap"><?php echo @$pagedata->ticketDetails["daysold"]; ?> day(s)</span></p>
         <p class="callheader"><span class="nowrap">Scheduled Ticket:</span> <span class="nowrap"><?php echo @$pagedata->ticketDetails["pm"] == true ? 'Yes' : 'No'; ?></span></p>
-        <p class="callheader"><span class="nowrap">Urgency:</span>          <span class="nowrap"><img src="/public/images/ICONS-urgency<?php echo @$pagedata->ticketDetails["urgency"];?>.svg" alt="<?php echo @$pagedata->ticketDetails["urgency"];?>" title="<?php echo @$pagedata->ticketDetails["urgency"];?>" style="height: 14px; width: 100px" /></span></p>
+        <p class="callheader"><span class="nowrap">Urgency:</span>          <span class="nowrap"><img src="/public/images/ICONS-urgency<?php echo @$pagedata->ticketDetails["urgency"]; ?>.svg" alt="<?php echo @$pagedata->ticketDetails["urgency"]; ?>" title="<?php echo @$pagedata->ticketDetails["urgency"]; ?>" style="height: 14px; width: 100px" /></span></p>
         <p class="callheader"><span class="nowrap">Locker:</span>           <span class="nowrap"><?php echo @$pagedata->ticketDetails["lockerid"]; ?></span></p>
       </td>
     </tr>
@@ -44,18 +44,18 @@
     <button id="scroll" title="scroll to bottom">scroll to bottom</button>
 
     <p class="callbody">
-      <ul><?php if (isset($pagedata->additionalDetails)) { foreach ($pagedata->additionalDetails as $key => $value) { echo "<li>" . $value["label"] .": ". $value["value"] . "</li>"; } } ?></ul>
+      <ul><?php if (isset($pagedata->additionalDetails)) { foreach ($pagedata->additionalDetails as $key => $value) { echo "<li>".$value["label"].": ".$value["value"]."</li>"; } } ?></ul>
     </p>
     <p class="callbody">
-      <?php echo nl2br($pagedata->ticketDetails["details"]);?>
+      <?php echo nl2br($pagedata->ticketDetails["details"]); ?>
       <?php if (isset($pagedata->ticketUpdates)) { foreach ($pagedata->ticketUpdates as &$update) { echo nl2br($update["details"]); } } ?></p>
-    <p class="highlight smalltxt">Last Update: <?php echo date("d/m/Y H:i", strtotime($pagedata->ticketDetails["lastupdate"]));?></p>
+    <p class="highlight smalltxt">Last Update: <?php echo date("d/m/Y H:i", strtotime($pagedata->ticketDetails["lastupdate"])); ?></p>
 
     <form action="/ticket/update/" method="post" enctype="multipart/form-data" id="updateForm">
       <input type="hidden" id="id" name="id" value="<?php echo $pagedata->ticketDetails["callid"]; ?>" />
       <input type="hidden" id="contact_email" name="contact_email" value="<?php echo $pagedata->ticketDetails["email"]; ?>" />
       <input type="hidden" id="button_value" name="button_value" value="" />
-      <input type="hidden" id="details" name="details" value="<?php echo htmlspecialchars($pagedata->ticketDetails["details"]);?>" />
+      <input type="hidden" id="details" name="details" value="<?php echo htmlspecialchars($pagedata->ticketDetails["details"]); ?>" />
       <fieldset>
         <legend>Update Ticket</legend>
         <p><textarea name="updatedetails" id="updatedetails" rows="10" cols="40"></textarea></p>
@@ -113,7 +113,7 @@
             foreach ($pagedata->engineersList as &$value) {
               if ($value["idengineers"] != $_SESSION['engineerId']) {
                   echo "<div class=\"engineer\" data-engineerid=\"".$value["idengineers"]."\">";
-                    if (@getimagesize(PROFILE_IMAGES.strtolower($value["sAMAccountName"]).".jpg")) { echo "<img src='/uploads/profile_images/".$value["sAMAccountName"].".jpg' class='mugshot'  />";} else {echo "<img src='/uploads/profile_images/default.jpg' class='mugshot' />";}
+                    if (@getimagesize(PROFILE_IMAGES.strtolower($value["sAMAccountName"]).".jpg")) { echo "<img src='/uploads/profile_images/".$value["sAMAccountName"].".jpg' class='mugshot'  />"; } else {echo "<img src='/uploads/profile_images/default.jpg' class='mugshot' />"; }
                   echo substr($value["engineerName"], 0, 17);
                   echo "</div>";
               }

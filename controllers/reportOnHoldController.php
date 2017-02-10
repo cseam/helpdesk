@@ -16,7 +16,7 @@ class reportOnHoldController {
     //get helpdesk details
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
-    $templateData->details = sizeof($templateData->reportResults). " " .$templateData->title. " for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+    $templateData->details = sizeof($templateData->reportResults)." ".$templateData->title." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
 
     //pass complete data and template to view engine and render
     $view = new Page();

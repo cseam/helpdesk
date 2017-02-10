@@ -21,12 +21,12 @@
               <select id="helpdesk_id" name="helpdesk_id" REQUIRED>
         				<option value="" SELECTED>Please Select</option>
         				<?php foreach ($pagedata->helpdesks as $key => $value) { ?>
-                <option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $pagedata->reportResults["helpdesk_id"]) { echo "SELECTED"; } ?>><?php echo $value["helpdesk_name"] ?></option>
+                <option value="<?php echo $value["id"] ?>" <?php if ($value["id"] == $pagedata->reportResults["helpdesk_id"]) { echo "SELECTED"; } ?>><?php echo $value["helpdesk_name"] ?></option>
               <?php  } ?>
         			</select>
               <p class="buttons">
               <button name="add" value="add" type="submit" onclick="this.form.button_value.value = this.value;">
-                <?php isset($pagedata->reportResults["id"]) ? print("Update") : print("Add");?>
+                <?php isset($pagedata->reportResults["id"]) ? print("Update") : print("Add"); ?>
               </button>
               </p>
           </fieldset>

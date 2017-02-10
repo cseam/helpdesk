@@ -8,7 +8,7 @@ class adminManageQuickResponsesController {
     //create empty object to store data for template
     $templateData = new stdClass();
     $templateData->title = "Manage Quick Responses";
-    $templateData->details = "quick responses available for engineers to select when updating a ticket to " . CODENAME;
+    $templateData->details = "quick responses available for engineers to select when updating a ticket to ".CODENAME;
     $templateData->listofQuickresponses = $quickresponseModel->getListOfQuickResponses();
 
     //Post Update Locations

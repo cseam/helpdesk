@@ -2,7 +2,7 @@
 
 //cron script to process scheduled tasks (run at 1am) designed to be run cli php
 $start_time = MICROTIME(TRUE);
-PRINT "\nCRON JOB STARTED : SCHEDULED TASKS " . date("h:i:s") . "\n";
+PRINT "\nCRON JOB STARTED : SCHEDULED TASKS ".date("h:i:s")."\n";
 // include functions and classes used
 require_once "/var/www/html/helpdesk/config/config.php";
 require_once "/var/www/html/helpdesk/models/Database.php";
@@ -12,14 +12,14 @@ require_once "/var/www/html/helpdesk/models/engineerModel.php";
 $database = new Database();
 $ticketModel = new ticketModel();
 $engineerModel = new engineerModel();
-PRINT "\n-- Connected to database : " . date("h:i:s") . "\n";
-PRINT "\n-- Starting Process Scheduled Tasks : ". date("h:i:s") . "\n";
+PRINT "\n-- Connected to database : ".date("h:i:s")."\n";
+PRINT "\n-- Starting Process Scheduled Tasks : ".date("h:i:s")."\n";
 // List all scheduled tickets
 PRINT "* Scheduled tickets in database \n";
 $database->query("SELECT * FROM scheduled_calls");
 $results = $database->resultset();
 if ($database->rowCount() === 0) { PRINT "0 items scheduled\n"; }
-foreach($results as $key => $value) {
+foreach ($results as $key => $value) {
   // cleanup ticket object
   unset($baseTicket);
   // who gets assigned to new ticket
@@ -87,9 +87,9 @@ foreach($results as $key => $value) {
         if (date('d', strtotime($startdate)) == date("d")) {
           // frequency matches create ticket
           $ticketModel->createNewTicket($baseTicket);
-          PRINT "Ticket created for scheduled task #" . $value["callid"] . " using monthly frequency rule\n";
+          PRINT "Ticket created for scheduled task #".$value["callid"]." using monthly frequency rule\n";
         } else {
-          PRINT "Ticket #". $value["callid"] . " deferred start date was a different day of the month\n";
+          PRINT "Ticket #".$value["callid"]." deferred start date was a different day of the month\n";
         };
       break;
     CASE "yearly":
@@ -97,21 +97,21 @@ foreach($results as $key => $value) {
         if (date('m-d', strtotime($startdate)) == date("m-d")) {
           // frequency matches create ticket
           $ticketModel->createNewTicket($baseTicket);
-          PRINT "Ticket created for scheduled task #" . $value["callid"] . " using yearly frequency rule\n";
+          PRINT "Ticket created for scheduled task #".$value["callid"]." using yearly frequency rule\n";
         } else {
-          PRINT "Ticket #". $value["callid"] . " deferred start date was a different day and month\n";
+          PRINT "Ticket #".$value["callid"]." deferred start date was a different day and month\n";
         };
       break;
   }
 }
-PRINT "\n-- Ending Process Scheduled Tickets : ". date("h:i:s") . "\n";
+PRINT "\n-- Ending Process Scheduled Tickets : ".date("h:i:s")."\n";
 // Log CRON Task to database
-$message = "CRON JOB (Scheduled Tickets Created) Complete : " . date("d:m:y h:i:s");
+$message = "CRON JOB (Scheduled Tickets Created) Complete : ".date("d:m:y h:i:s");
 $database->query("INSERT INTO scheduled_calls_cron_log (message) VALUES (:message)");
 $database->bind(":message", $message);
 $database->execute();
 // End CRON
-PRINT "\nCRON JOB ENDED : "  . date("h:i:s") . "\n";
+PRINT "\nCRON JOB ENDED : ".date("h:i:s")."\n";
 // mark the stop time
 $stop_time = MICROTIME(TRUE);
 // get the difference in seconds

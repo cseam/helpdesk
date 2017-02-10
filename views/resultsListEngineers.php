@@ -12,7 +12,7 @@
         <p><?php echo $pagedata->details ?></p>
         <table id="yourcalls">
           <tbody>
-            <?php foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php foreach ($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td><a href="/report/recentwork/<?php echo $value["idengineers"] ?>" alt="view report"><?php echo $value["engineerName"] ?></a></td>
               <td><a href="/report/recentwork/<?php echo $value["idengineers"] ?>" alt="view report"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view report" /></a></td>

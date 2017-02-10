@@ -8,7 +8,7 @@ class adminManageCallReasonsController {
     //create empty object to store data for template
     $templateData = new stdClass();
     $templateData->title = "Manage Call Reasons";
-    $templateData->details = "Reasons available for users to select when updating tickets on " . CODENAME;
+    $templateData->details = "Reasons available for users to select when updating tickets on ".CODENAME;
     $templateData->listofreasons = $reasonModel->getListOfReasons();
 
     //Post Update reasons

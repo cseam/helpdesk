@@ -13,7 +13,7 @@ class reportAssignedNumbersController {
     //populate report results for use in view
     $templateData->reportResults = $ticketModel->countAssignedTickets($_SESSION['engineerHelpdesk']);
     //set page details
-    $templateData->details = $templateData->title . " showing number of tickets assigned, currently open and all time, grouped by engineer.";
+    $templateData->details = $templateData->title." showing number of tickets assigned, currently open and all time, grouped by engineer.";
 
     //pass complete data and template to view engine and render
     $view = new Page();

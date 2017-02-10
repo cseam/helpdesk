@@ -11,7 +11,7 @@ class helpdeskModel {
       // populate custom report values
       $this->_startrange = isset($_SESSION['customReportsRangeStart']) ? $_SESSION['customReportsRangeStart'] : date('Y-m-01');
       $this->_endrange = isset($_SESSION['customReportsRangeEnd']) ? $_SESSION['customReportsRangeEnd'] : date('Y-m-t');
-      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null ;
+      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null;
     }
 
     public function getFriendlyHelpdeskName($helpdeskid) {
@@ -20,7 +20,7 @@ class helpdeskModel {
                         WHERE id = :helpdeskid");
       $database->bind(":helpdeskid", $helpdeskid);
       $results = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -28,7 +28,7 @@ class helpdeskModel {
       $database = new Database();
       $database->query("SELECT * FROM helpdesks");
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -38,7 +38,7 @@ class helpdeskModel {
                         WHERE deactivate !=1
                         ORDER BY helpdesk_name");
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -48,7 +48,7 @@ class helpdeskModel {
                         WHERE id = :helpdesk");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -58,7 +58,7 @@ class helpdeskModel {
                         WHERE id = :helpdesk");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -70,7 +70,7 @@ class helpdeskModel {
                         AND helpdesks.email_on_newticket = 1");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -81,7 +81,7 @@ class helpdeskModel {
                         AND engineers.disabled !=1");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowCount() ===0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -96,7 +96,7 @@ class helpdeskModel {
       $database->bind(":helpdesk", $helpdeskid);
       $database->bind(":urgency", $urgency);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -106,7 +106,7 @@ class helpdeskModel {
                         WHERE helpdesk = :helpdesk");
       $database->bind(":helpdesk", $helpdeskid);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       $ofhTime = $result['end_of_day'];
       $ofhMessage = $result['message'];
       $hour = date("G");
@@ -198,7 +198,7 @@ class helpdeskModel {
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 

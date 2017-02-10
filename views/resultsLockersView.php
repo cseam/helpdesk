@@ -23,10 +23,10 @@
           <tbody>
             <?php
             if (isset($pagedata->reportResults)) {
-            foreach($pagedata->reportResults as $key => $value) { ?>
+            foreach ($pagedata->reportResults as $key => $value) { ?>
               <tr>
                 <td><?php echo $value["lockerid"] ?></td>
-                <td><?php if ($value["status"] === "2") {echo "<span class=\"status1\">Ready</span>";} else {echo "<span class=\"status3\">In Progress</span>";} ?></td>
+                <td><?php if ($value["status"] === "2") {echo "<span class=\"status1\">Ready</span>"; } else {echo "<span class=\"status3\">In Progress</span>"; } ?></td>
                 <td><?php echo $value["name"]?></td>
                 <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo substr(strip_tags($value["title"]), 0, 30) ?></a></td>
                 <td>

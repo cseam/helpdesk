@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php if (isset($pagedata->reportResults)) { foreach($pagedata->reportResults as $key => $value) { ?>
+            <?php if (isset($pagedata->reportResults)) { foreach ($pagedata->reportResults as $key => $value) { ?>
             <tr>
               <td><?php echo $value["engineerName"] ?></td>
               <td><?php echo $value["helpdesk_name"] ?></td>
@@ -52,7 +52,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php if (isset($pagedata->poorFeedback)) { foreach($pagedata->poorFeedback as $key => $value) { ?>
+            <?php if (isset($pagedata->poorFeedback)) { foreach ($pagedata->poorFeedback as $key => $value) { ?>
             <tr>
              <td><?php echo $value["engineerName"] ?></td>
               <td><?php echo $value["owner"] ?></td>

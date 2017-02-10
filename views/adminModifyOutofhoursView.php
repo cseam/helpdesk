@@ -23,7 +23,7 @@
               <select id="helpdesk" name="helpdesk" REQUIRED>
         				<option value="" SELECTED>Please Select</option>
         				<?php foreach ($pagedata->helpdesks as $key => $value) { ?>
-                <option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $pagedata->reportResults["helpdesk"]) { echo "SELECTED"; } ?>><?php echo $value["helpdesk_name"] ?></option>
+                <option value="<?php echo $value["id"] ?>" <?php if ($value["id"] == $pagedata->reportResults["helpdesk"]) { echo "SELECTED"; } ?>><?php echo $value["helpdesk_name"] ?></option>
               <?php  } ?>
         			</select>
               <p class="buttons">

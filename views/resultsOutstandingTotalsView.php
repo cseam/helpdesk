@@ -62,8 +62,8 @@
           </thead>
           <tbody>
             <?php
-            if(isset($pagedata->reportResults)) {
-            foreach($pagedata->reportResults as $key => $value) { ?>
+            if (isset($pagedata->reportResults)) {
+            foreach ($pagedata->reportResults as $key => $value) { ?>
               <tr>
                 <td><?php echo $value["engineerName"] ?></td>
                 <td><?php echo $value["open"] ?></td>

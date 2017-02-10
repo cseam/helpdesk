@@ -4,7 +4,7 @@ class deleteScheduledTaskController {
   public function __construct()
   {
     //get ticket id from uri params
-    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $baseurl = explode('/', $_SERVER['REQUEST_URI']);
     $taskid = $baseurl[3];
     //create new models for required data
     $scheduledtaskModel = new scheduledtaskModel();

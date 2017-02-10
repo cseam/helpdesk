@@ -29,7 +29,7 @@ class logoutController {
         $logoutstats[$value['id']]["Name"] = $value['helpdesk_name'];
         $logoutstats[$value['id']]["avgCloseTime"] = $ticketModel->advCloseTimeByHelpdeskIdInDays($value['id']);
         $logoutstats[$value['id']]["outstanding"] = $ticketModel->countOutstandingTicketsByHelpdesk($value['id']);
-        $logoutstats[$value['id']]["totalclosed"] = $ticketModel->countTicketsByStatusCode(2 ,$value['id']);
+        $logoutstats[$value['id']]["totalclosed"] = $ticketModel->countTicketsByStatusCode(2, $value['id']);
         $logoutstats[$value['id']]["avgfeedback"] = $feedbackModel->avgHelpdeskFeedbackByHelpdesk($value['id']);
       }
 

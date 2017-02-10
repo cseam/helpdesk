@@ -13,13 +13,13 @@
         <div id="overview">
         <a href="/report/outstanding/">
           <p>
-            <span class="overviewValue"><?php echo number_format(@$pagedata->opentickets["outstanding"],0) ?></span>
+            <span class="overviewValue"><?php echo number_format(@$pagedata->opentickets["outstanding"], 0) ?></span>
             <span class="overviewLabel">Open tickets</span>
           </p>
         </a>
         <a href="/report/engineerbreakdown/">
           <p>
-            <span class="overviewValue"><?php echo number_format(@$pagedata->closedtickets["countClosed"],0) ?></span>
+            <span class="overviewValue"><?php echo number_format(@$pagedata->closedtickets["countClosed"], 0) ?></span>
             <span class="overviewLabel">Closed tickets</span>
           </p>
         </a>
@@ -51,13 +51,13 @@
         </a>
         <a href="/report/sla/">
           <p style="clear:both;">
-            <span class="overviewValue"><?php echo number_format(@$pagedata->firstresponse,0) ?>%</span>
+            <span class="overviewValue"><?php echo number_format(@$pagedata->firstresponse, 0) ?>%</span>
             <span class="overviewLabel">First response</span>
           </p>
         </a>
         <a href="/report/sla/">
           <p>
-            <span class="overviewValue"><?php echo number_format(@$pagedata->closetime,0) ?>%</span>
+            <span class="overviewValue"><?php echo number_format(@$pagedata->closetime, 0) ?>%</span>
             <span class="overviewLabel">Close time</span>
           </p>
         </a>
@@ -65,7 +65,7 @@
           <p class="fullwidth" style="padding: 35px 0;">
             <span class="overviewValue">
               <?php echo (@$pagedata->avgfeedback["avgFeedback"]) ? null : "no feedback left" ?>
-              <?php for ($i = 0; $i < round(number_format(@$pagedata->avgfeedback["avgFeedback"],2)); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='75' width='auto' />"; } ?>
+              <?php for ($i = 0; $i < round(number_format(@$pagedata->avgfeedback["avgFeedback"], 2)); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='75' width='auto' />"; } ?>
             </span>
             <span class="overviewLabel">Average feedback</span>
           </p>
@@ -78,7 +78,7 @@
         </a>
         <a href="/report/urgencybreakdown/">
           <p>
-            <span class="overviewValue smaller"><?php echo urgency_friendlyname(number_format(@$pagedata->avgurgency["avgUrgency"],0)) ?></span>
+            <span class="overviewValue smaller"><?php echo urgency_friendlyname(number_format(@$pagedata->avgurgency["avgUrgency"], 0)) ?></span>
             <span class="overviewLabel">Average urgency</span>
           </p>
         </a>

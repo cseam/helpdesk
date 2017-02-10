@@ -32,9 +32,9 @@ class userProfileController {
             $userProfileModel->upsertUserProfile($object);
             // update profile picture
               $upload_code = $ext = null;
-              if (is_uploaded_file($_FILES['attachment']['tmp_name']))  {
+              if (is_uploaded_file($_FILES['attachment']['tmp_name'])) {
                 //define uploads folder from config
-                $upload = ROOT . "/uploads/profile_images/" . $_SESSION['sAMAccountName'] . ".jpg";
+                $upload = ROOT."/uploads/profile_images/".$_SESSION['sAMAccountName'].".jpg";
                 //define temp upload location
                 $tmp_path = $_FILES["attachment"]["tmp_name"];
                 //check file is jpeg

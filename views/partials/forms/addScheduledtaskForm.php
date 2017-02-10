@@ -14,7 +14,7 @@
           <option value="bi-annual">bi-annual</option>
         </select>
       <label for="starton" title="Start On">Starting On (yyyy/mm/dd)</label>
-        <input type="date" id="starton" name="starton" value="<?php echo date("Y/m/d");?>" />
+        <input type="date" id="starton" name="starton" value="<?php echo date("Y/m/d"); ?>" />
       <label for="assigned" title="assigned">Assign to</label>
         <select id="assigned" name="assigned">
           <optgroup label="Global">
@@ -22,7 +22,7 @@
             <option value="AUTO" >Auto Assign</option>
           </optgroup>
           <optgroup label="Assign to engineer">
-            <?php foreach ($pagedata->engineers as $key => $value) { echo "<option value=\"".$value["idengineers"]."\">".$value["engineerName"]."</option>";} ?>
+            <?php foreach ($pagedata->engineers as $key => $value) { echo "<option value=\"".$value["idengineers"]."\">".$value["engineerName"]."</option>"; } ?>
           </optgroup>
         </select>
   </fieldset>
@@ -32,7 +32,7 @@
   			<label for="name" title="Contact name for this call">Your/Contact Name</label>
   			<input type="text" id="name" name="name" value=""  required />
   			<label for="contact_email" title="Contact email so engineer can comunicate">Contact Email</label>
-  			<input type="text" id="contact_email" name="contact_email" value="<?php echo $_SESSION['sAMAccountName']."@". COMPANY_SUFFIX;?>"  required />
+  			<input type="text" id="contact_email" name="contact_email" value="<?php echo $_SESSION['sAMAccountName']."@".COMPANY_SUFFIX; ?>"  required />
   			<label for="tel" title="Contact telephone so engineer can comunicate">Telephone / Mobile Number</label>
   			<input type="text" id="tel" name="tel" value="" />
   	</fieldset>
@@ -41,7 +41,7 @@
   			<label for="location" title="location of issue">Building</label>
   			<select id="location" name="location">
   				<option value="" SELECTED>Please select</option>
-  				<?php foreach ($pagedata->location as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["locationName"]."</option>";} ?>
+  				<?php foreach ($pagedata->location as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["locationName"]."</option>"; } ?>
   			</select>
   			<label for="room" title="Room where issue is">Room or Place</label>
   			<input type="text" id="room" name="room" value="" />
@@ -81,7 +81,7 @@
   			<label for="helpdesk" title="select the college department">Report to this Department</label>
   			<select id="helpdesk" name="helpdesk" required>
   				<option value="" SELECTED>Please Select</option>
-  				<?php foreach ($pagedata->helpdesks as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["helpdesk_name"]."</option>";} ?>
+  				<?php foreach ($pagedata->helpdesks as $key => $value) { echo "<option value=\"".$value["id"]."\">".$value["helpdesk_name"]."</option>"; } ?>
   			</select>
   			<script type="text/javascript">
   				$("#helpdesk").change(function(e) {

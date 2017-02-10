@@ -8,7 +8,7 @@ class adminManageSLAController {
     //create empty object to store data for template
     $templateData = new stdClass();
     $templateData->title = "Manage service level agreements";
-    $templateData->details = "Service level agreements generated for users when adding a new ticket to " . CODENAME;
+    $templateData->details = "Service level agreements generated for users when adding a new ticket to ".CODENAME;
     $templateData->listofSlas = $SLAModel->getListOfSLAs();
 
     //Post Update Locations

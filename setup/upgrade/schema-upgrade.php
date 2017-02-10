@@ -51,12 +51,12 @@
   }
 
   function getElementsByClass(&$parentNode, $className) {
-      $nodes=array();
+      $nodes = array();
       $childNodeList = $parentNode;
       for ($i = 0; $i < $childNodeList->length; $i++) {
           $temp = $childNodeList->item($i);
           if (stripos($temp->getAttribute('class'), $className) !== false) {
-              $nodes[]=$temp;
+              $nodes[] = $temp;
           }
       }
       return $nodes;
@@ -78,9 +78,9 @@
         PRIMARY KEY  (`ID`)
       )";
     $conn->exec($queryCreateUpdatesTable);
-    } catch(PDOException $e)
+    } catch (PDOException $e)
     {
-    echo "<p class='urgent'>ERROR: " . $e->getMessage() ."</p>";
+    echo "<p class='urgent'>ERROR: ".$e->getMessage()."</p>";
     }
 
   // get all tickets to process
@@ -94,25 +94,25 @@
         $doc = new DOMDocument();
         $doc->loadHTML($value["details"]);
         $items = $doc->documentElement->getElementsByTagName('div');
-        $classValue=getElementsByClass($items, 'original');//will contain the three nodes under "content_node"
+        $classValue = getElementsByClass($items, 'original'); //will contain the three nodes under "content_node"
         $original = getNodeInnerHTML($classValue[0]);
 
             foreach ($items as $tag1)
             {
             echo "<tr>";
-              echo "<td>" . $value["callid"] . "</td>";
-              echo "<td>" . getNodeInnerHTML($tag1) . "</td>";
+              echo "<td>".$value["callid"]."</td>";
+              echo "<td>".getNodeInnerHTML($tag1)."</td>";
               echo "<td>";
               // pull out date/time update from ticket
-              preg_match('/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $timestamp );
+              preg_match('/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $timestamp);
               if (sizeof($timestamp) > 0) {
                 // this record should be inserted into a new table as its a ticket update
                 // create mysql date time stamp
                 $stamp = DateTime::createFromFormat('d/m/Y H:i', $timestamp[0]);
                 // parse sAMAccountName and status type
-                preg_match('/(\w*) (\w*) (\w*),{0,1}\s{0,1}-{0,1}\s{0,1}(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $updatetoken );
+                preg_match('/(\w*) (\w*) (\w*),{0,1}\s{0,1}-{0,1}\s{0,1}(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/', $tag1->nodeValue, $updatetoken);
                 // fudge as no space to split on
-                $switchval = substr($updatetoken[1] , -4);
+                $switchval = substr($updatetoken[1], -4);
                 SWITCH ($switchval) {
                   CASE "osed":
                     $status = 2;

@@ -28,7 +28,7 @@ class addScheduledTaskController {
         $baseTicket->urgency = 1;
         $baseTicket->helpdesk = htmlspecialchars($_POST['helpdesk']);
         $baseTicket->category = htmlspecialchars($_POST['category']);
-        $ticketdetails = "<div class=\"original\">" . htmlspecialchars($_POST['details']) . "</div>";
+        $ticketdetails = "<div class=\"original\">".htmlspecialchars($_POST['details'])."</div>";
         $baseTicket->details = $ticketdetails;
         if ($_POST['assigned'] == 'DONT') {
           $assignedengineer = NULL;
@@ -52,15 +52,15 @@ class addScheduledTaskController {
         $baseTicket->startschedule = htmlspecialchars($_POST['starton']);
         if ($_POST['reoccurance'] == 'spring') {
           $baseTicket->frequencytype = 'yearly';
-          $baseTicket->startschedule =  date("Y") . '/01/15';
+          $baseTicket->startschedule = date("Y").'/01/15';
         }
         if ($_POST['reoccurance'] == 'summer') {
           $baseTicket->frequencytype = 'yearly';
-          $baseTicket->startschedule = date("Y") . '/04/15';
+          $baseTicket->startschedule = date("Y").'/04/15';
         }
         if ($_POST['reoccurance'] == 'winter') {
           $baseTicket->frequencytype = 'yearly';
-          $baseTicket->startschedule = date("Y") . '/09/15';
+          $baseTicket->startschedule = date("Y").'/09/15';
         }
         $scheduledtaskModel->createNewTicket($baseTicket);
       }

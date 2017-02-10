@@ -23,7 +23,7 @@
               </thead>
             <?php
             if (isset($pagedata->reportResults)) {
-            foreach($pagedata->reportResults as $key => $value) { ?>
+            foreach ($pagedata->reportResults as $key => $value) { ?>
               <tbody>
               <tr>
                 <td><?php echo $value["dateofcall"] ?> @ <?php echo $value["timeofcall"] ?></td>

@@ -4,7 +4,7 @@ class modifyObjectivesController {
   public function __construct()
   {
     //get ticket id from uri params
-    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $baseurl = explode('/', $_SERVER['REQUEST_URI']);
     $objectiveid = $baseurl[3];
     //create new models for required data
     $objectivesModel = new objectivesModel();
@@ -22,7 +22,7 @@ class modifyObjectivesController {
       //get engineers list
       $templateData->engineers = $engineerModel->getListOfEngineersByHelpdeskId($_SESSION["engineerHelpdesk"]);
       //set report title
-      $templateData->title = "Modify Performance Objective #". $objectiveid;
+      $templateData->title = "Modify Performance Objective #".$objectiveid;
       $templateData->details = "Please modify the objective details as required.";
       $templateData->objectivedetails = $objectivesModel->getObjectiveById($objectiveid);
 

@@ -4,7 +4,7 @@ class assignTicketController {
   public function __construct()
   {
     //get ticket id from uri params
-    $baseurl = explode('/',$_SERVER['REQUEST_URI']);
+    $baseurl = explode('/', $_SERVER['REQUEST_URI']);
     $ticketid = $baseurl[3];
     //create new models for required data
     $ticketModel = new ticketModel();
@@ -22,8 +22,8 @@ class assignTicketController {
 
     if ($_POST) {
       //update ticket
-      $updatemessage = "Ticket Assigned to " . $engineerModel->getEngineerFriendlyNameById($_POST["assignto"]) . " for the following reason: " . $_POST["reason"];
-      $ticketModel->updateTicketDetailsById($ticketid, "open", $_SESSION["sAMAccountName"] , $updatemessage);
+      $updatemessage = "Ticket Assigned to ".$engineerModel->getEngineerFriendlyNameById($_POST["assignto"])." for the following reason: ".$_POST["reason"];
+      $ticketModel->updateTicketDetailsById($ticketid, "open", $_SESSION["sAMAccountName"], $updatemessage);
       //change assignment
       $ticketModel->updateTicketAssignmentById($ticketid, $_POST["assignto"]);
       //reroute to ticket

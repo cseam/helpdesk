@@ -2,7 +2,7 @@
 <table id="departmentcalls">
   <tbody>
     <?php
-    foreach($left->sideData["deptdata"] as $key => $value) { ?>
+    foreach ($left->sideData["deptdata"] as $key => $value) { ?>
     <tr>
       <td>#<?php echo $value["callid"] ?></td>
       <td><span class="status<?php echo $value["status"] ?>"><?php echo $value["statusCode"] ?></span></td>

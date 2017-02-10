@@ -11,7 +11,7 @@
       // populate custom report values
       $this->_startrange = isset($_SESSION['customReportsRangeStart']) ? $_SESSION['customReportsRangeStart'] : date('Y-m-01');
       $this->_endrange = isset($_SESSION['customReportsRangeEnd']) ? $_SESSION['customReportsRangeEnd'] : date('Y-m-t');
-      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null ;
+      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null;
     }
 
     public function getMyTickets($username, $limit = 10) {
@@ -25,7 +25,7 @@
       $database->bind(":username", $username);
       $database->bind(":limit", $limit);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -34,7 +34,7 @@
       $database->query("SELECT * FROM call_updates WHERE callid = :callid ORDER BY id");
       $database->bind(":callid", $callid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -50,7 +50,7 @@
                         ");
       $database->bind(":engineerid", $engineerid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -63,7 +63,7 @@
                         ORDER by callid");
       $database->bind(":engineerid", $engineerid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -75,7 +75,7 @@
                         LIMIT :limit");
       $database->bind(":limit", $limit);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -102,7 +102,7 @@
       $database->bind(":helpdesk", $helpdeskid);
       $database->bind(":limit", $limit);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -117,7 +117,7 @@
                         WHERE callid = :ticketid");
       $database->bind(":ticketid", $ticketid);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -134,7 +134,7 @@
                         LIMIT 1");
       $database->bind(":helpdesk", $helpdeskid);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -151,7 +151,7 @@
                         LIMIT 1");
       $database->bind(":engineer", $engineerid);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -161,7 +161,7 @@
                         WHERE callid = :ticketid");
       $database->bind(":ticketid", $ticketid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -174,7 +174,7 @@
                         WHERE status = 4
                         ORDER BY opened");
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -192,7 +192,7 @@
                         ");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -210,7 +210,7 @@
                         ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -227,7 +227,7 @@
                         AND calls.status != 2 ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -244,7 +244,7 @@
                         ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -262,7 +262,7 @@
                         ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -280,7 +280,7 @@
                         ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -297,7 +297,7 @@
                         ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -314,7 +314,7 @@
                         ORDER BY opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -333,7 +333,7 @@
       $database->bind(":helpdesk", $helpdeskid);
       $database->bind(":limit", $limit);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -351,7 +351,7 @@
                         LIMIT 250");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
       return $results;
     }
 
@@ -366,11 +366,11 @@
                         ORDER BY calls.helpdesk");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) { return null;}
+      if ($database->rowcount() === 0) { return null; }
         // now have list of enginners with tickets open in $results, itterate over and get last ticket looked at
         // create new array to store enginner results in
         $ticketviews = [];
-        foreach($results as $key => $value) {
+        foreach ($results as $key => $value) {
         // query each engineer (//TODO this is a clown fiesta should be done in 1 query above (note to future self FIX THIS))
         $database->query("SELECT engineers.engineerName, call_views.callid, call_views.stamp, calls.title, calls.status, status.statusCode, calls.opened, datediff(CURDATE(),calls.opened) as daysold, timediff(NOW(),call_views.stamp) as minago, location.locationName, location.iconlocation
                           FROM call_views
@@ -384,7 +384,7 @@
                           ");
         $database->bind(":sAMAccountName", $value["sAMAccountName"]);
         $results = $database->single();
-        if ($database->rowcount() > 0) {array_push($ticketviews, $results);}
+        if ($database->rowcount() > 0) {array_push($ticketviews, $results); }
         }
       return $ticketviews;
     }
@@ -401,7 +401,7 @@
                         ORDER BY calls.assigned, calls.status, calls.opened");
       $database->bind(":helpdesk", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) {return null;}
+      if ($database->rowcount() === 0) {return null; }
       return $results;
     }
 
@@ -416,7 +416,7 @@
                         ORDER BY callid DESC");
       $database->bind(":owner", $owner);
       $results = $database->resultset();
-      if ($database->rowcount() === 0) {return null;}
+      if ($database->rowcount() === 0) {return null; }
       return $results;
     }
 
@@ -435,7 +435,7 @@
       $database->bind(":scope", $scope);
       $database->bind(":limit", $limit);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -508,7 +508,7 @@
      * @param string $workedwith
      */
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "", $workedwith = null) {
-      $message = "<div class=update>" . $update . "<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - " . date("d/m/Y H:i") . "</h3></div>";
+      $message = "<div class=update>".$update."<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - ".date("d/m/Y H:i")."</h3></div>";
       // update timestamp
       $database = new Database();
       $database->query("UPDATE calls
@@ -657,9 +657,9 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       // update array values with friendly name as they arent in the db!!!!
-      foreach($result as $key => $value) {
+      foreach ($result as $key => $value) {
         $result[$key]["urgency"] = urgency_friendlyname(array_values($value)[0]);
       }
       return $result;
@@ -699,7 +699,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -718,10 +718,10 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       // else populate object with db results
       // update array values with friendly name as they arent in the db!!!!
-      foreach($result as $key => $value) {
+      foreach ($result as $key => $value) {
         ($result[$key]["pm"] == 1 ? $result[$key]["pm"] = "Planned Tickets" : $result[$key]["pm"] = "Reactive Tickets");
       }
       return $result;
@@ -747,7 +747,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -766,7 +766,7 @@
                         ORDER BY calls.helpdesk");
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -786,7 +786,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -807,7 +807,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -816,7 +816,7 @@
       $database->query("SELECT COUNT(*) AS countAllTickets
                         FROM calls");
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -826,7 +826,7 @@
                         FROM calls
                         WHERE status !=2");
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -837,7 +837,7 @@
                         WHERE helpdesk IN (:helpdeskid)");
       $database->bind(":helpdeskid", $helpdeskid);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -854,7 +854,7 @@
       $database->bind(":status", $statuscode);
       $database->bind(":scope", $helpdesks);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -865,7 +865,7 @@
                         WHERE owner = :owner");
       $database->bind(":owner", $owner);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -879,11 +879,11 @@
                         ORDER BY MonthNum, helpdesk");
       $database->bind(':year', $year);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
-    public function countTotalsThisYearbyHelpdesk($year,$helpdesk) {
+    public function countTotalsThisYearbyHelpdesk($year, $helpdesk) {
       $database = new Database();
       $database->query("SELECT MONTH(calls.closed) AS MonthNum, count(calls.callid) AS Totals
                         FROM calls
@@ -896,7 +896,7 @@
       $database->bind(':helpdesk', $helpdesk);
       $database->bind(':year', $year);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -908,10 +908,10 @@
                         AND closed >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK)");
       $database->bind(':engineerId', $engineerId);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       $engineermon = $engineertue = $engineerwed = $engineerthu = $engineerfri = $engineersat = $engineersun = 0;
 
-      foreach($result as $key => $value) {
+      foreach ($result as $key => $value) {
         SWITCH ($value["DAY_OF_WEEK"]) {
           CASE "Mon":
             ++$engineermon;
@@ -955,7 +955,7 @@
                         AND closeengineerid = :engineerId ");
       $database->bind(':engineerId', $engineerId);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -967,7 +967,7 @@
                         AND assigned = :engineerId");
       $database->bind(':engineerId', $engineerId);
       $result = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -1010,7 +1010,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $results = $database->single();
-      if ($database->rowCount() ===0) { return null; }
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -1027,7 +1027,7 @@
                         GROUP BY calls.helpdesk");
       $database->bind(':scope', $helpdesks);
       $results = $database->single();
-      if ($database->rowCount() ===0) { return 0; }
+      if ($database->rowCount() === 0) { return 0; }
       return $results;
     }
 
@@ -1047,7 +1047,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $results = $database->single();
-      if ($database->rowCount() ===0) { return 0; }
+      if ($database->rowCount() === 0) { return 0; }
       return $results;
     }
 
@@ -1080,7 +1080,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $results = $database->single();
-      if ($database->rowCount() ===0) { return 0; }
+      if ($database->rowCount() === 0) { return 0; }
       return $results;
     }
 
@@ -1094,7 +1094,7 @@
           if (strtotime($value["opened"]) < time()) {
             // schedule due change ticket status
             $this->updateTicketStatusById($value["callid"], 1);
-            echo "Scheduled change status \"#" . $value["callid"] . "\"";
+            echo "Scheduled change status \"#".$value["callid"]."\"";
           }
         }
       return true;

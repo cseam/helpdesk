@@ -14,9 +14,9 @@
             // parse $pagedata for graph,
             //TODO this should be in the controler not the view idealy
               $labels = $series = "";
-              foreach($pagedata->reportResults as $key => $value) {
-                $labels .= "\"" .array_values($value)[0] . "\",";
-                $series .= array_values($value)[1] . ",";
+              foreach ($pagedata->reportResults as $key => $value) {
+                $labels .= "\"".array_values($value)[0]."\",";
+                $series .= array_values($value)[1].",";
               }
               $labels = rtrim($labels, ",");
               $series = rtrim($series, ",");

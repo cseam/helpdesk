@@ -10,7 +10,7 @@
                         WHERE typeid = :typeid");
       $database->bind(":typeid", $categoryid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -20,7 +20,7 @@
                         WHERE typeid = :typeid");
       $database->bind(":typeid", $categoryid);
       $results = $database->single();
-      if ($database->rowCount() === 0) { return 0;}
+      if ($database->rowCount() === 0) { return 0; }
       return $results["count"];
     }
 
@@ -43,7 +43,7 @@
                         ORDER BY typeid
                         ");
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 

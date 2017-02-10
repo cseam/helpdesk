@@ -22,9 +22,9 @@ class loginController {
       $_SESSION['engineerHelpdesk'] = null;
       $_SESSION['sAMAccountName'] = null;
       // form inputs
-      $explode_username = explode('.',$_POST['username']);
+      $explode_username = explode('.', $_POST['username']);
       $localusr = end($explode_username);
-      $formusername = $_POST['username'] . "@" . COMPANY_SUFFIX;
+      $formusername = $_POST['username']."@".COMPANY_SUFFIX;
       $formpassword = $_POST['password'];
       // check password isnt blank as ldap allows anon login that result in true
       if ($formpassword == "") {
@@ -41,7 +41,7 @@ class loginController {
             $dbUserDetails = $engineerModel->getDetailsByUsername($_POST['username']);
             if ($dbUserDetails) {
               // validate hash vs form input
-              if (validate_password($formpassword,$dbUserDetails->localHash) == 1) {
+              if (validate_password($formpassword, $dbUserDetails->localHash) == 1) {
                 // valid so setup session with details
                   $_SESSION['sAMAccountName'] = $dbUserDetails->sAMAccountName;
                   $_SESSION['engineerLevel'] = $dbUserDetails->engineerLevel;
@@ -85,13 +85,13 @@ class loginController {
                     // update engineer status
                     $engineerModel->updateEngineerStatus($dbUserDetails->idengineers, 1);
                     // reroute
-                      isset($_SESSION['entrypoint']) ? header('Location: ' . $_SESSION['entrypoint'] ) : header('Location: /');
+                      isset($_SESSION['entrypoint']) ? header('Location: '.$_SESSION['entrypoint']) : header('Location: /');
                       exit;
                   } else {
                     // assume user isnt engineer
                     $_SESSION['sAMAccountName'] = $_POST['username'];
                     // reroute
-                      isset($_SESSION['entrypoint']) ? header('Location: ' . $_SESSION['entrypoint'] ) : header('Location: /');
+                      isset($_SESSION['entrypoint']) ? header('Location: '.$_SESSION['entrypoint']) : header('Location: /');
                       exit;
                   }
               } else {

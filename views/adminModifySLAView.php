@@ -25,29 +25,29 @@
               <label for="urgency" title="urgency">Urgency</label>
               <select id="urgency" name="urgency" REQUIRED>
                 <option value="" SELECTED>Please Select</option>
-                <option value="1" <?php if($pagedata->reportResults["urgency"]==1) { echo "SELECTED"; } ?>>1</option>
-                <option value="2" <?php if($pagedata->reportResults["urgency"]==2) { echo "SELECTED"; } ?>>2</option>
-                <option value="3" <?php if($pagedata->reportResults["urgency"]==3) { echo "SELECTED"; } ?>>3</option>
-                <option value="4" <?php if($pagedata->reportResults["urgency"]==4) { echo "SELECTED"; } ?>>4</option>
-                <option value="5" <?php if($pagedata->reportResults["urgency"]==5) { echo "SELECTED"; } ?>>5</option>
-                <option value="6" <?php if($pagedata->reportResults["urgency"]==6) { echo "SELECTED"; } ?>>6</option>
-                <option value="7" <?php if($pagedata->reportResults["urgency"]==7) { echo "SELECTED"; } ?>>7</option>
-                <option value="8" <?php if($pagedata->reportResults["urgency"]==8) { echo "SELECTED"; } ?>>8</option>
-                <option value="9" <?php if($pagedata->reportResults["urgency"]==9) { echo "SELECTED"; } ?>>9</option>
-                <option value="10" <?php if($pagedata->reportResults["urgency"]==10) { echo "SELECTED"; } ?>>10</option>
+                <option value="1" <?php if ($pagedata->reportResults["urgency"] == 1) { echo "SELECTED"; } ?>>1</option>
+                <option value="2" <?php if ($pagedata->reportResults["urgency"] == 2) { echo "SELECTED"; } ?>>2</option>
+                <option value="3" <?php if ($pagedata->reportResults["urgency"] == 3) { echo "SELECTED"; } ?>>3</option>
+                <option value="4" <?php if ($pagedata->reportResults["urgency"] == 4) { echo "SELECTED"; } ?>>4</option>
+                <option value="5" <?php if ($pagedata->reportResults["urgency"] == 5) { echo "SELECTED"; } ?>>5</option>
+                <option value="6" <?php if ($pagedata->reportResults["urgency"] == 6) { echo "SELECTED"; } ?>>6</option>
+                <option value="7" <?php if ($pagedata->reportResults["urgency"] == 7) { echo "SELECTED"; } ?>>7</option>
+                <option value="8" <?php if ($pagedata->reportResults["urgency"] == 8) { echo "SELECTED"; } ?>>8</option>
+                <option value="9" <?php if ($pagedata->reportResults["urgency"] == 9) { echo "SELECTED"; } ?>>9</option>
+                <option value="10" <?php if ($pagedata->reportResults["urgency"] == 10) { echo "SELECTED"; } ?>>10</option>
               </select>
 
               <label for="helpdesk" title="helpdesk">Helpdesk</label>
               <select id="helpdesk" name="helpdesk" REQUIRED>
                 <option value="" SELECTED>Please Select</option>
                 <?php foreach ($pagedata->helpdesks as $key => $value) { ?>
-                <option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $pagedata->reportResults["helpdesk"]) { echo "SELECTED"; } ?>><?php echo $value["helpdesk_name"] ?></option>
+                <option value="<?php echo $value["id"] ?>" <?php if ($value["id"] == $pagedata->reportResults["helpdesk"]) { echo "SELECTED"; } ?>><?php echo $value["helpdesk_name"] ?></option>
               <?php  } ?>
               </select>
 
               <p class="buttons">
               <button name="add" value="add" type="submit" onclick="this.form.button_value.value = this.value;">
-                <?php isset($pagedata->reportResults["id"]) ? print("Update") : print("Add");?>
+                <?php isset($pagedata->reportResults["id"]) ? print("Update") : print("Add"); ?>
               </button>
               </p>
           </fieldset>

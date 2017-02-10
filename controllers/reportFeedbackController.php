@@ -15,8 +15,8 @@ class reportFeedbackController {
     $templateData->reportResults = $ticketModel->countEngineerFeedbackTotals($_SESSION['engineerHelpdesk']);
     $templateData->poorFeedback = $feedbackModel->getPoorFeedback($_SESSION['engineerHelpdesk']);
     //set page details
-    $templateData->details = $templateData->title . " showing average feedback for " .sizeof($templateData->reportResults)." engineers, and poor feedback, ";
-    if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
+    $templateData->details = $templateData->title." showing average feedback for ".sizeof($templateData->reportResults)." engineers, and poor feedback, ";
+    if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from ".$_SESSION['customReportsRangeStart']." to ".$_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
 
     //pass complete data and template to view engine and render
     $view = new Page();

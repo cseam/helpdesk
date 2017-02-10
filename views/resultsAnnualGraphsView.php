@@ -19,10 +19,10 @@ new Chartist.Line('.annualgraph', {
   labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
   series: [
     <?php
-    foreach($pagedata->graphstats as $key => $value) {
+    foreach ($pagedata->graphstats as $key => $value) {
       echo "[";
-        foreach($value as $resultskey => $resultsvalue) {
-          echo $resultsvalue . ",";
+        foreach ($value as $resultskey => $resultsvalue) {
+          echo $resultsvalue.",";
         }
       echo "],";
     } ?>
@@ -41,10 +41,10 @@ new Chartist.Line('.annualgraph', {
 <div class="annualgraph" style="height: 50vh;"></div>
 <?php
   $counter = 0;
-  foreach($pagedata->graphstats as $key => $value) {
+  foreach ($pagedata->graphstats as $key => $value) {
     $counter++;
     ?>
-  <span style="font-size: 0.7rem;color: white;padding: 0.1rem 0.5rem;" class="ct-series-<?php echo $counter ?>"><?php echo $key;?></span>
+  <span style="font-size: 0.7rem;color: white;padding: 0.1rem 0.5rem;" class="ct-series-<?php echo $counter ?>"><?php echo $key; ?></span>
 <?php  } ?>
 
 

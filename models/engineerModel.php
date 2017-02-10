@@ -11,7 +11,7 @@
       // populate custom report values
       $this->_startrange = isset($_SESSION['customReportsRangeStart']) ? $_SESSION['customReportsRangeStart'] : date('Y-m-01');
       $this->_endrange = isset($_SESSION['customReportsRangeEnd']) ? $_SESSION['customReportsRangeEnd'] : date('Y-m-t');
-      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null ;
+      $this->_helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : null;
     }
 
     public function getDetailsByUsername($username) {
@@ -20,7 +20,7 @@
                         WHERE sAMAccountName = :username");
       $database->bind(":username", $username);
       $row = $database->single();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
         // else populate opbject with db results
         $userObject = new stdClass();
         $userObject->sAMAccountName = $row['sAMAccountName'];
@@ -37,7 +37,7 @@
       $hdary = explode(",", $helpdeskid);
       $engineers = array();
 
-      foreach($hdary as $key => $val) {
+      foreach ($hdary as $key => $val) {
         $database->query("SELECT * FROM engineers
                           WHERE helpdesk = :helpdesk
                           AND disabled != 1");
@@ -62,7 +62,7 @@
       $hdary = explode(",", $helpdeskid);
       $engineers = array();
 
-      foreach($hdary as $key => $val) {
+      foreach ($hdary as $key => $val) {
       $database->query("SELECT * FROM engineers
                         WHERE helpdesk REGEXP CONCAT('(', :helpdesk , ')[^0-9]|^(' , :helpdesk , ')$')
                         AND disabled != 1");
@@ -99,7 +99,7 @@
       $database->bind(":available", $day);
       $database->bind(":id", $helpdeskid);
       $results = $database->single();
-      if ($database->rowCount() ===0) {
+      if ($database->rowCount() === 0) {
         //no results so start from beginning of table and accept values less than current id
         $database->query("SELECT idengineers FROM engineers WHERE helpdesk= :id AND engineerLevel=1 AND disabled=0 AND availableDays LIKE :available LIMIT 1");
         $database->bind(":available", $day);
@@ -222,7 +222,7 @@
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':scope', $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -243,7 +243,7 @@
       ");
       $database->bind(":scope", $helpdesks);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -267,7 +267,7 @@
                         ");
       $database->bind(":helpdeskid", $helpdeskid);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -283,11 +283,11 @@
                         ");
       $database->bind(":helpdeskid", $helpdeskid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       $assistsids = null;
         foreach ($results as &$values) {
           //loop database assists and create long csv of assistsids
-          $assistsids .= $values["workedwith"] . ",";
+          $assistsids .= $values["workedwith"].",";
         }
       //trim trailing comma
       $assistsids = rtrim($assistsids, ",");

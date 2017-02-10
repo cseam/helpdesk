@@ -23,14 +23,14 @@ class addChangeControlController {
         //get engineers emails
           $emailaddresses = $helpdeskModel->getEngineerEmails($_SESSION['engineerHelpdesk']);
           if ($emailemailaddresses) {
-            foreach($emailaddresses as $key => $value) {
+            foreach ($emailaddresses as $key => $value) {
               //email managers letting them know a new ticket has been added.
               $to = $value["engineerEmail"];
               $from = "helpdesk@cheltladiescollege.org";
-              $title = "Change control added at " .$stamp. " for " . $server;
+              $title = "Change control added at ".$stamp." for ".$server;
               $emailchangecontrolmessage = "<p>A change control has been added for ".$server." with the following details:</p>";
               $emailchangecontrolmessage .= "<p>".$changemade."</p>";
-              $emailchangecontrolmessage .= "<p>To view the details of this change control ticket please <a href=\"". HELPDESK_LOC ."\">Visit ". CODENAME ."</a></p>";
+              $emailchangecontrolmessage .= "<p>To view the details of this change control ticket please <a href=\"".HELPDESK_LOC."\">Visit ".CODENAME."</a></p>";
               $emailchangecontrolmessage .= "<p>This is an automated message please do not reply</p></span>";
               email_user($to, $from, $title, $emailchangecontrolmessage);
             }

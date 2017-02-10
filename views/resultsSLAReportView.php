@@ -24,7 +24,7 @@
           <tbody>
             <?php if (isset($pagedata->SLAtotals)) {
               $pietotal = $firsttotal = $closetotal = 0;
-              foreach($pagedata->SLAtotals as &$value) {
+              foreach ($pagedata->SLAtotals as &$value) {
                 $pietotal += $value["Total"];
                 $firsttotal += $value["FirstResponseSuccess"];
                 $closetotal += $value["ResponseTimeSuccess"];
@@ -33,8 +33,8 @@
               <td><?php echo $value["SLA"] ?></td>
               <td style="text-align: left;"><?php echo $value["Agreement"] ?></td>
               <td><?php echo $value["Total"] ?></td>
-              <td><?php echo number_format(($value["Total"] !== 0 ? ($value["FirstResponseSuccess"] / $value["Total"]) : 0) * 100 ,2). "%";?></td>
-              <td><?php echo number_format(($value["Total"] !== 0 ? ($value["ResponseTimeSuccess"] / $value["Total"]) : 0) * 100 ,2). "%";?></td>
+              <td><?php echo number_format(($value["Total"] !== 0 ? ($value["FirstResponseSuccess"] / $value["Total"]) : 0) * 100, 2)."%"; ?></td>
+              <td><?php echo number_format(($value["Total"] !== 0 ? ($value["ResponseTimeSuccess"] / $value["Total"]) : 0) * 100, 2)."%"; ?></td>
             </tr>
             <?php } } ?>
           </tbody>
@@ -44,10 +44,10 @@
         <script type="text/javascript">
           $(function() {
             // WAIT FOR DOM
-            var pieData = { series: [<?php echo $firsttotal ?>,<?php echo $pietotal-$firsttotal ?>] };
+            var pieData = { series: [<?php echo $firsttotal ?>,<?php echo $pietotal - $firsttotal ?>] };
             var pieOptions = { donut: false, showLabel: false, chartPadding: {top: 20} };
             new Chartist.Pie('#frperformance', pieData, pieOptions);
-            var pieData = { series: [<?php echo $closetotal ?>,<?php echo $pietotal-$closetotal ?>] };
+            var pieData = { series: [<?php echo $closetotal ?>,<?php echo $pietotal - $closetotal ?>] };
             var pieOptions = { donut: false, showLabel: false, chartPadding: {top: 20} };
             new Chartist.Pie('#clperformance', pieData, pieOptions);
           });
@@ -71,7 +71,7 @@
           <tbody>
             <?php
             if (isset($pagedata->reportResults)) {
-            foreach($pagedata->reportResults as $key => $value) {
+            foreach ($pagedata->reportResults as $key => $value) {
               if (($value["total_days_to_close"] - $value["close_eta_days"]) > 0) {
               ?>
             <tr>

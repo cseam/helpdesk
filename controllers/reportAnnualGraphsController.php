@@ -17,16 +17,16 @@ class reportAnnualGraphsController {
     //define arrays
     $graphstats = $lastyear = $thisyear = $results = array();
     //get helpdesks to plot
-    $helpdesks = explode(",",isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : $_SESSION['engineerHelpdesk'] );
+    $helpdesks = explode(",", isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : $_SESSION['engineerHelpdesk']);
     // loop over arrays
     foreach ($helpdesks as &$value) {
 
     //get results for year
     $thisyear = $ticketModel->countTotalsThisYearbyHelpdesk(date("Y"), $value);
-    $lastyear = $ticketModel->countTotalsThisYearbyHelpdesk(date("Y")-1, $value);
+    $lastyear = $ticketModel->countTotalsThisYearbyHelpdesk(date("Y") - 1, $value);
 
     //iterate over and merge to get 1 years full data
-      for($i=1; $i <= 12; $i++) {
+      for ($i = 1; $i <= 12; $i++) {
         $results[$i] = 0;
         foreach ($lastyear as $lykey => $lyvalue) {
           if ($lyvalue["MonthNum"] == $i) { $results[$i] = $lyvalue["Totals"]; }

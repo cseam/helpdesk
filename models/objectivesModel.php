@@ -13,7 +13,7 @@
                         ORDER BY engineers.idengineers");
       $database->bind(':helpdesk', $helpdeskid);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
@@ -23,7 +23,7 @@
                         WHERE engineerid = :engineerid");
       $database->bind(":engineerid", $engineerid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
@@ -33,13 +33,13 @@
                         WHERE id = :objectiveid");
       $database->bind(":objectiveid", $objectiveid);
       $results = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $results;
     }
 
     public function updateObjectiveById($objectiveid, $details, $progress) {
       // updates an objective with an engineers comments on progress
-      $message = "<div class=update>" . $details . "<h3 class=\"status1\">update by ".$_SESSION['sAMAccountName']." - " . date("d/m/Y H:i") . "</h3></div>";
+      $message = "<div class=update>".$details."<h3 class=\"status1\">update by ".$_SESSION['sAMAccountName']." - ".date("d/m/Y H:i")."</h3></div>";
       $database = new Database();
       $database->query("UPDATE performance_review_objectives
                         SET progress=:progress, details = CONCAT(details, :details)

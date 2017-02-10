@@ -20,7 +20,7 @@ class reportSearchController {
     if ($_POST) {
       $templateData->reportResults = $ticketModel->searchTicketsByTerm($_POST["term"], $_SESSION['engineerHelpdesk']);
       //set page details
-      $templateData->details = "First " . sizeof($templateData->reportResults)." (limited) ". $templateData->title ." result for '".$_POST["term"]."' on helpdesk.";
+      $templateData->details = "First ".sizeof($templateData->reportResults)." (limited) ".$templateData->title." result for '".$_POST["term"]."' on helpdesk.";
     }
 
     //pass complete data and template to view engine and render

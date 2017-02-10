@@ -23,7 +23,7 @@ class reportOutstandingController {
     $templateData->unassigned = sizeof($ticketModel->getUnassignedTicketsByHelpdesk($helpdesks));
     $templateData->over7days = sizeof($ticketModel->get7DayTicketsByHelpdesk($helpdesks));
     $templateData->stagnate = sizeof($ticketModel->getStagnateTicketsByHelpdesk($helpdesks));
-    $templateData->reportResults =  $engineerModel->countEngineerTotalsOutstatnding($helpdesks);
+    $templateData->reportResults = $engineerModel->countEngineerTotalsOutstatnding($helpdesks);
 
     //pass complete data and template to view engine and render
     $view = new Page();

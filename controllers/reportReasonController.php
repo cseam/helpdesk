@@ -13,8 +13,8 @@ class reportReasonController {
     //populate report results for use in view
     $templateData->reportResults = $ticketModel->countReasonForTickets($_SESSION['engineerHelpdesk']);
     //set page details
-    $templateData->details = $templateData->title . " showing tickets closed grouped by the reason the ticket was closed, ";
-    if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from " . $_SESSION['customReportsRangeStart'] . " to " . $_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
+    $templateData->details = $templateData->title." showing tickets closed grouped by the reason the ticket was closed, ";
+    if (isset($_SESSION['customReportsRangeStart'])) { $templateData->details .= " from ".$_SESSION['customReportsRangeStart']." to ".$_SESSION['customReportsRangeEnd']; } else { $templateData->details .= " this month."; }
 
     //pass complete data and template to view engine and render
     $view = new Page();

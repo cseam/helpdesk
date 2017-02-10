@@ -5,7 +5,7 @@
     <li>
       <div class="timeline-badge badge-1"></div>
       <div class="timeline-panel">
-        <div class="timeline-heading">- ticket opened: <?php echo date("d/m/Y H:i", strtotime($ticketDetails["opened"]));?></div>
+        <div class="timeline-heading">- ticket opened: <?php echo date("d/m/Y H:i", strtotime($ticketDetails["opened"])); ?></div>
       </div>
     </li>
     <?php
@@ -24,7 +24,7 @@
     <li>
       <div class="timeline-badge badge-1"></div>
       <div class="timeline-panel">
-        <div class="timeline-heading">- last update: <?php echo date("d/m/Y H:i", strtotime($ticketDetails["lastupdate"]));?></div>
+        <div class="timeline-heading">- last update: <?php echo date("d/m/Y H:i", strtotime($ticketDetails["lastupdate"])); ?></div>
       </div>
     </li>
   </ul>

@@ -15,12 +15,12 @@
                         ORDER BY lockerid");
       $database->bind(':helpdesk', $helpdeskid);
       $result = $database->resultset();
-      if ($database->rowCount() === 0) { return null;}
+      if ($database->rowCount() === 0) { return null; }
       return $result;
     }
 
     public function removeItemFromLockerById($callid, $engineername) {
-      $who = "<div class=update>Item collected from locker system <h3>Issued by ". $engineername ."," . date("d/m/y h:i") . "</h3></div>";
+      $who = "<div class=update>Item collected from locker system <h3>Issued by ".$engineername.",".date("d/m/y h:i")."</h3></div>";
       $database = new Database();
       $database->query("UPDATE calls
                         SET lockerid=null, lastupdate = :lastupdate, details = CONCAT(details, :details)
