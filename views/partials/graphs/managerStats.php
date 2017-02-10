@@ -1,31 +1,31 @@
 <?php
-	//TODO must be better way to do this this is a faff
-	// reset strings
-	$mon = $tue = $wed = $thu = $fri = $sat = $sun = $label = $series = $assistlabel = $assists = null;
-	// loop stats object to populate strings for closed graph
-	foreach($left->sideData["graphdata"] as $key => $value) {
-		$label .= "'" . $value["engineerName"] . "',";
-		$mon .= "'" . $value["mon"] . "',";
-		$tue .= "'" . $value["tue"] . "',";
-		$wed .= "'" . $value["wed"] . "',";
-		$thu .= "'" . $value["thu"] . "',";
-		$fri .= "'" . $value["fri"] . "',";
-		$sat .= "'" . $value["sat"] . "',";
-		$sun .= "'" . $value["sun"] . "',";
-	}
-		$series .= "[" . rtrim($mon, ",") . "],";
-		$series .= "[" . rtrim($tue, ",") . "],";
-		$series .= "[" . rtrim($wed, ",") . "],";
-		$series .= "[" . rtrim($thu, ",") . "],";
-		$series .= "[" . rtrim($fri, ",") . "],";
-		$series .= "[" . rtrim($sat, ",") . "],";
-		$series .= "[" . rtrim($sun, ",") . "],";
-	// loop assistdata object to populate strings for assist graph
-	foreach($left->sideData["assistdata"] as $key => $value) {
-			$assistlabel .= "'" . $key . "',";
-			$assists .= $value . ",";
-	}
-	$assists = rtrim($assists, ",")
+  //TODO must be better way to do this this is a faff
+  // reset strings
+  $mon = $tue = $wed = $thu = $fri = $sat = $sun = $label = $series = $assistlabel = $assists = null;
+  // loop stats object to populate strings for closed graph
+  foreach($left->sideData["graphdata"] as $key => $value) {
+    $label .= "'" . $value["engineerName"] . "',";
+    $mon .= "'" . $value["mon"] . "',";
+    $tue .= "'" . $value["tue"] . "',";
+    $wed .= "'" . $value["wed"] . "',";
+    $thu .= "'" . $value["thu"] . "',";
+    $fri .= "'" . $value["fri"] . "',";
+    $sat .= "'" . $value["sat"] . "',";
+    $sun .= "'" . $value["sun"] . "',";
+  }
+    $series .= "[" . rtrim($mon, ",") . "],";
+    $series .= "[" . rtrim($tue, ",") . "],";
+    $series .= "[" . rtrim($wed, ",") . "],";
+    $series .= "[" . rtrim($thu, ",") . "],";
+    $series .= "[" . rtrim($fri, ",") . "],";
+    $series .= "[" . rtrim($sat, ",") . "],";
+    $series .= "[" . rtrim($sun, ",") . "],";
+  // loop assistdata object to populate strings for assist graph
+  foreach($left->sideData["assistdata"] as $key => $value) {
+      $assistlabel .= "'" . $key . "',";
+      $assists .= $value . ",";
+  }
+  $assists = rtrim($assists, ",")
 ?>
 <script type="text/javascript">
 	function assists() {

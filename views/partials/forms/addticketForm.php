@@ -14,19 +14,19 @@
 		<legend>Location of issue</legend>
 			<label for="location" title="location of issue">Building</label>
 			<?php
-				$userProfileLocationId = isset($pagedata->userProfile['location']) ? $pagedata->userProfile['location'] : '';
-			?>
+        $userProfileLocationId = isset($pagedata->userProfile['location']) ? $pagedata->userProfile['location'] : '';
+      ?>
 			<select id="location" name="location">
 				<option value="" SELECTED>Please Select</option>
 				<?php
-					$optiongroup = null;
-				foreach ($pagedata->location as $key => $value) {
-					if ($optiongroup !== $value['optiongroup']) { echo "<optgroup label=\"" . $value['optiongroup'] . "\">"; $optiongroup = $value['optiongroup']; };
-					?>
+          $optiongroup = null;
+        foreach ($pagedata->location as $key => $value) {
+          if ($optiongroup !== $value['optiongroup']) { echo "<optgroup label=\"" . $value['optiongroup'] . "\">"; $optiongroup = $value['optiongroup']; };
+          ?>
 					<option value="<?php echo $value["id"] ?>" <?php if($value["id"] == $userProfileLocationId) { echo "SELECTED"; } ?>><?php echo $value["locationName"] ?></option>
 				<?php
-					if ($optiongroup !== $value['optiongroup']) { echo "</optgroup>"; };
-				} ?>
+          if ($optiongroup !== $value['optiongroup']) { echo "</optgroup>"; };
+        } ?>
 			</select>
 			<label for="room" title="Room where issue is">Room or Place</label>
 			<input type="text" id="room" name="room" value="" />

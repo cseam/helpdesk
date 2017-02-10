@@ -40,6 +40,9 @@
     return true;
   }
 
+  /**
+   * @param stdClass $slaobject
+   */
   public function upsertSLA($slaobject) {
     isset($slaobject->id) ? $this->modifySLAById($slaobject) : $this->addSLA($slaobject);
   }
@@ -106,6 +109,9 @@
     return $result;
   }
 
+  /**
+   * @param integer $urgency
+   */
   public function GetSLAPerformance($scope = null, $urgency) {
     isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
     $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
