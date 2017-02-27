@@ -509,13 +509,15 @@
      */
     public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "", $workedwith = null) {
       $message = "<div class=update>".$update."<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - ".date("d/m/Y H:i")."</h3></div>";
-      // update timestamp
+      // update timestamp & userupdate if user
       $database = new Database();
       $database->query("UPDATE calls
-                        SET calls.lastupdate = :lastupdate
+                        SET calls.lastupdate = :lastupdate,
+                        calls.userupdate = :userupdate
                         WHERE calls.callid = :callid");
       $database->bind(":callid", $ticketid);
       $database->bind(":lastupdate", date("c"));
+      $database->bind(":userupdate", $_SESSION["engineerLevel"]);
       $database->execute();
       // update call_updates
         SWITCH ($statuscode) {
