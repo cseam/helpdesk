@@ -17,7 +17,7 @@ class updateTicketController {
     if ($_POST) {
       // check if files uploaded in form
       $upload_code = null;
-      $ticketdetails = null;
+      $ticketdetails = '';
       $workedwith = null;
 
       if (is_uploaded_file($_FILES['attachment']['tmp_name'])) {
@@ -140,23 +140,19 @@ class updateTicketController {
         CASE "feedback":
             // reroute to feedback form
             header('Location: /ticket/feedback/'.$_POST["id"]);
-            exit;
-          break;
+          exit;
         CASE "forward":
             // reroute to forward form
             header('Location: /ticket/forward/'.$_POST["id"]);
-            exit;
-          break;
+          exit;
         CASE "assign":
             // reroute to assign form
             header('Location: /ticket/assign/'.$_POST["id"]);
-            exit;
-          break;
+          exit;
         CASE "schedule":
             // reroute to schedule form
             header('Location: /ticket/schedule/'.$_POST["id"]);
-            exit;
-          break;
+          exit;
         CASE "locker":
           $lockerid = random_locker();
           $lockersModel->updateTicketLockerById($_POST["id"], $lockerid);
@@ -304,7 +300,6 @@ class updateTicketController {
     $_SESSION['pagedata'] = $pagedata;
     header('Location: /ticket/updated/');
     exit;
-
   }
 
 }
