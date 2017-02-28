@@ -3,7 +3,7 @@
   class servicelevelagreementModel {
 
   private $_startrange = null;
-  private $_endrangerange = null;
+  private $_endrange = null;
   private $_helpdesks = null;
 
   // function for total mins
