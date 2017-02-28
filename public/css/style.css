@@ -585,6 +585,20 @@ h3.callbody {
     background-color: rgba(113, 10, 194, 0.1);
     color: rgba(113, 10, 194, 1)
 }
+.status7 {
+    padding: .3rem .6rem .2rem .7rem;
+    font-size: .7rem;
+    border-radius: 2px;
+    background-color: rgba(255, 137, 40, 0.2);
+    color: rgba(244, 77, 0, 1);
+    display: block;
+    text-align: center;
+    width: 75px
+}
+.update .status7 {
+    background-color: rgba(255, 137, 40, 0.2);
+    color: rgba(244, 77, 0, 1)
+}
 .engineerReports {
     margin-bottom: 50px
 }
