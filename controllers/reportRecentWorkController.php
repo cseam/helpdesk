@@ -5,7 +5,7 @@ class reportRecentWorkController {
   {
     //get uri params.
     $baseurl = explode('/', $_SERVER['REQUEST_URI']);
-    $engineerid = $baseurl[3];
+    $engineerid = $baseurl[4];
     //create new models for required data
     $ticketModel = new ticketModel();
     $engineersModel = new engineerModel();
@@ -28,7 +28,7 @@ class reportRecentWorkController {
       //set page details
       $templateData->details = "Please select and engineer to view a list of recent tickets they have worked on.";
       //get helpdesks
-      $helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : $_SESSION['engineerHelpdesk'];
+      $helpdesks = isset($_SESSION['customReportsHelpdesks']) ? $_SESSION['customReportsHelpdesks'] : $_SESSION['engineerHelpdesk'];;
       //get list of engineers
       $templateData->reportResults = $engineersModel->getListOfEngineersByHelpdeskId($helpdesks);
       //render template using $pagedata object

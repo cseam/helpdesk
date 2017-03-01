@@ -45,6 +45,7 @@
     $route->add('/manager/report/scheduledtasks', 'reportScheduledTasksController');
     $route->add('/manager/report/outofhours', 'reportOutOfHoursController');
     $route->add('/manager/report/performanceobjectives', 'reportPerformanceObjectivesController');
+    $route->add('/manager/report/recentwork/\d*', 'reportRecentWorkController'); //numerical wildcard route
   }
   // admin routes
   if (@$_SESSION['superuser'] == 1) {
@@ -90,7 +91,6 @@
     $route->add('/report/workrate', 'reportWorkrateController');
     $route->add('/report/assignednumbers', 'reportAssignedNumbersController');
     $route->add('/report/reason', 'reportReasonController');
-    $route->add('/report/recentwork/\d*', 'reportRecentWorkController'); //numerical wildcard route
     $route->add('/report/outstanding', 'reportOutstandingController');
     $route->add('/report/annualgraphs', 'reportAnnualGraphsController');
     $route->add('/report/settings', 'reportSettingsController');
