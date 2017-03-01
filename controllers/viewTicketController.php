@@ -27,7 +27,7 @@ class viewTicketController {
     //populate est ticket time total
     $esttimetotal = 0;
     foreach ($templateData->ticketUpdates as &$update) { $esttimetotal += $update["esttime"]; }
-    $templateData->ticketDetails["esttime"] = $esttimetotal . ' min';
+    $templateData->ticketDetails["esttime"] = $esttimetotal.' min';
     //check user has rights to view ticket engineers can see any ticket
     if ($_SESSION['engineerLevel'] == '0' & $_SESSION['sAMAccountName'] != $templateData->ticketDetails["owner"]) {
       $view->setTemplate('nopermissionView');

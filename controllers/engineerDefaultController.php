@@ -18,7 +18,7 @@ class engineerDefaultController {
     //populate est ticket time total
     $esttimetotal = 0;
     foreach ($templateData->ticketUpdates as &$update) { $esttimetotal += $update["esttime"]; }
-    $templateData->ticketDetails["esttime"] = $esttimetotal . ' min';
+    $templateData->ticketDetails["esttime"] = $esttimetotal.' min';
     //populate call reasons for this tickets helpdeskid
     $templateData->callreasons = $callreasonsModel->getReasonsByHelpdeskId($templateData->ticketDetails["helpdesk"]);
     //populate quick responses
