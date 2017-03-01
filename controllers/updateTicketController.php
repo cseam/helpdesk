@@ -45,7 +45,8 @@ class updateTicketController {
       if ($_POST["workedwitharray"]) {
         $workedwith = substr(htmlspecialchars($_POST["workedwitharray"]), 2);
       }
-
+      //process engineer est time
+      $esttime = htmlspecialchars($_POST["esttime"]);
       // check which button is pressed and process correctly
       SWITCH ($_POST["button_value"]) {
         CASE "add":
@@ -177,7 +178,7 @@ class updateTicketController {
           break;
         CASE "sendaway":
           $ticketModel->updateTicketStatusById($_POST["id"], 5);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "sendaway", $_SESSION["sAMAccountName"], $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "sendaway", $_SESSION["sAMAccountName"], $ticketdetails, $esttime);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Sent Away";
@@ -203,7 +204,7 @@ class updateTicketController {
           break;
         CASE "escalate":
           $ticketModel->updateTicketStatusById($_POST["id"], 4);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "escalated", $_SESSION["sAMAccountName"], $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "escalated", $_SESSION["sAMAccountName"], $ticketdetails, $esttime);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Escalated";
@@ -211,7 +212,7 @@ class updateTicketController {
           break;
         CASE "deescalate":
           $ticketModel->updateTicketStatusById($_POST["id"], 1);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "de-escalated", $_SESSION["sAMAccountName"], $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "de-escalated", $_SESSION["sAMAccountName"], $ticketdetails, $esttime);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - De-Escalated";
@@ -219,7 +220,7 @@ class updateTicketController {
           break;
         CASE "hold":
           $ticketModel->updateTicketStatusById($_POST["id"], 3);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "hold", $_SESSION["sAMAccountName"], $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "hold", $_SESSION["sAMAccountName"], $ticketdetails, $esttime);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - On Hold";
@@ -227,14 +228,14 @@ class updateTicketController {
           break;
         CASE "unhold":
           $ticketModel->updateTicketStatusById($_POST["id"], 1);
-          $ticketModel->updateTicketDetailsById($_POST["id"], "unhold", $_SESSION["sAMAccountName"], $ticketdetails);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "unhold", $_SESSION["sAMAccountName"], $ticketdetails, $esttime);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated - Un Hold";
           $pagedata->details = "Ticket ".$_POST["id"]." has been updated and taken off hold, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "close":
-          $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"], $ticketdetails, $workedwith);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "closed", $_SESSION["sAMAccountName"], $ticketdetails, $esttime, $workedwith);
           $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]);
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been closed.</p>";
           $feedbackemailmessage = "<p>Please take some time to leave feedback on how your engineer performed. <a href=\"".HELPDESK_LOC."/ticket/feedback/".$_POST["id"]."\">Leave feedback here</a></p>";
@@ -243,7 +244,7 @@ class updateTicketController {
           $pagedata->details = "Ticket ".$_POST["id"]." has been updated and closed, the ticket owner has been emailed to let them know the update to the ticket.<br /><br /><a href=\"/ticket/view/".$_POST["id"]."\" >Return to ticket</a>";
           break;
         CASE "update":
-          $ticketModel->updateTicketDetailsById($_POST["id"], "update", $_SESSION["sAMAccountName"], $ticketdetails, $workedwith);
+          $ticketModel->updateTicketDetailsById($_POST["id"], "update", $_SESSION["sAMAccountName"], $ticketdetails, $esttime, $workedwith);
           if ($_POST["callreason"]) { $ticketModel->updateTicketReasonById($_POST["id"], $_POST["callreason"]); }
           $emailmessage = "<span style=\"font-family: arial;\"><p>Your helpdesk ticket #".$_POST["id"]." has been updated.</p>";
           $pagedata->title = "#".$_POST["id"]." Ticket Updated";

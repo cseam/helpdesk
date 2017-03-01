@@ -24,6 +24,7 @@
         <p class="callheader"><span class="nowrap">Opened:</span>           <span class="nowrap"><?php echo date("d/m/Y H:i", strtotime(@$pagedata->ticketDetails["opened"])); ?></span></p>
         <p class="callheader"><span class="nowrap">Closed:</span>           <span class="nowrap"><?php if (isset($pagedata->ticketDetails["closed"])) { echo date("d/m/Y H:i", strtotime(@$pagedata->ticketDetails["closed"])); } ?></span></p>
         <p class="callheader"><span class="nowrap">Ticket Age:</span>       <span class="nowrap"><?php echo @$pagedata->ticketDetails["daysold"]; ?> day(s)</span></p>
+        <p class="callheader"><span class="nowrap">Est Total Job Time:</span>   <span class="nowrap"><?php echo @$pagedata->ticketDetails["esttime"]; ?></span></p>
         <p class="callheader"><span class="nowrap">Scheduled Ticket:</span> <span class="nowrap"><?php echo @$pagedata->ticketDetails["pm"] == true ? 'Yes' : 'No'; ?></span></p>
         <p class="callheader"><span class="nowrap">Urgency:</span>          <span class="nowrap"><img src="/public/images/ICONS-urgency<?php echo @$pagedata->ticketDetails["urgency"]; ?>.svg" alt="<?php echo @$pagedata->ticketDetails["urgency"]; ?>" title="<?php echo @$pagedata->ticketDetails["urgency"]; ?>" style="height: 14px; width: 100px" /></span></p>
         <p class="callheader"><span class="nowrap">Locker:</span>           <span class="nowrap"><?php echo @$pagedata->ticketDetails["lockerid"]; ?></span></p>
@@ -105,6 +106,51 @@
             <?php if (isset($pagedata->quickresponse)) { foreach ($pagedata->quickresponse as $key => $value) { echo "<option value=\"".$value["quick_response"]."\">".$value["quick_response"]."</option>"; } } ?>
           </select>
         </p>
+        <p>
+        <label for="esttime">Work time</label>
+          <span class="smalltxt" style="display: block; margin-left:0;">Approximatly how long did this update to the job take (not the whole ticket, only this update)</span>
+          <select id="esttime" name="esttime">
+            <option value="5" SELECTED>5 min</option>
+            <option value="10">10 min</option>
+            <option value="15">15 min</option>
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60">1 hr</option>
+            <option value="75">1 hr 15 min</option>
+            <option value="90">1 hr 30 min</option>
+            <option value="105">1 hr 45 min</option>
+            <option value="120">2 hr</option>
+            <option value="135">2 hr 15 min</option>
+            <option value="150">2 hr 30 min</option>
+            <option value="165">2 hr 45 min</option>
+            <option value="180">3 hr</option>
+            <option value="195">3 hr 15 min</option>
+            <option value="210">3 hr 30 min</option>
+            <option value="225">3 hr 45 min</option>
+            <option value="240">4 hr</option>
+            <option value="255">4 hr 15 min</option>
+            <option value="270">4 hr 30 min</option>
+            <option value="285">4 hr 45 min</option>
+            <option value="300">5 hr</option>
+            <option value="315">5 hr 15 min</option>
+            <option value="330">5 hr 30 min</option>
+            <option value="345">5 hr 45 min</option>
+            <option value="360">6 hr</option>
+            <option value="375">6 hr 15 min</option>
+            <option value="390">6 hr 30 min</option>
+            <option value="405">6 hr 45 min</option>
+            <option value="420">7 hr</option>
+            <option value="435">7 hr 15 min</option>
+            <option value="450">7 hr 30 min</option>
+            <option value="465">7 hr 45 min</option>
+            <option value="480">8 hr</option>
+            <option value="495">8 hr 15 min</option>
+            <option value="510">8 hr 30 min</option>
+            <option value="525">8 hr 45 min</option>
+          </select>
+        </p>
+
+
         <p>
         <label for="workedwith">Worked on this job with</label>
           <input type="hidden" id="workedwitharray" name="workedwitharray" value="" />

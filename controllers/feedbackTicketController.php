@@ -18,8 +18,12 @@ class feedbackTicketController {
     $templateData->listdata = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 20);
     //populate tickets data
     $templateData->ticketDetails = $ticketModel->getTicketDetails($ticketid);
+    $templateData->ticketUpdates = $ticketModel->getTicketUpdatesByCallId($ticketid);
     $templateData->additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
-
+    //populate est ticket time total
+    $esttimetotal = 0;
+    foreach ($templateData->ticketUpdates as &$update) { $esttimetotal += $update["esttime"]; }
+    $templateData->ticketDetails["esttime"] = $esttimetotal . ' min';
     // on post process form
     if ($_POST) {
       $formid = htmlspecialchars($_POST['id']);
