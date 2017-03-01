@@ -45,7 +45,7 @@
   <h3 class="callbody"><?php echo $pagedata->ticketDetails["title"]; ?></h3>
     <p class="callbody"><?php echo nl2br($pagedata->ticketDetails["details"]); ?></p>
     <p class="highlight smalltxt">Last Update: <?php echo date("d/m/Y H:i", strtotime($pagedata->ticketDetails["lastupdate"])); ?></p>
-
+    <p><strong>Time engineer estimated to have spent working on this job: <?php echo @$pagedata->ticketDetails["esttime"]; ?></strong></p>
     <form action="#" method="post" enctype="multipart/form-data" id="updateForm">
       <input type="hidden" id="id" name="id" value="<?php echo $pagedata->ticketDetails["callid"]; ?>" />
       <input type="hidden" id="button_value" name="button_value" value="" />

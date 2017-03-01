@@ -507,8 +507,8 @@
     /**
      * @param string $workedwith
      */
-    public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "", $workedwith = null) {
-      $message = "<div class=update>".$update."<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - ".date("d/m/Y H:i")."</h3></div>";
+    public function updateTicketDetailsById($ticketid, $statuscode = "update", $sAMAccountName = "unknown", $update = "", $esttime = 0, $workedwith = null) {
+      $message = "<div class=update>".$update."<h3 class=".$statuscode.">".$statuscode." by ".$sAMAccountName." - ".date("d/m/Y H:i")." - update time est (".$esttime."min) </h3></div>";
       // update timestamp & userupdate if user
       $database = new Database();
       $database->query("UPDATE calls
@@ -540,14 +540,15 @@
             $status = 1;
           break;
       }
-      $database->query("INSERT INTO call_updates (callid, stamp, details, sAMAccountName, status, workedwith)
-                        VALUES (:callid, :lastupdate, :details, :who, :status, :workedwith)");
+      $database->query("INSERT INTO call_updates (callid, stamp, details, sAMAccountName, status, workedwith, esttime)
+                        VALUES (:callid, :lastupdate, :details, :who, :status, :workedwith, :esttime)");
       $database->bind(":callid", $ticketid);
       $database->bind(":details", $message);
       $database->bind(":lastupdate", date("c"));
       $database->bind(":who", $sAMAccountName);
       $database->bind(":status", $status);
       $database->bind(":workedwith", $workedwith);
+      $database->bind(":esttime", $esttime);
       $database->execute();
       return null;
     }
