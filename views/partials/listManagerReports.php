@@ -10,9 +10,10 @@
   <a href="/manager/report/7days/"><img src="/public/images/ICONS-over7.svg" alt="View 7 day tickets" title="View 7 day tickets"  width="24" height="25" />&gt; 7 Days</a>
   <a href="/manager/report/invoice/"><img src="/public/images/ICONS-Invoice.svg" alt="awaiting invoice" title="awaiting invoice" width="24" height="25" />Awaiting invoice</a>
   <a href="/manager/report/search/"><img src="/public/images/ICONS-search.svg" alt="Search tickets" title="Search tickets" width="24" height="25" />Search</a>
-  <a href="/manager/report/scheduledtasks/"><img src="/public/images/ICONS-scheduledtask.svg" alt="scheduled tasks" title="sheduled tasks" width="24" height="25" />Scheduled tasks</a>
-  <a href="/manager/report/working-on/"><img src="/public/images/ICONS-yourcalls.svg" alt="working on" title="working on" width="24" height="25" />Last Viewed</a>
   <a href="/manager/report/jobsheet/"><img src="/public/images/ICONS-assignnotclosed.svg" alt="View job sheet" title="View job sheet" width="24" height="25" />Job Sheet</a>
+  <a href="/manager/report/scheduledtasks/"><img src="/public/images/ICONS-scheduledtask.svg" alt="scheduled tasks" title="sheduled tasks" width="24" height="25" />Scheduled tasks</a>
+  <a href="/manager/report/compliance"><img src="/public/images/ICONS-scheduledtaskcomp.svg" alt="scheduled compliance" title="scheduled compliance" width="24" height="25" />Scheduled Tasks Compliance</a>
+  <a href="/manager/report/working-on/"><img src="/public/images/ICONS-yourcalls.svg" alt="working on" title="working on" width="24" height="25" />Last Viewed</a>
   <a href="/manager/report/recentwork/"><img src="/public/images/ICONS-workingon.svg" alt="working on" title="working on" width="24" height="25" />Recent Work</a>
   <a href="/manager/report/changecontrol/"><img src="/public/images/ICONS-changecontrol.svg" alt="View change control" title="View change control" width="24" height="25" />Change control</a>
   <a href="/manager/report/lockers/"><img src="/public/images/ICONS-lockers.svg" alt="Lockers" title="Lockers" width="24" height="25" />Lockers</a>
