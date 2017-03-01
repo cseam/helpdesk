@@ -46,6 +46,7 @@
     $route->add('/manager/report/outofhours', 'reportOutOfHoursController');
     $route->add('/manager/report/performanceobjectives', 'reportPerformanceObjectivesController');
     $route->add('/manager/report/recentwork/\d*', 'reportRecentWorkController'); //numerical wildcard route
+    $route->add('/manager/report/compliance', 'reportComplianceController');
   }
   // admin routes
   if (@$_SESSION['superuser'] == 1) {
@@ -94,7 +95,6 @@
     $route->add('/report/outstanding', 'reportOutstandingController');
     $route->add('/report/annualgraphs', 'reportAnnualGraphsController');
     $route->add('/report/settings', 'reportSettingsController');
-    $route->add('/report/compliance', 'reportComplianceController');
   if (@$_SESSION['engineerLevel'] == 2 || @$_SESSION['superuser'] == 1) {
     // reports for managers only
     $route->add('/report/feedback', 'reportFeedbackController');
