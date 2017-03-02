@@ -123,7 +123,7 @@
   // scheduled task routes
     $route->add('/scheduledtask', 'addScheduledTaskController');
     $route->add('/scheduledtask/add', 'addScheduledTaskController');
-    $route->add('/scheduledtask/modify', 'modifyScheduledTaskController');
+    $route->add('/scheduledtask/modify/\d*', 'modifyScheduledTaskController');
     $route->add('/scheduledtask/delete/\d*', 'deleteScheduledTaskController'); //numerical wildcard route
   }
   // digital sign routes

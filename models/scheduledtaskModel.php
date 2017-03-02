@@ -14,6 +14,37 @@
       return $result;
     }
 
+    public function getTaskDetailsById($taskid) {
+      $database = new Database();
+      $database->query("SELECT * FROM scheduled_calls
+                        WHERE callid = :taskid");
+      $database->bind(':taskid', $taskid);
+      $result = $database->resultset();
+      if ($database->rowCount() === 0) { return null; }
+      return $result;
+    }
+
+    public function updateTaskWithObject($updatedTask) {
+      $database = new Database();
+      $database->query("UPDATE scheduled_calls
+                        SET scheduled_calls.enabled = :enabled,
+                            scheduled_calls.title = :title,
+                            scheduled_calls.details = :details,
+                            scheduled_calls.assigned = :assigned,
+                            scheduled_calls.frequencytype = :reoccurance,
+                            scheduled_calls.startschedule = :starton
+                        WHERE scheduled_calls.callid = :callid");
+      $database->bind(':callid', $updatedTask->callid);
+      $database->bind(':enabled', $updatedTask->enabled);
+      $database->bind(':title', $updatedTask->title);
+      $database->bind(':details', $updatedTask->details);
+      $database->bind(':assigned', $updatedTask->assigned);
+      $database->bind(':reoccurance', $updatedTask->reoccurance);
+      $database->bind(':starton', $updatedTask->starton);
+      $database->execute();
+      return;
+    }
+
     public function removeScheduledTaskById($taskid) {
       $database = new Database();
       $database->query("DELETE FROM scheduled_calls
