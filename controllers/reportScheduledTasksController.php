@@ -18,17 +18,22 @@ class reportScheduledTasksController {
             // reroute to add form
             header('Location: /scheduledtask/add');
             exit;
+          CASE "enableall":
+            // enable all tasks for this helpdesk
+            $scheduledtaskModel->enableAllScheduledTasksByHelpdesk($_SESSION['engineerHelpdesk']);
+          break;
+          CASE "disableall":
+            // disable all tasks for this helpdesk
+            $scheduledtaskModel->disableAllScheduledTasksByHelpdesk($_SESSION['engineerHelpdesk']);
           break;
           CASE "modify":
             // reroute to add form
             header('Location: /scheduledtask/modify/'.$callid);
             exit;
-          break;
           CASE "delete":
             // reroute to add form
             header('Location: /scheduledtask/delete/'.$callid);
             exit;
-          break;
         }
       }
 

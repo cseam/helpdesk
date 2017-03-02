@@ -13,11 +13,14 @@
         <p><form action="#" method="post" id="addForm">
             <input type="hidden" id="button_value" name="button_value" value="" />
             <button name="add" value="add" type="submit" onclick="this.form.button_value.value = this.value;">Add Scheduled Task</button>
+            <button name="enableall" value="enableall" type="submit" onclick="this.form.button_value.value = this.value;">Enable All</button>
+            <button name="disableall" value="disableall" type="submit" onclick="this.form.button_value.value = this.value;">Disable All</button>
         </form></p>
         <table id="changecontrol">
           <thead>
             <tr class="head">
               <th>#</th>
+              <th>Enabled</th>
               <th>Title</th>
               <th>Scheduled</th>
               <th>Update</th>
@@ -27,13 +30,15 @@
             <?php foreach ($pagedata->reportResults as $key => $value) { ?>
               <tr>
                 <td><?php echo $value["callid"] ?></td>
+                <td><?php echo (boolval($value["enabled"]) ? '&#10003;' : '&#10006;') ?></td>
                 <td><?php echo $value["title"]?></td>
                 <td><?php echo $value["frequencytype"]?></td>
                 <td>
                   <form action="#" method="post" id="modifyForm">
                       <input type="hidden" id="button_modify_value" name="button_modify_value" value="" />
                       <input type="hidden" id="callid" name="callid" value="<?php echo $value["callid"] ?>" />
-                      <button name="delete" value="delete" type="submit" onclick="this.form.button_modify_value.value = this.value;">Delete</button>
+                      <button name="delete" value="delete" type="submit" onclick="this.form.button_modify_value.value = this.value;" style="width:90px">Delete</button>
+                      <button name="modify" value="modify" type="submit" onclick="this.form.button_modify_value.value = this.value;" style="width:90px">Modify</button>
                   </form>
                 </td>
               </tr>
