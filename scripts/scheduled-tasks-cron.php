@@ -16,7 +16,7 @@ PRINT "\n-- Connected to database : ".date("h:i:s")."\n";
 PRINT "\n-- Starting Process Scheduled Tasks : ".date("h:i:s")."\n";
 // List all scheduled tickets
 PRINT "* Scheduled tickets in database \n";
-$database->query("SELECT * FROM scheduled_calls");
+$database->query("SELECT * FROM scheduled_calls WHERE scheduled_calls.enabled = 1");
 $results = $database->resultset();
 if ($database->rowCount() === 0) { PRINT "0 items scheduled\n"; }
 foreach ($results as $key => $value) {

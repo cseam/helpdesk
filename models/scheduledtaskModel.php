@@ -23,6 +23,26 @@
       return true;
     }
 
+    public function disableAllScheduledTasksByHelpdesk($helpdeskid) {
+      $database = new Database();
+      $database->query("UPDATE scheduled_calls
+                        SET scheduled_calls.enabled = 0
+                        WHERE scheduled_calls.helpdesk = :helpdeskid");
+      $database->bind(':helpdeskid', $helpdeskid);
+      $database->execute();
+      return;
+    }
+
+    public function enableAllScheduledTasksByHelpdesk($helpdeskid) {
+      $database = new Database();
+      $database->query("UPDATE scheduled_calls
+                        SET scheduled_calls.enabled = 1
+                        WHERE scheduled_calls.helpdesk = :helpdeskid");
+      $database->bind(':helpdeskid', $helpdeskid);
+      $database->execute();
+      return;
+    }
+
     public function createNewTicket($baseTicket) {
       $database = new Database();
       $database->query("INSERT INTO scheduled_calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, frequencytype, startschedule)
