@@ -45,6 +45,8 @@ class reportScheduledTasksController {
     $helpdeskdetails = $helpdeskModel->getFriendlyHelpdeskName($_SESSION['engineerHelpdesk']);
     //set page details
     $templateData->details = sizeof($templateData->reportResults)." ".$templateData->title." for ".$helpdeskdetails["helpdesk_name"]." helpdesk.";
+    //frequency data
+    $templateData->frequency = $scheduledtaskModel->getTaskFrequencyByHelpdesk($_SESSION['engineerHelpdesk']);
 
     //pass complete data and template to view engine and render
     $view = new Page();

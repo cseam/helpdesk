@@ -10,6 +10,39 @@
       <div id="ajax">
         <h1><?php echo $pagedata->title ?></h1>
         <p><?php echo $pagedata->details ?></p>
+        <h3>Yearly Frequency</h3>
+        <hr />
+        <div id="frequencymap">
+        <?php
+          $spacers = date("w", strtotime(date("Y")."-01-01"));
+          for($i = 1; $i<=$spacers; $i++) { ?>
+            <span class="dayspacer"></span>
+        <?php } ?>
+        <?php
+          for($i = 0; $i<=364; $i++) {
+          $opacity = 0;
+          $opacity = number_format($pagedata->frequency[$i] / max($pagedata->frequency), 2);
+          $opacity -= number_format(min($pagedata->frequency)/100, 2);
+          $date = DateTime::createFromFormat('z Y', strval($i) . ' ' . strval(date("Y")));
+          ?>
+        <span class="day" title="(<?php echo $date->format("D jS M") ;?>) tasks scheduled:<?php echo $pagedata->frequency[$i]; ?>">
+          <span class="colourfill" style="opacity: <?php echo $opacity ?>;"></span>
+        </span>
+        <?php } ?>
+        </div>
+        <hr />
+        <div class="frequencykey">
+          <span>More &nbsp;&nbsp;</span>
+          <span class="day"><span class="colourfill" style="opacity: 1;"></span></span>
+          <span class="day"><span class="colourfill" style="opacity: .8;"></span></span>
+          <span class="day"><span class="colourfill" style="opacity: .6;"></span></span>
+          <span class="day"><span class="colourfill" style="opacity: .4;"></span></span>
+          <span class="day"><span class="colourfill" style="opacity: .2;"></span></span>
+          <span>&nbsp;&nbsp; Less</span>
+        </div>
+
+
+        <h3>Task Details</h3>
         <p><form action="#" method="post" id="addForm">
             <input type="hidden" id="button_value" name="button_value" value="" />
             <button name="add" value="add" type="submit" onclick="this.form.button_value.value = this.value;">Add Scheduled Task</button>

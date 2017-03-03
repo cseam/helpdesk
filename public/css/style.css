@@ -504,6 +504,47 @@ h3.callbody {
     margin: 1rem .5rem 1rem .5rem;
     text-align: center
 }
+
+#frequencymap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  height: 85px;
+}
+.frequencykey {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-end;
+  width: 100%;
+  height: 15px;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.dayspacer {
+  background: transparent;
+  height: 10px;
+  width: 10px;
+  margin: 1px;
+}
+.day {
+  background: rgba(200, 200, 200, 0.4);
+  height: 10px;
+  width: 10px;
+  margin: 1px;
+}
+.colourfill {
+  display:block;
+  background: #bfcc80;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
 #calllist, #deptlist, #objlist {
     background: trasparent;
     height: 50%;
