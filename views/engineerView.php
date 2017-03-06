@@ -8,7 +8,7 @@
   <div id="rightpage">
     <div id="call">
       <div id="ajax">
-        <?php ($pagedata->ticketDetails ? include "views/partials/viewticket.php" : print("No open tickets")) ?>
+        <?php ($pagedata->ticketDetails["callid"] ? include "views/partials/viewticket.php" : print("No open tickets")) ?>
       </div>
     </div>
   </div>

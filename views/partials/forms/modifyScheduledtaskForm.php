@@ -29,7 +29,11 @@
             <option value="AUTO" <?php if($pagedata->taskDetails["0"]["assigned"] == -1) {echo "SELECTED";} ?>>Auto Assign</option>
           </optgroup>
           <optgroup label="Assign to engineer">
-            <?php foreach ($pagedata->engineers as $key => $value) { echo "<option value=\"".$value["idengineers"]."\">".$value["engineerName"]."</option>"; } ?>
+            <?php foreach ($pagedata->engineers as $key => $value) { ?>
+              <option value="<?php echo $value["idengineers"] ?>"
+                <?php if($pagedata->taskDetails["0"]["assigned"] == $value["idengineers"]) {echo "SELECTED";} ?>
+                ><?php echo $value["engineerName"] ?></option>
+            <?php } ?>
           </optgroup>
         </select>
   </fieldset>
