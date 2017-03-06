@@ -70,7 +70,11 @@
                 <tr><td class="hdtitle" colspan="6"><?php echo $value["requiredfor"] ?></td></tr>
               <?php } ?>
               <tr>
-                <td><span class="status<?php echo $value["status"] ?>"><?php echo $value["statusCode"] ?></span></td>
+                <td><?php if ($value["userupdate"] === '0') { ?>
+                  <span class="status7" title="Ticket updated by user">User Updated</span>
+                <?php } else { ?>
+                  <span class="status<?php echo $value["status"] ?>"><?php echo $value["statusCode"] ?></span>
+                <?php } ?></td>
                 <td>#<?php echo $value["callid"] ?></td>
                 <td><?php echo date("d/m/Y", strtotime($value["opened"])) ?> - <?php echo $value["daysold"] ?> days</td>
                 <td><img src="/public/images/<?php echo $value["iconlocation"] ?>" width="19" height="20" alt="<?php echo $value["locationName"] ?>" title="<?php echo $value["locationName"] ?>"/></td>
