@@ -14,6 +14,49 @@
       return $result;
     }
 
+    public function getTaskFrequencyByHelpdesk($helpdeskid) {
+      //build empty array for year
+      $frequency = array();
+      $frequency = array_fill(0, 365, 0);
+      //grab tasks for helpdesk
+      $database = new Database();
+      $database->query("SELECT * FROM scheduled_calls
+                        WHERE helpdesk = :helpdeskid");
+      $database->bind(':helpdeskid', $helpdeskid);
+      $result = $database->resultset();
+      //itterate over tasks
+        foreach ($result as &$tasks) {
+          //depending on freqency add to array on day, or multiple days over year
+          switch ($tasks["frequencytype"]):
+              case "daily":
+                  foreach ($frequency as $key => $value) {
+                    $frequency[$key]++;
+                  }
+                  break;
+              case "weekly":
+                  $frequency[date("j", strtotime($tasks["startschedule"]))-1]++;
+                  $date = new DateTime($tasks["startschedule"]);
+                  for ($i = 1; $i<=51; $i++) {
+                    $date->add(new DateInterval('P7D'));
+                    $frequency[$date->format("z")]++;
+                  };
+                  break;
+              case "monthly":
+                  $frequency[(date("j", strtotime($tasks["startschedule"]))-1)]++;
+                  for ($i = 1; $i<=11; $i++) {
+                    $daysInMonthCu += date("t", strtotime(date("Y")."-".$i."-"."01"));
+                    $date = new DateTime($tasks["startschedule"]);
+                    $date->add(new DateInterval('P'. $daysInMonthCu .'D'));
+                    $frequency[$date->format("z")]++;
+                  };
+                  break;
+              default:
+                  $frequency[date("z", strtotime($tasks["startschedule"]))]++;
+          endswitch;
+        }
+      return $frequency;
+    }
+
     public function getTaskDetailsById($taskid) {
       $database = new Database();
       $database->query("SELECT * FROM scheduled_calls
