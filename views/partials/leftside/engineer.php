@@ -20,5 +20,6 @@
     <a href="/engineer/changecontrol"><img src="/public/images/ICONS-changecontrol.svg" alt="" title="" width="24" height="25" />Change Control</a>
     <a href="/engineer/outofhours"><img src="/public/images/ICONS-outofhours.svg" alt="" title="" width="24" height="25" />Out Of Hours</a>
     <a href="/engineer/workrate"><img src="/public/images/ICONS-workrate.svg" alt="" title="" width="24" height="25" />Reports &amp; Stats</a>
+    <a href="/engineer/view/recentwork/<?php echo $_SESSION["engineerId"] ?>"><img src="/public/images/ICONS-workingon.svg" alt="working on" title="working on" width="24" height="25" />My Recent Work</a>
   </div>
 </div>

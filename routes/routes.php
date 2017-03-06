@@ -19,6 +19,7 @@
     $route->add('/engineer/outofhours', 'reportOutOfHoursController');
     $route->add('/engineer/workrate', 'reportWorkrateController');
     $route->add('/engineer/objectives/\d*', 'viewObjectivesController'); //numerical wildcard route
+    $route->add('/engineer/view/recentwork/\d*', 'reportRecentWorkController'); //numerical wildcard route
   }
   // manager routes
   if (@$_SESSION['engineerLevel'] == 2 || @$_SESSION['superuser'] == 1) {
