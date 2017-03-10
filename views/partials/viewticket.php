@@ -206,9 +206,19 @@
           <button name="close" value="close" type="submit" onclick="this.form.button_value.value = this.value;">Close</button>
           <?php }
           // show only for users ?>
-
           <?php if ($pagedata->ticketDetails["status"] != 2) { ?><button name="update" value="update" type="submit" onclick="this.form.button_value.value = this.value;">Update</button><?php } ?>
-          <?php if ($pagedata->ticketDetails["status"] == 2) { ?><button name="open" value="open" type="submit" onclick="this.form.button_value.value = this.value;">Reopen</button><?php } ?>
+          <?php if (isset($pagedata->ticketDetails["closed"])) {
+            $now = new DateTime();
+            $closed = new DateTime($pagedata->ticketDetails["closed"]);
+            $daysSinceClose = $closed->diff($now)->format("%a");
+            if ($daysSinceClose < 14) {
+              if ($pagedata->ticketDetails["status"] == 2) { ?>
+                <button name="open" value="open" type="submit" onclick="this.form.button_value.value = this.value;">Reopen</button>
+              <?php
+              }
+            }
+          }
+          ?>
           <?php if ($pagedata->ticketDetails["status"] == 2 or $_SESSION['engineerLevel'] != 1) {?>
           <button name="feedback" value="feedback" type="submit" onclick="this.form.button_value.value = this.value;">Leave Feedback</button>
           <?php } ?>

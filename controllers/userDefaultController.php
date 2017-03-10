@@ -12,6 +12,7 @@ class userDefaultController {
     //set report name
     $templateData->title = "Recent Ticket Activity";
     $templateData->reportResults = $ticketModel->getRecentActivityByOwner($_SESSION['sAMAccountName']);
+    $templateData->closedTickets = $ticketModel->getMyClosedTickets($_SESSION['sAMAccountName']);
     //set page details
     $templateData->details = "The following tickets have had recent activity, please check an engineer has not requested a response or feedback left,";
     //check to see if user profile exists if it doesnt update details with message prompting to complete
