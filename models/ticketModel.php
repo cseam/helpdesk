@@ -29,6 +29,24 @@
       return $results;
     }
 
+    public function getMyClosedTickets($username, $limit = 100) {
+      $database = new Database();
+      $database->query("SELECT *, datediff(CURDATE(),calls.opened) as daysold
+                        FROM calls
+                        JOIN status ON calls.status=status.id
+                        JOIN location ON calls.location=location.id
+                        JOIN engineers ON calls.assigned=engineers.idengineers
+                        WHERE owner = :username
+                        AND status = 2
+                        ORDER BY callid DESC
+                        LIMIT :limit");
+      $database->bind(":username", $username);
+      $database->bind(":limit", $limit);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null; }
+      return $results;
+    }
+
     public function getTicketUpdatesByCallId($callid) {
       $database = new Database();
       $database->query("SELECT * FROM call_updates WHERE callid = :callid ORDER BY id");

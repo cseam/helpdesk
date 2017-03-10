@@ -31,6 +31,33 @@
             } ?>
           </tbody>
         </table>
+        <br />
+        <br />
+        <h3>My Closed Tickets</h3>
+        <table>
+          <tbody>
+            <?php
+            if (isset($pagedata->closedTickets)) {
+            foreach ($pagedata->closedTickets as $key => $value) { ?>
+              <tr>
+                <td class="hdtitle listheader" colspan="6"><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><?php echo $value["title"] ?></a></td>
+              </tr>
+              <tr>
+                <td><span class="status<?php echo $value["status"] ?>"><?php echo $value["statusCode"] ?></span></td>
+                <td>#<?php echo $value["callid"] ?></td>
+                <td><?php echo date("d/m/Y", strtotime($value["opened"])) ?> - <?php echo $value["daysold"] ?> days</td>
+                <td><img src="/public/images/<?php echo $value["iconlocation"] ?>" width="19" height="20" alt="<?php echo $value["locationName"] ?>" title="<?php echo $value["locationName"] ?>"/></td>
+                <td><?php echo $value["engineerName"] ?></td>
+                <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
+              </tr>
+            <?php }
+              } ?>
+          </tbody>
+        </table>
+
+
+
+
       </div>
     </div>
   </div>
