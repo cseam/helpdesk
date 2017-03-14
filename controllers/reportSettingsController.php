@@ -26,6 +26,13 @@ class reportSettingsController {
         $_SESSION['customReportsRangeEnd'] = checkdate(substr($_POST["date-range"], 18, 2), substr($_POST["date-range"], 21, 2), substr($_POST["date-range"], 13, 4)) ? substr($_POST["date-range"], 13, 10) : null;
         $_SESSION['customReportsHelpdesks'] = htmlspecialchars($helpdesks);
         $templateData->success = "Settings updated, reports will now use your custom settings.";
+        // clear settings
+        if ($_POST["button_value"] == "clear") {
+          unset($_SESSION['customReportsRangeStart']);
+          unset($_SESSION['customReportsRangeEnd']);
+          unset($_SESSION['customReportsHelpdesks']);
+          $templateData->success = "Settings Cleared.";
+        }
       }
 
     //pass complete data and template to view engine and render
