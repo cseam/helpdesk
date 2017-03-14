@@ -9,10 +9,9 @@
     <p>
       Total tickets logged by users <span class="logoutstats"><?php echo number_format($pagedata->stats["countAllTickets"]) ?></span>
     </p>
-    <ul style="font-size: 0.9rem;">
+    <p>
     <?php
       foreach ($pagedata->logoutstats as &$value) {
-          echo "<li style=\"margin-bottom: 10px;margin-right: 50px;\">";
           echo $value["Name"];
           echo " have ";
           echo number_format($value["outstanding"]["outstanding"]);
@@ -25,10 +24,9 @@
           for ($i = 0; $i < round($value["avgfeedback"]["FeedbackAVG"]); $i++) {
             echo "<img src='/public/images/ICONS-star.svg' alt='star' height='16' width='auto' />";
             }
-          echo "</li>";
       }
     ?>
-    </ul>
+  </p>
   </div>
   <div id="rightpage">
     <div id="call">
