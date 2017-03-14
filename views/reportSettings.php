@@ -39,6 +39,7 @@
         </fieldset>
         <p class="buttons">
           <button name="save" value="save" type="submit" title="save" onclick="this.form.button_value.value = this.value;">Save</button>
+          <button name="clear" value="clear" type="submit" title="clear" onclick="this.form.button_value.value = this.value;">Clear Settings</button>
         </p>
         </form>
       </div>
