@@ -31,6 +31,16 @@
       return true;
     }
 
+    public function addNoteByTicketId($ticketid, $note) {
+      $database = new Database();
+      $database->query("INSERT INTO feedback_notes (ticketid, note)
+                        VALUES (:id, :note)");
+      $database->bind(':id', $ticketid);
+      $database->bind(':note', $note);
+      $database->execute();
+      return true;
+    }
+    
     public function getPoorFeedback($scope = null) {
       isset($scope) ? $helpdesks = $scope : $helpdesks = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"; // fudge for all helpdesks should be count of active helpdesks (//TODO FIX THIS)
       $helpdesks = isset($this->_helpdesks) ? $this->_helpdesks : $helpdesks;
@@ -65,6 +75,32 @@
       $database->bind(':startrange', $this->_startrange);
       $database->bind(':endrange', $this->_endrange);
       $database->bind(':id', $id);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null; }
+      return $results;
+    }
+
+    public function getFeedbackByTicketId($id) {
+      $database = new Database();
+      $database->query("SELECT feedback.satisfaction, feedback.details, feedback.callid, calls.email
+                        FROM feedback
+                        JOIN calls on feedback.callid=calls.callid
+                        JOIN engineers on engineers.idengineers=calls.closeengineerid
+                        WHERE feedback.callid = :id
+                        ");
+      $database->bind(':id', $id);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null; }
+      return $results;
+    }
+
+    public function getNotesByTicketId($ticketid) {
+      $database = new Database();
+      $database->query("SELECT feedback_notes.note
+                        FROM feedback_notes
+                        WHERE feedback_notes.ticketid = :id
+                        ");
+      $database->bind(':id', $ticketid);
       $results = $database->resultset();
       if ($database->rowCount() === 0) { return null; }
       return $results;

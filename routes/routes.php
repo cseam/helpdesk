@@ -100,6 +100,7 @@
     // reports for managers only
     $route->add('/report/feedback', 'reportFeedbackController');
     $route->add('/report/feedback/\d*', 'reportFeedbackListController'); //numerical wildcard route
+    $route->add('/report/feedback/note/\d*', 'reportFeedbackNoteController'); //numerical wildcard route
     $route->add('/report/sla', 'reportSlaController');
   }
   // ticket routes
