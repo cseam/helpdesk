@@ -48,7 +48,7 @@
               <th>Ticket Owner (user)</th>
               <th>Feedback Details</th>
               <th>Feedback</th>
-              <th>View</th>
+              <th>View / Notes</th>
             </tr>
           </thead>
           <tbody>
@@ -58,7 +58,10 @@
               <td><?php echo $value["owner"] ?></td>
               <td><?php echo $value["details"] ?></td>
               <td><?php for ($i = 0; $i < round($value["satisfaction"]); $i++) { echo "<img src='/public/images/ICONS-star.svg' alt='star' height='24' width='auto' />"; } ?></td>
-              <td><a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" class="icon" alt="view ticket" /></a></td>
+              <td>
+                <a href="/ticket/view/<?php echo $value["callid"] ?>" alt="view ticket"><img src="/public/images/ICONS-view.svg" width="24" height="25" alt="view ticket" /></a>&nbsp;
+                <a href="/report/feedback/note/<?php echo $value["callid"] ?>" alt="manager note"><img src="/public/images/ICONS-unassigned.svg" width="24" height="25" alt="manager note" /></a>
+              </td>
             </tr>
             <?php } } ?>
           </tbody>
