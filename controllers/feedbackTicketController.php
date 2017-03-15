@@ -22,7 +22,9 @@ class feedbackTicketController {
     $templateData->additionalDetails = $ticketModel->getAdditionalDetails($ticketid);
     //populate est ticket time total
     $esttimetotal = 0;
-    foreach ($templateData->ticketUpdates as &$update) { $esttimetotal += $update["esttime"]; }
+    if (is_array($templateData->ticketUpdates)) {
+      foreach ($templateData->ticketUpdates as &$update) { $esttimetotal += $update["esttime"]; }
+    }
     $templateData->ticketDetails["esttime"] = $esttimetotal.' min';
     // on post process form
     if ($_POST) {

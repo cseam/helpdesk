@@ -22,7 +22,7 @@ class addChangeControlController {
         //email engineers
         //get engineers emails
           $emailaddresses = $helpdeskModel->getEngineerEmails($_SESSION['engineerHelpdesk']);
-          if ($emailemailaddresses) {
+          if (is_array($emailaddresses)) {
             foreach ($emailaddresses as $key => $value) {
               //email managers letting them know a new ticket has been added.
               $to = $value["engineerEmail"];
