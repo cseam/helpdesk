@@ -128,8 +128,8 @@
      */
     public function createNewTicket($baseTicket) {
       $database = new Database();
-      $database->query("INSERT INTO scheduled_calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, frequencytype, startschedule)
-                        VALUES (:name, :contact_email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoice, :callreason, :title, :lockerid, :frequencytype, :startschedule)");
+      $database->query("INSERT INTO scheduled_calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, frequencytype, startschedule, showall)
+                        VALUES (:name, :contact_email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoice, :callreason, :title, :lockerid, :frequencytype, :startschedule, :showall)");
       $database->bind(":name", $baseTicket->name);
       $database->bind(":contact_email", $baseTicket->contact_email);
       $database->bind(":tel", $baseTicket->tel);
@@ -152,6 +152,7 @@
       $database->bind(":lockerid", $baseTicket->lockerid);
       $database->bind(":frequencytype", $baseTicket->frequencytype);
       $database->bind(":startschedule", $baseTicket->startschedule);
+      $database->bind(":showall", $baseTicket->showall);
       $database->execute();
       return $database->lastInsertId();
     }

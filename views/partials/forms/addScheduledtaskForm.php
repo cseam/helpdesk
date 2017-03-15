@@ -25,6 +25,11 @@
             <?php foreach ($pagedata->engineers as $key => $value) { echo "<option value=\"".$value["idengineers"]."\">".$value["engineerName"]."</option>"; } ?>
           </optgroup>
         </select>
+      <label for="showall" title="show to all engineers">Show ticket to all Engineers (even if not assigned)</label>
+          <select id="showall" name="showall">
+            <option value="0" SELECTED>No</option>
+            <option value="1">Yes</option>
+          </select>
   </fieldset>
   <input type="hidden" id="button_value" name="button_value" value="" />
   	<fieldset>

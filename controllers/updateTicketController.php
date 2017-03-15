@@ -118,6 +118,7 @@ class updateTicketController {
                 $baseTicket->lockerid = $lockerid;
                 $baseTicket->pm = htmlspecialchars($pm);
                 $baseTicket->requiredfor = $timecritical;
+                $baseTicket->showall = 0;
                 $ticketid = $ticketModel->createNewTicket($baseTicket);
               //insert additional ticket details
                 $fieldIdentify = $additionalModel->getListOfAdditionalFieldsByCategorys(htmlspecialchars($_POST['category']));

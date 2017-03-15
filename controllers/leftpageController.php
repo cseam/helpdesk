@@ -21,6 +21,7 @@ class leftpageController {
         // engineer
           $this->sideData["mytickets"] = $ticketModel->getMyTickets($_SESSION['sAMAccountName'], 15);
           $this->sideData["listdata"] = $ticketModel->getMyOpenAssignedTickets($_SESSION['engineerId']);
+          $this->sideData["showalldata"] = $ticketModel->getShowAllTicketsByHelpdeskId($_SESSION['engineerHelpdesk']);
           $this->sideData["deptdata"] = $ticketModel->getOpenTicketsByHelpdesk($_SESSION['engineerHelpdesk']);
           $this->sideData["objdata"] = $objectivesModel->getObjectivesByEngineerId($_SESSION['engineerId']);
             $graphstats = array();
