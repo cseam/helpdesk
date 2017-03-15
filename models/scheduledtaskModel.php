@@ -34,19 +34,19 @@
                   }
                   break;
               case "weekly":
-                  $frequency[date("j", strtotime($tasks["startschedule"]))-1]++;
+                  $frequency[date("j", strtotime($tasks["startschedule"])) - 1]++;
                   $date = new DateTime($tasks["startschedule"]);
-                  for ($i = 1; $i<=51; $i++) {
+                  for ($i = 1; $i <= 51; $i++) {
                     $date->add(new DateInterval('P7D'));
                     $frequency[$date->format("z")]++;
                   };
                   break;
               case "monthly":
-                  $frequency[(date("j", strtotime($tasks["startschedule"]))-1)]++;
-                  for ($i = 1; $i<=11; $i++) {
+                  $frequency[(date("j", strtotime($tasks["startschedule"])) - 1)]++;
+                  for ($i = 1; $i <= 11; $i++) {
                     $daysInMonthCu += date("t", strtotime(date("Y")."-".$i."-"."01"));
                     $date = new DateTime($tasks["startschedule"]);
-                    $date->add(new DateInterval('P'. $daysInMonthCu .'D'));
+                    $date->add(new DateInterval('P'.$daysInMonthCu.'D'));
                     $frequency[$date->format("z")]++;
                   };
                   break;
@@ -67,6 +67,9 @@
       return $result;
     }
 
+    /**
+     * @param stdClass $updatedTask
+     */
     public function updateTaskWithObject($updatedTask) {
       $database = new Database();
       $database->query("UPDATE scheduled_calls
@@ -88,6 +91,9 @@
       return;
     }
 
+    /**
+     * @param string $taskid
+     */
     public function removeScheduledTaskById($taskid) {
       $database = new Database();
       $database->query("DELETE FROM scheduled_calls
@@ -117,6 +123,9 @@
       return;
     }
 
+    /**
+     * @param stdClass $baseTicket
+     */
     public function createNewTicket($baseTicket) {
       $database = new Database();
       $database->query("INSERT INTO scheduled_calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, frequencytype, startschedule)
