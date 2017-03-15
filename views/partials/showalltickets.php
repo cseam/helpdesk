@@ -1,4 +1,4 @@
-<h3>High Priority Tickets</h3>
+<h3>Priority Tickets</h3>
 <table id="yourcalls">
   <tbody>
     <?php
