@@ -53,6 +53,7 @@ foreach ($results as $key => $value) {
   $baseTicket->title = $value["title"];
   $baseTicket->lockerid = $value["lockerid"];
   $baseTicket->pm = 1;
+  $baseTicket->showall = $value["showall"];
   // set start date to interagrate
   $startdate = date("Y-m-d", strtotime($value["startschedule"]));
   // Process each ticket checking frequency

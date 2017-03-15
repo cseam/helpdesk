@@ -38,6 +38,7 @@ class addScheduledTaskController {
           $assignedengineer = $_POST['assigned'];
         };
         $baseTicket->assigned = $assignedengineer;
+        $baseTicket->showall = htmlspecialchars($_POST['showall']);
         $baseTicket->opened = date("c");
         $baseTicket->lastupdate = date("c");
         $baseTicket->closed = null;

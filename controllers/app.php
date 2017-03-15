@@ -8,6 +8,8 @@ class app {
       // authentication check.
       require_once "controllers/authenticationController.php";
       // add routes & process
+      // create routes object
+      $route = new routeController();
       require_once "routes/routes.php";
       $route->process();
     }

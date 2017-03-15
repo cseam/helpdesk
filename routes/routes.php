@@ -1,6 +1,4 @@
 <?php
-  // create routes object
-  $route = new routeController();
   // routes are regular expressions to load corisponding controller
   // default routes top level landing pages routes
     $route->add('/', 'homeController');

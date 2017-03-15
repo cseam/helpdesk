@@ -9,7 +9,10 @@
   <a href="#" onclick="$('.engineerReports').hide();$('#objlist').slideDown('fast')"><img src="/public/images/ICONS-objective.svg" alt="performance objectives" title="performance objectives" width="16" height="17"> Objectives</a>
   <a href="#" onclick="$('.engineerReports').hide();$('#morelist').slideDown('fast')"><img src="/public/images/ICONS-workrate.svg" alt="more" title="more" width="16" height="17"> More </a>
 </div>
-<div id="calllist" class="engineerReports"><?php ($left->sideData["listdata"] ? include "views/partials/assignedtickets.php" : print("<h3>Assigned Tickets</h3><p>0 assigned tickets</p>")) ?></div>
+<div id="calllist" class="engineerReports">
+  <?php ($left->sideData["showalldata"] ? include "views/partials/showalltickets.php" : null ) ?>
+  <?php ($left->sideData["listdata"] ? include "views/partials/assignedtickets.php" : print("<h3>Assigned Tickets</h3><p>0 assigned tickets</p>")) ?>
+</div>
 <div id="deptlist" class="engineerReports"><?php ($left->sideData["deptdata"] ? include "views/partials/departmenttickets.php" : print("<h3>Department Tickets</h3><p>0 department tickets</p>")) ?></div>
 <div id="objlist" class="engineerReports"><?php ($left->sideData["objdata"] ? include "views/partials/myobjectives.php" : print("<h3>Performance Objectives</h3><p>0 performance objectives set</p>")) ?></div>
 <div id="morelist" class="engineerReports">

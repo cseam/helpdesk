@@ -85,6 +85,20 @@
       return $results;
     }
 
+    public function getShowAllTicketsByHelpdeskId($helpdeskid) {
+      $database = new Database();
+      $database->query("SELECT * FROM calls
+                        JOIN status ON calls.status=status.id
+                        WHERE showall = 1
+                        AND status != 2
+                        AND helpdesk = :helpdesk
+                        ORDER by callid");
+      $database->bind(":helpdesk", $helpdeskid);
+      $results = $database->resultset();
+      if ($database->rowCount() === 0) { return null; }
+      return $results;
+    }
+
     public function getAllTickets($limit = 10) {
       $database = new Database();
       $database->query("SELECT * FROM calls
@@ -633,8 +647,8 @@
      */
     public function createNewTicket($baseTicket) {
       $database = new Database();
-      $database->query("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, pm, requiredfor)
-                        VALUES (:name, :contact_email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoice, :callreason, :title, :lockerid, :pm, :requiredfor)");
+      $database->query("INSERT INTO calls (name, email, tel, details, assigned, opened, lastupdate, status, closed, closeengineerid, urgency, location, room, category, owner, helpdesk, invoicedate, callreason, title, lockerid, pm, requiredfor, showall)
+                        VALUES (:name, :contact_email, :tel, :details, :assigned, :opened, :lastupdate, :status, :closed, :closeengineerid, :urgency, :location, :room, :category, :owner, :helpdesk, :invoice, :callreason, :title, :lockerid, :pm, :requiredfor, :showall)");
       $database->bind(":name", $baseTicket->name);
       $database->bind(":contact_email", $baseTicket->contact_email);
       $database->bind(":tel", $baseTicket->tel);
@@ -657,6 +671,7 @@
       $database->bind(":lockerid", $baseTicket->lockerid);
       $database->bind(":pm", $baseTicket->pm);
       $database->bind(":requiredfor", $baseTicket->requiredfor);
+      $database->bind(":showall", $baseTicket->showall);
       $database->execute();
       return $database->lastInsertId();
     }
