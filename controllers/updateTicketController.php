@@ -86,7 +86,7 @@ class updateTicketController {
                   $status = '2';
                   $closed = date("c");
                   $closeengineerid = $_POST['engineerid'];
-                  $ticketdetails .= "<div class=update>Created and auto closed<h3 class=closed>Closed by " . $_SESSION["sAMAccountName"] . " - " . date("d/m/Y H:i") . " - update time est (0min) </h3></div>";
+                  $ticketdetails .= "<div class=update>Created and auto closed<h3 class=closed>Closed by ".$_SESSION["sAMAccountName"]." - ".date("d/m/Y H:i")." - update time est (0min) </h3></div>";
                 } else {
                   $status = '1';
                   $closed = null;

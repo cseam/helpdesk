@@ -15,17 +15,17 @@
         <div id="frequencymap">
         <?php
           $spacers = date("w", strtotime(date("Y")."-01-01"));
-          for($i = 1; $i<=$spacers; $i++) { ?>
+          for ($i = 1; $i <= $spacers; $i++) { ?>
             <span class="dayspacer"></span>
         <?php } ?>
         <?php
-          for($i = 0; $i<=364; $i++) {
+          for ($i = 0; $i <= 364; $i++) {
           $opacity = 0;
           $opacity = number_format($pagedata->frequency[$i] / max($pagedata->frequency), 2);
-          $opacity -= number_format(min($pagedata->frequency)/100, 2);
-          $date = DateTime::createFromFormat('z Y', strval($i) . ' ' . strval(date("Y")));
+          $opacity -= number_format(min($pagedata->frequency) / 100, 2);
+          $date = DateTime::createFromFormat('z Y', strval($i).' '.strval(date("Y")));
           ?>
-        <span class="day" title="(<?php echo $date->format("D jS M") ;?>) tasks scheduled:<?php echo $pagedata->frequency[$i]; ?>">
+        <span class="day" title="(<?php echo $date->format("D jS M"); ?>) tasks scheduled:<?php echo $pagedata->frequency[$i]; ?>">
           <span class="colourfill" style="opacity: <?php echo $opacity ?>;"></span>
         </span>
         <?php } ?>

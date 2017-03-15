@@ -19,7 +19,7 @@ class modifyScheduledTaskController {
         $updatedTask->callid = htmlspecialchars($_POST['callid']);
         $updatedTask->enabled = htmlspecialchars($_POST['enabled']);
         $updatedTask->title = htmlspecialchars($_POST['title']);
-        $updatedTask->details = "<div class=original>" . htmlspecialchars($_POST['details']) . "</div>";
+        $updatedTask->details = "<div class=original>".htmlspecialchars($_POST['details'])."</div>";
         if ($_POST['assigned'] == 'DONT') {
           $updatedTask->assigned = NULL;
         } elseif ($_POST['assigned'] == 'AUTO') {

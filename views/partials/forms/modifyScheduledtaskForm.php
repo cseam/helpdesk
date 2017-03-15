@@ -5,33 +5,33 @@
     <legend>Frequency</legend>
     <label for="enabled" title="enabled">Enabled</label>
       <select id="enabled" name="enabled">
-        <option value="1" <?php if($pagedata->taskDetails["0"]["enabled"] == "1") {echo "SELECTED";} ?>>Yes</option>
-        <option value="0" <?php if($pagedata->taskDetails["0"]["enabled"] == "0") {echo "SELECTED";} ?>>No</option>
+        <option value="1" <?php if ($pagedata->taskDetails["0"]["enabled"] == "1") {echo "SELECTED"; } ?>>Yes</option>
+        <option value="0" <?php if ($pagedata->taskDetails["0"]["enabled"] == "0") {echo "SELECTED"; } ?>>No</option>
       </select>
       <label for="reoccurance" title="reoccurance">Reoccurance</label>
         <select id="reoccurance" name="reoccurance">
-          <option value="once" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "once") {echo "SELECTED";} ?>>Once</option>
-          <option value="daily" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "daily") {echo "SELECTED";} ?>>Daily</option>
-          <option value="weekly" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "weekly") {echo "SELECTED";} ?>>Weekly</option>
-          <option value="monthly" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "monthly") {echo "SELECTED";} ?>>Monthly</option>
-          <option value="spring" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "spring") {echo "SELECTED";} ?>>Spring Term</option>
-          <option value="summer" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "summer") {echo "SELECTED";} ?>>Summer Term</option>
-          <option value="winter" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "winter") {echo "SELECTED";} ?>>Winter Term</option>
-          <option value="yearly" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "yearly") {echo "SELECTED";} ?>>Yearly</option>
-          <option value="bi-annual" <?php if($pagedata->taskDetails["0"]["frequencytype"] == "bi-annual") {echo "SELECTED";} ?>>bi-annual</option>
+          <option value="once" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "once") {echo "SELECTED"; } ?>>Once</option>
+          <option value="daily" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "daily") {echo "SELECTED"; } ?>>Daily</option>
+          <option value="weekly" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "weekly") {echo "SELECTED"; } ?>>Weekly</option>
+          <option value="monthly" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "monthly") {echo "SELECTED"; } ?>>Monthly</option>
+          <option value="spring" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "spring") {echo "SELECTED"; } ?>>Spring Term</option>
+          <option value="summer" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "summer") {echo "SELECTED"; } ?>>Summer Term</option>
+          <option value="winter" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "winter") {echo "SELECTED"; } ?>>Winter Term</option>
+          <option value="yearly" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "yearly") {echo "SELECTED"; } ?>>Yearly</option>
+          <option value="bi-annual" <?php if ($pagedata->taskDetails["0"]["frequencytype"] == "bi-annual") {echo "SELECTED"; } ?>>bi-annual</option>
         </select>
       <label for="starton" title="Start On">Starting On (yyyy-mm-dd)</label>
         <input id="starton" name="starton" value="<?php echo date("Y-m-d", strtotime($pagedata->taskDetails["0"]["startschedule"])) ?>" />
       <label for="assigned" title="assigned">Assign to</label>
         <select id="assigned" name="assigned">
           <optgroup label="Global">
-            <option value="DONT" <?php if($pagedata->taskDetails["0"]["assigned"] == 0) {echo "SELECTED";} ?>>Dont Assign (Manager can assign at later date)</option>
-            <option value="AUTO" <?php if($pagedata->taskDetails["0"]["assigned"] == -1) {echo "SELECTED";} ?>>Auto Assign</option>
+            <option value="DONT" <?php if ($pagedata->taskDetails["0"]["assigned"] == 0) {echo "SELECTED"; } ?>>Dont Assign (Manager can assign at later date)</option>
+            <option value="AUTO" <?php if ($pagedata->taskDetails["0"]["assigned"] == -1) {echo "SELECTED"; } ?>>Auto Assign</option>
           </optgroup>
           <optgroup label="Assign to engineer">
             <?php foreach ($pagedata->engineers as $key => $value) { ?>
               <option value="<?php echo $value["idengineers"] ?>"
-                <?php if($pagedata->taskDetails["0"]["assigned"] == $value["idengineers"]) {echo "SELECTED";} ?>
+                <?php if ($pagedata->taskDetails["0"]["assigned"] == $value["idengineers"]) {echo "SELECTED"; } ?>
                 ><?php echo $value["engineerName"] ?></option>
             <?php } ?>
           </optgroup>
