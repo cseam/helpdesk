@@ -10,7 +10,7 @@
   <a href="#" onclick="$('.engineerReports').hide();$('#morelist').slideDown('fast')"><img src="/public/images/ICONS-workrate.svg" alt="more" title="more" width="16" height="17"> More </a>
 </div>
 <div id="calllist" class="engineerReports">
-  <?php ($left->sideData["showalldata"] ? include "views/partials/showalltickets.php" : null ) ?>
+  <?php ($left->sideData["showalldata"] ? include "views/partials/showalltickets.php" : null) ?>
   <?php ($left->sideData["listdata"] ? include "views/partials/assignedtickets.php" : print("<h3>Assigned Tickets</h3><p>0 assigned tickets</p>")) ?>
 </div>
 <div id="deptlist" class="engineerReports"><?php ($left->sideData["deptdata"] ? include "views/partials/departmenttickets.php" : print("<h3>Department Tickets</h3><p>0 department tickets</p>")) ?></div>
