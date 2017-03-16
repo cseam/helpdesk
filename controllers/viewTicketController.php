@@ -29,7 +29,7 @@ class viewTicketController {
     foreach ($templateData->ticketUpdates as &$update) { $esttimetotal += $update["esttime"]; }
     $templateData->ticketDetails["esttime"] = $esttimetotal.' min';
     //check user has rights to view ticket engineers can see any ticket
-    if ($_SESSION['engineerLevel'] == '0' & $_SESSION['sAMAccountName'] != $templateData->ticketDetails["owner"]) {
+    if ($_SESSION['engineerLevel'] == '0' & strtolower($_SESSION['sAMAccountName']) != strtolower($templateData->ticketDetails["owner"]) ) {
       $view->setTemplate('nopermissionView');
       $view->setDataSrc(null);
       $view->render();
