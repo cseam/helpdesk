@@ -22,7 +22,7 @@
             </thead>
             <tbody>
               <?php foreach ($pagedata->reportResults as $key => $value) { ?>
-                <tr>
+                <tr <?php if ($value["overdue"]) { ?>class="overdue"<?php } ?>>
                   <td><a href="/ticket/view/<?php echo $value["callid"]?>"><?php echo $value["task"]?></a></td>
                   <td><?php echo $value["frequency"]?></td>
                   <td><?php echo $value["compliancedate"]?></td>

@@ -156,6 +156,9 @@ table th {
     text-align: left;
     text-transform: uppercase
 }
+.overdue {
+  background-color: rgba(255,0,0,.2);
+}
 .hdtitle {
     border-bottom: 0;
     padding-top: .8rem
