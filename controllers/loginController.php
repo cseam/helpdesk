@@ -89,7 +89,7 @@ class loginController {
                       exit;
                   } else {
                     // assume user isnt engineer
-                    $_SESSION['sAMAccountName'] = $_POST['username'];
+                    $_SESSION['sAMAccountName'] = strtolower($_POST['username']);
                     // reroute
                       isset($_SESSION['entrypoint']) ? header('Location: '.$_SESSION['entrypoint']) : header('Location: /');
                       exit;
@@ -108,7 +108,7 @@ class loginController {
     $view->setTemplate('loginView');
     $view->setDataSrc($templateData);
     $view->render();
-    
+
   }
 
 }
