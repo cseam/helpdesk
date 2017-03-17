@@ -7,6 +7,7 @@
           <option value="daily" >Daily</option>
           <option value="weekly" SELECTED >Weekly</option>
           <option value="monthly" >Monthly</option>
+          <option value="quarterly">Quarterly</option>
           <option value="spring">Spring Term</option>
           <option value="summer">Summer Term</option>
           <option value="winter">Winter Term</option>

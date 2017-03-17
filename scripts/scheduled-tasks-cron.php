@@ -93,6 +93,16 @@ foreach ($results as $key => $value) {
           PRINT "Ticket #".$value["callid"]." deferred start date was a different day of the month\n";
         };
       break;
+    CASE "quarterly":
+      // create ticket if month multiple of quaterly
+        if (floor((date('n', strtotime($startdate)) % 3) - 1) == 0) {
+          // frequency matches create ticket
+          $ticketModel->createNewTicket($baseTicket);
+          PRINT "Ticket created for scheduled task #".$value["callid"]." using quarterly frequency rule\n";
+        } else {
+          PRINT "Ticket #".$value["callid"]." deferred start date was a different month\n";
+        };
+      break;
     CASE "yearly":
       // create ticket if day of month matches start date
         if (date('m-d', strtotime($startdate)) == date("m-d")) {
